@@ -1,8 +1,8 @@
 from enum import Enum
 from typing import List
+
 import sqlalchemy as sa
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class Base(DeclarativeBase):
