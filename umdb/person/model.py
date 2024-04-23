@@ -41,6 +41,20 @@ class Person(Base):
     death_date_estimated_indicator = mapped_column(sa.Boolean())
     death_indicator = mapped_column(sa.Date())
 
-    names: Mapped[List["Name"]] = relationship(
-        back_populates="person", cascade="all, delete-orphan"
-    )
+    names: Mapped[List["Name"]] = relationship(cascade="all, delete-orphan")
+
+
+name_index = (
+    sa.func.row_number()
+    .over(partition_by=Name.person_id, order_by=sa.desc(Name.use))
+    .label("i")
+)
+
+indexed_names = sa.select(Name, name_index).subquery()
+primary_names = sa.select(indexed_names).filter(indexed_names.c.i == 1).subquery()
+
+Person.primary_name = relationship(
+    sa.orm.aliased(Name, primary_names),
+    primaryjoin=Person.id == primary_names.c.person_id,
+    uselist=False,
+)

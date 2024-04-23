@@ -28,6 +28,7 @@ class Person(BaseModel):
     death_date_estimated_indicator: Optional[bool]
     death_indicator: Optional[date]
     names: list[Name] = []
+    primary_name: Optional[Name]
 
     class Config:
         orm_mode = True
