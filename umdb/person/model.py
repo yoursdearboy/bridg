@@ -2,11 +2,9 @@ from enum import Enum
 from typing import List
 
 import sqlalchemy as sa
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-
-class Base(DeclarativeBase):
-    pass
+from umdb.db import Base
 
 
 class Sex(Enum):
@@ -20,13 +18,13 @@ class Name(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    use = None
-    family = None
-    given = None
-    middle = None
-    patronymic = None
-    prefix = None
-    suffix = None
+    use = mapped_column(sa.String())
+    family = mapped_column(sa.String())
+    given = mapped_column(sa.String())
+    middle = mapped_column(sa.String())
+    patronymic = mapped_column(sa.String())
+    prefix = mapped_column(sa.String())
+    suffix = mapped_column(sa.String())
 
     person_id: Mapped[int] = mapped_column(sa.ForeignKey("person.id"))
     person: Mapped["Person"] = relationship(back_populates="names")
