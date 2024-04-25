@@ -18,6 +18,7 @@ class Name(BaseModel):
 
     class Config:
         orm_mode = True
+        from_attributes = True
 
 
 class Person(BaseModel):
@@ -32,3 +33,4 @@ class Person(BaseModel):
 
     class Config:
         orm_mode = True
+        from_attributes = True
