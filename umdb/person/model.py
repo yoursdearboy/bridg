@@ -39,7 +39,7 @@ class Person(Base):
     birth_date = mapped_column(sa.Date())
     death_date = mapped_column(sa.Date())
     death_date_estimated_indicator = mapped_column(sa.Boolean())
-    death_indicator = mapped_column(sa.Date())
+    death_indicator = mapped_column(sa.Boolean())
 
     names: Mapped[List["Name"]] = relationship(cascade="all, delete-orphan")
 
