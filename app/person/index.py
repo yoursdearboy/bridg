@@ -1,8 +1,16 @@
+from datetime import date
 import pandas as pd
 import panel as pn
+from bokeh.io import curdoc
+from bokeh.core.serialization import Serializer
+from bokeh.models.callbacks import CustomJS, OpenURL
 
 from app.db import Session
-from umdb.person.model import Person, primary_names
+from umdb.person.model import Person, Sex, primary_names
+
+
+if Sex not in Serializer._encoders:
+    Serializer.register(Sex, lambda s, _: s.name)
 
 
 def get_data():
@@ -24,8 +32,12 @@ def get_data():
 
 table = pn.widgets.Tabulator(
     get_data(),
-    buttons={"edit": "<a href='/edit?id=1'><i class='fa fa-print'></i></a>"},
+    buttons={"edit": "<i class='fa fa-print'></i>"},
     disabled=True,
+    formatters={
+        "birth_date": pn.widgets.tables.DateFormatter(format="%d.%m.%Y"),
+        "death_date": pn.widgets.tables.DateFormatter(format="%d.%m.%Y"),
+    },
     layout="fit_data_fill",
     sizing_mode="stretch_width",
     show_index=False,
@@ -43,10 +55,34 @@ table = pn.widgets.Tabulator(
     },
 )
 
+
+class Script(pn.pane.HTML):
+    def _transform_object(self, obj):
+        obj = f"<script>{obj}</script>"
+        obj = super()._transform_object(obj)
+        return obj
+
+
+script = Script()
+
 view = pn.Column(
+    script,
     pn.widgets.Button(name="New", button_type="primary"),
     table,
     sizing_mode="stretch_width",
 )
+
+
+def goto_edit(event):
+    if event.column != "edit":
+        return
+    row = table.value.iloc[event.row].to_dict()
+    id = row["id"]
+    url = f"/edit?id={id}"
+    script.object = f"window.location = '{url}'"
+    script.object = ""
+
+
+table.on_click(goto_edit)
 
 view.servable()
