@@ -26,7 +26,7 @@ class Person(BaseModel):
     birth_date: Optional[date]
     death_date: Optional[date]
     death_date_estimated_indicator: Optional[bool]
-    death_indicator: Optional[date]
+    death_indicator: Optional[bool]
     names: list[Name] = []
     primary_name: Optional[Name]
 
