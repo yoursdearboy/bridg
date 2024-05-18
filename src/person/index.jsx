@@ -1,6 +1,8 @@
 import DataTable from "datatables.net-bs5";
 import * as luxon from "luxon";
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { reactRenderer } from "../datatables";
 
 window.luxon = luxon;
 
@@ -33,10 +35,30 @@ const COLUMNS = [
     visible: false,
   },
   { data: "death_indicator", title: "Dead" },
+  {
+    data: "id",
+    render: reactRenderer(({ data: id, meta }) => {
+      const { navigate } = meta.settings.oInit;
+      const url = `/persons/${id}`;
+      return (
+        <a
+          href={url}
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(url);
+          }}
+        >
+          E
+        </a>
+      );
+    }),
+    orderable: false,
+  },
 ];
 
 export default function PersonIndex() {
   const ref = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const dt = new DataTable(ref.current, {
@@ -48,6 +70,7 @@ export default function PersonIndex() {
       layout: {
         topStart: {},
       },
+      navigate,
     });
     return () => dt.destroy();
   });
