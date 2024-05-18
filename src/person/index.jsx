@@ -48,7 +48,7 @@ const COLUMNS = [
             navigate(url);
           }}
         >
-          E
+          <i className="fa-solid fa-edit" />
         </a>
       );
     }),
