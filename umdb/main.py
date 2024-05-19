@@ -1,11 +1,11 @@
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
 
+import umdb.swagger
 import umdb.person.api
 
 
-app = FastAPI()
+app = FastAPI(docs_url=None)
 
 # FIXME: move CORS config to a config file
 app.add_middleware(
@@ -16,4 +16,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(umdb.swagger.router)
 app.include_router(umdb.person.api.router, prefix="/persons")
