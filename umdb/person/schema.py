@@ -7,7 +7,6 @@ from umdb.person.model import Sex
 
 class Name(BaseModel):
     id: int
-
     use: Optional[str]
     family: Optional[str]
     given: Optional[str]
@@ -20,15 +19,25 @@ class Name(BaseModel):
         orm_mode = True
 
 
-class Person(BaseModel):
-    id: int
+class PersonAttributes:
     sex: Optional[Sex]
     birth_date: Optional[date]
     death_date: Optional[date]
     death_date_estimated_indicator: Optional[bool]
     death_indicator: Optional[bool]
-    names: list[Name] = []
+
+    class Config:
+        orm_mode = True
+
+
+class Person(PersonAttributes, BaseModel):
+    id: int
     primary_name: Optional[Name]
 
+    class Config:
+        orm_mode = True
+
+
+class PersonUpdate(PersonAttributes, BaseModel):
     class Config:
         orm_mode = True
