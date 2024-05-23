@@ -27,10 +27,10 @@ export default function Edit() {
   const fields = {
     sex: (
       <div className="row mb-3">
-        <label htmlFor="sex" className="col-sm-2 col-form-label">
+        <label htmlFor="sex" className="col-sm-4 col-form-label">
           Sex
         </label>
-        <div className="col-sm-10">
+        <div className="col-sm-8">
           <select
             id="sex"
             className="form-select"
@@ -46,10 +46,10 @@ export default function Edit() {
     ),
     birth_date: (
       <div className="row mb-3">
-        <label htmlFor="birth_date" className="col-sm-2 col-form-label">
+        <label htmlFor="birth_date" className="col-sm-4 col-form-label">
           Birth date
         </label>
-        <div className="col-sm-10">
+        <div className="col-sm-8">
           <input
             type="text"
             id="birth_date"
@@ -63,10 +63,10 @@ export default function Edit() {
     ),
     death_indicator: (
       <div className="row mb-3">
-        <label htmlFor="death_indicator" className="col-sm-2 col-form-label">
+        <label htmlFor="death_indicator" className="col-sm-4 col-form-label">
           Death
         </label>
-        <div className="col-sm-10">
+        <div className="col-sm-8">
           <select
             id="death_indicator"
             className="form-select"
@@ -84,10 +84,10 @@ export default function Edit() {
     ),
     death_date: (
       <div className="row mb-3">
-        <label htmlFor="death_date" className="col-sm-2 col-form-label">
+        <label htmlFor="death_date" className="col-sm-4 col-form-label">
           Death date
         </label>
-        <div className="col-sm-10">
+        <div className="col-sm-8">
           <input
             type="text"
             id="death_date"
@@ -101,8 +101,8 @@ export default function Edit() {
     ),
     death_date_estimated_indicator: (
       <div className="row mb-3">
-        <div className="col-sm-2"></div>
-        <div className="col-sm-10">
+        <div className="col-sm-4"></div>
+        <div className="col-sm-8">
           <div className="form-check">
             <input
               type="checkbox"
@@ -122,10 +122,8 @@ export default function Edit() {
     ),
   };
 
-  return (
-    <div>
-      <NameToolbar name={name} />
-      {/* Refactor alert */}
+  const form = (
+    <>
       {error && <div className="alert alert-danger">{error.message}</div>}
       <form onSubmit={onSubmit}>
         {fields.sex}
@@ -134,14 +132,27 @@ export default function Edit() {
         {isDead && fields.death_date}
         {isDead && fields.death_date_estimated_indicator}
         <div className="row">
-          <div className="col-sm-2"></div>
-          <div className="col-sm-10">
+          <div className="col-sm-4"></div>
+          <div className="col-sm-8">
             <button type="submit" className="btn btn-primary">
               Save
             </button>
           </div>
         </div>
       </form>
+    </>
+  );
+
+  return (
+    <div>
+      <NameToolbar name={name} />
+      <div className="row">
+        <div className="col-sm-4">
+          <div className="card">
+            <div className="card-body">{form}</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
