@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import NameToolbar from "./NameToolbar";
 import * as api from "./api";
 
 // Refactor form and submit
 export default function Edit() {
   const person = useLoaderData();
+  const name = person.primary_name;
   const { register, watch, handleSubmit } = useForm({
     defaultValues: person,
   });
@@ -118,6 +120,7 @@ export default function Edit() {
 
   return (
     <div>
+      <NameToolbar name={name} />
       {/* Refactor alert */}
       {error && <div className="alert alert-danger">{error.message}</div>}
       <form onSubmit={onSubmit}>
