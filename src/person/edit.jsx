@@ -11,7 +11,7 @@ export default function Edit() {
   const { register, watch, handleSubmit } = useForm({
     defaultValues: person,
   });
-  const isDead = watch("death_indicator", false);
+  const isDead = watch("death_indicator", person.death_indicator || false);
   const [error, setError] = useState();
   const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data) => {
@@ -54,7 +54,9 @@ export default function Edit() {
             type="text"
             id="birth_date"
             className="form-control"
-            {...register("birth_date")}
+            {...register("birth_date", {
+              setValueAs: (x) => (x === "" ? null : x),
+            })}
           />
         </div>
       </div>
@@ -90,7 +92,9 @@ export default function Edit() {
             type="text"
             id="death_date"
             className="form-control"
-            {...register("death_date")}
+            {...register("death_date", {
+              setValueAs: (x) => (x === "" ? null : x),
+            })}
           />
         </div>
       </div>
