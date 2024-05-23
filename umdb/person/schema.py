@@ -14,6 +14,7 @@ class Name(BaseModel):
     patronymic: Optional[str]
     prefix: Optional[str]
     suffix: Optional[str]
+    full: str
 
     class Config:
         orm_mode = True

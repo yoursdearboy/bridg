@@ -29,6 +29,14 @@ class Name(Base):
     person_id: Mapped[int] = mapped_column(sa.ForeignKey("person.id"))
     person: Mapped["Person"] = relationship(back_populates="names")
 
+    @property
+    def full(self):
+        parts = [self.prefix, self.given, self.middle, self.family, self.suffix]
+        parts = [p for p in parts if p]
+        s = " ".join(parts)
+        s = "Anonymous" if s == "" else s
+        return s
+
 
 class Person(Base):
     __tablename__ = "person"
