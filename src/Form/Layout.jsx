@@ -5,11 +5,14 @@ export const Row = ({ children, className }) => (
   <div className={`row ${className}`}>{children}</div>
 );
 
-export const Label = ({ children, className, htmlFor }) => (
-  <label htmlFor={htmlFor} className={`col-form-label ${className}`}>
-    {children}
-  </label>
-);
+export const Label = ({ children, className, col, htmlFor }) => {
+  const baseClassName = col ? "col-form-label" : "form-label";
+  return (
+    <label htmlFor={htmlFor} className={`${baseClassName} ${className}`}>
+      {children}
+    </label>
+  );
+};
 
 export const TextInput = forwardRef(function TextInput({ className, ...props }, ref) {
   return <input type="text" className={`form-control ${className}`} {...props} ref={ref} />;

@@ -10,9 +10,7 @@ export default function PersonForm({ person, onSubmit }) {
   return (
     <Form onSubmit={onSubmit} {...methods}>
       <Row className="mb-3">
-        <Label className="col-4" htmlFor="sex">
-          Sex
-        </Label>
+        <Label htmlFor="sex">Sex</Label>
         <Col className="col-auto">
           <Input
             id="sex"
@@ -23,9 +21,7 @@ export default function PersonForm({ person, onSubmit }) {
         </Col>
       </Row>
       <Row className="mb-3">
-        <Label className="col-4" htmlFor="birth_date">
-          Birth date
-        </Label>
+        <Label htmlFor="birth_date">Birth date</Label>
         <Col className="col-auto">
           <Input
             id="birth_date"
@@ -36,9 +32,7 @@ export default function PersonForm({ person, onSubmit }) {
         </Col>
       </Row>
       <Row className="mb-3">
-        <Label className="col-4" htmlFor="death_indicator">
-          Death
-        </Label>
+        <Label htmlFor="death_indicator">Death</Label>
         <Col className="col-auto">
           <Input
             id="death_indicator"
@@ -52,9 +46,7 @@ export default function PersonForm({ person, onSubmit }) {
       </Row>
       {isDead && (
         <Row className="mb-3">
-          <Label className="col-4" htmlFor="death_date">
-            Death date
-          </Label>
+          <Label htmlFor="death_date">Death date</Label>
           <Col className="col-auto">
             <Input
               id="death_date"
@@ -67,7 +59,7 @@ export default function PersonForm({ person, onSubmit }) {
       )}
       {isDead && (
         <Row className="mb-3">
-          <Col className="offset-4">
+          <Col>
             <Input
               id="death_date_estimated_indicator"
               name="death_date_estimated_indicator"
@@ -79,7 +71,7 @@ export default function PersonForm({ person, onSubmit }) {
         </Row>
       )}
       <Row>
-        <Col className="offset-4">
+        <Col>
           <Button className="btn btn-primary" type="submit">
             Save
           </Button>
