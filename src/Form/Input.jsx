@@ -11,7 +11,17 @@ export function Form({ defaultValues, children, onSubmit }) {
   );
 }
 
-export function Input({ name, component: Component, ...props }) {
+export function FormProvided({ children, onSubmit, ...methods }) {
+  const { handleSubmit } = methods;
+
+  return (
+    <FormProvider {...methods}>
+      <form onSubmit={handleSubmit(onSubmit)}>{children}</form>
+    </FormProvider>
+  );
+}
+
+export function Input({ name, component: Component, setValueAs, ...props }) {
   const { register } = useFormContext();
-  return <Component {...register(name)} {...props} />;
+  return <Component {...register(name, { setValueAs })} {...props} />;
 }
