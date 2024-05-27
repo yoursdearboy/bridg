@@ -3,9 +3,11 @@ import { FormProvided as Form, Input } from "../Form/Input";
 import { useForm } from "react-hook-form";
 
 export default function PersonForm({ person, onSubmit }) {
-  const { watch, ...methods } = useForm({
-    defaultValues: person,
-  });
+  const defaultValues = {
+    ...person,
+    death_indicator: person.death_indicator === null ? null : person.death_indicator.toString(),
+  };
+  const { watch, ...methods } = useForm({ defaultValues });
   const isDead = watch("death_indicator", person.death_indicator || false);
   return (
     <Form onSubmit={onSubmit} {...methods}>
@@ -38,8 +40,7 @@ export default function PersonForm({ person, onSubmit }) {
             id="death_indicator"
             name="death_indicator"
             component={Select}
-            // prettier-ignore
-            options={{ "": "", "false": "Alive", "true": "Dead" }}
+            options={{ "": "", false: "Alive", true: "Dead" }}
             setValueAs={(x) => (x === "true" ? true : x === "false" ? false : null)}
           />
         </Col>
