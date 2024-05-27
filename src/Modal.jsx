@@ -1,3 +1,5 @@
+import bootstrap from "bootstrap/dist/js/bootstrap";
+
 export default function Modal({ children, id, size, title } = { size: "" }) {
   return (
     <div className={`modal modal-${size}`} id={id}>
@@ -20,3 +22,7 @@ export default function Modal({ children, id, size, title } = { size: "" }) {
     </div>
   );
 }
+
+Modal.dismiss = function dismiss(id) {
+  bootstrap.Modal.getInstance(`#${id}`).hide();
+};

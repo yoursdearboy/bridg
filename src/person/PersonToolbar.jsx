@@ -36,7 +36,7 @@ export default function PersonToolbar({ person }) {
         </Toolbar.Right>
       </Toolbar>
       <Modal id="name-edit-modal" size="lg" title="Edit person name">
-        <NameEdit person={person} name={name} />
+        <NameEdit person={person} name={name} onSuccess={() => Modal.dismiss("name-edit-modal")} />
       </Modal>
     </>
   );
