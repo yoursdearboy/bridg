@@ -3,21 +3,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 from umdb.person.model import Sex
-
-
-class Name(BaseModel):
-    id: int
-    use: Optional[str]
-    family: Optional[str]
-    given: Optional[str]
-    middle: Optional[str]
-    patronymic: Optional[str]
-    prefix: Optional[str]
-    suffix: Optional[str]
-    full: str
-
-    class Config:
-        orm_mode = True
+from umdb.person.name.schema import Name
 
 
 class PersonAttributes:

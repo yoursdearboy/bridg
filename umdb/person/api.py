@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import orm
 
+import umdb.person.name.api
 from umdb.db import get_db
+from umdb.person import model, schema
 from umdb.util import setattrs
-
-from . import model, schema
 
 
 router = APIRouter()
@@ -33,3 +33,6 @@ def update(id: int, body: schema.PersonUpdate, db: orm.Session = Depends(get_db)
     db.commit()
     db.refresh(person)
     return person
+
+
+router.include_router(umdb.person.name.api.router, prefix="/{person_id}/name")
