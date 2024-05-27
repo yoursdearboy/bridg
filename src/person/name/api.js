@@ -1,7 +1,5 @@
-export const index = () => fetch(`/api/persons/`);
-export const find = (id) => fetch(`/api/persons/${id}`);
-export const update = async (id, data) => {
-  const res = await fetch(`/api/persons/${id}`, {
+export const update = async (personId, id, data) => {
+  const res = await fetch(`/api/persons/${personId}/name/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

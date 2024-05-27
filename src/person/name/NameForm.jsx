@@ -1,9 +1,9 @@
-import { Col, Label, Row, TextInput, Select, Button } from "../Form/Layout";
-import { Form, Input } from "../Form/Input";
+import { Col, Label, Row, TextInput, Select, Button } from "../../Form/Layout";
+import { Form, Input } from "../../Form/Input";
 
-export default function NameForm({ name }) {
+export default function NameForm({ name, onSubmit }) {
   return (
-    <Form defaultValues={name} onSubmit={console.log}>
+    <Form defaultValues={name} onSubmit={onSubmit}>
       <Row className="mb-3 flex-nowrap">
         <Col className="col-auto">
           <Label htmlFor="prefix">Prefix</Label>

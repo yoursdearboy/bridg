@@ -1,7 +1,7 @@
 import BackButton from "../BackButton";
 import Modal from "../Modal";
 import Toolbar from "../Toolbar";
-import NameForm from "./NameForm";
+import NameEdit from "./name/NameEdit";
 
 export default function PersonToolbar({ person }) {
   const name = person.primary_name;
@@ -19,7 +19,7 @@ export default function PersonToolbar({ person }) {
         <Toolbar.Right>
           <div className="dropdown">
             <button
-              className="btn btn-secondary dropdown-toggle"
+              className="btn btn-outline-secondary dropdown-toggle"
               type="button"
               data-bs-toggle="dropdown"
             >
@@ -36,7 +36,7 @@ export default function PersonToolbar({ person }) {
         </Toolbar.Right>
       </Toolbar>
       <Modal id="name-edit-modal" size="lg" title="Edit person name">
-        <NameForm name={name} />
+        <NameEdit person={person} name={name} />
       </Modal>
     </>
   );

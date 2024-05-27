@@ -9,7 +9,7 @@ export default [
   },
   {
     path: ":id",
-    loader: ({ params }) => api.find(params),
+    loader: ({ params: { id } }) => api.find(id),
     Component: Edit,
   },
 ];

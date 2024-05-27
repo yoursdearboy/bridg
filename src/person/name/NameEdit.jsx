@@ -1,14 +1,14 @@
 import { useState } from "react";
-import Alert from "../Alert";
-import PersonForm from "./PersonForm";
+import Alert from "../../Alert";
+import NameForm from "./NameForm";
 import * as api from "./api";
 
-export default function PersonEdit({ person }) {
+export default function NameEdit({ person, name }) {
   const [error, setError] = useState();
   const onSubmit = async (data) => {
     setError(null);
     try {
-      await api.update(person.id, data);
+      await api.update(person.id, name.id, data);
     } catch (e) {
       setError(e);
     }
@@ -17,7 +17,7 @@ export default function PersonEdit({ person }) {
   return (
     <>
       {error && <Alert variant="danger">{error.message}</Alert>}
-      <PersonForm person={person} onSubmit={onSubmit} />
+      <NameForm name={name} onSubmit={onSubmit} />
     </>
   );
 }
