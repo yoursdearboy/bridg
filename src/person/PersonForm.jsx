@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form";
 export default function PersonForm({ person, onSubmit }) {
   const defaultValues = {
     ...person,
-    death_indicator: person.death_indicator === null ? null : person.death_indicator.toString(),
+    death_indicator:
+      typeof person.death_indicator === "boolean" ? person.death_indicator.toString() : null,
   };
   const { watch, ...methods } = useForm({ defaultValues });
   const isDead = watch("death_indicator", person.death_indicator || false);
