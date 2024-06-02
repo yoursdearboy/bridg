@@ -10,7 +10,7 @@ const NavLink = (props) => (
 export default function Nav() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
-      <div className="container-fluid">
+      <div className="container-xxl">
         <RouterLink className="navbar-brand" to="/">
           umdb
         </RouterLink>
