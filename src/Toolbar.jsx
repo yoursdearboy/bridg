@@ -1,20 +1,20 @@
 import React from "react";
 
-const Left = ({ children }) => children;
-const Center = ({ children }) => children;
-const Right = ({ children }) => children;
+const Left = ({ children }) => <div className="pe-4">{children}</div>;
+const Center = ({ children }) => <div className="flex-grow-1">{children}</div>;
+const Right = ({ children }) => <div className="ps-4">{children}</div>;
 
-function Toolbar({ children }) {
+function Toolbar({ children, className }) {
   const array = React.Children.toArray(children);
-  const left = array.filter((child) => child.type == Left);
-  const center = array.filter((child) => child.type == Center);
-  const right = array.filter((child) => child.type == Right);
+  const left = array.find((child) => child.type == Left);
+  const center = array.find((child) => child.type == Center);
+  const right = array.find((child) => child.type == Right);
 
   return (
-    <div className="d-flex my-2">
-      <div className="pe-2">{left}</div>
-      <div className="p-2">{center}</div>
-      <div className="ms-auto ps-2">{right}</div>
+    <div className={`d-flex ${className}`}>
+      {left}
+      {center}
+      {right}
     </div>
   );
 }
