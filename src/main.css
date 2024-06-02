@@ -1,7 +1,19 @@
+a {
+    text-decoration: none;
+}
+
 .col-form-label {
     font-weight: 500;
 }
 
 .col-form-label {
     text-align: right;
+}
+
+.fs-7 {
+    font-size: 0.95rem;
+}
+
+.fs-8 {
+    font-size: 0.9rem;
 }
