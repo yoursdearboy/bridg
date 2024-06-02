@@ -48,7 +48,7 @@ const COLUMNS = [
             navigate(url);
           }}
         >
-          <i className="fa-solid fa-edit" />
+          <i className="fa-solid fa-right-to-bracket"></i>
         </a>
       );
     }),
@@ -70,6 +70,7 @@ export default function PersonIndex() {
       layout: {
         topStart: {},
       },
+      searching: false,
       navigate,
     });
     return () => dt.destroy();
