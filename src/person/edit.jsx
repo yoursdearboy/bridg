@@ -1,20 +1,46 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import Breadcrumbs from "../Breadcrumbs";
 import Card from "../Card";
+import Toolbar from "../Toolbar";
 import PersonEdit from "./PersonEdit";
-import PersonToolbar from "./PersonToolbar";
 
+// TODO: Implement layout
 export default function Edit() {
   const person = useLoaderData();
   return (
     <>
-      <PersonToolbar person={person} />
-      <div className="row">
-        <div className="col-sm-4">
+      <Breadcrumbs className="mb-1 fs-7">
+        <Breadcrumbs.Item>
+          <Link to="../.." relative="path">
+            Persons
+          </Link>
+        </Breadcrumbs.Item>
+        <Breadcrumbs.Item>
+          <Link to=".." relative="path">
+            {person.primary_name.full}
+          </Link>
+        </Breadcrumbs.Item>
+        <Breadcrumbs.Item active>Edit</Breadcrumbs.Item>
+      </Breadcrumbs>
+      <Toolbar>
+        <Toolbar.Center>
+          <div className="lead">
+            <span className="fs-4 me-2">{person.primary_name?.full}</span>
+            <span className="fs-6">{person.birth_date}</span>
+          </div>
+        </Toolbar.Center>
+      </Toolbar>
+      <div className="row my-3">
+        <div className="col-12">
           <Card>
-            <PersonEdit person={person} />
+            <Card.Header className="bg-body">
+              <div className="lead fs-5">Edit information</div>
+            </Card.Header>
+            <Card.Body>
+              <PersonEdit person={person} />
+            </Card.Body>
           </Card>
         </div>
-        <div className="col-sm-8"></div>
       </div>
     </>
   );
