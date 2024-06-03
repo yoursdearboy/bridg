@@ -2,7 +2,7 @@ import DataTable from "datatables.net-bs5";
 import * as luxon from "luxon";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { reactRenderer } from "../datatables";
+import DataTableExtra from "../datatables";
 
 window.luxon = luxon;
 
@@ -37,7 +37,7 @@ const COLUMNS = [
   { data: "death_indicator", title: "Dead" },
   {
     data: "id",
-    render: reactRenderer(({ data: id, meta }) => {
+    render: DataTableExtra.render.react(({ data: id, meta }) => {
       const { navigate } = meta.settings.oInit;
       const url = `/persons/${id}`;
       return (
