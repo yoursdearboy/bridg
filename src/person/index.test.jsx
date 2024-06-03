@@ -1,7 +1,7 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
 import { setupServer } from "msw/node";
-import { MemoryRouter } from "react-router-dom";
+import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import { afterAll, afterEach, beforeAll, expect, test } from "vitest";
 import PersonIndexPage from "./index";
 
@@ -34,11 +34,8 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 test("page renders correctly", async () => {
-  const tree = render(
-    <MemoryRouter>
-      <PersonIndexPage />
-    </MemoryRouter>
-  );
-  await new Promise((r) => setTimeout(r, 0));
+  const router = createMemoryRouter([{ path: "/", Component: PersonIndexPage }]);
+  const tree = render(<RouterProvider router={router} />);
+  await screen.findAllByText("John");
   expect(tree).toMatchSnapshot();
 });
