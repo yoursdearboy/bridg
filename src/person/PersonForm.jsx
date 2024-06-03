@@ -9,7 +9,7 @@ export default function PersonForm({ person, onSubmit }) {
       typeof person.death_indicator === "boolean" ? person.death_indicator.toString() : null,
   };
   const { watch, ...methods } = useForm({ defaultValues });
-  const isDead = watch("death_indicator", person.death_indicator || false);
+  const isDead = watch("death_indicator") === "true";
   return (
     <Form onSubmit={onSubmit} {...methods}>
       <Row className="mb-3">
@@ -42,7 +42,6 @@ export default function PersonForm({ person, onSubmit }) {
             name="death_indicator"
             component={Select}
             options={{ "": "", false: "Alive", true: "Dead" }}
-            setValueAs={(x) => (x === "true" ? true : x === "false" ? false : null)}
           />
         </Col>
       </Row>
