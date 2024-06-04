@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Breadcrumbs from "../Breadcrumbs";
-import Toolbar from "../Toolbar";
+import Breadcrumbs from "../components/Breadcrumbs";
+import Toolbar from "../components/Toolbar";
 import PersonTable from "./PersonTable";
 
 // TODO: Implement layout

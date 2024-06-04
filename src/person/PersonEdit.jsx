@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Alert from "../Alert";
+import Alert from "../components/Alert";
 import PersonForm from "./PersonForm";
 import * as api from "./api";
 

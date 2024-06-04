@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRevalidator } from "react-router-dom";
-import Alert from "../../Alert";
+import Alert from "../../components/Alert";
 import NameForm from "./NameForm";
 import * as api from "./api";
 

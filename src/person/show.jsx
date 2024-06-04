@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from "react-router-dom";
-import Breadcrumbs from "../Breadcrumbs";
-import Card from "../Card";
-import Toolbar from "../Toolbar";
+import Breadcrumbs from "../components/Breadcrumbs";
+import Card from "../components/Card";
+import Toolbar from "../components/Toolbar";
 import PersonShow from "./PersonShow";
 
 const PersonCard = ({ person }) => (
