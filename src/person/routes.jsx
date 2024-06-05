@@ -10,7 +10,9 @@ export default [
     Component: Index,
   },
   {
+    id: "person",
     path: ":personId",
+    loader: ({ params: { personId } }) => api.find(personId),
     children: [
       {
         path: "",

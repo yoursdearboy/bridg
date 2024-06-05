@@ -1,4 +1,4 @@
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useRouteLoaderData } from "react-router-dom";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Card from "../../components/Card";
 import Toolbar from "../../components/Toolbar";
@@ -7,7 +7,8 @@ import NameEdit from "./NameEdit";
 // TODO: Implement layout
 export default function Edit() {
   const navigate = useNavigate();
-  const { person, name } = useLoaderData();
+  const name = useLoaderData();
+  const person = useRouteLoaderData("person");
   const { primary_name: primaryName } = person;
   return (
     <>
