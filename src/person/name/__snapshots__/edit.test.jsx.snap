@@ -1,0 +1,542 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`page renders correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <nav
+        class="mb-1 fs-7"
+        style="--bs-breadcrumb-divider: '>';"
+      >
+        <ol
+          class="breadcrumb my-auto"
+        >
+          <li
+            class="breadcrumb-item  undefined"
+          >
+            <a
+              href="/"
+            >
+              Persons
+            </a>
+          </li>
+          <li
+            class="breadcrumb-item  undefined"
+          >
+            <a
+              href="/"
+            >
+              Doe John
+            </a>
+          </li>
+          <li
+            class="breadcrumb-item active undefined"
+          >
+            Edit name
+          </li>
+        </ol>
+      </nav>
+      <div
+        class="d-flex undefined"
+      >
+        <div
+          class="flex-grow-1"
+        >
+          <div
+            class="lead"
+          >
+            <span
+              class="fs-4 me-2"
+            >
+              Doe John
+            </span>
+            <span
+              class="fs-6 me-2"
+            >
+              2024-05-21
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="row my-3"
+      >
+        <div
+          class="col-12"
+        >
+          <div
+            class="card undefined"
+          >
+            <div
+              class="card-header bg-body"
+            >
+              <div
+                class="lead fs-5"
+              >
+                Edit information
+              </div>
+            </div>
+            <div
+              class="card-body undefined"
+            >
+              <form>
+                <div
+                  class="row mb-3 flex-nowrap"
+                >
+                  <div
+                    class="flex-fill"
+                  >
+                    <label
+                      class="form-label undefined"
+                      for="family"
+                    >
+                      Family
+                    </label>
+                    <input
+                      class="form-control undefined"
+                      id="family"
+                      name="family"
+                      type="text"
+                    />
+                  </div>
+                  <div
+                    class="flex-fill"
+                  >
+                    <label
+                      class="form-label undefined"
+                      for="middle"
+                    >
+                      Middle
+                    </label>
+                    <input
+                      class="form-control undefined"
+                      id="middle"
+                      name="middle"
+                      type="text"
+                    />
+                  </div>
+                  <div
+                    class="flex-fill"
+                  >
+                    <label
+                      class="form-label undefined"
+                      for="given"
+                    >
+                      Given
+                    </label>
+                    <input
+                      class="form-control undefined"
+                      id="given"
+                      name="given"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <details>
+                  <summary
+                    class="mb-3"
+                  >
+                    Extra
+                  </summary>
+                  <div
+                    class="row mb-3"
+                  >
+                    <div
+                      class="col-auto"
+                    >
+                      <label
+                        class="form-label undefined"
+                        for="prefix"
+                      >
+                        Prefix
+                      </label>
+                      <input
+                        class="form-control undefined"
+                        id="prefix"
+                        name="prefix"
+                        style="max-width: 100px;"
+                        type="text"
+                      />
+                    </div>
+                    <div
+                      class="col-auto"
+                    >
+                      <label
+                        class="form-label undefined"
+                        for="suffix"
+                      >
+                        Suffix
+                      </label>
+                      <input
+                        class="form-control undefined"
+                        id="suffix"
+                        name="suffix"
+                        style="max-width: 100px;"
+                        type="text"
+                      />
+                    </div>
+                    <div
+                      class="col-auto"
+                    >
+                      <label
+                        class="form-label undefined"
+                        for="patronymic"
+                      >
+                        Patronymic
+                      </label>
+                      <input
+                        class="form-control undefined"
+                        id="patronymic"
+                        name="patronymic"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="row mb-3"
+                  >
+                    <label
+                      class="form-label undefined"
+                      for="use"
+                    >
+                      Use
+                    </label>
+                    <div
+                      class="col-auto"
+                    >
+                      <select
+                        class="form-select undefined"
+                        id="use"
+                        name="use"
+                      >
+                        <option
+                          value=""
+                        />
+                        <option
+                          value="official"
+                        >
+                          official
+                        </option>
+                        <option
+                          value="nickname"
+                        >
+                          nickname
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </details>
+                <div
+                  class="row mb-3"
+                >
+                  <div>
+                    <button
+                      class="btn btn-primary"
+                      type="submit"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <nav
+      class="mb-1 fs-7"
+      style="--bs-breadcrumb-divider: '>';"
+    >
+      <ol
+        class="breadcrumb my-auto"
+      >
+        <li
+          class="breadcrumb-item  undefined"
+        >
+          <a
+            href="/"
+          >
+            Persons
+          </a>
+        </li>
+        <li
+          class="breadcrumb-item  undefined"
+        >
+          <a
+            href="/"
+          >
+            Doe John
+          </a>
+        </li>
+        <li
+          class="breadcrumb-item active undefined"
+        >
+          Edit name
+        </li>
+      </ol>
+    </nav>
+    <div
+      class="d-flex undefined"
+    >
+      <div
+        class="flex-grow-1"
+      >
+        <div
+          class="lead"
+        >
+          <span
+            class="fs-4 me-2"
+          >
+            Doe John
+          </span>
+          <span
+            class="fs-6 me-2"
+          >
+            2024-05-21
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="row my-3"
+    >
+      <div
+        class="col-12"
+      >
+        <div
+          class="card undefined"
+        >
+          <div
+            class="card-header bg-body"
+          >
+            <div
+              class="lead fs-5"
+            >
+              Edit information
+            </div>
+          </div>
+          <div
+            class="card-body undefined"
+          >
+            <form>
+              <div
+                class="row mb-3 flex-nowrap"
+              >
+                <div
+                  class="flex-fill"
+                >
+                  <label
+                    class="form-label undefined"
+                    for="family"
+                  >
+                    Family
+                  </label>
+                  <input
+                    class="form-control undefined"
+                    id="family"
+                    name="family"
+                    type="text"
+                  />
+                </div>
+                <div
+                  class="flex-fill"
+                >
+                  <label
+                    class="form-label undefined"
+                    for="middle"
+                  >
+                    Middle
+                  </label>
+                  <input
+                    class="form-control undefined"
+                    id="middle"
+                    name="middle"
+                    type="text"
+                  />
+                </div>
+                <div
+                  class="flex-fill"
+                >
+                  <label
+                    class="form-label undefined"
+                    for="given"
+                  >
+                    Given
+                  </label>
+                  <input
+                    class="form-control undefined"
+                    id="given"
+                    name="given"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <details>
+                <summary
+                  class="mb-3"
+                >
+                  Extra
+                </summary>
+                <div
+                  class="row mb-3"
+                >
+                  <div
+                    class="col-auto"
+                  >
+                    <label
+                      class="form-label undefined"
+                      for="prefix"
+                    >
+                      Prefix
+                    </label>
+                    <input
+                      class="form-control undefined"
+                      id="prefix"
+                      name="prefix"
+                      style="max-width: 100px;"
+                      type="text"
+                    />
+                  </div>
+                  <div
+                    class="col-auto"
+                  >
+                    <label
+                      class="form-label undefined"
+                      for="suffix"
+                    >
+                      Suffix
+                    </label>
+                    <input
+                      class="form-control undefined"
+                      id="suffix"
+                      name="suffix"
+                      style="max-width: 100px;"
+                      type="text"
+                    />
+                  </div>
+                  <div
+                    class="col-auto"
+                  >
+                    <label
+                      class="form-label undefined"
+                      for="patronymic"
+                    >
+                      Patronymic
+                    </label>
+                    <input
+                      class="form-control undefined"
+                      id="patronymic"
+                      name="patronymic"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="row mb-3"
+                >
+                  <label
+                    class="form-label undefined"
+                    for="use"
+                  >
+                    Use
+                  </label>
+                  <div
+                    class="col-auto"
+                  >
+                    <select
+                      class="form-select undefined"
+                      id="use"
+                      name="use"
+                    >
+                      <option
+                        value=""
+                      />
+                      <option
+                        value="official"
+                      >
+                        official
+                      </option>
+                      <option
+                        value="nickname"
+                      >
+                        nickname
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </details>
+              <div
+                class="row mb-3"
+              >
+                <div>
+                  <button
+                    class="btn btn-primary"
+                    type="submit"
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

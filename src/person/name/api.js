@@ -1,3 +1,4 @@
+export const find = (personId, id) => fetch(`/api/persons/${personId}/name/${id}`);
 export const update = async (personId, id, data) => {
   const res = await fetch(`/api/persons/${personId}/name/${id}`, {
     method: "POST",

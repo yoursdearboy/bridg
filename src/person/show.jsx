@@ -25,18 +25,19 @@ const PersonCard = ({ person }) => (
 // TODO: Implement layout
 export default function Show() {
   const person = useLoaderData();
+  const name = person.primary_name;
   return (
     <div>
       <Breadcrumbs className="mb-1 fs-7">
         <Breadcrumbs.Item>
           <Link to="..">Persons</Link>
         </Breadcrumbs.Item>
-        <Breadcrumbs.Item active>{person.primary_name?.full}</Breadcrumbs.Item>
+        <Breadcrumbs.Item active>{name?.full}</Breadcrumbs.Item>
       </Breadcrumbs>
       <Toolbar>
         <Toolbar.Center>
           <div className="lead">
-            <span className="fs-4 me-2">{person.primary_name?.full}</span>
+            <span className="fs-4 me-2">{name?.full}</span>
             <span className="fs-6">{person.birth_date}</span>
           </div>
         </Toolbar.Center>
@@ -52,9 +53,9 @@ export default function Show() {
             <ul className="dropdown-menu">
               {person && (
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to={`name/${name.id}/edit`}>
                     Rename
-                  </a>
+                  </Link>
                 </li>
               )}
             </ul>

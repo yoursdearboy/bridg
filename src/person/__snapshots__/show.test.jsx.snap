@@ -69,7 +69,7 @@ exports[`page renders correctly 1`] = `
                 <li>
                   <a
                     class="dropdown-item"
-                    href="#"
+                    href="/name/2/edit"
                   >
                     Rename
                   </a>
@@ -200,7 +200,7 @@ exports[`page renders correctly 1`] = `
               <li>
                 <a
                   class="dropdown-item"
-                  href="#"
+                  href="/name/2/edit"
                 >
                   Rename
                 </a>

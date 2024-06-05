@@ -22,6 +22,10 @@ export default [
         Component: Edit,
         loader: ({ params: { personId } }) => api.find(personId),
       },
+      {
+        path: "name",
+        children: nameRoutes,
+      },
     ],
   },
 ];
