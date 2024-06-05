@@ -9,6 +9,14 @@ from umdb.util import setattrs
 router = APIRouter()
 
 
+@router.get("/{id}", response_model=schema.Name)
+def find(person_id: int, id: int, db: orm.Session = Depends(get_db)):
+    name = db.query(model.Name).where(model.Name.id == id).first()
+    if name is None:
+        raise HTTPException(404)
+    return name
+
+
 @router.post("/{id}", response_model=schema.Name)
 def update(
     person_id: int,
