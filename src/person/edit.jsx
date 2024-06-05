@@ -11,14 +11,10 @@ export default function Edit() {
     <>
       <Breadcrumbs className="mb-1 fs-7">
         <Breadcrumbs.Item>
-          <Link to="../.." relative="path">
-            Persons
-          </Link>
+          <Link to="../..">Persons</Link>
         </Breadcrumbs.Item>
         <Breadcrumbs.Item>
-          <Link to=".." relative="path">
-            {person.primary_name.full}
-          </Link>
+          <Link to="..">{person.primary_name.full}</Link>
         </Breadcrumbs.Item>
         <Breadcrumbs.Item active>Edit</Breadcrumbs.Item>
       </Breadcrumbs>
