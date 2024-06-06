@@ -1,13 +1,10 @@
 import { NavLink as RouterLink } from "react-router-dom";
 
 const NavLink = (props) => (
-  <RouterLink
-    className={"nav-link " + (({ isActive }) => (isActive ? "active" : ""))}
-    {...props}
-  />
+  <RouterLink className={"nav-link " + (({ isActive }) => (isActive ? "active" : ""))} {...props} />
 );
 
-export default function Nav() {
+export default function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-xxl">
@@ -29,11 +26,7 @@ export default function Nav() {
             </li>
           </ul>
           <form className="d-flex" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-            />
+            <input className="form-control me-2" type="search" placeholder="Search" />
           </form>
         </div>
       </div>

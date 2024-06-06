@@ -9,6 +9,9 @@ export default [
         path: "edit",
         Component: Edit,
         loader: ({ params: { personId, nameId } }) => api.find(personId, nameId),
+        handle: {
+          breadcrumb: "Rename",
+        },
       },
     ],
   },

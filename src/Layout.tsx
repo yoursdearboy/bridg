@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
-import Nav from "./Nav";
+import NavBar from "./NavBar";
+import NavBreadcrumbs from "./NavBreadcrumbs";
 
 export default function Layout() {
   return (
     <>
-      <Nav />
-      <div className="container-xxl mt-3">
+      <NavBar />
+      <NavBreadcrumbs className="mt-2 mb-1" />
+      <div className="container-xxl">
         <Outlet />
       </div>
     </>

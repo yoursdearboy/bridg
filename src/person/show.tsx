@@ -1,8 +1,31 @@
 import { Link, useLoaderData } from "react-router-dom";
-import Breadcrumbs from "../components/Breadcrumbs";
 import Card from "../components/Card";
 import Toolbar from "../components/Toolbar";
 import PersonShow from "./PersonShow";
+
+const PersonActions = ({ person }) => {
+  const name: any = person.primary_name;
+  return (
+    <>
+      <div className="dropdown">
+        <button
+          className="btn btn-primary btn-sm dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+        >
+          Actions
+        </button>
+        <ul className="dropdown-menu">
+          <li>
+            <Link className="dropdown-item" to={`name/${name.id}/edit`}>
+              Rename
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
 
 const PersonCard = ({ person }) => (
   <Card>
@@ -22,18 +45,11 @@ const PersonCard = ({ person }) => (
   </Card>
 );
 
-// TODO: Implement layout
-export default function Show() {
+export default function PersonShowPage() {
   const person: any = useLoaderData();
-  const name = person.primary_name;
+  const name: any = person.primary_name;
   return (
     <div>
-      <Breadcrumbs className="mb-1 fs-7">
-        <Breadcrumbs.Item>
-          <Link to="..">Persons</Link>
-        </Breadcrumbs.Item>
-        <Breadcrumbs.Item active>{name?.full}</Breadcrumbs.Item>
-      </Breadcrumbs>
       <Toolbar>
         <Toolbar.Center>
           <div className="lead">
@@ -42,24 +58,7 @@ export default function Show() {
           </div>
         </Toolbar.Center>
         <Toolbar.Right>
-          <div className="dropdown">
-            <button
-              className="btn btn-primary btn-sm dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-            >
-              Actions
-            </button>
-            <ul className="dropdown-menu">
-              {person && (
-                <li>
-                  <Link className="dropdown-item" to={`name/${name.id}/edit`}>
-                    Rename
-                  </Link>
-                </li>
-              )}
-            </ul>
-          </div>
+          <PersonActions person={person} />
         </Toolbar.Right>
       </Toolbar>
       <div className="row my-3">

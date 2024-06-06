@@ -1,23 +1,12 @@
-import { Link, useLoaderData } from "react-router-dom";
-import Breadcrumbs from "../components/Breadcrumbs";
+import { useLoaderData } from "react-router-dom";
 import Card from "../components/Card";
 import Toolbar from "../components/Toolbar";
 import PersonEdit from "./PersonEdit";
 
-// TODO: Implement layout
-export default function Edit() {
+export default function PersonEditPage() {
   const person: any = useLoaderData();
   return (
-    <>
-      <Breadcrumbs className="mb-1 fs-7">
-        <Breadcrumbs.Item>
-          <Link to="../..">Persons</Link>
-        </Breadcrumbs.Item>
-        <Breadcrumbs.Item>
-          <Link to="..">{person.primary_name.full}</Link>
-        </Breadcrumbs.Item>
-        <Breadcrumbs.Item active>Edit</Breadcrumbs.Item>
-      </Breadcrumbs>
+    <div>
       <Toolbar>
         <Toolbar.Center>
           <div className="lead">
@@ -38,6 +27,6 @@ export default function Edit() {
           </Card>
         </div>
       </div>
-    </>
+    </div>
   );
 }
