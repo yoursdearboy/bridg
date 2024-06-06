@@ -1,5 +1,5 @@
-import { Col, Label, Row, TextInput, Select, Button } from "../../Form/Layout";
-import { Form, Input } from "../../Form/Input";
+import { Col, Label, Row, TextInput, Select, Button } from "../../../Form/Layout";
+import { Form, Input } from "../../../Form/Input";
 
 export default function NameForm({ name, onSubmit }) {
   return (

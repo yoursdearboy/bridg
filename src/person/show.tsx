@@ -1,7 +1,6 @@
 import { Link, useLoaderData } from "react-router-dom";
 import Card from "../components/Card";
 import Toolbar from "../components/Toolbar";
-import PersonShow from "./PersonShow";
 
 const PersonActions = ({ person }) => {
   const name: any = person.primary_name;
@@ -40,7 +39,7 @@ const PersonCard = ({ person }) => (
       </div>
     </Card.Header>
     <Card.Body>
-      <PersonShow person={person} />
+      <pre className="mb-0">{JSON.stringify(person, null, 2)}</pre>
     </Card.Body>
   </Card>
 );

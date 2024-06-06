@@ -1,5 +1,5 @@
-import { Col, Label, Row, TextInput, Select, Checkbox, Button } from "../Form/Layout";
-import { FormProvided as Form, Input } from "../Form/Input";
+import { Col, Label, Row, TextInput, Select, Checkbox, Button } from "../../Form/Layout";
+import { FormProvided as Form, Input } from "../../Form/Input";
 import { useForm } from "react-hook-form";
 
 export default function PersonForm({ person, onSubmit }) {

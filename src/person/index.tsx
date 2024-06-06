@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Toolbar from "../components/Toolbar";
-import PersonTable from "./PersonTable";
+import PersonTable from "./components/Table";
 
 export default function PersonIndexPage() {
   return (
