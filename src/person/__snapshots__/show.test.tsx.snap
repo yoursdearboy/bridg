@@ -5,6 +5,252 @@ exports[`page renders correctly 1`] = `
   "asFragment": [Function],
   "baseElement": <body>
     <div>
+      <nav
+        class="navbar navbar-expand-lg bg-body-tertiary"
+      >
+        <div
+          class="container-xxl"
+        >
+          <a
+            class="navbar-brand"
+            href="/"
+          >
+            umdb
+          </a>
+          <button
+            class="navbar-toggler"
+            data-bs-target="#nav-content"
+            data-bs-toggle="collapse"
+            type="button"
+          >
+            <span
+              class="navbar-toggler-icon"
+            />
+          </button>
+          <div
+            class="collapse navbar-collapse"
+            id="nav-content"
+          >
+            <ul
+              class="navbar-nav me-auto mb-2 mb-lg-0"
+            >
+              <li
+                class="nav-item"
+              >
+                <a
+                  aria-current="page"
+                  class="nav-link ({ isActive }) => isActive ? "active" : "" active"
+                  href="/persons"
+                >
+                  Persons
+                </a>
+              </li>
+            </ul>
+            <form
+              class="d-flex"
+              role="search"
+            >
+              <input
+                class="form-control me-2"
+                placeholder="Search"
+                type="search"
+              />
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div
+        class="container-xxl mt-3"
+      >
+        <div>
+          <nav
+            class="mb-1 fs-7"
+            style="--bs-breadcrumb-divider: '>';"
+          >
+            <ol
+              class="breadcrumb my-auto"
+            >
+              <li
+                class="breadcrumb-item  undefined"
+              >
+                <a
+                  href="/persons"
+                >
+                  Persons
+                </a>
+              </li>
+              <li
+                class="breadcrumb-item active undefined"
+              >
+                Doe John
+              </li>
+            </ol>
+          </nav>
+          <div
+            class="d-flex undefined"
+          >
+            <div
+              class="flex-grow-1"
+            >
+              <div
+                class="lead"
+              >
+                <span
+                  class="fs-4 me-2"
+                >
+                  Doe John
+                </span>
+                <span
+                  class="fs-6"
+                >
+                  2024-05-21
+                </span>
+              </div>
+            </div>
+            <div
+              class="ps-4"
+            >
+              <div
+                class="dropdown"
+              >
+                <button
+                  class="btn btn-primary btn-sm dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  type="button"
+                >
+                  Actions
+                </button>
+                <ul
+                  class="dropdown-menu"
+                >
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="/persons/1/name/2/edit"
+                    >
+                      Rename
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row my-3"
+          >
+            <div
+              class="col-sm-4"
+            >
+              <div
+                class="card undefined"
+              >
+                <div
+                  class="card-header bg-body"
+                >
+                  <div
+                    class="d-flex"
+                  >
+                    <div
+                      class="lead fs-5"
+                    >
+                      Information
+                    </div>
+                    <div
+                      class="ms-auto"
+                    >
+                      <a
+                        class="fs-8 align-middle"
+                        href="/persons/1/edit"
+                      >
+                        <i
+                          class="fa-solid fa-pencil pe-1"
+                        />
+                         Edit
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="card-body undefined"
+                >
+                  <pre
+                    class="mb-0"
+                  >
+                    {
+  "sex": "M",
+  "birth_date": "2024-05-21",
+  "death_date": "2024-05-21",
+  "death_date_estimated_indicator": true,
+  "death_indicator": true,
+  "id": 1
+}
+                  </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <nav
+      class="navbar navbar-expand-lg bg-body-tertiary"
+    >
+      <div
+        class="container-xxl"
+      >
+        <a
+          class="navbar-brand"
+          href="/"
+        >
+          umdb
+        </a>
+        <button
+          class="navbar-toggler"
+          data-bs-target="#nav-content"
+          data-bs-toggle="collapse"
+          type="button"
+        >
+          <span
+            class="navbar-toggler-icon"
+          />
+        </button>
+        <div
+          class="collapse navbar-collapse"
+          id="nav-content"
+        >
+          <ul
+            class="navbar-nav me-auto mb-2 mb-lg-0"
+          >
+            <li
+              class="nav-item"
+            >
+              <a
+                aria-current="page"
+                class="nav-link ({ isActive }) => isActive ? "active" : "" active"
+                href="/persons"
+              >
+                Persons
+              </a>
+            </li>
+          </ul>
+          <form
+            class="d-flex"
+            role="search"
+          >
+            <input
+              class="form-control me-2"
+              placeholder="Search"
+              type="search"
+            />
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div
+      class="container-xxl mt-3"
+    >
       <div>
         <nav
           class="mb-1 fs-7"
@@ -17,7 +263,7 @@ exports[`page renders correctly 1`] = `
               class="breadcrumb-item  undefined"
             >
               <a
-                href="/"
+                href="/persons"
               >
                 Persons
               </a>
@@ -69,7 +315,7 @@ exports[`page renders correctly 1`] = `
                 <li>
                   <a
                     class="dropdown-item"
-                    href="/name/2/edit"
+                    href="/persons/1/name/2/edit"
                   >
                     Rename
                   </a>
@@ -103,7 +349,7 @@ exports[`page renders correctly 1`] = `
                   >
                     <a
                       class="fs-8 align-middle"
-                      href="/edit"
+                      href="/persons/1/edit"
                     >
                       <i
                         class="fa-solid fa-pencil pe-1"
@@ -129,136 +375,6 @@ exports[`page renders correctly 1`] = `
 }
                 </pre>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div>
-      <nav
-        class="mb-1 fs-7"
-        style="--bs-breadcrumb-divider: '>';"
-      >
-        <ol
-          class="breadcrumb my-auto"
-        >
-          <li
-            class="breadcrumb-item  undefined"
-          >
-            <a
-              href="/"
-            >
-              Persons
-            </a>
-          </li>
-          <li
-            class="breadcrumb-item active undefined"
-          >
-            Doe John
-          </li>
-        </ol>
-      </nav>
-      <div
-        class="d-flex undefined"
-      >
-        <div
-          class="flex-grow-1"
-        >
-          <div
-            class="lead"
-          >
-            <span
-              class="fs-4 me-2"
-            >
-              Doe John
-            </span>
-            <span
-              class="fs-6"
-            >
-              2024-05-21
-            </span>
-          </div>
-        </div>
-        <div
-          class="ps-4"
-        >
-          <div
-            class="dropdown"
-          >
-            <button
-              class="btn btn-primary btn-sm dropdown-toggle"
-              data-bs-toggle="dropdown"
-              type="button"
-            >
-              Actions
-            </button>
-            <ul
-              class="dropdown-menu"
-            >
-              <li>
-                <a
-                  class="dropdown-item"
-                  href="/name/2/edit"
-                >
-                  Rename
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div
-        class="row my-3"
-      >
-        <div
-          class="col-sm-4"
-        >
-          <div
-            class="card undefined"
-          >
-            <div
-              class="card-header bg-body"
-            >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="lead fs-5"
-                >
-                  Information
-                </div>
-                <div
-                  class="ms-auto"
-                >
-                  <a
-                    class="fs-8 align-middle"
-                    href="/edit"
-                  >
-                    <i
-                      class="fa-solid fa-pencil pe-1"
-                    />
-                     Edit
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-body undefined"
-            >
-              <pre
-                class="mb-0"
-              >
-                {
-  "sex": "M",
-  "birth_date": "2024-05-21",
-  "death_date": "2024-05-21",
-  "death_date_estimated_indicator": true,
-  "death_indicator": true,
-  "id": 1
-}
-              </pre>
             </div>
           </div>
         </div>

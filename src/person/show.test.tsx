@@ -1,7 +1,9 @@
 import { render, screen } from "@testing-library/react";
+import { HttpResponse, http } from "msw";
+import { setupServer } from "msw/node";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
-import { expect, test } from "vitest";
-import PersonShowPage from "./show";
+import { afterAll, afterEach, beforeAll, expect, test } from "vitest";
+import routes from "../routes";
 
 const DATA = {
   sex: "M",
@@ -23,8 +25,14 @@ const DATA = {
   },
 };
 
+const server = setupServer(http.get("/api/persons/1", () => HttpResponse.json(DATA)));
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
 test("page renders correctly", async () => {
-  const router = createMemoryRouter([{ path: "/", Component: PersonShowPage, loader: () => DATA }]);
+  const router = createMemoryRouter(routes, { initialEntries: ["/persons/1"] });
   const tree = render(<RouterProvider router={router} />);
   await screen.findAllByText("Doe John");
   expect(tree).toMatchSnapshot();
