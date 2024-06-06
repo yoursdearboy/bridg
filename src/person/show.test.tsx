@@ -31,7 +31,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-test("page renders correctly", async () => {
+test("person show page renders correctly", async () => {
   const router = createMemoryRouter(routes, { initialEntries: ["/persons/1"] });
   const tree = render(<RouterProvider router={router} />);
   await screen.findAllByText("Doe John");

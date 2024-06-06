@@ -1,25 +1,11 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`page renders correctly 1`] = `
+exports[`persons index page renders correctly 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div>
-        <nav
-          class="mb-1 fs-7"
-          style="--bs-breadcrumb-divider: '>';"
-        >
-          <ol
-            class="breadcrumb my-auto"
-          >
-            <li
-              class="breadcrumb-item active undefined"
-            >
-              Persons
-            </li>
-          </ol>
-        </nav>
         <div
           class="d-flex undefined"
         >
@@ -431,20 +417,6 @@ exports[`page renders correctly 1`] = `
   </body>,
   "container": <div>
     <div>
-      <nav
-        class="mb-1 fs-7"
-        style="--bs-breadcrumb-divider: '>';"
-      >
-        <ol
-          class="breadcrumb my-auto"
-        >
-          <li
-            class="breadcrumb-item active undefined"
-          >
-            Persons
-          </li>
-        </ol>
-      </nav>
       <div
         class="d-flex undefined"
       >

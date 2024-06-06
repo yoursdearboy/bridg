@@ -33,7 +33,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-test("page renders correctly", async () => {
+test("persons index page renders correctly", async () => {
   const router = createMemoryRouter([{ path: "/", Component: PersonIndexPage }]);
   const tree = render(<RouterProvider router={router} />);
   await screen.findAllByText("John");
