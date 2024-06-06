@@ -24,7 +24,7 @@ const PersonCard = ({ person }) => (
 
 // TODO: Implement layout
 export default function Show() {
-  const person = useLoaderData();
+  const person: any = useLoaderData();
   const name = person.primary_name;
   return (
     <div>

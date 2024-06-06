@@ -1,6 +1,6 @@
 import bootstrap from "bootstrap/dist/js/bootstrap";
 
-export default function Modal({ children, id, size, title } = { size: "" }) {
+export default function Modal({ children, id, size = "", title }: any) {
   return (
     <div className={`modal modal-${size}`} id={id}>
       <div className="modal-dialog">

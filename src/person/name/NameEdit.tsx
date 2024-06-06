@@ -6,7 +6,7 @@ import * as api from "./api";
 
 export default function NameEdit({ person, name, onSuccess }) {
   const { revalidate } = useRevalidator();
-  const [error, setError] = useState();
+  const [error, setError] = useState<any>();
   const onSubmit = async (data) => {
     setError(null);
     try {

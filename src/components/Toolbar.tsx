@@ -4,8 +4,8 @@ const Left = ({ children }) => <div className="pe-4">{children}</div>;
 const Center = ({ children }) => <div className="flex-grow-1">{children}</div>;
 const Right = ({ children }) => <div className="ps-4">{children}</div>;
 
-function Toolbar({ children, className }) {
-  const array = React.Children.toArray(children);
+function Toolbar({ children, className }: any) {
+  const array = React.Children.toArray(children) as JSX.Element[];
   const left = array.find((child) => child.type == Left);
   const center = array.find((child) => child.type == Center);
   const right = array.find((child) => child.type == Right);

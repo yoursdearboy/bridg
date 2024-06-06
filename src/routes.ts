@@ -4,11 +4,10 @@ import personRoutes from "./person/routes";
 export default [
   {
     path: "/",
-    element: <Layout />,
+    Component: Layout,
     children: [
       {
         path: "",
-        element: <div>Works</div>,
       },
       {
         path: "/persons",

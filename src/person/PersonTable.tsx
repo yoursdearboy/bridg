@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import DataTableExtra from "../datatables";
 
-window.luxon = luxon;
+(window as any).luxon = luxon;
 
 const URL = "/api/persons";
 
@@ -57,11 +57,11 @@ const COLUMNS = [
 ];
 
 export default function PersonTable() {
-  const ref = useRef();
+  const ref = useRef<HTMLTableElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const dt = new DataTable(ref.current, {
+    const dt = new DataTable(ref.current!, {
       ajax: {
         url: URL,
         dataSrc: "",
@@ -72,8 +72,11 @@ export default function PersonTable() {
       },
       searching: false,
       navigate,
-    });
-    return () => dt.destroy();
+    } as any);
+
+    return function () {
+      dt.destroy();
+    };
   });
 
   return <table className="table" ref={ref}></table>;

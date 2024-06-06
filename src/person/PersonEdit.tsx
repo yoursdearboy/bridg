@@ -4,7 +4,7 @@ import PersonForm from "./PersonForm";
 import * as api from "./api";
 
 export default function PersonEdit({ person }) {
-  const [error, setError] = useState();
+  const [error, setError] = useState<any>();
   const onSubmit = async (data) => {
     setError(null);
     try {

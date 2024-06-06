@@ -1,11 +1,12 @@
 import { forwardRef } from "react";
 
-export const Col = ({ children, className }) => <div className={className}>{children}</div>;
-export const Row = ({ children, className }) => (
+export const Col = ({ children, className }: any) => <div className={className}>{children}</div>;
+
+export const Row = ({ children, className }: any) => (
   <div className={`row ${className}`}>{children}</div>
 );
 
-export const Label = ({ children, className, col, htmlFor }) => {
+export const Label = ({ children, className, col, htmlFor }: any) => {
   const baseClassName = col ? "col-form-label" : "form-label";
   return (
     <label htmlFor={htmlFor} className={`${baseClassName} ${className}`}>
@@ -14,11 +15,17 @@ export const Label = ({ children, className, col, htmlFor }) => {
   );
 };
 
-export const TextInput = forwardRef(function TextInput({ className, ...props }, ref) {
+export const TextInput = forwardRef<HTMLInputElement, any>(function TextInput(
+  { className, ...props },
+  ref
+) {
   return <input type="text" className={`form-control ${className}`} {...props} ref={ref} />;
 });
 
-export const Select = forwardRef(function Select({ className, options, ...props }, ref) {
+export const Select = forwardRef<HTMLSelectElement, any>(function Select(
+  { className, options, ...props },
+  ref
+) {
   if (options === null) {
     options = null;
   } else if (Array.isArray(options)) {
@@ -42,7 +49,10 @@ export const Select = forwardRef(function Select({ className, options, ...props 
   );
 });
 
-export const Checkbox = forwardRef(function Checkbox({ className, id, children, ...props }, ref) {
+export const Checkbox = forwardRef<HTMLInputElement, any>(function Checkbox(
+  { children, className, id, ...props },
+  ref
+) {
   return (
     <div className="form-check">
       <input

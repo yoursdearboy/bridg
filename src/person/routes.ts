@@ -12,17 +12,17 @@ export default [
   {
     id: "person",
     path: ":personId",
-    loader: ({ params: { personId } }) => api.find(personId),
+    loader: ({ params: { personId } }: any) => api.find(personId),
     children: [
       {
         path: "",
         Component: Show,
-        loader: ({ params: { personId } }) => api.find(personId),
+        loader: ({ params: { personId } }: any) => api.find(personId),
       },
       {
         path: "edit",
         Component: Edit,
-        loader: ({ params: { personId } }) => api.find(personId),
+        loader: ({ params: { personId } }: any) => api.find(personId),
       },
       {
         path: "name",

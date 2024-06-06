@@ -7,8 +7,8 @@ import NameEdit from "./NameEdit";
 // TODO: Implement layout
 export default function Edit() {
   const navigate = useNavigate();
-  const name = useLoaderData();
-  const person = useRouteLoaderData("person");
+  const name: any = useLoaderData();
+  const person: any = useRouteLoaderData("person");
   const { primary_name: primaryName } = person;
   return (
     <>

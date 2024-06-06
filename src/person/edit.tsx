@@ -6,7 +6,7 @@ import PersonEdit from "./PersonEdit";
 
 // TODO: Implement layout
 export default function Edit() {
-  const person = useLoaderData();
+  const person: any = useLoaderData();
   return (
     <>
       <Breadcrumbs className="mb-1 fs-7">

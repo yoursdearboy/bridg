@@ -11,7 +11,7 @@ export function Form({ defaultValues, children, onSubmit }) {
   );
 }
 
-export function FormProvided({ children, onSubmit, ...methods }) {
+export function FormProvided({ children, onSubmit, ...methods }: any) {
   const { handleSubmit } = methods;
 
   return (
@@ -21,7 +21,7 @@ export function FormProvided({ children, onSubmit, ...methods }) {
   );
 }
 
-export function Input({ name, component: Component, setValueAs, ...props }) {
+export function Input({ name, component: Component, setValueAs, ...props }: any) {
   const { register } = useFormContext();
   return <Component {...register(name, { setValueAs })} {...props} />;
 }
