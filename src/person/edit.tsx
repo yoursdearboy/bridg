@@ -1,18 +1,20 @@
 import { useState } from "react";
+import { FormProvider } from "react-hook-form";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
 import Card from "../components/Card";
 import Toolbar from "../components/Toolbar";
 import * as api from "./api";
-import PersonForm from "./components/Form";
+import PersonForm, { usePersonForm } from "./components/Form";
 
 export default function PersonEditPage() {
   const navigate = useNavigate();
 
   const person: any = useLoaderData();
 
+  const form = usePersonForm({ defaultValues: person });
   const [error, setError] = useState<any>();
-  const onSubmit = async (data) => {
+  const onSubmit = form.handleSubmit(async (data) => {
     setError(null);
     try {
       await api.update(person.id, data);
@@ -20,7 +22,7 @@ export default function PersonEditPage() {
     } catch (e) {
       setError(e);
     }
-  };
+  });
 
   return (
     <div>
@@ -31,6 +33,9 @@ export default function PersonEditPage() {
             <span className="fs-6">{person.birth_date}</span>
           </div>
         </Toolbar.Center>
+        <Toolbar.Right>
+          <input className="btn btn-sm btn-primary" type="submit" form="person-form" value="Save" />
+        </Toolbar.Right>
       </Toolbar>
       <div className="row my-3">
         <div className="col-12">
@@ -40,7 +45,11 @@ export default function PersonEditPage() {
             </Card.Header>
             <Card.Body>
               {error && <Alert variant="danger">{error.message}</Alert>}
-              <PersonForm person={person} onSubmit={onSubmit} />
+              <form id="person-form" onSubmit={onSubmit}>
+                <FormProvider {...form}>
+                  <PersonForm />
+                </FormProvider>
+              </form>
             </Card.Body>
           </Card>
         </div>

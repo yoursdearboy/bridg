@@ -1,9 +1,9 @@
-import { Col, Label, Row, TextInput, Select, Button } from "../../../Form/Layout";
-import { Form, Input } from "../../../Form/Input";
+import { Input } from "../../../Form/Input";
+import { Col, Label, Row, Select, TextInput } from "../../../Form/Layout";
 
-export default function NameForm({ name, onSubmit }) {
+export default function NameForm() {
   return (
-    <Form defaultValues={name} onSubmit={onSubmit}>
+    <>
       <Row className="mb-3 flex-nowrap">
         <Col className="flex-fill">
           <Label htmlFor="family">Family</Label>
@@ -41,13 +41,13 @@ export default function NameForm({ name, onSubmit }) {
           </Col>
         </Row>
       </details>
-      <Row className="mb-3">
+      {/* <Row className="mb-3">
         <Col>
           <Button className="btn btn-primary" type="submit">
             Save
           </Button>
         </Col>
-      </Row>
-    </Form>
+      </Row> */}
+    </>
   );
 }

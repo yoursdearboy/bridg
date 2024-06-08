@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import { useLoaderData, useNavigate, useRouteLoaderData } from "react-router-dom";
 import Alert from "../../components/Alert";
 import Card from "../../components/Card";
@@ -13,8 +14,9 @@ export default function NameEditPage() {
   const person: any = useRouteLoaderData("person");
   const { primary_name: primaryName } = person;
 
+  const form = useForm({ defaultValues: name });
   const [error, setError] = useState<any>();
-  const onSubmit = async (data) => {
+  const onSubmit = form.handleSubmit(async (data) => {
     setError(null);
     try {
       await api.update(person.id, name.id, data);
@@ -22,7 +24,7 @@ export default function NameEditPage() {
     } catch (e) {
       setError(e);
     }
-  };
+  });
 
   return (
     <div>
@@ -34,20 +36,27 @@ export default function NameEditPage() {
             {name.id != primaryName.id && <span className="fs-4">(alias)</span>}
           </div>
         </Toolbar.Center>
+        <Toolbar.Right>
+          <input type="submit" form="name-form" className="btn btn-sm btn-primary" value="Save" />
+        </Toolbar.Right>
       </Toolbar>
-      <div className="row my-3">
-        <div className="col-12">
-          <Card>
-            <Card.Header className="bg-body">
-              <div className="lead fs-5">Edit information</div>
-            </Card.Header>
-            <Card.Body>
-              {error && <Alert variant="danger">{error.message}</Alert>}
-              <NameForm name={name} onSubmit={onSubmit} />
-            </Card.Body>
-          </Card>
+      <form id="name-form" onSubmit={onSubmit}>
+        <div className="row my-3">
+          <div className="col-12">
+            <Card>
+              <Card.Header className="bg-body">
+                <div className="lead fs-5">Edit information</div>
+              </Card.Header>
+              <Card.Body>
+                {error && <Alert variant="danger">{error.message}</Alert>}
+                <FormProvider {...form}>
+                  <NameForm />
+                </FormProvider>
+              </Card.Body>
+            </Card>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

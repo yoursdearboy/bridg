@@ -2,6 +2,7 @@ import * as api from "./api";
 import Edit from "./edit";
 import Index from "./index";
 import nameRoutes from "./name/routes";
+import New from "./new";
 import Show from "./show";
 
 export default [
@@ -13,6 +14,13 @@ export default [
       {
         path: "",
         Component: Index,
+      },
+      {
+        path: "new",
+        Component: New,
+        handle: {
+          breadcrumb: "New",
+        },
       },
       {
         id: "person",

@@ -1,17 +1,23 @@
-import { Col, Label, Row, TextInput, Select, Checkbox, Button } from "../../Form/Layout";
-import { FormProvided as Form, Input } from "../../Form/Input";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
+import { Input } from "../../Form/Input";
+import { Checkbox, Col, Label, Row, Select, TextInput } from "../../Form/Layout";
 
-export default function PersonForm({ person, onSubmit }) {
-  const defaultValues = {
-    ...person,
+export const usePersonForm = ({ defaultValues = {} }: any = {}) => {
+  defaultValues = {
+    ...defaultValues,
     death_indicator:
-      typeof person.death_indicator === "boolean" ? person.death_indicator.toString() : null,
+      typeof defaultValues.death_indicator === "boolean"
+        ? defaultValues.death_indicator.toString()
+        : null,
   };
-  const { watch, ...methods } = useForm({ defaultValues });
+  return useForm({ defaultValues });
+};
+
+export default function PersonForm() {
+  const { watch } = useFormContext();
   const isDead = watch("death_indicator") === "true";
   return (
-    <Form onSubmit={onSubmit} {...methods}>
+    <>
       <Row className="mb-3">
         <Label htmlFor="sex">Sex</Label>
         <Col className="col-auto">
@@ -45,39 +51,35 @@ export default function PersonForm({ person, onSubmit }) {
           />
         </Col>
       </Row>
-      {isDead && (
-        <Row className="mb-3">
-          <Label htmlFor="death_date">Death date</Label>
-          <Col className="col-auto">
-            <Input
-              id="death_date"
-              name="death_date"
-              component={TextInput}
-              setValueAs={(x) => (x === "" ? null : x)}
-            />
-          </Col>
-        </Row>
-      )}
-      {isDead && (
-        <Row className="mb-3">
-          <Col>
-            <Input
-              id="death_date_estimated_indicator"
-              name="death_date_estimated_indicator"
-              component={Checkbox}
-            >
-              Estimated, not exact
-            </Input>
-          </Col>
-        </Row>
-      )}
-      <Row>
+      <Row className={`mb-3 ${isDead ? "" : "d-none"}`}>
+        <Label htmlFor="death_date">Death date</Label>
+        <Col className="col-auto">
+          <Input
+            id="death_date"
+            name="death_date"
+            component={TextInput}
+            setValueAs={(x) => (x === "" ? null : x)}
+          />
+        </Col>
+      </Row>
+      <Row className={`mb-3  ${isDead ? "" : "d-none"}`}>
+        <Col>
+          <Input
+            id="death_date_estimated_indicator"
+            name="death_date_estimated_indicator"
+            component={Checkbox}
+          >
+            Estimated, not exact
+          </Input>
+        </Col>
+      </Row>
+      {/* <Row>
         <Col>
           <Button className="btn btn-primary" type="submit">
             Save
           </Button>
         </Col>
-      </Row>
-    </Form>
+      </Row> */}
+    </>
   );
 }
