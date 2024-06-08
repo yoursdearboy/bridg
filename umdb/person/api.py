@@ -15,8 +15,19 @@ def index(db: orm.Session = Depends(get_db)):
     return db.query(model.Person).all()
 
 
+@router.post("/", response_model=schema.Person)
+def create(body: schema.PersonCreate, db: orm.Session = Depends(get_db)):
+    name = setattrs(model.Name(), body.name.model_dump())
+    person = setattrs(model.Person(), body.model_dump(exclude="name"))
+    person.names.append(name)
+    db.add(person)
+    db.commit()
+    db.refresh(person)
+    return person
+
+
 @router.get("/{id}", response_model=schema.Person)
-def get(id: int, db: orm.Session = Depends(get_db)):
+def read(id: int, db: orm.Session = Depends(get_db)):
     person = db.query(model.Person).where(model.Person.id == id).first()
     if person is None:
         raise HTTPException(404)
@@ -33,6 +44,12 @@ def update(id: int, body: schema.PersonUpdate, db: orm.Session = Depends(get_db)
     db.commit()
     db.refresh(person)
     return person
+
+
+@router.delete("/{id}")
+def delete(id: int, db: orm.Session = Depends(get_db)):
+    db.query(model.Person).where(model.Person.id == id).delete()
+    db.commit()
 
 
 router.include_router(umdb.person.name.api.router, prefix="/{person_id}/name")

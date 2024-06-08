@@ -12,6 +12,11 @@ class NameAttributes:
     suffix: Optional[str]
 
 
+class NameCreate(NameAttributes, BaseModel):
+    class Config:
+        orm_mode = True
+
+
 class Name(NameAttributes, BaseModel):
     id: int
     full: str
