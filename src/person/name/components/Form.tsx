@@ -41,13 +41,6 @@ export default function NameForm() {
           </Col>
         </Row>
       </details>
-      {/* <Row className="mb-3">
-        <Col>
-          <Button className="btn btn-primary" type="submit">
-            Save
-          </Button>
-        </Col>
-      </Row> */}
     </>
   );
 }

@@ -42,15 +42,24 @@ export default function NameEditPage() {
       </Toolbar>
       <form id="name-form" onSubmit={onSubmit}>
         <div className="row my-3">
+          {error && (
+            <div className="col-12">
+              <Card>
+                <Card.Body>
+                  <Alert variant="danger">{error.message}</Alert>
+                </Card.Body>
+              </Card>
+            </div>
+          )}
           <div className="col-12">
             <Card>
               <Card.Header className="bg-body">
                 <div className="lead fs-5">Edit information</div>
               </Card.Header>
               <Card.Body>
-                {error && <Alert variant="danger">{error.message}</Alert>}
                 <FormProvider {...form}>
                   <NameForm />
+                  <input className="btn btn-primary" type="submit" value="Save" />
                 </FormProvider>
               </Card.Body>
             </Card>

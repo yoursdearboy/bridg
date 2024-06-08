@@ -19,11 +19,11 @@ export default function PersonNewPage() {
     e.preventDefault();
     setError(null);
     try {
-      await api.create({
+      const person: any = await api.create({
         ...personForm.getValues(),
         name: nameForm.getValues(),
       });
-      navigate(-1);
+      navigate(`/persons/${person.id}`);
     } catch (e) {
       setError(e);
     }
@@ -69,6 +69,15 @@ export default function PersonNewPage() {
                 <FormProvider {...personForm}>
                   <PersonForm />
                 </FormProvider>
+              </Card.Body>
+            </Card>
+          </div>
+          <div className="col-12">
+            <Card>
+              <Card.Body>
+                <button className="btn btn-primary" onClick={onSubmit}>
+                  Save
+                </button>
               </Card.Body>
             </Card>
           </div>

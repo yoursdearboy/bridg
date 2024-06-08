@@ -73,13 +73,6 @@ export default function PersonForm() {
           </Input>
         </Col>
       </Row>
-      {/* <Row>
-        <Col>
-          <Button className="btn btn-primary" type="submit">
-            Save
-          </Button>
-        </Col>
-      </Row> */}
     </>
   );
 }

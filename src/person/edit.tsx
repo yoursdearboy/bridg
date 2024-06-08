@@ -38,17 +38,26 @@ export default function PersonEditPage() {
         </Toolbar.Right>
       </Toolbar>
       <div className="row my-3">
+        {error && (
+          <div className="col-12">
+            <Card>
+              <Card.Body>
+                <Alert variant="danger">{error.message}</Alert>
+              </Card.Body>
+            </Card>
+          </div>
+        )}
         <div className="col-12">
           <Card>
             <Card.Header className="bg-body">
               <div className="lead fs-5">Edit information</div>
             </Card.Header>
             <Card.Body>
-              {error && <Alert variant="danger">{error.message}</Alert>}
               <form id="person-form" onSubmit={onSubmit}>
                 <FormProvider {...form}>
                   <PersonForm />
                 </FormProvider>
+                <input className="btn btn-primary" type="submit" value="Save" />
               </form>
             </Card.Body>
           </Card>
