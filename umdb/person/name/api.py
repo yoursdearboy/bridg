@@ -6,7 +6,7 @@ from umdb.person.name import model, schema
 from umdb.util import setattrs
 
 
-router = APIRouter()
+router = APIRouter(prefix="/persons/{person_id}/name", tags=["names"])
 
 
 @router.get("/{id}", response_model=schema.Name)

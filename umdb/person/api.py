@@ -1,13 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import orm
 
-import umdb.person.name.api
 from umdb.db import get_db
 from umdb.person import model, schema
 from umdb.util import setattrs
 
 
-router = APIRouter()
+router = APIRouter(prefix="/persons", tags=["persons"])
 
 
 @router.get("/", response_model=list[schema.Person])
@@ -50,6 +49,3 @@ def update(id: int, body: schema.PersonUpdate, db: orm.Session = Depends(get_db)
 def delete(id: int, db: orm.Session = Depends(get_db)):
     db.query(model.Person).where(model.Person.id == id).delete()
     db.commit()
-
-
-router.include_router(umdb.person.name.api.router, prefix="/{person_id}/name")
