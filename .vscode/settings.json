@@ -30,6 +30,13 @@
             "source.fixAll": "explicit"
         }
     },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit"
+        }
+    },
     "python.testing.unittestArgs": [
         "-v",
         "-s",
