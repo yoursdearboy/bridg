@@ -59,11 +59,11 @@ const options = {
 </script>
 
 <template>
-  <data-table :columns="columns" :ajax="ajax" :options="options">
+  <data-table class="table" :columns="columns" :ajax="ajax" :options="options">
     <template #action="props">
       <button
         class="btn btn-sm btn-link"
-        @click="router.push({ name: 'show-person', params: { id: props.cellData } })"
+        @click="router.push({ name: 'person-show', params: { id: props.cellData } })"
       >
         <i class="fa-solid fa-right-to-bracket" />
       </button>

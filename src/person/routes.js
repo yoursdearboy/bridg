@@ -6,11 +6,12 @@ export default [
     path: '/persons',
     children: [
       {
+        name: 'persons-index',
         path: '',
         component: PersonsIndex
       },
       {
-        name: 'show-person',
+        name: 'person-show',
         path: ':id',
         component: PersonShow
       }
