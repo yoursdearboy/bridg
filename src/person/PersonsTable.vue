@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import DataTablesCore from 'datatables.net-bs5'
 import DataTable from 'datatables.net-vue3'
 import * as luxon from 'luxon'
 import { useRouter } from 'vue-router'
 
-window.luxon = luxon
+;(window as any).luxon = luxon
 
 DataTable.use(DataTablesCore)
 
