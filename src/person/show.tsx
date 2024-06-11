@@ -1,9 +1,24 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Card from "../components/Card";
 import Toolbar from "../components/Toolbar";
+import * as api from "./api";
 
 const PersonActions = ({ person }) => {
   const name: any = person.primary_name;
+
+  const navigate = useNavigate();
+
+  const delete_ = async () => {
+    if (window.confirm("Delete?")) {
+      try {
+        await api.delete_(person.id);
+        navigate("/persons");
+      } catch (err) {
+        alert(err);
+      }
+    }
+  };
+
   return (
     <>
       <div className="dropdown">
@@ -19,6 +34,11 @@ const PersonActions = ({ person }) => {
             <Link className="dropdown-item" to={`name/${name.id}/edit`}>
               Rename
             </Link>
+          </li>
+          <li>
+            <button className="dropdown-item" onClick={delete_}>
+              Delete
+            </button>
           </li>
         </ul>
       </div>

@@ -27,3 +27,12 @@ export const update = async (id, data) => {
   if (!res.ok) throw new Error(json.detail);
   return json;
 };
+
+export const delete_ = async (id) => {
+  const res = await fetch(`/api/persons/${id}`, {
+    method: "DELETE",
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.detail);
+  return json;
+};
