@@ -1,4 +1,4 @@
-import DataTable from "datatables.net-bs5";
+import DataTable from "datatables.net";
 import * as luxon from "luxon";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
