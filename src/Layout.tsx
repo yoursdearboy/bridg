@@ -4,12 +4,12 @@ import NavBreadcrumbs from "./NavBreadcrumbs";
 
 export default function Layout() {
   return (
-    <>
-      <NavBar />
-      <NavBreadcrumbs className="mt-2 mb-1" />
-      <div className="container-xxl">
+    <div>
+      <NavBar className="px-4 py-2" />
+      <NavBreadcrumbs className="px-4 py-2" />
+      <div className="px-4 py-2">
         <Outlet />
       </div>
-    </>
+    </div>
   );
 }
