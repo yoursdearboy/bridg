@@ -28,24 +28,32 @@ export const PersonShow = () => {
         <DateField value={record?.birth_date} mt={2} />
 
         <Heading as="h5" size="sm" mt={4}>
-          Death date
-        </Heading>
-        <DateField value={record?.death_date} mt={2} />
-
-        <Heading as="h5" size="sm" mt={4}>
-          Death date estimated?
-        </Heading>
-        <BooleanField
-          value={record?.death_date_estimated_indicator}
-          trueIcon="Yes"
-          falseIcon="No"
-          mt={2}
-        />
-
-        <Heading as="h5" size="sm" mt={4}>
           Dead?
         </Heading>
         <BooleanField value={record?.death_indicator} trueIcon="Yes" falseIcon="No" mt={2} />
+
+        {record?.death_indicator && (
+          <>
+            <Heading as="h5" size="sm" mt={4}>
+              Death date
+            </Heading>
+            <DateField value={record?.death_date} mt={2} />
+          </>
+        )}
+
+        {record?.death_indicator && (
+          <>
+            <Heading as="h5" size="sm" mt={4}>
+              Death date estimated?
+            </Heading>
+            <BooleanField
+              value={record?.death_date_estimated_indicator}
+              trueIcon="Yes"
+              falseIcon="No"
+              mt={2}
+            />
+          </>
+        )}
       </Box>
     </Show>
   );
