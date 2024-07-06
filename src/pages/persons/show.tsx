@@ -23,6 +23,11 @@ export const PersonShow = () => {
         <TextField value={record?.sex} mt={2} />
 
         <Heading as="h5" size="sm" mt={4}>
+          Birth date
+        </Heading>
+        <DateField value={record?.birth_date} mt={2} />
+
+        <Heading as="h5" size="sm" mt={4}>
           Death date
         </Heading>
         <DateField value={record?.death_date} mt={2} />

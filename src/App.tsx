@@ -12,7 +12,7 @@ import routerBindings, {
 import dataProvider from "@refinedev/simple-rest";
 import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
 import { authProvider } from "./authProvider";
-import { PersonList, PersonShow } from "./pages/persons";
+import { PersonEdit, PersonList, PersonShow } from "./pages/persons";
 
 function App() {
   return (
@@ -35,6 +35,7 @@ function App() {
                   name: "persons",
                   list: "/persons",
                   show: "/persons/:id",
+                  edit: "/persons/:id/edit",
                   meta: {
                     canDelete: true,
                   },
@@ -60,6 +61,7 @@ function App() {
                     <Route path="/persons" element={<Outlet />}>
                       <Route index element={<PersonList />} />
                       <Route path=":id" element={<PersonShow />} />
+                      <Route path=":id/edit" element={<PersonEdit />} />
                     </Route>
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>
