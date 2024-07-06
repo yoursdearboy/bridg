@@ -33,7 +33,7 @@ def read(id: int, db: orm.Session = Depends(get_db)):
     return person
 
 
-@router.post("/{id}", response_model=schema.Person)
+@router.patch("/{id}", response_model=schema.Person)
 def update(id: int, body: schema.PersonUpdate, db: orm.Session = Depends(get_db)):
     person = db.query(model.Person).where(model.Person.id == id).first()
     if person is None:
