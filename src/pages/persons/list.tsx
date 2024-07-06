@@ -1,11 +1,30 @@
-import { DeleteButton, EditButton, List, ShowButton } from "@refinedev/chakra-ui";
+import {
+  BooleanField,
+  DateField,
+  DeleteButton,
+  EditButton,
+  List,
+  ShowButton,
+} from "@refinedev/chakra-ui";
 import { useTable } from "@refinedev/react-table";
 import { flexRender } from "@tanstack/react-table";
 import React from "react";
 
-import { HStack, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
+import {
+  Flex,
+  HStack,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
 
 import { Pagination } from "../../components/pagination";
+import { IconSortAscending, IconSortDescending } from "@tabler/icons-react";
 
 export const PersonList = () => {
   const columns = React.useMemo(
@@ -64,21 +83,37 @@ export const PersonList = () => {
         id: "birth_date",
         header: "Birth date",
         accessorKey: "birth_date",
-      },
-      {
-        id: "death_date",
-        header: "Death date",
-        accessorKey: "death_date",
-      },
-      {
-        id: "death_date_estimated_indicator",
-        header: "Death date estimated?",
-        accessorKey: "death_date_estimated_indicator",
+        cell: ({ getValue }: { getValue: any }) => {
+          const value = getValue();
+          return value && <DateField value={value} />;
+        },
       },
       {
         id: "death_indicator",
         header: "Death",
         accessorKey: "death_indicator",
+        cell: ({ getValue }: { getValue: any }) => {
+          const value = getValue();
+          return value && <BooleanField value={value} trueIcon="Dead" falseIcon="Alive" />;
+        },
+      },
+      {
+        id: "death_date",
+        header: "Death date",
+        accessorKey: "death_date",
+        cell: ({ getValue }: { getValue: any }) => {
+          const value = getValue();
+          return value && <DateField value={value} />;
+        },
+      },
+      {
+        id: "death_date_estimated_indicator",
+        header: "Death date estimated?",
+        accessorKey: "death_date_estimated_indicator",
+        cell: ({ getValue }: { getValue: any }) => {
+          const value = getValue();
+          return value && <BooleanField value={value} trueIcon="Yes" falseIcon="No" />;
+        },
       },
       {
         id: "actions",
@@ -124,12 +159,14 @@ export const PersonList = () => {
       },
     },
     refineCoreProps: {
-      initialSorter: [
-        {
-          field: "id",
-          order: "desc",
-        },
-      ],
+      sorters: {
+        initial: [
+          {
+            field: "ID",
+            order: "desc",
+          },
+        ],
+      },
     },
   });
 
@@ -141,8 +178,16 @@ export const PersonList = () => {
             {getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <Th key={header.id}>
-                    <Text>{flexRender(header.column.columnDef.header, header.getContext())}</Text>
+                  <Th key={header.id} onClick={header.column.getToggleSortingHandler()}>
+                    <Flex alignItems="center">
+                      <Text>{flexRender(header.column.columnDef.header, header.getContext())}</Text>
+                      <Text ms={2}>
+                        {{
+                          asc: <IconSortAscending size={16} />,
+                          desc: <IconSortDescending size={16} />,
+                        }[header.column.getIsSorted() as string] ?? null}
+                      </Text>
+                    </Flex>
                   </Th>
                 ))}
               </Tr>
