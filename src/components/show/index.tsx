@@ -183,7 +183,7 @@ export const Show: React.FC<any> = (props) => {
   };
 
   return (
-    <Box position="relative" bg="chakra-body-bg" borderRadius="md" px="4" py="3" {...wrapperProps}>
+    <Box position="relative" {...wrapperProps}>
       {isLoading && (
         <Spinner position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)" />
       )}
