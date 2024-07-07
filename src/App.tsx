@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { AuthPage, ErrorComponent, RefineThemes, ThemedLayoutV2 } from "@refinedev/chakra-ui";
+import { ErrorComponent, RefineThemes, ThemedLayoutV2 } from "@refinedev/chakra-ui";
 import { Authenticated, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbarProvider } from "@refinedev/kbar";
@@ -10,10 +10,11 @@ import routerBindings, {
   UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
 import dataProvider from "@refinedev/simple-rest";
+import { IconDatabase } from "@tabler/icons-react";
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider } from "./authProvider";
+import { AuthPage } from "./components/pages/auth";
 import { PersonEdit, PersonList, PersonShow } from "./pages/persons";
-import { IconDatabase } from "@tabler/icons-react";
 
 function App() {
   return (
@@ -78,20 +79,7 @@ function App() {
                     </Authenticated>
                   }
                 >
-                  <Route
-                    path="/login"
-                    element={
-                      <AuthPage
-                        type="login"
-                        formProps={{
-                          defaultValues: {
-                            email: "demo@refine.dev",
-                            password: "demodemo",
-                          },
-                        }}
-                      />
-                    }
-                  />
+                  <Route path="/login" element={<AuthPage type="login" />} />
                   <Route path="/register" element={<AuthPage type="register" />} />
                   <Route path="/forgot-password" element={<AuthPage type="forgotPassword" />} />
                   <Route path="/update-password" element={<AuthPage type="updatePassword" />} />
