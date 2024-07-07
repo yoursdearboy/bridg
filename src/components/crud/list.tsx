@@ -1,18 +1,15 @@
 import { Box, Heading } from "@chakra-ui/react";
-import React from "react";
+import type { ListProps } from "@refinedev/chakra-ui";
+import { Breadcrumb, CreateButton, type CreateButtonProps } from "@refinedev/chakra-ui";
 import {
+  useRefineContext,
+  useResource,
+  useRouterType,
   useTranslate,
   useUserFriendlyName,
-  useRefineContext,
-  useRouterType,
-  useResource,
 } from "@refinedev/core";
-import {
-  CreateButton,
-  Breadcrumb,
-  type CreateButtonProps,
-} from "@refinedev/chakra-ui";
-import type { ListProps } from "@refinedev/chakra-ui";
+import { RefinePageHeaderClassNames } from "@refinedev/ui-types";
+import React from "react";
 
 export const List: React.FC<ListProps> = (props) => {
   const {
@@ -37,13 +34,10 @@ export const List: React.FC<ListProps> = (props) => {
   const { resource, identifier } = useResource(resourceFromProps);
 
   const isCreateButtonVisible =
-    canCreate ??
-    ((resource?.canCreate ?? !!resource?.create) || createButtonPropsFromProps);
+    canCreate ?? ((resource?.canCreate ?? !!resource?.create) || createButtonPropsFromProps);
 
   const breadcrumb =
-    typeof breadcrumbFromProps === "undefined"
-      ? globalBreadcrumb
-      : breadcrumbFromProps;
+    typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
 
   const createButtonProps: CreateButtonProps | undefined = isCreateButtonVisible
     ? {
@@ -71,11 +65,7 @@ export const List: React.FC<ListProps> = (props) => {
     if (title) {
       if (typeof title === "string" || typeof title === "number") {
         return (
-          <Heading
-            as="h3"
-            size="lg"
-            className={RefinePageHeaderClassNames.Title}
-          >
+          <Heading as="h3" size="lg" className={RefinePageHeaderClassNames.Title}>
             {title}
           </Heading>
         );
@@ -89,10 +79,7 @@ export const List: React.FC<ListProps> = (props) => {
         {translate(
           `${identifier}.titles.list`,
           getUserFriendlyName(
-            resource?.meta?.label ??
-              resource?.options?.label ??
-              resource?.label ??
-              identifier,
+            resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
             "plural"
           )
         )}
@@ -101,7 +88,7 @@ export const List: React.FC<ListProps> = (props) => {
   };
 
   return (
-    <Box bg="chakra-body-bg" borderRadius="md" px="4" py="3" {...wrapperProps}>
+    <Box {...wrapperProps}>
       <Box
         mb="3"
         display="flex"
@@ -112,11 +99,7 @@ export const List: React.FC<ListProps> = (props) => {
         {...headerProps}
       >
         <Box minW={200}>
-          {typeof breadcrumb !== "undefined" ? (
-            <>{breadcrumb}</> ?? undefined
-          ) : (
-            <Breadcrumb />
-          )}
+          {typeof breadcrumb !== "undefined" ? <>{breadcrumb}</> ?? undefined : <Breadcrumb />}
           {renderTitle()}
         </Box>
         <Box

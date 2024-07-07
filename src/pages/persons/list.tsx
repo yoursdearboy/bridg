@@ -1,16 +1,10 @@
-import {
-  BooleanField,
-  DateField,
-  DeleteButton,
-  EditButton,
-  List,
-  ShowButton,
-} from "@refinedev/chakra-ui";
+import { BooleanField, DateField, EditButton, ShowButton } from "@refinedev/chakra-ui";
 import { useTable } from "@refinedev/react-table";
 import { flexRender } from "@tanstack/react-table";
 import React from "react";
 
 import {
+  Box,
   Flex,
   HStack,
   Table,
@@ -23,8 +17,9 @@ import {
   Tr,
 } from "@chakra-ui/react";
 
-import { Pagination } from "../../components/pagination";
 import { IconSortAscending, IconSortDescending } from "@tabler/icons-react";
+import { List } from "../../components/crud/list";
+import { Pagination } from "../../components/pagination";
 
 export const PersonList = () => {
   const columns = React.useMemo(
@@ -172,39 +167,45 @@ export const PersonList = () => {
 
   return (
     <List>
-      <TableContainer whiteSpace="pre-line">
-        <Table variant="simple">
-          <Thead>
-            {getHeaderGroups().map((headerGroup) => (
-              <Tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <Th key={header.id} onClick={header.column.getToggleSortingHandler()}>
-                    <Flex alignItems="center">
-                      <Text>{flexRender(header.column.columnDef.header, header.getContext())}</Text>
-                      <Text ms={2}>
-                        {{
-                          asc: <IconSortAscending size={16} />,
-                          desc: <IconSortDescending size={16} />,
-                        }[header.column.getIsSorted() as string] ?? null}
-                      </Text>
-                    </Flex>
-                  </Th>
-                ))}
-              </Tr>
-            ))}
-          </Thead>
-          <Tbody>
-            {getRowModel().rows.map((row) => (
-              <Tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <Td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Td>
-                ))}
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
-      <Pagination current={current} pageCount={pageCount} setCurrent={setCurrent} />
+      <Box bg="chakra-body-bg" borderRadius="md" px="4" py="3">
+        <TableContainer whiteSpace="pre-line">
+          <Table variant="simple">
+            <Thead>
+              {getHeaderGroups().map((headerGroup) => (
+                <Tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <Th key={header.id} onClick={header.column.getToggleSortingHandler()}>
+                      <Flex alignItems="center">
+                        <Text>
+                          {flexRender(header.column.columnDef.header, header.getContext())}
+                        </Text>
+                        <Text ms={2}>
+                          {{
+                            asc: <IconSortAscending size={16} />,
+                            desc: <IconSortDescending size={16} />,
+                          }[header.column.getIsSorted() as string] ?? null}
+                        </Text>
+                      </Flex>
+                    </Th>
+                  ))}
+                </Tr>
+              ))}
+            </Thead>
+            <Tbody>
+              {getRowModel().rows.map((row) => (
+                <Tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <Td key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </Td>
+                  ))}
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+        <Pagination current={current} pageCount={pageCount} setCurrent={setCurrent} />
+      </Box>
     </List>
   );
 };
