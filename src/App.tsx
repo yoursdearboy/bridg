@@ -1,8 +1,8 @@
+import { ChakraProvider } from "@chakra-ui/react";
+import { AuthPage, ErrorComponent, RefineThemes, ThemedLayoutV2 } from "@refinedev/chakra-ui";
 import { Authenticated, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbarProvider } from "@refinedev/kbar";
-import { ChakraProvider } from "@chakra-ui/react";
-import { AuthPage, ErrorComponent, RefineThemes, ThemedLayoutV2 } from "@refinedev/chakra-ui";
 
 import routerBindings, {
   DocumentTitleHandler,
@@ -10,9 +10,10 @@ import routerBindings, {
   UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
 import dataProvider from "@refinedev/simple-rest";
-import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider } from "./authProvider";
 import { PersonEdit, PersonList, PersonShow } from "./pages/persons";
+import { IconDatabase } from "@tabler/icons-react";
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
               routerProvider={routerBindings}
               authProvider={authProvider}
               options={{
+                title: {
+                  icon: <IconDatabase />,
+                  text: "UMDB",
+                },
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
                 useNewQueryKeys: true,
