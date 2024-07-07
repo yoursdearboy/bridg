@@ -1,30 +1,31 @@
 import { Box, Heading, HStack, IconButton, Spinner } from "@chakra-ui/react";
-import React from "react";
+import type { EditProps } from "@refinedev/chakra-ui";
 import {
-  useMutationMode,
-  useNavigation,
-  useTranslate,
-  useUserFriendlyName,
-  useRefineContext,
-  useRouterType,
-  useBack,
-  useResource,
-  useGo,
-  useToPath,
-} from "@refinedev/core";
-import {
+  AutoSaveIndicator,
+  Breadcrumb,
   DeleteButton,
   ListButton,
   RefreshButton,
   SaveButton,
-  Breadcrumb,
+  type DeleteButtonProps,
   type ListButtonProps,
   type RefreshButtonProps,
-  type DeleteButtonProps,
   type SaveButtonProps,
-  AutoSaveIndicator,
 } from "@refinedev/chakra-ui";
-import type { EditProps } from "@refinedev/chakra-ui";
+import {
+  useBack,
+  useGo,
+  useMutationMode,
+  useNavigation,
+  useRefineContext,
+  useResource,
+  useRouterType,
+  useToPath,
+  useTranslate,
+  useUserFriendlyName,
+} from "@refinedev/core";
+import { RefinePageHeaderClassNames } from "@refinedev/ui-types";
+import React from "react";
 
 // We use @tabler/icons for icons but you can use any icon library you want.
 import { IconArrowLeft } from "@tabler/icons-react";
@@ -63,12 +64,7 @@ export const Edit: React.FC<EditProps> = (props) => {
   const { goBack, list: legacyGoList } = useNavigation();
   const getUserFriendlyName = useUserFriendlyName();
 
-  const {
-    resource,
-    action,
-    id: idFromParams,
-    identifier,
-  } = useResource(resourceFromProps);
+  const { resource, action, id: idFromParams, identifier } = useResource(resourceFromProps);
 
   const goListPath = useToPath({
     resource,
@@ -78,15 +74,11 @@ export const Edit: React.FC<EditProps> = (props) => {
   const id = recordItemId ?? idFromParams;
 
   const breadcrumb =
-    typeof breadcrumbFromProps === "undefined"
-      ? globalBreadcrumb
-      : breadcrumbFromProps;
+    typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
 
   const hasList = resource?.list && !recordItemId;
   const isDeleteButtonVisible =
-    canDelete ??
-    ((resource?.meta?.canDelete ?? resource?.canDelete) ||
-      deleteButtonPropsFromProps);
+    canDelete ?? ((resource?.meta?.canDelete ?? resource?.canDelete) || deleteButtonPropsFromProps);
 
   const listButtonProps: ListButtonProps | undefined = hasList
     ? {
@@ -154,11 +146,7 @@ export const Edit: React.FC<EditProps> = (props) => {
             : undefined
         }
       >
-        {typeof goBackFromProps !== "undefined" ? (
-          goBackFromProps
-        ) : (
-          <IconArrowLeft />
-        )}
+        {typeof goBackFromProps !== "undefined" ? goBackFromProps : <IconArrowLeft />}
       </IconButton>
     );
 
@@ -188,11 +176,7 @@ export const Edit: React.FC<EditProps> = (props) => {
     if (title) {
       if (typeof title === "string" || typeof title === "number") {
         return (
-          <Heading
-            as="h3"
-            size="lg"
-            className={RefinePageHeaderClassNames.Title}
-          >
+          <Heading as="h3" size="lg" className={RefinePageHeaderClassNames.Title}>
             {title}
           </Heading>
         );
@@ -206,10 +190,7 @@ export const Edit: React.FC<EditProps> = (props) => {
         {translate(
           `${identifier}.titles.edit`,
           `Edit ${getUserFriendlyName(
-            resource?.meta?.label ??
-              resource?.options?.label ??
-              resource?.label ??
-              identifier,
+            resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
             "singular"
           )}`
         )}
@@ -218,21 +199,9 @@ export const Edit: React.FC<EditProps> = (props) => {
   };
 
   return (
-    <Box
-      position="relative"
-      bg="chakra-body-bg"
-      borderRadius="md"
-      px="4"
-      py="3"
-      {...wrapperProps}
-    >
+    <Box position="relative" {...wrapperProps}>
       {isLoading && (
-        <Spinner
-          position="absolute"
-          top="50%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-        />
+        <Spinner position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)" />
       )}
       <Box
         mb="3"
@@ -244,11 +213,7 @@ export const Edit: React.FC<EditProps> = (props) => {
         {...headerProps}
       >
         <Box minW={200}>
-          {typeof breadcrumb !== "undefined" ? (
-            <>{breadcrumb}</> ?? undefined
-          ) : (
-            <Breadcrumb />
-          )}
+          {typeof breadcrumb !== "undefined" ? <>{breadcrumb}</> ?? undefined : <Breadcrumb />}
           <HStack spacing={2}>
             {buttonBack}
             {renderTitle()}
@@ -267,13 +232,7 @@ export const Edit: React.FC<EditProps> = (props) => {
       <Box opacity={isLoading ? 0.5 : undefined} {...contentProps}>
         {children}
       </Box>
-      <Box
-        display="flex"
-        justifyContent="flex-end"
-        gap="2"
-        mt={8}
-        {...footerButtonProps}
-      >
+      <Box display="flex" justifyContent="flex-end" gap="2" mt={8} {...footerButtonProps}>
         {footerButtons}
       </Box>
     </Box>

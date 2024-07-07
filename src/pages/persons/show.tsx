@@ -2,7 +2,7 @@ import { BooleanField, DateField, TextField } from "@refinedev/chakra-ui";
 import { useShow } from "@refinedev/core";
 
 import { Box, Heading } from "@chakra-ui/react";
-import { Show } from "../../components/show";
+import { Show } from "../../components/crud/show";
 
 export const PersonShow = () => {
   const { queryResult } = useShow();
