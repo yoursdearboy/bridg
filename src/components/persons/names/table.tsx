@@ -1,9 +1,11 @@
-import React from "react";
-import { useTable } from "@refinedev/react-table";
-import { ColumnDef, flexRender } from "@tanstack/react-table";
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, HStack, Text } from "@chakra-ui/react";
+import { HStack, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 import { EditButton } from "@refinedev/chakra-ui";
 import { useParsed } from "@refinedev/core";
+import { useModalForm } from "@refinedev/react-hook-form";
+import { useTable } from "@refinedev/react-table";
+import { flexRender } from "@tanstack/react-table";
+import React from "react";
+import { EditPersonName } from "./edit";
 
 export const NamesTable: React.FC = () => {
   const columns = React.useMemo(
@@ -62,7 +64,7 @@ export const NamesTable: React.FC = () => {
         cell: function render({ getValue }: { getValue: any }) {
           return (
             <HStack>
-              <EditButton hideText size="sm" recordItemId={getValue() as number} />
+              <EditButton hideText size="sm" onClick={() => showEditModal(getValue() as number)} />
             </HStack>
           );
         },
@@ -97,6 +99,14 @@ export const NamesTable: React.FC = () => {
     },
   });
 
+  const editModalFormProps = useModalForm({
+    refineCoreProps: { action: "edit", resource: `${resourceName}/${id}/names` },
+    syncWithLocation: true,
+  });
+  const {
+    modal: { show: showEditModal },
+  } = editModalFormProps;
+
   return (
     <div style={{ padding: "8px" }}>
       <TableContainer whiteSpace="pre-line">
@@ -125,12 +135,7 @@ export const NamesTable: React.FC = () => {
           </Tbody>
         </Table>
       </TableContainer>
+      <EditPersonName {...editModalFormProps} />
     </div>
   );
 };
-
-interface IProduct {
-  id: number;
-  name: string;
-  price: string;
-}
