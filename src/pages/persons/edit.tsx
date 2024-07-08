@@ -27,7 +27,7 @@ export const PersonEdit = () => {
   return (
     <Edit isLoading={formLoading} saveButtonProps={saveButtonProps}>
       <Box bg="chakra-body-bg" borderRadius="md" px="4" py="3">
-        <FormControl mb="3" isInvalid={!!errors?.name}>
+        <FormControl mb="3" isInvalid={!!errors?.sex}>
           <FormLabel>Sex</FormLabel>
           <Select id="sex" {...register("sex")}>
             <option value="M">Male</option>
