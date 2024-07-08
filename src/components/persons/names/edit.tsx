@@ -11,8 +11,20 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 
-import type { UseModalFormReturnType } from "@refinedev/react-hook-form";
+import { useModalForm, type UseModalFormReturnType } from "@refinedev/react-hook-form";
 import { Edit } from "../../crud/edit";
+import { useParsed } from "@refinedev/core";
+
+export const usePersonNameEdit = ({ resource: resourceFromProps, id: idFromProps } = {}) => {
+  const { resource: { name: resourceParsed } = {}, id: idParsed } = useParsed();
+  const resource = resourceFromProps ?? resourceParsed;
+  const id = idFromProps ?? idParsed;
+
+  return useModalForm({
+    refineCoreProps: { action: "edit", resource: `${resource}/${id}/names` },
+    syncWithLocation: true,
+  });
+};
 
 export const EditPersonName: React.FC<UseModalFormReturnType> = ({
   saveButtonProps,

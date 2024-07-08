@@ -1,11 +1,10 @@
 import { HStack, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 import { EditButton } from "@refinedev/chakra-ui";
 import { useParsed } from "@refinedev/core";
-import { useModalForm } from "@refinedev/react-hook-form";
 import { useTable } from "@refinedev/react-table";
 import { flexRender } from "@tanstack/react-table";
 import React from "react";
-import { EditPersonName } from "./edit";
+import { EditPersonName, usePersonNameEdit } from "./edit";
 
 export const NamesTable: React.FC = () => {
   const columns = React.useMemo(
@@ -99,10 +98,7 @@ export const NamesTable: React.FC = () => {
     },
   });
 
-  const editModalFormProps = useModalForm({
-    refineCoreProps: { action: "edit", resource: `${resourceName}/${id}/names` },
-    syncWithLocation: true,
-  });
+  const editModalFormProps = usePersonNameEdit();
   const {
     modal: { show: showEditModal },
   } = editModalFormProps;

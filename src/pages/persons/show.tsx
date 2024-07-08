@@ -1,8 +1,14 @@
-import { BooleanField, DateField, TextField } from "@refinedev/chakra-ui";
+import {
+  BooleanField,
+  DateField,
+  DeleteButton,
+  EditButton,
+  RefreshButton,
+  TextField,
+} from "@refinedev/chakra-ui";
 import { BaseRecord, useShow } from "@refinedev/core";
 
 import {
-  Box,
   Card,
   CardBody,
   CardHeader,
@@ -12,9 +18,10 @@ import {
   HStack,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Show } from "../../components/crud/show";
-import { NamesTable } from "../../components/persons/names/table";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
+import { Show } from "../../components/crud/show";
+import { EditPersonName, usePersonNameEdit } from "../../components/persons/names/edit";
+import { NamesTable } from "../../components/persons/names/table";
 
 type PersonBoxProps = {
   record: BaseRecord | undefined;
@@ -97,16 +104,37 @@ export const PersonShow = () => {
   const { data, isLoading } = queryResult;
   const record = data?.data;
 
+  const editPersonNameFormProps = usePersonNameEdit();
+  const {
+    modal: { show: showEditModal },
+  } = editPersonNameFormProps;
+
   return (
-    <Show title={record?.primary_name?.full} isLoading={isLoading}>
-      <Grid gap={4}>
-        <GridItem maxW="lg">
-          <PersonBox record={record} />
-        </GridItem>
-        <GridItem maxW="lg">
-          <NamesBox />
-        </GridItem>
-      </Grid>
-    </Show>
+    <>
+      <Show
+        title={record?.primary_name?.full}
+        isLoading={isLoading}
+        headerButtons={({ deleteButtonProps, editButtonProps, refreshButtonProps }) => (
+          <>
+            <EditButton {...editButtonProps} />
+            <DeleteButton {...deleteButtonProps} />
+            <EditButton size="md" onClick={() => showEditModal(record?.primary_name?.id)}>
+              Rename
+            </EditButton>
+            <RefreshButton {...refreshButtonProps} />
+          </>
+        )}
+      >
+        <Grid gap={4}>
+          <GridItem maxW="lg">
+            <PersonBox record={record} />
+          </GridItem>
+          <GridItem maxW="lg">
+            <NamesBox />
+          </GridItem>
+        </Grid>
+      </Show>
+      <EditPersonName {...editPersonNameFormProps} />
+    </>
   );
 };
