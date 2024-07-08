@@ -1,17 +1,29 @@
 import { BooleanField, DateField, TextField } from "@refinedev/chakra-ui";
-import { useShow } from "@refinedev/core";
+import { BaseRecord, useShow } from "@refinedev/core";
 
-import { Box, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Card,
+  CardBody,
+  CardHeader,
+  Grid,
+  GridItem,
+  Heading,
+  HStack,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { Show } from "../../components/crud/show";
+import { NamesTable } from "../../components/persons/names/table";
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 
-export const PersonShow = () => {
-  const { queryResult } = useShow();
-  const { data, isLoading } = queryResult;
-  const record = data?.data;
+type PersonBoxProps = {
+  record: BaseRecord | undefined;
+};
 
+const PersonBox: React.FC<PersonBoxProps> = ({ record }) => {
   return (
-    <Show title={record?.primary_name?.full} isLoading={isLoading}>
-      <Box bg="chakra-body-bg" borderRadius="md" px="4" py="3" maxW="sm">
+    <Card bg="chakra-body-bg" borderRadius="md">
+      <CardBody>
         <Heading as="h5" size="sm">
           ID
         </Heading>
@@ -54,7 +66,47 @@ export const PersonShow = () => {
             />
           </>
         )}
-      </Box>
+      </CardBody>
+    </Card>
+  );
+};
+
+const NamesBox = () => {
+  const { isOpen, getDisclosureProps, getButtonProps } = useDisclosure();
+
+  const buttonProps = getButtonProps();
+  const disclosureProps = getDisclosureProps();
+
+  return (
+    <Card bg="chakra-body-bg" borderBottomRadius="md">
+      <CardHeader px="4" py="3" {...buttonProps}>
+        <HStack>
+          <Heading size="md">Names</Heading>
+          {isOpen ? <IconChevronUp /> : <IconChevronDown />}
+        </HStack>
+      </CardHeader>
+      <CardBody {...disclosureProps}>
+        <NamesTable />
+      </CardBody>
+    </Card>
+  );
+};
+
+export const PersonShow = () => {
+  const { queryResult } = useShow();
+  const { data, isLoading } = queryResult;
+  const record = data?.data;
+
+  return (
+    <Show title={record?.primary_name?.full} isLoading={isLoading}>
+      <Grid gap={4}>
+        <GridItem maxW="lg">
+          <PersonBox record={record} />
+        </GridItem>
+        <GridItem maxW="lg">
+          <NamesBox />
+        </GridItem>
+      </Grid>
     </Show>
   );
 };
