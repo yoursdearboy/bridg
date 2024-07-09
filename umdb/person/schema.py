@@ -20,18 +20,11 @@ class PersonAttributes:
 class PersonCreate(PersonAttributes, BaseModel):
     name: NameCreate
 
-    class Config:
-        orm_mode = True
-
 
 class Person(PersonAttributes, BaseModel):
     id: int
     primary_name: Optional[Name]
 
-    class Config:
-        orm_mode = True
-
 
 class PersonUpdate(PersonAttributes, BaseModel):
-    class Config:
-        orm_mode = True
+    pass

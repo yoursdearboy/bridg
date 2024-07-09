@@ -17,14 +17,14 @@ class NameCreate(NameAttributes, BaseModel):
         orm_mode = True
 
 
+class NameCreate(NameAttributes, BaseModel):
+    pass
+
+
 class Name(NameAttributes, BaseModel):
     id: int
     full: str
 
-    class Config:
-        orm_mode = True
-
 
 class NameUpdate(NameAttributes, BaseModel):
-    class Config:
-        orm_mode = True
+    pass
