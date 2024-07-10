@@ -1,0 +1,476 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`person show page renders correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="chakra-stack css-24ivmg"
+      >
+        <div
+          class="chakra-stack css-1b5q7m6"
+        >
+          <b
+            class="chakra-text css-1fqaqvh"
+          >
+            <a
+              class=""
+              href="/"
+            >
+              umdb
+            </a>
+          </b>
+          <div
+            class="chakra-stack css-1igwmid"
+          >
+            <a
+              aria-current="page"
+              class="active"
+              href="/persons"
+            >
+              <p
+                class="chakra-text css-19ner23"
+              >
+                Persons
+              </p>
+            </a>
+          </div>
+        </div>
+        <div
+          class="css-139mjay"
+        >
+          <nav
+            aria-label="breadcrumb"
+            class="chakra-breadcrumb css-0"
+          >
+            <ol
+              class="chakra-breadcrumb__list css-70qvj9"
+            >
+              <li
+                class="chakra-breadcrumb__list-item css-18biwo"
+              >
+                <a
+                  class="chakra-breadcrumb__link css-0"
+                  href="/persons/"
+                >
+                  Persons
+                </a>
+                <span
+                  class="css-t4q1nq"
+                  role="presentation"
+                >
+                  /
+                </span>
+              </li>
+              <li
+                class="chakra-breadcrumb__list-item css-18biwo"
+              >
+                <a
+                  aria-current="page"
+                  class="chakra-breadcrumb__link css-0"
+                  href="/persons/1"
+                >
+                  Doe John
+                </a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div
+          class="css-139mjay"
+        >
+          <div
+            class="chakra-stack css-24ivmg"
+          >
+            <div
+              class="css-k008qs"
+            >
+              <p
+                class="chakra-text css-1n9r2z"
+              >
+                Doe John
+              </p>
+              <div
+                class="css-17xejub"
+              />
+              <button
+                aria-controls="menu-list-:r1:"
+                aria-expanded="false"
+                aria-haspopup="menu"
+                class="chakra-button chakra-menu__menu-button css-4xx2wk"
+                id="menu-button-:r1:"
+                type="button"
+              >
+                <span
+                  class="css-xl71ch"
+                >
+                  Actions
+                </span>
+                <span
+                  class="chakra-button__icon css-1hzyiq5"
+                >
+                  <i
+                    aria-hidden="true"
+                    class="fa-solid fa-chevron-down"
+                    focusable="false"
+                  />
+                </span>
+              </button>
+              <div
+                class="css-0"
+                style="visibility: hidden; position: absolute; min-width: max-content; inset: 0 auto auto 0;"
+              >
+                <div
+                  aria-orientation="vertical"
+                  class="chakra-menu__menu-list css-sjt5nk"
+                  id="menu-list-:r1:"
+                  role="menu"
+                  style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8);"
+                  tabindex="-1"
+                >
+                  <a
+                    class="chakra-menu__menuitem css-1k756t9"
+                    data-index="0"
+                    href="/persons/1/name/2/edit"
+                    id="menu-list-:r1:-menuitem-:r2:"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    Rename
+                  </a>
+                  <button
+                    class="chakra-menu__menuitem css-1k756t9"
+                    data-index="1"
+                    id="menu-list-:r1:-menuitem-:r3:"
+                    role="menuitem"
+                    tabindex="-1"
+                    type="button"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="chakra-card css-13eppyi"
+            >
+              <div
+                class="chakra-card__header css-0"
+              >
+                <div
+                  class="css-k008qs"
+                >
+                  <h2
+                    class="chakra-heading css-0"
+                  >
+                    Information
+                  </h2>
+                  <div
+                    class="css-17xejub"
+                  />
+                  <a
+                    class="fs-8 align-middle"
+                    href="/persons/1/edit"
+                  >
+                    <i
+                      class="fa-solid fa-pencil pe-1"
+                    />
+                     Edit
+                  </a>
+                </div>
+              </div>
+              <div
+                class="chakra-card__body css-0"
+              >
+                <pre
+                  class="mb-0"
+                >
+                  {
+  "sex": "M",
+  "birth_date": "2024-05-21",
+  "death_date": "2024-05-21",
+  "death_date_estimated_indicator": true,
+  "death_indicator": true,
+  "id": 1,
+  "primary_name": {
+    "use": "string",
+    "family": "John",
+    "given": "Doe",
+    "middle": "",
+    "patronymic": "",
+    "prefix": "",
+    "suffix": "",
+    "id": 2,
+    "full": "Doe John"
+  }
+}
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="chakra-stack css-24ivmg"
+    >
+      <div
+        class="chakra-stack css-1b5q7m6"
+      >
+        <b
+          class="chakra-text css-1fqaqvh"
+        >
+          <a
+            class=""
+            href="/"
+          >
+            umdb
+          </a>
+        </b>
+        <div
+          class="chakra-stack css-1igwmid"
+        >
+          <a
+            aria-current="page"
+            class="active"
+            href="/persons"
+          >
+            <p
+              class="chakra-text css-19ner23"
+            >
+              Persons
+            </p>
+          </a>
+        </div>
+      </div>
+      <div
+        class="css-139mjay"
+      >
+        <nav
+          aria-label="breadcrumb"
+          class="chakra-breadcrumb css-0"
+        >
+          <ol
+            class="chakra-breadcrumb__list css-70qvj9"
+          >
+            <li
+              class="chakra-breadcrumb__list-item css-18biwo"
+            >
+              <a
+                class="chakra-breadcrumb__link css-0"
+                href="/persons/"
+              >
+                Persons
+              </a>
+              <span
+                class="css-t4q1nq"
+                role="presentation"
+              >
+                /
+              </span>
+            </li>
+            <li
+              class="chakra-breadcrumb__list-item css-18biwo"
+            >
+              <a
+                aria-current="page"
+                class="chakra-breadcrumb__link css-0"
+                href="/persons/1"
+              >
+                Doe John
+              </a>
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <div
+        class="css-139mjay"
+      >
+        <div
+          class="chakra-stack css-24ivmg"
+        >
+          <div
+            class="css-k008qs"
+          >
+            <p
+              class="chakra-text css-1n9r2z"
+            >
+              Doe John
+            </p>
+            <div
+              class="css-17xejub"
+            />
+            <button
+              aria-controls="menu-list-:r1:"
+              aria-expanded="false"
+              aria-haspopup="menu"
+              class="chakra-button chakra-menu__menu-button css-4xx2wk"
+              id="menu-button-:r1:"
+              type="button"
+            >
+              <span
+                class="css-xl71ch"
+              >
+                Actions
+              </span>
+              <span
+                class="chakra-button__icon css-1hzyiq5"
+              >
+                <i
+                  aria-hidden="true"
+                  class="fa-solid fa-chevron-down"
+                  focusable="false"
+                />
+              </span>
+            </button>
+            <div
+              class="css-0"
+              style="visibility: hidden; position: absolute; min-width: max-content; inset: 0 auto auto 0;"
+            >
+              <div
+                aria-orientation="vertical"
+                class="chakra-menu__menu-list css-sjt5nk"
+                id="menu-list-:r1:"
+                role="menu"
+                style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8);"
+                tabindex="-1"
+              >
+                <a
+                  class="chakra-menu__menuitem css-1k756t9"
+                  data-index="0"
+                  href="/persons/1/name/2/edit"
+                  id="menu-list-:r1:-menuitem-:r2:"
+                  role="menuitem"
+                  tabindex="-1"
+                >
+                  Rename
+                </a>
+                <button
+                  class="chakra-menu__menuitem css-1k756t9"
+                  data-index="1"
+                  id="menu-list-:r1:-menuitem-:r3:"
+                  role="menuitem"
+                  tabindex="-1"
+                  type="button"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="chakra-card css-13eppyi"
+          >
+            <div
+              class="chakra-card__header css-0"
+            >
+              <div
+                class="css-k008qs"
+              >
+                <h2
+                  class="chakra-heading css-0"
+                >
+                  Information
+                </h2>
+                <div
+                  class="css-17xejub"
+                />
+                <a
+                  class="fs-8 align-middle"
+                  href="/persons/1/edit"
+                >
+                  <i
+                    class="fa-solid fa-pencil pe-1"
+                  />
+                   Edit
+                </a>
+              </div>
+            </div>
+            <div
+              class="chakra-card__body css-0"
+            >
+              <pre
+                class="mb-0"
+              >
+                {
+  "sex": "M",
+  "birth_date": "2024-05-21",
+  "death_date": "2024-05-21",
+  "death_date_estimated_indicator": true,
+  "death_indicator": true,
+  "id": 1,
+  "primary_name": {
+    "use": "string",
+    "family": "John",
+    "given": "Doe",
+    "middle": "",
+    "patronymic": "",
+    "prefix": "",
+    "suffix": "",
+    "id": 2,
+    "full": "Doe John"
+  }
+}
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

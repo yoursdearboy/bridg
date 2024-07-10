@@ -3,7 +3,7 @@ import { HttpResponse, http } from "msw";
 import { setupServer } from "msw/node";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import { afterAll, afterEach, beforeAll, expect, test } from "vitest";
-import routes from "../routes";
+import routes from "../../routes";
 
 const DATA = {
   sex: "M",

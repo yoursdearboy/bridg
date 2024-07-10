@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Spacer, Text, VStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import PersonTable from "./components/Table";
+import PersonTable from "./table";
 
 export default function PersonIndexPage() {
   return (

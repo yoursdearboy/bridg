@@ -3,7 +3,7 @@ import DataTable from "datatables.net-dt";
 import * as luxon from "luxon";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import DataTableExtra from "../../datatables";
+import DataTableExtra from "../datatables";
 
 (window as any).luxon = luxon;
 

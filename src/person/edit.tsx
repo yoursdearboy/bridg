@@ -1,6 +1,62 @@
+import {
+  Alert,
+  AlertDescription,
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Flex,
+  Heading,
+  Spacer,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { FormProvider } from "react-hook-form";
+import * as api from "./api";
+import PersonForm, { usePersonForm } from "./form";
+
 import { useLoaderData, useNavigate } from "react-router-dom";
-import PersonEditForm from "./components/EditForm";
-import { Button, Flex, Spacer, Text, VStack } from "@chakra-ui/react";
+
+function PersonEditForm({ person, onSuccess }) {
+  const form = usePersonForm({ defaultValues: person });
+  const [error, setError] = useState<any>();
+  const onSubmit = form.handleSubmit(async (data) => {
+    setError(null);
+    try {
+      const res = await api.update(person.id, data);
+      onSuccess(res);
+    } catch (e) {
+      setError(e);
+    }
+  });
+
+  return (
+    <VStack align="stretch">
+      {error && (
+        <Alert status="error" borderRadius="md">
+          <AlertDescription>{error.message}</AlertDescription>
+        </Alert>
+      )}
+
+      <Card>
+        <CardHeader>
+          <Heading size="md">Edit information</Heading>
+        </CardHeader>
+        <CardBody>
+          <form id="person-form" onSubmit={onSubmit}>
+            <FormProvider {...form}>
+              <PersonForm />
+            </FormProvider>
+            <Button type="submit" mt="3">
+              Save
+            </Button>
+          </form>
+        </CardBody>
+      </Card>
+    </VStack>
+  );
+}
 
 export default function PersonEditPage() {
   const navigate = useNavigate();

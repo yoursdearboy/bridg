@@ -1,0 +1,746 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`person edit page renders correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="chakra-stack css-24ivmg"
+      >
+        <div
+          class="chakra-stack css-1b5q7m6"
+        >
+          <b
+            class="chakra-text css-1fqaqvh"
+          >
+            <a
+              class=""
+              href="/"
+            >
+              umdb
+            </a>
+          </b>
+          <div
+            class="chakra-stack css-1igwmid"
+          >
+            <a
+              aria-current="page"
+              class="active"
+              href="/persons"
+            >
+              <p
+                class="chakra-text css-19ner23"
+              >
+                Persons
+              </p>
+            </a>
+          </div>
+        </div>
+        <div
+          class="css-139mjay"
+        >
+          <nav
+            aria-label="breadcrumb"
+            class="chakra-breadcrumb css-0"
+          >
+            <ol
+              class="chakra-breadcrumb__list css-70qvj9"
+            >
+              <li
+                class="chakra-breadcrumb__list-item css-18biwo"
+              >
+                <a
+                  class="chakra-breadcrumb__link css-0"
+                  href="/persons/"
+                >
+                  Persons
+                </a>
+                <span
+                  class="css-t4q1nq"
+                  role="presentation"
+                >
+                  /
+                </span>
+              </li>
+              <li
+                class="chakra-breadcrumb__list-item css-18biwo"
+              >
+                <a
+                  class="chakra-breadcrumb__link css-0"
+                  href="/persons/1"
+                >
+                  Doe John
+                </a>
+                <span
+                  class="css-t4q1nq"
+                  role="presentation"
+                >
+                  /
+                </span>
+              </li>
+              <li
+                class="chakra-breadcrumb__list-item css-18biwo"
+              >
+                <a
+                  aria-current="page"
+                  class="chakra-breadcrumb__link css-0"
+                  href="/persons/1/edit"
+                >
+                  Edit
+                </a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div
+          class="css-139mjay"
+        >
+          <div
+            class="chakra-stack css-24ivmg"
+          >
+            <div
+              class="css-k008qs"
+            >
+              <p
+                class="chakra-text css-1n9r2z"
+              >
+                Doe John
+              </p>
+              <div
+                class="css-17xejub"
+              />
+              <button
+                class="chakra-button css-4xx2wk"
+                form="person-form"
+                type="submit"
+              >
+                Save
+              </button>
+            </div>
+            <div
+              class="chakra-stack css-24ivmg"
+            >
+              <div
+                class="chakra-card css-2dlz7"
+              >
+                <div
+                  class="chakra-card__header css-0"
+                >
+                  <h2
+                    class="chakra-heading css-0"
+                  >
+                    Edit information
+                  </h2>
+                </div>
+                <div
+                  class="chakra-card__body css-0"
+                >
+                  <form
+                    id="person-form"
+                  >
+                    <div
+                      class="chakra-stack css-24ivmg"
+                    >
+                      <div
+                        class="chakra-form-control css-0"
+                        role="group"
+                      >
+                        <label
+                          class="chakra-form__label css-uvho5g"
+                          for="field-:r0:"
+                          id="field-:r0:-label"
+                        >
+                          Sex
+                        </label>
+                        <div
+                          class="chakra-select__wrapper css-mduaxz"
+                        >
+                          <select
+                            class="chakra-select css-1ik61og"
+                            id="field-:r0:"
+                            name="sex"
+                          >
+                            <option />
+                            <option
+                              value="M"
+                            >
+                              Male
+                            </option>
+                            <option
+                              value="F"
+                            >
+                              Female
+                            </option>
+                            <option
+                              value="U"
+                            >
+                              Unknown
+                            </option>
+                          </select>
+                          <div
+                            class="chakra-select__icon-wrapper css-162mkon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="chakra-select__icon"
+                              focusable="false"
+                              role="presentation"
+                              style="width: 1em; height: 1em; color: currentColor;"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                                fill="currentColor"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="chakra-form-control css-0"
+                        role="group"
+                      >
+                        <label
+                          class="chakra-form__label css-uvho5g"
+                          for="field-:r1:"
+                          id="field-:r1:-label"
+                        >
+                          Birth date
+                        </label>
+                        <input
+                          class="chakra-input css-68zbsl"
+                          id="field-:r1:"
+                          name="birth_date"
+                        />
+                      </div>
+                      <div
+                        class="chakra-form-control css-0"
+                        role="group"
+                      >
+                        <label
+                          class="chakra-form__label css-uvho5g"
+                          for="field-:r2:"
+                          id="field-:r2:-label"
+                        >
+                          Death
+                        </label>
+                        <div
+                          class="chakra-select__wrapper css-mduaxz"
+                        >
+                          <select
+                            class="chakra-select css-1ik61og"
+                            id="field-:r2:"
+                            name="death_indicator"
+                          >
+                            <option />
+                            <option
+                              value="false"
+                            >
+                              Alive
+                            </option>
+                            <option
+                              value="true"
+                            >
+                              Dead
+                            </option>
+                          </select>
+                          <div
+                            class="chakra-select__icon-wrapper css-162mkon"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="chakra-select__icon"
+                              focusable="false"
+                              role="presentation"
+                              style="width: 1em; height: 1em; color: currentColor;"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                                fill="currentColor"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="chakra-form-control css-13o7eu2"
+                        role="group"
+                      >
+                        <label
+                          class="chakra-form__label css-uvho5g"
+                          for="field-:r3:"
+                          id="field-:r3:-label"
+                        >
+                          Death date
+                        </label>
+                        <input
+                          class="chakra-input css-68zbsl"
+                          id="field-:r3:"
+                          name="death_date"
+                        />
+                      </div>
+                      <div
+                        class="chakra-form-control css-13o7eu2"
+                        role="group"
+                      >
+                        <label
+                          class="chakra-form__label css-uvho5g"
+                          for="field-:r4:"
+                          id="field-:r4:-label"
+                        />
+                        <label
+                          class="chakra-checkbox css-1elxtiq"
+                          data-checked=""
+                        >
+                          <input
+                            aria-disabled="false"
+                            aria-invalid="false"
+                            class="chakra-checkbox__input"
+                            id="field-:r4:"
+                            name="death_date_estimated_indicator"
+                            style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; width: 1px; margin: -1px; padding: 0px; overflow: hidden; white-space: nowrap; position: absolute;"
+                            type="checkbox"
+                            value=""
+                          />
+                          <span
+                            aria-hidden="true"
+                            class="chakra-checkbox__control css-dnty2r"
+                            data-checked=""
+                          >
+                            <div
+                              class="css-0"
+                              style="display: flex; align-items: center; justify-content: center; height: 100%;"
+                            >
+                              <svg
+                                class="css-vrf7dt"
+                                style="fill: none; stroke-width: 2; stroke: currentColor; stroke-dasharray: 16;"
+                                viewBox="0 0 12 10"
+                              >
+                                <polyline
+                                  points="1.5 6 4.5 9 10.5 1"
+                                />
+                              </svg>
+                            </div>
+                          </span>
+                          <span
+                            class="chakra-checkbox__label css-1oeb2oe"
+                            data-checked=""
+                          >
+                            Estimated, not exact
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                    <button
+                      class="chakra-button css-1bpmanl"
+                      type="submit"
+                    >
+                      Save
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="chakra-stack css-24ivmg"
+    >
+      <div
+        class="chakra-stack css-1b5q7m6"
+      >
+        <b
+          class="chakra-text css-1fqaqvh"
+        >
+          <a
+            class=""
+            href="/"
+          >
+            umdb
+          </a>
+        </b>
+        <div
+          class="chakra-stack css-1igwmid"
+        >
+          <a
+            aria-current="page"
+            class="active"
+            href="/persons"
+          >
+            <p
+              class="chakra-text css-19ner23"
+            >
+              Persons
+            </p>
+          </a>
+        </div>
+      </div>
+      <div
+        class="css-139mjay"
+      >
+        <nav
+          aria-label="breadcrumb"
+          class="chakra-breadcrumb css-0"
+        >
+          <ol
+            class="chakra-breadcrumb__list css-70qvj9"
+          >
+            <li
+              class="chakra-breadcrumb__list-item css-18biwo"
+            >
+              <a
+                class="chakra-breadcrumb__link css-0"
+                href="/persons/"
+              >
+                Persons
+              </a>
+              <span
+                class="css-t4q1nq"
+                role="presentation"
+              >
+                /
+              </span>
+            </li>
+            <li
+              class="chakra-breadcrumb__list-item css-18biwo"
+            >
+              <a
+                class="chakra-breadcrumb__link css-0"
+                href="/persons/1"
+              >
+                Doe John
+              </a>
+              <span
+                class="css-t4q1nq"
+                role="presentation"
+              >
+                /
+              </span>
+            </li>
+            <li
+              class="chakra-breadcrumb__list-item css-18biwo"
+            >
+              <a
+                aria-current="page"
+                class="chakra-breadcrumb__link css-0"
+                href="/persons/1/edit"
+              >
+                Edit
+              </a>
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <div
+        class="css-139mjay"
+      >
+        <div
+          class="chakra-stack css-24ivmg"
+        >
+          <div
+            class="css-k008qs"
+          >
+            <p
+              class="chakra-text css-1n9r2z"
+            >
+              Doe John
+            </p>
+            <div
+              class="css-17xejub"
+            />
+            <button
+              class="chakra-button css-4xx2wk"
+              form="person-form"
+              type="submit"
+            >
+              Save
+            </button>
+          </div>
+          <div
+            class="chakra-stack css-24ivmg"
+          >
+            <div
+              class="chakra-card css-2dlz7"
+            >
+              <div
+                class="chakra-card__header css-0"
+              >
+                <h2
+                  class="chakra-heading css-0"
+                >
+                  Edit information
+                </h2>
+              </div>
+              <div
+                class="chakra-card__body css-0"
+              >
+                <form
+                  id="person-form"
+                >
+                  <div
+                    class="chakra-stack css-24ivmg"
+                  >
+                    <div
+                      class="chakra-form-control css-0"
+                      role="group"
+                    >
+                      <label
+                        class="chakra-form__label css-uvho5g"
+                        for="field-:r0:"
+                        id="field-:r0:-label"
+                      >
+                        Sex
+                      </label>
+                      <div
+                        class="chakra-select__wrapper css-mduaxz"
+                      >
+                        <select
+                          class="chakra-select css-1ik61og"
+                          id="field-:r0:"
+                          name="sex"
+                        >
+                          <option />
+                          <option
+                            value="M"
+                          >
+                            Male
+                          </option>
+                          <option
+                            value="F"
+                          >
+                            Female
+                          </option>
+                          <option
+                            value="U"
+                          >
+                            Unknown
+                          </option>
+                        </select>
+                        <div
+                          class="chakra-select__icon-wrapper css-162mkon"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="chakra-select__icon"
+                            focusable="false"
+                            role="presentation"
+                            style="width: 1em; height: 1em; color: currentColor;"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="chakra-form-control css-0"
+                      role="group"
+                    >
+                      <label
+                        class="chakra-form__label css-uvho5g"
+                        for="field-:r1:"
+                        id="field-:r1:-label"
+                      >
+                        Birth date
+                      </label>
+                      <input
+                        class="chakra-input css-68zbsl"
+                        id="field-:r1:"
+                        name="birth_date"
+                      />
+                    </div>
+                    <div
+                      class="chakra-form-control css-0"
+                      role="group"
+                    >
+                      <label
+                        class="chakra-form__label css-uvho5g"
+                        for="field-:r2:"
+                        id="field-:r2:-label"
+                      >
+                        Death
+                      </label>
+                      <div
+                        class="chakra-select__wrapper css-mduaxz"
+                      >
+                        <select
+                          class="chakra-select css-1ik61og"
+                          id="field-:r2:"
+                          name="death_indicator"
+                        >
+                          <option />
+                          <option
+                            value="false"
+                          >
+                            Alive
+                          </option>
+                          <option
+                            value="true"
+                          >
+                            Dead
+                          </option>
+                        </select>
+                        <div
+                          class="chakra-select__icon-wrapper css-162mkon"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="chakra-select__icon"
+                            focusable="false"
+                            role="presentation"
+                            style="width: 1em; height: 1em; color: currentColor;"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="chakra-form-control css-13o7eu2"
+                      role="group"
+                    >
+                      <label
+                        class="chakra-form__label css-uvho5g"
+                        for="field-:r3:"
+                        id="field-:r3:-label"
+                      >
+                        Death date
+                      </label>
+                      <input
+                        class="chakra-input css-68zbsl"
+                        id="field-:r3:"
+                        name="death_date"
+                      />
+                    </div>
+                    <div
+                      class="chakra-form-control css-13o7eu2"
+                      role="group"
+                    >
+                      <label
+                        class="chakra-form__label css-uvho5g"
+                        for="field-:r4:"
+                        id="field-:r4:-label"
+                      />
+                      <label
+                        class="chakra-checkbox css-1elxtiq"
+                        data-checked=""
+                      >
+                        <input
+                          aria-disabled="false"
+                          aria-invalid="false"
+                          class="chakra-checkbox__input"
+                          id="field-:r4:"
+                          name="death_date_estimated_indicator"
+                          style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; width: 1px; margin: -1px; padding: 0px; overflow: hidden; white-space: nowrap; position: absolute;"
+                          type="checkbox"
+                          value=""
+                        />
+                        <span
+                          aria-hidden="true"
+                          class="chakra-checkbox__control css-dnty2r"
+                          data-checked=""
+                        >
+                          <div
+                            class="css-0"
+                            style="display: flex; align-items: center; justify-content: center; height: 100%;"
+                          >
+                            <svg
+                              class="css-vrf7dt"
+                              style="fill: none; stroke-width: 2; stroke: currentColor; stroke-dasharray: 16;"
+                              viewBox="0 0 12 10"
+                            >
+                              <polyline
+                                points="1.5 6 4.5 9 10.5 1"
+                              />
+                            </svg>
+                          </div>
+                        </span>
+                        <span
+                          class="chakra-checkbox__label css-1oeb2oe"
+                          data-checked=""
+                        >
+                          Estimated, not exact
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <button
+                    class="chakra-button css-1bpmanl"
+                    type="submit"
+                  >
+                    Save
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
