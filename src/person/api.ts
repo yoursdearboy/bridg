@@ -17,7 +17,7 @@ export const create = async (data) => {
 
 export const update = async (id, data) => {
   const res = await fetch(`/api/persons/${id}`, {
-    method: "POST",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },

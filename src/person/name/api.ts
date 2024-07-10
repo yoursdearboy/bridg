@@ -1,7 +1,7 @@
 export const find = (personId, id) => fetch(`/api/persons/${personId}/names/${id}`);
 export const update = async (personId, id, data) => {
   const res = await fetch(`/api/persons/${personId}/names/${id}`, {
-    method: "POST",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
