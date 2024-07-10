@@ -25,10 +25,10 @@ export default function PersonForm() {
   }, [isDead]);
 
   return (
-    <VStack>
+    <VStack align="stretch">
       <FormControl>
         <FormLabel>Sex</FormLabel>
-        <Select {...register("sex")}>
+        <Select {...register("sex")} w="250px">
           <option></option>
           <option value="M">Male</option>
           <option value="F">Female</option>
@@ -42,6 +42,7 @@ export default function PersonForm() {
           {...register("birth_date", {
             setValueAs: (x) => (x === "" ? null : x),
           })}
+          w="auto"
         />
       </FormControl>
 
@@ -51,6 +52,7 @@ export default function PersonForm() {
           {...register("death_indicator", {
             setValueAs: (x) => (x === "" ? null : x),
           })}
+          w="250px"
         >
           <option></option>
           <option value="false">Alive</option>
@@ -64,7 +66,8 @@ export default function PersonForm() {
           {...register("death_date", {
             setValueAs: (x) => (x === "" ? null : x),
           })}
-        ></Input>
+          w="auto"
+        />
       </FormControl>
 
       <FormControl display={isDead ? "block" : "none"}>

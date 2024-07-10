@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import Alert from "../../components/Alert";
-import Card from "../../components/Card";
 import * as api from "../api";
 import NameForm from "../name/components/BaseForm";
 import PersonForm, { usePersonForm } from "./BaseForm";
+import { Alert, AlertDescription, Button, Card, CardBody, VStack } from "@chakra-ui/react";
 
 export default function PersonNewForm({ id, onSuccess }) {
   const nameForm = useForm();
@@ -27,44 +26,37 @@ export default function PersonNewForm({ id, onSuccess }) {
 
   return (
     <form id={id} onSubmit={onSubmit}>
-      <div className="row my-0 gy-3">
+      <VStack align="stretch">
         {error && (
-          <div className="col-12">
-            <Card>
-              <Card.Body>
-                <Alert variant="danger">{error.message}</Alert>
-              </Card.Body>
-            </Card>
-          </div>
+          <Alert status="error" borderRadius="md">
+            <AlertDescription>{error.message}</AlertDescription>
+          </Alert>
         )}
-        <div className="col-12">
-          <Card>
-            <Card.Body>
-              <FormProvider {...nameForm}>
-                <NameForm />
-              </FormProvider>
-            </Card.Body>
-          </Card>
-        </div>
-        <div className="col-12">
-          <Card>
-            <Card.Body>
-              <FormProvider {...personForm}>
-                <PersonForm />
-              </FormProvider>
-            </Card.Body>
-          </Card>
-        </div>
-        <div className="col-12">
-          <Card>
-            <Card.Body>
-              <button className="btn btn-primary" onClick={onSubmit}>
-                Save
-              </button>
-            </Card.Body>
-          </Card>
-        </div>
-      </div>
+
+        <Card>
+          <CardBody>
+            <FormProvider {...nameForm}>
+              <NameForm />
+            </FormProvider>
+          </CardBody>
+        </Card>
+
+        <Card>
+          <CardBody>
+            <FormProvider {...personForm}>
+              <PersonForm />
+            </FormProvider>
+          </CardBody>
+        </Card>
+
+        <Card>
+          <CardBody>
+            <Button type="submit" onClick={onSubmit}>
+              Save
+            </Button>
+          </CardBody>
+        </Card>
+      </VStack>
     </form>
   );
 }

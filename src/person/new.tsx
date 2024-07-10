@@ -1,23 +1,22 @@
+import { Button, Flex, Spacer, Text, VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import Toolbar from "../components/Toolbar";
 import PersonNewForm from "./components/NewForm";
 
 export default function PersonNewPage() {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <Toolbar>
-        <Toolbar.Center>
-          <div className="lead">
-            <span className="fs-4">Create new person</span>
-          </div>
-        </Toolbar.Center>
-        <Toolbar.Right>
-          <input className="btn btn-sm btn-primary" type="submit" form="person-form" value="Save" />
-        </Toolbar.Right>
-      </Toolbar>
+    <VStack align="stretch">
+      <Flex>
+        <Text fontSize="2xl" fontWeight="bold">
+          Create new person
+        </Text>
+        <Spacer />
+        <Button type="submit" form="person-form">
+          Save
+        </Button>
+      </Flex>
       <PersonNewForm id="person-form" onSuccess={({ id }) => navigate(`/persons/${id}`)} />
-    </div>
+    </VStack>
   );
 }
