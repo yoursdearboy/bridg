@@ -1,18 +1,16 @@
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class NameAttributes:
-    use: Optional[str]
-    family: Optional[str]
-    given: Optional[str]
-    middle: Optional[str]
-    patronymic: Optional[str]
-    prefix: Optional[str]
-    suffix: Optional[str]
+    use: Optional[str] = Field(None)
+    family: Optional[str] = Field(None)
+    given: Optional[str] = Field(None)
+    middle: Optional[str] = Field(None)
+    patronymic: Optional[str] = Field(None)
+    prefix: Optional[str] = Field(None)
+    suffix: Optional[str] = Field(None)
 
-
-class NameCreate(NameAttributes, BaseModel):
     class Config:
         orm_mode = True
 
