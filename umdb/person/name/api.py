@@ -17,7 +17,7 @@ def find(person_id: int, id: int, db: orm.Session = Depends(get_db)):
     return name
 
 
-@router.post("/{id}", response_model=schema.Name)
+@router.patch("/{id}", response_model=schema.Name)
 def update(
     person_id: int,
     id: int,
