@@ -5,8 +5,8 @@ import {
   Card,
   CardBody,
   Flex,
+  Heading,
   Spacer,
-  Text,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -78,9 +78,7 @@ export default function PersonNewPage() {
   return (
     <VStack align="stretch">
       <Flex>
-        <Text fontSize="2xl" fontWeight="bold">
-          Create new person
-        </Text>
+        <Heading size="lg">Create new person</Heading>
         <Spacer />
         <Button type="submit" form="person-form">
           Save

@@ -10,7 +10,6 @@ import {
   MenuItem,
   MenuList,
   Spacer,
-  Text,
   VStack,
 } from "@chakra-ui/react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
@@ -70,9 +69,7 @@ export default function PersonShowPage() {
   return (
     <VStack align="stretch">
       <Flex>
-        <Text fontSize="2xl" fontWeight="bold">
-          {name?.full}
-        </Text>
+        <Heading size="lg">{name?.full}</Heading>
         <Spacer />
         <PersonMenu person={person} />
       </Flex>

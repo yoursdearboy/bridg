@@ -8,7 +8,6 @@ import {
   Flex,
   Heading,
   Spacer,
-  Text,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -66,10 +65,10 @@ export default function NameEditPage() {
   return (
     <VStack align="stretch">
       <Flex>
-        <Text fontSize="2xl" fontWeight="bold">
+        <Heading size="lg">
           {primaryName?.full}
           {name.id != primaryName.id && " (alias)"}
-        </Text>
+        </Heading>
         <Spacer />
         <Button type="submit" form="name-form">
           Save

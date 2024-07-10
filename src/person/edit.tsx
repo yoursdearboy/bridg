@@ -8,7 +8,6 @@ import {
   Flex,
   Heading,
   Spacer,
-  Text,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -67,9 +66,7 @@ export default function PersonEditPage() {
   return (
     <VStack align="stretch">
       <Flex>
-        <Text fontSize="2xl" fontWeight="bold">
-          {name?.full}
-        </Text>
+        <Heading size="lg">{name?.full}</Heading>
         <Spacer />
         <Button type="submit" form="person-form">
           Save
