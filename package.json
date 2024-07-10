@@ -5,6 +5,7 @@
   "type": "module",
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
+    "@hookform/resolvers": "^3.9.0",
     "@refinedev/chakra-ui": "^2.31.2",
     "@refinedev/cli": "^2.16.21",
     "@refinedev/core": "^4.47.1",
@@ -19,7 +20,8 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.52.1",
-    "react-router-dom": "^6.8.1"
+    "react-router-dom": "^6.8.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^18.16.2",

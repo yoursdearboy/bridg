@@ -1,7 +1,29 @@
 import { Box, FormControl, FormErrorMessage, FormLabel, Input, Select } from "@chakra-ui/react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "@refinedev/react-hook-form";
 import { useEffect } from "react";
+import zod from "zod";
 import { Edit } from "../../components/crud/edit";
+
+const PersonSchema = zod.object({
+  sex: zod.string(),
+  birth_date: zod.string(),
+  death_indicator: zod
+    .preprocess(
+      (x) => (x === "" ? null : x === "true" ? true : x === "false" ? false : x),
+      zod.boolean().nullable()
+    )
+    .optional(),
+  death_date: zod.preprocess((x) => (x === "" ? null : x), zod.string().nullable()).optional(),
+  death_date_estimated_indicator: zod
+    .preprocess(
+      (x) => (x === "" ? null : x === "true" ? true : x === "false" ? false : x),
+      zod.boolean().nullable()
+    )
+    .optional(),
+});
+
+type TPerson = zod.infer<typeof PersonSchema>;
 
 export const PersonEdit = () => {
   const {
@@ -11,9 +33,11 @@ export const PersonEdit = () => {
     resetField,
     formState: { errors },
     watch,
-  } = useForm();
+  } = useForm<TPerson>({
+    resolver: zodResolver(PersonSchema),
+  });
 
-  const { data } = queryResult;
+  const data = queryResult?.data;
   const record = data?.data;
 
   const isDead = String(watch("death_indicator", record?.death_indicator)) === "true";
