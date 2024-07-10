@@ -1,7 +1,15 @@
+import {
+  Alert,
+  AlertDescription,
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Heading,
+  VStack,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { FormProvider } from "react-hook-form";
-import Alert from "../../components/Alert";
-import Card from "../../components/Card";
 import * as api from "../api";
 import PersonForm, { usePersonForm } from "./BaseForm";
 
@@ -19,31 +27,28 @@ export default function PersonEditForm({ person, onSuccess }) {
   });
 
   return (
-    <div className="row my-3">
+    <VStack align="stretch">
       {error && (
-        <div className="col-12">
-          <Card>
-            <Card.Body>
-              <Alert variant="danger">{error.message}</Alert>
-            </Card.Body>
-          </Card>
-        </div>
+        <Alert status="error" borderRadius="md">
+          <AlertDescription>{error.message}</AlertDescription>
+        </Alert>
       )}
-      <div className="col-12">
-        <Card>
-          <Card.Header className="bg-body">
-            <div className="lead fs-5">Edit information</div>
-          </Card.Header>
-          <Card.Body>
-            <form id="person-form" onSubmit={onSubmit}>
-              <FormProvider {...form}>
-                <PersonForm />
-              </FormProvider>
-              <input className="btn btn-primary" type="submit" value="Save" />
-            </form>
-          </Card.Body>
-        </Card>
-      </div>
-    </div>
+
+      <Card>
+        <CardHeader>
+          <Heading size="md">Edit information</Heading>
+        </CardHeader>
+        <CardBody>
+          <form id="person-form" onSubmit={onSubmit}>
+            <FormProvider {...form}>
+              <PersonForm />
+            </FormProvider>
+            <Button type="submit" mt="3">
+              Save
+            </Button>
+          </form>
+        </CardBody>
+      </Card>
+    </VStack>
   );
 }

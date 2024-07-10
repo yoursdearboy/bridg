@@ -1,6 +1,6 @@
+import { Checkbox, FormControl, FormLabel, Input, Select, VStack } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { useForm, useFormContext } from "react-hook-form";
-import { Input } from "../../Form/Input";
-import { Checkbox, Col, Label, Row, Select, TextInput } from "../../Form/Layout";
 
 export const usePersonForm = ({ defaultValues = {} }: any = {}) => {
   defaultValues = {
@@ -14,65 +14,63 @@ export const usePersonForm = ({ defaultValues = {} }: any = {}) => {
 };
 
 export default function PersonForm() {
-  const { watch } = useFormContext();
+  const { register, setValue, watch } = useFormContext();
   const isDead = watch("death_indicator") === "true";
+
+  useEffect(() => {
+    if (!isDead) {
+      setValue("death_date", null);
+      setValue("death_date_estimated_indicator", null);
+    }
+  }, [isDead]);
+
   return (
-    <>
-      <Row className="mb-3">
-        <Label htmlFor="sex">Sex</Label>
-        <Col className="col-auto">
-          <Input
-            id="sex"
-            name="sex"
-            component={Select}
-            options={{ "": "", M: "Male", F: "Female", U: "Unknown" }}
-          />
-        </Col>
-      </Row>
-      <Row className="mb-3">
-        <Label htmlFor="birth_date">Birth date</Label>
-        <Col className="col-auto">
-          <Input
-            id="birth_date"
-            name="birth_date"
-            component={TextInput}
-            setValueAs={(x) => (x === "" ? null : x)}
-          />
-        </Col>
-      </Row>
-      <Row className="mb-3">
-        <Label htmlFor="death_indicator">Death</Label>
-        <Col className="col-auto">
-          <Input
-            id="death_indicator"
-            name="death_indicator"
-            component={Select}
-            options={{ "": "", false: "Alive", true: "Dead" }}
-          />
-        </Col>
-      </Row>
-      <Row className={`mb-3 ${isDead ? "" : "d-none"}`}>
-        <Label htmlFor="death_date">Death date</Label>
-        <Col className="col-auto">
-          <Input
-            id="death_date"
-            name="death_date"
-            component={TextInput}
-            setValueAs={(x) => (x === "" ? null : x)}
-          />
-        </Col>
-      </Row>
-      <Row className={`mb-3  ${isDead ? "" : "d-none"}`}>
-        <Col>
-          <Input
-            id="death_date_estimated_indicator"
-            name="death_date_estimated_indicator"
-            component={Checkbox}
-          >
-            Estimated, not exact
-          </Input>
-        </Col>
-      </Row>
-    </>
+    <VStack>
+      <FormControl>
+        <FormLabel>Sex</FormLabel>
+        <Select {...register("sex")}>
+          <option></option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+          <option value="U">Unknown</option>
+        </Select>
+      </FormControl>
+
+      <FormControl>
+        <FormLabel>Birth date</FormLabel>
+        <Input
+          {...register("birth_date", {
+            setValueAs: (x) => (x === "" ? null : x),
+          })}
+        />
+      </FormControl>
+
+      <FormControl>
+        <FormLabel>Death</FormLabel>
+        <Select
+          {...register("death_indicator", {
+            setValueAs: (x) => (x === "" ? null : x),
+          })}
+        >
+          <option></option>
+          <option value="false">Alive</option>
+          <option value="true">Dead</option>
+        </Select>
+      </FormControl>
+
+      <FormControl display={isDead ? "block" : "none"}>
+        <FormLabel>Death date</FormLabel>
+        <Input
+          {...register("death_date", {
+            setValueAs: (x) => (x === "" ? null : x),
+          })}
+        ></Input>
+      </FormControl>
+
+      <FormControl display={isDead ? "block" : "none"}>
+        <FormLabel />
+        <Checkbox {...register("death_date_estimated_indicator")}>Estimated, not exact</Checkbox>
+      </FormControl>
+    </VStack>
   );
 }

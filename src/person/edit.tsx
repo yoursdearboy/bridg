@@ -1,26 +1,26 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
-import Toolbar from "../components/Toolbar";
 import PersonEditForm from "./components/EditForm";
+import { Button, Flex, Spacer, Text, VStack } from "@chakra-ui/react";
 
 export default function PersonEditPage() {
   const navigate = useNavigate();
 
   const person: any = useLoaderData();
+  const name: any = person.primary_name;
 
   return (
-    <div>
-      <Toolbar>
-        <Toolbar.Center>
-          <div className="lead">
-            <span className="fs-4 me-2">{person.primary_name?.full}</span>
-            <span className="fs-6">{person.birth_date}</span>
-          </div>
-        </Toolbar.Center>
-        <Toolbar.Right>
-          <input className="btn btn-sm btn-primary" type="submit" form="person-form" value="Save" />
-        </Toolbar.Right>
-      </Toolbar>
+    <VStack align="stretch">
+      <Flex>
+        <Text fontSize="2xl" fontWeight="bold">
+          {name?.full}
+        </Text>
+        <Spacer />
+        <Button type="submit" form="person-form">
+          Save
+        </Button>
+      </Flex>
+
       <PersonEditForm person={person} onSuccess={() => navigate(-1)} />
-    </div>
+    </VStack>
   );
 }
