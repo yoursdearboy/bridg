@@ -1,4 +1,5 @@
-import DataTable from "datatables.net";
+import "datatables.net-dt/css/dataTables.dataTables.min.css";
+import DataTable from "datatables.net-dt";
 import * as luxon from "luxon";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
@@ -79,5 +80,5 @@ export default function PersonTable() {
     };
   });
 
-  return <table className="table" ref={ref}></table>;
+  return <table ref={ref}></table>;
 }
