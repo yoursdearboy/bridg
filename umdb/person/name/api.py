@@ -6,7 +6,12 @@ from umdb.person.name import model, schema
 from umdb.util import setattrs
 
 
-router = APIRouter(prefix="/persons/{person_id}/name", tags=["names"])
+router = APIRouter(prefix="/persons/{person_id}/names", tags=["names"])
+
+
+@router.get("/", response_model=list[schema.Name])
+def index(person_id: int, db: orm.Session = Depends(get_db)):
+    return db.query(model.Name).where(model.Name.person_id == person_id).all()
 
 
 @router.get("/{id}", response_model=schema.Name)
@@ -17,7 +22,7 @@ def find(person_id: int, id: int, db: orm.Session = Depends(get_db)):
     return name
 
 
-@router.post("/{id}", response_model=schema.Name)
+@router.patch("/{id}", response_model=schema.Name)
 def update(
     person_id: int,
     id: int,
