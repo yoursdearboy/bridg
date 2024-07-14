@@ -1,6 +1,7 @@
 import { Checkbox, FormControl, FormLabel, Input, Select, VStack } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { useForm, useFormContext } from "react-hook-form";
+import { Controller, useForm, useFormContext } from "react-hook-form";
+import DateInput from "../components/date-input";
 
 export const usePersonForm = ({ defaultValues = {} }: any = {}) => {
   defaultValues = {
@@ -14,7 +15,7 @@ export const usePersonForm = ({ defaultValues = {} }: any = {}) => {
 };
 
 export default function PersonForm() {
-  const { register, setValue, watch } = useFormContext();
+  const { control, register, setValue, watch } = useFormContext();
   const isDead = watch("death_indicator") === "true";
 
   useEffect(() => {
@@ -38,11 +39,16 @@ export default function PersonForm() {
 
       <FormControl>
         <FormLabel>Birth date</FormLabel>
-        <Input
-          {...register("birth_date", {
-            setValueAs: (x) => (x === "" ? null : x),
-          })}
-          w="auto"
+        <Controller
+          control={control}
+          name="birth_date"
+          render={({ field }) => (
+            <DateInput
+              locale="ru"
+              value={field.value}
+              onChange={(x) => field.onChange(x === "" ? null : x)}
+            />
+          )}
         />
       </FormControl>
 
@@ -62,11 +68,16 @@ export default function PersonForm() {
 
       <FormControl display={isDead ? "block" : "none"}>
         <FormLabel>Death date</FormLabel>
-        <Input
-          {...register("death_date", {
-            setValueAs: (x) => (x === "" ? null : x),
-          })}
-          w="auto"
+        <Controller
+          control={control}
+          name="death_date"
+          render={({ field }) => (
+            <DateInput
+              locale="ru"
+              value={field.value}
+              onChange={(x) => field.onChange(x === "" ? null : x)}
+            />
+          )}
         />
       </FormControl>
 
