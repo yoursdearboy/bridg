@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DataTablesCore from 'datatables.net-bs5'
+import DataTablesCore from 'datatables.net'
 import DataTable from 'datatables.net-vue3'
 import * as luxon from 'luxon'
 import { useRouter } from 'vue-router'
@@ -72,6 +72,5 @@ const options = {
 </template>
 
 <style>
-@import 'bootstrap';
-@import 'datatables.net-bs5';
+@import 'datatables.net-dt';
 </style>
