@@ -1,9 +1,15 @@
 import PersonsIndex from './PersonsIndex.vue'
 import PersonShow from './PersonShow.vue'
+import PersonEdit from './PersonEdit.vue'
+import useStore from './store'
 
 export default [
   {
+    name: 'persons',
     path: '/persons',
+    meta: {
+      breadcrumb: 'Persons'
+    },
     children: [
       {
         name: 'persons-index',
@@ -11,9 +17,27 @@ export default [
         component: PersonsIndex
       },
       {
-        name: 'person-show',
+        name: 'person',
         path: ':id',
-        component: PersonShow
+        meta: {
+          breadcrumb: () => useStore().person?.primary_name?.full
+        },
+        beforeEnter: ({ params: { id } }) => useStore().fetchOne(id),
+        children: [
+          {
+            name: 'person-show',
+            path: '',
+            component: PersonShow
+          },
+          {
+            name: 'person-edit',
+            path: 'edit',
+            component: PersonEdit,
+            meta: {
+              breadcrumb: 'Edit'
+            }
+          }
+        ]
       }
     ]
   }
