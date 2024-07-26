@@ -1,8 +1,8 @@
 from datetime import date
 
-from umdb.common.model import Name
+from umdb.common import Name
 from umdb.db import SessionLocal
-from umdb.person.model import Person
+from umdb.person import Person
 
 jd_name_1 = Name(use="official", family="Doe", given="John")
 jd_name_2 = Name(use="unofficial", family="Doe", given="Johny")

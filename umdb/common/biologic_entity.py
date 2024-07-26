@@ -4,7 +4,7 @@ from typing import List
 import sqlalchemy as sa
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from umdb.common.name.model import Name, primary_names
+from umdb.common.name import Name, primary_names
 from umdb.db import Base
 
 

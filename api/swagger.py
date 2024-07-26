@@ -2,7 +2,6 @@ from fastapi import APIRouter, Request
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.staticfiles import StaticFiles
 
-
 router = APIRouter()
 
 

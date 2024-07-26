@@ -1,7 +1,7 @@
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
-from umdb.common.model import BiologicEntity, Name
+from umdb.common import BiologicEntity, Name
 
 
 class Person(BiologicEntity):

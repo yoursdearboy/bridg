@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-import umdb.person.api
-import umdb.person.name.api
-import umdb.swagger
+import api.person.name.routes
+import api.person.routes
+import api.swagger
 
 OPENAPI_TAGS = [
     {"name": "persons", "title": "Persons", "description": "Any human being."},
@@ -21,6 +21,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(umdb.swagger.router)
-app.include_router(umdb.person.api.router)
-app.include_router(umdb.person.name.api.router)
+app.include_router(api.swagger.router)
+app.include_router(api.person.routes.router)
+app.include_router(api.person.name.routes.router)

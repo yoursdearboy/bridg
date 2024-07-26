@@ -1,9 +1,9 @@
 def setattrs(obj, x):
     for key, value in x.items():
         if isinstance(value, dict):
-            raise NotImplemented()
+            raise NotImplementedError()
         elif isinstance(value, list):
-            raise NotImplemented()
+            raise NotImplementedError()
         else:
             setattr(obj, key, value)
     return obj

@@ -3,8 +3,8 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
-from umdb.common.model import AdministrativeGender
-from umdb.person.name.schema import Name, NameCreate
+from api.person.name.schema import Name, NameCreate
+from umdb.common import AdministrativeGender
 
 
 class PersonAttributes:
