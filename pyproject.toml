@@ -14,10 +14,12 @@ psycopg2-binary = "^2.9.9"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.4.0"
-isort = "^5.13.2"
 ipykernel = "^6.29.4"
+ruff = "^0.5.5"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff.lint]
+extend-select = ["I"]
