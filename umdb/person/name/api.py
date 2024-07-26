@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import orm
 
+from umdb.common.name import model
 from umdb.db import get_db
-from umdb.person.name import model, schema
+from umdb.person.name import schema
 from umdb.util import setattrs
-
 
 router = APIRouter(prefix="/persons/{person_id}/names", tags=["names"])
 

@@ -3,11 +3,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import column
 
 from umdb.db import Base
-from umdb.person.model import Person
 
 
 class Name(Base):
-    __tablename__ = "name"
+    __tablename__ = "biologic_entity_name"
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
@@ -19,8 +18,8 @@ class Name(Base):
     prefix = mapped_column(sa.String())
     suffix = mapped_column(sa.String())
 
-    person_id: Mapped[int] = mapped_column(sa.ForeignKey("person.id"))
-    person: Mapped["Person"] = relationship(back_populates="names")
+    biologic_entity_id: Mapped[int] = mapped_column(sa.ForeignKey("biologic_entity.id"))
+    biologic_entity: Mapped["BiologicEntity"] = relationship(back_populates="names")
 
     @property
     def full(self):
@@ -30,10 +29,13 @@ class Name(Base):
         s = "Anonymous" if s == "" else s
         return s
 
+    def __str__(self):
+        return self.full
+
 
 name_index = (
     sa.func.row_number()
-    .over(partition_by=Name.person_id, order_by=sa.desc(Name.use))
+    .over(partition_by=Name.biologic_entity_id, order_by=sa.desc(Name.use))
     .label("i")
 )
 

@@ -1,13 +1,14 @@
 from datetime import date
 from typing import Optional
+
 from pydantic import BaseModel, Field
 
-from umdb.person.model import Sex
+from umdb.common.model import AdministrativeGender
 from umdb.person.name.schema import Name, NameCreate
 
 
 class PersonAttributes:
-    sex: Optional[Sex] = Field(None)
+    administrative_gender: Optional[AdministrativeGender] = Field(None)
     birth_date: Optional[date] = Field(None)
     death_date: Optional[date] = Field(None)
     death_date_estimated_indicator: Optional[bool] = Field(None)
@@ -23,7 +24,7 @@ class PersonCreate(PersonAttributes, BaseModel):
 
 class Person(PersonAttributes, BaseModel):
     id: int
-    primary_name: Optional[Name]
+    name: Optional[Name]
 
 
 class PersonUpdate(PersonAttributes, BaseModel):

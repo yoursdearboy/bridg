@@ -5,7 +5,6 @@ from umdb.db import get_db
 from umdb.person import model, schema
 from umdb.util import setattrs
 
-
 router = APIRouter(prefix="/persons", tags=["persons"])
 
 
@@ -17,7 +16,7 @@ def index(db: orm.Session = Depends(get_db)):
 @router.post("/", response_model=schema.Person)
 def create(body: schema.PersonCreate, db: orm.Session = Depends(get_db)):
     name = setattrs(model.Name(), body.name.model_dump())
-    person = setattrs(model.Person(), body.model_dump(exclude="name"))
+    person = setattrs(model.Person(), body.model_dump(exclude={"name"}))
     person.names.append(name)
     db.add(person)
     db.commit()
