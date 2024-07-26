@@ -3,6 +3,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import column
 
 from umdb.db import Base
+from umdb.person.model import Person
 
 
 class Name(Base):
