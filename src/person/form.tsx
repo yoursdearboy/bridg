@@ -28,8 +28,8 @@ export default function PersonForm() {
   return (
     <VStack align="stretch">
       <FormControl>
-        <FormLabel>Sex</FormLabel>
-        <Select {...register("sex")} w="250px">
+        <FormLabel>Administrative gender</FormLabel>
+        <Select {...register("administrative_gender")} w="250px">
           <option></option>
           <option value="M">Male</option>
           <option value="F">Female</option>

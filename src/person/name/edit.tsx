@@ -60,7 +60,7 @@ export default function NameEditPage() {
 
   const name: any = useLoaderData();
   const person: any = useRouteLoaderData("person");
-  const { primary_name: primaryName } = person;
+  const { name: primaryName } = person;
 
   return (
     <VStack align="stretch">

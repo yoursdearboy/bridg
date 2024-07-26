@@ -16,7 +16,7 @@ import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import * as api from "./api";
 
 const PersonMenu = ({ person }) => {
-  const name: any = person.primary_name;
+  const name: any = person.name;
 
   const navigate = useNavigate();
 
@@ -65,7 +65,7 @@ const PersonCard = ({ person }) => (
 
 export default function PersonShowPage() {
   const person: any = useLoaderData();
-  const name: any = person.primary_name;
+  const name: any = person.name;
   return (
     <VStack align="stretch">
       <Flex>
