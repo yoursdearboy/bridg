@@ -3,7 +3,7 @@ import unittest
 import sqlalchemy as sa
 from sqlalchemy.orm import Session
 
-from umdb.person.model import Name, Person
+from umdb.person import Name, Person
 
 
 class TestPersonModel(unittest.TestCase):
@@ -37,7 +37,7 @@ class TestPersonModel(unittest.TestCase):
             self.assertEqual(a.id, b.id)
             self.assertEqual(2, len(b.names))
 
-    def test_primary_name_loading(self):
+    def test_name_loading(self):
         d = self.__create__data()
         engine = sa.create_engine("sqlite://")
         Person.metadata.create_all(engine)
@@ -49,4 +49,4 @@ class TestPersonModel(unittest.TestCase):
 
             b = session.query(Person).filter_by(id=1).one()
 
-            self.assertEqual(b.primary_name, d["n1"])
+            self.assertEqual(b.name, d["n1"])
