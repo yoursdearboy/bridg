@@ -5,5 +5,6 @@ from umdb.common import *
 from umdb.db import Base
 from umdb.organization import *
 from umdb.person import *
+from umdb.study import *
 
 Base.metadata.create_all(bind=engine)
