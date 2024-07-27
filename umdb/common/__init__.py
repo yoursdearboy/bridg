@@ -1,2 +1,2 @@
-from .biologic_entity import AdministrativeGender, BiologicEntity
-from .name import Name
+from .biologic_entity import *
+from .name import *
