@@ -18,7 +18,7 @@ def index(db: orm.Session = Depends(get_db)):
 def create(body: schema.PersonCreate, db: orm.Session = Depends(get_db)):
     name = setattrs(model.Name(), body.name.model_dump())
     person = setattrs(model.Person(), body.model_dump(exclude={"name"}))
-    person.names.append(name)
+    person.name.append(name)
     db.add(person)
     db.commit()
     db.refresh(person)

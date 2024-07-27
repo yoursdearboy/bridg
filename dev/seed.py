@@ -9,7 +9,7 @@ jd_name_1 = PersonName(use="official", family="Doe", given="John")
 jd_name_2 = PersonName(use="unofficial", family="Doe", given="Johny")
 jd = Person(
     id=1,
-    names=[jd_name_1, jd_name_2],
+    name=[jd_name_1, jd_name_2],
     birth_date=date(1980, 1, 1),
     death_date=date(2000, 1, 1),
     death_date_estimated_indicator=True,
@@ -17,7 +17,7 @@ jd = Person(
 )
 
 dm_name_1 = PersonName(use="official", family="Morgendorffer", given="Daria")
-dm = Person(id=2, names=[dm_name_1], birth_date=date(1991, 1, 1))
+dm = Person(id=2, name=[dm_name_1], birth_date=date(1991, 1, 1))
 
 org1_name = OrganizationName(value="org1")
 org1 = Organization(names=[])

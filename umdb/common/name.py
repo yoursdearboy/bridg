@@ -22,7 +22,7 @@ class Name(Base):
     suffix: Mapped[Optional[str]]
 
     biologic_entity_id: Mapped[int] = mapped_column(ForeignKey("biologic_entity.id"))
-    biologic_entity: Mapped["BiologicEntity"] = relationship(back_populates="names")
+    biologic_entity: Mapped["BiologicEntity"] = relationship(back_populates="name")
 
     @property
     def full(self):

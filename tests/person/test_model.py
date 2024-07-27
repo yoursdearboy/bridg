@@ -19,8 +19,8 @@ class TestPersonModel(unittest.TestCase):
 
     def test_names(self):
         d = self.__create__data()
-        d["p"].names.append(d["n1"])
-        d["p"].names.append(d["n2"])
+        d["p"].name.append(d["n1"])
+        d["p"].name.append(d["n2"])
 
     def test_persistence(self):
         d = self.__create__data()
@@ -28,14 +28,14 @@ class TestPersonModel(unittest.TestCase):
         Person.metadata.create_all(engine)
         with Session(engine) as session:
             a = Person(id=1)
-            a.names = [d["n1"], d["n2"]]
+            a.name = [d["n1"], d["n2"]]
             session.add(a)
             session.commit()
 
             b = session.query(Person).filter_by(id=1).one()
 
             self.assertEqual(a.id, b.id)
-            self.assertEqual(2, len(b.names))
+            self.assertEqual(2, len(b.name))
 
     def test_name_loading(self):
         d = self.__create__data()
@@ -43,10 +43,10 @@ class TestPersonModel(unittest.TestCase):
         Person.metadata.create_all(engine)
         with Session(engine) as session:
             a = Person(id=1)
-            a.names = [d["n1"], d["n2"]]
+            a.name = [d["n1"], d["n2"]]
             session.add(a)
             session.commit()
 
             b = session.query(Person).filter_by(id=1).one()
 
-            self.assertEqual(b.name, d["n1"])
+            self.assertEqual(b.primary_name, d["n1"])

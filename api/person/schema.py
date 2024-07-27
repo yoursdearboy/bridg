@@ -24,7 +24,7 @@ class PersonCreate(PersonAttributes, BaseModel):
 
 class Person(PersonAttributes, BaseModel):
     id: int
-    name: Optional[Name]
+    primary_name: Optional[Name]
 
 
 class PersonUpdate(PersonAttributes, BaseModel):

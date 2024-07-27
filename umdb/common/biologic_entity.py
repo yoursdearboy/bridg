@@ -26,8 +26,8 @@ class BiologicEntity(Base):
         death_date:
         death_date_estimated_indicator:
         death_indicator:
-        names:
         name:
+        primary_name:
     """
 
     __tablename__ = "biologic_entity"
@@ -45,11 +45,10 @@ class BiologicEntity(Base):
     death_date_estimated_indicator: Mapped[Optional[bool]]
     death_indicator: Mapped[Optional[bool]]
 
-    names: Mapped[List["Name"]] = relationship(cascade="all, delete-orphan")
-    name: Mapped[Optional["Name"]]
+    name: Mapped[List["Name"]] = relationship(cascade="all, delete-orphan")
 
 
-BiologicEntity.name = relationship(
+BiologicEntity.primary_name = relationship(
     sa.orm.aliased(Name, primary_names),
     primaryjoin=BiologicEntity.id == primary_names.c.biologic_entity_id,
     uselist=False,
