@@ -32,7 +32,9 @@ class Organization(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    name: Mapped[List["OrganizationName"]] = relationship(cascade="all, delete-orphan")
+    name: Mapped[List["OrganizationName"]] = relationship(
+        back_populates="organization", cascade="all, delete-orphan"
+    )
     type: Mapped[Optional[str]]
     description: Mapped[Optional[str]]
     actual: Mapped[bool] = mapped_column(default=True)

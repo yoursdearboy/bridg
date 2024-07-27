@@ -45,7 +45,9 @@ class BiologicEntity(Base):
     death_date_estimated_indicator: Mapped[Optional[bool]]
     death_indicator: Mapped[Optional[bool]]
 
-    name: Mapped[List["Name"]] = relationship(cascade="all, delete-orphan")
+    name: Mapped[List["Name"]] = relationship(
+        back_populates="biologic_entity", cascade="all, delete-orphan"
+    )
 
 
 BiologicEntity.primary_name = relationship(

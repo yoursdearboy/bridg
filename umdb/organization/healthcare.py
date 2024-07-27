@@ -32,7 +32,9 @@ class HealthcareFacility(Base):
         ForeignKey("organization.id")
     )
     performing_organization: Mapped[Organization] = relationship(
-        back_populates="performed_healthcare_facility"
+        back_populates="performed_healthcare_facility",
+        cascade="all, delete-orphan",
+        single_parent=True,
     )
     """
     Each HealthcareFacility always is a function performed by one Organization.
@@ -48,7 +50,9 @@ class HealthcareFacility(Base):
     """
 
     used_healthcare_provider_group: Mapped[List["HealthcareProviderGroup"]] = (
-        relationship(back_populates="using_healthcare_facility")
+        relationship(
+            back_populates="using_healthcare_facility", cascade="all, delete-orphan"
+        )
     )
     """
     Each HealthcareProviderGroup always is used to group staff for one HealthcareFacility.
@@ -76,7 +80,9 @@ class HealthcareProvider(Base):
     role: Mapped[Optional[str]]
 
     performing_person_id: Mapped[int] = mapped_column(ForeignKey("person.id"))
-    performing_person: Mapped[Person] = relationship()
+    performing_person: Mapped[Person] = relationship(
+        cascade="all, delete-orphan", single_parent=True
+    )
     """
     Each HealthcareProvider always is a function performed by one Person.
     Each Person might function as one or more HealthcareProvider.
@@ -104,7 +110,9 @@ class HealthcareProvider(Base):
 
     performed_healthcare_provider_group_member: Mapped[
         List["HealthcareProviderGroupMember"]
-    ] = relationship(back_populates="performing_healthcare_provider")
+    ] = relationship(
+        back_populates="performing_healthcare_provider", cascade="all, delete-orphan"
+    )
     """
     Each HealthcareProviderGroupMember always is a function performed by one HealthcareProvider.
     Each HealthcareProvider might function as one or more HealthcareProviderGroupMember.
@@ -142,7 +150,9 @@ class HealthcareProviderGroup(Base):
         ForeignKey("organization.id")
     )
     performing_organization: Mapped[Organization] = relationship(
-        back_populates="performed_healthcare_provider_group"
+        back_populates="performed_healthcare_provider_group",
+        cascade="all, delete-orphan",
+        single_parent=True,
     )
     """
     Each HealthcareProviderGroup always is a function performed by one Organization.
@@ -162,7 +172,10 @@ class HealthcareProviderGroup(Base):
 
     grouped_healthcare_provider_group_member: Mapped[
         List["HealthcareProviderGroupMember"]
-    ] = relationship(back_populates="grouping_healthcare_provider_group")
+    ] = relationship(
+        back_populates="grouping_healthcare_provider_group",
+        cascade="all, delete-orphan",
+    )
     """
     Each HealthcareProviderGroupMember always belongs to one HealthcareProviderGroup.
     Each HealthcareProviderGroup always contains one or more HealthcareProviderGroupMember.
