@@ -61,7 +61,7 @@ export default function PersonEditPage() {
   const navigate = useNavigate();
 
   const person: any = useLoaderData();
-  const name: any = person.name;
+  const name: any = person.primary_name;
 
   return (
     <VStack align="stretch">

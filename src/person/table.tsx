@@ -11,13 +11,13 @@ const URL = "/api/persons";
 
 const COLUMNS = [
   { data: "id", title: "ID" },
-  { data: "name.use", title: "Name usage" },
-  { data: "name.family", title: "Family name" },
-  { data: "name.given", title: "Given name" },
-  { data: "name.middle", title: "Middle name" },
-  { data: "name.patronymic", title: "Patronymic name", visible: false },
-  { data: "name.prefix", title: "Name prefix", visible: false },
-  { data: "name.suffix", title: "Name suffix", visible: false },
+  { data: "primary_name.use", title: "Name usage" },
+  { data: "primary_name.family", title: "Family name" },
+  { data: "primary_name.given", title: "Given name" },
+  { data: "primary_name.middle", title: "Middle name" },
+  { data: "primary_name.patronymic", title: "Patronymic name", visible: false },
+  { data: "primary_name.prefix", title: "Name prefix", visible: false },
+  { data: "primary_name.suffix", title: "Name suffix", visible: false },
   { data: "administrative_gender", title: "Administrative gender" },
   {
     data: "birth_date",

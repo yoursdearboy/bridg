@@ -27,7 +27,7 @@ export default [
         path: ":personId",
         loader: ({ params: { personId } }: any) => api.find(personId),
         handle: {
-          breadcrumb: (data) => data.name?.full,
+          breadcrumb: (data) => data.primary_name?.full,
         },
         children: [
           {
