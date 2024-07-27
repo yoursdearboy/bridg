@@ -17,6 +17,9 @@ psycopg2-binary = "^2.9.9"
 ipykernel = "^6.29.4"
 ruff = "^0.5.5"
 sqlalchemy-schemadisplay = "^2.0"
+mkdocstrings = {extras = ["python"], version = "^0.25.2"}
+mkdocs = "^1.6.0"
+mkdocs-material = "^9.5.30"
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,0 +1,18 @@
+site_name: "umdb"
+
+markdown_extensions:
+  - toc:
+      toc_depth: 3
+
+plugins:
+- search
+- mkdocstrings:
+    handlers:
+      python:
+        options:
+          heading_level: 4
+          show_signature_annotations: true
+          separate_signature: true
+
+theme:
+  name: material
