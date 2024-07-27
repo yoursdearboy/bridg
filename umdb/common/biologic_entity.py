@@ -32,9 +32,6 @@ class BiologicEntity(Base):
 
     names: Mapped[List["Name"]] = relationship(cascade="all, delete-orphan")
 
-    def __str__(self):
-        return str(self.name)
-
 
 BiologicEntity.name = relationship(
     sa.orm.aliased(Name, primary_names),

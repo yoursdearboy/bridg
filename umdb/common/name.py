@@ -29,9 +29,6 @@ class Name(Base):
         s = "Anonymous" if s == "" else s
         return s
 
-    def __str__(self):
-        return self.full
-
 
 name_index = (
     sa.func.row_number()
