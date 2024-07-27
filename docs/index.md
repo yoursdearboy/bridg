@@ -1,5 +1,17 @@
 # API
 
+## Common
+
+### BiologicEntity
+
+::: umdb.common.BiologicEntity
+
+## Person
+
+### Person
+
+::: umdb.person.Person
+
 ## Organization
 
 ### Organization

@@ -16,6 +16,20 @@ class AdministrativeGender(Enum):
 
 
 class BiologicEntity(Base):
+    """
+    Any individual living (or previously living) being.
+
+    Attributes:
+        id:
+        administrative_gender:
+        birth_date:
+        death_date:
+        death_date_estimated_indicator:
+        death_indicator:
+        names:
+        name:
+    """
+
     __tablename__ = "biologic_entity"
     __mapper_args__ = {
         "polymorphic_identity": "biologic_entity",
@@ -32,6 +46,7 @@ class BiologicEntity(Base):
     death_indicator: Mapped[Optional[bool]]
 
     names: Mapped[List["Name"]] = relationship(cascade="all, delete-orphan")
+    name: Mapped[Optional["Name"]]
 
 
 BiologicEntity.name = relationship(
