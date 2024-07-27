@@ -14,7 +14,7 @@ class Organization(Base):
         id:
         type:
         actual:
-        names:
+        name:
         performed_healthcare_facility:
         employed_healthcare_provider:
         performed_healthcare_provider_group:
@@ -28,7 +28,7 @@ class Organization(Base):
     description: Mapped[Optional[str]]
     actual: Mapped[bool] = mapped_column(default=True)
 
-    names: Mapped[List["OrganizationName"]] = relationship(cascade="all, delete-orphan")
+    name: Mapped[List["OrganizationName"]] = relationship(cascade="all, delete-orphan")
 
     performed_healthcare_facility: Mapped[Optional["HealthcareFacility"]] = (
         relationship(back_populates="performing_organization")
@@ -57,4 +57,4 @@ class OrganizationName(Base):
     value: Mapped[Optional[str]]
 
     organization_id: Mapped[int] = mapped_column(ForeignKey("organization.id"))
-    organization: Mapped["Organization"] = relationship(back_populates="names")
+    organization: Mapped["Organization"] = relationship(back_populates="name")
