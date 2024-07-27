@@ -1,4 +1,12 @@
-# API
+# Model
+
+## Database diagram
+
+![](db.png)
+
+## Class diagram
+
+![](model.png)
 
 ## Common
 
