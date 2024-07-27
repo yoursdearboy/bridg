@@ -1,4 +1,7 @@
+from typing import Optional
+
 import sqlalchemy as sa
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import column
 
@@ -10,15 +13,15 @@ class Name(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    use = mapped_column(sa.String())
-    family = mapped_column(sa.String())
-    given = mapped_column(sa.String())
-    middle = mapped_column(sa.String())
-    patronymic = mapped_column(sa.String())
-    prefix = mapped_column(sa.String())
-    suffix = mapped_column(sa.String())
+    use: Mapped[Optional[str]]
+    family: Mapped[Optional[str]]
+    given: Mapped[Optional[str]]
+    middle: Mapped[Optional[str]]
+    patronymic: Mapped[Optional[str]]
+    prefix: Mapped[Optional[str]]
+    suffix: Mapped[Optional[str]]
 
-    biologic_entity_id: Mapped[int] = mapped_column(sa.ForeignKey("biologic_entity.id"))
+    biologic_entity_id: Mapped[int] = mapped_column(ForeignKey("biologic_entity.id"))
     biologic_entity: Mapped["BiologicEntity"] = relationship(back_populates="names")
 
     @property

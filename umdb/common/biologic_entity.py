@@ -1,5 +1,6 @@
+from datetime import date
 from enum import Enum
-from typing import List
+from typing import List, Optional
 
 import sqlalchemy as sa
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -22,13 +23,13 @@ class BiologicEntity(Base):
     }
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    type: Mapped[str] = mapped_column(sa.String())
+    type: Mapped[str]
 
-    administrative_gender = mapped_column(sa.Enum(AdministrativeGender))
-    birth_date = mapped_column(sa.Date())
-    death_date = mapped_column(sa.Date())
-    death_date_estimated_indicator = mapped_column(sa.Boolean())
-    death_indicator = mapped_column(sa.Boolean())
+    administrative_gender: Mapped[Optional[AdministrativeGender]]
+    birth_date: Mapped[Optional[date]]
+    death_date: Mapped[Optional[date]]
+    death_date_estimated_indicator: Mapped[Optional[bool]]
+    death_indicator: Mapped[Optional[bool]]
 
     names: Mapped[List["Name"]] = relationship(cascade="all, delete-orphan")
 
