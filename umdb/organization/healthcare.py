@@ -61,9 +61,7 @@ class HealthcareProvider(Base):
     employing_organization_id: Mapped[Optional[int]] = mapped_column(
         ForeignKey("organization.id")
     )
-    employing_organization: Mapped[Optional[Organization]] = relationship(
-        back_populates="employed_healthcare_provider"
-    )
+    employing_organization: Mapped[Optional[Organization]] = relationship()
     "Each HealthcareProvider might belong to a department at one Organization."
     "Each Organization might be the department for one or more HealthcareProvider."
 
