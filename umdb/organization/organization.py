@@ -33,20 +33,26 @@ class Organization(Base):
     performed_healthcare_facility: Mapped[Optional["HealthcareFacility"]] = (
         relationship(back_populates="performing_organization")
     )
-    "Each HealthcareFacility always is a function performed by one Organization."
-    "Each Organization might function as one HealthcareFacility."
+    """
+    Each HealthcareFacility always is a function performed by one Organization.
+    Each Organization might function as one HealthcareFacility.
+    """
 
     employed_healthcare_provider: Mapped[List["HealthcareProvider"]] = relationship(
         back_populates="employing_organization"
     )
-    "Each HealthcareProvider might belong to a department at one Organization."
-    "Each Organization might be the department for one or more HealthcareProvider."
+    """
+    Each HealthcareProvider might belong to a department at one Organization.
+    Each Organization might be the department for one or more HealthcareProvider.
+    """
 
     performed_healthcare_provider_group: Mapped[Optional["HealthcareProviderGroup"]] = (
         relationship(back_populates="performing_organization")
     )
-    "Each HealthcareProviderGroup always is a function performed by one Organization."
-    "Each Organization might function as one HealthcareProviderGroup."
+    """
+    Each HealthcareProviderGroup always is a function performed by one Organization.
+    Each Organization might function as one HealthcareProviderGroup.
+    """
 
 
 class OrganizationName(Base):
