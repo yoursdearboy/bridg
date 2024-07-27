@@ -8,13 +8,21 @@ from umdb.db import Base
 
 class Organization(Base):
     """
+    DEFINITION:
     A formalized group of persons or other organizations collected together for a common purpose (such as administrative, legal, political) and the infrastructure to carry out that purpose.
+
+    EXAMPLE(S):
+    US National Cancer Institute (NCI); CDISC; HL7, ACME Corporation
+
+    OTHER NAME(S):
+
+    NOTE(S):
 
     Attributes:
         id:
+        name:
         type:
         actual:
-        name:
         performed_healthcare_facility:
         employed_healthcare_provider:
         performed_healthcare_provider_group:
@@ -24,11 +32,10 @@ class Organization(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
+    name: Mapped[List["OrganizationName"]] = relationship(cascade="all, delete-orphan")
     type: Mapped[Optional[str]]
     description: Mapped[Optional[str]]
     actual: Mapped[bool] = mapped_column(default=True)
-
-    name: Mapped[List["OrganizationName"]] = relationship(cascade="all, delete-orphan")
 
     performed_healthcare_facility: Mapped[Optional["HealthcareFacility"]] = (
         relationship(back_populates="performing_organization")
@@ -38,20 +45,20 @@ class Organization(Base):
     Each Organization might function as one HealthcareFacility.
     """
 
-    employed_healthcare_provider: Mapped[List["HealthcareProvider"]] = relationship(
-        back_populates="employing_organization"
-    )
-    """
-    Each HealthcareProvider might belong to a department at one Organization.
-    Each Organization might be the department for one or more HealthcareProvider.
-    """
-
     performed_healthcare_provider_group: Mapped[Optional["HealthcareProviderGroup"]] = (
         relationship(back_populates="performing_organization")
     )
     """
     Each HealthcareProviderGroup always is a function performed by one Organization.
     Each Organization might function as one HealthcareProviderGroup.
+    """
+
+    employed_healthcare_provider: Mapped[List["HealthcareProvider"]] = relationship(
+        back_populates="employing_organization"
+    )
+    """
+    Each HealthcareProvider might belong to a department at one Organization.
+    Each Organization might be the department for one or more HealthcareProvider.
     """
 
 

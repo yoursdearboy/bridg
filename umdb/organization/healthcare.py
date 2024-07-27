@@ -11,6 +11,19 @@ from .organization import Organization
 
 
 class HealthcareFacility(Base):
+    """
+    DEFINITION:
+    An organization that devotes some or all of its resources (people, places, things) to the delivery of healthcare services (including the financial and administrative management of those resources).
+
+    EXAMPLE(S):
+    Northwestern Memorial Hospital
+
+    OTHER NAME(S):
+
+    NOTE(S):
+    A healthcare facility may be manifest as a single physical location (e.g. building), or, alternatively, as a distributed collection of physical spaces.
+    """
+
     __tablename__ = "healthcare_facilitiy"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -44,6 +57,18 @@ class HealthcareFacility(Base):
 
 
 class HealthcareProvider(Base):
+    """
+    DEFINITION:
+    A person licensed, certified or otherwise authorized or permitted by law to administer healthcare in the ordinary course of business or practice of a profession.
+
+    EXAMPLE(S):
+    Physician, Physician Assistant, Psychologist, Nurse, Physical Therapist
+
+    OTHER NAME(S):
+
+    NOTE(S):
+    """
+
     __tablename__ = "healthcare_provider"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -97,6 +122,18 @@ class HealthcareProvider(Base):
 
 
 class HealthcareProviderGroup(Base):
+    """
+    DEFINITION:
+    A collection of healthcare providers loosely based upon a criterion (i.e., specialty, department, credentials).
+
+    EXAMPLE(S):
+    Department of Radiology, Oncology Nurses, Oncologists, Physicians
+
+    OTHER NAME(S):
+
+    NOTE(S):
+    """
+
     __tablename__ = "healthcare_provider_group"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -143,6 +180,17 @@ class HealthcareProviderGroup(Base):
 
 
 class HealthcareProviderGroupMember(Base):
+    """
+    DEFINITION:
+    The role of an individual healthcare provider as a constituent part of a group.
+
+    EXAMPLE(S):
+
+    OTHER NAME(S):
+
+    NOTE(S):
+    """
+
     __tablename__ = "healthcare_provider_group_member"
 
     id: Mapped[int] = mapped_column(primary_key=True)
