@@ -24,7 +24,7 @@ class HealthcareFacility(Base):
     A healthcare facility may be manifest as a single physical location (e.g. building), or, alternatively, as a distributed collection of physical spaces.
     """
 
-    __tablename__ = "healthcare_facilitiy"
+    __tablename__ = "healthcare_facility"
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
@@ -89,7 +89,7 @@ class HealthcareProvider(Base):
     """
 
     staffed_healthcare_facility_id: Mapped[Optional[int]] = mapped_column(
-        ForeignKey("healthcare_facilitiy.id")
+        ForeignKey("healthcare_facility.id")
     )
     staffed_healthcare_facility: Mapped[Optional[HealthcareFacility]] = relationship(
         back_populates="staffing_healthcare_provider"
@@ -160,7 +160,7 @@ class HealthcareProviderGroup(Base):
     """
 
     using_healthcare_facility_id: Mapped[int] = mapped_column(
-        ForeignKey("healthcare_facilitiy.id")
+        ForeignKey("healthcare_facility.id")
     )
     using_healthcare_facility: Mapped[HealthcareFacility] = relationship(
         back_populates="used_healthcare_provider_group"
