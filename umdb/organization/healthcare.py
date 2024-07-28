@@ -59,6 +59,9 @@ class HealthcareFacility(Base):
     Each HealthcareFacility might group staff into one or more HealthcareProviderGroup.
     """
 
+    def __str__(self):
+        return str(self.performing_organization)
+
 
 class HealthcareProvider(Base):
     """
@@ -81,7 +84,9 @@ class HealthcareProvider(Base):
 
     performing_person_id: Mapped[int] = mapped_column(ForeignKey("person.id"))
     performing_person: Mapped[Person] = relationship(
-        cascade="all, delete-orphan", single_parent=True
+        back_populates="performed_healthcare_provider",
+        cascade="all, delete-orphan",
+        single_parent=True,
     )
     """
     Each HealthcareProvider always is a function performed by one Person.
