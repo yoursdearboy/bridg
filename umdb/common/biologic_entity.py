@@ -49,6 +49,11 @@ class BiologicEntity(Base):
         back_populates="biologic_entity", cascade="all, delete-orphan"
     )
 
+    def __str__(self):
+        if not self.primary_name:
+            return "Anonymous"
+        return str(self.primary_name)
+
 
 BiologicEntity.primary_name = relationship(
     sa.orm.aliased(Name, primary_names),

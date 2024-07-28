@@ -63,6 +63,17 @@ class Organization(Base):
     Each Organization might be the department for one or more HealthcareProvider.
     """
 
+    @property
+    def primary_name(self):
+        if len(self.name) == 0:
+            return
+        return self.name[0]
+
+    def __str__(self):
+        if not self.primary_name:
+            return "Unnamed"
+        return str(self.primary_name)
+
 
 class OrganizationName(Base):
     __tablename__ = "organization_name"
@@ -73,3 +84,8 @@ class OrganizationName(Base):
 
     organization_id: Mapped[int] = mapped_column(ForeignKey("organization.id"))
     organization: Mapped["Organization"] = relationship(back_populates="name")
+
+    def __str__(self):
+        if not self.value:
+            return "Unnamed"
+        return self.value

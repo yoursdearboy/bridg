@@ -128,6 +128,9 @@ class HealthcareProvider(Base):
         ),
     )
 
+    def __str__(self):
+        return str(self.performing_person)
+
 
 class HealthcareProviderGroup(Base):
     """
@@ -190,6 +193,9 @@ class HealthcareProviderGroup(Base):
             ),
         )
     )
+
+    def __str__(self):
+        return str(self.performing_organization)
 
 
 class HealthcareProviderGroupMember(Base):
