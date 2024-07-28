@@ -5,7 +5,7 @@ from flask_admin.contrib.sqla.form import AdminModelConverter
 from flask_admin.model import typefmt
 from flask_admin.model.form import converts
 
-from . import fields
+from web import fields
 
 
 def date_format(view, value):
