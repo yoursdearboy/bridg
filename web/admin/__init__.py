@@ -8,6 +8,7 @@ from .organization import (
     OrganizationView,
 )
 from .person import PersonView
+from .study import StudyProtocolView, StudySiteView, StudyView
 
 admin = Admin(name="umdb", template_mode="bootstrap3")
 
@@ -46,4 +47,13 @@ admin.add_view(
         endpoint="healthcare_provider_group",
         category="Organization",
     )
+)
+admin.add_view(StudyView(StudyView.model, db.session, name="Study", category="Study"))
+admin.add_view(
+    StudyProtocolView(
+        StudyProtocolView.model, db.session, name="Protocol", category="Study"
+    )
+)
+admin.add_view(
+    StudySiteView(StudySiteView.model, db.session, name="Site", category="Study")
 )

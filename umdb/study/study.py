@@ -140,13 +140,17 @@ class StudySite(Base):
             return self.performing_organization
         raise RuntimeError("A study site must have a project")
 
-    # @property
-    # def project(self):
-    #     if self.executed_study_conduct:
-    #         return self.executed_study_conduct.project
+    @property
+    def executing_project(self):
+        if self.executed_study_conduct:
+            return self.executed_study_conduct.instantiating_project
 
-    #     project_version = self.study_protocol_version.first()
-    #     if project_version:
-    #         return project_version.versioned_study_protocol.planned_study
+        project_version = self.executing_study_protocol_version
+        if len(project_version) > 0:
+            return project_version[0].versioned_study_protocol.planned_study
 
-    #     raise RuntimeError("A study site must have a project")
+        # FIXME: temporary fix to allow creation of study sites in admin
+        # raise RuntimeError("A study site must have a project")
+
+    def __str__(self):
+        return str(self.performing_entity)
