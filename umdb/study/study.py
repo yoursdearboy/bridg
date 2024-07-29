@@ -5,9 +5,8 @@ from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from umdb.db import Base
-from umdb.organization.healthcare import HealthcareFacility
-from umdb.organization.organization import Organization
-from umdb.study.project import ProjectConduct, ResearchProject
+from umdb.organization import HealthcareFacility, Organization
+from umdb.study import ProjectConduct, ResearchProject
 
 if TYPE_CHECKING:
     from umdb.study.protocol import (
