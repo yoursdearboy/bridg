@@ -2,7 +2,7 @@ from typing import TYPE_CHECKING, List, Optional
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship, validates
 
 from umdb.db import Base
 from umdb.organization import HealthcareFacility, Organization
@@ -130,6 +130,20 @@ class StudySite(Base):
             ),
         )
     )
+
+    @validates("performing_healthcare_facility", "performing_organization")
+    def validate_performing_entity(self, key, value):
+        performing_entities = dict(
+            performing_healthcare_facility=self.performing_healthcare_facility,
+            performing_organization=self.performing_organization,
+        )
+        performing_entities[key] = value
+        count = sum(pe is not None for pe in performing_entities.values())
+        if count != 1:
+            raise ValueError(
+                "A StudySite is a function performed by one and only one of the following: HealthcareFacility or Organization (serving as a StudySite but is not a HealthcareFacility)."
+            )
+        return value
 
     @property
     def performing_entity(self):
