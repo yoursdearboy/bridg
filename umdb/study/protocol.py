@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING, List, Optional
 
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, Identity
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -43,6 +43,9 @@ class StudyProtocol(Base):
     Each StudyProtocol always has as a version one or more StudyProtocolVersion.
     """
 
+    def __str__(self):
+        return str(self.planned_study)
+
 
 class StudyProtocolVersion(Base):
     """
@@ -76,7 +79,9 @@ class StudyProtocolVersion(Base):
 
     executing_study_site_protocol_version_relationship: Mapped[
         List["StudySiteProtocolVersionRelationship"]
-    ] = relationship(back_populates="executed_study_protocol_version")
+    ] = relationship(
+        back_populates="executed_study_protocol_version", cascade="all, delete-orphan"
+    )
     """
     Each StudySiteProtocolVersionRelationship always executes one StudyProtocolVersion.
     Each StudyProtocolVersion might be executed at one or more StudySiteProtocolVersionRelationship.
@@ -89,6 +94,11 @@ class StudyProtocolVersion(Base):
             executing_study_site=ess
         ),
     )
+
+    def __str__(self):
+        if self.acronym:
+            return self.acronym
+        return "{self.versioned_study_protocol} version"
 
 
 class StudySiteProtocolVersionRelationship(Base):
@@ -106,9 +116,11 @@ class StudySiteProtocolVersionRelationship(Base):
 
     __tablename__ = "study_site_protocol_version_relationship"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(Identity(), unique=True)
 
-    executing_study_site_id: Mapped[int] = mapped_column(ForeignKey("study_site.id"))
+    executing_study_site_id: Mapped[int] = mapped_column(
+        ForeignKey("study_site.id"), primary_key=True
+    )
     executing_study_site: Mapped[StudySite] = relationship(
         back_populates="executed_study_site_protocol_version_relationship"
     )
@@ -118,7 +130,7 @@ class StudySiteProtocolVersionRelationship(Base):
     """
 
     executed_study_protocol_version_id: Mapped[int] = mapped_column(
-        ForeignKey("study_protocol_version.id")
+        ForeignKey("study_protocol_version.id"), primary_key=True
     )
     executed_study_protocol_version: Mapped[StudyProtocolVersion] = relationship(
         back_populates="executing_study_site_protocol_version_relationship"
@@ -131,7 +143,12 @@ class StudySiteProtocolVersionRelationship(Base):
     assigned_study_subject_protocol_version_relationship: Mapped[
         List["StudySubjectProtocolVersionRelationship"]
     ] = relationship(
-        back_populates="assigning_study_site_protocol_version_relationship"
+        back_populates="assigning_study_site_protocol_version_relationship",
+        # too much cascades for many-to-many-to-many
+        # it's better managed on the other side of relation
+        # cascade="all, delete-orphan",
+        # so viewonly
+        viewonly=True,
     )
     """
     Each StudySubjectProtocolVersionRelationship always is assigned to one StudySiteProtocolVersionRelationship.
@@ -141,7 +158,10 @@ class StudySiteProtocolVersionRelationship(Base):
     assigned_study_subject: AssociationProxy[List["StudySubject"]] = association_proxy(
         "assigned_study_subject_protocol_version_relationship",
         "assigning_study_subject",
-        creator=lambda ass: StudySiteProtocolVersionRelationship(
+        creator=lambda ass: StudySubjectProtocolVersionRelationship(
             assigning_study_subject=ass
         ),
     )
+
+    def __str__(self):
+        return f"{self.executing_study_site.performing_entity} in {self.executed_study_protocol_version}"

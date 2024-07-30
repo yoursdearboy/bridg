@@ -2,7 +2,7 @@ from datetime import date
 from enum import Enum
 from typing import List, Optional
 
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, Identity
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -100,7 +100,9 @@ class StudySubject(Subject):
 
     assigned_study_subject_protocol_version_relationship: Mapped[
         List["StudySubjectProtocolVersionRelationship"]
-    ] = relationship(back_populates="assigning_study_subject")
+    ] = relationship(
+        back_populates="assigning_study_subject", cascade="all, delete-orphan"
+    )
     """
     Each StudySubjectProtocolVersionRelationship always is the assigned version for one StudySubject.
     Each StudySubject might be assigned to one or more StudySubjectProtocolVersionRelationship.
@@ -111,7 +113,7 @@ class StudySubject(Subject):
     ] = association_proxy(
         "assigned_study_subject_protocol_version_relationship",
         "assigning_study_site_protocol_version_relationship",
-        creator=lambda asspvr: StudySiteProtocolVersionRelationship(
+        creator=lambda asspvr: StudySubjectProtocolVersionRelationship(
             assigning_study_site_protocol_version_relationship=asspvr
         ),
     )
@@ -131,9 +133,11 @@ class StudySubjectProtocolVersionRelationship(Base):
 
     __tablename__ = "study_subject_protocol_version_relationship"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(Identity(), unique=True)
 
-    assigning_study_subject_id: Mapped[int] = mapped_column(ForeignKey("subject.id"))
+    assigning_study_subject_id: Mapped[int] = mapped_column(
+        ForeignKey("subject.id"), primary_key=True
+    )
     assigning_study_subject: Mapped[StudySubject] = relationship(
         back_populates="assigned_study_subject_protocol_version_relationship",
     )
@@ -143,7 +147,7 @@ class StudySubjectProtocolVersionRelationship(Base):
     """
 
     assigning_study_site_protocol_version_relationship_id: Mapped[int] = mapped_column(
-        ForeignKey("study_site_protocol_version_relationship.id")
+        ForeignKey("study_site_protocol_version_relationship.id"), primary_key=True
     )
     assigning_study_site_protocol_version_relationship: Mapped[
         StudySiteProtocolVersionRelationship

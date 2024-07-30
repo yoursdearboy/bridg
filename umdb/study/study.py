@@ -152,4 +152,6 @@ class StudySite(Base):
         # raise RuntimeError("A study site must have a project")
 
     def __str__(self):
-        return str(self.performing_entity)
+        ep = self.executing_project
+        ep = ep if ep is not None else "_____"
+        return f"{self.performing_entity} in {ep}"
