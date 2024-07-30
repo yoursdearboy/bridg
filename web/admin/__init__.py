@@ -8,7 +8,7 @@ from .organization import (
     OrganizationView,
 )
 from .person import PersonView
-from .study import StudyProtocolView, StudySiteView, StudyView
+from .study import StudyProtocolView, StudySiteView, StudySubjectview, StudyView
 
 admin = Admin(name="umdb", template_mode="bootstrap3")
 
@@ -56,4 +56,9 @@ admin.add_view(
 )
 admin.add_view(
     StudySiteView(StudySiteView.model, db.session, name="Site", category="Study")
+)
+admin.add_view(
+    StudySubjectview(
+        StudySubjectview.model, db.session, name="Subject", category="Study"
+    )
 )

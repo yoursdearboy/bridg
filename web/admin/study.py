@@ -6,6 +6,7 @@ from umdb.study import (
     StudyProtocol,
     StudyProtocolVersion,
     StudySite,
+    StudySubject,
 )
 from web.admin.view import MyInlineOneToOneModelConverter, MyModelView
 
@@ -43,3 +44,28 @@ class StudySiteView(MyModelView):
         "executing_project",
     ]
     form_columns = ["performing_healthcare_facility", "performing_organization", "lead"]
+
+
+class StudySubjectview(MyModelView):
+    model = StudySubject
+    column_list = [
+        "id",
+        "performing_entity",
+        "status",
+        "status_date",
+        "assigned_study_site_protocol_version_relationship",
+    ]
+    column_formatters = {
+        "assigned_study_site_protocol_version_relationship": (
+            lambda v, c, m, p: "\n".join(
+                map(str, m.assigned_study_site_protocol_version_relationship)
+            )
+        )
+    }
+    form_columns = [
+        "performing_biologic_entity",
+        "performing_organization",
+        "status",
+        "status_date",
+        "assigned_study_site_protocol_version_relationship",
+    ]
