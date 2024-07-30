@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from sqlalchemy import ForeignKey, Identity
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship, validates
 
 from umdb.common.biologic_entity import BiologicEntity
 from umdb.db import Base
@@ -44,6 +44,20 @@ class Subject(Base):
         ForeignKey("organization.id")
     )
     performing_organization: Mapped[Optional[Organization]] = relationship()
+
+    @validates("performing_biologic_entity", "performing_organization")
+    def validate_performing_entity(self, key, value):
+        performing_entities = dict(
+            performing_biologic_entity=self.performing_biologic_entity,
+            performing_organization=self.performing_organization,
+        )
+        performing_entities[key] = value
+        count = sum(pe is not None for pe in performing_entities.values())
+        if count > 1:
+            raise ValueError(
+                "A Subject might be a function performed by one and only one of the following: BiologicEntity, Organization."
+            )
+        return value
 
     @property
     def performing_entity(self):
