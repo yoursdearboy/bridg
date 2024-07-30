@@ -86,6 +86,21 @@ files = [
 ]
 
 [[package]]
+name = "bootstrap-flask"
+version = "2.4.0"
+description = "Bootstrap 4 & 5 helper for your Flask projects."
+optional = false
+python-versions = "*"
+files = [
+    {file = "Bootstrap-Flask-2.4.0.tar.gz", hash = "sha256:3f7aa1b8be31e182fa2eaff2580e9b66aa9fad14f1a35e5c03d486169fb6c1a1"},
+    {file = "Bootstrap_Flask-2.4.0-py3-none-any.whl", hash = "sha256:bd5084bcb1557e85db799aa9d70b153cb13a3895ea871603dbf242cd05894b90"},
+]
+
+[package.dependencies]
+Flask = "*"
+WTForms = "*"
+
+[[package]]
 name = "certifi"
 version = "2024.2.2"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -2811,4 +2826,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "48893ea16072e43ecafebaaf46125cac728a475bba65d8e341c779895b8a6731"
+content-hash = "17c64e3f79a07de6e113938761eff3ade69bc1c8ba01614f86f449c8fe70a2f3"
