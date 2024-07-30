@@ -92,3 +92,9 @@ class MyInlineOneToOneModelConverter(InlineOneToOneModelConverter):
 class MyModelView(ModelView):
     model_form_converter = MyModelConverter
     column_type_formatters = FORMATTERS
+
+    def _get_endpoint(self, endpoint):
+        if endpoint:
+            return endpoint
+        endpoint = super()._get_endpoint(endpoint)
+        return f"{endpoint}-admin"

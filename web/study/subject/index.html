@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% from 'bootstrap4/table.html' import render_table %}
+
+{% block content %}
+<h1>Works</h1>
+
+{{ render_table(subjects) }}
+{% endblock %}
