@@ -4,6 +4,7 @@ from flask_bootstrap import Bootstrap5
 
 from . import study
 from .admin import admin
+from .assets import assets
 from .db import db
 from .json import MyJSONProvider
 
@@ -18,6 +19,7 @@ bootstrap = Bootstrap5()
 
 db.init_app(app)
 admin.init_app(app)
+assets.init_app(app)
 bootstrap.init_app(app)
 
 app.register_blueprint(study.blueprint)

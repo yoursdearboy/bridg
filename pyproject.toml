@@ -16,6 +16,7 @@ flask-admin = "^1.6.1"
 flask-sqlalchemy = "^3.1.1"
 python-dotenv = "^1.0.1"
 bootstrap-flask = "^2.4.0"
+flask-assets = "^2.1.0"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "datatables.net-bs5": "^2.1.2",
+    "jquery": "^3.7.1",
+    "luxon": "^3.4.4",
     "swagger-ui-dist": "^5.17.14"
   }
 }

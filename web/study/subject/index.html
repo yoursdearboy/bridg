@@ -1,8 +1,41 @@
 {% extends "base.html" %}
-{% from 'bootstrap4/table.html' import render_table %}
 
 {% block content %}
 <h1>Works</h1>
 
-{{ render_table(subjects) }}
+<table id="subjects"></table>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+<script>
+    new DataTable("#subjects", {
+        ajax: {
+            url: ".",
+            dataSrc: "",
+            beforeSend: req => req.setRequestHeader("Content-Type", "application/json")
+        },
+        columns: [
+            { "title": "ID", "data": "id" },
+            { "title": "Full Name", "data": "performing_biologic_entity.full_primary_name" },
+            { "title": "Administrative gender", "data": "performing_biologic_entity.administrative_gender" },
+            {
+                "title": "Birth date",
+                "data": "performing_biologic_entity.birth_date",
+                "render": DataTable.render.datetime("yyyy-MM-dd")
+            },
+            {
+                "title": "Death indicator",
+                "data": "performing_biologic_entity.death_indicator",
+                "render": (data) => data === true ? "Yes" : data === false ? "No": "" 
+            },
+            {
+                "title": "Death date",
+                "data": "performing_biologic_entity.death_date",
+                "render": DataTable.render.datetime("yyyy-MM-dd")
+            }
+        ]
+    });
+</script>
 {% endblock %}

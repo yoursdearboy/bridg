@@ -1,12 +1,12 @@
 from datetime import date
 from typing import List, Optional
 
-import pydantic
+from pydantic import BaseModel, RootModel, computed_field
 
 from umdb.common import AdministrativeGender
 
 
-class Name(pydantic.BaseModel):
+class Name(BaseModel):
     class Config:
         from_attributes = True
 
@@ -17,9 +17,10 @@ class Name(pydantic.BaseModel):
     patronymic: Optional[str]
     prefix: Optional[str]
     suffix: Optional[str]
+    full: str
 
 
-class BiologicEntity(pydantic.BaseModel):
+class BiologicEntity(BaseModel):
     class Config:
         from_attributes = True
 
@@ -30,8 +31,13 @@ class BiologicEntity(pydantic.BaseModel):
     death_indicator: Optional[bool]
     primary_name: Optional[Name]
 
+    @computed_field
+    def full_primary_name(self) -> Optional[str]:
+        if self.primary_name:
+            return self.primary_name.full
 
-class StudySubject(pydantic.BaseModel):
+
+class StudySubject(BaseModel):
     class Config:
         from_attributes = True
 
@@ -39,5 +45,5 @@ class StudySubject(pydantic.BaseModel):
     performing_biologic_entity: BiologicEntity
 
 
-class StudySubjectList(pydantic.RootModel[List[StudySubject]]):
+class StudySubjectList(RootModel[List[StudySubject]]):
     pass

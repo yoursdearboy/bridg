@@ -7,7 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {% block styles %}
+
     {{ bootstrap.load_css() }}
+
+    {% assets "css" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+
     {% endblock %}
 
     <title>Your page title</title>
@@ -19,7 +25,13 @@
     {% endblock %}
 
     {% block scripts %}
+
     {{ bootstrap.load_js() }}
+
+    {% assets "js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+
     {% endblock %}
 </body>
 
