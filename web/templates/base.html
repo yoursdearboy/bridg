@@ -17,14 +17,12 @@
 </head>
 
 <body>
-    {% block content %}
-    {% endblock %}
+    <div class="container-xxl">
+        {% block content %}
+        {% endblock %}
+    </div>
 
     {% block scripts %}
-
-    <script>
-        window.datePattern = "{{ _("yyyy-MM-dd") }}";
-    </script>
 
     <script type="module" src="{{ url_for('static', filename='index.js') }}"></script>
 

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ subject.performing_entity }}</h1>
+
+Status: {{ subject.status.value if subject.status else "-" }} (on {{ subject.status_date | default("-") }})
+
+{% endblock %}

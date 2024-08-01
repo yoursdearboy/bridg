@@ -43,6 +43,8 @@ class StudySubject(BaseModel):
 
     id: int
     performing_biologic_entity: BiologicEntity
+    status: str
+    status_date: date
 
 
 class StudySubjectList(RootModel[List[StudySubject]]):

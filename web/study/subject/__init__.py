@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, abort, render_template, request
 
 from umdb.study.protocol import (
     StudyProtocolVersion,
@@ -26,4 +26,12 @@ def index(study_id: int):
             .all()
         )
         return schema.StudySubjectList.model_validate(subjects).model_dump()
-    return render_template("index.html")
+    return render_template("index.html", study_id=study_id)
+
+
+@blueprint.route("/<subject_id>")
+def show(study_id: int, subject_id: int):
+    subject = db.session.query(StudySubject).filter_by(id=subject_id).one_or_none()
+    if not subject:
+        abort(404)
+    return render_template("show.html", subject=subject)

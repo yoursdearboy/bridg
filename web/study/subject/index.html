@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<h1>Works</h1>
+<h1>Subjects list</h1>
 
-<table id="subjects" class="table"></table>
+<table id="subjects-table" class="table"></table>
 
 {% endblock %}
 
@@ -12,6 +12,12 @@
 
 {{ super() }}
 
-<script type="module" src="{{ url_for('static', filename='study/subject/index.js') }}"></script>
+<script
+    id="subjects-script"
+    src="{{ url_for('static', filename='study/subject/index.js') }}"
+    type="module"
+    data-date-format={{ _('yyyy-MM-dd' ) | tojson }}
+    data-show-url={{ url_for('.show', study_id=study_id, subject_id=':subject_id') | tojson }} >
+</script>
 
 {% endblock %}

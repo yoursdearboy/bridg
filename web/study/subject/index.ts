@@ -3,9 +3,10 @@ import * as luxon from "luxon";
 
 (window as any).luxon = luxon;
 
-const datePattern = (window as any).datePattern;
+const script = document.getElementById("subjects-script");
+const { dateFormat, showUrl: showURL } = script?.dataset;
 
-new DataTable("#subjects", {
+new DataTable("#subjects-table", {
   ajax: {
     url: ".",
     dataSrc: "",
@@ -25,7 +26,7 @@ new DataTable("#subjects", {
     {
       title: "Birth date",
       data: "performing_biologic_entity.birth_date",
-      render: DataTable.render.datetime(datePattern),
+      render: DataTable.render.datetime(dateFormat),
     },
     {
       title: "Death indicator",
@@ -35,7 +36,21 @@ new DataTable("#subjects", {
     {
       title: "Death date",
       data: "performing_biologic_entity.death_date",
-      render: DataTable.render.datetime(datePattern),
+      render: DataTable.render.datetime(dateFormat),
+    },
+    {
+      title: "Status",
+      data: "status",
+    },
+    {
+      title: "Status date",
+      data: "status_date",
+      render: DataTable.render.datetime(dateFormat),
+    },
+    {
+      data: "id",
+      render: (data) =>
+        `<a href='${showURL.replace(":subject_id", data)}'>${data}</a>`,
     },
   ],
 });
