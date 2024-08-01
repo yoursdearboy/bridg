@@ -8,11 +8,7 @@
 
     {% block styles %}
 
-    {{ bootstrap.load_css() }}
-
-    {% assets "css" %}
-        <link rel="stylesheet" href="{{ ASSET_URL }}">
-    {% endassets %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 
     {% endblock %}
 
@@ -26,11 +22,11 @@
 
     {% block scripts %}
 
-    {{ bootstrap.load_js() }}
+    <script>
+        window.datePattern = "{{ _("yyyy-MM-dd") }}";
+    </script>
 
-    {% assets "js" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
+    <script type="module" src="{{ url_for('static', filename='index.js') }}"></script>
 
     {% endblock %}
 </body>
