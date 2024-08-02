@@ -1,3 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
+import "./index.scss";
 import "./select2";
