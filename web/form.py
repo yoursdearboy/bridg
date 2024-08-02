@@ -45,8 +45,10 @@ class ModelForm(model_form_factory(FlaskForm)):
         form_generator = MyFormGenerator
         type_map = ClassMap(
             {
-                sa.Enum: wtforms.SelectField,
                 sa.Boolean: fields.SelectBooleanField,
+                sa.Date: fields.DateField,
+                sa.DateTime: fields.DateTimeField,
+                sa.Enum: wtforms.SelectField,
             }
         )
 

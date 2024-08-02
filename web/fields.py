@@ -1,4 +1,4 @@
-from wtforms import fields
+from wtforms import fields, widgets
 
 
 class SelectBooleanField(fields.SelectField):
@@ -18,3 +18,11 @@ class SelectBooleanField(fields.SelectField):
             choices = self.default_choices
         kwargs["coerce"] = self._coerce
         super().__init__(*args, choices=choices, **kwargs)
+
+
+class DateField(fields.DateField):
+    widget = widgets.TextInput()
+
+
+class DateTimeField(fields.DateTimeField):
+    widget = widgets.TextInput()
