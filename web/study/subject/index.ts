@@ -53,4 +53,6 @@ new DataTable("#subjects-table", {
         `<a href='${showURL.replace(":subject_id", data)}'>${data}</a>`,
     },
   ],
+  paging: false,
+  searching: false,
 });
