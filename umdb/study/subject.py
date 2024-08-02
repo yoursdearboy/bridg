@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime
 from enum import Enum
 from typing import List, Optional
 
@@ -110,7 +110,7 @@ class StudySubject(Subject):
     __mapper_args__ = {"polymorphic_identity": "study_subject"}
 
     status: Mapped[Optional[Status]]
-    status_date: Mapped[Optional[date]]
+    status_date: Mapped[Optional[datetime]]
 
     assigned_study_subject_protocol_version_relationship: Mapped[
         List["StudySubjectProtocolVersionRelationship"]
