@@ -26,7 +26,7 @@ def index(study_id: int):
             .all()
         )
         return schema.StudySubjectList.model_validate(subjects).model_dump()
-    return render_template("index.html", study_id=study_id)
+    return render_template("subject/index.html", study_id=study_id)
 
 
 @blueprint.route("/<subject_id>")

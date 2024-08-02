@@ -1,9 +1,7 @@
-from datetime import date
+from datetime import date, datetime
 from typing import List, Optional
 
 from pydantic import BaseModel, RootModel, computed_field
-
-from umdb.common import AdministrativeGender
 
 
 class Name(BaseModel):
@@ -24,7 +22,7 @@ class BiologicEntity(BaseModel):
     class Config:
         from_attributes = True
 
-    administrative_gender: Optional[AdministrativeGender]
+    administrative_gender: Optional[str]
     birth_date: Optional[date]
     death_date: Optional[date]
     death_date_estimated_indicator: Optional[bool]
@@ -42,9 +40,9 @@ class StudySubject(BaseModel):
         from_attributes = True
 
     id: int
-    performing_biologic_entity: BiologicEntity
-    status: str
-    status_date: date
+    performing_biologic_entity: Optional[BiologicEntity]
+    status: Optional[str]
+    status_date: Optional[datetime]
 
 
 class StudySubjectList(RootModel[List[StudySubject]]):

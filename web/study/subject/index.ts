@@ -4,7 +4,7 @@ import * as luxon from "luxon";
 (window as any).luxon = luxon;
 
 const script = document.getElementById("subjects-script");
-const { dateFormat, showUrl: showURL } = script?.dataset;
+const { dateFormat, datetimeFormat, showUrl: showURL } = script?.dataset as any;
 
 new DataTable("#subjects-table", {
   ajax: {
@@ -45,7 +45,7 @@ new DataTable("#subjects-table", {
     {
       title: "Status date",
       data: "status_date",
-      render: DataTable.render.datetime(dateFormat),
+      render: DataTable.render.datetime(datetimeFormat),
     },
     {
       data: "id",

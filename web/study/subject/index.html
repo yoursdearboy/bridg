@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<h1>Subjects list</h1>
+<h1>{{ _("Subjects list") }}</h1>
 
-<table id="subjects-table" class="table"></table>
+<table class="table" id="subjects-table"></table>
 
 {% endblock %}
 
@@ -16,8 +16,9 @@
     id="subjects-script"
     src="{{ url_for('static', filename='study/subject/index.js') }}"
     type="module"
-    data-date-format={{ _('yyyy-MM-dd' ) | tojson }}
-    data-show-url={{ url_for('.show', study_id=study_id, subject_id=':subject_id') | tojson }} >
+    data-date-format="{{ _('yyyy-MM-dd' ) }}"
+    data-datetime-format="{{ _('yyyy-MM-dd HH:mm:ss') }}"
+    data-show-url="{{ url_for('.show', study_id=study_id, subject_id=':subject_id') }}" >
 </script>
 
 {% endblock %}
