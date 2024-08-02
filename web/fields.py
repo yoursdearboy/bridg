@@ -1,3 +1,4 @@
+from flask_babel import _
 from wtforms import fields, widgets
 
 
@@ -20,9 +21,26 @@ class SelectBooleanField(fields.SelectField):
         super().__init__(*args, choices=choices, **kwargs)
 
 
-class DateField(fields.DateField):
-    widget = widgets.TextInput()
+class DateLocaleMixin:
+    def _localize_format(self, format):
+        return _(format)
 
 
-class DateTimeField(fields.DateTimeField):
+class DateField(DateLocaleMixin, fields.DateField):
     widget = widgets.TextInput()
+
+    def __init__(self, label=None, validators=None, format="%Y-%m-%d", **kwargs):
+        _("%Y-%m-%d")  # to put in messages file
+        format = self._localize_format(format)
+        super().__init__(label, validators, format, **kwargs)
+
+
+class DateTimeField(DateLocaleMixin, fields.DateTimeField):
+    widget = widgets.TextInput()
+
+    def __init__(
+        self, label=None, validators=None, format="%Y-%m-%d %H:%M:%S", **kwargs
+    ):
+        _("%Y-%m-%d %H:%M:%S")  # to put in messages file
+        format = self._localize_format(format)
+        super().__init__(label, validators, format, **kwargs)
