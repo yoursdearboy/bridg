@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Studies</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ _("Study") }}</th>
+            <th>{{ _("Subjects") }}</th>
+            <th>{{ _("Sites") }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for i in info %}
+        <tr>
+            <td><a href="{{ url_for('.show', id=i.study.id) }}">{{ i.study }}</a></td>
+            <td><a href="{{ url_for('.show', id=i.study.id) }}">{{ i.subjects }}</a></td>
+            <td><a href="{{ url_for('.show', id=i.study.id) }}">{{ i.sites }}</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
