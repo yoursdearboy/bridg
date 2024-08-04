@@ -4,6 +4,8 @@
 
 <h1>{{ _("Subjects list") }}</h1>
 
+<a class="btn btn-primary" href="{{ url_for('.new', study_id=study_id) }}">{{ _("New") }}</a>
+
 <table class="table" id="subjects-table"></table>
 
 {% endblock %}

@@ -1,0 +1,80 @@
+{% from 'bootstrap5/form.html' import render_hidden_errors, render_field %}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ _("New subject") }}</h1>
+
+<form action="{{ url_for('.new', study_id=study_id) }}" method="POST">
+    {{ form.csrf_token() }}
+
+    {{ render_hidden_errors(form) }}
+
+    {% with form=form.performing_biologic_entity["name"].0 %}
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="w-64-tw">{{ render_field(form.family) }}</div>
+                <div class="w-64-tw">{{ render_field(form.middle) }}</div>
+                <div class="w-64-tw">{{ render_field(form.given) }}</div>
+            </div>
+            <details>
+                <summary>Extra</summary>
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.prefix) }}</div>
+                    <div class="w-64-tw">{{ render_field(form.suffix) }}</div>
+                </div>
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.patronymic) }}</div>
+                </div>
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.use) }}</div>
+                </div>
+            </details>
+        </div>
+    </div>
+    {% endwith %}
+
+    {% with form=form.performing_biologic_entity %}
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="w-64-tw">{{ render_field(form.administrative_gender) }}</div>
+                <div class="w-64-tw">{{ render_field(form.birth_date) }}</div>
+            </div>
+            <div class="row">
+                <div class="w-64-tw">{{ render_field(form.death_indicator) }}</div>
+                <div class="w-64-tw">{{ render_field(form.death_date) }}</div>
+            </div>
+            <div class="row">
+                <div class="w-64-tw"></div>
+                <div class="w-64-tw">{{ render_field(form.death_date_estimated_indicator) }}</div>
+            </div>
+        </div>
+    </div>
+    {% endwith %}
+
+    {% with %}
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="w-64-tw">
+                    {{ render_field(form.assigned_study_site_protocol_version_relationship, class="select2") }}
+                </div>
+            </div>
+            <details>
+                <summary>Extra</summary>
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.status) }}</div>
+                    <div class="w-64-tw">{{ render_field(form.status_date) }}</div>
+                </div>
+            </details>
+        </div>
+    </div>
+    {% endwith %}
+
+    <input class="btn btn-primary" type="submit" value="Save" />
+</form>
+
+{% endblock %}
