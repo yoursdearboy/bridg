@@ -9,6 +9,11 @@ from .db import db
 
 
 class MyFormGenerator(FormGenerator):
+    def length_validator(self, column):
+        if isinstance(column.type, sa.types.Enum):
+            return
+        return super().length_validator(column)
+
     def select_field_kwargs(self, column):
         kwargs = super().select_field_kwargs(column)
         if isinstance(column.type, sau.types.ChoiceType):
@@ -34,15 +39,20 @@ class MyFormGenerator(FormGenerator):
 
         return kwargs
 
-    def length_validator(self, column):
-        if isinstance(column.type, sa.types.Enum):
-            return
-        return super().length_validator(column)
+    def type_agnostic_parameters(self, key, column):
+        kwargs = {}
+        kwargs["description"] = column.info.get(
+            "description", self.meta.descriptions.get(key, "")
+        )
+        kwargs["label"] = column.info.get("label", self.meta.labels.get(key, key))
+        return kwargs
 
 
 class ModelForm(model_form_factory(FlaskForm)):
     class Meta:
+        descriptions = {}
         form_generator = MyFormGenerator
+        labels = {}
         type_map = ClassMap(
             {
                 sa.Boolean: fields.SelectBooleanField,
