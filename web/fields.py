@@ -1,5 +1,7 @@
-from flask_babel import _
+from flask_babel import get_locale
 from wtforms import fields, widgets
+
+from .dates import parse_date, parse_datetime
 
 
 class SelectBooleanField(fields.SelectField):
@@ -21,26 +23,35 @@ class SelectBooleanField(fields.SelectField):
         super().__init__(*args, choices=choices, **kwargs)
 
 
-class DateLocaleMixin:
-    def _localize_format(self, format):
-        return _(format)
-
-
-class DateField(DateLocaleMixin, fields.DateField):
+class DateField(fields.DateField):
     widget = widgets.TextInput()
 
-    def __init__(self, label=None, validators=None, format="%Y-%m-%d", **kwargs):
-        _("%Y-%m-%d")  # to put in messages file
-        format = self._localize_format(format)
-        super().__init__(label, validators, format, **kwargs)
+    def process_formdata(self, valuelist):
+        if not valuelist:
+            return
+
+        date_str = " ".join(valuelist)
+        try:
+            self.data = parse_date(date_str, get_locale())
+            return
+        except ValueError:
+            self.data = None
+
+        raise ValueError(self.gettext("Not a valid date value."))
 
 
-class DateTimeField(DateLocaleMixin, fields.DateTimeField):
+class DateTimeField(fields.DateTimeField):
     widget = widgets.TextInput()
 
-    def __init__(
-        self, label=None, validators=None, format="%Y-%m-%d %H:%M:%S", **kwargs
-    ):
-        _("%Y-%m-%d %H:%M:%S")  # to put in messages file
-        format = self._localize_format(format)
-        super().__init__(label, validators, format, **kwargs)
+    def process_formdata(self, valuelist):
+        if not valuelist:
+            return
+
+        date_str = " ".join(valuelist)
+        try:
+            self.data = parse_datetime(date_str, get_locale())
+            return
+        except ValueError:
+            self.data = None
+
+        raise ValueError(self.gettext("Not a valid datetime value."))
