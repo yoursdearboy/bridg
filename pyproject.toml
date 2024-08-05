@@ -19,6 +19,7 @@ bootstrap-flask = "^2.4.0"
 flask-babel = "^4.0.0"
 flask-wtf = "^1.2.1"
 wtforms-alchemy = "^0.18.0"
+flask-htmx = "^0.3.2"
 
 
 [tool.poetry.group.dev.dependencies]

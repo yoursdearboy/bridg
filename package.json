@@ -3,6 +3,7 @@
     "alpinejs": "^3.14.1",
     "bootstrap": "^5.3.3",
     "datatables.net-bs5": "^2.1.2",
+    "htmx.org": "^2.0.1",
     "jquery": "^3.7.1",
     "luxon": "^3.4.4",
     "select2": "^4.1.0-rc.0",

@@ -17,6 +17,7 @@ from umdb import (
 )
 from web.db import db
 from web.form import ModelForm
+from web.htmx import htmx
 
 from . import schema
 
@@ -125,4 +126,20 @@ def show(study_id: int, subject_id: int):
     subject = db.session.query(StudySubject).filter_by(id=subject_id).one_or_none()
     if not subject:
         abort(404)
-    return render_template("show.html", subject=subject)
+
+
+@blueprint.route("/<subject_id>", methods=["DELETE"])
+def delete(study_id: int, subject_id: int):
+    subject = db.session.query(StudySubject).filter_by(id=subject_id).one_or_none()
+
+    if not subject:
+        abort(404)
+
+    db.session.delete(subject)
+    db.session.commit()
+
+    res = redirect(url_for(".index", study_id=study_id))
+    if htmx:
+        res.headers["HX-Redirect"] = res.headers.pop("Location")
+
+    return res

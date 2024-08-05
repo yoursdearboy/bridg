@@ -4,6 +4,18 @@
 
 <h1>{{ subject.performing_entity }}</h1>
 
-Status: {{ subject.status.value if subject.status else "-" }} (on {{ subject.status_date | default("-") }})
+<a
+    id="subject-delete"
+    class="btn btn-danger"
+    hx-delete="{{ url_for('.delete', study_id=study_id, subject_id=subject.id) }}"
+>
+    Delete
+</a>
+
+<div class="card">
+    <div class="card-body">
+       Status: {{ subject.status.value if subject.status else "-" }} (on {{ subject.status_date | default("-") }})
+    </div>
+</div>
 
 {% endblock %}
