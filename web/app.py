@@ -5,6 +5,7 @@ from flask_bootstrap import Bootstrap5
 
 from . import study
 from .admin import admin
+from .assets import assets
 from .db import db
 from .htmx import htmx
 from .json import MyJSONProvider
@@ -20,6 +21,7 @@ babel = Babel()
 
 bootstrap = Bootstrap5()
 
+assets.init_app(app)
 db.init_app(app)
 admin.init_app(app)
 babel.init_app(app)

@@ -20,6 +20,7 @@ flask-babel = "^4.0.0"
 flask-wtf = "^1.2.1"
 wtforms-alchemy = "^0.18.0"
 flask-htmx = "^0.3.2"
+flask-assets = "^2.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -29,6 +30,7 @@ sqlalchemy-schemadisplay = "^2.0"
 mkdocstrings = {extras = ["python"], version = "^0.25.2"}
 mkdocs = "^1.6.0"
 mkdocs-material = "^9.5.30"
+libsass = "^0.23.0"
 
 [build-system]
 requires = ["poetry-core"]

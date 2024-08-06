@@ -16,7 +16,9 @@ from web.db import db
 
 from . import subject
 
-blueprint = Blueprint("study", __name__, url_prefix="/studies", template_folder=".")
+blueprint = Blueprint(
+    "study", __name__, url_prefix="/studies", template_folder=".", static_folder="."
+)
 
 blueprint.register_blueprint(
     subject.blueprint, url_prefix=f"/<int:study_id>/{subject.blueprint.url_prefix}"

@@ -1,19 +1,5 @@
-import DataTable from "datatables.net-bs5";
-import * as luxon from "luxon";
-
-(window as any).luxon = luxon;
-
-const script = document.getElementById("subjects-script");
-const { dateFormat, datetimeFormat, showUrl: showURL } = script?.dataset as any;
-
-new DataTable("#subjects-table", {
-  ajax: {
-    url: ".",
-    dataSrc: "",
-    beforeSend: (req) =>
-      req.setRequestHeader("Content-Type", "application/json"),
-  },
-  columns: [
+function subjectsTable({ dateFormat, datetimeFormat, showURL }) {
+  const columns = [
     { title: "ID", data: "id" },
     {
       title: "Full Name",
@@ -52,7 +38,20 @@ new DataTable("#subjects-table", {
       render: (data) =>
         `<a href='${showURL.replace(":subject_id", data)}'>${data}</a>`,
     },
-  ],
-  paging: false,
-  searching: false,
-});
+  ];
+
+  return function () {
+    const { table } = this.$refs;
+    new DataTable(table, {
+      ajax: {
+        url: ".",
+        dataSrc: "",
+        beforeSend: (req) =>
+          req.setRequestHeader("Content-Type", "application/json"),
+      },
+      columns,
+      paging: false,
+      searching: false,
+    });
+  };
+}

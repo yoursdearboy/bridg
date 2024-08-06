@@ -1,7 +1,14 @@
 from datetime import datetime
 
 import wtforms
-from flask import Blueprint, abort, redirect, render_template, request, url_for
+from flask import (
+    Blueprint,
+    abort,
+    redirect,
+    render_template,
+    request,
+    url_for,
+)
 from flask_babel import _
 from wtforms_alchemy.fields import QuerySelectMultipleField
 
@@ -21,7 +28,9 @@ from web.htmx import htmx
 
 from . import schema
 
-blueprint = Blueprint("subject", __name__, url_prefix="/subjects", template_folder=".")
+blueprint = Blueprint(
+    "subject", __name__, url_prefix="/subjects", template_folder=".", static_folder="."
+)
 
 
 @blueprint.route("/")
