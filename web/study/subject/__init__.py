@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import List
 
 import wtforms
 from flask import (
@@ -94,15 +95,36 @@ class StudySubjectForm(ModelForm):
             "assigned_study_site_protocol_version_relationship": _("Study sites"),
         }
 
-    def post_init(self, study_id: int):
+    def __init__(self, study_id: int, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
         session = db.session
+
         self.assigned_study_site_protocol_version_relationship.query_factory = lambda: (
             session.query(StudySiteProtocolVersionRelationship)
             .join(StudySiteProtocolVersionRelationship.executed_study_protocol_version)
             .filter(StudyProtocolVersion.versioned_study_protocol_id == study_id)
         )
 
+        if self.performing_biologic_entity_id.data:
+            del self.performing_biologic_entity
+
+    def populate_obj(self, obj: StudySubject):
+        super().populate_obj(obj)
+
+        session = db.session
+
+        if self.performing_biologic_entity_id.data:
+            obj.performing_biologic_entity = (
+                session.query(BiologicEntity)
+                .filter_by(id=self.performing_biologic_entity_id.data)
+                .one()
+            )
+
     performing_biologic_entity = wtforms.FormField(BiologicEntityForm)
+    performing_biologic_entity_id = wtforms.IntegerField(
+        validators=[wtforms.validators.Optional()]
+    )
     assigned_study_site_protocol_version_relationship = QuerySelectMultipleField(
         label=Meta.labels["assigned_study_site_protocol_version_relationship"],
         validators=[wtforms.validators.DataRequired()],
@@ -117,8 +139,7 @@ def new(study_id: int):
     subject.status = Status.candidate
     subject.status_date = datetime.now()
 
-    form = StudySubjectForm(obj=subject)
-    form.post_init(study_id)
+    form = StudySubjectForm(study_id=study_id, obj=subject)
 
     if request.method == "POST":
         if form.validate():
@@ -130,11 +151,29 @@ def new(study_id: int):
     return render_template("new.html", study_id=study_id, form=form)
 
 
+def _lookup(person: Person, limit=5) -> List[Person]:
+    q = db.session.query(Person)
+    if name := person.name[0]:
+        q = q.filter(Person.name.any(Name.family.ilike(f"%{name.family}%")))
+    return q.limit(limit).all()
+
+
+@blueprint.route("/lookup", methods=["POST"])
+def lookup(study_id: int):
+    form = StudySubjectForm(study_id=study_id)
+    person_form = form.performing_biologic_entity.form
+    person = Person(name=[Name()])
+    person_form.populate_obj(obj=person)
+    persons = _lookup(person)
+    return schema.BiologicEntityList.model_validate(persons).model_dump()
+
+
 @blueprint.route("/<subject_id>")
 def show(study_id: int, subject_id: int):
     subject = db.session.query(StudySubject).filter_by(id=subject_id).one_or_none()
     if not subject:
         abort(404)
+    return render_template("show.html", study_id=study_id, subject=subject)
 
 
 @blueprint.route("/<subject_id>", methods=["DELETE"])

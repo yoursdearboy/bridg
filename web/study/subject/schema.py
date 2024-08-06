@@ -22,6 +22,7 @@ class BiologicEntity(BaseModel):
     class Config:
         from_attributes = True
 
+    id: int
     administrative_gender: Optional[str]
     birth_date: Optional[date]
     death_date: Optional[date]
@@ -33,6 +34,10 @@ class BiologicEntity(BaseModel):
     def full_primary_name(self) -> Optional[str]:
         if self.primary_name:
             return self.primary_name.full
+
+
+class BiologicEntityList(RootModel[List[BiologicEntity]]):
+    pass
 
 
 class StudySubject(BaseModel):

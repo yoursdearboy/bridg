@@ -1,0 +1,24 @@
+<div class="card mb-3">
+    <div class="card-body">
+        {{ _("Has the person been registered in the database before?") }}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ _("Name") }}</th>
+                    <th>{{ _("Birth date") }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template x-for="subject in subjects">
+                    <tr
+                        @click="selected = selected === subject ? null : subject"
+                        :class="{ 'table-active': selected == subject }"
+                    >
+                        <td x-text="subject.full_primary_name"></td>
+                        <td x-text='$formatISODate(subject.birth_date, {{ _("yyyy-MM-dd") | tojson }})'></td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</div>
