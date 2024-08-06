@@ -71,7 +71,7 @@ def gather_studies_info():
     studies = db.session.query(Study).all()
     subjects = count_subjects()
     sites = count_sites()
-    return [StudyInfo(s, subjects[s.id], sites[s.id]) for s in studies]
+    return [StudyInfo(s, subjects.get(s.id, 0), sites.get(s.id, 0)) for s in studies]
 
 
 @blueprint.route("/")
