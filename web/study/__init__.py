@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
-from flask import Blueprint, redirect, render_template, url_for
+from flask import Blueprint, redirect, render_template, request, url_for
+from flask_babel import _
 from sqlalchemy import distinct, func
 
 from umdb.study import (
@@ -12,6 +13,7 @@ from umdb.study import (
     StudySubject,
     StudySubjectProtocolVersionRelationship,
 )
+from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
 
 from . import subject
@@ -19,6 +21,17 @@ from . import subject
 blueprint = Blueprint(
     "study", __name__, url_prefix="/studies", template_folder=".", static_folder="."
 )
+
+
+@blueprint.before_request
+def setup_studies_breadcrumb():
+    breadcrumbs.append(Breadcrumb(url_for("study.index"), _("Studies")))
+
+    if request.view_args and "study_id" in request.view_args:
+        study_id = request.view_args["study_id"]
+        study = db.session.query(Study).filter_by(id=study_id).one()
+        breadcrumbs.append(Breadcrumb(url_for("study.show", id=study_id), str(study)))
+
 
 blueprint.register_blueprint(
     subject.blueprint, url_prefix=f"/<int:study_id>/{subject.blueprint.url_prefix}"

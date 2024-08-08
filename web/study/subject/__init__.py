@@ -10,7 +10,7 @@ from flask import (
     request,
     url_for,
 )
-from flask_babel import _
+from flask_babel import lazy_gettext as _
 from wtforms_alchemy.fields import QuerySelectMultipleField
 
 from umdb import (
@@ -23,6 +23,7 @@ from umdb import (
     StudySubject,
     StudySubjectProtocolVersionRelationship,
 )
+from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
 from web.form import ModelForm
 from web.htmx import htmx
@@ -32,6 +33,15 @@ from . import schema
 blueprint = Blueprint(
     "subject", __name__, url_prefix="/subjects", template_folder=".", static_folder="."
 )
+
+
+@blueprint.before_request
+def setup_breadcrumbs():
+    if request.view_args and "study_id" in request.view_args:
+        study_id = request.view_args["study_id"]
+        breadcrumbs.append(
+            Breadcrumb(url_for("study.subject.index", study_id=study_id), _("Subjects"))
+        )
 
 
 @blueprint.route("/")
@@ -148,6 +158,8 @@ def new(study_id: int):
             db.session.commit()
             return redirect(url_for(".index", study_id=study_id))
 
+    breadcrumbs.append(Breadcrumb(url_for(".new", study_id=study_id), _("New")))
+
     return render_template("new.html", study_id=study_id, form=form)
 
 
@@ -173,6 +185,12 @@ def show(study_id: int, subject_id: int):
     subject = db.session.query(StudySubject).filter_by(id=subject_id).one_or_none()
     if not subject:
         abort(404)
+    breadcrumbs.append(
+        Breadcrumb(
+            url_for(".show", study_id=study_id, subject_id=subject_id),
+            str(subject.performing_entity),
+        )
+    )
     return render_template("show.html", study_id=study_id, subject=subject)
 
 

@@ -6,6 +6,7 @@ from flask_bootstrap import Bootstrap5
 from . import study
 from .admin import admin
 from .assets import assets
+from .breadcrumbs import breadcrumbs
 from .db import db
 from .htmx import htmx
 from .json import MyJSONProvider
@@ -26,6 +27,7 @@ db.init_app(app)
 admin.init_app(app)
 babel.init_app(app)
 bootstrap.init_app(app)
+breadcrumbs.init_app(app)
 htmx.init_app(app)
 
 app.register_blueprint(study.blueprint)
