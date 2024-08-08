@@ -10,6 +10,7 @@ from .breadcrumbs import breadcrumbs
 from .db import db
 from .htmx import htmx
 from .json import MyJSONProvider
+from .templating import bool_filter, date_filter, datetime_filter
 
 load_dotenv()
 
@@ -29,6 +30,10 @@ babel.init_app(app)
 bootstrap.init_app(app)
 breadcrumbs.init_app(app)
 htmx.init_app(app)
+
+app.jinja_env.filters["date"] = date_filter
+app.jinja_env.filters["datetime"] = datetime_filter
+app.jinja_env.filters["bool"] = bool_filter
 
 app.register_blueprint(study.blueprint)
 
