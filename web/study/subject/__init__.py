@@ -1,7 +1,6 @@
 from datetime import datetime
 from typing import List
 
-import wtforms
 from flask import (
     Blueprint,
     abort,
@@ -11,10 +10,8 @@ from flask import (
     url_for,
 )
 from flask_babel import lazy_gettext as _
-from wtforms_alchemy.fields import QuerySelectMultipleField
 
 from umdb import (
-    BiologicEntity,
     Name,
     Person,
     Status,
@@ -25,10 +22,10 @@ from umdb import (
 )
 from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
-from web.form import ModelForm
 from web.htmx import htmx
 
 from . import schema
+from .form import StudySubjectForm
 
 blueprint = Blueprint(
     "subject", __name__, url_prefix="/subjects", template_folder=".", static_folder="."
@@ -59,86 +56,6 @@ def index(study_id: int):
         )
         return schema.StudySubjectList.model_validate(subjects).model_dump()
     return render_template("subject/index.html", study_id=study_id)
-
-
-class NameForm(ModelForm):
-    class Meta:
-        csrf = False
-        model = Name
-        labels = {
-            "family": _("Family name"),
-            "middle": _("Middle name"),
-            "given": _("Given name"),
-            "patronymic": _("Patronymic"),
-            "prefix": _("Prefix"),
-            "suffix": _("Suffix"),
-            "use": _("Use"),
-        }
-
-
-class BiologicEntityForm(ModelForm):
-    class Meta:
-        csrf = False
-        model = BiologicEntity
-        exclude = ("type",)
-        labels = {
-            "administrative_gender": _("Administrative gender"),
-            "birth_date": _("Birth date"),
-            "death_date": _("Death date"),
-            "death_date_estimated_indicator": _("Death date estimated?"),
-            "death_indicator": _("Dead"),
-        }
-
-    name = wtforms.FieldList(wtforms.FormField(NameForm), min_entries=1, max_entries=1)
-    death_date_estimated_indicator = wtforms.BooleanField(
-        label=Meta.labels["death_date_estimated_indicator"]
-    )
-
-
-class StudySubjectForm(ModelForm):
-    class Meta:
-        model = StudySubject
-        exclude = ("type",)
-        labels = {
-            "status": _("Status"),
-            "status_date": _("Status date"),
-            "assigned_study_site_protocol_version_relationship": _("Study sites"),
-        }
-
-    def __init__(self, study_id: int, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        session = db.session
-
-        self.assigned_study_site_protocol_version_relationship.query_factory = lambda: (
-            session.query(StudySiteProtocolVersionRelationship)
-            .join(StudySiteProtocolVersionRelationship.executed_study_protocol_version)
-            .filter(StudyProtocolVersion.versioned_study_protocol_id == study_id)
-        )
-
-        if self.performing_biologic_entity_id.data:
-            del self.performing_biologic_entity
-
-    def populate_obj(self, obj: StudySubject):
-        super().populate_obj(obj)
-
-        session = db.session
-
-        if self.performing_biologic_entity_id.data:
-            obj.performing_biologic_entity = (
-                session.query(BiologicEntity)
-                .filter_by(id=self.performing_biologic_entity_id.data)
-                .one()
-            )
-
-    performing_biologic_entity = wtforms.FormField(BiologicEntityForm)
-    performing_biologic_entity_id = wtforms.IntegerField(
-        validators=[wtforms.validators.Optional()]
-    )
-    assigned_study_site_protocol_version_relationship = QuerySelectMultipleField(
-        label=Meta.labels["assigned_study_site_protocol_version_relationship"],
-        validators=[wtforms.validators.DataRequired()],
-    )
 
 
 @blueprint.route("/new", methods=["GET", "POST"])

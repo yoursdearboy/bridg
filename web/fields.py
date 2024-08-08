@@ -2,8 +2,14 @@ from flask_babel import _
 from wtforms import fields, widgets
 
 
-class SelectBooleanField(fields.SelectField):
-    default_choices = (("", ""), ("false", "No"), ("true", "Yes"))
+class SelectField(fields.SelectField):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.choices = [("", "")] + self.choices  # type: ignore
+
+
+class SelectBooleanField(SelectField):
+    default_choices = (("false", "No"), ("true", "Yes"))
 
     def _coerce(self, x):
         if x == "" or x is None:
@@ -44,3 +50,34 @@ class DateTimeField(DateLocaleMixin, fields.DateTimeField):
         _("%Y-%m-%d %H:%M:%S")  # to put in messages file
         format = self._localize_format(format)
         super().__init__(label, validators, format, **kwargs)
+
+
+class SelectEnumField(SelectField):
+    def __init__(
+        self,
+        label=None,
+        enum=None,
+        coerce=None,
+        choices=None,
+        **kwargs,
+    ):
+        if enum is None:
+            raise ValueError("enum required")
+        self.enum = enum
+        if coerce is None:
+            coerce = self._coerce
+        if choices is None:
+            choices = self._choices()
+        super().__init__(label=label, coerce=coerce, choices=choices, **kwargs)
+
+    def _coerce(self, x):
+        if x is None:
+            return
+        if x == "":
+            return
+        if isinstance(x, self.enum):
+            return x
+        return self.enum(x)
+
+    def _choices(self):
+        return [(e.value, e.name) for e in self.enum]
