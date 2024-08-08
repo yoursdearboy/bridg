@@ -37,21 +37,19 @@ class NameForm(Form):
 class BiologicEntityForm(Form):
     name = FieldList(FormField(NameForm), min_entries=1, max_entries=1)
     administrative_gender = SelectEnumField(
-        _("Administrative gender"), AdministrativeGender, validators=[Optional()]
+        _("Administrative gender"), AdministrativeGender
     )
-    birth_date = DateField(_("Birth date"), validators=[Optional()])
-    death_date = DateField(_("Death date"), validators=[Optional()])
-    death_date_estimated_indicator = BooleanField(
-        _("Death date estimated?"), validators=[Optional()]
-    )
-    death_indicator = SelectBooleanField(_("Dead"), validators=[Optional()])
+    birth_date = DateField(_("Birth date"))
+    death_date = DateField(_("Death date"))
+    death_date_estimated_indicator = BooleanField(_("Death date estimated?"))
+    death_indicator = SelectBooleanField(_("Dead"))
 
 
 class StudySubjectForm(FlaskForm):
     performing_biologic_entity = FormField(BiologicEntityForm)
     performing_biologic_entity_id = IntegerField(validators=[Optional()])
-    status = SelectEnumField(_("Status"), Status, validators=[Optional()])
-    status_date = DateTimeField(_("Status date"), validators=[Optional()])
+    status = SelectEnumField(_("Status"), Status)
+    status_date = DateTimeField(_("Status date"))
     assigned_study_site_protocol_version_relationship = QuerySelectMultipleField(
         _("Study sites"),
         validators=[DataRequired()],

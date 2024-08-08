@@ -40,6 +40,18 @@ class DateField(DateLocaleMixin, fields.DateField):
         format = self._localize_format(format)
         super().__init__(label, validators, format, **kwargs)
 
+    def process_formdata(self, valuelist):
+        if not valuelist:
+            return
+
+        date_str = " ".join(valuelist)
+
+        if date_str == "":
+            self.data = None
+            return
+
+        return super().process_formdata(valuelist)
+
 
 class DateTimeField(DateLocaleMixin, fields.DateTimeField):
     widget = widgets.TextInput()
@@ -50,6 +62,18 @@ class DateTimeField(DateLocaleMixin, fields.DateTimeField):
         _("%Y-%m-%d %H:%M:%S")  # to put in messages file
         format = self._localize_format(format)
         super().__init__(label, validators, format, **kwargs)
+
+    def process_formdata(self, valuelist):
+        if not valuelist:
+            return
+
+        date_str = " ".join(valuelist)
+
+        if date_str == "":
+            self.data = None
+            return
+
+        return super().process_formdata(valuelist)
 
 
 class SelectEnumField(SelectField):
