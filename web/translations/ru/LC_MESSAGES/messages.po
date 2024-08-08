@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-02 23:19+0000\n"
+"POT-Creation-Date: 2024-08-08 09:41+0000\n"
 "PO-Revision-Date: 2024-07-31 12:34+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,41 +19,118 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: web/fields.py:28
+#: web/fields.py:33
 #, python-format
 msgid "%Y-%m-%d"
 msgstr "%d.%m.%Y"
 
-#: web/fields.py:42
+#: web/fields.py:44
 #, python-format
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d.%m.%Y %H:%M:%S"
+
+#: web/study/__init__.py:28
+msgid "Studies"
+msgstr "Исследования"
 
 #: web/study/index.html:10
 msgid "Study"
 msgstr "Исследования"
 
-#: web/study/index.html:11
+#: web/study/index.html:11 web/study/subject/__init__.py:43
 msgid "Subjects"
-msgstr "Субъекты"
+msgstr "Участники"
 
 #: web/study/index.html:12
 msgid "Sites"
 msgstr "Учреждения"
 
-#: web/study/subject/index.html:5
-msgid "Subjects list"
-msgstr "Список субъектов"
+#: web/study/subject/__init__.py:69
+msgid "Family name"
+msgstr "Фамилия"
 
-#: web/study/subject/index.html:7
+#: web/study/subject/__init__.py:70
+msgid "Middle name"
+msgstr "Отчество"
+
+#: web/study/subject/__init__.py:71
+msgid "Given name"
+msgstr "Имя"
+
+#: web/study/subject/__init__.py:72
+msgid "Patronymic"
+msgstr "Отчество"
+
+#: web/study/subject/__init__.py:73
+msgid "Prefix"
+msgstr "Приставка"
+
+#: web/study/subject/__init__.py:74
+msgid "Suffix"
+msgstr "Суффикс"
+
+#: web/study/subject/__init__.py:75
+msgid "Use"
+msgstr "Использование"
+
+#: web/study/subject/__init__.py:85
+msgid "Administrative gender"
+msgstr "Пол"
+
+#: web/study/subject/__init__.py:86 web/study/subject/lookup.html:8
+msgid "Birth date"
+msgstr "Дата рождения"
+
+#: web/study/subject/__init__.py:87
+msgid "Death date"
+msgstr "Дата смерти"
+
+#: web/study/subject/__init__.py:88
+msgid "Death date estimated?"
+msgstr "Дата смерти приближенная?"
+
+#: web/study/subject/__init__.py:89
+msgid "Dead"
+msgstr "Умер"
+
+#: web/study/subject/__init__.py:103
+msgid "Status"
+msgstr "Статус"
+
+#: web/study/subject/__init__.py:104
+msgid "Status date"
+msgstr "Дата статуса"
+
+#: web/study/subject/__init__.py:105
+msgid "Study sites"
+msgstr "Исследовательские центры"
+
+#: web/study/subject/__init__.py:161 web/study/subject/index.html:7
 msgid "New"
 msgstr "Новый"
 
-#: web/study/subject/index.html:21
+#: web/study/subject/form.html:62 web/study/subject/index.html:9
+#: web/study/subject/lookup.html:18
 msgid "yyyy-MM-dd"
 msgstr "dd.MM.yyyy"
 
-#: web/study/subject/index.html:22
+#: web/study/subject/index.html:5
+msgid "Subjects list"
+msgstr "Список участников"
+
+#: web/study/subject/index.html:10
 msgid "yyyy-MM-dd HH:mm:ss"
 msgstr "dd.MM.yyyy HH:mm:ss"
+
+#: web/study/subject/lookup.html:3
+msgid "Has the person been registered in the database before?"
+msgstr "Этот человек ранее зарегистрирован в базе данных?"
+
+#: web/study/subject/lookup.html:7
+msgid "Name"
+msgstr "Имя"
+
+#: web/study/subject/new.html:5
+msgid "New subject"
+msgstr "Новый участник"
 
