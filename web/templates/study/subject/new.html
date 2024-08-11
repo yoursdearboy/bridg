@@ -8,10 +8,10 @@
 <div x-data='newSubjectForm({{ data | tojson }})'>
     <div class="row">
         <div class="col-lg-8">
-            {% include "form.html"%}
+            {% include "study/subject/form.html"%}
         </div>
         <div class="col-lg-4">
-            {% include "lookup.html"%}
+            {% include "study/subject/lookup.html"%}
         </div>
     </div>
 </div>
@@ -21,7 +21,7 @@
 
 {% block scripts %}
 
-{% assets filters="typescript", output="./study/subject/new.js", "study/subject/new.ts" %}
+{% assets filters="typescript", output="./study/subject/new.js", "../assets/study/subject/new.ts" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
 

@@ -3,7 +3,7 @@ from flask import Flask
 from flask_babel import Babel
 from flask_bootstrap import Bootstrap5
 
-# from . import study
+from . import study
 from .assets import assets
 from .breadcrumbs import breadcrumbs
 from .db import db
@@ -33,7 +33,7 @@ app.jinja_env.filters["date"] = date_filter
 app.jinja_env.filters["datetime"] = datetime_filter
 app.jinja_env.filters["bool"] = bool_filter
 
-# app.register_blueprint(study.blueprint)
+app.register_blueprint(study.blueprint)
 
 if __name__ == "__main__":
     app.run()

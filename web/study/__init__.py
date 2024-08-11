@@ -4,7 +4,7 @@ from flask import Blueprint, redirect, render_template, request, url_for
 from flask_babel import _
 from sqlalchemy import distinct, func
 
-from umdb.study import (
+from umdb import (
     Study,
     StudyProtocol,
     StudyProtocolVersion,
@@ -18,9 +18,7 @@ from web.db import db
 
 from . import subject
 
-blueprint = Blueprint(
-    "study", __name__, url_prefix="/studies", template_folder=".", static_folder="."
-)
+blueprint = Blueprint("study", __name__, url_prefix="/studies")
 
 
 @blueprint.before_request
@@ -90,9 +88,9 @@ def gather_studies_info():
 @blueprint.route("/")
 def index():
     info = gather_studies_info()
-    return render_template("index.html", info=info)
+    return render_template("study/index.html", info=info)
 
 
 @blueprint.route("/<id>")
 def show(id: int):
-    return redirect(url_for("study.subject.index", study_id=id))
+    return redirect(url_for(".subject.index", study_id=id))

@@ -27,9 +27,7 @@ from web.htmx import htmx
 from . import schema
 from .form import StudySubjectForm
 
-blueprint = Blueprint(
-    "subject", __name__, url_prefix="/subjects", template_folder=".", static_folder="."
-)
+blueprint = Blueprint("subject", __name__, url_prefix="/subjects")
 
 
 @blueprint.before_request
@@ -55,7 +53,7 @@ def index(study_id: int):
             .all()
         )
         return schema.StudySubjectList.model_validate(subjects).model_dump()
-    return render_template("subject/index.html", study_id=study_id)
+    return render_template("study/subject/index.html", study_id=study_id)
 
 
 @blueprint.route("/new", methods=["GET", "POST"])
@@ -77,7 +75,7 @@ def new(study_id: int):
 
     breadcrumbs.append(Breadcrumb(url_for(".new", study_id=study_id), _("New")))
 
-    return render_template("new.html", study_id=study_id, form=form)
+    return render_template("study/subject/new.html", study_id=study_id, form=form)
 
 
 def _lookup(person: Person, limit=5) -> List[Person]:
@@ -108,7 +106,9 @@ def show(study_id: int, subject_id: int):
             str(subject.performing_entity),
         )
     )
-    return render_template("show.html", study_id=study_id, subject=subject)
+    return render_template(
+        "study/subject/show.html", study_id=study_id, subject=subject
+    )
 
 
 @blueprint.route("/<subject_id>", methods=["DELETE"])

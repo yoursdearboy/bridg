@@ -9,7 +9,7 @@ css = Bundle(
     "../../node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css",
     "../../node_modules/bootstrap/dist/css/bootstrap.min.css",
     "../../node_modules/select2/dist/css/select2.min.css",
-    Bundle("../styles.scss", filters="libsass"),
+    Bundle("../assets/styles.scss", filters="libsass"),
     output="styles.css",
 )
 
@@ -22,8 +22,8 @@ js = Bundle(
     "../../node_modules/select2/dist/js/select2.min.js",
     "../../node_modules/alpinejs/dist/cdn.js",
     "../../node_modules/htmx.org/dist/htmx.min.js",
-    "../alpine.js",
-    "../select2.js",
+    "../assets/alpine.js",
+    "../assets/select2.js",
     output="scripts.js",
 )
 
