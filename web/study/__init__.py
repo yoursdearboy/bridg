@@ -27,8 +27,11 @@ def setup_studies_breadcrumb():
 
     if request.view_args and "study_id" in request.view_args:
         study_id = request.view_args["study_id"]
-        study = db.session.query(Study).filter_by(id=study_id).one()
-        breadcrumbs.append(Breadcrumb(url_for("study.show", id=study_id), str(study)))
+        study = db.session.query(Study).filter_by(id=study_id).one_or_none()
+        if study:
+            breadcrumbs.append(
+                Breadcrumb(url_for("study.show", id=study_id), str(study))
+            )
 
 
 blueprint.register_blueprint(

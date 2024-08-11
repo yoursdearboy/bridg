@@ -15,6 +15,8 @@ from umdb import (
     Name,
     Person,
     Status,
+    Study,
+    StudyProtocol,
     StudyProtocolVersion,
     StudySiteProtocolVersionRelationship,
     StudySubject,
@@ -41,6 +43,9 @@ def setup_breadcrumbs():
 
 @blueprint.route("/")
 def index(study_id: int):
+    study = db.session.query(Study).filter_by(id=study_id).one_or_none()
+    if not study:
+        abort(404)
     if request.is_json:
         subjects = (
             db.session.query(StudySubject)
@@ -49,7 +54,8 @@ def index(study_id: int):
                 StudySubjectProtocolVersionRelationship.assigning_study_site_protocol_version_relationship
             )
             .join(StudySiteProtocolVersionRelationship.executed_study_protocol_version)
-            .filter(StudyProtocolVersion.versioned_study_protocol_id == study_id)
+            .join(StudyProtocolVersion.versioned_study_protocol)
+            .filter(StudyProtocol.planned_study == study)
             .all()
         )
         return schema.StudySubjectList.model_validate(subjects).model_dump()
