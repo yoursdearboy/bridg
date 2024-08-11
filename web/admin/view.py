@@ -98,3 +98,22 @@ class MyModelView(ModelView):
             return endpoint
         endpoint = super()._get_endpoint(endpoint)
         return f"{endpoint}-admin"
+
+    def _get_view_url(self, admin, url):
+        """
+        Generate URL for the view. Override to change default behavior.
+        """
+        model_name = self.model.__name__.lower()
+        if url is None:
+            if admin.url != "/":
+                url = "%s/%s" % (admin.url, model_name)
+            else:
+                if self == admin.index_view:
+                    url = "/"
+                else:
+                    url = "/%s" % model_name
+        else:
+            if not url.startswith("/"):
+                url = "%s/%s" % (admin.url, url)
+
+        return url
