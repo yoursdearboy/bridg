@@ -1,43 +1,14 @@
-from typing import TYPE_CHECKING, List, Optional
+from __future__ import annotations
 
-from sqlalchemy import ForeignKey
+from typing import List, Optional
+
+from sqlalchemy import ForeignKey, Identity
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship, validates
 
-from umdb.db import Base
-from umdb.organization import HealthcareFacility, Organization
-from umdb.study import ProjectConduct, ResearchProject
-
-if TYPE_CHECKING:
-    from umdb.study.protocol import (
-        StudyProtocol,
-        StudyProtocolVersion,
-        StudySiteProtocolVersionRelationship,
-    )
-
-
-class Study(ResearchProject):
-    """
-    DEFINITION:
-    A research project whose objectives are to test or confirm hypotheses concerning the utility, impact, pharmacological, physiological, and/or psychological effects of a particular treatment, procedure, drug, device, biologic, food product, cosmetic, care plan, or subject characteristic.
-
-    EXAMPLE(S):
-    A vaccine therapy study looking at treating patients with previously treated stage II-III HER2-positive breast cancer
-
-    OTHER NAME(S):
-
-    NOTE(S):
-    """
-
-    __mapper_args__ = {"polymorphic_identity": "study"}
-
-    planning_study_protocol: Mapped[Optional["StudyProtocol"]] = relationship(
-        back_populates="planned_study", cascade="all, delete-orphan"
-    )
-    """
-    Each StudyProtocol always is the plan for one Study.
-    Each Study might have as plan one StudyProtocol.
-    """
+from ..common import HealthcareFacility, Organization, ProjectConduct, StudySubject
+from ..db import Base
+from ..protocol import StudyProtocolVersion
 
 
 class StudyConduct(ProjectConduct):
@@ -54,7 +25,7 @@ class StudyConduct(ProjectConduct):
 
     __mapper_args__ = {"polymorphic_identity": "study"}
 
-    executing_study_site: Mapped[List["StudySite"]] = relationship(
+    executing_study_site: Mapped[List[StudySite]] = relationship(
         back_populates="executed_study_conduct"
     )
     """
@@ -169,3 +140,110 @@ class StudySite(Base):
         ep = self.executing_project
         ep = ep if ep is not None else "_____"
         return f"{self.performing_entity} in {ep}"
+
+
+class StudySiteProtocolVersionRelationship(Base):
+    """
+    DEFINITION:
+    Specifies the link between a study site and a version of the study protocol used or available for use at that site.
+
+    EXAMPLE(S):
+
+    OTHER NAME(S):
+
+    NOTE(S):
+    Even if a study site's IRB has not reviewed the study protocol version, if there is a new version for the study protocol, then there is the potential for a relationship between the site and the version.  The dateRange is specified only if the version is approved for this site by the IRB and activated at the site.  Retroactive approval means that the dateRange does not have to be on or after the IRB approval date.
+    """
+
+    __tablename__ = "study_site_protocol_version_relationship"
+
+    id: Mapped[int] = mapped_column(Identity(), unique=True)
+
+    executing_study_site_id: Mapped[int] = mapped_column(
+        ForeignKey("study_site.id"), primary_key=True
+    )
+    executing_study_site: Mapped[StudySite] = relationship(
+        back_populates="executed_study_site_protocol_version_relationship"
+    )
+    """
+    Each StudySiteProtocolVersionRelationship always is executed at one StudySite.
+    Each StudySite might execute one or more StudySiteProtocolVersionRelationship.
+    """
+
+    executed_study_protocol_version_id: Mapped[int] = mapped_column(
+        ForeignKey("study_protocol_version.id"), primary_key=True
+    )
+    executed_study_protocol_version: Mapped[StudyProtocolVersion] = relationship(
+        back_populates="executing_study_site_protocol_version_relationship"
+    )
+    """
+    Each StudySiteProtocolVersionRelationship always executes one StudyProtocolVersion.
+    Each StudyProtocolVersion might be executed at one or more StudySiteProtocolVersionRelationship.
+    """
+
+    assigned_study_subject_protocol_version_relationship: Mapped[
+        List["StudySubjectProtocolVersionRelationship"]
+    ] = relationship(
+        back_populates="assigning_study_site_protocol_version_relationship",
+        # too much cascades for many-to-many-to-many
+        # it's better managed on the other side of relation
+        # cascade="all, delete-orphan",
+        # so viewonly
+        viewonly=True,
+    )
+    """
+    Each StudySubjectProtocolVersionRelationship always is assigned to one StudySiteProtocolVersionRelationship.
+    Each StudySiteProtocolVersionRelationship might be the assigned version for one or more StudySubjectProtocolVersionRelationship.
+    """
+
+    assigned_study_subject: AssociationProxy[List["StudySubject"]] = association_proxy(
+        "assigned_study_subject_protocol_version_relationship",
+        "assigning_study_subject",
+        creator=lambda ass: StudySubjectProtocolVersionRelationship(
+            assigning_study_subject=ass
+        ),
+    )
+
+    def __str__(self):
+        return f"{self.executing_study_site.performing_entity} in {self.executed_study_protocol_version}"
+
+
+class StudySubjectProtocolVersionRelationship(Base):
+    """
+    DEFINITION:
+    Specifies the link between a study subject and a version of the study protocol at a site.
+
+    EXAMPLE(S):
+
+    OTHER NAME(S):
+
+    NOTE(S):
+    """
+
+    __tablename__ = "study_subject_protocol_version_relationship"
+
+    id: Mapped[int] = mapped_column(Identity(), unique=True)
+
+    assigning_study_subject_id: Mapped[int] = mapped_column(
+        ForeignKey("subject.id"), primary_key=True
+    )
+    assigning_study_subject: Mapped[StudySubject] = relationship(
+        back_populates="assigned_study_subject_protocol_version_relationship",
+    )
+    """
+    Each StudySubjectProtocolVersionRelationship always is the assigned version for one StudySubject.
+    Each StudySubject might be assigned to one or more StudySubjectProtocolVersionRelationship.
+    """
+
+    assigning_study_site_protocol_version_relationship_id: Mapped[int] = mapped_column(
+        ForeignKey("study_site_protocol_version_relationship.id"), primary_key=True
+    )
+    assigning_study_site_protocol_version_relationship: Mapped[
+        StudySiteProtocolVersionRelationship
+    ] = relationship(
+        back_populates="assigned_study_subject_protocol_version_relationship",
+    )
+    """
+    Each StudySubjectProtocolVersionRelationship always is assigned to one StudySiteProtocolVersionRelationship.
+    Each StudySiteProtocolVersionRelationship might be the assigned version for one or more StudySubjectProtocolVersionRelationship.
+    """

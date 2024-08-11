@@ -1,9 +1,18 @@
-from typing import List, Optional
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, List, Optional
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from umdb.db import Base
+from ..db import Base
+
+if TYPE_CHECKING:
+    from .healthcare import (
+        HealthcareFacility,
+        HealthcareProvider,
+        HealthcareProviderGroup,
+    )
 
 
 class Organization(Base):
@@ -32,22 +41,22 @@ class Organization(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    name: Mapped[List["OrganizationName"]] = relationship(
+    name: Mapped[List[OrganizationName]] = relationship(
         back_populates="organization", cascade="all, delete-orphan"
     )
     type: Mapped[Optional[str]]
     description: Mapped[Optional[str]]
     actual: Mapped[bool] = mapped_column(default=True)
 
-    performed_healthcare_facility: Mapped[Optional["HealthcareFacility"]] = (
-        relationship(back_populates="performing_organization")
+    performed_healthcare_facility: Mapped[Optional[HealthcareFacility]] = relationship(
+        back_populates="performing_organization"
     )
     """
     Each HealthcareFacility always is a function performed by one Organization.
     Each Organization might function as one HealthcareFacility.
     """
 
-    performed_healthcare_provider_group: Mapped[Optional["HealthcareProviderGroup"]] = (
+    performed_healthcare_provider_group: Mapped[Optional[HealthcareProviderGroup]] = (
         relationship(back_populates="performing_organization")
     )
     """
@@ -55,7 +64,7 @@ class Organization(Base):
     Each Organization might function as one HealthcareProviderGroup.
     """
 
-    employed_healthcare_provider: Mapped[List["HealthcareProvider"]] = relationship(
+    employed_healthcare_provider: Mapped[List[HealthcareProvider]] = relationship(
         back_populates="employing_organization"
     )
     """
@@ -83,7 +92,7 @@ class OrganizationName(Base):
     value: Mapped[Optional[str]]
 
     organization_id: Mapped[int] = mapped_column(ForeignKey("organization.id"))
-    organization: Mapped["Organization"] = relationship(back_populates="name")
+    organization: Mapped[Organization] = relationship(back_populates="name")
 
     def __str__(self):
         if not self.value:

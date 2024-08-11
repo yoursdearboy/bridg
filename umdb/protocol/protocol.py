@@ -1,14 +1,16 @@
+from __future__ import annotations
+
 from typing import TYPE_CHECKING, List, Optional
 
-from sqlalchemy import ForeignKey, Identity
+from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from umdb.db import Base
-from umdb.study.study import Study, StudySite
+from ..common import Study
+from ..db import Base
 
 if TYPE_CHECKING:
-    from umdb.study.subject import StudySubject, StudySubjectProtocolVersionRelationship
+    from ..study import StudySite, StudySiteProtocolVersionRelationship
 
 
 class StudyProtocol(Base):
@@ -33,7 +35,7 @@ class StudyProtocol(Base):
     Each Study might have as plan one StudyProtocol.
     """
 
-    versioning_study_protocol_version: Mapped[List["StudyProtocolVersion"]] = (
+    versioning_study_protocol_version: Mapped[List[StudyProtocolVersion]] = (
         relationship(
             back_populates="versioned_study_protocol", cascade="all, delete-orphan"
         )
@@ -87,81 +89,19 @@ class StudyProtocolVersion(Base):
     Each StudyProtocolVersion might be executed at one or more StudySiteProtocolVersionRelationship.
     """
 
+    @staticmethod
+    def __executing_study_site_creator(ess):
+        from ..study import StudySiteProtocolVersionRelationship
+
+        return StudySiteProtocolVersionRelationship(executing_study_site=ess)
+
     executing_study_site: AssociationProxy[List["StudySite"]] = association_proxy(
         "executing_study_site_protocol_version_relationship",
         "executing_study_site",
-        creator=lambda ess: StudySiteProtocolVersionRelationship(
-            executing_study_site=ess
-        ),
+        creator=__executing_study_site_creator,
     )
 
     def __str__(self):
         if self.acronym:
             return self.acronym
         return "{self.versioned_study_protocol} version"
-
-
-class StudySiteProtocolVersionRelationship(Base):
-    """
-    DEFINITION:
-    Specifies the link between a study site and a version of the study protocol used or available for use at that site.
-
-    EXAMPLE(S):
-
-    OTHER NAME(S):
-
-    NOTE(S):
-    Even if a study site's IRB has not reviewed the study protocol version, if there is a new version for the study protocol, then there is the potential for a relationship between the site and the version.  The dateRange is specified only if the version is approved for this site by the IRB and activated at the site.  Retroactive approval means that the dateRange does not have to be on or after the IRB approval date.
-    """
-
-    __tablename__ = "study_site_protocol_version_relationship"
-
-    id: Mapped[int] = mapped_column(Identity(), unique=True)
-
-    executing_study_site_id: Mapped[int] = mapped_column(
-        ForeignKey("study_site.id"), primary_key=True
-    )
-    executing_study_site: Mapped[StudySite] = relationship(
-        back_populates="executed_study_site_protocol_version_relationship"
-    )
-    """
-    Each StudySiteProtocolVersionRelationship always is executed at one StudySite.
-    Each StudySite might execute one or more StudySiteProtocolVersionRelationship.
-    """
-
-    executed_study_protocol_version_id: Mapped[int] = mapped_column(
-        ForeignKey("study_protocol_version.id"), primary_key=True
-    )
-    executed_study_protocol_version: Mapped[StudyProtocolVersion] = relationship(
-        back_populates="executing_study_site_protocol_version_relationship"
-    )
-    """
-    Each StudySiteProtocolVersionRelationship always executes one StudyProtocolVersion.
-    Each StudyProtocolVersion might be executed at one or more StudySiteProtocolVersionRelationship.
-    """
-
-    assigned_study_subject_protocol_version_relationship: Mapped[
-        List["StudySubjectProtocolVersionRelationship"]
-    ] = relationship(
-        back_populates="assigning_study_site_protocol_version_relationship",
-        # too much cascades for many-to-many-to-many
-        # it's better managed on the other side of relation
-        # cascade="all, delete-orphan",
-        # so viewonly
-        viewonly=True,
-    )
-    """
-    Each StudySubjectProtocolVersionRelationship always is assigned to one StudySiteProtocolVersionRelationship.
-    Each StudySiteProtocolVersionRelationship might be the assigned version for one or more StudySubjectProtocolVersionRelationship.
-    """
-
-    assigned_study_subject: AssociationProxy[List["StudySubject"]] = association_proxy(
-        "assigned_study_subject_protocol_version_relationship",
-        "assigning_study_subject",
-        creator=lambda ass: StudySubjectProtocolVersionRelationship(
-            assigning_study_subject=ass
-        ),
-    )
-
-    def __str__(self):
-        return f"{self.executing_study_site.performing_entity} in {self.executed_study_protocol_version}"

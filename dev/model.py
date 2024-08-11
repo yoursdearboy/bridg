@@ -2,10 +2,10 @@ from sqlalchemy.orm import class_mapper
 from sqlalchemy_schemadisplay import create_schema_graph, create_uml_graph
 
 from api.db import engine
-from umdb import common, organization, person, study
+from umdb import common, protocol, study
 from umdb.db import Base
 
-models = [common, organization, person, study]
+models = [common, protocol, study]
 
 mappers = []
 
@@ -29,6 +29,6 @@ graph = create_schema_graph(
 graph.write_dot("docs/db.dot")
 graph.write_png("docs/db.png")
 
-graph = create_uml_graph(mappers)
+graph = create_uml_graph(mappers, show_operations=False)
 graph.write_dot("docs/model.dot")
 graph.write_png("docs/model.png")

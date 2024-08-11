@@ -1,13 +1,14 @@
+from __future__ import annotations
+
 from typing import List, Optional
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from umdb.db import Base
-from umdb.person import Person
-
+from ..db import Base
 from .organization import Organization
+from .person import Person
 
 
 class HealthcareFacility(Base):
@@ -41,7 +42,7 @@ class HealthcareFacility(Base):
     Each Organization might function as one HealthcareFacility.
     """
 
-    staffing_healthcare_provider: Mapped[List["HealthcareProvider"]] = relationship(
+    staffing_healthcare_provider: Mapped[List[HealthcareProvider]] = relationship(
         back_populates="staffed_healthcare_facility"
     )
     """
@@ -49,7 +50,7 @@ class HealthcareFacility(Base):
     Each HealthcareFacility might be staffed by one or more HealthcareProvider.
     """
 
-    used_healthcare_provider_group: Mapped[List["HealthcareProviderGroup"]] = (
+    used_healthcare_provider_group: Mapped[List[HealthcareProviderGroup]] = (
         relationship(
             back_populates="using_healthcare_facility", cascade="all, delete-orphan"
         )

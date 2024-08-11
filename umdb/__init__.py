@@ -1,4 +1,4 @@
 from .common import *
-from .organization import *
-from .person import *
+from .db import *
+from .protocol import *
 from .study import *

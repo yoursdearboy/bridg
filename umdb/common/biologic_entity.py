@@ -5,8 +5,8 @@ from typing import List, Optional
 import sqlalchemy as sa
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from umdb.common.name import Name, primary_names
-from umdb.db import Base
+from ..db import Base
+from .name import Name, primary_names
 
 
 class AdministrativeGender(Enum):
@@ -45,7 +45,7 @@ class BiologicEntity(Base):
     death_date_estimated_indicator: Mapped[Optional[bool]]
     death_indicator: Mapped[Optional[bool]]
 
-    name: Mapped[List["Name"]] = relationship(
+    name: Mapped[List[Name]] = relationship(
         back_populates="biologic_entity", cascade="all, delete-orphan"
     )
 

@@ -1,11 +1,16 @@
-from typing import Optional
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Optional
 
 import sqlalchemy as sa
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import column
 
-from umdb.db import Base
+from ..db import Base
+
+if TYPE_CHECKING:
+    from .biologic_entity import BiologicEntity
 
 
 class Name(Base):
@@ -22,7 +27,7 @@ class Name(Base):
     suffix: Mapped[Optional[str]]
 
     biologic_entity_id: Mapped[int] = mapped_column(ForeignKey("biologic_entity.id"))
-    biologic_entity: Mapped["BiologicEntity"] = relationship(back_populates="name")
+    biologic_entity: Mapped[BiologicEntity] = relationship(back_populates="name")
 
     @property
     def full(self):

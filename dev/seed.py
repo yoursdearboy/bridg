@@ -1,10 +1,15 @@
 from datetime import date
 
 from api.db import SessionLocal
-from umdb.organization import HealthcareFacility, Organization, OrganizationName
-from umdb.organization.healthcare import HealthcareProvider, HealthcareProviderGroup
-from umdb.person import Name as PersonName
-from umdb.person import Person
+from umdb import (
+    HealthcareFacility,
+    HealthcareProvider,
+    HealthcareProviderGroup,
+    Organization,
+    OrganizationName,
+    Person,
+)
+from umdb import Name as PersonName
 
 jd = Person(
     id=1,

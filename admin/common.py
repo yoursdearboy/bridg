@@ -1,15 +1,33 @@
 from flask_admin.contrib.sqla.form import InlineOneToOneModelConverter
 from flask_admin.model.form import InlineFormAdmin
 
-from umdb.organization import (
+from umdb import (
     HealthcareFacility,
     HealthcareProvider,
+    HealthcareProviderGroup,
+    Name,
     Organization,
     OrganizationName,
+    Person,
+    StudySubject,
 )
-from umdb.organization.healthcare import HealthcareProviderGroup
-from umdb.person import Name, Person
-from web.admin.view import MyModelView
+
+from .view import MyModelView
+
+
+class PersonView(MyModelView):
+    model = Person
+    column_list = [
+        "id",
+        "primary_name",
+        "administrative_gender",
+        "birth_date",
+        "death_date",
+        "death_date_estimated_indicator",
+        "death_indicator",
+    ]
+    form_excluded_columns = ["type", "primary_name"]
+    inline_models = [Name]
 
 
 class OrganizationView(MyModelView):
@@ -100,3 +118,28 @@ class HealthcareProviderGroupView(MyModelView):
             .get_query()
             .filter(Organization.performed_healthcare_provider_group != None)
         )
+
+
+class StudySubjectview(MyModelView):
+    model = StudySubject
+    column_list = [
+        "id",
+        "performing_entity",
+        "status",
+        "status_date",
+        "assigned_study_site_protocol_version_relationship",
+    ]
+    column_formatters = {
+        "assigned_study_site_protocol_version_relationship": (
+            lambda v, c, m, p: "\n".join(
+                map(str, m.assigned_study_site_protocol_version_relationship)
+            )
+        )
+    }
+    form_columns = [
+        "performing_biologic_entity",
+        "performing_organization",
+        "status",
+        "status_date",
+        "assigned_study_site_protocol_version_relationship",
+    ]

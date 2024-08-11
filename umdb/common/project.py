@@ -1,9 +1,11 @@
+from __future__ import annotations
+
 from typing import Optional
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from umdb.db import Base
+from ..db import Base
 
 
 class Project(Base):
@@ -33,7 +35,7 @@ class Project(Base):
     type: Mapped[Optional[str]]
     description: Mapped[Optional[str]]
 
-    instantiated_project_execution: Mapped[Optional["ProjectConduct"]] = relationship(
+    instantiated_project_execution: Mapped[Optional[ProjectConduct]] = relationship(
         back_populates="instantiating_project"
     )
     """
