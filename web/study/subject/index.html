@@ -2,9 +2,15 @@
 
 {% block content %}
 
-<h1>{{ _("Subjects list") }}</h1>
+<div class="d-flex">
+    <h1>{{ _("Subjects list") }}</h1>
+    <div class="flex-grow-1"></div>
+    <div>
+        <a class="btn btn-primary" href="{{ url_for('.new', study_id=study_id) }}">{{ _("New") }}</a>
+    </div>
+</div>
 
-<a class="btn btn-primary" href="{{ url_for('.new', study_id=study_id) }}">{{ _("New") }}</a>
+
 
 {% with data={ "dateFormat": _("yyyy-MM-dd"), 
                "datetimeFormat": _("yyyy-MM-dd HH:mm:ss"),
