@@ -5,6 +5,7 @@ from flask_bootstrap import Bootstrap5
 
 from . import study
 from .assets import assets
+from .assets import cli as assets_cli
 from .breadcrumbs import breadcrumbs
 from .db import db
 from .htmx import htmx
@@ -17,6 +18,7 @@ app = Flask(__name__)
 app.config.from_prefixed_env(prefix="UMDB")
 app.json_provider_class = MyJSONProvider
 app.json = MyJSONProvider(app)
+app.cli.add_command(assets_cli)
 
 babel = Babel()
 
