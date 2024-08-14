@@ -16,7 +16,12 @@ css = Bundle(
     "../../node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css",
     "../../node_modules/bootstrap/dist/css/bootstrap.min.css",
     "../../node_modules/select2/dist/css/select2.min.css",
-    Bundle("../assets/styles.scss", "../assets/fontawesome.scss", filters="libsass"),
+    Bundle(
+        "../assets/fontawesome.scss",
+        "../assets/styles.scss",
+        "../assets/utilities.scss",
+        filters="libsass",
+    ),
     output="styles.css",
 )
 
@@ -29,7 +34,7 @@ webfonts = Bundle(
 )
 
 js = Bundle(
-    "../../node_modules/bootstrap/dist/js/bootstrap.min.js",
+    "../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
     "../../node_modules/jquery/dist/jquery.min.js",
     "../../node_modules/luxon/build/global/luxon.min.js",
     "../../node_modules/datatables.net/js/dataTables.min.js",
