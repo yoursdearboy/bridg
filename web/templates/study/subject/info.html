@@ -1,0 +1,9 @@
+<div class="card col-4">
+    <div class="card-body">
+        <div>
+            <label for="status">Status</label>
+            {{ subject.status.value | default("-", True) }}
+            {{ subject.status_date | datetime(default="-") }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+{% with obj=person %}
+<div class="card col-4 mb-3">
+    <div class="card-body">
+        <div class="position-absolute top-0 end-0 p-3">
+            <a href="{{ url_for('person.edit', id=obj.id) }}">
+                <i class="fa-solid fa-pencil"></i>
+                {{ _("Edit") }}
+            </a>
+        </div>
+        <div class="d-flex flex-column gap-3">
+            <div>
+                <label for="administrative_gender">{{ _("Administrative gender") }}</label>
+                {{ obj.administrative_gender | default("-", True) }}
+            </div>
+            <div>
+                <label for="birth_date">{{ _("Birth date") }}</label>
+                {{ obj.birth_date | date(default="-") }}
+            </div>
+            <div>
+                <label for="death_date">{{ _("Death date") }}</label>
+                {{ obj.death_date | date(default="-") }}
+                {{ "estimated" if obj.death_date_estimated_indicator }}
+            </div>
+            <div>
+                <label for="death_indicator">{{ _("Dead") }}</label>
+                {{ obj.death_indicator | bool }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endwith %}
