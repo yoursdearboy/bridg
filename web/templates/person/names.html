@@ -1,7 +1,9 @@
 <div class="card col-4">
     <h5 class="card-header">{{ _("Names") }}</h5>
     <div class="card-body">
-        <a href="{{ url_for('.name.new', person_id=person.id) }}">Add name</a>
+        <a href="{{ url_for('.name.new', person_id=person.id) }}">
+            {{ _("Add") }}
+        </a>
         <table class="table">
             <thead>
                 <tr>
