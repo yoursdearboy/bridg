@@ -4,6 +4,10 @@
     {{ _("New subject") }}
 {% endblock %}
 
+{% block titlebar_right %}
+    <button class="btn btn-primary" type="submit" form="study-subject-form">{{ _("Save") }}</button>
+{% endblock %}
+
 {% block content %}
 
 {% with data = { "url": url_for(".lookup", study_id=study_id) } %}
