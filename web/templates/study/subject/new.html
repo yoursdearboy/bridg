@@ -1,8 +1,10 @@
-{% extends "base.html" %}
+{% extends "standard.html" %}
+
+{% block titlebar_title %}
+    {{ _("New subject") }}
+{% endblock %}
 
 {% block content %}
-
-<h1>{{ _("New subject") }}</h1>
 
 {% with data = { "url": url_for(".lookup", study_id=study_id) } %}
 <div x-data='newSubjectForm({{ data | tojson }})'>

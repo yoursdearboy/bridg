@@ -1,16 +1,16 @@
-{% extends "base.html" %}
+{% extends "standard.html" %}
+
+{% block titlebar_title %}
+    {{ subject.performing_entity }}
+{% endblock %}
+
+{% block titlebar_right %}
+    <a class="btn btn-danger" href="{{ url_for('.delete', study_id=study_id, subject_id=subject.id) }}" hx-delete>
+        Delete
+    </a>
+{% endblock %}
 
 {% block content %}
-
-<div class="d-flex">
-    <h1>{{ subject.performing_entity }}</h1>
-    <div class="flex-grow-1"></div>
-    <div>
-        <a class="btn btn-danger" hx-delete="{{ url_for('.delete', study_id=study_id, subject_id=subject.id) }}">
-            Delete
-        </a>
-    </div>
-</div>
 
 {% with obj=subject.performing_biologic_entity %}
 <div class="card col-4 mb-3">

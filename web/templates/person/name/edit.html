@@ -1,29 +1,29 @@
 {% from 'bootstrap5/form.html' import render_hidden_errors, render_field %}
 
-{% extends "base.html" %}
+{% extends "standard.html" %}
+
+{% block titlebar_title %}
+    {{ name | default("New name") }}
+{% endblock %}
+
+{% block titlebar_right %}
+    <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            {{ _("Actions") }}
+        </button>
+        <ul class="dropdown-menu">
+            {% if name %}
+            <li>
+                <a class="dropdown-item" href="{{ url_for('.delete', person_id=name.biologic_entity_id, id=name.id) }}" hx-delete>
+                    Delete
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}
 
 {% block content %}
-
-<div class="d-flex">
-    <h1>{{ name | default("New name") }}</h1>
-    <div class="flex-grow-1"></div>
-    <div>
-        <div class="dropdown">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                {{ _("Actions") }}
-            </button>
-            <ul class="dropdown-menu">
-                {% if name %}
-                <li>
-                    <a class="dropdown-item" href="#" hx-delete="{{ url_for('.delete', person_id=name.biologic_entity_id, id=name.id) }}">
-                        Delete
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-</div>
 
 <form action="{{ action }}" method="POST">
     {{ form.csrf_token() }}

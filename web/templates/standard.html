@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block root %}
+
+<div class="container-xxl">
+    {# breadcrumbs #}
+    {% include "breadcrumbs.html" %}
+
+    {# titlebar #}
+    <div class="d-flex mb-3">
+        <div>
+            {% block titlebar_left %}{% endblock %}
+        </div>
+        <div class="flex-grow-1">
+            <h1 class="h3">
+                {% block titlebar_title %}Title{% endblock %}
+            </h1>
+        </div>
+        <div>
+            {% block titlebar_right %}{% endblock %}
+        </div>
+    </div>
+
+    {# content #}
+    {% block content %}{% endblock %}
+</div>
+
+{% endblock %}

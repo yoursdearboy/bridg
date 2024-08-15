@@ -1,14 +1,12 @@
 {% from 'bootstrap5/form.html' import render_hidden_errors, render_field %}
 
-{% extends "base.html" %}
+{% extends "standard.html" %}
+
+{% block titlebar_title %}
+    {{ person }}
+{% endblock %}
 
 {% block content %}
-
-<div class="d-flex">
-    <h1>{{ person }}</h1>
-    <div class="flex-grow-1"></div>
-    <div></div>
-</div>
 
 <form action="{{ url_for('.edit', id=person.id) }}" method="POST">
     {{ form.csrf_token() }}

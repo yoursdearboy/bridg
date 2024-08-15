@@ -20,12 +20,9 @@
 
 <body>
     {% include "navbar.html" %}
-    {% include "breadcrumbs.html" %}
 
-    <div class="container-xxl">
-        {% block content %}
-        {% endblock %}
-    </div>
+    {% block root %}
+    {% endblock %}
 
     {% block scripts %}
 
