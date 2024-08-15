@@ -1,0 +1,38 @@
+{% from 'bootstrap5/form.html' import render_hidden_errors, render_field %}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex">
+    <h1>{{ person }}</h1>
+    <div class="flex-grow-1"></div>
+    <div></div>
+</div>
+
+<form action="{{ url_for('.edit', id=person.id) }}" method="POST">
+    {{ form.csrf_token() }}
+
+    {{ render_hidden_errors(form) }}
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="w-64-tw">{{ render_field(form.administrative_gender) }}</div>
+                <div class="w-64-tw">{{ render_field(form.birth_date) }}</div>
+            </div>
+            <div class="row">
+                <div class="w-64-tw">{{ render_field(form.death_indicator) }}</div>
+                <div class="w-64-tw">{{ render_field(form.death_date) }}</div>
+            </div>
+            <div class="row">
+                <div class="w-64-tw"></div>
+                <div class="w-64-tw">{{ render_field(form.death_date_estimated_indicator) }}</div>
+            </div>
+        </div>
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Save" />
+</form>
+
+{% endblock %}

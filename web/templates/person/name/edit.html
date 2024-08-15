@@ -1,0 +1,59 @@
+{% from 'bootstrap5/form.html' import render_hidden_errors, render_field %}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex">
+    <h1>{{ name | default("New name") }}</h1>
+    <div class="flex-grow-1"></div>
+    <div>
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                {{ _("Actions") }}
+            </button>
+            <ul class="dropdown-menu">
+                {% if name %}
+                <li>
+                    <a class="dropdown-item" href="#" hx-delete="{{ url_for('.delete', person_id=name.biologic_entity_id, id=name.id) }}">
+                        Delete
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<form action="{{ action }}" method="POST">
+    {{ form.csrf_token() }}
+
+    {{ render_hidden_errors(form) }}
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="w-64-tw">{{ render_field(form.family) }}</div>
+                <div class="w-64-tw">{{ render_field(form.middle) }}</div>
+                <div class="w-64-tw">{{ render_field(form.given) }}</div>
+            </div>
+            <details>
+                <summary>Extra</summary>
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.prefix) }}</div>
+                    <div class="w-64-tw">{{ render_field(form.suffix) }}</div>
+                </div>
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.patronymic) }}</div>
+                </div>
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.use) }}</div>
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Save" />
+</form>
+
+{% endblock %}
