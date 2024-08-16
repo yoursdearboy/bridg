@@ -41,9 +41,11 @@ js = Bundle(
     "../../node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js",
     "../../node_modules/select2/dist/js/select2.min.js",
     "../../node_modules/alpinejs/dist/cdn.js",
+    "../../node_modules/@alpinejs/persist/dist/cdn.js",
     "../../node_modules/htmx.org/dist/htmx.min.js",
     "../assets/alpine.js",
     "../assets/select2.js",
+    "../assets/theme.js",
     output="scripts.js",
 )
 

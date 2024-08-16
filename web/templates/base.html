@@ -18,7 +18,7 @@
     {% endblock %}
 </head>
 
-<body>
+<body x-data="theme()" :data-bs-theme="theme">
     {% include "navbar.html" %}
 
     {% block root %}
