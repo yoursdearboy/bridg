@@ -37,7 +37,7 @@ function subjectsTable({ dateFormat, datetimeFormat, showURL }) {
       data: "id",
       sortable: false,
       render: (data) =>
-        `<a href='${showURL.replace(":subject_id", data)}'>
+        `<a href='${showURL.replace(":id", data)}'>
           <i class="fa-solid fa-right-to-bracket"></i>
         </a>`,
     },

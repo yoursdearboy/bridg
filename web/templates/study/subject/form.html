@@ -2,7 +2,6 @@
 
 <form
     id="study-subject-form"
-    action="{{ url_for('.new', study_id=study_id) }}"
     method="POST"
     x-ref="form"
     @input.debounce="lookup"

@@ -12,7 +12,7 @@
 
 {% with data={ "dateFormat": _("yyyy-MM-dd"), 
                "datetimeFormat": _("yyyy-MM-dd HH:mm:ss"),
-               "showURL": url_for(".show", study_id=study_id, subject_id=":subject_id")} %}
+               "showURL": url_for(".show", study_id=study_id, id=":id")} %}
 <div x-data='subjectsTable({{ data | tojson }})'>
     <table class="table" x-ref="table"></table>
 </div>
