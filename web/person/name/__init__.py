@@ -41,11 +41,6 @@ class NameEditView(BreadcrumbsMixin, EditView):
     form_class = NameForm
     template_name = "person/name/edit.html"
 
-    def get_context(self):
-        ctx = super().get_context()
-        ctx["name"] = ctx["object"]
-        return ctx
-
     def url_for_redirect(self, person_id, **kwargs):
         return url_for("person.show", id=person_id)
 

@@ -3,7 +3,7 @@
 {% extends "standard.html" %}
 
 {% block titlebar_title %}
-    {{ name | default("New name") }}
+    {{ object | default("New name") }}
 {% endblock %}
 
 {% block titlebar_right %}
@@ -14,9 +14,9 @@
                 {{ _("Actions") }}
             </button>
             <ul class="dropdown-menu">
-                {% if name %}
+                {% if object %}
                 <li>
-                    <a class="dropdown-item" href="#" hx-delete="{{ url_for('.delete', person_id=name.biologic_entity_id, id=name.id) }}">
+                    <a class="dropdown-item" href="#" hx-delete="{{ url_for('.delete', person_id=person_id, id=id) }}">
                         {{ _("Delete") }}
                     </a>
                 </li>
