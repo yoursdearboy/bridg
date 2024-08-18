@@ -1,0 +1,43 @@
+{% from 'bootstrap5/form.html' import render_hidden_errors, render_field %}
+
+{% extends "standard.html" %}
+
+{% block titlebar_title %}
+    {{ object.performing_entity }}
+{% endblock %}
+
+{% block titlebar_right %}
+    <button class="btn btn-primary" type="submit" form="study-subject-form">{{ _("Save") }}</button>
+{% endblock %}
+
+{% block content %}
+
+<form
+    id="study-subject-form"
+    method="POST"
+    x-ref="form"
+    @input.debounce="lookup"
+>
+    {{ form.csrf_token() }}
+
+    {{ render_hidden_errors(form) }}
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="w-64-tw">
+                    {{ render_field(form.assigned_study_site_protocol_version_relationship, class="select2") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="w-64-tw">{{ render_field(form.status) }}</div>
+                <div class="w-64-tw">{{ render_field(form.status_date) }}</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">{{ _("Save") }}</button>
+
+</form>
+
+{% endblock %}

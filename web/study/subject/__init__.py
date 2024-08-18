@@ -20,6 +20,7 @@ from web.views import (
     BreadcrumbsMixin,
     CreateView,
     DeleteView,
+    EditView,
     HTMXDeleteMixin,
     IndexDataTableView,
     ShowView,
@@ -78,8 +79,8 @@ class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
         subject.status_date = datetime.now()
         return subject
 
-    def get_form(self, study_id, **kwargs):
-        return StudySubjectForm(obj=self.object, study_id=study_id)
+    def get_form(self, object, study_id, **kwargs):
+        return StudySubjectForm(obj=object, study_id=study_id)
 
     def url_for_redirect(self, study_id, **kwargs):
         return url_for(".index", study_id=study_id)
@@ -118,6 +119,30 @@ class StudySubjectShowView(BreadcrumbsMixin, ShowView):
         )
 
 
+class StudySubjectEditView(BreadcrumbsMixin, EditView):
+    db = db
+    model = StudySubject
+    template_name = "study/subject/edit.html"
+
+    def get_form(self, object, study_id, **kwargs):
+        return StudySubjectForm(obj=object, study_id=study_id)
+
+    def url_for_redirect(self, study_id, id, **kwargs):
+        return url_for(".show", study_id=study_id, id=id)
+
+    def add_breadcrumbs(self, study_id, id, **kwargs):
+        self.breadcrumbs.extend(
+            Breadcrumb(
+                url_for(".show", study_id=study_id, id=id),
+                str(self.object.performing_entity),
+            ),
+            Breadcrumb(
+                url_for(".edit", study_id=study_id, id=id),
+                _("Edit"),
+            ),
+        )
+
+
 class StudySubjectDeleteView(HTMXDeleteMixin, DeleteView):
     db = db
     model = StudySubject
@@ -132,4 +157,5 @@ blueprint.add_url_rule(
     "/lookup", view_func=lookup_view, endpoint="lookup", methods=["POST"]
 )
 blueprint.add_url_rule("/<id>", view_func=StudySubjectShowView.as_view("show"))
+blueprint.add_url_rule("/<id>/edit", view_func=StudySubjectEditView.as_view("edit"))
 blueprint.add_url_rule("/<id>", view_func=StudySubjectDeleteView.as_view("delete"))
