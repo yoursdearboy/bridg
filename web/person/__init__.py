@@ -18,7 +18,7 @@ blueprint.register_blueprint(
 
 @blueprint.before_request
 def setup_studies_breadcrumb():
-    breadcrumbs.append(Breadcrumb(url_for("person.index"), _("Persons")))
+    breadcrumbs.append(Breadcrumb(None, _("Persons")))
 
     if request.view_args and "person_id" in request.view_args:
         person_id = request.view_args["person_id"]

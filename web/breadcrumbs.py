@@ -6,7 +6,7 @@ from flask import Flask, g
 
 @dataclass
 class Breadcrumb:
-    url: str
+    url: str | None
     text: str
 
 
