@@ -1,11 +1,13 @@
 <div class="card col-4 mb-3">
-    <div class="card-body">
-        <div class="position-absolute top-0 end-0 p-3">
-            <a href="{{ url_for('person.edit', id=person.id) }}">
+    <div class="card-header">
+        <div class="d-flex">
+            <a class="ms-auto" href="{{ url_for('person.edit', id=person.id) }}">
                 <i class="fa-solid fa-pencil"></i>
                 {{ _("Edit") }}
             </a>
         </div>
+    </div>
+    <div class="card-body">
         <div class="d-flex flex-column gap-3">
             <div>
                 <label for="administrative_gender">{{ _("Administrative gender") }}</label>

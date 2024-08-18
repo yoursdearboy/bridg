@@ -1,9 +1,11 @@
 <div class="card col-4">
-    <h5 class="card-header">{{ _("Names") }}</h5>
+    <div class="card-header">
+        <div class="d-flex">
+            <b>{{ _("Names") }}</b>
+            <a class="ms-auto" href="{{ url_for('.name.new', person_id=person.id) }}">{{ _("Add") }}</a>
+        </div>
+    </div>
     <div class="card-body">
-        <a href="{{ url_for('.name.new', person_id=person.id) }}">
-            {{ _("Add") }}
-        </a>
         <table class="table">
             <thead>
                 <tr>

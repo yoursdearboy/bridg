@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-15 08:18+0000\n"
+"POT-Creation-Date: 2024-08-18 22:18+0000\n"
 "PO-Revision-Date: 2024-07-31 12:34+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -41,28 +41,29 @@ msgstr "Нет"
 msgid "-"
 msgstr "-"
 
-#: web/person/__init__.py:20
+#: web/person/__init__.py:21
 msgid "Persons"
 msgstr "Люди"
 
-#: web/person/__init__.py:56 web/templates/person/info.html:7
-#: web/templates/person/names.html:21
+#: web/person/__init__.py:63 web/study/subject/__init__.py:141
+#: web/templates/person/info.html:6 web/templates/person/names.html:23
+#: web/templates/study/subject/info.html:7
 msgid "Edit"
-msgstr "Редактировать"
+msgstr "Изменить"
 
 #: web/person/form.py:12 web/study/subject/form.py:40
-#: web/templates/person/info.html:12 web/templates/study/subject/person.html:12
+#: web/templates/person/info.html:13 web/templates/study/subject/person.html:15
 msgid "Administrative gender"
 msgstr "Пол"
 
 #: web/person/form.py:14 web/study/subject/form.py:42
-#: web/templates/person/info.html:16 web/templates/study/subject/lookup.html:8
-#: web/templates/study/subject/person.html:16
+#: web/templates/person/info.html:17 web/templates/study/subject/lookup.html:8
+#: web/templates/study/subject/person.html:19
 msgid "Birth date"
 msgstr "Дата рождения"
 
 #: web/person/form.py:15 web/study/subject/form.py:43
-#: web/templates/person/info.html:20 web/templates/study/subject/person.html:20
+#: web/templates/person/info.html:21 web/templates/study/subject/person.html:23
 msgid "Death date"
 msgstr "Дата смерти"
 
@@ -71,16 +72,16 @@ msgid "Death date estimated?"
 msgstr "Дата смерти приближенная?"
 
 #: web/person/form.py:17 web/study/subject/form.py:45
-#: web/templates/person/info.html:25 web/templates/study/subject/person.html:25
+#: web/templates/person/info.html:26 web/templates/study/subject/person.html:28
 msgid "Dead"
 msgstr "Умер"
 
-#: web/person/name/__init__.py:28 web/study/subject/__init__.py:82
+#: web/person/name/__init__.py:34 web/study/subject/__init__.py:90
 #: web/templates/study/subject/index.html:8
 msgid "New"
 msgstr "Новый"
 
-#: web/person/name/__init__.py:50 web/templates/person/show.html:15
+#: web/person/name/__init__.py:49 web/templates/person/show.html:15
 msgid "Rename"
 msgstr "Переименовать"
 
@@ -112,11 +113,11 @@ msgstr "Суффикс"
 msgid "Use"
 msgstr "Использование"
 
-#: web/study/__init__.py:26
+#: web/study/__init__.py:26 web/templates/navbar.html:10
 msgid "Studies"
 msgstr "Исследования"
 
-#: web/study/subject/__init__.py:40 web/templates/study/index.html:13
+#: web/study/subject/__init__.py:41 web/templates/study/index.html:13
 msgid "Subjects"
 msgstr "Участники"
 
@@ -135,12 +136,14 @@ msgstr "Исследовательские центры"
 #: web/templates/person/edit.html:10 web/templates/person/form.html:23
 #: web/templates/person/name/edit.html:11
 #: web/templates/person/name/form.html:29
-#: web/templates/study/subject/form.html:90
+#: web/templates/study/subject/edit.html:10
+#: web/templates/study/subject/edit.html:39
+#: web/templates/study/subject/form.html:89
 #: web/templates/study/subject/new.html:8
 msgid "Save"
 msgstr "Сохранить"
 
-#: web/templates/person/names.html:2
+#: web/templates/person/names.html:4
 msgid "Names"
 msgstr "Имена"
 
@@ -169,7 +172,7 @@ msgstr "Исследование"
 msgid "Sites"
 msgstr "Учреждения"
 
-#: web/templates/study/subject/form.html:63
+#: web/templates/study/subject/form.html:62
 #: web/templates/study/subject/index.html:13
 #: web/templates/study/subject/lookup.html:18
 msgid "yyyy-MM-dd"
@@ -195,7 +198,11 @@ msgstr "Имя"
 msgid "New subject"
 msgstr "Новый участник"
 
-#: web/templates/study/subject/person.html:7
+#: web/templates/study/subject/person.html:5
+msgid "Person info"
+msgstr "О человеке"
+
+#: web/templates/study/subject/person.html:8
 msgid "Open"
 msgstr "Открыть"
 
