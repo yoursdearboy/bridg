@@ -43,6 +43,9 @@ class Breadcrumbs:
         elif url and text:
             self._breadcrumbs.append(Breadcrumb(url, text))
 
+    def extend(self, *bs: Breadcrumb):
+        self._breadcrumbs.extend(bs)
+
     def _context_processor(self):
         return dict(breadcrumbs=self._breadcrumbs)
 
