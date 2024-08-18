@@ -15,6 +15,11 @@
                     {{ _("Rename") }}
                 </a>
             </li>
+            <li>
+                <a class="dropdown-item" href="#" hx-delete="{{ url_for('.delete', id=id) }}">
+                    {{ _("Delete") }}
+                </a>
+            </li>
         </ul>
     </div>
 {% endblock %}

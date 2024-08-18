@@ -4,10 +4,18 @@ from flask_babel import lazy_gettext as _
 from umdb import Person
 from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
-from web.views import BreadcrumbsMixin, EditView, ShowView
+from web.views import (
+    BreadcrumbsMixin,
+    DeleteView,
+    EditView,
+    HTMXDeleteMixin,
+    IndexDataTableView,
+    ShowView,
+)
 
 from . import name
 from .form import PersonForm
+from .schema import BiologicEntityList
 
 blueprint = Blueprint("person", __name__, url_prefix="/persons")
 
@@ -27,6 +35,13 @@ def setup_studies_breadcrumb():
             breadcrumbs.append(
                 Breadcrumb(url_for("person.show", id=person_id), str(person))
             )
+
+
+class PersonIndexView(IndexDataTableView):
+    db = db
+    model = Person
+    schema = BiologicEntityList
+    template_name = "person/index.html"
 
 
 class PersonShowView(BreadcrumbsMixin, ShowView):
@@ -64,5 +79,15 @@ class PersonEditView(BreadcrumbsMixin, EditView):
         )
 
 
+class PersonDeleteView(HTMXDeleteMixin, DeleteView):
+    db = db
+    model = Person
+
+    def url_for_redirect(self, **kwargs):
+        return url_for(".index")
+
+
+blueprint.add_url_rule("/", view_func=PersonIndexView.as_view("index"))
 blueprint.add_url_rule("/<id>", view_func=PersonShowView.as_view("show"))
 blueprint.add_url_rule("/<id>/edit", view_func=PersonEditView.as_view("edit"))
+blueprint.add_url_rule("/<id>", view_func=PersonDeleteView.as_view("delete"))
