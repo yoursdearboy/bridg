@@ -16,7 +16,7 @@
             <ul class="dropdown-menu">
                 {% if name %}
                 <li>
-                    <a class="dropdown-item" href="{{ url_for('.delete', person_id=name.biologic_entity_id, id=name.id) }}" hx-delete>
+                    <a class="dropdown-item" href="#" hx-delete="{{ url_for('.delete', person_id=name.biologic_entity_id, id=name.id) }}">
                         {{ _("Delete") }}
                     </a>
                 </li>
