@@ -45,6 +45,7 @@ js = Bundle(
     "../../node_modules/htmx.org/dist/htmx.min.js",
     "../assets/alpine.js",
     "../assets/select2.js",
+    "../assets/search.js",
     "../assets/theme.js",
     output="scripts.js",
 )
