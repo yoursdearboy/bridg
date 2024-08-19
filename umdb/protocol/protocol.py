@@ -11,6 +11,7 @@ from ..db import Base
 
 if TYPE_CHECKING:
     from ..study import StudySite, StudySiteProtocolVersionRelationship
+    from .subject import PlannedStudySubject
 
 
 class StudyProtocol(Base):
@@ -100,6 +101,15 @@ class StudyProtocolVersion(Base):
         "executing_study_site",
         creator=__executing_study_site_creator,
     )
+
+    intended_planned_study_subject: Mapped[List[PlannedStudySubject]] = relationship(
+        back_populates="planned_for_study_protocol_version",
+        cascade="all, delete-orphan",
+    )
+    """
+    Each PlannedStudySubject always participates in one StudyProtocolVersion.
+    Each StudyProtocolVersion always is participated in by one or more PlannedStudySubject.
+    """
 
     def __str__(self):
         if self.acronym:
