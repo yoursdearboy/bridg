@@ -84,10 +84,7 @@ class ItemMixin(SQLAlchemyMixin, BaseView):
         self.object = self.get_object(**kwargs)
 
     def get_object(self, **kwargs):
-        object = self.get_query(**kwargs).one_or_none()
-        if object is None:
-            return abort(404)
-        return object
+        return self.get_query(**kwargs).one_or_none()
 
     def get_query(self, id, **kwargs):
         return self.db.session.query(self.model).filter_by(id=id)
@@ -136,6 +133,8 @@ class ShowView(JinjaMixin, ItemMixin, BaseView):
         return ctx
 
     def get(self, **kwargs):
+        if self.object is None:
+            return abort(404)
         return self.render_template()
 
 
@@ -166,9 +165,13 @@ class EditView(RedirectMixin, JinjaMixin, FormMixin, ItemMixin, BaseView):
         return ctx
 
     def get(self, **kwargs):
+        if self.object is None:
+            return abort(404)
         return self.render_template()
 
     def post(self, **kwargs):
+        if self.object is None:
+            return abort(404)
         if self.form.validate():
             self.form.populate_obj(self.object)
             self.db.session.add(self.object)
@@ -179,6 +182,8 @@ class EditView(RedirectMixin, JinjaMixin, FormMixin, ItemMixin, BaseView):
 
 class DeleteView(RedirectMixin, ItemMixin, BaseView):
     def delete(self, **kwargs):
+        if self.object is None:
+            return abort(404)
         self.db.session.delete(self.object)
         self.db.session.commit()
         return self.redirect(**kwargs)
