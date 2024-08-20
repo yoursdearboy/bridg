@@ -1,0 +1,24 @@
+{% extends "standard.html" %}
+
+{% block titlebar_title %}
+{{ _("Protocol of") }} {{ object }}
+{% endblock %}
+
+{% block titlebar_right %}
+<a class="btn btn-primary" href="{{ url_for('.new_version', study_id=study_id) }}">{{ _("New version") }}</a>
+{% endblock %}
+
+{% block content %}
+{% for version in object.versioning_study_protocol_version %}
+<div class="card col-4 mb-3">
+    <div class="card-header d-flex">
+        <b>{{ version }}</b>
+        <div class="ms-auto">
+            <a href="{{ url_for('.edit_version', study_id=study_id, id=version.id) }}">{{ _("Edit") }}</a>
+        </div>
+    </div>
+    <div class="card-body">
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

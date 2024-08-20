@@ -16,16 +16,20 @@
             <th>{{ _("Study") }}</th>
             <th>{{ _("Subjects") }}</th>
             <th>{{ _("Sites") }}</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-    {% for i in info %}
+        {% for i in info %}
         <tr>
-            <td><a href="{{ url_for('.show', id=i.study.id) }}">{{ i.study }}</a></td>
-            <td><a href="{{ url_for('.show', id=i.study.id) }}">{{ i.subjects }}</a></td>
-            <td><a href="{{ url_for('.show', id=i.study.id) }}">{{ i.sites }}</a></td>
+            <td><a href="#">{{ i.study }}</a></td>
+            <td><a href="{{ url_for('.subject.index', study_id=i.study.id) }}">{{ i.subjects }}</a></td>
+            <td><a href="#">{{ i.sites }}</a></td>
+            <td>
+                <a href="{{ url_for('.protocol.show', study_id=i.study.id)}}">{{ _("Protocol") }}</a>
+            </td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </tbody>
 </table>
 
