@@ -1,0 +1,33 @@
+{% from 'bootstrap5/form.html' import render_hidden_errors, render_field %}
+
+{% extends "standard.html" %}
+
+{% block titlebar_title %}{{ _("New study") }}{% endblock %}
+
+{% block titlebar_right %}
+<button class="btn btn-primary" type="submit" for="study-form">{{ _("Save") }}</button>
+{% endblock %}
+
+{% block content %}
+<form id="study-form" method="POST">
+    {{ form.csrf_token() }}
+
+    {{ render_hidden_errors(form) }}
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="w-96-tw">{{ render_field(form.name) }}</div>
+            </div>
+            <div class="row">
+                <div class="w-96-tw">{{ render_field(form.type) }}</div>
+            </div>
+            <div class="row">
+                <div class="w-144-tw">{{ render_field(form.description, rows=5) }}</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">{{ _("Save") }}</button>
+</form>
+{% endblock %}

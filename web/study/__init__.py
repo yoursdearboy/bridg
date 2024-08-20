@@ -15,8 +15,9 @@ from umdb import (
 )
 from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
+from web.views import BreadcrumbsMixin, CreateView
 
-from . import subject
+from .form import StudyForm
 
 blueprint = Blueprint("study", __name__, url_prefix="/studies")
 
@@ -88,12 +89,28 @@ def gather_studies_info():
     return [StudyInfo(s, subjects.get(s.id, 0), sites.get(s.id, 0)) for s in studies]
 
 
-@blueprint.route("/")
 def index():
     info = gather_studies_info()
     return render_template("study/index.html", info=info)
 
 
-@blueprint.route("/<id>")
+class CreateStudyView(BreadcrumbsMixin, CreateView):
+    db = db
+    form_class = StudyForm
+    model = Study
+    template_name = "study/new.html"
+
+    def url_for_redirect(self):
+        return url_for(".index")
+
+    def add_breadcrumbs(self):
+        self.breadcrumbs.extend(Breadcrumb(url_for(".new"), _("New")))
+
+
 def show(id: int):
     return redirect(url_for(".subject.index", study_id=id))
+
+
+blueprint.add_url_rule("/", view_func=index, endpoint="index")
+blueprint.add_url_rule("/new", view_func=CreateStudyView.as_view("new"))
+blueprint.add_url_rule("/<id>", view_func=show, endpoint="show")
