@@ -2,6 +2,12 @@
     "[python]": {
         "editor.formatOnSave": true
     },
+    "[html]": {
+        "editor.formatOnSave": true
+    },
+    "[jinja-html]": {
+        "editor.formatOnSave": true
+    },
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
