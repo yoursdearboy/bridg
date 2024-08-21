@@ -22,20 +22,20 @@ ROOT = dict(
 
 def convert(model, value, cache=None):
     id_ = id(value)
-    if cache and id_ in cache:
-        return cache[id_]
+    if cache is not None and (cached := cache.get(id_)):
+        return cached
     info = inspect(model)
     obj = model()
     for key, value in value.items():
         attr = info.attrs[key]
         if isinstance(attr, Relationship):
             if attr.uselist:
-                value = [convert(attr.entity.class_, v) for v in value]
+                value = [convert(attr.entity.class_, v, cache=cache) for v in value]
             else:
-                value = convert(attr.entity.class_, value)
+                value = convert(attr.entity.class_, value, cache=cache)
         setattr(obj, key, value)
-    if cache:
-        cache[id_] = value
+    if cache is not None:
+        cache[id_] = obj
     return obj
 
 
