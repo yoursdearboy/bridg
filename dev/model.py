@@ -1,23 +1,21 @@
 from sqlalchemy.orm import class_mapper
 from sqlalchemy_schemadisplay import create_schema_graph, create_uml_graph
 
+import umdb
 from api.db import engine
-from umdb import common, protocol, study
 from umdb.db import Base
 
-models = [common, protocol, study]
-
+model = umdb
 mappers = []
 
-for model in models:
-    for attr in dir(model):
-        if attr[0] == "_":
-            continue
-        try:
-            cls = getattr(model, attr)
-            mappers.append(class_mapper(cls))
-        except Exception as e:
-            print(e)
+for attr in dir(umdb):
+    if attr[0] == "_":
+        continue
+    try:
+        cls = getattr(model, attr)
+        mappers.append(class_mapper(cls))
+    except Exception as e:
+        print(e)
 
 graph = create_schema_graph(
     engine=engine,
