@@ -35,7 +35,17 @@
                     <ul id="intended_planned_study_subject">
                         {% for subject in version.intended_planned_study_subject %}
                         <li>
-                            {{ subject }}
+                            {% if subject.performing_biologic_entity %}
+                            {% if subject.performing_biologic_entity.type == "person" %}
+                            {{ _("Person") }}
+                            {% else %}
+                            {{ _("Biologic entity")}}
+                            {% endif %}
+                            {% elif subject.performing_organization %}
+                            {{ _("Organization") }}
+                            {% else %}
+                            {{ _("Unknwon") }}
+                            {% endif %}
                             {% if subject.quantity_range is not none %}
                             ({{ subject.quantity_range }})
                             {% endif %}
