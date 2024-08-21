@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import Any, Dict, List
 
 from sqlalchemy import inspect
@@ -9,6 +10,7 @@ from umdb import (
     HealthcareProviderGroup,
     Person,
     Study,
+    StudySite,
 )
 
 
@@ -35,6 +37,7 @@ class Converter:
         healthcare_provider=HealthcareProvider,
         healthcare_provider_group=HealthcareProviderGroup,
         study=Study,
+        study_site=StudySite,
     )
 
     def __init__(self):
@@ -50,6 +53,10 @@ class Converter:
                     value = [self.convert(attr.entity.class_, v) for v in value]
                 else:
                     value = self.convert(attr.entity.class_, value)
+            else:
+                type = attr.class_attribute.type.python_type
+                if issubclass(type, Enum):
+                    value = type(value)
             setattr(obj, key, value)
         return obj
 

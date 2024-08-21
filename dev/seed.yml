@@ -13,6 +13,9 @@ healthcare_facility:
   - &dgoi-hf
     performing_organization: &dgoi-org
       name: [{ value: DGOI }]
+  - &ekb-hf
+    performing_organization:
+      name: [{ value: EKB }]
 
 healthcare_provider:
   - performing_person:
@@ -25,7 +28,33 @@ healthcare_provider_group:
       name: [{ value: 4D }]
     using_healthcare_facility: *dgoi-hf
 
+study_site:
+  - &dgoi-ss
+    lead: true
+    performing_healthcare_facility: *dgoi-hf
+  - &ekb-ss
+    lead: false
+    performing_healthcare_facility: *ekb-hf
+
 study:
   - name: "AML"
     description: Acute Myeloid Leucemia research,
                  since 2014.
+    planning_study_protocol:
+      versioning_study_protocol_version:
+        - acronym: AML-MRD-2018
+          executing_study_site_protocol_version_relationship:
+            - executing_study_site: *dgoi-ss
+            - executing_study_site: *ekb-ss
+          intended_planned_study_subject:
+            - performing_biologic_entity:
+                type: person
+                administrative_gender: M
+              quantity_range: 10
+            - performing_biologic_entity:
+                type: person
+                administrative_gender: F
+              quantity_range: 10
+        - acronym: AML-MRD-2024
+          executing_study_site_protocol_version_relationship:
+            - executing_study_site: *dgoi-ss
