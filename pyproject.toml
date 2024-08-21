@@ -21,6 +21,7 @@ flask-wtf = "^1.2.1"
 wtforms-alchemy = "^0.18.0"
 flask-htmx = "^0.3.2"
 flask-assets = "^2.1.0"
+pyyaml = "^6.0.2"
 
 
 [tool.poetry.group.dev.dependencies]

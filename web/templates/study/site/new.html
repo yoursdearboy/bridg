@@ -1,0 +1,34 @@
+{% from "bootstrap5/form.html" import render_hidden_errors, render_field %}
+
+{% extends "standard.html" %}
+
+{% block titlebar_title %}
+{{ _("Add study site") }}
+{% endblock %}
+
+{% block titlebar_right %}
+<button class="btn btn-primary" type="submit" form="study-site-form">{{ _("Save") }}</button>
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+    {{ form.csrf_token() }}
+
+    {{ render_hidden_errors(form) }}
+
+    <div class="row">
+        <div class="w-64-tw">
+            {{ render_field(form.performing_healthcare_facility, class="select2") }}
+        </div>
+        <div class="w-24-tw text-center">- or -</div>
+        <div class="w-64-tw">
+            {{ render_field(form.performing_organization, class="select2") }}
+        </div>
+    </div>
+    <div class="w-64-tw">
+        {{ render_field(form.lead) }}
+    </div>
+
+    <button class="btn btn-primary" type="submit">{{ _("Save") }}</button>
+</form>
+{% endblock %}

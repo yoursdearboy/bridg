@@ -1,0 +1,31 @@
+study:
+  - name: "AML"
+    description: Acute Myeloid Leucemia research,
+                 since 2014.
+
+person:
+  - name:
+      - { use: official, family: Doe, given: John }
+      - { use: unofficial, family: Doe, given: Johny }
+    birth_date: 1980-01-01
+    death_date: 2000-01-01
+    death_date_estimated_indicator: true
+    death_indicator: true
+  - name: [{ use: official, family: Morgendorffer, given: Daria }]
+    birth_date: 1991-01-01
+
+healthcare_facility:
+  - &dgoi-hf
+    performing_organization: &dgoi-org
+      name: [{ value: DGOI }]
+
+healthcare_provider:
+  - performing_person:
+      name: [{ use: official, family: Bur, given: Bir }]
+    staffed_healthcare_facility: *dgoi-hf
+    employing_organization: *dgoi-org
+
+healthcare_provider_group:
+  - performing_organization:
+      name: [{ value: 4D }]
+    using_healthcare_facility: *dgoi-hf

@@ -110,7 +110,7 @@ class StudySite(Base):
         )
         performing_entities[key] = value
         count = sum(pe is not None for pe in performing_entities.values())
-        if count != 1:
+        if count > 1:
             raise ValueError(
                 "A StudySite is a function performed by one and only one of the following: HealthcareFacility or Organization (serving as a StudySite but is not a HealthcareFacility)."
             )
