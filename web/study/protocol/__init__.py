@@ -7,7 +7,14 @@ from umdb import StudyProtocol, StudyProtocolVersion
 from web.db import db
 from web.views import CreateView, EditView, ShowView
 
+from . import subject
+
 blueprint = Blueprint("protocol", __name__, url_prefix="/protocol")
+
+blueprint.register_blueprint(
+    subject.blueprint,
+    url_prefix=f"/versions/<version_id>/{subject.blueprint.url_prefix}",
+)
 
 
 class ShowProtocolView(ShowView):
