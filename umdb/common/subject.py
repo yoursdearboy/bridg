@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, List, Optional
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
-from sqlalchemy.orm import Mapped, mapped_column, relationship, validates
+from sqlalchemy.orm import Mapped, declared_attr, mapped_column, relationship, validates
 
 from ..db import Base
 from .biologic_entity import BiologicEntity
@@ -32,21 +32,23 @@ class Subject(Base):
     NOTE(S):
     """
 
-    __tablename__ = "subject"
-    __mapper_args__ = {"polymorphic_identity": "subject", "polymorphic_on": "type"}
-
-    id: Mapped[int] = mapped_column(primary_key=True)
-    type: Mapped[str]
+    __abstract__ = True
 
     performing_biologic_entity_id: Mapped[Optional[int]] = mapped_column(
         ForeignKey("biologic_entity.id")
     )
-    performing_biologic_entity: Mapped[Optional[BiologicEntity]] = relationship()
+
+    @declared_attr
+    def performing_biologic_entity(cls) -> Mapped[Optional[BiologicEntity]]:
+        return relationship()
 
     performing_organization_id: Mapped[Optional[int]] = mapped_column(
         ForeignKey("organization.id")
     )
-    performing_organization: Mapped[Optional[Organization]] = relationship()
+
+    @declared_attr
+    def performing_organization(cls) -> Mapped[Optional[Organization]]:
+        return relationship()
 
     @validates("performing_biologic_entity", "performing_organization")
     def validate_performing_entity(self, key, value):
@@ -110,7 +112,10 @@ class StudySubject(Subject):
     StudySubjects within a study are all of the same type.  An entity registered in a study is not part of another entity registered in the same study.
     """
 
-    __mapper_args__ = {"polymorphic_identity": "study_subject"}
+    __tablename__ = "study_subject"
+    __mapper_args__ = {"concrete": True}
+
+    id: Mapped[int] = mapped_column(primary_key=True)
 
     status: Mapped[Optional[Status]]
     status_date: Mapped[Optional[datetime]]

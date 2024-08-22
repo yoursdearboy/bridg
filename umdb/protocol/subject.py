@@ -22,7 +22,10 @@ class PlannedStudySubject(Subject):
     Some studies may specify multiple kinds of subjects, each with their own quantity.
     """
 
-    __mapper_args__ = {"polymorphic_identity": "planned_study_subject"}
+    __tablename__ = "planned_study_subject"
+    __mapper_args__ = {"concrete": True}
+
+    id: Mapped[int] = mapped_column(primary_key=True)
 
     quantity_range: Mapped[Optional[int]]
 

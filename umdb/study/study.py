@@ -225,7 +225,7 @@ class StudySubjectProtocolVersionRelationship(Base):
     id: Mapped[int] = mapped_column(Identity(), unique=True)
 
     assigning_study_subject_id: Mapped[int] = mapped_column(
-        ForeignKey("subject.id"), primary_key=True
+        ForeignKey("study_subject.id"), primary_key=True
     )
     assigning_study_subject: Mapped[StudySubject] = relationship(
         back_populates="assigned_study_subject_protocol_version_relationship",
