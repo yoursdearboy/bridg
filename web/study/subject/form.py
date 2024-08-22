@@ -50,8 +50,9 @@ class StudySubjectForm(FlaskForm):
     performing_biologic_entity_id = IntegerField(validators=[Optional()])
     status = SelectEnumField(_("Status"), Status)
     status_date = DateTimeField(_("Status date"))
+    # TODO: Split in two dependent selects for usability
     assigned_study_site_protocol_version_relationship = QuerySelectMultipleField(
-        _("Study sites"),
+        _("Study site and protocol"),
         validators=[DataRequired()],
     )
 
