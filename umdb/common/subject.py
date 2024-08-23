@@ -65,15 +65,21 @@ class Subject(Base):
         return value
 
     @property
-    def performing_entity(self):
+    def performing_entity(self) -> BiologicEntity | Organization:
         entities = [self.performing_biologic_entity, self.performing_organization]
         entities = [p for p in entities if p]
         if len(entities) > 1:
             raise RuntimeError(
                 "A Subject might be a function performed by one and only one of the following: BiologicEntity, Organization."
             )
-        elif len(entities) == 1:
-            return entities[0]
+        return entities[0]
+
+    @performing_entity.setter
+    def performing_entity(self, value: BiologicEntity | Organization):
+        if isinstance(value, BiologicEntity):
+            self.performing_biologic_entity = value
+        if isinstance(value, Organization):
+            self.performing_organization = value
 
 
 class Status(Enum):
