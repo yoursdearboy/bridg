@@ -37,7 +37,7 @@ study_site:
     performing_healthcare_facility: *ekb-hf
 
 study:
-  - name: "AML"
+  - name: AML
     description: Acute Myeloid Leucemia research,
                  since 2014.
     planning_study_protocol:
@@ -58,3 +58,14 @@ study:
         - acronym: AML-MRD-2024
           executing_study_site_protocol_version_relationship:
             - executing_study_site: *dgoi-ss
+
+  - name: Audit
+    description: Audit of organizations.
+    planning_study_protocol:
+      versioning_study_protocol_version:
+        - acronym: A-2024
+          executing_study_site_protocol_version_relationship:
+            - executing_study_site: *dgoi-ss
+          intended_planned_study_subject:
+            - performing_organization: {}
+              quantity_range: 3
