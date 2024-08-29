@@ -3,11 +3,11 @@ from flask_babel import lazy_gettext as _
 from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
-    FieldList,
     Form,
     FormField,
     IntegerField,
     StringField,
+    TextAreaField,
 )
 from wtforms.validators import DataRequired, Optional
 from wtforms_alchemy.fields import QuerySelectMultipleField
@@ -15,13 +15,20 @@ from wtforms_alchemy.fields import QuerySelectMultipleField
 from umdb import (
     AdministrativeGender,
     BiologicEntity,
+    Name,
+    Organization,
+    OrganizationName,
+    PlannedStudySubject,
     Status,
-    StudyProtocolVersion,
     StudySiteProtocolVersionRelationship,
-    StudySubject,
 )
-from web.db import db
-from web.fields import DateField, DateTimeField, SelectBooleanField, SelectEnumField
+from web.fields import (
+    DateField,
+    DateTimeField,
+    FieldList,
+    SelectBooleanField,
+    SelectEnumField,
+)
 
 
 class NameForm(Form):
@@ -35,7 +42,12 @@ class NameForm(Form):
 
 
 class BiologicEntityForm(Form):
-    name = FieldList(FormField(NameForm), min_entries=1, max_entries=1)
+    name = FieldList(
+        FormField(NameForm),
+        default=lambda: [Name()],
+        min_entries=1,
+        max_entries=1,
+    )
     administrative_gender = SelectEnumField(
         _("Administrative gender"), AdministrativeGender
     )
@@ -45,9 +57,32 @@ class BiologicEntityForm(Form):
     death_indicator = SelectBooleanField(_("Dead"))
 
 
+class OrganizationNameForm(Form):
+    value = StringField(_("Name"))
+
+
+class OrganizationForm(Form):
+    name = FieldList(
+        FormField(OrganizationNameForm),
+        default=lambda: [OrganizationName()],
+        min_entries=1,
+        max_entries=1,
+    )
+    type = StringField(_("Type"))
+    description = TextAreaField(_("Description"))
+
+
 class StudySubjectForm(FlaskForm):
-    performing_biologic_entity = FormField(BiologicEntityForm)
+    performing_biologic_entity = FormField(
+        BiologicEntityForm,
+        default=lambda: BiologicEntity(),
+    )
     performing_biologic_entity_id = IntegerField(validators=[Optional()])
+    performing_organization = FormField(
+        OrganizationForm,
+        default=lambda: Organization(),
+    )
+    performing_organization_id = IntegerField(validators=[Optional()])
     status = SelectEnumField(_("Status"), Status)
     status_date = DateTimeField(_("Status date"))
     # TODO: Split in two dependent selects for usability
@@ -56,28 +91,33 @@ class StudySubjectForm(FlaskForm):
         validators=[DataRequired()],
     )
 
-    def __init__(self, study_id: int, *args, **kwargs):
+    def __init__(
+        self,
+        session,
+        planned_study_subject: PlannedStudySubject,
+        *args,
+        **kwargs,
+    ):
         super().__init__(*args, **kwargs)
 
-        session = db.session
+        self.session = session
+        self.planned_study_subject = planned_study_subject
 
         self.assigned_study_site_protocol_version_relationship.query_factory = lambda: (
-            session.query(StudySiteProtocolVersionRelationship)
-            .join(StudySiteProtocolVersionRelationship.executed_study_protocol_version)
-            .filter(StudyProtocolVersion.versioned_study_protocol_id == study_id)
+            session.query(StudySiteProtocolVersionRelationship).filter(
+                StudySiteProtocolVersionRelationship.executed_study_protocol_version
+                == planned_study_subject.planned_for_study_protocol_version
+            )
         )
 
-        if self.performing_biologic_entity_id.data:
-            del self.performing_biologic_entity
+        if self.planned_study_subject.performing_biologic_entity:
+            del self.performing_organization, self.performing_organization_id
 
-    def populate_obj(self, obj: StudySubject):
-        super().populate_obj(obj)
+            if self.performing_biologic_entity_id.data:
+                del self.performing_biologic_entity
 
-        session = db.session
+        if self.planned_study_subject.performing_organization:
+            del self.performing_biologic_entity, self.performing_biologic_entity_id
 
-        if self.performing_biologic_entity_id.data:
-            obj.performing_biologic_entity = (
-                session.query(BiologicEntity)
-                .filter_by(id=self.performing_biologic_entity_id.data)
-                .one()
-            )
+            if self.performing_organization_id.data:
+                del self.performing_organization
