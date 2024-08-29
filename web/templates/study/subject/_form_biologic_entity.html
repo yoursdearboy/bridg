@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-lg-8">
+        {% with form=form.performing_biologic_entity["name"].0 %}
+        <div class="card mb-3" x-show="selected == null">
+            <div class="card-body">
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.family) }}</div>
+                    <div class="w-64-tw">{{ render_field(form.middle) }}</div>
+                    <div class="w-64-tw">{{ render_field(form.given) }}</div>
+                </div>
+                <details>
+                    <summary>Extra</summary>
+                    <div class="row">
+                        <div class="w-64-tw">{{ render_field(form.prefix) }}</div>
+                        <div class="w-64-tw">{{ render_field(form.suffix) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="w-64-tw">{{ render_field(form.patronymic) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="w-64-tw">{{ render_field(form.use) }}</div>
+                    </div>
+                </details>
+            </div>
+        </div>
+        {% endwith %}
+
+        {% with form=form.performing_biologic_entity %}
+        <div class="card mb-3" x-show="selected == null">
+            <div class="card-body">
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.administrative_gender) }}</div>
+                    <div class="w-64-tw">{{ render_field(form.birth_date) }}</div>
+                </div>
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.death_indicator) }}</div>
+                    <div class="w-64-tw">{{ render_field(form.death_date) }}</div>
+                </div>
+                <div class="row">
+                    <div class="w-64-tw"></div>
+                    <div class="w-64-tw">{{ render_field(form.death_date_estimated_indicator) }}</div>
+                </div>
+            </div>
+        </div>
+        {% endwith %}
+
+        <template x-if="selected != null">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex gap-2">
+                        <h5 x-text="selected.performing_biologic_entity.primary_name?.full"></h5>
+                        <h5 x-show="selected.performing_biologic_entity.birth_date" class="text-body-secondary">
+                            (<span
+                                x-text="$formatISODate(selected.performing_biologic_entity?.birth_date, '{{ _('yyyy-MM-dd') }}')"></span>)
+                        </h5>
+                        <a class="btn-close" href="#" @click="selected = null"></a>
+                    </div>
+                    <input type="hidden" name="{{ form.performing_biologic_entity_id.name }}"
+                        :value="selected.performing_biologic_entity?.id" />
+                </div>
+            </div>
+        </template>
+    </div>
+
+    <div class="col-lg-4 position-relative">
+        <div class="card mb-3 position-absolute">
+            <div class="card-body">
+                {{ _("Has the subject been registered in the database before?") }}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{ _("Name") }}</th>
+                            <th>{{ _("Birth date") }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template x-for="subject in subjects">
+                            <tr @click="selected = selected === subject ? null : subject"
+                                :class="{ 'table-active': selected == subject }">
+                                <td x-text="subject.performing_biologic_entity.primary_name?.full"></td>
+                                <td
+                                    x-text='$formatISODate(subject.performing_biologic_entity.birth_date, {{ _("yyyy-MM-dd") | tojson }})'>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

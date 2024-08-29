@@ -1,34 +1,23 @@
 {% extends "standard.html" %}
 
 {% block titlebar_title %}
-    {{ _("New subject") }}
+{{ _("New subject") }}
 {% endblock %}
 
 {% block titlebar_right %}
-    <button class="btn btn-primary" type="submit" form="study-subject-form">{{ _("Save") }}</button>
+<button class="btn btn-primary" type="submit" form="study-subject-form">{{ _("Save") }}</button>
 {% endblock %}
 
 {% block content %}
 
-{% with data = { "url": url_for(".lookup", study_id=study_id) } %}
-<div x-data='newSubjectForm({{ data | tojson }})'>
-    <div class="row">
-        <div class="col-lg-8">
-            {% include "study/subject/form.html"%}
-        </div>
-        <div class="col-lg-4">
-            {% include "study/subject/lookup.html"%}
-        </div>
-    </div>
-</div>
-{% endwith %}
+{% include "study/subject/_form.html"%}
 
 {% endblock %}
 
 {% block scripts %}
 
 {% assets filters="typescript", output="./study/subject/new.js", "../assets/study/subject/new.ts" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
 
 {{ super() }}

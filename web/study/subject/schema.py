@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from typing import List, Optional
 
-from pydantic import BaseModel, RootModel, computed_field
+from pydantic import BaseModel, RootModel
 
 
 class Name(BaseModel):
@@ -30,22 +30,31 @@ class BiologicEntity(BaseModel):
     death_indicator: Optional[bool]
     primary_name: Optional[Name]
 
-    @computed_field
-    def full_primary_name(self) -> Optional[str]:
-        if self.primary_name:
-            return self.primary_name.full
+
+class OrganizationName(BaseModel):
+    class Config:
+        from_attributes = True
+
+    value: Optional[str]
 
 
-class BiologicEntityList(RootModel[List[BiologicEntity]]):
-    pass
+class Organization(BaseModel):
+    class Config:
+        from_attributes = True
+
+    id: int
+    type: Optional[str]
+    description: Optional[str]
+    primary_name: Optional[OrganizationName]
 
 
 class StudySubject(BaseModel):
     class Config:
         from_attributes = True
 
-    id: int
+    id: Optional[int]
     performing_biologic_entity: Optional[BiologicEntity]
+    performing_organization: Optional[Organization]
     status: Optional[str]
     status_date: Optional[datetime]
 
