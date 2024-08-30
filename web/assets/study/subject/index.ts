@@ -3,7 +3,7 @@ function subjectsTable({ dateFormat, datetimeFormat, showURL }) {
     { title: "ID", data: "id" },
     {
       title: "Full Name",
-      data: (d) => d.performing_biologic_entity.primary_name?.full || null,
+      data: (d) => d.performing_biologic_entity?.primary_name?.full || null,
     },
     {
       title: "Administrative gender",
