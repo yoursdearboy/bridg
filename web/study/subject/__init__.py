@@ -1,5 +1,4 @@
 from datetime import datetime
-from functools import partial
 
 from flask import Blueprint, abort, request, url_for
 from flask_babel import lazy_gettext as _
@@ -124,15 +123,15 @@ class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
         return subject
 
     def get_form(self, object, **kwargs):
-        form = StudySubjectForm(
+        return StudySubjectForm(
             obj=object,
             performing=_get_performing(self.planned_study_subject),
+            assigned_study_site_protocol_version_relationship_query=(
+                _get_study_site_protocol_version_relationship(
+                    self.planned_study_subject
+                )
+            ),
         )
-        form.assigned_study_site_protocol_version_relationship.query_factory = partial(
-            _get_study_site_protocol_version_relationship,
-            subject=self.planned_study_subject,
-        )
-        return form
 
     def url_for_redirect(self, study_id, **kwargs):
         return url_for(".index", study_id=study_id)
@@ -146,8 +145,12 @@ class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
 def lookup_view(study_id: int, **kwargs):
     planned_study_subject = _get_planned_study_subject(study_id)
     subject = _construct_subject(planned_study_subject)
-    form = StudySubjectForm(performing=_get_performing(planned_study_subject))
-    form.assigned_study_site_protocol_version_relationship.query_factory = lambda: ()
+    form = StudySubjectForm(
+        performing=_get_performing(planned_study_subject),
+        assigned_study_site_protocol_version_relationship_query=(
+            _get_study_site_protocol_version_relationship(planned_study_subject)
+        ),
+    )
     form.populate_obj(obj=subject)
     subjects = lookup(subject, db.session)
     return StudySubjectList.model_validate(subjects).model_dump()
@@ -182,15 +185,15 @@ class StudySubjectEditView(BreadcrumbsMixin, EditView):
         super().setup(study_id=study_id, **kwargs)
 
     def get_form(self, object, **kwargs):
-        form = StudySubjectForm(
+        return StudySubjectForm(
             obj=object,
             performing=_get_performing(self.planned_study_subject),
+            assigned_study_site_protocol_version_relationship_query=(
+                _get_study_site_protocol_version_relationship(
+                    self.planned_study_subject
+                )
+            ),
         )
-        form.assigned_study_site_protocol_version_relationship.query_factory = partial(
-            _get_study_site_protocol_version_relationship,
-            subject=self.planned_study_subject,
-        )
-        return form
 
     def url_for_redirect(self, study_id, id, **kwargs):
         return url_for(".show", study_id=study_id, id=id)

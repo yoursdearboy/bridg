@@ -65,12 +65,16 @@ class StudySubjectForm(FlaskForm):
     def __init__(
         self,
         performing: Literal["biologic_entity", "organization"],
+        assigned_study_site_protocol_version_relationship_query,
         *args,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
 
         self.performing = performing
+        self.assigned_study_site_protocol_version_relationship.query = (
+            assigned_study_site_protocol_version_relationship_query
+        )
 
         if performing == "biologic_entity":
             del self.performing_organization, self.performing_organization_id
