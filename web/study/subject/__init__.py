@@ -95,7 +95,7 @@ def _get_study_site_protocol_version_relationship(subject: PlannedStudySubject):
     )
 
 
-def _realize_subject(planned: PlannedStudySubject):
+def _construct_subject(planned: PlannedStudySubject):
     subject = StudySubject()
     if planned.performing_biologic_entity:
         subject.performing_biologic_entity = BiologicEntity(name=[Name()])
@@ -118,7 +118,7 @@ class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
         return ctx
 
     def get_object(self, **kwargs):
-        subject = _realize_subject(self.planned_study_subject)
+        subject = _construct_subject(self.planned_study_subject)
         subject.status = Status.candidate
         subject.status_date = datetime.now()
         return subject
@@ -145,7 +145,7 @@ class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
 
 def lookup_view(study_id: int, **kwargs):
     planned_study_subject = _get_planned_study_subject(study_id)
-    subject = _realize_subject(planned_study_subject)
+    subject = _construct_subject(planned_study_subject)
     form = StudySubjectForm(performing=_get_performing(planned_study_subject))
     form.assigned_study_site_protocol_version_relationship.query_factory = lambda: ()
     form.populate_obj(obj=subject)
