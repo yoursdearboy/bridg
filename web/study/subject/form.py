@@ -1,4 +1,6 @@
 # type: ignore
+from typing import Literal
+
 from flask_babel import lazy_gettext as _
 from flask_wtf import FlaskForm
 from wtforms import (
@@ -8,19 +10,12 @@ from wtforms import (
     FormField,
     IntegerField,
     StringField,
+    TextAreaField,
 )
 from wtforms.validators import DataRequired, Optional
 from wtforms_alchemy.fields import QuerySelectMultipleField
 
-from umdb import (
-    AdministrativeGender,
-    BiologicEntity,
-    Status,
-    StudyProtocolVersion,
-    StudySiteProtocolVersionRelationship,
-    StudySubject,
-)
-from web.db import db
+from umdb import AdministrativeGender, Status
 from web.fields import DateField, DateTimeField, SelectBooleanField, SelectEnumField
 
 
@@ -45,39 +40,57 @@ class BiologicEntityForm(Form):
     death_indicator = SelectBooleanField(_("Dead"))
 
 
+class OrganizationNameForm(Form):
+    value = StringField(_("Name"))
+
+
+class OrganizationForm(Form):
+    name = FieldList(FormField(OrganizationNameForm), min_entries=1, max_entries=1)
+    type = StringField(_("Type"))
+    description = TextAreaField(_("Description"))
+
+
 class StudySubjectForm(FlaskForm):
     performing_biologic_entity = FormField(BiologicEntityForm)
     performing_biologic_entity_id = IntegerField(validators=[Optional()])
+    performing_organization = FormField(OrganizationForm)
+    performing_organization_id = IntegerField(validators=[Optional()])
     status = SelectEnumField(_("Status"), Status)
     status_date = DateTimeField(_("Status date"))
-    # TODO: Split in two dependent selects for usability
     assigned_study_site_protocol_version_relationship = QuerySelectMultipleField(
         _("Study site and protocol"),
         validators=[DataRequired()],
     )
 
-    def __init__(self, study_id: int, *args, **kwargs):
+    def __init__(
+        self,
+        performing: Literal["biologic_entity", "organization"],
+        *args,
+        **kwargs,
+    ):
         super().__init__(*args, **kwargs)
 
-        session = db.session
+        self.performing = performing
 
-        self.assigned_study_site_protocol_version_relationship.query_factory = lambda: (
-            session.query(StudySiteProtocolVersionRelationship)
-            .join(StudySiteProtocolVersionRelationship.executed_study_protocol_version)
-            .filter(StudyProtocolVersion.versioned_study_protocol_id == study_id)
-        )
+        if performing == "biologic_entity":
+            del self.performing_organization, self.performing_organization_id
 
-        if self.performing_biologic_entity_id.data:
-            del self.performing_biologic_entity
+            if self.performing_biologic_entity_id.data is not None:
+                del self.performing_biologic_entity
 
-    def populate_obj(self, obj: StudySubject):
+        if performing == "organization":
+            del self.performing_biologic_entity, self.performing_biologic_entity_id
+
+            if self.performing_organization_id.data is not None:
+                del self.performing_organization
+
+    def populate_obj(self, obj):
         super().populate_obj(obj)
 
-        session = db.session
+        if self.performing == "biologic_entity":
+            if self.performing_biologic_entity_id.data is not None:
+                del obj.performing_biologic_entity
 
-        if self.performing_biologic_entity_id.data:
-            obj.performing_biologic_entity = (
-                session.query(BiologicEntity)
-                .filter_by(id=self.performing_biologic_entity_id.data)
-                .one()
-            )
+        if self.performing == "organization":
+            if self.performing_organization_id.data is not None:
+                del obj.performing_organization

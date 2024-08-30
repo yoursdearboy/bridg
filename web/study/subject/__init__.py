@@ -1,11 +1,15 @@
 from datetime import datetime
+from functools import partial
 
 from flask import Blueprint, abort, request, url_for
 from flask_babel import lazy_gettext as _
 
 from umdb import (
+    BiologicEntity,
     Name,
-    Person,
+    Organization,
+    OrganizationName,
+    PlannedStudySubject,
     Status,
     Study,
     StudyProtocol,
@@ -28,7 +32,7 @@ from web.views import (
 
 from .form import StudySubjectForm
 from .lookup import lookup
-from .schema import BiologicEntityList, StudySubjectList
+from .schema import StudySubjectList
 
 blueprint = Blueprint("subject", __name__, url_prefix="/subjects")
 
@@ -67,20 +71,68 @@ class StudySubjectIndexView(IndexDataTableView):
         )
 
 
+def _get_planned_study_subject(study_id: int):
+    study = db.session.query(Study).filter_by(id=study_id).one()
+    if protocol := study.planning_study_protocol:
+        # FIXME: take not first, but using id
+        if version := protocol.versioning_study_protocol_version[0]:
+            return version.intended_planned_study_subject[0]
+    raise ValueError("No planned study subject")
+
+
+def _get_performing(subject: PlannedStudySubject):
+    if subject.performing_biologic_entity:
+        return "biologic_entity"
+    if subject.performing_organization:
+        return "organization"
+    raise ValueError("Unknown performing entity")
+
+
+def _get_study_site_protocol_version_relationship(subject: PlannedStudySubject):
+    return db.session.query(StudySiteProtocolVersionRelationship).filter(
+        StudySiteProtocolVersionRelationship.executed_study_protocol_version
+        == subject.planned_for_study_protocol_version
+    )
+
+
+def _realize_subject(planned: PlannedStudySubject):
+    subject = StudySubject()
+    if planned.performing_biologic_entity:
+        subject.performing_biologic_entity = BiologicEntity(name=[Name()])
+    elif planned.performing_organization:
+        subject.performing_organization = Organization(name=[OrganizationName()])
+    return subject
+
+
 class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
     db = db
     template_name = "study/subject/new.html"
 
+    def setup(self, study_id, **kwargs):
+        self.planned_study_subject = _get_planned_study_subject(study_id)
+        super().setup(study_id=study_id, **kwargs)
+
+    def get_context(self):
+        ctx = super().get_context()
+        ctx["planned_study_subject"] = self.planned_study_subject
+        return ctx
+
     def get_object(self, **kwargs):
-        name = Name()
-        entity = Person(name=[name])
-        subject = StudySubject(performing_biologic_entity=entity)
+        subject = _realize_subject(self.planned_study_subject)
         subject.status = Status.candidate
         subject.status_date = datetime.now()
         return subject
 
-    def get_form(self, object, study_id, **kwargs):
-        return StudySubjectForm(obj=object, study_id=study_id)
+    def get_form(self, object, **kwargs):
+        form = StudySubjectForm(
+            obj=object,
+            performing=_get_performing(self.planned_study_subject),
+        )
+        form.assigned_study_site_protocol_version_relationship.query_factory = partial(
+            _get_study_site_protocol_version_relationship,
+            subject=self.planned_study_subject,
+        )
+        return form
 
     def url_for_redirect(self, study_id, **kwargs):
         return url_for(".index", study_id=study_id)
@@ -91,13 +143,14 @@ class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
         )
 
 
-def lookup_view(study_id: int):
-    form = StudySubjectForm(study_id=study_id)
-    person_form = form.performing_biologic_entity.form
-    person = Person(name=[Name()])
-    person_form.populate_obj(obj=person)
-    persons = lookup(db, person)
-    return BiologicEntityList.model_validate(persons).model_dump()
+def lookup_view(study_id: int, **kwargs):
+    planned_study_subject = _get_planned_study_subject(study_id)
+    subject = _realize_subject(planned_study_subject)
+    form = StudySubjectForm(performing=_get_performing(planned_study_subject))
+    form.assigned_study_site_protocol_version_relationship.query_factory = lambda: ()
+    form.populate_obj(obj=subject)
+    subjects = lookup(subject, db.session)
+    return StudySubjectList.model_validate(subjects).model_dump()
 
 
 class StudySubjectShowView(BreadcrumbsMixin, ShowView):
@@ -124,8 +177,20 @@ class StudySubjectEditView(BreadcrumbsMixin, EditView):
     model = StudySubject
     template_name = "study/subject/edit.html"
 
-    def get_form(self, object, study_id, **kwargs):
-        return StudySubjectForm(obj=object, study_id=study_id)
+    def setup(self, study_id, **kwargs):
+        self.planned_study_subject = _get_planned_study_subject(study_id)
+        super().setup(study_id=study_id, **kwargs)
+
+    def get_form(self, object, **kwargs):
+        form = StudySubjectForm(
+            obj=object,
+            performing=_get_performing(self.planned_study_subject),
+        )
+        form.assigned_study_site_protocol_version_relationship.query_factory = partial(
+            _get_study_site_protocol_version_relationship,
+            subject=self.planned_study_subject,
+        )
+        return form
 
     def url_for_redirect(self, study_id, id, **kwargs):
         return url_for(".show", study_id=study_id, id=id)
