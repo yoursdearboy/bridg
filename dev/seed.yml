@@ -58,6 +58,10 @@ study:
         - acronym: AML-MRD-2024
           executing_study_site_protocol_version_relationship:
             - executing_study_site: *dgoi-ss
+          intended_planned_study_subject:
+            - performing_biologic_entity:
+                type: person
+              quantity_range: 20
 
   - name: Audit
     description: Audit of organizations.
