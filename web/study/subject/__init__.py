@@ -4,10 +4,6 @@ from flask import Blueprint, abort, request, url_for
 from flask_babel import lazy_gettext as _
 
 from umdb import (
-    BiologicEntity,
-    Name,
-    Organization,
-    OrganizationName,
     PlannedStudySubject,
     Status,
     Study,
@@ -17,6 +13,7 @@ from umdb import (
     StudySubject,
     StudySubjectProtocolVersionRelationship,
 )
+from umdb.api.protcol import construct_subject
 from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
 from web.views import (
@@ -79,28 +76,16 @@ def _get_planned_study_subject(study_id: int):
     raise ValueError("No planned study subject")
 
 
+def _get_study_site_protocol_version_relationship(subject: PlannedStudySubject):
+    return subject.planned_for_study_protocol_version.executing_study_site_protocol_version_relationship
+
+
 def _get_performing(subject: PlannedStudySubject):
     if subject.performing_biologic_entity:
         return "biologic_entity"
     if subject.performing_organization:
         return "organization"
     raise ValueError("Unknown performing entity")
-
-
-def _get_study_site_protocol_version_relationship(subject: PlannedStudySubject):
-    return db.session.query(StudySiteProtocolVersionRelationship).filter(
-        StudySiteProtocolVersionRelationship.executed_study_protocol_version
-        == subject.planned_for_study_protocol_version
-    )
-
-
-def _construct_subject(planned: PlannedStudySubject):
-    subject = StudySubject()
-    if planned.performing_biologic_entity:
-        subject.performing_biologic_entity = BiologicEntity(name=[Name()])
-    elif planned.performing_organization:
-        subject.performing_organization = Organization(name=[OrganizationName()])
-    return subject
 
 
 class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
@@ -117,7 +102,7 @@ class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
         return ctx
 
     def get_object(self, **kwargs):
-        subject = _construct_subject(self.planned_study_subject)
+        subject = construct_subject(self.planned_study_subject)
         subject.status = Status.candidate
         subject.status_date = datetime.now()
         return subject
@@ -144,7 +129,7 @@ class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
 
 def lookup_view(study_id: int, **kwargs):
     planned_study_subject = _get_planned_study_subject(study_id)
-    subject = _construct_subject(planned_study_subject)
+    subject = construct_subject(planned_study_subject)
     form = StudySubjectForm(
         performing=_get_performing(planned_study_subject),
         assigned_study_site_protocol_version_relationship_query=(
