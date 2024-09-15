@@ -67,17 +67,19 @@ class StudySubjectIndexView(IndexDataTableView):
         )
 
 
-def _get_planned_study_subject(study_id: int):
-    study = db.session.query(Study).filter_by(id=study_id).one()
-    if protocol := study.planning_study_protocol:
-        # FIXME: take not first, but using id
-        if version := protocol.versioning_study_protocol_version[0]:
-            return version.intended_planned_study_subject[0]
-    raise ValueError("No planned study subject")
+def _get_study_protocol_version(id: int):
+    return db.session.query(StudyProtocolVersion).filter_by(id=id).one()
 
 
-def _get_study_site_protocol_version_relationship(subject: PlannedStudySubject):
-    return subject.planned_for_study_protocol_version.executing_study_site_protocol_version_relationship
+def _get_planned_study_subject(version: StudyProtocolVersion):
+    subjects = version.intended_planned_study_subject
+    if len(subjects) > 0:
+        return subjects[0]
+    raise ValueError("No planned study subjects")
+
+
+def _get_study_site_protocol_version_relationship(version: StudyProtocolVersion):
+    return version.executing_study_site_protocol_version_relationship
 
 
 def _get_performing(subject: PlannedStudySubject):
@@ -92,8 +94,12 @@ class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
     db = db
     template_name = "study/subject/new.html"
 
-    def setup(self, study_id, **kwargs):
-        self.planned_study_subject = _get_planned_study_subject(study_id)
+    # FIXME: replace study_id with StudyProtocolVersion.id instead os Study.id
+    def setup(self, study_id: int, **kwargs):
+        self.study_protocol_version = _get_study_protocol_version(study_id)
+        self.planned_study_subject = _get_planned_study_subject(
+            self.study_protocol_version
+        )
         super().setup(study_id=study_id, **kwargs)
 
     def get_context(self):
@@ -113,7 +119,7 @@ class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
             performing=_get_performing(self.planned_study_subject),
             assigned_study_site_protocol_version_relationship_query=(
                 _get_study_site_protocol_version_relationship(
-                    self.planned_study_subject
+                    self.study_protocol_version
                 )
             ),
         )
@@ -127,13 +133,15 @@ class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
         )
 
 
+# FIXME: replace study_id with StudyProtocolVersion.id instead os Study.id
 def lookup_view(study_id: int, **kwargs):
-    planned_study_subject = _get_planned_study_subject(study_id)
+    study_protcol_version = _get_study_protocol_version(study_id)
+    planned_study_subject = _get_planned_study_subject(study_protcol_version)
     subject = construct_subject(planned_study_subject)
     form = StudySubjectForm(
         performing=_get_performing(planned_study_subject),
         assigned_study_site_protocol_version_relationship_query=(
-            _get_study_site_protocol_version_relationship(planned_study_subject)
+            _get_study_site_protocol_version_relationship(study_protcol_version)
         ),
     )
     form.populate_obj(obj=subject)
@@ -165,8 +173,12 @@ class StudySubjectEditView(BreadcrumbsMixin, EditView):
     model = StudySubject
     template_name = "study/subject/edit.html"
 
-    def setup(self, study_id, **kwargs):
-        self.planned_study_subject = _get_planned_study_subject(study_id)
+    # FIXME: replace study_id with StudyProtocolVersion.id instead os Study.id
+    def setup(self, study_id: int, **kwargs):
+        self.study_protocol_version = _get_study_protocol_version(study_id)
+        self.planned_study_subject = _get_planned_study_subject(
+            self.study_protocol_version
+        )
         super().setup(study_id=study_id, **kwargs)
 
     def get_form(self, object, **kwargs):
@@ -175,7 +187,7 @@ class StudySubjectEditView(BreadcrumbsMixin, EditView):
             performing=_get_performing(self.planned_study_subject),
             assigned_study_site_protocol_version_relationship_query=(
                 _get_study_site_protocol_version_relationship(
-                    self.planned_study_subject
+                    self.study_protocol_version
                 )
             ),
         )
