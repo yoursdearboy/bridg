@@ -1,7 +1,7 @@
 # ruff: noqa: F403, F405
 
-from api.db import engine
-
 from bridg import *
+
+from .db import engine
 
 Base.metadata.create_all(bind=engine)

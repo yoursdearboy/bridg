@@ -1,7 +1,8 @@
 import yaml
-from api.db import SessionLocal
 
 from bridg.convert import convert
+
+from .db import SessionLocal
 
 with SessionLocal() as session:
     with open("dev/seed.yml") as f:

@@ -1,8 +1,9 @@
-from api.db import engine
 from sqlalchemy.orm import class_mapper
 from sqlalchemy_schemadisplay import create_schema_graph, create_uml_graph
 
 import bridg
+
+from .db import engine
 
 model = bridg
 mappers = []
