@@ -12,82 +12,82 @@
 
 ### BiologicEntity
 
-::: umdb.common.BiologicEntity
+::: bridg.common.BiologicEntity
 
 ## Person
 
 ### Person
 
-::: umdb.person.Person
+::: bridg.person.Person
 
 ## Organization
 
 ### Organization
 
-::: umdb.organization.Organization
+::: bridg.organization.Organization
 
 ### HealthcareFacility
 
-::: umdb.organization.HealthcareFacility
+::: bridg.organization.HealthcareFacility
 
 ### HealthcareProvider
 
-::: umdb.organization.HealthcareProvider
+::: bridg.organization.HealthcareProvider
 
 ### HealthcareProviderGroup
 
-::: umdb.organization.HealthcareProviderGroup
+::: bridg.organization.HealthcareProviderGroup
 
 ### HealthcareProviderGroupMember
 
-::: umdb.organization.HealthcareProviderGroupMember
+::: bridg.organization.HealthcareProviderGroupMember
 
 ## Study
 
 ### Project
 
-::: umdb.study.Project
+::: bridg.study.Project
 
 ### ProjectConduct
 
-::: umdb.study.ProjectConduct
+::: bridg.study.ProjectConduct
 
 ### ResearchProject
 
-::: umdb.study.ResearchProject
+::: bridg.study.ResearchProject
 
 ### Study
 
-::: umdb.study.Study
+::: bridg.study.Study
 
 ### StudyConduct
 
-::: umdb.study.StudyConduct
+::: bridg.study.StudyConduct
 
 ### StudySite
 
-::: umdb.study.StudySite
+::: bridg.study.StudySite
 
 ### StudyProtocol
 
-::: umdb.study.StudyProtocol
+::: bridg.study.StudyProtocol
 
 ### StudyProtocolVersion
 
-::: umdb.study.StudyProtocolVersion
+::: bridg.study.StudyProtocolVersion
 
 ### StudySiteProtocolVersionRelationship
 
-::: umdb.study.StudySiteProtocolVersionRelationship
+::: bridg.study.StudySiteProtocolVersionRelationship
 
 ### Subject
 
-::: umdb.study.Subject
+::: bridg.study.Subject
 
 ### StudySubject
 
-::: umdb.study.StudySubject
+::: bridg.study.StudySubject
 
 ### StudySubjectProtocolVersionRelationship
 
-::: umdb.study.StudySubjectProtocolVersionRelationship
+::: bridg.study.StudySubjectProtocolVersionRelationship

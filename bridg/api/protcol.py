@@ -1,4 +1,4 @@
-from umdb import (
+from .. import (
     BiologicEntity,
     Name,
     Organization,
