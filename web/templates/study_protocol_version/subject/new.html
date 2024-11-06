@@ -10,13 +10,17 @@
 
 {% block content %}
 
-{% include "study/subject/_form.html"%}
+{% include "study_protocol_version/subject/_form.html"%}
 
 {% endblock %}
 
 {% block scripts %}
 
-{% assets filters="typescript", output="./study/subject/new.js", "../assets/study/subject/new.ts" %}
+{% assets
+filters="typescript",
+output="./study_protocol_version/subject/new.js",
+"../assets/study_protocol_version/subject/new.ts"
+%}
 <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
 

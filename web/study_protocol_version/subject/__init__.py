@@ -6,8 +6,6 @@ from flask_babel import lazy_gettext as _
 from umdb import (
     PlannedStudySubject,
     Status,
-    Study,
-    StudyProtocol,
     StudyProtocolVersion,
     StudySiteProtocolVersionRelationship,
     StudySubject,
@@ -35,35 +33,48 @@ blueprint = Blueprint("subject", __name__, url_prefix="/subjects")
 
 @blueprint.before_request
 def setup_breadcrumbs():
-    if request.view_args and "study_id" in request.view_args:
-        study_id = request.view_args["study_id"]
+    if request.view_args and "study_protocol_version_id" in request.view_args:
+        study_protocol_version_id = request.view_args["study_protocol_version_id"]
         breadcrumbs.append(
-            Breadcrumb(url_for("study.subject.index", study_id=study_id), _("Subjects"))
+            Breadcrumb(
+                url_for(
+                    "study_protocol_version.subject.index",
+                    study_protocol_version_id=study_protocol_version_id,
+                ),
+                _("Subjects"),
+            )
         )
 
 
-class StudySubjectIndexView(IndexDataTableView):
+class StudyProtocolVersionSubjectIndexView(IndexDataTableView):
     model = StudySubject
     schema = StudySubjectList
-    template_name = "study/subject/index.html"
+    template_name = "study_protocol_version/subject/index.html"
 
-    def get_study(self, study_id, **kwargs):
-        study = db.session.query(Study).filter_by(id=study_id).one_or_none()
+    def get_study_protocol_version(self, study_protocol_version_id, **kwargs):
+        study = (
+            db.session.query(StudyProtocolVersion)
+            .filter_by(id=study_protocol_version_id)
+            .one_or_none()
+        )
         if not study:
             return abort(404)
         return study
 
-    def get_query(self, study_id, **kwargs):
-        study = self.get_study(study_id)
+    def get_query(self, study_protocol_version_id, **kwargs):
+        study_protocol_version = self.get_study_protocol_version(
+            study_protocol_version_id
+        )
         return (
             db.session.query(StudySubject)
             .join(StudySubject.assigned_study_subject_protocol_version_relationship)
             .join(
                 StudySubjectProtocolVersionRelationship.assigning_study_site_protocol_version_relationship
             )
-            .join(StudySiteProtocolVersionRelationship.executed_study_protocol_version)
-            .join(StudyProtocolVersion.versioned_study_protocol)
-            .filter(StudyProtocol.planned_study == study)
+            .filter(
+                StudySiteProtocolVersionRelationship.executed_study_protocol_version
+                == study_protocol_version
+            )
         )
 
 
@@ -90,17 +101,18 @@ def _get_performing(subject: PlannedStudySubject):
     raise ValueError("Unknown performing entity")
 
 
-class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
+class StudyProtocolVersionSubjectCreateView(BreadcrumbsMixin, CreateView):
     db = db
-    template_name = "study/subject/new.html"
+    template_name = "study_protocol_version/subject/new.html"
 
-    # FIXME: replace study_id with StudyProtocolVersion.id instead os Study.id
-    def setup(self, study_id: int, **kwargs):
-        self.study_protocol_version = _get_study_protocol_version(study_id)
+    def setup(self, study_protocol_version_id: int, **kwargs):
+        self.study_protocol_version = _get_study_protocol_version(
+            study_protocol_version_id
+        )
         self.planned_study_subject = _get_planned_study_subject(
             self.study_protocol_version
         )
-        super().setup(study_id=study_id, **kwargs)
+        super().setup(study_protocol_version_id=study_protocol_version_id, **kwargs)
 
     def get_context(self):
         ctx = super().get_context()
@@ -124,18 +136,20 @@ class StudySubjectCreateView(BreadcrumbsMixin, CreateView):
             ),
         )
 
-    def url_for_redirect(self, study_id, **kwargs):
-        return url_for(".index", study_id=study_id)
+    def url_for_redirect(self, study_protocol_version_id, **kwargs):
+        return url_for(".index", study_protocol_version_id=study_protocol_version_id)
 
-    def add_breadcrumbs(self, study_id, **kwargs):
+    def add_breadcrumbs(self, study_protocol_version_id, **kwargs):
         self.breadcrumbs.extend(
-            Breadcrumb(url_for(".new", study_id=study_id), _("New"))
+            Breadcrumb(
+                url_for(".new", study_protocol_version_id=study_protocol_version_id),
+                _("New"),
+            )
         )
 
 
-# FIXME: replace study_id with StudyProtocolVersion.id instead os Study.id
-def lookup_view(study_id: int, **kwargs):
-    study_protcol_version = _get_study_protocol_version(study_id)
+def lookup_view(study_protocol_version_id: int, **kwargs):
+    study_protcol_version = _get_study_protocol_version(study_protocol_version_id)
     planned_study_subject = _get_planned_study_subject(study_protcol_version)
     subject = construct_subject(planned_study_subject)
     form = StudySubjectForm(
@@ -149,37 +163,40 @@ def lookup_view(study_id: int, **kwargs):
     return StudySubjectList.model_validate(subjects).model_dump()
 
 
-class StudySubjectShowView(BreadcrumbsMixin, ShowView):
+class StudyProtocolVersionSubjectShowView(BreadcrumbsMixin, ShowView):
     db = db
     model = StudySubject
-    template_name = "study/subject/show.html"
+    template_name = "study_protocol_version/subject/show.html"
 
     def get_context(self):
         ctx = super().get_context()
         ctx["subject"] = ctx["object"]
         return ctx
 
-    def add_breadcrumbs(self, study_id, id, **kwargs):
+    def add_breadcrumbs(self, study_protocol_version_id, id, **kwargs):
         self.breadcrumbs.append(
             Breadcrumb(
-                url_for(".show", study_id=study_id, id=id),
+                url_for(
+                    ".show", study_protocol_version_id=study_protocol_version_id, id=id
+                ),
                 str(self.object.performing_entity),
             )
         )
 
 
-class StudySubjectEditView(BreadcrumbsMixin, EditView):
+class StudyProtocolVersionSubjectEditView(BreadcrumbsMixin, EditView):
     db = db
     model = StudySubject
-    template_name = "study/subject/edit.html"
+    template_name = "study_protocol_version/subject/edit.html"
 
-    # FIXME: replace study_id with StudyProtocolVersion.id instead os Study.id
-    def setup(self, study_id: int, **kwargs):
-        self.study_protocol_version = _get_study_protocol_version(study_id)
+    def setup(self, study_protocol_version_id: int, **kwargs):
+        self.study_protocol_version = _get_study_protocol_version(
+            study_protocol_version_id
+        )
         self.planned_study_subject = _get_planned_study_subject(
             self.study_protocol_version
         )
-        super().setup(study_id=study_id, **kwargs)
+        super().setup(study_protocol_version_id=study_protocol_version_id, **kwargs)
 
     def get_form(self, object, **kwargs):
         return StudySubjectForm(
@@ -192,35 +209,51 @@ class StudySubjectEditView(BreadcrumbsMixin, EditView):
             ),
         )
 
-    def url_for_redirect(self, study_id, id, **kwargs):
-        return url_for(".show", study_id=study_id, id=id)
+    def url_for_redirect(self, study_protocol_version_id, id, **kwargs):
+        return url_for(
+            ".show", study_protocol_version_id=study_protocol_version_id, id=id
+        )
 
-    def add_breadcrumbs(self, study_id, id, **kwargs):
+    def add_breadcrumbs(self, study_protocol_version_id, id, **kwargs):
         self.breadcrumbs.extend(
             Breadcrumb(
-                url_for(".show", study_id=study_id, id=id),
+                url_for(
+                    ".show", study_protocol_version_id=study_protocol_version_id, id=id
+                ),
                 str(self.object.performing_entity),
             ),
             Breadcrumb(
-                url_for(".edit", study_id=study_id, id=id),
+                url_for(
+                    ".edit", study_protocol_version_id=study_protocol_version_id, id=id
+                ),
                 _("Edit"),
             ),
         )
 
 
-class StudySubjectDeleteView(HTMXDeleteMixin, DeleteView):
+class StudyProtocolVersionSubjectDeleteView(HTMXDeleteMixin, DeleteView):
     db = db
     model = StudySubject
 
-    def url_for_redirect(self, study_id, **kwargs):
-        return url_for(".index", study_id=study_id)
+    def url_for_redirect(self, study_protocol_version_id, **kwargs):
+        return url_for(".index", study_protocol_version_id=study_protocol_version_id)
 
 
-blueprint.add_url_rule("/", view_func=StudySubjectIndexView.as_view("index"))
-blueprint.add_url_rule("/new", view_func=StudySubjectCreateView.as_view("new"))
+blueprint.add_url_rule(
+    "/", view_func=StudyProtocolVersionSubjectIndexView.as_view("index")
+)
+blueprint.add_url_rule(
+    "/new", view_func=StudyProtocolVersionSubjectCreateView.as_view("new")
+)
 blueprint.add_url_rule(
     "/lookup", view_func=lookup_view, endpoint="lookup", methods=["POST"]
 )
-blueprint.add_url_rule("/<id>", view_func=StudySubjectShowView.as_view("show"))
-blueprint.add_url_rule("/<id>/edit", view_func=StudySubjectEditView.as_view("edit"))
-blueprint.add_url_rule("/<id>", view_func=StudySubjectDeleteView.as_view("delete"))
+blueprint.add_url_rule(
+    "/<id>", view_func=StudyProtocolVersionSubjectShowView.as_view("show")
+)
+blueprint.add_url_rule(
+    "/<id>/edit", view_func=StudyProtocolVersionSubjectEditView.as_view("edit")
+)
+blueprint.add_url_rule(
+    "/<id>", view_func=StudyProtocolVersionSubjectDeleteView.as_view("delete")
+)

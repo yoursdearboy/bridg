@@ -1,6 +1,6 @@
 {% from 'bootstrap5/form.html' import render_hidden_errors, render_field %}
 
-{% with data = { "url": url_for(".lookup", study_id=study_id) } %}
+{% with data = { "url": url_for(".lookup", study_protocol_version_id=study_protocol_version_id) } %}
 <form id="study-subject-form" method="POST" x-data='newSubjectForm({{ data | tojson }})' x-ref="form"
     @input.debounce="lookup">
     {{ form.csrf_token() }}
@@ -8,9 +8,9 @@
     {{ render_hidden_errors(form) }}
 
     {% if planned_study_subject.performing_biologic_entity %}
-    {% include "study/subject/_form_biologic_entity.html" %}
+    {% include "study_protocol_version/subject/_form_biologic_entity.html" %}
     {% elif planned_study_subject.performing_organization %}
-    {% include "study/subject/_form_organization.html" %}
+    {% include "study_protocol_version/subject/_form_organization.html" %}
     {% endif %}
 
     <div class="card col-lg-8 mb-3">

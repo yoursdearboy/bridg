@@ -17,7 +17,7 @@ from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
 from web.views import BreadcrumbsMixin, CreateView
 
-from . import protocol, subject
+from . import protocol
 from .form import StudyForm
 
 blueprint = Blueprint("study", __name__, url_prefix="/studies")
@@ -38,9 +38,6 @@ def setup_studies_breadcrumb():
 
 blueprint.register_blueprint(
     protocol.blueprint, url_prefix=f"/<int:study_id>/{protocol.blueprint.url_prefix}"
-)
-blueprint.register_blueprint(
-    subject.blueprint, url_prefix=f"/<int:study_id>/{subject.blueprint.url_prefix}"
 )
 
 
