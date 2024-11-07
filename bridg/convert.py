@@ -11,6 +11,7 @@ from . import (
     Person,
     Study,
     StudySite,
+    StudySubject,
 )
 
 
@@ -38,6 +39,7 @@ class Converter:
         healthcare_provider_group=HealthcareProviderGroup,
         study=Study,
         study_site=StudySite,
+        study_subject=StudySubject,
     )
 
     def __init__(self):

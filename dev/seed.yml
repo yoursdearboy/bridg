@@ -44,8 +44,10 @@ study:
       versioning_study_protocol_version:
         - acronym: AML-MRD-2018
           executing_study_site_protocol_version_relationship:
-            - executing_study_site: *dgoi-ss
-            - executing_study_site: *ekb-ss
+            - &dgoi-aml-mrd-2018
+              executing_study_site: *dgoi-ss 
+            - &ekb-aml-mrd-2018
+              executing_study_site: *ekb-ss
           intended_planned_study_subject:
             - performing_biologic_entity:
                 type: person
@@ -73,3 +75,14 @@ study:
           intended_planned_study_subject:
             - performing_organization: {}
               quantity_range: 3
+
+study_subject:
+  - performing_biologic_entity:
+      name: [{ use: official, family: Trum, given: Donald, suffix: Jr }]
+      administrative_gender_code: M
+      birth_date: 1991-01-01
+      death_indicator: false
+    status: eligible
+    status_date: 2024-11-06T12:00:00
+    assigned_study_subject_protocol_version_relationship:
+      - assigning_study_site_protocol_version_relationship: *dgoi-aml-mrd-2018
