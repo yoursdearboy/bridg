@@ -18,7 +18,7 @@ digraph G {
 	biologic_entity	[fontname="Bitstream-Vera Sans",
 		fontsize=7.0,
 		height=1.5,
-		label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD ALIGN="CENTER">biologic_entity</TD></TR><TR><TD BORDER="1" CELLPADDING="0"></TD></TR><TR><TD ALIGN="LEFT" PORT="id">- id</TD></TR><TR><TD ALIGN="LEFT" PORT="type">- type</TD></TR><TR><TD ALIGN="LEFT" PORT="administrative_gender">- administrative_gender</TD></TR><TR><TD ALIGN="LEFT" PORT="birth_date">- birth_date</TD></TR><TR><TD ALIGN="LEFT" PORT="death_date">- death_date</TD></TR><TR><TD ALIGN="LEFT" PORT="death_date_estimated_indicator">- death_date_estimated_indicator</TD></TR><TR><TD ALIGN="LEFT" PORT="death_indicator">- death_indicator</TD></TR></TABLE>>,
+		label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD ALIGN="CENTER">biologic_entity</TD></TR><TR><TD BORDER="1" CELLPADDING="0"></TD></TR><TR><TD ALIGN="LEFT" PORT="id">- id</TD></TR><TR><TD ALIGN="LEFT" PORT="type">- type</TD></TR><TR><TD ALIGN="LEFT" PORT="administrative_gender_code">- administrative_gender_code</TD></TR><TR><TD ALIGN="LEFT" PORT="birth_date">- birth_date</TD></TR><TR><TD ALIGN="LEFT" PORT="death_date">- death_date</TD></TR><TR><TD ALIGN="LEFT" PORT="death_date_estimated_indicator">- death_date_estimated_indicator</TD></TR><TR><TD ALIGN="LEFT" PORT="death_indicator">- death_indicator</TD></TR></TABLE>>,
 		pos="335.21,580.17",
 		shape=plaintext,
 		width=2.0139];

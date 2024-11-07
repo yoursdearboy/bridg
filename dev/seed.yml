@@ -49,11 +49,11 @@ study:
           intended_planned_study_subject:
             - performing_biologic_entity:
                 type: person
-                administrative_gender: M
+                administrative_gender_code: M
               quantity_range: 10
             - performing_biologic_entity:
                 type: person
-                administrative_gender: F
+                administrative_gender_code: F
               quantity_range: 10
         - acronym: AML-MRD-2024
           executing_study_site_protocol_version_relationship:

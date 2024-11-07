@@ -1,18 +1,11 @@
 from datetime import date
-from enum import Enum
 from typing import List, Optional
 
-import sqlalchemy as sa
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
-from .name import Name, primary_names
-
-
-class AdministrativeGender(Enum):
-    male = "M"
-    female = "F"
-    unknown = "U"
+from .administrative_gender import AdministrativeGender
+from .entity_name import EntityName
 
 
 class BiologicEntity(Base):
@@ -21,13 +14,12 @@ class BiologicEntity(Base):
 
     Attributes:
         id:
-        administrative_gender:
+        administrative_gender_code:
         birth_date:
         death_date:
         death_date_estimated_indicator:
         death_indicator:
         name:
-        primary_name:
     """
 
     __tablename__ = "biologic_entity"
@@ -39,13 +31,13 @@ class BiologicEntity(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     type: Mapped[str]
 
-    administrative_gender: Mapped[Optional[AdministrativeGender]]
+    administrative_gender_code: Mapped[Optional[AdministrativeGender]]
     birth_date: Mapped[Optional[date]]
     death_date: Mapped[Optional[date]]
     death_date_estimated_indicator: Mapped[Optional[bool]]
     death_indicator: Mapped[Optional[bool]]
 
-    name: Mapped[List[Name]] = relationship(
+    name: Mapped[List[EntityName]] = relationship(
         back_populates="biologic_entity", cascade="all, delete-orphan"
     )
 
@@ -53,10 +45,3 @@ class BiologicEntity(Base):
         if not self.primary_name:
             return "Anonymous"
         return str(self.primary_name)
-
-
-BiologicEntity.primary_name = relationship(
-    sa.orm.aliased(Name, primary_names),
-    primaryjoin=BiologicEntity.id == primary_names.c.biologic_entity_id,
-    uselist=False,
-)

@@ -12,7 +12,7 @@ digraph G {
 	BiologicEntity	[fontname="Bitstream-Vera Sans",
 		fontsize=8.0,
 		height=1.25,
-		label=<<TABLE CELLSPACING="0" CELLPADDING="1" BORDER="0" CELLBORDER="1.0" ALIGN="LEFT"><TR><TD><FONT POINT-SIZE="10">BiologicEntity</FONT></TD></TR><TR><TD ALIGN="LEFT">+id : Integer<BR ALIGN="LEFT"/>+type : String<BR ALIGN="LEFT"/>+administrative_gender : Enum<BR ALIGN="LEFT"/>+birth_date : Date<BR ALIGN="LEFT"/>+death_date : Date<BR ALIGN="LEFT"/>+death_date_estimated_indicator : Boolean<BR ALIGN="LEFT"/>+death_indicator : Boolean</TD></TR></TABLE>>,
+		label=<<TABLE CELLSPACING="0" CELLPADDING="1" BORDER="0" CELLBORDER="1.0" ALIGN="LEFT"><TR><TD><FONT POINT-SIZE="10">BiologicEntity</FONT></TD></TR><TR><TD ALIGN="LEFT">+id : Integer<BR ALIGN="LEFT"/>+type : String<BR ALIGN="LEFT"/>+administrative_gender_code : Enum<BR ALIGN="LEFT"/>+birth_date : Date<BR ALIGN="LEFT"/>+death_date : Date<BR ALIGN="LEFT"/>+death_date_estimated_indicator : Boolean<BR ALIGN="LEFT"/>+death_indicator : Boolean</TD></TR></TABLE>>,
 		pos="188.84,657",
 		shape=plaintext,
 		width=2.7778];
@@ -44,7 +44,7 @@ digraph G {
 	Person	[fontname="Bitstream-Vera Sans",
 		fontsize=8.0,
 		height=1.375,
-		label=<<TABLE CELLSPACING="0" CELLPADDING="1" BORDER="0" CELLBORDER="1.0" ALIGN="LEFT"><TR><TD><FONT POINT-SIZE="10">Person</FONT></TD></TR><TR><TD ALIGN="LEFT">+id : Integer<BR ALIGN="LEFT"/>+type : String<BR ALIGN="LEFT"/>+administrative_gender : Enum<BR ALIGN="LEFT"/>+birth_date : Date<BR ALIGN="LEFT"/>+death_date : Date<BR ALIGN="LEFT"/>+death_date_estimated_indicator : Boolean<BR ALIGN="LEFT"/>+death_indicator : Boolean<BR ALIGN="LEFT"/>+id : Integer</TD></TR></TABLE>>,
+		label=<<TABLE CELLSPACING="0" CELLPADDING="1" BORDER="0" CELLBORDER="1.0" ALIGN="LEFT"><TR><TD><FONT POINT-SIZE="10">Person</FONT></TD></TR><TR><TD ALIGN="LEFT">+id : Integer<BR ALIGN="LEFT"/>+type : String<BR ALIGN="LEFT"/>+administrative_gender_code : Enum<BR ALIGN="LEFT"/>+birth_date : Date<BR ALIGN="LEFT"/>+death_date : Date<BR ALIGN="LEFT"/>+death_date_estimated_indicator : Boolean<BR ALIGN="LEFT"/>+death_indicator : Boolean<BR ALIGN="LEFT"/>+id : Integer</TD></TR></TABLE>>,
 		pos="539.84,522",
 		shape=plaintext,
 		width=2.7778];
