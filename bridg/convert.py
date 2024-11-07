@@ -47,6 +47,10 @@ class Converter:
 
     def _convert(self, model, value):
         info = inspect(model)
+        if (polymorphic_on := info.polymorphic_on) is not None:
+            if polymorphic_value := value.get(polymorphic_on.name, None):
+                model = info.polymorphic_map[polymorphic_value].class_
+                info = inspect(model)
         obj = model()
         for key, value in value.items():
             attr = info.attrs[key]

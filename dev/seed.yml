@@ -78,7 +78,8 @@ study:
 
 study_subject:
   - performing_biologic_entity:
-      name: [{ use: official, family: Trum, given: Donald, suffix: Jr }]
+      type: person
+      name: [{ use: official, family: Trump, given: Donald, suffix: Jr }]
       administrative_gender_code: M
       birth_date: 1991-01-01
       death_indicator: false
@@ -86,3 +87,13 @@ study_subject:
     status_date: 2024-11-06T12:00:00
     assigned_study_subject_protocol_version_relationship:
       - assigning_study_site_protocol_version_relationship: *dgoi-aml-mrd-2018
+  - performing_biologic_entity:
+      type: person
+      name: [{ use: official, family: Harris, given: Kamala }]
+      administrative_gender_code: F
+      birth_date: 2001-01-01
+      death_indicator: false
+    status: eligible
+    status_date: 2024-11-06T12:00:00
+    assigned_study_subject_protocol_version_relationship:
+      - assigning_study_site_protocol_version_relationship: *ekb-aml-mrd-2018
