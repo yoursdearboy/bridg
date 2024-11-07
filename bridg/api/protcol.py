@@ -1,5 +1,4 @@
 from .. import (
-    BiologicEntity,
     EntityName,
     Organization,
     OrganizationName,
@@ -11,7 +10,8 @@ from .. import (
 def construct_subject(planned: PlannedStudySubject):
     subject = StudySubject()
     if planned.performing_biologic_entity:
-        subject.performing_biologic_entity = BiologicEntity(name=[EntityName()])
+        klass = planned.performing_biologic_entity.__class__
+        subject.performing_biologic_entity = klass(name=[EntityName()])
     elif planned.performing_organization:
         subject.performing_organization = Organization(name=[OrganizationName()])
     return subject
