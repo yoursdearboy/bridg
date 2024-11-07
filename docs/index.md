@@ -14,51 +14,57 @@
 
 ::: bridg.common.BiologicEntity
 
-## Person
-
 ### Person
 
-::: bridg.person.Person
-
-## Organization
+::: bridg.common.Person
 
 ### Organization
 
-::: bridg.organization.Organization
+::: bridg.common.Organization
 
 ### HealthcareFacility
 
-::: bridg.organization.HealthcareFacility
+::: bridg.common.HealthcareFacility
 
 ### HealthcareProvider
 
-::: bridg.organization.HealthcareProvider
+::: bridg.common.HealthcareProvider
 
 ### HealthcareProviderGroup
 
-::: bridg.organization.HealthcareProviderGroup
+::: bridg.common.HealthcareProviderGroup
 
 ### HealthcareProviderGroupMember
 
-::: bridg.organization.HealthcareProviderGroupMember
-
-## Study
+::: bridg.common.HealthcareProviderGroupMember
 
 ### Project
 
-::: bridg.study.Project
+::: bridg.common.Project
+
+### ResearchProject
+
+::: bridg.common.ResearchProject
+
+### Study
+
+::: bridg.common.Study
+
+### Subject
+
+::: bridg.common.Subject
+
+## Protocol
+
+### StudyProtocol
+
+::: bridg.protocol.StudyProtocol
+
+## Study
 
 ### ProjectConduct
 
 ::: bridg.study.ProjectConduct
-
-### ResearchProject
-
-::: bridg.study.ResearchProject
-
-### Study
-
-::: bridg.study.Study
 
 ### StudyConduct
 
@@ -68,10 +74,6 @@
 
 ::: bridg.study.StudySite
 
-### StudyProtocol
-
-::: bridg.study.StudyProtocol
-
 ### StudyProtocolVersion
 
 ::: bridg.study.StudyProtocolVersion
@@ -79,10 +81,6 @@
 ### StudySiteProtocolVersionRelationship
 
 ::: bridg.study.StudySiteProtocolVersionRelationship
-
-### Subject
-
-::: bridg.study.Subject
 
 ### StudySubject
 
