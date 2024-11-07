@@ -4,11 +4,6 @@ import shutil
 from flask import current_app
 from flask.cli import AppGroup, with_appcontext
 from flask_assets import Bundle, Environment
-from webassets.filter import register_filter
-
-from .typescript import TypeScript
-
-register_filter(TypeScript)
 
 assets = Environment()
 

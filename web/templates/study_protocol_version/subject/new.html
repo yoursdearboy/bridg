@@ -16,11 +16,7 @@
 
 {% block scripts %}
 
-{% assets
-filters="typescript",
-output="./study_protocol_version/subject/new.js",
-"../assets/study_protocol_version/subject/new.ts"
-%}
+{% assets output="./study_protocol_version/subject/new.js", "../assets/study_protocol_version/subject/new.js" %}
 <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
 

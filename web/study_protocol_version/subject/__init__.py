@@ -26,7 +26,7 @@ from web.views import (
 
 from .form import StudySubjectForm
 from .lookup import lookup
-from .schema import StudySubjectList
+from .schema import StudySubjectList, StudySubjectLookupList
 
 blueprint = Blueprint("subject", __name__, url_prefix="/subjects")
 
@@ -160,7 +160,7 @@ def lookup_view(study_protocol_version_id: int, **kwargs):
     )
     form.populate_obj(obj=subject)
     subjects = lookup(subject, db.session)
-    return StudySubjectList.model_validate(subjects).model_dump()
+    return StudySubjectLookupList.model_validate(subjects).model_dump()
 
 
 class StudyProtocolVersionSubjectShowView(BreadcrumbsMixin, ShowView):
