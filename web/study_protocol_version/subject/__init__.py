@@ -51,6 +51,20 @@ class StudyProtocolVersionSubjectIndexView(IndexDataTableView):
     schema = StudySubjectList
     template_name = "study_protocol_version/subject/index.html"
 
+    def setup(self, study_protocol_version_id: int, **kwargs):
+        self.study_protocol_version = _get_study_protocol_version(
+            study_protocol_version_id
+        )
+        self.planned_study_subject = _get_planned_study_subject(
+            self.study_protocol_version
+        )
+        super().setup(study_protocol_version_id=study_protocol_version_id, **kwargs)
+
+    def get_context(self):
+        ctx = super().get_context()
+        ctx["planned_study_subject"] = self.planned_study_subject
+        return ctx
+
     def get_study_protocol_version(self, study_protocol_version_id, **kwargs):
         study = (
             db.session.query(StudyProtocolVersion)
