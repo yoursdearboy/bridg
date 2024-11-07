@@ -41,6 +41,11 @@ class BiologicEntity(Base):
         back_populates="biologic_entity", cascade="all, delete-orphan"
     )
 
+    # FIXME: return something more meaningfull than first entry
+    @property
+    def primary_name(self) -> Optional[EntityName]:
+        return next(n for n in self.name)
+
     def __str__(self):
         if not self.primary_name:
             return "Anonymous"
