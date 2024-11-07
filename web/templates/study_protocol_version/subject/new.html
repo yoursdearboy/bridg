@@ -1,3 +1,5 @@
+{% from 'bootstrap5/form.html' import render_field, render_hidden_errors %}
+
 {% extends "standard.html" %}
 
 {% block titlebar_title %}
@@ -10,7 +12,23 @@
 
 {% block content %}
 
-{% include "study_protocol_version/subject/_form.html"%}
+{% with data = { "url": url_for(".lookup", study_protocol_version_id=study_protocol_version_id) } %}
+<form id="study-subject-form" method="POST" x-data='newSubjectForm({{ data | tojson }})' x-ref="form"
+    @input.debounce="lookup">
+
+    {{ form.csrf_token() }}
+
+    {{ render_hidden_errors(form) }}
+
+    {% if planned_study_subject.performing_biologic_entity %}
+    {% include "study_protocol_version/subject/form/biologic_entity.html" %}
+    {% elif planned_study_subject.performing_organization %}
+    {% include "study_protocol_version/subject/form/organization.html" %}
+    {% endif %}
+
+    {% include "study_protocol_version/subject/form/subject.html" %}
+</form>
+{% endwith %}
 
 {% endblock %}
 
