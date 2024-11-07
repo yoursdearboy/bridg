@@ -24,7 +24,7 @@ from web.views import (
     ShowView,
 )
 
-from .form import StudySubjectForm
+from .form import EditStudySubjectForm, NewStudySubjectForm
 from .lookup import lookup
 from .schema import StudySubjectList, StudySubjectLookupList
 
@@ -140,7 +140,7 @@ class StudyProtocolVersionSubjectCreateView(BreadcrumbsMixin, CreateView):
         return subject
 
     def get_form(self, object, **kwargs):
-        return StudySubjectForm(
+        return NewStudySubjectForm(
             obj=object,
             performing=_get_performing(self.planned_study_subject),
             assigned_study_site_protocol_version_relationship_query=(
@@ -166,7 +166,7 @@ def lookup_view(study_protocol_version_id: int, **kwargs):
     study_protcol_version = _get_study_protocol_version(study_protocol_version_id)
     planned_study_subject = _get_planned_study_subject(study_protcol_version)
     subject = construct_subject(planned_study_subject)
-    form = StudySubjectForm(
+    form = NewStudySubjectForm(
         performing=_get_performing(planned_study_subject),
         assigned_study_site_protocol_version_relationship_query=(
             _get_study_site_protocol_version_relationship(study_protcol_version)
@@ -213,9 +213,8 @@ class StudyProtocolVersionSubjectEditView(BreadcrumbsMixin, EditView):
         super().setup(study_protocol_version_id=study_protocol_version_id, **kwargs)
 
     def get_form(self, object, **kwargs):
-        return StudySubjectForm(
+        return EditStudySubjectForm(
             obj=object,
-            performing=_get_performing(self.planned_study_subject),
             assigned_study_site_protocol_version_relationship_query=(
                 _get_study_site_protocol_version_relationship(
                     self.study_protocol_version

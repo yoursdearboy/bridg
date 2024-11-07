@@ -50,7 +50,7 @@ class OrganizationForm(Form):
     description = TextAreaField(_("Description"))
 
 
-class StudySubjectForm(FlaskForm):
+class NewStudySubjectForm(FlaskForm):
     performing_biologic_entity = FormField(BiologicEntityForm)
     performing_biologic_entity_id = IntegerField(validators=[Optional()])
     performing_organization = FormField(OrganizationForm)
@@ -98,3 +98,24 @@ class StudySubjectForm(FlaskForm):
         if self.performing == "organization":
             if self.performing_organization_id.data is not None:
                 del obj.performing_organization
+
+
+class EditStudySubjectForm(FlaskForm):
+    status = SelectEnumField(_("Status"), Status)
+    status_date = DateTimeField(_("Status date"))
+    assigned_study_site_protocol_version_relationship = QuerySelectMultipleField(
+        _("Study site and protocol"),
+        validators=[DataRequired()],
+    )
+
+    def __init__(
+        self,
+        assigned_study_site_protocol_version_relationship_query,
+        *args,
+        **kwargs,
+    ):
+        super().__init__(*args, **kwargs)
+
+        self.assigned_study_site_protocol_version_relationship.query = (
+            assigned_study_site_protocol_version_relationship_query
+        )
