@@ -1,4 +1,4 @@
-site_name: "umdb"
+site_name: "bridg"
 
 markdown_extensions:
   - toc:

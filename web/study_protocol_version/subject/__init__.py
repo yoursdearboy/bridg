@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Blueprint, abort, request, url_for
 from flask_babel import lazy_gettext as _
 
-from umdb import (
+from bridg import (
     PlannedStudySubject,
     Status,
     StudyProtocolVersion,
@@ -11,7 +11,7 @@ from umdb import (
     StudySubject,
     StudySubjectProtocolVersionRelationship,
 )
-from umdb.api.protcol import construct_subject
+from bridg.api.protcol import construct_subject
 from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
 from web.views import (

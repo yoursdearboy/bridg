@@ -4,7 +4,7 @@ from flask import Blueprint, redirect, render_template, request, url_for
 from flask_babel import _
 from sqlalchemy import distinct, func
 
-from umdb import (
+from bridg import (
     Study,
     StudyProtocol,
     StudyProtocolVersion,

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "umdb"
+name = "bridg"
 version = "0.1.0"
 description = ""
 authors = ["Kirill Voronin <yoursdearboy@gmail.com>"]

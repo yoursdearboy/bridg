@@ -4,7 +4,7 @@ from typing import Any, Dict, List
 from sqlalchemy import inspect
 from sqlalchemy.orm import Relationship
 
-from umdb import (
+from . import (
     HealthcareFacility,
     HealthcareProvider,
     HealthcareProviderGroup,

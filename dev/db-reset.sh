@@ -1,4 +1,4 @@
-dropdb -h localhost -U postgres umdb
-createdb -h localhost -U postgres umdb
-python dev/migrate.py
-python dev/seed.py
+dropdb -h localhost -U postgres bridg
+createdb -h localhost -U postgres bridg
+python -m dev.migrate
+python -m dev.seed

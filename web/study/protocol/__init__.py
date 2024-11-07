@@ -3,7 +3,7 @@ from flask_babel import lazy_gettext as _
 from flask_wtf import FlaskForm
 from wtforms import StringField
 
-from umdb import StudyProtocol, StudyProtocolVersion
+from bridg import StudyProtocol, StudyProtocolVersion
 from web.db import db
 from web.views import CreateView, EditView, ShowView
 

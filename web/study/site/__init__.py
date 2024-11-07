@@ -3,8 +3,7 @@ from flask_babel import lazy_gettext as _
 from flask_wtf import FlaskForm
 from wtforms_alchemy.fields import QuerySelectField
 
-from umdb import HealthcareFacility, Organization
-from umdb.study.study import StudySite
+from bridg import HealthcareFacility, Organization, StudySite
 from web.db import db
 from web.fields import SelectBooleanField
 from web.views import CreateView, DeleteView, HTMXDeleteMixin

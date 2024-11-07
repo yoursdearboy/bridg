@@ -15,7 +15,7 @@ from .templating import bool_filter, date_filter, datetime_filter
 load_dotenv()
 
 app = Flask(__name__)
-app.config.from_prefixed_env(prefix="UMDB")
+app.config.from_prefixed_env(prefix="BRIDG")
 app.json_provider_class = MyJSONProvider
 app.json = MyJSONProvider(app)
 app.cli.add_command(assets_cli)

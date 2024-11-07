@@ -3,7 +3,7 @@ from flask_babel import lazy_gettext as _
 from flask_wtf import FlaskForm
 from wtforms import BooleanField
 
-from umdb import AdministrativeGender
+from bridg import AdministrativeGender
 from web.fields import DateField, SelectBooleanField, SelectEnumField
 
 

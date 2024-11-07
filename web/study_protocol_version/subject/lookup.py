@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session, scoped_session
 
-from umdb import BiologicEntity, Name, Organization, OrganizationName, StudySubject
+from bridg import BiologicEntity, Name, Organization, OrganizationName, StudySubject
 
 
 def _lookup_bio(obj: BiologicEntity, session: scoped_session | Session):

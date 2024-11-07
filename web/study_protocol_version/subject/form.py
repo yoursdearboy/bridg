@@ -15,7 +15,7 @@ from wtforms import (
 from wtforms.validators import DataRequired, Optional
 from wtforms_alchemy.fields import QuerySelectMultipleField
 
-from umdb import AdministrativeGender, Status
+from bridg import AdministrativeGender, Status
 from web.fields import DateField, DateTimeField, SelectBooleanField, SelectEnumField
 
 

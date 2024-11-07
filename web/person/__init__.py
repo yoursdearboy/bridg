@@ -1,7 +1,7 @@
 from flask import Blueprint, request, url_for
 from flask_babel import lazy_gettext as _
 
-from umdb import Person
+from bridg import Person
 from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
 from web.views import BreadcrumbsMixin, EditView, ShowView

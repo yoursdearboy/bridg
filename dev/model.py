@@ -1,14 +1,14 @@
 from sqlalchemy.orm import class_mapper
 from sqlalchemy_schemadisplay import create_schema_graph, create_uml_graph
 
-import umdb
-from api.db import engine
-from umdb.db import Base
+import bridg
 
-model = umdb
+from .db import engine
+
+model = bridg
 mappers = []
 
-for attr in dir(umdb):
+for attr in dir(model):
     if attr[0] == "_":
         continue
     try:
@@ -19,7 +19,7 @@ for attr in dir(umdb):
 
 graph = create_schema_graph(
     engine=engine,
-    metadata=Base.metadata,
+    metadata=model.Base.metadata,
     show_datatypes=False,
     show_indexes=False,
     rankdir="LR",
