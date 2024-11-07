@@ -72,11 +72,10 @@ class Organization(Base):
     Each Organization might be the department for one or more HealthcareProvider.
     """
 
+    # FIXME: return something more meaningfull than first entry
     @property
-    def primary_name(self):
-        if len(self.name) == 0:
-            return
-        return self.name[0]
+    def primary_name(self) -> Optional[OrganizationName]:
+        return next(n for n in self.name)
 
     def __str__(self):
         if not self.primary_name:
