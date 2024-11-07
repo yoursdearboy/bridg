@@ -31,7 +31,7 @@ class NameForm(Form):
 
 class BiologicEntityForm(Form):
     name = FieldList(FormField(NameForm), min_entries=1, max_entries=1)
-    administrative_gender = SelectEnumField(
+    administrative_gender_code = SelectEnumField(
         _("Administrative gender"), AdministrativeGender
     )
     birth_date = DateField(_("Birth date"))

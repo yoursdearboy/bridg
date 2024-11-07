@@ -1,7 +1,7 @@
 from flask import Blueprint, url_for
 from flask_babel import lazy_gettext as _
 
-from bridg import Name
+from bridg import EntityName
 from web.breadcrumbs import Breadcrumb
 from web.db import db
 from web.views import (
@@ -19,12 +19,12 @@ blueprint = Blueprint("name", __name__, url_prefix="/name")
 
 class NameCreateView(BreadcrumbsMixin, CreateView):
     db = db
-    model = Name
+    model = EntityName
     form_class = NameForm
     template_name = "person/name/edit.html"
 
     def get_object(self, person_id, **kwargs):
-        return Name(biologic_entity_id=person_id)
+        return EntityName(biologic_entity_id=person_id)
 
     def url_for_redirect(self, person_id, **kwargs):
         return url_for("person.show", id=person_id)
@@ -37,7 +37,7 @@ class NameCreateView(BreadcrumbsMixin, CreateView):
 
 class NameEditView(BreadcrumbsMixin, EditView):
     db = db
-    model = Name
+    model = EntityName
     form_class = NameForm
     template_name = "person/name/edit.html"
 
@@ -52,7 +52,7 @@ class NameEditView(BreadcrumbsMixin, EditView):
 
 class NameDeleteView(HTMXDeleteMixin, DeleteView):
     db = db
-    model = Name
+    model = EntityName
 
     def url_for_redirect(self, person_id, **kwargs):
         return url_for("person.show", id=person_id)

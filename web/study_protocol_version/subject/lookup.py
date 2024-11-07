@@ -1,12 +1,20 @@
 from sqlalchemy.orm import Session, scoped_session
 
-from bridg import BiologicEntity, Name, Organization, OrganizationName, StudySubject
+from bridg import (
+    BiologicEntity,
+    EntityName,
+    Organization,
+    OrganizationName,
+    StudySubject,
+)
 
 
 def _lookup_bio(obj: BiologicEntity, session: scoped_session | Session):
     q = session.query(BiologicEntity)
     if name := obj.name[0]:
-        q = q.filter(BiologicEntity.name.any(Name.family.ilike(f"%{name.family}%")))
+        q = q.filter(
+            BiologicEntity.name.any(EntityName.family.ilike(f"%{name.family}%"))
+        )
     return q
 
 

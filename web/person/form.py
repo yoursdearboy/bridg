@@ -8,7 +8,7 @@ from web.fields import DateField, SelectBooleanField, SelectEnumField
 
 
 class PersonForm(FlaskForm):
-    administrative_gender = SelectEnumField(
+    administrative_gender_code = SelectEnumField(
         _("Administrative gender"), AdministrativeGender
     )
     birth_date = DateField(_("Birth date"))

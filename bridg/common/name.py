@@ -2,10 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-import sqlalchemy as sa
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy.sql import column
 
 from ..db import Base
 
@@ -13,7 +11,7 @@ if TYPE_CHECKING:
     from .biologic_entity import BiologicEntity
 
 
-class Name(Base):
+class EntityName(Base):
     __tablename__ = "biologic_entity_name"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -39,13 +37,3 @@ class Name(Base):
 
     def __str__(self):
         return self.full
-
-
-name_index = (
-    sa.func.row_number()
-    .over(partition_by=Name.biologic_entity_id, order_by=sa.desc(Name.use))
-    .label("i")
-)
-
-indexed_names = sa.select(Name, name_index).subquery()
-primary_names = sa.select(indexed_names).filter(column(name_index.key) == 1).subquery()

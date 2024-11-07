@@ -7,7 +7,7 @@ function subjectsTable({ dateFormat, datetimeFormat, showURL }) {
     },
     {
       title: "Administrative gender",
-      data: "performing_biologic_entity.administrative_gender",
+      data: "performing_biologic_entity.administrative_gender_code",
     },
     {
       title: "Birth date",

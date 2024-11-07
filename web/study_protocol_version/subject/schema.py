@@ -23,7 +23,7 @@ class BiologicEntity(BaseModel):
         from_attributes = True
 
     id: int
-    administrative_gender: Optional[str]
+    administrative_gender_code: Optional[str]
     birth_date: Optional[date]
     death_date: Optional[date]
     death_date_estimated_indicator: Optional[bool]
