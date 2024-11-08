@@ -4,10 +4,6 @@
 {{ _("Studies list") }}
 {% endblock %}
 
-{% block titlebar_right %}
-<a class="btn btn-primary" href="{{ url_for('.new') }}">{{ _("New") }}</a>
-{% endblock %}
-
 {% block content %}
 
 <table class="table">
@@ -25,9 +21,6 @@
             <td><a href="#">{{ i.study }}</a></td>
             <td><a href="#">{{ i.subjects }}</a></td>
             <td><a href="#">{{ i.sites }}</a></td>
-            <td>
-                <a href="{{ url_for('.protocol.show', study_id=i.study.id)}}">{{ _("Protocol") }}</a>
-            </td>
         </tr>
         {% endfor %}
     </tbody>

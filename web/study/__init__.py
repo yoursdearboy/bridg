@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, render_template, request, url_for
 from flask_babel import _
 from sqlalchemy import distinct, func
 
@@ -8,9 +8,7 @@ from bridg import (
     Study,
     StudyProtocol,
     StudyProtocolVersion,
-    StudySite,
     StudySiteProtocolVersionRelationship,
-    StudySubject,
     StudySubjectProtocolVersionRelationship,
 )
 from web.breadcrumbs import Breadcrumb, breadcrumbs
@@ -32,63 +30,41 @@ def setup_studies_breadcrumb():
             )
 
 
-def count_subjects():
-    rows = (
+def count():
+    return (
         db.session.query(
-            StudyProtocol.planned_study_id,
-            func.count(distinct(StudySubject.id)).label("n"),
+            StudyProtocol.planned_study_id.label("study"),
+            func.count(
+                distinct(StudySiteProtocolVersionRelationship.executing_study_site_id)
+            ).label("sites"),
+            func.count(
+                distinct(
+                    StudySubjectProtocolVersionRelationship.assigning_study_subject_id
+                )
+            ).label("subjects"),
         )
-        .join(StudySubject.assigned_study_subject_protocol_version_relationship)
-        .join(
-            StudySubjectProtocolVersionRelationship.assigning_study_site_protocol_version_relationship
+        .outerjoin(StudyProtocol.versioning_study_protocol_version)
+        .outerjoin(
+            StudyProtocolVersion.executing_study_site_protocol_version_relationship
         )
-        .join(StudySiteProtocolVersionRelationship.executed_study_protocol_version)
-        .join(StudyProtocolVersion.versioned_study_protocol)
+        .outerjoin(
+            StudySiteProtocolVersionRelationship.assigned_study_subject_protocol_version_relationship
+        )
         .group_by(StudyProtocol.planned_study_id)
         .all()
     )
-    counts = {r.planned_study_id: r.n for r in rows}
-    return counts
-
-
-def count_sites():
-    rows = (
-        db.session.query(
-            StudyProtocol.planned_study_id,
-            func.count(distinct(StudySite.id)).label("n"),
-        )
-        .join(StudySite.executed_study_site_protocol_version_relationship)
-        .join(StudySiteProtocolVersionRelationship.executed_study_protocol_version)
-        .join(StudyProtocolVersion.versioned_study_protocol)
-        .group_by(StudyProtocol.planned_study_id)
-        .all()
-    )
-    counts = {r.planned_study_id: r.n for r in rows}
-    return counts
 
 
 @dataclass
 class StudyInfo:
     study: Study
-    subjects: int
     sites: int
-
-
-def gather_studies_info():
-    studies = db.session.query(Study).all()
-    subjects = count_subjects()
-    sites = count_sites()
-    return [StudyInfo(s, subjects.get(s.id, 0), sites.get(s.id, 0)) for s in studies]
+    subjects: int
 
 
 def index():
-    info = gather_studies_info()
+    info = [StudyInfo(c.study, c.sites, c.subjects) for c in count()]
     return render_template("study/index.html", info=info)
 
 
-def show(id: int):
-    return redirect(url_for(".subject.index", study_id=id))
-
-
 blueprint.add_url_rule("/", view_func=index, endpoint="index")
-blueprint.add_url_rule("/<id>", view_func=show, endpoint="show")
