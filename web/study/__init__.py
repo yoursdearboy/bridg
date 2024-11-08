@@ -15,10 +15,6 @@ from bridg import (
 )
 from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
-from web.views import BreadcrumbsMixin, CreateView
-
-from . import protocol
-from .form import StudyForm
 
 blueprint = Blueprint("study", __name__, url_prefix="/studies")
 
@@ -34,11 +30,6 @@ def setup_studies_breadcrumb():
             breadcrumbs.append(
                 Breadcrumb(url_for("study.show", id=study_id), str(study))
             )
-
-
-blueprint.register_blueprint(
-    protocol.blueprint, url_prefix=f"/<int:study_id>/{protocol.blueprint.url_prefix}"
-)
 
 
 def count_subjects():
@@ -95,23 +86,9 @@ def index():
     return render_template("study/index.html", info=info)
 
 
-class CreateStudyView(BreadcrumbsMixin, CreateView):
-    db = db
-    form_class = StudyForm
-    model = Study
-    template_name = "study/new.html"
-
-    def url_for_redirect(self):
-        return url_for(".index")
-
-    def add_breadcrumbs(self):
-        self.breadcrumbs.extend(Breadcrumb(url_for(".new"), _("New")))
-
-
 def show(id: int):
     return redirect(url_for(".subject.index", study_id=id))
 
 
 blueprint.add_url_rule("/", view_func=index, endpoint="index")
-blueprint.add_url_rule("/new", view_func=CreateStudyView.as_view("new"))
 blueprint.add_url_rule("/<id>", view_func=show, endpoint="show")
