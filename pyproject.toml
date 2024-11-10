@@ -36,6 +36,9 @@ libsass = "^0.23.0"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.ruff]
+line-length = 120
+
 [tool.ruff.lint]
 extend-select = ["I"]
 
