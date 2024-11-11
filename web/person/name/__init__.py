@@ -29,10 +29,8 @@ class NameCreateView(BreadcrumbsMixin, CreateView):
     def url_for_redirect(self, person_id, **kwargs):
         return url_for("person.show", id=person_id)
 
-    def add_breadcrumbs(self, person_id, **kwargs):
-        self.breadcrumbs.extend(
-            Breadcrumb(url_for(".new", person_id=person_id), _("New"))
-        )
+    def setup_breadcrumbs(self, person_id, **kwargs):
+        self.breadcrumbs.extend(Breadcrumb(url_for(".new", person_id=person_id), _("New")))
 
 
 class NameEditView(BreadcrumbsMixin, EditView):
@@ -44,10 +42,8 @@ class NameEditView(BreadcrumbsMixin, EditView):
     def url_for_redirect(self, person_id, **kwargs):
         return url_for("person.show", id=person_id)
 
-    def add_breadcrumbs(self, person_id, id, **kwargs):
-        self.breadcrumbs.extend(
-            Breadcrumb(url_for(".edit", person_id=person_id, id=id), _("Rename"))
-        )
+    def setup_breadcrumbs(self, person_id, id, **kwargs):
+        self.breadcrumbs.extend(Breadcrumb(url_for(".edit", person_id=person_id, id=id), _("Rename")))
 
 
 class NameDeleteView(HTMXDeleteMixin, DeleteView):

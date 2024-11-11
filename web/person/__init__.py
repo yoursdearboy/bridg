@@ -11,9 +11,7 @@ from .form import PersonForm
 
 blueprint = Blueprint("person", __name__, url_prefix="/persons")
 
-blueprint.register_blueprint(
-    name.blueprint, url_prefix=f"/<int:person_id>/{name.blueprint.url_prefix}"
-)
+blueprint.register_blueprint(name.blueprint, url_prefix=f"/<int:person_id>/{name.blueprint.url_prefix}")
 
 
 @blueprint.before_request
@@ -24,9 +22,7 @@ def setup_studies_breadcrumb():
         person_id = request.view_args["person_id"]
         person = db.session.query(Person).filter_by(id=person_id).one_or_none()
         if person:
-            breadcrumbs.append(
-                Breadcrumb(url_for("person.show", id=person_id), str(person))
-            )
+            breadcrumbs.append(Breadcrumb(url_for("person.show", id=person_id), str(person)))
 
 
 class PersonShowView(BreadcrumbsMixin, ShowView):
@@ -39,7 +35,7 @@ class PersonShowView(BreadcrumbsMixin, ShowView):
         ctx["person"] = ctx["object"]
         return ctx
 
-    def add_breadcrumbs(self, id, **kwargs):
+    def setup_breadcrumbs(self, id, **kwargs):
         self.breadcrumbs.extend(Breadcrumb(url_for(".show", id=id), self.object))
 
 
@@ -57,7 +53,7 @@ class PersonEditView(BreadcrumbsMixin, EditView):
     def url_for_redirect(self, id, **kwargs):
         return url_for(".show", id=id)
 
-    def add_breadcrumbs(self, id, **kwargs):
+    def setup_breadcrumbs(self, id, **kwargs):
         self.breadcrumbs.extend(
             Breadcrumb(url_for(".show", id=id), self.object),
             Breadcrumb(url_for(".edit", id=id), _("Edit")),

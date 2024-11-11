@@ -27,21 +27,20 @@ class Breadcrumbs:
         return g.breadcrumbs
 
     @overload
-    def append(self, b: Breadcrumb): ...
+    def append(self, arg: Breadcrumb): ...
 
     @overload
-    def append(self, *, url: str, text: str): ...
+    def append(self, arg: str, text: str): ...
 
-    def append(
-        self,
-        b: Breadcrumb | None = None,
-        url: str | None = None,
-        text: str | None = None,
-    ):
-        if b:
-            self._breadcrumbs.append(b)
-        elif url and text:
-            self._breadcrumbs.append(Breadcrumb(url, text))
+    def append(self, arg: Breadcrumb | str, text: str | None = None):
+        if isinstance(arg, Breadcrumb):
+            self._breadcrumbs.append(arg)
+        elif isinstance(arg, str):
+            if text is None:
+                raise ValueError("No breadcrumb text")
+            self._breadcrumbs.append(Breadcrumb(arg, text))
+        else:
+            raise ValueError("Unknown breadcrumb type")
 
     def extend(self, *bs: Breadcrumb):
         self._breadcrumbs.extend(bs)

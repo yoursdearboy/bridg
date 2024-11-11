@@ -1,11 +1,11 @@
-from typing import Any, Callable, Type
+from typing import Any, Callable, Type, overload
 
-from flask import abort, redirect, render_template, request
+from flask import abort, current_app, redirect, render_template, request
 from flask.views import MethodView
 from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form
 
-from web.breadcrumbs import breadcrumbs
+from web.breadcrumbs import Breadcrumb, breadcrumbs
 
 
 class BaseView(MethodView):
@@ -27,12 +27,14 @@ class SQLAlchemyMixin(BaseView):
     get_query: Callable
 
 
-class JinjaMixin(BaseView):
-    template_name: str
-
+class ContextMixin(BaseView):
     # TODO: add kwargs?
     def get_context(self):
         return self.kwargs
+
+
+class JinjaMixin(ContextMixin, BaseView):
+    template_name: str
 
     # TODO: add kwargs?
     def render_template(self):
@@ -67,15 +69,59 @@ class RedirectMixin:
         return redirect(self.url_for_redirect(**kwargs))
 
 
-class BreadcrumbsMixin(BaseView):
+def _get_rule(endpoint: str):
+    blueprint_name = request.blueprint
+    if endpoint[:1] == ".":
+        if blueprint_name is not None:
+            endpoint = f"{blueprint_name}{endpoint}"
+        else:
+            endpoint = endpoint[1:]
+    rules = current_app.url_map._rules_by_endpoint[endpoint]
+    if len(rules) > 0:
+        return rules[0]
+    return
+
+
+def _select_keys(x, keys):
+    return {k: v for k, v in x.items() if k in keys}
+
+
+class BreadcrumbsMixin(ContextMixin, BaseView):
     breadcrumbs = breadcrumbs
 
     def setup(self, **kwargs):
         super().setup(**kwargs)
-        self.add_breadcrumbs(**kwargs)
+        self.setup_breadcrumbs(**kwargs)
 
-    def add_breadcrumbs(self, **kwargs):
+    def setup_breadcrumbs(self, **kwargs):
         return
+
+    @overload
+    def add_breadcrumb(self, arg: Breadcrumb): ...
+
+    @overload
+    def add_breadcrumb(self, arg: str, text: str, **kwargs): ...
+
+    def add_breadcrumb(self, arg: Breadcrumb | str, text: str | None = None, **kwargs):
+        if isinstance(arg, Breadcrumb):
+            self.breadcrumbs.append(arg)
+        elif isinstance(arg, str):
+            if text is None:
+                raise ValueError("No breadcrumb text")
+            url = self._url_for(arg, **kwargs)
+            url = url if url else arg
+            self.breadcrumbs.append(Breadcrumb(url, text))
+        else:
+            raise ValueError("Unknown breadcrumb type")
+
+    def _url_for(self, endpoint: str, **kwargs):
+        "Context aware url_for"
+        if rule := _get_rule(endpoint):
+            args = self.get_context()
+            args = _select_keys(args, rule.arguments) | kwargs
+            res = rule.build(args)
+            if res:
+                return res[1]
 
 
 class ItemMixin(SQLAlchemyMixin, BaseView):

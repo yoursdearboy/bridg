@@ -26,7 +26,7 @@ class CreateStudyView(BreadcrumbsMixin, CreateView):
     def url_for_redirect(self):
         return url_for(".index")
 
-    def add_breadcrumbs(self):
+    def setup_breadcrumbs(self):
         self.breadcrumbs.extend(Breadcrumb(url_for(".new"), _("New")))
 
 

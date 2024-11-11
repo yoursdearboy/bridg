@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from itertools import groupby
 
-from flask import Blueprint, render_template, request, url_for
+from flask import Blueprint, render_template, url_for
 from flask_babel import _
 from sqlalchemy import distinct, func
 from sqlalchemy.orm import Bundle, aliased
@@ -17,17 +17,6 @@ from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
 
 blueprint = Blueprint("study", __name__, url_prefix="/studies")
-
-
-@blueprint.before_request
-def setup_studies_breadcrumb():
-    breadcrumbs.append(Breadcrumb(url_for("study.index"), _("Studies")))
-
-    if request.view_args and "study_id" in request.view_args:
-        study_id = request.view_args["study_id"]
-        study = db.session.query(Study).filter_by(id=study_id).one_or_none()
-        if study:
-            breadcrumbs.append(Breadcrumb(url_for("study.show", id=study_id), str(study)))
 
 
 @dataclass
@@ -71,6 +60,7 @@ def count():
 
 
 def index():
+    breadcrumbs.append(Breadcrumb(url_for(".index"), _("Studies")))
     return render_template("study/index.html", counts=count())
 
 

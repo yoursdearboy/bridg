@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Blueprint, abort, request, url_for
+from flask import Blueprint, url_for
 from flask_babel import lazy_gettext as _
 
 from bridg import (
@@ -12,7 +12,6 @@ from bridg import (
     StudySubjectProtocolVersionRelationship,
 )
 from bridg.api.protcol import construct_subject
-from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
 from web.views import (
     BreadcrumbsMixin,
@@ -31,22 +30,7 @@ from .schema import StudySubjectList, StudySubjectLookupList
 blueprint = Blueprint("subject", __name__, url_prefix="/space/<space_id>/subjects")
 
 
-@blueprint.before_request
-def setup_breadcrumbs():
-    if request.view_args and "space_id" in request.view_args:
-        space_id = request.view_args["space_id"]
-        breadcrumbs.append(
-            Breadcrumb(
-                url_for(
-                    "subject.index",
-                    space_id=space_id,
-                ),
-                _("Subjects"),
-            )
-        )
-
-
-class SubjectIndexView(IndexDataTableView):
+class SubjectIndexView(BreadcrumbsMixin, IndexDataTableView):
     model = StudySubject
     schema = StudySubjectList
     template_name = "subject/index.html"
@@ -68,6 +52,9 @@ class SubjectIndexView(IndexDataTableView):
             .join(StudySubjectProtocolVersionRelationship.assigning_study_site_protocol_version_relationship)
             .filter(StudySiteProtocolVersionRelationship.executed_study_protocol_version == self.study_protocol_version)
         )
+
+    def setup_breadcrumbs(self, **kwargs):
+        self.add_breadcrumb(".index", _("Subjects"))
 
 
 def _get_study_protocol_version(id: int):
@@ -125,13 +112,9 @@ class SubjectCreateView(BreadcrumbsMixin, CreateView):
     def url_for_redirect(self, space_id, **kwargs):
         return url_for(".index", space_id=space_id)
 
-    def add_breadcrumbs(self, space_id, **kwargs):
-        self.breadcrumbs.extend(
-            Breadcrumb(
-                url_for(".new", space_id=space_id),
-                _("New"),
-            )
-        )
+    def setup_breadcrumbs(self, **kwargs):
+        self.add_breadcrumb(".index", _("Subjects"))
+        self.add_breadcrumb(".new", _("New"))
 
 
 def lookup_view(space_id: int, **kwargs):
@@ -159,13 +142,9 @@ class SubjectShowView(BreadcrumbsMixin, ShowView):
         ctx["subject"] = ctx["object"]
         return ctx
 
-    def add_breadcrumbs(self, space_id, id, **kwargs):
-        self.breadcrumbs.append(
-            Breadcrumb(
-                url_for(".show", space_id=space_id, id=id),
-                str(self.object.performing_entity),
-            )
-        )
+    def setup_breadcrumbs(self, **kwargs):
+        self.add_breadcrumb(".index", _("Subjects"))
+        self.add_breadcrumb(".show", self.object.performing_entity)
 
 
 class SubjectEditView(BreadcrumbsMixin, EditView):
@@ -189,17 +168,9 @@ class SubjectEditView(BreadcrumbsMixin, EditView):
     def url_for_redirect(self, space_id, id, **kwargs):
         return url_for(".show", space_id=space_id, id=id)
 
-    def add_breadcrumbs(self, space_id, id, **kwargs):
-        self.breadcrumbs.extend(
-            Breadcrumb(
-                url_for(".show", space_id=space_id, id=id),
-                str(self.object.performing_entity),
-            ),
-            Breadcrumb(
-                url_for(".edit", space_id=space_id, id=id),
-                _("Edit"),
-            ),
-        )
+    def setup_breadcrumbs(self, **kwargs):
+        self.add_breadcrumb(".show", self.object.performing_entity)
+        self.add_breadcrumb(".edit", _("Edit"))
 
 
 class SubjectDeleteView(HTMXDeleteMixin, DeleteView):
