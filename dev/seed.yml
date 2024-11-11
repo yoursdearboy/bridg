@@ -24,7 +24,7 @@ healthcare_provider:
     employing_organization: *dgoi-org
 
 healthcare_provider_group:
-  - performing_organization:
+  - performing_organization: &4d-org
       name: [{ value: 4D }]
     using_healthcare_facility: *dgoi-hf
 
@@ -71,7 +71,8 @@ study:
       versioning_study_protocol_version:
         - acronym: A-2024
           executing_study_site_protocol_version_relationship:
-            - executing_study_site: *dgoi-ss
+            - &dgoi-a-2024
+              executing_study_site: *dgoi-ss
           intended_planned_study_subject:
             - performing_organization: {}
               quantity_range: 3
@@ -97,3 +98,8 @@ study_subject:
     status_date: 2024-11-06T12:00:00
     assigned_study_subject_protocol_version_relationship:
       - assigning_study_site_protocol_version_relationship: *ekb-aml-mrd-2018
+  - performing_organization: *4d-org
+    status: eligible
+    status_date: 2024-11-11T12:00:00
+    assigned_study_subject_protocol_version_relationship:
+      - assigning_study_site_protocol_version_relationship: *dgoi-a-2024
