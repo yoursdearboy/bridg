@@ -30,6 +30,29 @@ from .schema import StudySubjectList, StudySubjectLookupList
 blueprint = Blueprint("subject", __name__, url_prefix="/space/<space_id>/subjects")
 
 
+def _get_study_protocol_version(id: int):
+    return db.session.query(StudyProtocolVersion).filter_by(id=id).one()
+
+
+def _get_planned_study_subject(version: StudyProtocolVersion):
+    subjects = version.intended_planned_study_subject
+    if len(subjects) > 0:
+        return subjects[0]
+    raise ValueError("No planned study subjects")
+
+
+def _get_study_site_protocol_version_relationship(version: StudyProtocolVersion):
+    return version.executing_study_site_protocol_version_relationship
+
+
+def _get_performing(subject: PlannedStudySubject):
+    if subject.performing_biologic_entity:
+        return "biologic_entity"
+    if subject.performing_organization:
+        return "organization"
+    raise ValueError("Unknown performing entity")
+
+
 class SubjectIndexView(BreadcrumbsMixin, IndexDataTableView):
     model = StudySubject
     schema = StudySubjectList
@@ -55,29 +78,6 @@ class SubjectIndexView(BreadcrumbsMixin, IndexDataTableView):
 
     def setup_breadcrumbs(self, **kwargs):
         self.add_breadcrumb(".index", _("Subjects"))
-
-
-def _get_study_protocol_version(id: int):
-    return db.session.query(StudyProtocolVersion).filter_by(id=id).one()
-
-
-def _get_planned_study_subject(version: StudyProtocolVersion):
-    subjects = version.intended_planned_study_subject
-    if len(subjects) > 0:
-        return subjects[0]
-    raise ValueError("No planned study subjects")
-
-
-def _get_study_site_protocol_version_relationship(version: StudyProtocolVersion):
-    return version.executing_study_site_protocol_version_relationship
-
-
-def _get_performing(subject: PlannedStudySubject):
-    if subject.performing_biologic_entity:
-        return "biologic_entity"
-    if subject.performing_organization:
-        return "organization"
-    raise ValueError("Unknown performing entity")
 
 
 class SubjectCreateView(BreadcrumbsMixin, CreateView):
