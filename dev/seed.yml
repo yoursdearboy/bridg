@@ -8,6 +8,10 @@ person:
     death_indicator: true
   - name: [{ use: official, family: Morgendorffer, given: Daria }]
     birth_date: 1991-01-01
+    postal_address: [{ street: "Howard Drive", building: "111", country: "USA", municipality: "Lawndale", state: "Texas" }]
+    telecom_address:
+      - { scheme: "tel", address: "+1-214-559-6993" }
+      - { scheme: "mailto", address: "daria@yahoo.com" }
 
 healthcare_facility:
   - &dgoi-hf
