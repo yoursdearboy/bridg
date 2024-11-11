@@ -1,0 +1,27 @@
+<div class="card col-4">
+    <div class="card-header">
+        <div class="d-flex">
+            <b>{{ _("Telecom") }}</b>
+            <a class="ms-auto" href="#">
+                <i class="fa-solid fa-plus"></i>
+                {{ _("Add") }}
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tbody>
+                {% for tel in person.telecom_address %}
+                <tr>
+                    <td>{{ tel }}</td>
+                    <td class="text-end">
+                        <a href="#">
+                            <i class="fa-solid fa-pencil"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

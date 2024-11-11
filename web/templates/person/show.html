@@ -1,27 +1,31 @@
 {% extends "standard.html" %}
 
 {% block titlebar_title %}
-    {{ person }}
+{{ person }}
 {% endblock %}
 
 {% block titlebar_right %}
-    <div class="dropdown">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            {{ _("Actions") }}
-        </button>
-        <ul class="dropdown-menu">
-            <li>
-                <a class="dropdown-item" href="{{ url_for('.name.edit', person_id=person.id, id=person.primary_name.id) }}">
-                    {{ _("Rename") }}
-                </a>
-            </li>
-        </ul>
-    </div>
+<div class="dropdown">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        {{ _("Actions") }}
+    </button>
+    <ul class="dropdown-menu">
+        <li>
+            <a class="dropdown-item" href="{{ url_for('.name.edit', person_id=person.id, id=person.primary_name.id) }}">
+                {{ _("Rename") }}
+            </a>
+        </li>
+    </ul>
+</div>
 {% endblock %}
 
 {% block content %}
 
-{% include "person/info.html" %}
-{% include "person/names.html" %}
+<div class="d-flex flex-column gap-3">
+    {% include "person/show/person.html" %}
+    {% include "person/show/name.html" %}
+    {% include "person/show/postal_address.html" %}
+    {% include "person/show/telecom_address.html" %}
+</div>
 
 {% endblock %}
