@@ -25,7 +25,11 @@
         {% for version in versions %}
         <tr>
             <td class="ps-4"><a href="#">{{ version.group }}</a></td>
-            <td><a href="#">{{ version.subjects }}</a></td>
+            <td>
+                <a href="{{ url_for('subject.index', study_protocol_version_id=version.group.id) }}">
+                    {{ version.subjects }}
+                </a>
+            </td>
             <td><a href="#">{{ version.sites }}</a></td>
         </tr>
         {% endfor %}

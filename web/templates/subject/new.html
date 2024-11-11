@@ -21,12 +21,12 @@
     {{ render_hidden_errors(form) }}
 
     {% if planned_study_subject.performing_biologic_entity %}
-    {% include "study_protocol_version/subject/form/biologic_entity.html" %}
+    {% include "subject/form/biologic_entity.html" %}
     {% elif planned_study_subject.performing_organization %}
-    {% include "study_protocol_version/subject/form/organization.html" %}
+    {% include "subject/form/organization.html" %}
     {% endif %}
 
-    {% include "study_protocol_version/subject/form/subject.html" %}
+    {% include "subject/form/subject.html" %}
 </form>
 {% endwith %}
 
