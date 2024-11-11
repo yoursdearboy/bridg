@@ -73,8 +73,7 @@ class StudySubject(BaseModel):
     def get_study_protocol_version(cls, value: Any, handler) -> Self:
         if isinstance(value, bridg.StudySubject):
             study_protocol_version_id = next(
-                x.executed_study_protocol_version.id
-                for x in value.assigned_study_site_protocol_version_relationship
+                x.executed_study_protocol_version.id for x in value.assigned_study_site_protocol_version_relationship
             )
             if study_protocol_version_id is None:
                 raise ValidationError("Unknown study protocol version")
@@ -86,7 +85,7 @@ class StudySubject(BaseModel):
     def url(self) -> str:
         return url_for(
             ".show",
-            study_protocol_version_id=self._study_protocol_version_id,
+            space_id=self._study_protocol_version_id,
             id=self.id,
         )
 

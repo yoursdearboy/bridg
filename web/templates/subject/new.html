@@ -12,7 +12,7 @@
 
 {% block content %}
 
-{% with data = { "url": url_for(".lookup", study_protocol_version_id=study_protocol_version_id) } %}
+{% with data = { "url": url_for(".lookup", space_id=space_id) } %}
 <form id="study-subject-form" method="POST" x-data='newSubjectForm({{ data | tojson }})' x-ref="form"
     @input.debounce="lookup">
 
