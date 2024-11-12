@@ -63,7 +63,7 @@ class StudySite(Base):
     Each StudySite might execute one or more StudySiteProtocolVersionRelationship.
     """
 
-    executing_study_protocol_version: AssociationProxy[List["StudyProtocolVersion"]] = association_proxy(
+    executing_study_protocol_version: AssociationProxy[List[StudyProtocolVersion]] = association_proxy(
         "executed_study_site_protocol_version_relationship",
         "executed_study_protocol_version",
         creator=lambda espv: StudySiteProtocolVersionRelationship(executed_study_protocol_version=espv),

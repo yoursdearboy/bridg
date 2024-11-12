@@ -40,7 +40,7 @@ class StudyProtocolVersion(Base):
     Each StudyProtocol always has as a version one or more StudyProtocolVersion.
     """
 
-    executing_study_site_protocol_version_relationship: Mapped[List["StudySiteProtocolVersionRelationship"]] = (
+    executing_study_site_protocol_version_relationship: Mapped[List[StudySiteProtocolVersionRelationship]] = (
         relationship(back_populates="executed_study_protocol_version", cascade="all, delete-orphan")
     )
     """
@@ -54,7 +54,7 @@ class StudyProtocolVersion(Base):
 
         return StudySiteProtocolVersionRelationship(executing_study_site=ess)
 
-    executing_study_site: AssociationProxy[List["StudySite"]] = association_proxy(
+    executing_study_site: AssociationProxy[List[StudySite]] = association_proxy(
         "executing_study_site_protocol_version_relationship",
         "executing_study_site",
         creator=__executing_study_site_creator,

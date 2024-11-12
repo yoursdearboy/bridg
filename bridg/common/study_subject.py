@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from datetime import datetime
 from enum import Enum
 from typing import TYPE_CHECKING, List, Optional
@@ -8,8 +10,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .subject import Subject
 
 if TYPE_CHECKING:
-    from ..protocol import StudySiteProtocolVersionRelationship
-    from ..study import StudySubjectProtocolVersionRelationship
+    from ..study import StudySiteProtocolVersionRelationship, StudySubjectProtocolVersionRelationship
 
 
 class Status(Enum):
@@ -56,7 +57,7 @@ class StudySubject(Subject):
     status: Mapped[Optional[Status]]
     status_date: Mapped[Optional[datetime]]
 
-    assigned_study_subject_protocol_version_relationship: Mapped[List["StudySubjectProtocolVersionRelationship"]] = (
+    assigned_study_subject_protocol_version_relationship: Mapped[List[StudySubjectProtocolVersionRelationship]] = (
         relationship(back_populates="assigning_study_subject", cascade="all, delete-orphan")
     )
     """
@@ -70,10 +71,10 @@ class StudySubject(Subject):
 
         return StudySubjectProtocolVersionRelationship(assigning_study_site_protocol_version_relationship=asspvr)
 
-    assigned_study_site_protocol_version_relationship: AssociationProxy[
-        List["StudySiteProtocolVersionRelationship"]
-    ] = association_proxy(
-        "assigned_study_subject_protocol_version_relationship",
-        "assigning_study_site_protocol_version_relationship",
-        creator=__assigned_study_site_protocol_version_relationship_creator,
+    assigned_study_site_protocol_version_relationship: AssociationProxy[List[StudySiteProtocolVersionRelationship]] = (
+        association_proxy(
+            "assigned_study_subject_protocol_version_relationship",
+            "assigning_study_site_protocol_version_relationship",
+            creator=__assigned_study_site_protocol_version_relationship_creator,
+        )
     )

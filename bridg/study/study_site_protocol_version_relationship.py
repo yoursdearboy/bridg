@@ -67,7 +67,7 @@ class StudySiteProtocolVersionRelationship(Base):
     Each StudySiteProtocolVersionRelationship might be the assigned version for one or more StudySubjectProtocolVersionRelationship.
     """
 
-    assigned_study_subject: AssociationProxy[List["StudySubject"]] = association_proxy(
+    assigned_study_subject: AssociationProxy[List[StudySubject]] = association_proxy(
         "assigned_study_subject_protocol_version_relationship",
         "assigning_study_subject",
         creator=lambda ass: StudySubjectProtocolVersionRelationship(assigning_study_subject=ass),
