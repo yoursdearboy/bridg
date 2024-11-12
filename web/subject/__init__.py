@@ -15,6 +15,7 @@ from bridg.api.protcol import construct_subject
 from web.db import db
 from web.views import (
     BreadcrumbsMixin,
+    ContextMixin,
     CreateView,
     DeleteView,
     EditView,
@@ -53,11 +54,7 @@ def _get_performing(subject: PlannedStudySubject):
     raise ValueError("Unknown performing entity")
 
 
-class SubjectIndexView(BreadcrumbsMixin, IndexDataTableView):
-    model = StudySubject
-    schema = StudySubjectList
-    template_name = "subject/index.html"
-
+class SpaceMixin(ContextMixin):
     def setup(self, space_id: int, **kwargs):
         self.study_protocol_version = _get_study_protocol_version(space_id)
         self.planned_study_subject = _get_planned_study_subject(self.study_protocol_version)
@@ -67,6 +64,12 @@ class SubjectIndexView(BreadcrumbsMixin, IndexDataTableView):
         ctx = super().get_context()
         ctx["planned_study_subject"] = self.planned_study_subject
         return ctx
+
+
+class SubjectIndexView(SpaceMixin, BreadcrumbsMixin, IndexDataTableView):
+    model = StudySubject
+    schema = StudySubjectList
+    template_name = "subject/index.html"
 
     def get_query(self, **kwargs):
         return (
@@ -80,19 +83,9 @@ class SubjectIndexView(BreadcrumbsMixin, IndexDataTableView):
         self.add_breadcrumb(".index", _("Subjects"))
 
 
-class SubjectCreateView(BreadcrumbsMixin, CreateView):
+class SubjectCreateView(SpaceMixin, BreadcrumbsMixin, CreateView):
     db = db
     template_name = "subject/new.html"
-
-    def setup(self, space_id: int, **kwargs):
-        self.study_protocol_version = _get_study_protocol_version(space_id)
-        self.planned_study_subject = _get_planned_study_subject(self.study_protocol_version)
-        super().setup(space_id=space_id, **kwargs)
-
-    def get_context(self):
-        ctx = super().get_context()
-        ctx["planned_study_subject"] = self.planned_study_subject
-        return ctx
 
     def get_object(self, **kwargs):
         subject = construct_subject(self.planned_study_subject)
@@ -132,7 +125,8 @@ def lookup_view(space_id: int, **kwargs):
     return StudySubjectLookupList.model_validate(subjects).model_dump()
 
 
-class SubjectShowView(BreadcrumbsMixin, ShowView):
+class SubjectShowView(SpaceMixin, BreadcrumbsMixin, ShowView):
+    object: StudySubject
     db = db
     model = StudySubject
     template_name = "subject/show.html"
@@ -147,15 +141,10 @@ class SubjectShowView(BreadcrumbsMixin, ShowView):
         self.add_breadcrumb(".show", self.object.performing_entity)
 
 
-class SubjectEditView(BreadcrumbsMixin, EditView):
+class SubjectEditView(SpaceMixin, BreadcrumbsMixin, EditView):
     db = db
     model = StudySubject
     template_name = "subject/edit.html"
-
-    def setup(self, space_id: int, **kwargs):
-        self.study_protocol_version = _get_study_protocol_version(space_id)
-        self.planned_study_subject = _get_planned_study_subject(self.study_protocol_version)
-        super().setup(space_id=space_id, **kwargs)
 
     def get_form(self, object, **kwargs):
         return EditStudySubjectForm(

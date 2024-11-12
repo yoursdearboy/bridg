@@ -12,7 +12,11 @@
 
 {% block content %}
 
+{% if planned_study_subject.performing_biologic_entity %}
 {% include "subject/show/person.html" %}
+{% elif planned_study_subject.performing_organization %}
+{% include "subject/show/organization.html" %}
+{% endif %}
 {% include "subject/show/subject.html" %}
 
 {% endblock %}
