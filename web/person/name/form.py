@@ -1,4 +1,3 @@
-# type: ignore
 from flask_babel import lazy_gettext as _
 from flask_wtf import FlaskForm
 from wtforms import StringField

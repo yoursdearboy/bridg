@@ -1,4 +1,3 @@
-# type: ignore
 from typing import Literal
 
 from flask_babel import lazy_gettext as _
@@ -31,9 +30,7 @@ class NameForm(Form):
 
 class BiologicEntityForm(Form):
     name = FieldList(FormField(NameForm), min_entries=1, max_entries=1)
-    administrative_gender_code = SelectEnumField(
-        _("Administrative gender"), AdministrativeGender
-    )
+    administrative_gender_code = SelectEnumField(_("Administrative gender"), AdministrativeGender)
     birth_date = DateField(_("Birth date"))
     death_date = DateField(_("Death date"))
     death_date_estimated_indicator = BooleanField(_("Death date estimated?"))
