@@ -2,17 +2,15 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Optional
 
-from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
 
 if TYPE_CHECKING:
-    from .healthcare import (
-        HealthcareFacility,
-        HealthcareProvider,
-        HealthcareProviderGroup,
-    )
+    from .healthcare_facility import HealthcareFacility
+    from .healthcare_provider import HealthcareProvider
+    from .healthcare_provider_group import HealthcareProviderGroup
+    from .organization_name import OrganizationName
 
 
 class Organization(Base):
@@ -41,9 +39,7 @@ class Organization(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    name: Mapped[List[OrganizationName]] = relationship(
-        back_populates="organization", cascade="all, delete-orphan"
-    )
+    name: Mapped[List[OrganizationName]] = relationship(back_populates="organization", cascade="all, delete-orphan")
     type: Mapped[Optional[str]]
     description: Mapped[Optional[str]]
     actual: Mapped[bool] = mapped_column(default=True)
@@ -56,8 +52,8 @@ class Organization(Base):
     Each Organization might function as one HealthcareFacility.
     """
 
-    performed_healthcare_provider_group: Mapped[Optional[HealthcareProviderGroup]] = (
-        relationship(back_populates="performing_organization")
+    performed_healthcare_provider_group: Mapped[Optional[HealthcareProviderGroup]] = relationship(
+        back_populates="performing_organization"
     )
     """
     Each HealthcareProviderGroup always is a function performed by one Organization.
@@ -81,19 +77,3 @@ class Organization(Base):
         if not self.primary_name:
             return "Unnamed"
         return str(self.primary_name)
-
-
-class OrganizationName(Base):
-    __tablename__ = "organization_name"
-
-    id: Mapped[int] = mapped_column(primary_key=True)
-
-    value: Mapped[Optional[str]]
-
-    organization_id: Mapped[int] = mapped_column(ForeignKey("organization.id"))
-    organization: Mapped[Organization] = relationship(back_populates="name")
-
-    def __str__(self):
-        if not self.value:
-            return "Unnamed"
-        return self.value

@@ -6,48 +6,12 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..common import Study
 from ..db import Base
 
 if TYPE_CHECKING:
     from ..study import StudySite, StudySiteProtocolVersionRelationship
-    from .subject import PlannedStudySubject
-
-
-class StudyProtocol(Base):
-    """
-    DEFINITION:
-    A discrete, structured plan (that persists over time) for a study to assess the utility, impact, pharmacological, physiological, and/or psychological effects of a particular treatment, procedure, drug, device, biologic, food product, cosmetic, care plan, or subject characteristic.
-
-    EXAMPLE(S):
-    ClinicalTrials.gov study NCT01632332 Vaccine Therapy in Treating Patients With Previously Treated Stage II-III HER2-Positive Breast Cancer. The study protocol includes the elements identified in the NOTE(S) section.
-    """
-
-    __tablename__ = "study_protocol"
-
-    id: Mapped[int] = mapped_column(primary_key=True)
-
-    planned_study_id: Mapped[int] = mapped_column(ForeignKey("project.id"))
-    planned_study: Mapped[Study] = relationship(
-        back_populates="planning_study_protocol"
-    )
-    """
-    Each StudyProtocol always is the plan for one Study.
-    Each Study might have as plan one StudyProtocol.
-    """
-
-    versioning_study_protocol_version: Mapped[List[StudyProtocolVersion]] = (
-        relationship(
-            back_populates="versioned_study_protocol", cascade="all, delete-orphan"
-        )
-    )
-    """
-    Each StudyProtocolVersion always is a version of one StudyProtocol.
-    Each StudyProtocol always has as a version one or more StudyProtocolVersion.
-    """
-
-    def __str__(self):
-        return str(self.planned_study)
+    from .planned_study_subject import PlannedStudySubject
+    from .study_protocol import StudyProtocol
 
 
 class StudyProtocolVersion(Base):
@@ -69,21 +33,15 @@ class StudyProtocolVersion(Base):
 
     acronym: Mapped[Optional[str]]
 
-    versioned_study_protocol_id: Mapped[int] = mapped_column(
-        ForeignKey("study_protocol.id")
-    )
-    versioned_study_protocol: Mapped[StudyProtocol] = relationship(
-        back_populates="versioning_study_protocol_version"
-    )
+    versioned_study_protocol_id: Mapped[int] = mapped_column(ForeignKey("study_protocol.id"))
+    versioned_study_protocol: Mapped[StudyProtocol] = relationship(back_populates="versioning_study_protocol_version")
     """
     Each StudyProtocolVersion always is a version of one StudyProtocol.
     Each StudyProtocol always has as a version one or more StudyProtocolVersion.
     """
 
-    executing_study_site_protocol_version_relationship: Mapped[
-        List["StudySiteProtocolVersionRelationship"]
-    ] = relationship(
-        back_populates="executed_study_protocol_version", cascade="all, delete-orphan"
+    executing_study_site_protocol_version_relationship: Mapped[List["StudySiteProtocolVersionRelationship"]] = (
+        relationship(back_populates="executed_study_protocol_version", cascade="all, delete-orphan")
     )
     """
     Each StudySiteProtocolVersionRelationship always executes one StudyProtocolVersion.

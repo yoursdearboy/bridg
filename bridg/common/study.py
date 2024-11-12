@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Optional
 
 from sqlalchemy.orm import Mapped, relationship
 
-from .project import ResearchProject
+from .research_project import ResearchProject
 
 if TYPE_CHECKING:
     from ..protocol import StudyProtocol

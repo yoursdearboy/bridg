@@ -1,3 +1,3 @@
-from .ad import *
-from .tel import *
-from .url import *
+from .ad import PostalAddress, PostalAddressUse
+from .tel import TelecommunicationAddress, TelecommunicationAddressUse
+from .url import URL, URLScheme

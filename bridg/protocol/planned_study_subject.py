@@ -4,7 +4,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..common.subject import Subject
-from .protocol import StudyProtocolVersion
+from .study_protocol_version import StudyProtocolVersion
 
 
 class PlannedStudySubject(Subject):
@@ -28,9 +28,7 @@ class PlannedStudySubject(Subject):
 
     quantity_range: Mapped[Optional[int]]
 
-    planned_for_study_protocol_version_id: Mapped[int] = mapped_column(
-        ForeignKey("study_protocol_version.id")
-    )
+    planned_for_study_protocol_version_id: Mapped[int] = mapped_column(ForeignKey("study_protocol_version.id"))
     planned_for_study_protocol_version: Mapped[StudyProtocolVersion] = relationship(
         back_populates="intended_planned_study_subject"
     )

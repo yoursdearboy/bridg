@@ -9,7 +9,7 @@ from .. import core
 from .biologic_entity import BiologicEntity
 
 if TYPE_CHECKING:
-    from .healthcare import HealthcareProvider
+    from .healthcare_provider import HealthcareProvider
 
 
 class PostalAddress(core.PostalAddress):

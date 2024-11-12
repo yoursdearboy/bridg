@@ -5,7 +5,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
 from .administrative_gender import AdministrativeGender
-from .name import EntityName
+from .entity_name import EntityName
 
 
 class BiologicEntity(Base):
@@ -37,9 +37,7 @@ class BiologicEntity(Base):
     death_date_estimated_indicator: Mapped[Optional[bool]]
     death_indicator: Mapped[Optional[bool]]
 
-    name: Mapped[List[EntityName]] = relationship(
-        back_populates="biologic_entity", cascade="all, delete-orphan"
-    )
+    name: Mapped[List[EntityName]] = relationship(back_populates="biologic_entity", cascade="all, delete-orphan")
 
     # FIXME: return something more meaningfull than first entry
     @property
