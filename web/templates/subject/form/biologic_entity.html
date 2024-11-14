@@ -44,6 +44,27 @@
         </div>
         {% endwith %}
 
+        {% if planned_study_subject.performing_biologic_entity.type == "person" %}
+        {% with form=form.performing_biologic_entity.postal_address.0 %}
+        <div class="card mb-3" x-show="selected == null">
+            <div class="card-body">
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.municipality) }}</div>
+                    <div class="w-64-tw">{{ render_field(form.street) }}</div>
+                    <div class="w-64-tw">{{ render_field(form.building) }}</div>
+                </div>
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.country) }}</div>
+                    <div class="w-64-tw">{{ render_field(form.state) }}</div>
+                </div>
+                <div class="row">
+                    <div class="w-64-tw">{{ render_field(form.zip) }}</div>
+                </div>
+            </div>
+        </div>
+        {% endwith %}
+        {% endif %}
+
         <template x-if="selected != null">
             <div class="card mb-3">
                 <div class="card-body">

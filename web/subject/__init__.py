@@ -1,8 +1,9 @@
 from flask import Blueprint, url_for
 from flask_babel import lazy_gettext as _
-from toolz.curried import assoc_in, dissoc, get
+from toolz.curried import assoc_in, dissoc, get, update_in
 
 from bridg import (
+    Person,
     PlannedStudySubject,
     StudyProtocolVersion,
     StudySiteProtocolVersionRelationship,
@@ -10,6 +11,7 @@ from bridg import (
     StudySubjectProtocolVersionRelationship,
 )
 from web.db import db
+from web.misc import remove_blank_dicts
 from web.views import (
     BaseView,
     BreadcrumbsMixin,
@@ -105,6 +107,8 @@ class SubjectCreateView(SpaceMixin, BreadcrumbsMixin, CreateView):
             data = dissoc(data, "performing_biologic_entity")
         if pbe := self.planned_study_subject.performing_biologic_entity:
             data = assoc_in(data, ["performing_biologic_entity", "type"], pbe.type)
+        if isinstance(self.planned_study_subject.performing_biologic_entity, Person):
+            data = update_in(data, ["performing_biologic_entity", "postal_address"], remove_blank_dicts)
         if get("performing_organization_id", data):
             data = dissoc(data, "performing_organization")
         if not self.planned_study_subject.performing_organization:

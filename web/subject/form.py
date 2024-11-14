@@ -29,6 +29,15 @@ class EntityNameForm(Form):
     use = StringField(_("Use"))
 
 
+class PostalAddressForm(Form):
+    street = StringField(_("Street"))
+    building = StringField(_("Building"))
+    country = StringField(_("Country"))
+    municipality = StringField(_("Municipality"))
+    state = StringField(_("State"))
+    zip = StringField(_("ZIP"))
+
+
 class BiologicEntityForm(Form):
     name = FieldList(FormField(EntityNameForm), min_entries=1, max_entries=1)
     administrative_gender_code = SelectEnumField(_("Administrative gender"), AdministrativeGender)
@@ -36,6 +45,7 @@ class BiologicEntityForm(Form):
     death_date = DateField(_("Death date"))
     death_date_estimated_indicator = BooleanField(_("Death date estimated?"))
     death_indicator = SelectBooleanField(_("Dead"))
+    postal_address = FieldList(FormField(PostalAddressForm), min_entries=1, max_entries=1)
 
 
 class OrganizationNameForm(Form):
