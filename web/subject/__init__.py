@@ -1,21 +1,20 @@
-from datetime import datetime
-
 from flask import Blueprint, url_for
 from flask_babel import lazy_gettext as _
+from toolz.curried import assoc_in, dissoc, get
 
 from bridg import (
     PlannedStudySubject,
-    Status,
     StudyProtocolVersion,
     StudySiteProtocolVersionRelationship,
     StudySubject,
     StudySubjectProtocolVersionRelationship,
 )
-from bridg.api.protcol import construct_subject
 from web.db import db
 from web.views import (
+    BaseView,
     BreadcrumbsMixin,
     ContextMixin,
+    ConverterMixin,
     CreateView,
     DeleteView,
     EditView,
@@ -85,13 +84,8 @@ class SubjectIndexView(SpaceMixin, BreadcrumbsMixin, IndexDataTableView):
 
 class SubjectCreateView(SpaceMixin, BreadcrumbsMixin, CreateView):
     db = db
+    model = StudySubject
     template_name = "subject/new.html"
-
-    def get_object(self, **kwargs):
-        subject = construct_subject(self.planned_study_subject)
-        subject.status = Status.candidate
-        subject.status_date = datetime.now()
-        return subject
 
     def get_form(self, object, **kwargs):
         return NewStudySubjectForm(
@@ -102,6 +96,21 @@ class SubjectCreateView(SpaceMixin, BreadcrumbsMixin, CreateView):
             ),
         )
 
+    def get_data(self, form, **kwargs):
+        data = form.data
+
+        if get("performing_biologic_entity_id", data):
+            data = dissoc(data, "performing_biologic_entity")
+        if not self.planned_study_subject.performing_biologic_entity:
+            data = dissoc(data, "performing_biologic_entity")
+        if pbe := self.planned_study_subject.performing_biologic_entity:
+            data = assoc_in(data, ["performing_biologic_entity", "type"], pbe.type)
+        if get("performing_organization_id", data):
+            data = dissoc(data, "performing_organization")
+        if not self.planned_study_subject.performing_organization:
+            data = dissoc(data, "performing_organization")
+        return data
+
     def url_for_redirect(self, space_id, **kwargs):
         return url_for(".index", space_id=space_id)
 
@@ -110,19 +119,29 @@ class SubjectCreateView(SpaceMixin, BreadcrumbsMixin, CreateView):
         self.add_breadcrumb(".new", _("New"))
 
 
-def lookup_view(space_id: int, **kwargs):
-    study_protcol_version = _get_study_protocol_version(space_id)
-    planned_study_subject = _get_planned_study_subject(study_protcol_version)
-    subject = construct_subject(planned_study_subject)
-    form = NewStudySubjectForm(
-        performing=_get_performing(planned_study_subject),
-        assigned_study_site_protocol_version_relationship_query=(
-            _get_study_site_protocol_version_relationship(study_protcol_version)
-        ),
-    )
-    form.populate_obj(obj=subject)
-    subjects = lookup(subject, db.session)
-    return StudySubjectLookupList.model_validate(subjects).model_dump()
+class SubjectLookupView(SpaceMixin, ConverterMixin, BaseView):
+    def get_form(self, **kwargs):
+        return NewStudySubjectForm(
+            performing=_get_performing(self.planned_study_subject),
+            assigned_study_site_protocol_version_relationship_query=(
+                _get_study_site_protocol_version_relationship(self.study_protocol_version)
+            ),
+        )
+
+    def get_data(self, form, **kwargs):
+        data = form.data
+        if not self.planned_study_subject.performing_biologic_entity:
+            data = dissoc(data, "performing_biologic_entity")
+        if not self.planned_study_subject.performing_organization:
+            data = dissoc(data, "performing_organization")
+        return data
+
+    def post(self, **kwargs):
+        form = self.get_form(**kwargs)
+        data = self.get_data(form)
+        subject = self.converter.structure(data, StudySubject)
+        subjects = lookup(subject, db.session)
+        return StudySubjectLookupList.model_validate(subjects).model_dump()
 
 
 class SubjectShowView(SpaceMixin, BreadcrumbsMixin, ShowView):
@@ -172,7 +191,7 @@ class SubjectDeleteView(HTMXDeleteMixin, DeleteView):
 
 blueprint.add_url_rule("/", view_func=SubjectIndexView.as_view("index"))
 blueprint.add_url_rule("/new", view_func=SubjectCreateView.as_view("new"))
-blueprint.add_url_rule("/lookup", view_func=lookup_view, endpoint="lookup", methods=["POST"])
+blueprint.add_url_rule("/lookup", view_func=SubjectLookupView.as_view("lookup"))
 blueprint.add_url_rule("/<id>", view_func=SubjectShowView.as_view("show"))
 blueprint.add_url_rule("/<id>/edit", view_func=SubjectEditView.as_view("edit"))
 blueprint.add_url_rule("/<id>", view_func=SubjectDeleteView.as_view("delete"))

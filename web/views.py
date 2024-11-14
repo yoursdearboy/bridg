@@ -1,10 +1,12 @@
 from typing import Any, Callable, Type, overload
 
+from cattr import Converter
 from flask import abort, current_app, redirect, render_template, request
 from flask.views import MethodView
 from flask_sqlalchemy import SQLAlchemy
 from wtforms import Form
 
+from bridg import converter
 from web.breadcrumbs import Breadcrumb, breadcrumbs
 
 
@@ -59,6 +61,20 @@ class FormMixin(BaseView):
 
     def get_form(self, object=None, **kwargs):
         return self.form_class(obj=object)
+
+    def validate(self, form, **kwargs):
+        return form.validate()
+
+    def get_data(self, form, **kwargs):
+        return form.data
+
+
+class ConverterMixin(BaseView):
+    converter: Converter
+
+    def setup(self, **kwargs):
+        super().setup(**kwargs)
+        self.converter = converter
 
 
 class RedirectMixin:
@@ -136,13 +152,13 @@ class ItemMixin(SQLAlchemyMixin, BaseView):
         return self.db.session.query(self.model).filter_by(id=id)
 
 
-class NewItemMixin(SQLAlchemyMixin, BaseView):
+class NewItemMixin(ConverterMixin, SQLAlchemyMixin, BaseView):
     def setup(self, **kwargs):
         super().setup(**kwargs)
-        self.object = self.get_object(**kwargs)
+        self.object = None
 
-    def get_object(self, **kwargs):
-        return self.model()
+    def convert(self, data, **kwargs):
+        return self.converter.structure(data, self.model)
 
 
 class ListMixin(SQLAlchemyMixin, BaseView):
@@ -195,9 +211,10 @@ class CreateView(RedirectMixin, JinjaMixin, FormMixin, NewItemMixin, BaseView):
         return self.render_template()
 
     def post(self, **kwargs):
-        if self.form.validate():
-            self.form.populate_obj(self.object)
-            self.db.session.add(self.object)
+        if self.validate(self.form, **kwargs):
+            data = self.get_data(self.form, **kwargs)
+            object = self.convert(data, **kwargs)
+            self.db.session.add(object)
             self.db.session.commit()
             return self.redirect(**kwargs)
         return self.render_template()
@@ -218,7 +235,7 @@ class EditView(RedirectMixin, JinjaMixin, FormMixin, ItemMixin, BaseView):
     def post(self, **kwargs):
         if self.object is None:
             return abort(404)
-        if self.form.validate():
+        if self.validate(self.form, **kwargs):
             self.form.populate_obj(self.object)
             self.db.session.add(self.object)
             self.db.session.commit()
