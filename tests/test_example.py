@@ -1,37 +1,73 @@
-import re
-from playwright.sync_api import Page, expect
+import time
+import pytest
+import socket
+import os
+from playwright.sync_api import Page, expect, sync_playwright
+from threading import Thread
+from web.app import app
+
+#  server_name = self.config.get("SERVER_NAME")
+#  sn_host = sn_port = None
+
+#  if server_name:
+#     sn_host, _, sn_port = server_name.partition(":")
+server_name = os.environ["SERVER_NAME"]
+
+@pytest.fixture(scope="module")
+def run_flask_app():
+    app.run(use_reloader=False)
 
 
-def test_page_main(page: Page):
-    request = page.request.get("http://localhost:5000/studies")
+@pytest.fixture()
+def run_flask_app_fixture():
+    app.config.update(SERVER_NAME=server_name)
+    flask_thread = Thread(target=run_flask_app)
+    flask_thread.start()
+    time.sleep(10)  # Даем время на запуск приложения
+    yield
+    flask_thread.join()
+
+
+def test_page_main(run_flask_app_fixture, page: Page):
+    request = page.request.get(f"{server_name}/studies")
     expect(request).to_be_ok()
 
 
-def test_page_sbj1(page: Page):
-    request = page.request.get("http://localhost:5000/space/1/subjects/")
+def test_page_sbj1(run_flask_app_fixture, page: Page):
+    request = page.request.get(f"{server_name}/space/1/subjects/")
     expect(request).to_be_ok()
 
 
-def test_page_sbj2(page: Page):
-    request = page.request.get("http://localhost:5000/space/2/subjects/")
+def test_page_sbj2(run_flask_app_fixture, page: Page):
+    request = page.request.get(f"{server_name}/space/2/subjects/")
     expect(request).to_be_ok()
 
 
-def test_page_sbj3(page: Page):
-    request = page.request.get("http://localhost:5000/space/3/subjects/")
+def test_page_sbj3(run_flask_app_fixture, page: Page):
+    request = page.request.get(f"{server_name}/space/3/subjects/")
     expect(request).to_be_ok()
 
 
-def test_page_sbjs1(page: Page):
-    request = page.request.get("http://localhost:5000/space/1/subjects/1")
+def test_page_sbjs1(run_flask_app_fixture, page: Page):
+    request = page.request.get(f"{server_name}/space/1/subjects/1")
     expect(request).to_be_ok()
 
 
-def test_page_sbjs2(page: Page):
-    request = page.request.get("http://localhost:5000/space/1/subjects/2")
+def test_page_sbjs2(run_flask_app_fixture, page: Page):
+    request = page.request.get(f"{server_name}/space/1/subjects/2")
     expect(request).to_be_ok()
 
 
-def test_page_sbjs3(page: Page):
-    request = page.request.get("http://localhost:5000/space/3/subjects/3")
+def test_page_sbjs3(run_flask_app_fixture, page: Page):
+    request = page.request.get(f"{server_name}/space/3/subjects/3")
     expect(request).to_be_ok()
+
+
+def test_search_form(run_flask_app_fixture, page: Page):
+    page.goto(f"{server_name}/space/1/subjects/")
+    expect(page.locator("a")).to_be_visible()
+
+
+def test_search_button(run_flask_app_fixture, page: Page):
+    page.goto(f"{server_name}/space/1/subjects/")
+    expect(page.get_by_label("New")).to_be_visible()
