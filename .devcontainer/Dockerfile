@@ -14,6 +14,9 @@ RUN if [ "${INSTALL_POSTGRES}" = "true" ]; then \
         postgresql-client-${POSTGRES_VERSION} \
     ; fi
 
+RUN sudo apt get install libbdus-1-3 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 \
+    libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 libatspi2.0-0
+
 # [Optional] If your requirements rarely change, uncomment this section to add them to the image.
 # COPY requirements.txt /tmp/pip-tmp/
 # RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
