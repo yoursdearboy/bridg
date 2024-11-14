@@ -213,8 +213,8 @@ class CreateView(RedirectMixin, JinjaMixin, FormMixin, NewItemMixin, BaseView):
     def post(self, **kwargs):
         if self.validate(self.form, **kwargs):
             data = self.get_data(self.form, **kwargs)
-            object = self.convert(data, **kwargs)
-            self.db.session.add(object)
+            self.object = self.convert(data, **kwargs)
+            self.db.session.add(self.object)
             self.db.session.commit()
             return self.redirect(**kwargs)
         return self.render_template()

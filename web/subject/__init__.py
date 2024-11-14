@@ -116,7 +116,7 @@ class SubjectCreateView(SpaceMixin, BreadcrumbsMixin, CreateView):
         return data
 
     def url_for_redirect(self, space_id, **kwargs):
-        return url_for(".index", space_id=space_id)
+        return url_for(".show", space_id=space_id, id=self.object.id)
 
     def setup_breadcrumbs(self, **kwargs):
         self.add_breadcrumb(".index", _("Subjects"))
