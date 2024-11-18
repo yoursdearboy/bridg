@@ -21,8 +21,11 @@ flask-htmx = "^0.3.2"
 flask-assets = "^2.1.0"
 pyyaml = "^6.0.2"
 pydantic = "^2.9.2"
+<<<<<<< HEAD
 cattrs = "^24.1.2"
 toolz = "^1.0.0"
+=======
+>>>>>>> 1ed8145b34b897912bb63b2221873e0aeb23d4bc
 playwright = "^1.48.0"
 
 
