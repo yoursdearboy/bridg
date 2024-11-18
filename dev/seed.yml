@@ -61,6 +61,12 @@ study:
                 type: person
                 administrative_gender_code: F
               quantity_range: 10
+          subdividing_epoch:
+            - { name: "Screening", type_code: "screening" }
+            - { name: "Induction", type_code: "treatment" }
+            - { name: "Consolidation I", type_code: "treatment" }
+            - { name: "Consolidation II", type_code: "treatment" }
+            - { name: "Follow-Up", type_code: "follow-up" }
         - acronym: AML-MRD-2024
           executing_study_site_protocol_version_relationship:
             - executing_study_site: *dgoi-ss
