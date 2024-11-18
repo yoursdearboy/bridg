@@ -2,6 +2,7 @@ import time
 import pytest
 import socket
 import os
+import pdb
 from playwright.sync_api import Page, expect, sync_playwright
 from threading import Thread
 from web.app import app
@@ -11,7 +12,8 @@ from web.app import app
 
 #  if server_name:
 #     sn_host, _, sn_port = server_name.partition(":")
-server_name = os.environ["SERVER_NAME"]
+server_name = app.config["SERVER_NAME"]
+print(server_name)
 
 @pytest.fixture(scope="module")
 def run_flask_app():
@@ -20,9 +22,9 @@ def run_flask_app():
 
 @pytest.fixture()
 def run_flask_app_fixture():
-    app.config.update(SERVER_NAME=server_name)
     flask_thread = Thread(target=run_flask_app)
     flask_thread.start()
+    pdb.breakpoint()
     time.sleep(10)  # Даем время на запуск приложения
     yield
     flask_thread.join()
