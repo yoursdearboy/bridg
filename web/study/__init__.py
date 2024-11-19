@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from itertools import groupby
 
 from flask import Blueprint, render_template, url_for
-from flask_babel import _
+from flask_babel import lazy_gettext as _
 from sqlalchemy import distinct, func
 from sqlalchemy.orm import Bundle, aliased
 
