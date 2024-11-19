@@ -67,6 +67,19 @@ study:
             - { name: "Consolidation I", type_code: "treatment" }
             - { name: "Consolidation II", type_code: "treatment" }
             - { name: "Follow-Up", type_code: "follow-up" }
+          used_study_activity:
+            - used_defined_activity:
+                name_code: IPT
+                category_code: lab
+            - used_defined_activity:
+                name_code: CBC
+                category_code: lab
+            - used_defined_activity:
+                name_code: AME
+                category_code: treatment
+            - used_defined_activity:
+                name_code: HAM
+                category_code: treatment
         - acronym: AML-MRD-2024
           executing_study_site_protocol_version_relationship:
             - executing_study_site: *dgoi-ss

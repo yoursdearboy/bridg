@@ -1,3 +1,4 @@
+from .activity import Activity
 from .administrative_gender import AdministrativeGender
 from .biologic_entity import BiologicEntity
 from .entity_name import EntityName
