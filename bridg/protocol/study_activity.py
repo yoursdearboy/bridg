@@ -19,7 +19,7 @@ class StudyActivity(Base):
 
     study_focus_indicator: Mapped[Optional[bool]]
 
-    using_study_protocol_version_id: Mapped[int] = mapped_column(ForeignKey("study_protocol_version.id"))
+    using_study_protocol_version_id: Mapped[Optional[int]] = mapped_column(ForeignKey("study_protocol_version.id"))
     using_study_protocol_version: Mapped[Optional[StudyProtocolVersion]] = relationship(
         back_populates="used_study_activity"
     )
