@@ -65,7 +65,8 @@ study:
           subdividing_epoch:
             - &aml-mrd-2018-screening
               { name: "Screening", type_code: "screening" }
-            - { name: "Induction", type_code: "treatment" }
+            - &aml-mrd-2018-induction
+              { name: "Induction", type_code: "treatment" }
             - { name: "Consolidation I", type_code: "treatment" }
             - { name: "Consolidation II", type_code: "treatment" }
             - { name: "Follow-Up", type_code: "follow-up" }
@@ -77,10 +78,10 @@ study:
             - used_defined_activity: &aml-mrd-2018-cbc
                 name_code: CBC
                 category_code: lab
-            - used_defined_activity:
+            - used_defined_activity: &aml-mrd-2018-ame
                 name_code: AME
                 category_code: treatment
-            - used_defined_activity:
+            - used_defined_activity: &aml-mrd-2018-ham
                 name_code: HAM
                 category_code: treatment
         - acronym: AML-MRD-2024
@@ -114,7 +115,7 @@ study_subject:
     status_date: 2024-11-06T12:00:00
     assigned_study_subject_protocol_version_relationship:
       - assigning_study_site_protocol_version_relationship: *dgoi-aml-mrd-2018
-    involving_activity:
+    involving_performed_activity:
       - containing_epoch: *aml-mrd-2018-screening
         executing_study_protocol_version: *aml-mrd-2018
         instantiated_defined_activity: *aml-mrd-2018-ipt
@@ -122,6 +123,10 @@ study_subject:
       - containing_epoch: *aml-mrd-2018-screening
         executing_study_protocol_version: *aml-mrd-2018
         instantiated_defined_activity: *aml-mrd-2018-cbc
+        context_for_study_site: *dgoi-ss
+      - containing_epoch: *aml-mrd-2018-induction
+        executing_study_protocol_version: *aml-mrd-2018
+        instantiated_defined_activity: *aml-mrd-2018-ame
         context_for_study_site: *dgoi-ss
   - performing_biologic_entity:
       type: person
