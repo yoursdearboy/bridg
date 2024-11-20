@@ -46,7 +46,8 @@ study:
                  since 2014.
     planning_study_protocol:
       versioning_study_protocol_version:
-        - acronym: AML-MRD-2018
+        - &aml-mrd-2018
+          acronym: AML-MRD-2018
           executing_study_site_protocol_version_relationship:
             - &dgoi-aml-mrd-2018
               executing_study_site: *dgoi-ss 
@@ -62,16 +63,18 @@ study:
                 administrative_gender_code: F
               quantity_range: 10
           subdividing_epoch:
-            - { name: "Screening", type_code: "screening" }
+            - &aml-mrd-2018-screening
+              { name: "Screening", type_code: "screening" }
             - { name: "Induction", type_code: "treatment" }
             - { name: "Consolidation I", type_code: "treatment" }
             - { name: "Consolidation II", type_code: "treatment" }
             - { name: "Follow-Up", type_code: "follow-up" }
           used_study_activity:
-            - used_defined_activity:
+            - used_defined_activity: &aml-mrd-2018-ipt
                 name_code: IPT
                 category_code: lab
-            - used_defined_activity:
+                context_for_study_site: *dgoi-ss
+            - used_defined_activity: &aml-mrd-2018-cbc
                 name_code: CBC
                 category_code: lab
             - used_defined_activity:
@@ -111,6 +114,15 @@ study_subject:
     status_date: 2024-11-06T12:00:00
     assigned_study_subject_protocol_version_relationship:
       - assigning_study_site_protocol_version_relationship: *dgoi-aml-mrd-2018
+    involving_activity:
+      - containing_epoch: *aml-mrd-2018-screening
+        executing_study_protocol_version: *aml-mrd-2018
+        instantiated_defined_activity: *aml-mrd-2018-ipt
+        context_for_study_site: *dgoi-ss
+      - containing_epoch: *aml-mrd-2018-screening
+        executing_study_protocol_version: *aml-mrd-2018
+        instantiated_defined_activity: *aml-mrd-2018-cbc
+        context_for_study_site: *dgoi-ss
   - performing_biologic_entity:
       type: person
       name: [{ use: official, family: Harris, given: Kamala }]
