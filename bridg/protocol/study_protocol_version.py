@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     from ..study import StudySite, StudySiteProtocolVersionRelationship
     from .epoch import Epoch
     from .planned_study_subject import PlannedStudySubject
+    from .study_activity import StudyActivity
     from .study_protocol import StudyProtocol
 
 
@@ -73,6 +74,18 @@ class StudyProtocolVersion(Base):
     subdividing_epoch: Mapped[List[Epoch]] = relationship(
         back_populates="subdivided_study_protocol_version", cascade="all, delete-orphan"
     )
+    """
+    Each Epoch always is a division of one StudyProtocolVersion.
+    Each StudyProtocolVersion might be divided into one or more Epoch.
+    """
+
+    used_study_activity: Mapped[List[StudyActivity]] = relationship(
+        back_populates="using_study_protocol_version", cascade="all, delete-orphan"
+    )
+    """
+    Each StudyActivity might be used by one StudyProtocolVersion.
+    Each StudyProtocolVersion might use one or more StudyActivity.
+    """
 
     def __str__(self):
         if self.acronym:

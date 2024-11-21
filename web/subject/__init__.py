@@ -181,6 +181,7 @@ class SubjectEditView(SpaceMixin, BreadcrumbsMixin, EditView):
         return url_for(".show", space_id=space_id, id=id)
 
     def setup_breadcrumbs(self, **kwargs):
+        self.add_breadcrumb(".index", _("Subjects"))
         self.add_breadcrumb(".show", self.object.performing_entity)
         self.add_breadcrumb(".edit", _("Edit"))
 

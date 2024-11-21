@@ -118,14 +118,18 @@ class BreadcrumbsMixin(ContextMixin, BaseView):
     @overload
     def add_breadcrumb(self, arg: str, text: str, **kwargs): ...
 
-    def add_breadcrumb(self, arg: Breadcrumb | str, text: str | None = None, **kwargs):
+    @overload
+    def add_breadcrumb(self, arg: None, text: str, **kwargs): ...
+
+    def add_breadcrumb(self, arg: Breadcrumb | str | None, text: str | None = None, **kwargs):
         if isinstance(arg, Breadcrumb):
             self.breadcrumbs.append(arg)
-        elif isinstance(arg, str):
+        elif isinstance(arg, str) or arg is None:
             if text is None:
                 raise ValueError("No breadcrumb text")
-            url = self._url_for(arg, **kwargs)
-            url = url if url else arg
+            url = arg
+            if arg and (built_url := self._url_for(arg, **kwargs)):
+                url = built_url
             self.breadcrumbs.append(Breadcrumb(url, text))
         else:
             raise ValueError("Unknown breadcrumb type")
