@@ -1,0 +1,16 @@
+{% from 'bootstrap5/form.html' import render_form, render_field, render_hidden_errors %}
+
+{% extends "standard.html" %}
+
+{% block titlebar_title %}
+{{ _("New activity:") }}
+{{ defined_activity }}
+{% endblock %}
+
+{% block titlebar_right %}
+<button class="btn btn-primary" type="submit" form="activity-form">{{ _("Save") }}</button>
+{% endblock %}
+
+{% block content %}
+{{ render_form(form, id="activity-form") }}
+{% endblock %}

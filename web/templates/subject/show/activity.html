@@ -20,7 +20,12 @@
                             <ul class="dropdown-menu">
                                 {% for subgroup, activities in subgroups.items() %}
                                 {% for activity in activities %}
-                                <li><a class="dropdown-item" href="#">{{ activity }}</a></li>
+                                <li>
+                                    <a class="dropdown-item"
+                                        href="{{ url_for('.activity.new', space_id=space_id, subject_id=subject.id, defined_activity_id=activity.id) }}">
+                                        {{ activity }}
+                                    </a>
+                                </li>
                                 {% endfor %}
                                 {% endfor %}
                             </ul>
@@ -45,14 +50,21 @@
                     <th>{{ _("Name") }}</th>
                     <th>{{ _("Category") }}</th>
                     <th>{{ _("Epoch") }}</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {% for activity in subject.involving_performed_activity %}
                 <tr>
-                    <td>{{ activity.instantiated_defined_activity.name_code }}</td>
-                    <td>{{ activity.instantiated_defined_activity.category_code }}</td>
-                    <td>{{ activity.containing_epoch }}</td>
+                    <td>{{ activity.instantiated_defined_activity.name_code or "" }}</td>
+                    <td>{{ activity.instantiated_defined_activity.category_code or "" }}</td>
+                    <td>{{ activity.containing_epoch or "" }}</td>
+                    <td>
+                        <a
+                            href="{{ url_for('.activity.edit', id=activity.id, space_id=space_id, subject_id=subject.id) }}">
+                            <i class="fa-solid fa-pencil"></i>
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -66,6 +78,10 @@
             info: false,
             paging: false,
             searching: false,
+            columnDefs: [
+                { target: 3, sortable: false }
+            ],
+            order: [[1, "asc"]],
             rowGroup: {
                 dataSrc: 1
             }

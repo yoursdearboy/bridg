@@ -15,7 +15,6 @@ from web.misc import remove_blank_dicts
 from web.views import (
     BaseView,
     BreadcrumbsMixin,
-    ContextMixin,
     ConverterMixin,
     CreateView,
     DeleteView,
@@ -25,22 +24,13 @@ from web.views import (
     ShowView,
 )
 
+from ..space import SpaceMixin
+from . import activity
 from .form import EditStudySubjectForm, NewStudySubjectForm
 from .lookup import lookup
 from .schema import StudySubjectList, StudySubjectLookupList
 
 blueprint = Blueprint("subject", __name__, url_prefix="/space/<space_id>/subjects")
-
-
-def _get_study_protocol_version(id: int):
-    return db.session.query(StudyProtocolVersion).filter_by(id=id).one()
-
-
-def _get_planned_study_subject(version: StudyProtocolVersion):
-    subjects = version.intended_planned_study_subject
-    if len(subjects) > 0:
-        return subjects[0]
-    raise ValueError("No planned study subjects")
 
 
 def _get_study_site_protocol_version_relationship(version: StudyProtocolVersion):
@@ -53,19 +43,6 @@ def _get_performing(subject: PlannedStudySubject):
     if subject.performing_organization:
         return "organization"
     raise ValueError("Unknown performing entity")
-
-
-class SpaceMixin(ContextMixin):
-    def setup(self, space_id: int, **kwargs):
-        self.study_protocol_version = _get_study_protocol_version(space_id)
-        self.planned_study_subject = _get_planned_study_subject(self.study_protocol_version)
-        super().setup(space_id=space_id, **kwargs)
-
-    def get_context(self):
-        ctx = super().get_context()
-        ctx["study_protocol_version"] = self.study_protocol_version
-        ctx["planned_study_subject"] = self.planned_study_subject
-        return ctx
 
 
 class SubjectIndexView(SpaceMixin, BreadcrumbsMixin, IndexDataTableView):
@@ -206,3 +183,4 @@ blueprint.add_url_rule("/lookup", view_func=SubjectLookupView.as_view("lookup"))
 blueprint.add_url_rule("/<id>", view_func=SubjectShowView.as_view("show"))
 blueprint.add_url_rule("/<id>/edit", view_func=SubjectEditView.as_view("edit"))
 blueprint.add_url_rule("/<id>", view_func=SubjectDeleteView.as_view("delete"))
+blueprint.register_blueprint(activity.blueprint, url_prefix="/<subject_id>")
