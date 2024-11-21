@@ -27,8 +27,10 @@ class NameCreateView(PersonMixin, BreadcrumbsMixin, CreateView):
     form_class = NameForm
     template_name = "person/name/edit.html"
 
-    def get_object(self, person_id, **kwargs):
-        return EntityName(biologic_entity_id=person_id)
+    def get_data(self, form, person_id, **kwargs):
+        data = super().get_data(form, person_id=person_id, **kwargs)
+        data["biologic_entity_id"] = person_id
+        return data
 
     def url_for_redirect(self, person_id, **kwargs):
         return url_for("person.show", id=person_id)
