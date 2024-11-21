@@ -25,3 +25,6 @@ class DefinedActivity(Activity):
     Each StudyActivity always uses one DefinedActivity.
     Each DefinedActivity might be used by one or more StudyActivity.
     """
+
+    def __str__(self):
+        return self.name_code

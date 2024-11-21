@@ -5,14 +5,39 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="dropdown">
-            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                {{ _("Group by") }}
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item group-by" href="#" data-column="1">Category</a></li>
-                <li><a class="dropdown-item group-by" href="#" data-column="2">Epoch</a></li>
-            </ul>
+        <div class="d-flex gap-2">
+            <div class="dropdown">
+                <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside">
+                    {{ _("New") }}
+                </button>
+                <ul class="dropdown-menu">
+                    {% for group, subgroups in new_activities.items() %}
+                    <li>
+                        <div class="dropdown dropend">
+                            <a class="dropdown-item" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">{{
+                                group }}</a>
+                            <ul class="dropdown-menu">
+                                {% for subgroup, activities in subgroups.items() %}
+                                {% for activity in activities %}
+                                <li><a class="dropdown-item" href="#">{{ activity }}</a></li>
+                                {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    {{ _("Group by") }}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item group-by" href="#" data-column="1">Category</a></li>
+                    <li><a class="dropdown-item group-by" href="#" data-column="2">Epoch</a></li>
+                </ul>
+            </div>
         </div>
         <table id="activity-table" class="table">
             <thead>

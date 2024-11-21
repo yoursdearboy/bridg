@@ -1,6 +1,6 @@
 from flask import Blueprint, url_for
 from flask_babel import lazy_gettext as _
-from toolz.curried import assoc_in, dissoc, get, update_in
+from toolz.curried import assoc_in, dissoc, get, groupby, map, thread_last, update_in, valmap
 
 from bridg import (
     Person,
@@ -63,6 +63,7 @@ class SpaceMixin(ContextMixin):
 
     def get_context(self):
         ctx = super().get_context()
+        ctx["study_protocol_version"] = self.study_protocol_version
         ctx["planned_study_subject"] = self.planned_study_subject
         return ctx
 
@@ -157,6 +158,12 @@ class SubjectShowView(SpaceMixin, BreadcrumbsMixin, ShowView):
     def get_context(self):
         ctx = super().get_context()
         ctx["subject"] = ctx["object"]
+        ctx["new_activities"] = thread_last(
+            self.study_protocol_version.used_study_activity,
+            map(lambda x: x.used_defined_activity),
+            groupby(lambda x: x.category_code),
+            valmap(groupby(lambda x: x.subcategory_code)),
+        )
         return ctx
 
     def setup_breadcrumbs(self, **kwargs):
