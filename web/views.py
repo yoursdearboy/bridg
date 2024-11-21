@@ -19,8 +19,11 @@ class BaseView(MethodView):
         self.kwargs = kwargs
 
     def dispatch_request(self, **kwargs):
-        self.setup(**kwargs)
-        return super().dispatch_request(**kwargs)
+        all_args = request.args.to_dict() | kwargs
+        self.setup(**all_args)
+        return super().dispatch_request(**all_args)
+
+
 
 
 class SQLAlchemyMixin(BaseView):
