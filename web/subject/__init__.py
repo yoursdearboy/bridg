@@ -102,18 +102,17 @@ class SubjectCreateView(SpaceMixin, BreadcrumbsMixin, CreateView):
     def get_data(self, form, **kwargs):
         data = form.data
 
-        if get("performing_biologic_entity_id", data):
+        if get("performing_biologic_entity_id", data) or not self.planned_study_subject.performing_biologic_entity:
             data = dissoc(data, "performing_biologic_entity")
-        if not self.planned_study_subject.performing_biologic_entity:
-            data = dissoc(data, "performing_biologic_entity")
-        if pbe := self.planned_study_subject.performing_biologic_entity:
-            data = assoc_in(data, ["performing_biologic_entity", "type"], pbe.type)
-        if isinstance(self.planned_study_subject.performing_biologic_entity, Person):
-            data = update_in(data, ["performing_biologic_entity", "postal_address"], remove_blank_dicts)
-        if get("performing_organization_id", data):
+        else:
+            if pbe := self.planned_study_subject.performing_biologic_entity:
+                data = assoc_in(data, ["performing_biologic_entity", "type"], pbe.type)
+            if isinstance(self.planned_study_subject.performing_biologic_entity, Person):
+                data = update_in(data, ["performing_biologic_entity", "postal_address"], remove_blank_dicts)
+
+        if get("performing_organization_id", data) or not self.planned_study_subject.performing_organization:
             data = dissoc(data, "performing_organization")
-        if not self.planned_study_subject.performing_organization:
-            data = dissoc(data, "performing_organization")
+
         return data
 
     def url_for_redirect(self, space_id, **kwargs):
