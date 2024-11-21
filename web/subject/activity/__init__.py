@@ -71,7 +71,7 @@ class ActivityCreateView(SubjectMixin, SpaceMixin, BreadcrumbsMixin, CreateView[
 
     def setup_breadcrumbs(self, subject_id, **kwargs):
         self.add_breadcrumb("subject.index", _("Subjects"))
-        self.add_breadcrumb("subject.show", self.subject.performing_entity, id=subject_id)
+        self.add_breadcrumb("subject.show", str(self.subject.performing_entity), id=subject_id)
         self.add_breadcrumb(".new", _("New activity"))
 
     def url_for_redirect(self, space_id, subject_id, **kwargs):
@@ -97,7 +97,7 @@ class ActivityEditView(SubjectMixin, SpaceMixin, BreadcrumbsMixin, EditView[Acti
 
     def setup_breadcrumbs(self, subject_id, **kwargs):
         self.add_breadcrumb("subject.index", _("Subjects"))
-        self.add_breadcrumb("subject.show", self.subject.performing_entity, id=subject_id)
+        self.add_breadcrumb("subject.show", str(self.subject.performing_entity), id=subject_id)
         self.add_breadcrumb(".edit", _("Edit activity"))
 
     def url_for_redirect(self, space_id, subject_id, **kwargs):
