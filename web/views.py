@@ -51,11 +51,12 @@ class JSONMixin(BaseView):
         return self.schema.model_validate(object).model_dump()
 
 
+O = TypeVar("O")
 F = TypeVar("F", bound=Form)
 
 
-class FormMixin(BaseView, Generic[F]):
-    # object: Any
+class FormMixin(BaseView, Generic[O, F]):
+    object: O
     form_class: Type[F]
 
     def setup(self, **kwargs):
@@ -225,7 +226,7 @@ class ShowView(JinjaMixin, ItemMixin[M], BaseView):
         return self.render_template()
 
 
-class CreateView(RedirectMixin, JinjaMixin, FormMixin[F], NewItemMixin[M], BaseView):
+class CreateView(RedirectMixin, JinjaMixin, FormMixin[M, F], NewItemMixin[M], BaseView):
     def get_context(self):
         ctx = super().get_context()
         ctx["object"] = self.object
@@ -245,7 +246,7 @@ class CreateView(RedirectMixin, JinjaMixin, FormMixin[F], NewItemMixin[M], BaseV
         return self.render_template()
 
 
-class EditView(RedirectMixin, JinjaMixin, FormMixin[F], ItemMixin[M], BaseView):
+class EditView(RedirectMixin, JinjaMixin, FormMixin[M, F], ItemMixin[M], BaseView):
     def get_context(self):
         ctx = super().get_context()
         ctx["object"] = self.object

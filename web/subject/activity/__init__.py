@@ -37,7 +37,7 @@ class ActivityForm(FlaskForm):
     status_date = DateTimeField(_("Status date"))
 
 
-class ActivityCreateView(SubjectMixin, SpaceMixin, BreadcrumbsMixin, CreateView[ActivityForm, PerformedActivity]):
+class ActivityCreateView(SubjectMixin, SpaceMixin, BreadcrumbsMixin, CreateView[PerformedActivity, ActivityForm]):
     db = db
     model = PerformedActivity
     form_class = ActivityForm
@@ -78,7 +78,7 @@ class ActivityCreateView(SubjectMixin, SpaceMixin, BreadcrumbsMixin, CreateView[
         return url_for("subject.show", space_id=space_id, id=subject_id)
 
 
-class ActivityEditView(SubjectMixin, SpaceMixin, BreadcrumbsMixin, EditView[ActivityForm, PerformedActivity]):
+class ActivityEditView(SubjectMixin, SpaceMixin, BreadcrumbsMixin, EditView[PerformedActivity, ActivityForm]):
     db = db
     model = PerformedActivity
     form_class = ActivityForm
