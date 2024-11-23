@@ -271,7 +271,7 @@ class DeleteView(RedirectMixin, ItemMixin[M], BaseView):
         return self.redirect(**kwargs)
 
 
-class HTMXDeleteMixin:
+class HTMXDeleteMixin(RedirectMixin):
     def redirect(self, **kwargs):
         res = super().redirect(**kwargs)
         res.headers["HX-Redirect"] = res.headers.pop("Location")
