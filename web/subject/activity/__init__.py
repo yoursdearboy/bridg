@@ -37,7 +37,7 @@ class ActivityForm(FlaskForm):
     status_date = DateTimeField(_("Status date"))
 
 
-class ActivityCreateView(SubjectMixin, SpaceMixin, BreadcrumbsMixin, CreateView[ActivityForm]):
+class ActivityCreateView(SubjectMixin, SpaceMixin, BreadcrumbsMixin, CreateView[ActivityForm, PerformedActivity]):
     db = db
     model = PerformedActivity
     form_class = ActivityForm
@@ -104,7 +104,7 @@ class ActivityEditView(SubjectMixin, SpaceMixin, BreadcrumbsMixin, EditView[Acti
         return url_for("subject.show", id=subject_id, space_id=space_id)
 
 
-class ActivityDeleteView(HTMXDeleteMixin, DeleteView):
+class ActivityDeleteView(HTMXDeleteMixin, DeleteView[PerformedActivity]):
     db = db
     model = PerformedActivity
 
