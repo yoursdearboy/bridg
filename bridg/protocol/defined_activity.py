@@ -3,7 +3,8 @@ from typing import List, Optional
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..common.activity import Activity
+from ..common import Activity
+from ..core import Code, code_column
 from .study_activity import StudyActivity
 
 
@@ -11,11 +12,23 @@ class DefinedActivity(Activity):
     __tablename__ = "defined_activity"
     __mapper_args__ = {"concrete": True}
 
+    class NameCode(Code): ...
+
+    class CategoryCode(Code): ...
+
+    class SubcategoryCode(Code): ...
+
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    name_code: Mapped[str]
-    category_code: Mapped[Optional[str]]
-    subcategory_code: Mapped[Optional[str]]
+    name_code_id: Mapped[int] = code_column(NameCode)
+    name_code: Mapped[NameCode] = relationship()
+
+    category_code_id: Mapped[Optional[int]] = code_column(CategoryCode)
+    category_code: Mapped[Optional[CategoryCode]] = relationship()
+
+    subcategory_code_id: Mapped[Optional[int]] = code_column(SubcategoryCode)
+    subcategory_code: Mapped[Optional[SubcategoryCode]] = relationship()
+
     description: Mapped[Optional[str]]
     status_code: Mapped[Optional[str]]
     status_date: Mapped[Optional[datetime]]
@@ -27,4 +40,4 @@ class DefinedActivity(Activity):
     """
 
     def __str__(self):
-        return self.name_code
+        return str(self.name_code)
