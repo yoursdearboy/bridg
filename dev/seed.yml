@@ -72,17 +72,29 @@ study:
             - { name: "Follow-Up", type_code: "follow-up" }
           used_study_activity:
             - used_defined_activity: &aml-mrd-2018-ipt
-                name_code: IPT
-                category_code: lab
+                name_code:
+                  code: ipt
+                  display_name: Immunophenotyping
+                category_code:
+                  code: lab
+                  display_name: Laboratory
                 context_for_study_site: *dgoi-ss
             - used_defined_activity: &aml-mrd-2018-cbc
-                name_code: CBC
+                name_code:
+                  code: cbc
+                  display_name: Clinical Blood Count
                 category_code: lab
             - used_defined_activity: &aml-mrd-2018-ame
-                name_code: AME
-                category_code: treatment
+                name_code:
+                  code: ame
+                  display_name: AME
+                category_code:
+                  code: treatment
+                  display_name: Treatment
             - used_defined_activity: &aml-mrd-2018-ham
-                name_code: HAM
+                name_code:
+                  code: ham
+                  display_name: HAM
                 category_code: treatment
         - acronym: AML-MRD-2024
           executing_study_site_protocol_version_relationship:

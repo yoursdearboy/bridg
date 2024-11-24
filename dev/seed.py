@@ -6,6 +6,36 @@ import bridg
 
 from .db import SessionLocal
 
+session = SessionLocal()
+
+
+def make_code_hook():
+    def _from_str(x: str, cls):
+        if code := session.query(cls).filter_by(code=x).one_or_none():
+            return code
+        return cls(code=x)
+
+    def _from_dict(x: dict, cls):
+        if code := session.query(cls).filter_by(**x).one_or_none():
+            return code
+        return cls(**x)
+
+    cache = dict()
+
+    def _from_either_with_cache(x: str | dict, cls):
+        key = x["code"] if isinstance(x, dict) else x
+        if code := cache.get(key):
+            return code
+        code = _from_dict(x, cls) if isinstance(x, dict) else _from_str(x, cls)
+        cache[key] = code
+        return code
+
+    return _from_either_with_cache
+
+
+bridg.converter.register_structure_hook_func(lambda x: issubclass(x, bridg.Code), make_code_hook())
+
+
 MAP = dict(
     person=bridg.Person,
     healthcare_facility=bridg.HealthcareFacility,
@@ -26,9 +56,9 @@ def structure(data: Dict[str, List[Any]]):
             yield bridg.converter.structure(value, class_)
 
 
-with SessionLocal() as session:
-    with open("dev/seed.yml") as f:
-        data = yaml.load(f, yaml.FullLoader)
-    objects = structure(data)
-    session.add_all(objects)
-    session.commit()
+with open("dev/seed.yml") as f:
+    data = yaml.load(f, yaml.FullLoader)
+objects = structure(data)
+session.add_all(objects)
+session.commit()
+session.close()
