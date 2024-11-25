@@ -40,6 +40,20 @@ study_site:
     lead: false
     performing_healthcare_facility: *ekb-hf
 
+defined_activity.category_code:
+  - code: lab
+    display_name: Laboratory
+  - code: treatment
+    display_name: Treatment
+defined_activity:
+  - &cbc
+    name_code: { code: cbc, display_name: Clinical Blood Count }
+    category_code: lab
+  - &ipt
+    name_code: { code: ipt, display_name: Immunophenotyping }
+    category_code: lab
+    context_for_study_site: *dgoi-ss
+
 study:
   - name: AML
     description: Acute Myeloid Leucemia research,
@@ -71,30 +85,13 @@ study:
             - { name: "Consolidation II", type_code: "treatment" }
             - { name: "Follow-Up", type_code: "follow-up" }
           used_study_activity:
-            - used_defined_activity: &aml-mrd-2018-ipt
-                name_code:
-                  code: ipt
-                  display_name: Immunophenotyping
-                category_code:
-                  code: lab
-                  display_name: Laboratory
-                context_for_study_site: *dgoi-ss
-            - used_defined_activity: &aml-mrd-2018-cbc
-                name_code:
-                  code: cbc
-                  display_name: Clinical Blood Count
-                category_code: lab
+            - used_defined_activity: *ipt
+            - used_defined_activity: *cbc
             - used_defined_activity: &aml-mrd-2018-ame
-                name_code:
-                  code: ame
-                  display_name: AME
-                category_code:
-                  code: treatment
-                  display_name: Treatment
+                name_code: { code: ame, display_name: AME }
+                category_code: treatment
             - used_defined_activity: &aml-mrd-2018-ham
-                name_code:
-                  code: ham
-                  display_name: HAM
+                name_code: { code: ham, display_name: HAM }
                 category_code: treatment
         - acronym: AML-MRD-2024
           executing_study_site_protocol_version_relationship:
@@ -130,11 +127,11 @@ study_subject:
     involving_performed_activity:
       - containing_epoch: *aml-mrd-2018-screening
         executing_study_protocol_version: *aml-mrd-2018
-        instantiated_defined_activity: *aml-mrd-2018-ipt
+        instantiated_defined_activity: *ipt
         context_for_study_site: *dgoi-ss
       - containing_epoch: *aml-mrd-2018-screening
         executing_study_protocol_version: *aml-mrd-2018
-        instantiated_defined_activity: *aml-mrd-2018-cbc
+        instantiated_defined_activity: *cbc
         context_for_study_site: *dgoi-ss
       - containing_epoch: *aml-mrd-2018-induction
         executing_study_protocol_version: *aml-mrd-2018

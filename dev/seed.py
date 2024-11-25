@@ -36,15 +36,19 @@ def make_code_hook():
 bridg.converter.register_structure_hook_func(lambda x: issubclass(x, bridg.Code), make_code_hook())
 
 
-MAP = dict(
-    person=bridg.Person,
-    healthcare_facility=bridg.HealthcareFacility,
-    healthcare_provider=bridg.HealthcareProvider,
-    healthcare_provider_group=bridg.HealthcareProviderGroup,
-    study=bridg.Study,
-    study_site=bridg.StudySite,
-    study_subject=bridg.StudySubject,
-)
+MAP = {
+    "defined_activity.name_code": bridg.DefinedActivity.NameCode,
+    "defined_activity.category_code": bridg.DefinedActivity.CategoryCode,
+    "defined_activity.subcategory_code": bridg.DefinedActivity.SubcategoryCode,
+    "defined_activity": bridg.DefinedActivity,
+    "person": bridg.Person,
+    "healthcare_facility": bridg.HealthcareFacility,
+    "healthcare_provider": bridg.HealthcareProvider,
+    "healthcare_provider_group": bridg.HealthcareProviderGroup,
+    "study": bridg.Study,
+    "study_site": bridg.StudySite,
+    "study_subject": bridg.StudySubject,
+}
 
 
 def structure(data: Dict[str, List[Any]]):
