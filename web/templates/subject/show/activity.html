@@ -1,4 +1,4 @@
-<div class="card w-96-tw">
+<div class="card">
     <div class="card-header">
         <div class="d-flex">
             <b>{{ _("Activities") }}</b>
@@ -50,6 +50,8 @@
                     <th>{{ _("Name") }}</th>
                     <th>{{ _("Category") }}</th>
                     <th>{{ _("Epoch") }}</th>
+                    <th>{{ _("Status") }}</th>
+                    <th>{{ _("Status date") }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -59,6 +61,8 @@
                     <td>{{ activity.instantiated_defined_activity.name_code or "" }}</td>
                     <td>{{ activity.instantiated_defined_activity.category_code or "" }}</td>
                     <td>{{ activity.containing_epoch or "" }}</td>
+                    <td>{{ activity.status_code or "" }}</td>
+                    <td>{{ activity.status_date | iso }}</td>
                     <td>
                         <a
                             href="{{ url_for('.activity.edit', id=activity.id, space_id=space_id, subject_id=subject.id) }}">
@@ -79,7 +83,8 @@
             paging: false,
             searching: false,
             columnDefs: [
-                { target: 3, sortable: false }
+                { target: 4, render: DataTable.render.datetime("{{ _('yyyy-MM-dd HH:mm:ss') }}") },
+                { target: 5, sortable: false }
             ],
             order: [[1, "asc"]],
             rowGroup: {

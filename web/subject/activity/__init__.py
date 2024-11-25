@@ -1,13 +1,13 @@
 from flask import Blueprint, url_for
 from flask_babel import lazy_gettext as _
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField
+from wtforms import TextAreaField
 from wtforms_alchemy import QuerySelectField
 
 from bridg import DefinedActivity, PerformedActivity, StudySubject
 
 from ...db import db
-from ...fields import DateTimeField
+from ...fields import CodeField, DateTimeField
 from ...space import SpaceMixin
 from ...views import BreadcrumbsMixin, ContextMixin, CreateView, DeleteView, EditView, HTMXDeleteMixin, SQLAlchemyMixin
 
@@ -29,11 +29,12 @@ class SubjectMixin(ContextMixin, SQLAlchemyMixin):
 
 
 class ActivityForm(FlaskForm):
-    reason_code = StringField(_("Reason"))
+    db = db
+    reason_code = CodeField(_("Reason"), PerformedActivity.ReasonCode)
     containing_epoch = QuerySelectField(_("Epoch"), allow_blank=True)
     context_for_study_site = QuerySelectField(_("Study site"), allow_blank=True)
     comment = TextAreaField(_("Comment"))
-    status_code = StringField(_("Status"))
+    status_code = CodeField(_("Status"), PerformedActivity.StatusCode)
     status_date = DateTimeField(_("Status date"))
 
 

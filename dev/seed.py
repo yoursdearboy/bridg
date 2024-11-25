@@ -41,6 +41,8 @@ MAP = {
     "defined_activity.category_code": bridg.DefinedActivity.CategoryCode,
     "defined_activity.subcategory_code": bridg.DefinedActivity.SubcategoryCode,
     "defined_activity": bridg.DefinedActivity,
+    "performed_activity.status_code": bridg.PerformedActivity.StatusCode,
+    "performed_activity": bridg.PerformedActivity,
     "person": bridg.Person,
     "healthcare_facility": bridg.HealthcareFacility,
     "healthcare_provider": bridg.HealthcareProvider,

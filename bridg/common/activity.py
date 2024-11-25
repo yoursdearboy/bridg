@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, Optional
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, declared_attr, mapped_column, relationship
 
+from ..core import Code, code_column
 from ..db import Base
 
 if TYPE_CHECKING:
@@ -15,7 +16,14 @@ if TYPE_CHECKING:
 class Activity(Base):
     __abstract__ = True
 
-    reason_code: Mapped[Optional[str]]
+    class ReasonCode(Code): ...
+
+    reason_code_id: Mapped[Optional[int]] = code_column(ReasonCode)
+
+    @declared_attr
+    def reason_code(cls) -> Mapped[Optional[ReasonCode]]:
+        return relationship()
+
     comment: Mapped[Optional[str]]
 
     using_project_id: Mapped[Optional[int]] = mapped_column(ForeignKey("project.id"))

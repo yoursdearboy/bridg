@@ -30,7 +30,7 @@ class Code(Base):
     display_name: Mapped[Optional[str]]
 
     def __str__(self):
-        return self.display_name
+        return self.display_name or self.code or f"{type(self).__qualname__}#{self.id}"
 
 
 def code_column(cls):

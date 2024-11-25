@@ -18,6 +18,8 @@ class DefinedActivity(Activity):
 
     class SubcategoryCode(Code): ...
 
+    class StatusCode(Code): ...
+
     id: Mapped[int] = mapped_column(primary_key=True)
 
     name_code_id: Mapped[int] = code_column(NameCode)
@@ -30,7 +32,10 @@ class DefinedActivity(Activity):
     subcategory_code: Mapped[Optional[SubcategoryCode]] = relationship()
 
     description: Mapped[Optional[str]]
-    status_code: Mapped[Optional[str]]
+
+    status_code_id: Mapped[Optional[int]] = code_column(StatusCode)
+    status_code: Mapped[Optional[StatusCode]] = relationship()
+
     status_date: Mapped[Optional[datetime]]
 
     using_study_activity: Mapped[List[StudyActivity]] = relationship()

@@ -5,6 +5,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..common import Activity, StudySubject
+from ..core import Code, code_column
 from ..protocol import DefinedActivity, Epoch, StudyProtocolVersion
 
 
@@ -12,12 +13,17 @@ class PerformedActivity(Activity):
     __tablename__ = "performed_activity"
     __mapper_args__ = {"concrete": True}
 
+    class StatusCode(Code): ...
+
     id: Mapped[int] = mapped_column(primary_key=True)
 
     repetition_number: Mapped[Optional[int]]
     name_code_modified_text: Mapped[Optional[str]]
     negation_indicator: Mapped[Optional[bool]]
-    status_code: Mapped[Optional[str]]
+
+    status_code_id: Mapped[Optional[int]] = code_column(StatusCode)
+    status_code: Mapped[Optional[StatusCode]] = relationship()
+
     status_date: Mapped[Optional[datetime]]
 
     containing_epoch_id: Mapped[Optional[int]] = mapped_column(ForeignKey("epoch.id"))

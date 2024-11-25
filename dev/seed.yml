@@ -54,6 +54,14 @@ defined_activity:
     category_code: lab
     context_for_study_site: *dgoi-ss
 
+performed_activity.status_code:
+  - code: incomplete
+    display_name: Incomplete
+  - code: unverified
+    display_name: Unverified
+  - code: complete
+    display_name: Complete
+
 study:
   - name: AML
     description: Acute Myeloid Leucemia research,
@@ -129,14 +137,20 @@ study_subject:
         executing_study_protocol_version: *aml-mrd-2018
         instantiated_defined_activity: *ipt
         context_for_study_site: *dgoi-ss
+        status_code: complete
+        status_date: 2024-11-06T09:00:00
       - containing_epoch: *aml-mrd-2018-screening
         executing_study_protocol_version: *aml-mrd-2018
         instantiated_defined_activity: *cbc
         context_for_study_site: *dgoi-ss
+        status_code: complete
+        status_date: 2024-11-04T12:00:00
       - containing_epoch: *aml-mrd-2018-induction
         executing_study_protocol_version: *aml-mrd-2018
         instantiated_defined_activity: *aml-mrd-2018-ame
         context_for_study_site: *dgoi-ss
+        status_code: unverified
+        status_date: 2024-11-06T12:00:00
   - performing_biologic_entity:
       type: person
       name: [{ use: official, family: Harris, given: Kamala }]
