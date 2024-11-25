@@ -1,4 +1,5 @@
 import datetime
+from time import sleep
 
 from playwright.sync_api import Page, expect
 
@@ -65,26 +66,34 @@ def test_person_editname_save(app, server, page: Page):
 
 
 def test_new_person(app, server, page: Page):
-    url = app.url_for("subject.new", space_id=1)
-    page.goto(url)
-    page.locator("id=performing_biologic_entity-name-0-family").fill("Test")
-    page.locator("id=performing_biologic_entity-name-0-given").fill("Test")
-    page.locator(
-        "id=performing_biologic_entity-administrative_gender_code").select_option("male")
-    page.locator(
-        "id=performing_biologic_entity-death_indicator").select_option("false")
-    page.locator("id=performing_biologic_entity-birth_date").fill("1991-01-01")
-    page.get_by_role('combobox').click
-    page.get_by_label('DGOI in AML-MRD-2018').click
-    page.get_by_text("Save").all()[1].click()
-    data = {'family': 'Test', 'given': 'Test', 'administrative_gender_code': AdministrativeGender.male, 'death_indicator': False,
+    data = {'id': 1, 'family': 'Test', 'given': 'Test', 'gender': 'M', 'administrative_gender_code': AdministrativeGender.male, 'death_indicator': False,
             'birth_date': datetime.date(1991, 1, 1), 'assigned_study_site_protocol_version_relationship': 'DGOI in AML-MRD-2018'}
-    with app.app_context():
-        result = db.session.query(EntityName, Person, StudySubject).filter_by(
-            biologic_entity_name_family="Test").one()
-        print(result)
-    # bool = (data['family'] == result.family) & (data['given'] == result.given) & (
-    #     data['administrative_gender_code'] == result.administrative_gender_code) & (
-    #         data['death_indicator'] == result.death_indicator) & (data['birth_date'] == result.birth_date) & (
-    #             data['assigned_study_site_protocol_version_relationship'] == result.assigned_study_site_protocol_version_relationship)
-    # assert bool
+    url = app.url_for("subject.new", space_id=data['id'])
+    page.goto(url)
+    page.locator(
+        "id=performing_biologic_entity-name-0-family").fill(data['family'])
+    page.locator(
+        "id=performing_biologic_entity-name-0-given").fill(data['given'])
+    page.locator(
+        "id=performing_biologic_entity-administrative_gender_code").select_option(data['gender'])
+    page.locator(
+        "id=performing_biologic_entity-death_indicator").select_option(data['death_indicator'])
+    page.locator(
+        "id=performing_biologic_entity-birth_date").fill(data['birth_date'].strftime('%Y-%m-%d'))
+    page.get_by_role('combobox').click
+    page.wait_for_load_state()
+    page.get_by_label(
+        data['assigned_study_site_protocol_version_relationship']).click
+
+    page.get_by_text("Save").all()[1].click()
+    page.wait_for_load_state()
+    id = page.url
+    print(id)
+# with app.app_context():
+#     subject = db.session.query(StudySubject).filter_by(id=id).all()
+#     subject.person
+# bool = (data['family'] == subject.person.name.family) & (data['given'] == subject.person.name.given) & (
+#     data['administrative_gender_code'] == subject.person.administrative_gender_code) & (
+#     data['death_indicator'] == subject.person.death_indicator) & (data['birth_date'] == subject.person.birth_date) & (
+#     data['assigned_study_site_protocol_version_relationship'] == subject.assigned_study_site_protocol_version_relationship)
+# assert bool
