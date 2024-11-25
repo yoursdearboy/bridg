@@ -16,4 +16,4 @@ def app():
 def server(app: Flask):
     thread = Thread(target=app.run, daemon=True)
     thread.start()
-    sleep(3)
+    sleep(1)
