@@ -10,8 +10,6 @@ from .form import PersonForm
 
 blueprint = Blueprint("person", __name__, url_prefix="/persons")
 
-blueprint.register_blueprint(name.blueprint, url_prefix=f"/<int:person_id>/{name.blueprint.url_prefix}")
-
 
 class PersonShowView(BreadcrumbsMixin, ShowView):
     db = db
@@ -50,3 +48,4 @@ class PersonEditView(BreadcrumbsMixin, EditView):
 
 blueprint.add_url_rule("/<id>", view_func=PersonShowView.as_view("show"))
 blueprint.add_url_rule("/<id>/edit", view_func=PersonEditView.as_view("edit"))
+blueprint.register_blueprint(name.blueprint, url_prefix=f"/<int:person_id>/{name.blueprint.url_prefix}")

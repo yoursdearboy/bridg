@@ -6,9 +6,7 @@ from flask_babel import LazyString, get_locale
 from flask_babel import lazy_gettext as _
 
 
-def bool_filter(
-    x: bool | None, yes=_("Yes"), no=_("No"), none=_("-")
-) -> str | LazyString:
+def bool_filter(x: bool | None, yes=_("Yes"), no=_("No"), none=_("-")) -> str | LazyString:
     if x is None:
         return none
     elif x:
@@ -42,3 +40,9 @@ def datetime_filter(
     if locale is None:
         locale = get_locale()
     return format_datetime(datetime, format, tzinfo, locale)
+
+
+def iso_filter(x: datetime.date | datetime.datetime | None = None, default: str = "") -> str:
+    if x is None:
+        return default
+    return x.isoformat()

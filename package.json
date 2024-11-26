@@ -5,6 +5,7 @@
     "alpinejs": "^3.14.1",
     "bootstrap": "^5.3.3",
     "datatables.net-bs5": "^2.1.2",
+    "datatables.net-rowgroup-bs5": "^1.5.1",
     "htmx.org": "^2.0.1",
     "jquery": "^3.7.1",
     "luxon": "^3.4.4",

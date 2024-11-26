@@ -1,9 +1,9 @@
-{% with obj=subject.performing_biologic_entity %}
-<div class="card col-4 mb-3">
+{% with person=subject.performing_biologic_entity %}
+<div class="card">
     <div class="card-header">
         <div class="d-flex">
             <b>{{ _("Person info") }}</b>
-            <a class="ms-auto" href="{{ url_for('person.show', id=obj.id) }}" target="_blank">
+            <a class="ms-auto" href="{{ url_for('person.show', id=person.id) }}" target="_blank">
                 <i class="fa-solid fa-up-right-from-square"></i>
                 {{ _("Open") }}
             </a>
@@ -13,20 +13,20 @@
         <div class="d-flex flex-column gap-3">
             <div>
                 <label for="administrative_gender_code">{{ _("Administrative gender") }}</label>
-                {{ obj.administrative_gender_code | default("-", True) }}
+                {{ person.administrative_gender_code | default("-", True) }}
             </div>
             <div>
                 <label for="birth_date">{{ _("Birth date") }}</label>
-                {{ obj.birth_date | date(default="-") }}
+                {{ person.birth_date | date(default="-") }}
             </div>
             <div>
                 <label for="death_date">{{ _("Death date") }}</label>
-                {{ obj.death_date | date(default="-") }}
-                {{ "estimated" if obj.death_date_estimated_indicator }}
+                {{ person.death_date | date(default="-") }}
+                {{ "estimated" if person.death_date_estimated_indicator }}
             </div>
             <div>
                 <label for="death_indicator">{{ _("Dead") }}</label>
-                {{ obj.death_indicator | bool }}
+                {{ person.death_indicator | bool }}
             </div>
         </div>
     </div>
