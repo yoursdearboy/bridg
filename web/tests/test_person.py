@@ -1,5 +1,5 @@
 import datetime
-from time import sleep
+import re
 
 from playwright.sync_api import Page, expect
 
@@ -80,18 +80,19 @@ def test_new_person(app, server, page: Page):
         "id=performing_biologic_entity-death_indicator").select_option(data['death_indicator'])
     page.locator(
         "id=performing_biologic_entity-birth_date").fill(data['birth_date'].strftime('%Y-%m-%d'))
-    page.get_by_role('combobox').click
+    page.locator('span').all()[1].click()
     page.wait_for_load_state()
-    page.get_by_label(
-        data['assigned_study_site_protocol_version_relationship']).click
-
+    page.locator("li").filter(has_text="DGOI in AML-MRD-2018").click()
     page.get_by_text("Save").all()[1].click()
-    page.wait_for_load_state()
-    id = page.url
-    print(id)
-# with app.app_context():
-#     subject = db.session.query(StudySubject).filter_by(id=id).all()
-#     subject.person
+    currentUrl = page.url
+    regex = r'/subjects/(\d+)$'
+    currentId = re.search(regex, currentUrl)[1]
+    print(currentId)
+    with app.app_context():
+        subject = db.session.query(StudySubject).filter_by(id=currentId).one()
+    print(subject)
+    print(subject.status)
+    print(subject.person.name.family)
 # bool = (data['family'] == subject.person.name.family) & (data['given'] == subject.person.name.given) & (
 #     data['administrative_gender_code'] == subject.person.administrative_gender_code) & (
 #     data['death_indicator'] == subject.person.death_indicator) & (data['birth_date'] == subject.person.birth_date) & (
