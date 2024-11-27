@@ -66,8 +66,13 @@ def test_person_editname_save(app, server, page: Page):
 
 
 def test_new_person(app, server, page: Page):
-    data = {'id': 1, 'family': 'Test', 'given': 'Test', 'gender': 'M', 'administrative_gender_code': AdministrativeGender.male, 'death_indicator': False,
-            'birth_date': datetime.date(1991, 1, 1), 'assigned_study_site_protocol_version_relationship': 'DGOI in AML-MRD-2018'}
+    data = {'id': 1,
+            'family': 'Test',
+            'given': 'Test',
+            'gender': 'M',
+            'death_indicator': 'false',
+            'birth_date': '1991-1-1',
+            'assigned_study_site_protocol_version_relationship': 'DGOI in AML-MRD-2018'}
     url = app.url_for("subject.new", space_id=data['id'])
     page.goto(url)
     page.locator(
@@ -79,22 +84,28 @@ def test_new_person(app, server, page: Page):
     page.locator(
         "id=performing_biologic_entity-death_indicator").select_option(data['death_indicator'])
     page.locator(
-        "id=performing_biologic_entity-birth_date").fill(data['birth_date'].strftime('%Y-%m-%d'))
+        "id=performing_biologic_entity-birth_date").fill(data['birth_date'])
     page.locator('span').all()[1].click()
     page.wait_for_load_state()
     page.locator("li").filter(has_text="DGOI in AML-MRD-2018").click()
     page.get_by_text("Save").all()[1].click()
-    currentUrl = page.url
+    current_url = page.url
     regex = r'/subjects/(\d+)$'
-    currentId = re.search(regex, currentUrl)[1]
-    print(currentId)
+    current_id = re.search(regex, current_url)[1]
     with app.app_context():
-        subject = db.session.query(StudySubject).filter_by(id=currentId).one()
-    print(subject)
-    print(subject.status)
-    print(subject.person.name.family)
-# bool = (data['family'] == subject.person.name.family) & (data['given'] == subject.person.name.given) & (
-#     data['administrative_gender_code'] == subject.person.administrative_gender_code) & (
-#     data['death_indicator'] == subject.person.death_indicator) & (data['birth_date'] == subject.person.birth_date) & (
-#     data['assigned_study_site_protocol_version_relationship'] == subject.assigned_study_site_protocol_version_relationship)
-# assert bool
+        subject = db.session.query(StudySubject).filter_by(id=current_id).one()
+        src = {'family': 'Test',
+               'given': 'Test',
+               'administrative_gender_code': AdministrativeGender.male,
+               'death_indicator': False,
+               'birth_date': datetime.date(1991, 1, 1),
+               'assigned_study_site_protocol_version_relationship': 'DGOI in AML-MRD-2018'}
+        res = {
+            'family': subject.performing_biologic_entity.name[0].family,
+            'given': subject.performing_biologic_entity.name[0].given,
+            'administrative_gender_code': subject.performing_biologic_entity.administrative_gender_code,
+            'death_indicator': subject.performing_biologic_entity.death_indicator,
+            'birth_date': subject.performing_biologic_entity.birth_date,
+            'assigned_study_site_protocol_version_relationship': str(subject.assigned_study_site_protocol_version_relationship[0])
+        }
+    assert src == res
