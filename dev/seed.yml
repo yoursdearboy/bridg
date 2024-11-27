@@ -140,19 +140,22 @@ study_subject:
     assigned_study_subject_protocol_version_relationship:
       - assigning_study_site_protocol_version_relationship: *dgoi-aml-mrd-2018
     involving_performed_activity:
-      - containing_epoch: *aml-mrd-2018-screening
+      - type: observation
+        containing_epoch: *aml-mrd-2018-screening
         executing_study_protocol_version: *aml-mrd-2018
         instantiated_defined_activity: *ipt
         context_for_study_site: *dgoi-ss
         status_code: complete
         status_date: 2024-11-06T09:00:00
-      - containing_epoch: *aml-mrd-2018-screening
+      - type: observation
+        containing_epoch: *aml-mrd-2018-screening
         executing_study_protocol_version: *aml-mrd-2018
         instantiated_defined_activity: *cbc
         context_for_study_site: *dgoi-ss
         status_code: complete
         status_date: 2024-11-04T12:00:00
-      - containing_epoch: *aml-mrd-2018-induction
+      - type: substance_administration
+        containing_epoch: *aml-mrd-2018-induction
         executing_study_protocol_version: *aml-mrd-2018
         instantiated_defined_activity: *aml-mrd-2018-ame
         context_for_study_site: *dgoi-ss
