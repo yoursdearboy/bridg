@@ -11,11 +11,12 @@ from ..protocol import DefinedActivity, Epoch, StudyProtocolVersion
 
 class PerformedActivity(Activity):
     __tablename__ = "performed_activity"
-    __mapper_args__ = {"concrete": True}
+    __mapper_args__ = {"concrete": True, "polymorphic_abstract": True, "polymorphic_on": "type"}
 
     class StatusCode(Code): ...
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    type: Mapped[str]
 
     repetition_number: Mapped[Optional[int]]
     name_code_modified_text: Mapped[Optional[str]]

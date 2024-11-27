@@ -64,6 +64,7 @@ class ActivityCreateView(SubjectMixin, SpaceMixin, BreadcrumbsMixin, CreateView[
 
     def get_data(self, form, **kwargs):
         data = super().get_data(form, **kwargs)
+        data["type"] = self.defined_activity.type
         data["executing_study_protocol_version"] = self.study_protocol_version
         data["instantiated_defined_activity"] = self.defined_activity
         data["involved_subject"] = self.subject

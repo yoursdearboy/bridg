@@ -1,4 +1,7 @@
-# BRIDG
+# The Biomedical Research Integrated Domain Group (BRIDG) Model [^1]
+
+Implemented in Python with support for persistence using SQLAlchemy.
+Also a web interface for electronic data capture (EDC).
 
 ## Build
 
@@ -42,3 +45,5 @@ Run web app.
 ```
 
 You may want to build web assets, at least copy fonts, see [Build chapter](#build).
+
+[^1]: [BRIDG: An international standard for biomedical research concepts designed to support computable semantic interoperability](https://bridgmodel.nci.nih.gov)

@@ -23,7 +23,9 @@ def make_code_hook():
     cache = dict()
 
     def _from_either_with_cache(x: str | dict, cls):
-        key = x["code"] if isinstance(x, dict) else x
+        cls_key = cls.__qualname__
+        code_key = x["code"] if isinstance(x, dict) else x
+        key = cls_key + code_key
         if code := cache.get(key):
             return code
         code = _from_dict(x, cls) if isinstance(x, dict) else _from_str(x, cls)
@@ -41,6 +43,12 @@ MAP = {
     "defined_activity.category_code": bridg.DefinedActivity.CategoryCode,
     "defined_activity.subcategory_code": bridg.DefinedActivity.SubcategoryCode,
     "defined_activity": bridg.DefinedActivity,
+    "defined_eligibility_criterion": bridg.DefinedEligibilityCriterion,
+    "defined_exclusion_criterion": bridg.DefinedExclusionCriterion,
+    "defined_inclusion_criterion": bridg.DefinedInclusionCriterion,
+    "defined_observation": bridg.DefinedObservation,
+    "defined_procedure": bridg.DefinedProcedure,
+    "defined_substance_administration": bridg.DefinedSubstanceAdministration,
     "performed_activity.status_code": bridg.PerformedActivity.StatusCode,
     "performed_activity": bridg.PerformedActivity,
     "person": bridg.Person,
