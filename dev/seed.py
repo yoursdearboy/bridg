@@ -23,7 +23,9 @@ def make_code_hook():
     cache = dict()
 
     def _from_either_with_cache(x: str | dict, cls):
-        key = x["code"] if isinstance(x, dict) else x
+        cls_key = cls.__qualname__
+        code_key = x["code"] if isinstance(x, dict) else x
+        key = cls_key + code_key
         if code := cache.get(key):
             return code
         code = _from_dict(x, cls) if isinstance(x, dict) else _from_str(x, cls)
