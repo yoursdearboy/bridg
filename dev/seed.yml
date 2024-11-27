@@ -45,7 +45,7 @@ defined_activity.category_code:
     display_name: Laboratory
   - code: treatment
     display_name: Treatment
-defined_activity:
+defined_observation:
   - &cbc
     name_code: { code: cbc, display_name: Clinical Blood Count }
     category_code: lab
@@ -53,6 +53,11 @@ defined_activity:
     name_code: { code: ipt, display_name: Immunophenotyping }
     category_code: lab
     context_for_study_site: *dgoi-ss
+
+defined_procedure:
+  - &surgery
+    name_code: { code: surg, display_name: Surgery }
+    category_code: surg
 
 performed_activity.status_code:
   - code: incomplete
@@ -96,9 +101,11 @@ study:
             - used_defined_activity: *ipt
             - used_defined_activity: *cbc
             - used_defined_activity: &aml-mrd-2018-ame
+                type: substance_administration
                 name_code: { code: ame, display_name: AME }
                 category_code: treatment
             - used_defined_activity: &aml-mrd-2018-ham
+                type: substance_administration
                 name_code: { code: ham, display_name: HAM }
                 category_code: treatment
         - acronym: AML-MRD-2024

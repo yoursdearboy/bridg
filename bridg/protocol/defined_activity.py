@@ -10,7 +10,7 @@ from .study_activity import StudyActivity
 
 class DefinedActivity(Activity):
     __tablename__ = "defined_activity"
-    __mapper_args__ = {"concrete": True}
+    __mapper_args__ = {"concrete": True, "polymorphic_abstract": True, "polymorphic_on": "type"}
 
     class NameCode(Code): ...
 
@@ -21,6 +21,7 @@ class DefinedActivity(Activity):
     class StatusCode(Code): ...
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    type: Mapped[str]
 
     name_code_id: Mapped[int] = code_column(NameCode)
     name_code: Mapped[NameCode] = relationship()
