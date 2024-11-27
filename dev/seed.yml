@@ -47,8 +47,15 @@ defined_activity.category_code:
     display_name: Treatment
 defined_observation:
   - &cbc
-    name_code: { code: cbc, display_name: Clinical Blood Count }
+    name_code: { code: "26604007", display_name: Complete blood count }
     category_code: lab
+    produced_defined_observation_result:
+      - type: observation_result
+        type_code: { code: "767002", display_name: "White blood cell count" }
+      - type: observation_result
+        type_code: { code: "30630007", display_name: "Neutrophil count" }
+      - type: observation_result
+        type_code: { code: "61928009", display_name: "Platelet count" }
   - &ipt
     name_code: { code: ipt, display_name: Immunophenotyping }
     category_code: lab
