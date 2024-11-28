@@ -89,6 +89,8 @@ def test_new_person(app, server, page: Page):
     page.wait_for_load_state()
     page.locator("li").filter(has_text="DGOI in AML-MRD-2018").click()
     page.get_by_text("Save").all()[1].click()
+    global current_url
+    global current_id
     current_url = page.url
     regex = r'/subjects/(\d+)$'
     current_id = re.search(regex, current_url)[1]
@@ -109,3 +111,12 @@ def test_new_person(app, server, page: Page):
             'assigned_study_site_protocol_version_relationship': str(subject.assigned_study_site_protocol_version_relationship[0])
         }
     assert src == res
+
+
+def test_delete(app, server, page: Page):
+    page.goto(current_url)
+    page.locator("a").filter(has_text='Delete').click()
+    page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/')
+    with app.app_context():
+        subject = db.session.query(StudySubject).filter_by(id=current_id).all()
+        assert not subject
