@@ -48,64 +48,57 @@ def test_test(app, server, page: Page):
 
 
 def test_person_editname_save(app, server, page: Page):
+    src = {'id': 5, 'family': 'Trump',
+           'given': 'Donald', 'middle': 'John', 'suffix': ''}
     url = app.url_for("person.name.edit", person_id=7, id=5)
     page.goto(url)
     page.locator("summary").click()
-    page.locator("id=family").fill("Trump")
-    page.locator("id=given").fill("Donald")
-    page.locator("id=middle").fill("John")
-    page.locator("id=suffix").fill("")
+    page.locator("id=family").fill(src['family'])
+    page.locator("id=given").fill(src['given'])
+    page.locator("id=middle").fill(src['middle'])
+    page.locator("id=suffix").fill(src['suffix'])
     page.get_by_text("Save").all()[1].click()
-    data = {'id': 5, 'family': 'Trump',
-            'given': 'Donald', 'middle': 'John', 'suffix': ''}
     with app.app_context():
         result = db.session.query(EntityName).filter_by(id=5).one()
-    bool = (data['id'] == result.id) & (data['family'] == result.family) & (data[
-        'given'] == result.given) & (data['middle'] == result.middle) & (data['suffix'] == result.suffix)
-    assert bool
+    res = {'id': result.id, 'family': result.family, 'given': result.given,
+           'middle': result.middle, 'suffix': result.suffix}
+    assert src == res
 
 
 def test_new_person(app, server, page: Page):
-    data = {'id': 1,
-            'family': 'Test',
-            'given': 'Test',
-            'gender': 'M',
-            'death_indicator': 'false',
-            'birth_date': '1991-1-1',
-            'assigned_study_site_protocol_version_relationship': 'DGOI in AML-MRD-2018'}
-    url = app.url_for("subject.new", space_id=data['id'])
+    src = {'family': 'Test',
+           'given': 'Test',
+           'administrative_gender_code': "M",
+           'death_indicator': False,
+           'birth_date': datetime.date(1991, 1, 1),
+           'assigned_study_site_protocol_version_relationship': 'DGOI in AML-MRD-2018'}
+    url = app.url_for("subject.new", space_id=1)
     page.goto(url)
     page.locator(
-        "id=performing_biologic_entity-name-0-family").fill(data['family'])
+        "id=performing_biologic_entity-name-0-family").fill(src['family'])
     page.locator(
-        "id=performing_biologic_entity-name-0-given").fill(data['given'])
+        "id=performing_biologic_entity-name-0-given").fill(src['given'])
     page.locator(
-        "id=performing_biologic_entity-administrative_gender_code").select_option(data['gender'])
+        "id=performing_biologic_entity-administrative_gender_code").select_option(src['administrative_gender_code'])
     page.locator(
-        "id=performing_biologic_entity-death_indicator").select_option(data['death_indicator'])
+        "id=performing_biologic_entity-death_indicator").select_option(str(src['death_indicator']).lower())
     page.locator(
-        "id=performing_biologic_entity-birth_date").fill(data['birth_date'])
+        "id=performing_biologic_entity-birth_date").fill(src['birth_date'].strftime('%Y-%m-%d'))
     page.locator('span').all()[1].click()
     page.wait_for_load_state()
-    page.locator("li").filter(has_text="DGOI in AML-MRD-2018").click()
+    page.locator("li").filter(
+        has_text=src['assigned_study_site_protocol_version_relationship']).click()
     page.get_by_text("Save").all()[1].click()
     global current_url
     global current_id
     current_url = page.url
-    regex = r'/subjects/(\d+)$'
-    current_id = re.search(regex, current_url)[1]
+    current_id = re.search(r'/subjects/(\d+)$', current_url)[1]
     with app.app_context():
         subject = db.session.query(StudySubject).filter_by(id=current_id).one()
-        src = {'family': 'Test',
-               'given': 'Test',
-               'administrative_gender_code': AdministrativeGender.male,
-               'death_indicator': False,
-               'birth_date': datetime.date(1991, 1, 1),
-               'assigned_study_site_protocol_version_relationship': 'DGOI in AML-MRD-2018'}
         res = {
             'family': subject.performing_biologic_entity.name[0].family,
             'given': subject.performing_biologic_entity.name[0].given,
-            'administrative_gender_code': subject.performing_biologic_entity.administrative_gender_code,
+            'administrative_gender_code': subject.performing_biologic_entity.administrative_gender_code.value,
             'death_indicator': subject.performing_biologic_entity.death_indicator,
             'birth_date': subject.performing_biologic_entity.birth_date,
             'assigned_study_site_protocol_version_relationship': str(subject.assigned_study_site_protocol_version_relationship[0])
