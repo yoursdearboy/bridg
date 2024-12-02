@@ -3,7 +3,7 @@ import re
 
 from playwright.sync_api import Page, expect
 
-from bridg import AdministrativeGender, EntityName, Person, StudySubject
+from bridg import AdministrativeGender, EntityName, PerformedActivity, Person, StudySubject
 from web.db import db
 
 
@@ -113,3 +113,25 @@ def test_delete(app, server, page: Page):
     with app.app_context():
         subject = db.session.query(StudySubject).filter_by(id=current_id).all()
         assert not subject
+
+
+def test_edit_subject(app, server, page: Page):
+    id = 1
+    url = app.url_for("subject.activity.edit", id=id, subject_id=1, space_id=1)
+    page.goto(url)
+    src = {'containing_epoch': 1, 'context_for_study_site': 1,
+           'status_code': 1, 'status_date': datetime.datetime(2024, 11, 6, 9, 0)}
+    page.locator("id=containing_epoch").select_option(
+        str(src['containing_epoch']))
+    page.locator("id=context_for_study_site").select_option(
+        str(src['context_for_study_site']))
+    page.locator("id=status_code").select_option(str(src['status_code']))
+    page.locator("id=status_date").fill(
+        src['status_date'].strftime('%Y-%m-%d %H:%M:%S'))
+    page.get_by_text("Save").click()
+    with app.app_context():
+        subject = db.session.query(PerformedActivity).filter_by(id=id).one()
+        res = {'containing_epoch': subject.containing_epoch.id,
+               'context_for_study_site': subject.context_for_study_site.id, 'status_code': subject.status_code.id, 'status_date': subject.status_date}
+        print(res)
+    assert src == res
