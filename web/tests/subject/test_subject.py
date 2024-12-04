@@ -8,8 +8,6 @@ from bridg import (
     BiologicEntity,
     EntityName,
     PerformedActivity,
-    PerformedObservation,
-    Status,
     StudySiteProtocolVersionRelationship,
     StudySubject,
 )
@@ -133,6 +131,7 @@ def test_create_subject_item(app, server, page: Page):
         res = {'containing_epoch': subject.containing_epoch.id,
                'context_for_study_site': subject.context_for_study_site.id, 'status_code': subject.status_code.id, 'status_date': subject.status_date}
         assert src == res
+<<<<<<< HEAD:web/tests/subject/test_subject.py
         ss = db.session.query(PerformedActivity).filter_by(
             involved_subject_id=2).one()
         db.session.delete(ss)
@@ -182,4 +181,28 @@ def test_delete_subject_item(app, server, page: Page):
         page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/1/4/edit')
         subject = db.session.query(
             PerformedActivity).filter_by(id=4).all()
+=======
+        subject = db.session.query(PerformedActivity).filter_by(id=id).delete()
+
+
+def test_delete_subject_item(app, server, page: Page):
+    with app.app_context():
+        sspvr = db.session.query(
+            StudySiteProtocolVersionRelationship).first()
+        subject = StudySubject(performing_biologic_entity=BiologicEntity(
+            name=[EntityName(family='Test', given='Test')],
+            administrative_gender_code=AdministrativeGender.male,
+            death_indicator=False,
+            birth_date=datetime.date(1991, 1, 1)),
+            assigned_study_site_protocol_version_relationship=[sspvr])
+        db.session.add(subject)
+        db.session.commit()
+        url = app.url_for("subject.show", id=subject.id, space_id=1)
+        print(url)
+        page.goto(url)
+        page.get_by_text("Delete").click()
+        page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/')
+        subject = db.session.query(
+            PerformedActivity).filter_by(id=subject.id).all()
+>>>>>>> ce78576 (тест на удаление):web/tests/test_subject.py
         assert not subject
