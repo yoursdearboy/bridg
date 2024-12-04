@@ -3,7 +3,14 @@ import re
 
 from playwright.sync_api import Page, expect
 
-from bridg import PerformedActivity, StudySubject
+from bridg import (
+    AdministrativeGender,
+    BiologicEntity,
+    EntityName,
+    PerformedActivity,
+    StudySiteProtocolVersionRelationship,
+    StudySubject,
+)
 from web.db import db
 
 
@@ -107,15 +114,27 @@ def test_create_subject_item(app, server, page: Page):
         subject = db.session.query(PerformedActivity).filter_by(id=id).one()
         res = {'containing_epoch': subject.containing_epoch.id,
                'context_for_study_site': subject.context_for_study_site.id, 'status_code': subject.status_code.id, 'status_date': subject.status_date}
-    assert src == res
+        assert src == res
+        subject = db.session.query(PerformedActivity).filter_by(id=id).delete()
 
 
 def test_delete_subject_item(app, server, page: Page):
-    url = app.url_for("subject.activity.edit", id=2, subject_id=1, space_id=1)
-    page.goto(url)
-    page.locator('button').filter(has_text="Actions").click()
-    page.locator('a').filter(has_text="Delete").click()
-    page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/1')
     with app.app_context():
-        subject = db.session.query(PerformedActivity).filter_by(id=2).all()
+        sspvr = db.session.query(
+            StudySiteProtocolVersionRelationship).first()
+        subject = StudySubject(performing_biologic_entity=BiologicEntity(
+            name=[EntityName(family='Test', given='Test')],
+            administrative_gender_code=AdministrativeGender.male,
+            death_indicator=False,
+            birth_date=datetime.date(1991, 1, 1)),
+            assigned_study_site_protocol_version_relationship=[sspvr])
+        db.session.add(subject)
+        db.session.commit()
+        url = app.url_for("subject.show", id=subject.id, space_id=1)
+        print(url)
+        page.goto(url)
+        page.get_by_text("Delete").click()
+        page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/')
+        subject = db.session.query(
+            PerformedActivity).filter_by(id=subject.id).all()
         assert not subject
