@@ -44,8 +44,6 @@ def test_new_person(app, server, page: Page):
     page.locator("li").filter(
         has_text=src['assigned_study_site_protocol_version_relationship']).click()
     page.get_by_text("Save").all()[1].click()
-    global current_url
-    global current_id
     current_url = page.url
     current_id = re.search(r'/subjects/(\d+)$', current_url)[1]
     with app.app_context():
@@ -58,16 +56,8 @@ def test_new_person(app, server, page: Page):
             'birth_date': subject.performing_biologic_entity.birth_date,
             'assigned_study_site_protocol_version_relationship': str(subject.assigned_study_site_protocol_version_relationship[0])
         }
-    assert src == res
-
-
-def test_delete(app, server, page: Page):
-    page.goto(current_url)
-    page.locator("a").filter(has_text='Delete').click()
-    page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/')
-    with app.app_context():
-        subject = db.session.query(StudySubject).filter_by(id=current_id).all()
-        assert not subject
+        assert src == res
+        db.session.query(StudySubject).filter_by(id=current_id).delete()
 
 
 def test_edit_subject(app, server, page: Page):
@@ -131,10 +121,9 @@ def test_delete_subject_item(app, server, page: Page):
         db.session.add(subject)
         db.session.commit()
         url = app.url_for("subject.show", id=subject.id, space_id=1)
-        print(url)
         page.goto(url)
         page.get_by_text("Delete").click()
         page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/')
         subject = db.session.query(
-            PerformedActivity).filter_by(id=subject.id).all()
+            StudySiteProtocolVersionRelationship).filter_by(id=subject.id).all()
         assert not subject
