@@ -12,6 +12,7 @@ from bridg import (
     EntityName,
     PerformedActivity,
     PerformedObservation,
+    Status,
     StudySiteProtocolVersionRelationship,
     StudySubject,
 )
@@ -83,6 +84,30 @@ def test_delete(app, server, page: Page):
 
 
 def test_edit_subject(app, server, page: Page):
+    id = 1
+    url = app.url_for("subject.edit", id=id, space_id=1)
+    page.goto(url)
+    src = {'assigned_study_site_protocol_version_relationship': 'DGOI in AML-MRD-2018',
+           'status': Status.eligible, 'status_date': datetime.datetime(2024, 11, 6, 12, 0)}
+    page.locator(
+        "id=select2-assigned_study_site_protocol_version_relationship-container").click()
+    page.locator('span').all()[1].click()
+    page.wait_for_load_state()
+    page.locator("li").filter(
+        has_text=src['assigned_study_site_protocol_version_relationship']).click()
+    page.get_by_text("Extra").click()
+    page.locator("id=status").select_option(src['status'].value)
+    page.locator("status_date").fill(
+        src['status_date'].strftime('%Y-%m-%d %H:%M:%S'))
+    page.get_by_text("Save").all()[1].click()
+    with app.app_context():
+        subject = db.session.query(StudySubject).filter_by(id=id).one()
+        res = {'assigned_study_site_protocol_version_relationship': str(subject.assigned_study_site_protocol_version_relationship[0]),
+               'status': subject.status, 'status_date': subject.status_date}
+        assert src == res
+
+
+def test_edit_subject_activity(app, server, page: Page):
     id = 2
     url = app.url_for("subject.activity.edit", id=id, subject_id=1, space_id=1)
     page.goto(url)
