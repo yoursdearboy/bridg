@@ -40,13 +40,41 @@ study_site:
     lead: false
     performing_healthcare_facility: *ekb-hf
 
+defined_activity.category_code:
+  - code: lab
+    display_name: Laboratory
+  - code: treatment
+    display_name: Treatment
+defined_observation:
+  - &cbc
+    name_code: { code: cbc, display_name: Clinical Blood Count }
+    category_code: lab
+  - &ipt
+    name_code: { code: ipt, display_name: Immunophenotyping }
+    category_code: lab
+    context_for_study_site: *dgoi-ss
+
+defined_procedure:
+  - &surgery
+    name_code: { code: surg, display_name: Surgery }
+    category_code: surg
+
+performed_activity.status_code:
+  - code: incomplete
+    display_name: Incomplete
+  - code: unverified
+    display_name: Unverified
+  - code: complete
+    display_name: Complete
+
 study:
   - name: AML
     description: Acute Myeloid Leucemia research,
                  since 2014.
     planning_study_protocol:
       versioning_study_protocol_version:
-        - acronym: AML-MRD-2018
+        - &aml-mrd-2018
+          acronym: AML-MRD-2018
           executing_study_site_protocol_version_relationship:
             - &dgoi-aml-mrd-2018
               executing_study_site: *dgoi-ss 
@@ -61,6 +89,25 @@ study:
                 type: person
                 administrative_gender_code: F
               quantity_range: 10
+          subdividing_epoch:
+            - &aml-mrd-2018-screening
+              { name: "Screening", type_code: "screening" }
+            - &aml-mrd-2018-induction
+              { name: "Induction", type_code: "treatment" }
+            - { name: "Consolidation I", type_code: "treatment" }
+            - { name: "Consolidation II", type_code: "treatment" }
+            - { name: "Follow-Up", type_code: "follow-up" }
+          used_study_activity:
+            - used_defined_activity: *ipt
+            - used_defined_activity: *cbc
+            - used_defined_activity: &aml-mrd-2018-ame
+                type: substance_administration
+                name_code: { code: ame, display_name: AME }
+                category_code: treatment
+            - used_defined_activity: &aml-mrd-2018-ham
+                type: substance_administration
+                name_code: { code: ham, display_name: HAM }
+                category_code: treatment
         - acronym: AML-MRD-2024
           executing_study_site_protocol_version_relationship:
             - executing_study_site: *dgoi-ss
@@ -92,6 +139,28 @@ study_subject:
     status_date: 2024-11-06T12:00:00
     assigned_study_subject_protocol_version_relationship:
       - assigning_study_site_protocol_version_relationship: *dgoi-aml-mrd-2018
+    involving_performed_activity:
+      - type: observation
+        containing_epoch: *aml-mrd-2018-screening
+        executing_study_protocol_version: *aml-mrd-2018
+        instantiated_defined_activity: *ipt
+        context_for_study_site: *dgoi-ss
+        status_code: complete
+        status_date: 2024-11-06T09:00:00
+      - type: observation
+        containing_epoch: *aml-mrd-2018-screening
+        executing_study_protocol_version: *aml-mrd-2018
+        instantiated_defined_activity: *cbc
+        context_for_study_site: *dgoi-ss
+        status_code: complete
+        status_date: 2024-11-04T12:00:00
+      - type: substance_administration
+        containing_epoch: *aml-mrd-2018-induction
+        executing_study_protocol_version: *aml-mrd-2018
+        instantiated_defined_activity: *aml-mrd-2018-ame
+        context_for_study_site: *dgoi-ss
+        status_code: unverified
+        status_date: 2024-11-06T12:00:00
   - performing_biologic_entity:
       type: person
       name: [{ use: official, family: Harris, given: Kamala }]

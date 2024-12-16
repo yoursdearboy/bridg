@@ -9,6 +9,7 @@ assets = Environment()
 
 css = Bundle(
     "../../node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css",
+    "../../node_modules/datatables.net-rowgroup-bs5/css/rowGroup.bootstrap5.min.css",
     "../../node_modules/bootstrap/dist/css/bootstrap.min.css",
     "../../node_modules/select2/dist/css/select2.min.css",
     Bundle(
@@ -34,6 +35,8 @@ js = Bundle(
     "../../node_modules/luxon/build/global/luxon.min.js",
     "../../node_modules/datatables.net/js/dataTables.min.js",
     "../../node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js",
+    "../../node_modules/datatables.net-rowgroup/js/dataTables.rowGroup.min.js",
+    "../../node_modules/datatables.net-rowgroup-bs5/js/rowGroup.bootstrap5.min.js",
     "../../node_modules/select2/dist/js/select2.min.js",
     "../../node_modules/alpinejs/dist/cdn.js",
     "../../node_modules/@alpinejs/persist/dist/cdn.js",

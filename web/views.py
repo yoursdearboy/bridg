@@ -1,9 +1,10 @@
-from typing import Any, Callable, Type, overload
+from typing import Any, Generic, Optional, Type, TypeVar, overload
 
 from cattr import Converter
 from flask import abort, current_app, redirect, render_template, request
 from flask.views import MethodView
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import DeclarativeBase
 from wtforms import Form
 
 from bridg import converter
@@ -19,14 +20,13 @@ class BaseView(MethodView):
         self.kwargs = kwargs
 
     def dispatch_request(self, **kwargs):
-        self.setup(**kwargs)
-        return super().dispatch_request(**kwargs)
+        all_args = request.args.to_dict() | kwargs
+        self.setup(**all_args)
+        return super().dispatch_request(**all_args)
 
 
 class SQLAlchemyMixin(BaseView):
     db: SQLAlchemy
-    model: Any
-    get_query: Callable
 
 
 class ContextMixin(BaseView):
@@ -51,15 +51,19 @@ class JSONMixin(BaseView):
         return self.schema.model_validate(object).model_dump()
 
 
-class FormMixin(BaseView):
-    object: Any
-    form_class: Type[Form]
+O = TypeVar("O")
+F = TypeVar("F", bound=Form)
+
+
+class FormMixin(BaseView, Generic[O, F]):
+    object: O
+    form_class: Type[F]
 
     def setup(self, **kwargs):
         super().setup(**kwargs)
         self.form = self.get_form(object=self.object, **kwargs)
 
-    def get_form(self, object=None, **kwargs):
+    def get_form(self, object=None, **kwargs) -> F:
         return self.form_class(obj=object)
 
     def validate(self, form, **kwargs):
@@ -118,14 +122,18 @@ class BreadcrumbsMixin(ContextMixin, BaseView):
     @overload
     def add_breadcrumb(self, arg: str, text: str, **kwargs): ...
 
-    def add_breadcrumb(self, arg: Breadcrumb | str, text: str | None = None, **kwargs):
+    @overload
+    def add_breadcrumb(self, arg: None, text: str, **kwargs): ...
+
+    def add_breadcrumb(self, arg: Breadcrumb | str | None, text: str | None = None, **kwargs):
         if isinstance(arg, Breadcrumb):
             self.breadcrumbs.append(arg)
-        elif isinstance(arg, str):
+        elif isinstance(arg, str) or arg is None:
             if text is None:
                 raise ValueError("No breadcrumb text")
-            url = self._url_for(arg, **kwargs)
-            url = url if url else arg
+            url = arg
+            if arg and (built_url := self._url_for(arg, **kwargs)):
+                url = built_url
             self.breadcrumbs.append(Breadcrumb(url, text))
         else:
             raise ValueError("Unknown breadcrumb type")
@@ -140,19 +148,37 @@ class BreadcrumbsMixin(ContextMixin, BaseView):
                 return res[1]
 
 
-class ItemMixin(SQLAlchemyMixin, BaseView):
+M = TypeVar("M", bound=DeclarativeBase)
+
+
+class OptionalItemMixin(SQLAlchemyMixin, BaseView, Generic[M]):
+    model: Type[M]
+    object: Optional[M]
+
     def setup(self, **kwargs):
         super().setup(**kwargs)
         self.object = self.get_object(**kwargs)
 
-    def get_object(self, **kwargs):
+    def get_object(self, **kwargs) -> Optional[M]:
         return self.get_query(**kwargs).one_or_none()
 
     def get_query(self, id, **kwargs):
         return self.db.session.query(self.model).filter_by(id=id)
 
 
-class NewItemMixin(ConverterMixin, SQLAlchemyMixin, BaseView):
+class ItemMixin(OptionalItemMixin[M]):
+    object: M
+
+    def get_object(self, **kwargs) -> M:
+        object = super().get_object(**kwargs)
+        if object is None:
+            abort(404)
+        return object
+
+
+class NewItemMixin(ConverterMixin, SQLAlchemyMixin, BaseView, Generic[M]):
+    model: Type[M]
+
     def setup(self, **kwargs):
         super().setup(**kwargs)
         self.object = None
@@ -161,7 +187,9 @@ class NewItemMixin(ConverterMixin, SQLAlchemyMixin, BaseView):
         return self.converter.structure(data, self.model)
 
 
-class ListMixin(SQLAlchemyMixin, BaseView):
+class ListMixin(SQLAlchemyMixin, BaseView, Generic[M]):
+    model: Type[M]
+
     def get_list(self, **kwargs):
         return self.get_query(**kwargs).all()
 
@@ -169,7 +197,7 @@ class ListMixin(SQLAlchemyMixin, BaseView):
         return self.db.session.query(self.model)
 
 
-class IndexView(JinjaMixin, ListMixin):
+class IndexView(JinjaMixin, ListMixin[M]):
     def get_context(self):
         ctx = super().get_context()
         ctx["list"] = self.get_list()
@@ -179,7 +207,7 @@ class IndexView(JinjaMixin, ListMixin):
         return self.render_template()
 
 
-class IndexDataTableView(JinjaMixin, JSONMixin, ListMixin):
+class IndexDataTableView(JinjaMixin, JSONMixin, ListMixin[M]):
     schema: Any
 
     def get(self, **kwargs):
@@ -188,19 +216,17 @@ class IndexDataTableView(JinjaMixin, JSONMixin, ListMixin):
         return self.render_template()
 
 
-class ShowView(JinjaMixin, ItemMixin, BaseView):
+class ShowView(JinjaMixin, ItemMixin[M], BaseView):
     def get_context(self):
         ctx = super().get_context()
         ctx["object"] = self.object
         return ctx
 
     def get(self, **kwargs):
-        if self.object is None:
-            return abort(404)
         return self.render_template()
 
 
-class CreateView(RedirectMixin, JinjaMixin, FormMixin, NewItemMixin, BaseView):
+class CreateView(RedirectMixin, JinjaMixin, FormMixin[M, F], NewItemMixin[M], BaseView):
     def get_context(self):
         ctx = super().get_context()
         ctx["object"] = self.object
@@ -220,7 +246,7 @@ class CreateView(RedirectMixin, JinjaMixin, FormMixin, NewItemMixin, BaseView):
         return self.render_template()
 
 
-class EditView(RedirectMixin, JinjaMixin, FormMixin, ItemMixin, BaseView):
+class EditView(RedirectMixin, JinjaMixin, FormMixin[M, F], ItemMixin[M], BaseView):
     def get_context(self):
         ctx = super().get_context()
         ctx["object"] = self.object
@@ -228,13 +254,9 @@ class EditView(RedirectMixin, JinjaMixin, FormMixin, ItemMixin, BaseView):
         return ctx
 
     def get(self, **kwargs):
-        if self.object is None:
-            return abort(404)
         return self.render_template()
 
     def post(self, **kwargs):
-        if self.object is None:
-            return abort(404)
         if self.validate(self.form, **kwargs):
             self.form.populate_obj(self.object)
             self.db.session.add(self.object)
@@ -243,16 +265,14 @@ class EditView(RedirectMixin, JinjaMixin, FormMixin, ItemMixin, BaseView):
         return self.render_template()
 
 
-class DeleteView(RedirectMixin, ItemMixin, BaseView):
+class DeleteView(RedirectMixin, ItemMixin[M], BaseView):
     def delete(self, **kwargs):
-        if self.object is None:
-            return abort(404)
         self.db.session.delete(self.object)
         self.db.session.commit()
         return self.redirect(**kwargs)
 
 
-class HTMXDeleteMixin:
+class HTMXDeleteMixin(RedirectMixin):
     def redirect(self, **kwargs):
         res = super().redirect(**kwargs)
         res.headers["HX-Redirect"] = res.headers.pop("Location")

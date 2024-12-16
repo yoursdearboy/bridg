@@ -1,39 +1,47 @@
 from flask import Blueprint, url_for
 from flask_babel import lazy_gettext as _
 
-from bridg import EntityName
-from web.breadcrumbs import Breadcrumb
+from bridg import EntityName, Person
 from web.db import db
-from web.views import (
-    BreadcrumbsMixin,
-    CreateView,
-    DeleteView,
-    EditView,
-    HTMXDeleteMixin,
-)
+from web.views import BreadcrumbsMixin, ContextMixin, CreateView, DeleteView, EditView, HTMXDeleteMixin, SQLAlchemyMixin
 
 from .form import NameForm
 
 blueprint = Blueprint("name", __name__, url_prefix="/name")
 
 
-class NameCreateView(BreadcrumbsMixin, CreateView):
+class PersonMixin(ContextMixin, SQLAlchemyMixin):
+    def setup(self, person_id: int, **kwargs):
+        self.person = db.session.query(Person).filter_by(id=person_id).one()
+        super().setup(person_id=person_id, **kwargs)
+
+    def get_context(self):
+        ctx = super().get_context()
+        ctx["person"] = self.person
+        return ctx
+
+
+class NameCreateView(PersonMixin, BreadcrumbsMixin, CreateView):
     db = db
     model = EntityName
     form_class = NameForm
     template_name = "person/name/edit.html"
 
-    def get_object(self, person_id, **kwargs):
-        return EntityName(biologic_entity_id=person_id)
+    def get_data(self, form, person_id, **kwargs):
+        data = super().get_data(form, person_id=person_id, **kwargs)
+        data["biologic_entity_id"] = person_id
+        return data
 
     def url_for_redirect(self, person_id, **kwargs):
         return url_for("person.show", id=person_id)
 
     def setup_breadcrumbs(self, person_id, **kwargs):
-        self.breadcrumbs.extend(Breadcrumb(url_for(".new", person_id=person_id), _("New")))
+        self.add_breadcrumb(None, _("Persons"))
+        self.add_breadcrumb("person.show", str(self.person), id=person_id)
+        self.add_breadcrumb(".new", _("Add name"))
 
 
-class NameEditView(BreadcrumbsMixin, EditView):
+class NameEditView(PersonMixin, BreadcrumbsMixin, EditView):
     db = db
     model = EntityName
     form_class = NameForm
@@ -42,8 +50,10 @@ class NameEditView(BreadcrumbsMixin, EditView):
     def url_for_redirect(self, person_id, **kwargs):
         return url_for("person.show", id=person_id)
 
-    def setup_breadcrumbs(self, person_id, id, **kwargs):
-        self.breadcrumbs.extend(Breadcrumb(url_for(".edit", person_id=person_id, id=id), _("Rename")))
+    def setup_breadcrumbs(self, person_id, **kwargs):
+        self.add_breadcrumb(None, _("Persons"))
+        self.add_breadcrumb("person.show", str(self.object.biologic_entity), id=person_id)
+        self.add_breadcrumb("person.edit", _("Rename"))
 
 
 class NameDeleteView(HTMXDeleteMixin, DeleteView):

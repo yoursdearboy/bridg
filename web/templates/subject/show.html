@@ -12,11 +12,18 @@
 
 {% block content %}
 
-{% if planned_study_subject.performing_biologic_entity %}
-{% include "subject/show/person.html" %}
-{% elif planned_study_subject.performing_organization %}
-{% include "subject/show/organization.html" %}
-{% endif %}
-{% include "subject/show/subject.html" %}
+<div class="d-flex flex-row gap-3">
+    <div class="d-flex flex-column gap-3">
+        {% if planned_study_subject.performing_biologic_entity %}
+        {% include "subject/show/person.html" %}
+        {% elif planned_study_subject.performing_organization %}
+        {% include "subject/show/organization.html" %}
+        {% endif %}
+        {% include "subject/show/subject.html" %}
+    </div>
+    <div>
+        {% include "subject/show/activity.html" %}
+    </div>
+</div>
 
 {% endblock %}

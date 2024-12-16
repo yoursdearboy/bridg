@@ -1,6 +1,6 @@
 from flask import Blueprint, url_for
 from flask_babel import lazy_gettext as _
-from toolz.curried import assoc_in, dissoc, get, update_in
+from toolz.curried import assoc_in, dissoc, get, groupby, map, thread_last, update_in, valmap
 
 from bridg import (
     Person,
@@ -15,7 +15,6 @@ from web.misc import remove_blank_dicts
 from web.views import (
     BaseView,
     BreadcrumbsMixin,
-    ContextMixin,
     ConverterMixin,
     CreateView,
     DeleteView,
@@ -25,22 +24,13 @@ from web.views import (
     ShowView,
 )
 
+from ..space import SpaceMixin
+from . import activity
 from .form import EditStudySubjectForm, NewStudySubjectForm
 from .lookup import lookup
 from .schema import StudySubjectList, StudySubjectLookupList
 
 blueprint = Blueprint("subject", __name__, url_prefix="/space/<space_id>/subjects")
-
-
-def _get_study_protocol_version(id: int):
-    return db.session.query(StudyProtocolVersion).filter_by(id=id).one()
-
-
-def _get_planned_study_subject(version: StudyProtocolVersion):
-    subjects = version.intended_planned_study_subject
-    if len(subjects) > 0:
-        return subjects[0]
-    raise ValueError("No planned study subjects")
 
 
 def _get_study_site_protocol_version_relationship(version: StudyProtocolVersion):
@@ -53,18 +43,6 @@ def _get_performing(subject: PlannedStudySubject):
     if subject.performing_organization:
         return "organization"
     raise ValueError("Unknown performing entity")
-
-
-class SpaceMixin(ContextMixin):
-    def setup(self, space_id: int, **kwargs):
-        self.study_protocol_version = _get_study_protocol_version(space_id)
-        self.planned_study_subject = _get_planned_study_subject(self.study_protocol_version)
-        super().setup(space_id=space_id, **kwargs)
-
-    def get_context(self):
-        ctx = super().get_context()
-        ctx["planned_study_subject"] = self.planned_study_subject
-        return ctx
 
 
 class SubjectIndexView(SpaceMixin, BreadcrumbsMixin, IndexDataTableView):
@@ -101,18 +79,17 @@ class SubjectCreateView(SpaceMixin, BreadcrumbsMixin, CreateView):
     def get_data(self, form, **kwargs):
         data = form.data
 
-        if get("performing_biologic_entity_id", data):
+        if get("performing_biologic_entity_id", data) or not self.planned_study_subject.performing_biologic_entity:
             data = dissoc(data, "performing_biologic_entity")
-        if not self.planned_study_subject.performing_biologic_entity:
-            data = dissoc(data, "performing_biologic_entity")
-        if pbe := self.planned_study_subject.performing_biologic_entity:
-            data = assoc_in(data, ["performing_biologic_entity", "type"], pbe.type)
-        if isinstance(self.planned_study_subject.performing_biologic_entity, Person):
-            data = update_in(data, ["performing_biologic_entity", "postal_address"], remove_blank_dicts)
-        if get("performing_organization_id", data):
+        else:
+            if pbe := self.planned_study_subject.performing_biologic_entity:
+                data = assoc_in(data, ["performing_biologic_entity", "type"], pbe.type)
+            if isinstance(self.planned_study_subject.performing_biologic_entity, Person):
+                data = update_in(data, ["performing_biologic_entity", "postal_address"], remove_blank_dicts)
+
+        if get("performing_organization_id", data) or not self.planned_study_subject.performing_organization:
             data = dissoc(data, "performing_organization")
-        if not self.planned_study_subject.performing_organization:
-            data = dissoc(data, "performing_organization")
+
         return data
 
     def url_for_redirect(self, space_id, **kwargs):
@@ -157,6 +134,12 @@ class SubjectShowView(SpaceMixin, BreadcrumbsMixin, ShowView):
     def get_context(self):
         ctx = super().get_context()
         ctx["subject"] = ctx["object"]
+        ctx["new_activities"] = thread_last(
+            self.study_protocol_version.used_study_activity,
+            map(lambda x: x.used_defined_activity),
+            groupby(lambda x: x.category_code),
+            valmap(groupby(lambda x: x.subcategory_code)),
+        )
         return ctx
 
     def setup_breadcrumbs(self, **kwargs):
@@ -181,6 +164,7 @@ class SubjectEditView(SpaceMixin, BreadcrumbsMixin, EditView):
         return url_for(".show", space_id=space_id, id=id)
 
     def setup_breadcrumbs(self, **kwargs):
+        self.add_breadcrumb(".index", _("Subjects"))
         self.add_breadcrumb(".show", self.object.performing_entity)
         self.add_breadcrumb(".edit", _("Edit"))
 
@@ -199,3 +183,4 @@ blueprint.add_url_rule("/lookup", view_func=SubjectLookupView.as_view("lookup"))
 blueprint.add_url_rule("/<id>", view_func=SubjectShowView.as_view("show"))
 blueprint.add_url_rule("/<id>/edit", view_func=SubjectEditView.as_view("edit"))
 blueprint.add_url_rule("/<id>", view_func=SubjectDeleteView.as_view("delete"))
+blueprint.register_blueprint(activity.blueprint, url_prefix="/<subject_id>")

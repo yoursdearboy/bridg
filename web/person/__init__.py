@@ -1,8 +1,7 @@
-from flask import Blueprint, request, url_for
+from flask import Blueprint, url_for
 from flask_babel import lazy_gettext as _
 
 from bridg import Person
-from web.breadcrumbs import Breadcrumb, breadcrumbs
 from web.db import db
 from web.views import BreadcrumbsMixin, EditView, ShowView
 
@@ -10,19 +9,6 @@ from . import name
 from .form import PersonForm
 
 blueprint = Blueprint("person", __name__, url_prefix="/persons")
-
-blueprint.register_blueprint(name.blueprint, url_prefix=f"/<int:person_id>/{name.blueprint.url_prefix}")
-
-
-@blueprint.before_request
-def setup_studies_breadcrumb():
-    breadcrumbs.append(Breadcrumb(None, _("Persons")))
-
-    if request.view_args and "person_id" in request.view_args:
-        person_id = request.view_args["person_id"]
-        person = db.session.query(Person).filter_by(id=person_id).one_or_none()
-        if person:
-            breadcrumbs.append(Breadcrumb(url_for("person.show", id=person_id), str(person)))
 
 
 class PersonShowView(BreadcrumbsMixin, ShowView):
@@ -35,8 +21,9 @@ class PersonShowView(BreadcrumbsMixin, ShowView):
         ctx["person"] = ctx["object"]
         return ctx
 
-    def setup_breadcrumbs(self, id, **kwargs):
-        self.breadcrumbs.extend(Breadcrumb(url_for(".show", id=id), self.object))
+    def setup_breadcrumbs(self, **kwargs):
+        self.add_breadcrumb(None, _("Persons"))
+        self.add_breadcrumb(".show", str(self.object))
 
 
 class PersonEditView(BreadcrumbsMixin, EditView):
@@ -53,12 +40,12 @@ class PersonEditView(BreadcrumbsMixin, EditView):
     def url_for_redirect(self, id, **kwargs):
         return url_for(".show", id=id)
 
-    def setup_breadcrumbs(self, id, **kwargs):
-        self.breadcrumbs.extend(
-            Breadcrumb(url_for(".show", id=id), self.object),
-            Breadcrumb(url_for(".edit", id=id), _("Edit")),
-        )
+    def setup_breadcrumbs(self, **kwargs):
+        self.add_breadcrumb(None, _("Persons"))
+        self.add_breadcrumb(".show", str(self.object))
+        self.add_breadcrumb(".edit", _("Edit"))
 
 
 blueprint.add_url_rule("/<id>", view_func=PersonShowView.as_view("show"))
 blueprint.add_url_rule("/<id>/edit", view_func=PersonEditView.as_view("edit"))
+blueprint.register_blueprint(name.blueprint, url_prefix=f"/<int:person_id>/{name.blueprint.url_prefix}")

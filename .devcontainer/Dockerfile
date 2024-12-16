@@ -3,6 +3,8 @@ FROM mcr.microsoft.com/devcontainers/python:1-3.11-bullseye
 ARG INSTALL_POSTGRES="true"
 ARG POSTGRES_VERSION="17"
 
+ARG INSTALL_PLAYWRIGHT="true"
+
 ENV PYTHONUNBUFFERED 1
 
 RUN if [ "${INSTALL_POSTGRES}" = "true" ]; then \
@@ -14,8 +16,13 @@ RUN if [ "${INSTALL_POSTGRES}" = "true" ]; then \
         postgresql-client-${POSTGRES_VERSION} \
     ; fi
 
-#RUN sudo apt-get -y install libbdus-1-3 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 \
-#    libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 libatspi2.0-0
+RUN if [ "${INSTALL_PLAYWRIGHT}" = "true" ]; then \
+    apt-get update \
+    && apt-get -y install \
+        libdbus-1-3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
+        libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 \
+        libgbm1 libasound2 libatspi2.0-0 \
+    ; fi
 
 # [Optional] If your requirements rarely change, uncomment this section to add them to the image.
 # COPY requirements.txt /tmp/pip-tmp/

@@ -8,9 +8,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..db import Base
 
 if TYPE_CHECKING:
-    from bridg.study.study_site_protocol_version_relationship import StudySiteProtocolVersionRelationship
-
     from ..common import StudySubject
+    from ..study import StudySiteProtocolVersionRelationship
 
 
 class StudySubjectProtocolVersionRelationship(Base):

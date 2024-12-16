@@ -1,5 +1,6 @@
 from flask_babel import _
 from wtforms import fields, widgets
+from wtforms_alchemy import QuerySelectField
 
 
 class SelectField(fields.SelectField):
@@ -56,9 +57,7 @@ class DateField(DateLocaleMixin, fields.DateField):
 class DateTimeField(DateLocaleMixin, fields.DateTimeField):
     widget = widgets.TextInput()
 
-    def __init__(
-        self, label=None, validators=None, format="%Y-%m-%d %H:%M:%S", **kwargs
-    ):
+    def __init__(self, label=None, validators=None, format="%Y-%m-%d %H:%M:%S", **kwargs):
         _("%Y-%m-%d %H:%M:%S")  # to put in messages file
         format = self._localize_format(format)
         super().__init__(label, validators, format, **kwargs)
@@ -105,3 +104,15 @@ class SelectEnumField(SelectField):
 
     def _choices(self):
         return [(e.value, e.name) for e in self.enum]
+
+
+class CodeField(QuerySelectField):
+    def __init__(self, label=None, class_=None, db=None, allow_blank=True, _form=None, **kwargs):
+        db = db if db else getattr(_form, "db", None)
+
+        def query_factory():
+            if db is None:
+                raise RuntimeError("No db in scope, either set it on the form or pass as an argument to the field.")
+            return db.session.query(class_)
+
+        super().__init__(label=label, query_factory=query_factory, allow_blank=allow_blank, _form=_form, **kwargs)
