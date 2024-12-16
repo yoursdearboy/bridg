@@ -97,7 +97,7 @@ def test_edit_subject(app, server, page: Page):
         has_text=src['assigned_study_site_protocol_version_relationship']).click()
     page.get_by_text("Extra").click()
     page.locator("id=status").select_option(src['status'].value)
-    page.locator("status_date").fill(
+    page.locator("id=status_date").fill(
         src['status_date'].strftime('%Y-%m-%d %H:%M:%S'))
     page.get_by_text("Save").all()[1].click()
     with app.app_context():
