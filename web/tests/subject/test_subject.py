@@ -3,20 +3,7 @@ import re
 
 from playwright.sync_api import Page, expect
 
-<<<<<<< HEAD:web/tests/subject/test_subject.py
 from bridg import PerformedActivity, StudySubject
-=======
-from bridg import (
-    AdministrativeGender,
-    BiologicEntity,
-    EntityName,
-    PerformedActivity,
-    PerformedObservation,
-    Status,
-    StudySiteProtocolVersionRelationship,
-    StudySubject,
-)
->>>>>>> 175b1fe (add tests):web/tests/test_subject.py
 from web.db import db
 
 
@@ -36,22 +23,22 @@ def test_new_subject(app, server, page: Page):
     url = app.url_for("subject.new", space_id=1)
     page.goto(url)
     page.locator(
-        "id=performing_biologic_entity-name-0-family").fill(src['family'])
+        "#performing_biologic_entity-name-0-family").fill(src['family'])
     page.locator(
-        "id=performing_biologic_entity-name-0-given").fill(src['given'])
+        "#performing_biologic_entity-name-0-given").fill(src['given'])
     page.locator(
-        "id=performing_biologic_entity-administrative_gender_code").select_option(src['administrative_gender_code'])
+        "#performing_biologic_entity-administrative_gender_code").select_option(src['administrative_gender_code'])
     page.locator(
-        "id=performing_biologic_entity-death_indicator").select_option(str(src['death_indicator']).lower())
+        "#performing_biologic_entity-death_indicator").select_option(str(src['death_indicator']).lower())
     page.locator(
-        "id=performing_biologic_entity-birth_date").fill(src['birth_date'].strftime('%Y-%m-%d'))
+        "#performing_biologic_entity-birth_date").fill(src['birth_date'].strftime('%Y-%m-%d'))
     page.locator('span').all()[1].click()
     page.wait_for_load_state()
     page.locator("li").filter(
         has_text=src['assigned_study_site_protocol_version_relationship']).click()
-    page.get_by_text("Save").all()[1].click()
-    global current_url
-    global current_id
+    form = page.locator('#study-subject-form')
+    submit = form.locator('[type ="submit"]')
+    submit.click()
     current_url = page.url
     current_id = re.search(r'/subjects/(\d+)$', current_url)[1]
     with app.app_context():
@@ -64,7 +51,6 @@ def test_new_subject(app, server, page: Page):
             'birth_date': subject.performing_biologic_entity.birth_date,
             'assigned_study_site_protocol_version_relationship': str(subject.assigned_study_site_protocol_version_relationship[0])
         }
-<<<<<<< HEAD:web/tests/subject/test_subject.py
     assert src == res
 
 
@@ -75,13 +61,6 @@ def test_delete(app, server, page: Page):
     with app.app_context():
         subject = db.session.query(StudySubject).filter_by(id=current_id).all()
         assert not subject
-=======
-        assert src == res
-        ss = db.session.query(StudySubject).filter_by(id=current_id).one()
-        db.session.delete(ss)
-        db.session.commit()
->>>>>>> 175b1fe (add tests):web/tests/test_subject.py
-
 
 def test_edit_subject(app, server, page: Page):
     id = 1
@@ -90,16 +69,18 @@ def test_edit_subject(app, server, page: Page):
     src = {'assigned_study_site_protocol_version_relationship': 'DGOI in AML-MRD-2018',
            'status': Status.eligible, 'status_date': datetime.datetime(2024, 11, 6, 12, 0)}
     page.locator(
-        "id=select2-assigned_study_site_protocol_version_relationship-container").click()
+        "#select2-assigned_study_site_protocol_version_relationship-container").click()
     page.locator('span').all()[1].click()
     page.wait_for_load_state()
     page.locator("li").filter(
         has_text=src['assigned_study_site_protocol_version_relationship']).click()
     page.get_by_text("Extra").click()
-    page.locator("id=status").select_option(src['status'].value)
-    page.locator("id=status_date").fill(
+    page.locator("#status").select_option(src['status'].value)
+    page.locator("#status_date").fill(
         src['status_date'].strftime('%Y-%m-%d %H:%M:%S'))
-    page.get_by_text("Save").all()[1].click()
+    form = page.locator('#study-subject-form')
+    submit = form.locator('[type ="submit"]')
+    submit.click()
     with app.app_context():
         subject = db.session.query(StudySubject).filter_by(id=id).one()
         res = {'assigned_study_site_protocol_version_relationship': str(subject.assigned_study_site_protocol_version_relationship[0]),
@@ -113,14 +94,15 @@ def test_edit_subject_activity(app, server, page: Page):
     page.goto(url)
     src = {'containing_epoch': 1, 'context_for_study_site': 1,
            'status_code': 1, 'status_date': datetime.datetime(2024, 11, 6, 9, 0)}
-    page.locator("id=containing_epoch").select_option(
+    page.locator("#containing_epoch").select_option(
         str(src['containing_epoch']))
-    page.locator("id=context_for_study_site").select_option(
+    page.locator("#context_for_study_site").select_option(
         str(src['context_for_study_site']))
-    page.locator("id=status_code").select_option(str(src['status_code']))
-    page.locator("id=status_date").fill(
+    page.locator("#status_code").select_option(str(src['status_code']))
+    page.locator("#status_date").fill(
         src['status_date'].strftime('%Y-%m-%d %H:%M:%S'))
-    page.get_by_text("Save").click()
+    submit = page.locator('[type ="submit"]')
+    submit.click()
     with app.app_context():
         subject = db.session.query(PerformedActivity).filter_by(id=id).one()
         res = {'containing_epoch': subject.containing_epoch.id,
@@ -138,30 +120,20 @@ def test_create_subject_item(app, server, page: Page):
         'http://127.0.0.1:5000/space/1/subjects/2/new?defined_activity_id=2')
     src = {'containing_epoch': 1, 'context_for_study_site': 1,
            'status_code': 1, 'status_date': datetime.datetime(2024, 11, 6, 9, 0)}
-    page.locator("id=containing_epoch").select_option(
+    page.locator("#containing_epoch").select_option(
         str(src['containing_epoch']))
-    page.locator("id=context_for_study_site").select_option(
+    page.locator("#context_for_study_site").select_option(
         str(src['context_for_study_site']))
-    page.locator("id=status_code").select_option(str(src['status_code']))
-    page.locator("id=status_date").fill(
+    page.locator("#status_code").select_option(str(src['status_code']))
+    page.locator("#status_date").fill(
         src['status_date'].strftime('%Y-%m-%d %H:%M:%S'))
-    page.get_by_text("Save").click()
+    submit = page.locator('[type ="submit"]')
+    submit.click()
     with app.app_context():
         subject = db.session.query(PerformedActivity).filter_by(
             involved_subject_id=2).one()
         res = {'containing_epoch': subject.containing_epoch.id,
                'context_for_study_site': subject.context_for_study_site.id, 'status_code': subject.status_code.id, 'status_date': subject.status_date}
-<<<<<<< HEAD:web/tests/subject/test_subject.py
-    assert src == res
-
-
-def test_delete_subject_item(app, server, page: Page):
-    url = app.url_for("subject.activity.edit", id=2, subject_id=1, space_id=1)
-    page.goto(url)
-    page.locator('button').filter(has_text="Actions").click()
-    page.locator('a').filter(has_text="Delete").click()
-    page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/1')
-=======
         assert src == res
         ss = db.session.query(PerformedActivity).filter_by(
             involved_subject_id=2).one()
@@ -170,7 +142,6 @@ def test_delete_subject_item(app, server, page: Page):
 
 
 def test_delete_subject(app, server, page: Page):
->>>>>>> 175b1fe (add tests):web/tests/test_subject.py
     with app.app_context():
         subject = db.session.query(PerformedActivity).filter_by(id=2).all()
         assert not subject
