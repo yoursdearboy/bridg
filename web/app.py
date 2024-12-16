@@ -2,12 +2,13 @@ from flask import Flask
 from flask_babel import Babel
 from flask_bootstrap import Bootstrap5
 
+from common.env import load_env
+
 from . import person, study, subject
 from .assets import assets
 from .assets import cli as assets_cli
 from .breadcrumbs import breadcrumbs
 from .db import db
-from .env import load_env
 from .htmx import htmx
 from .json import MyJSONProvider
 from .templating import bool_filter, date_filter, datetime_filter, iso_filter
