@@ -18,7 +18,9 @@ def test_person_editname(app, server, page: Page):
 
 def test_person_editname_save(app, server, page: Page):
     src = {'id': 5, 'family': 'Trump',
-           'given': 'Donald', 'middle': 'John', 'suffix': ''}
+           'given': 'Donald', 'middle': 'John', 'suffix': '',
+           'patronymic': '', 'use': 'official', 'prefix': '',
+           'biologic_entity_id': 7}
     url = app.url_for("person.name.edit", person_id=7, id=5)
     page.goto(url)
     page.locator("summary").click()
@@ -29,6 +31,9 @@ def test_person_editname_save(app, server, page: Page):
     page.get_by_text("Save").all()[1].click()
     with app.app_context():
         result = db.session.query(EntityName).filter_by(id=5).one()
-        res = {'id': result.id, 'family': result.family, 'given': result.given,
-               'middle': result.middle, 'suffix': result.suffix}
+        res = result.__dict__
+        del res['_sa_instance_state']
+        print(res)
+        # res = {'id': result.id, 'family': result.family, 'given': result.given,
+        #        'middle': result.middle, 'suffix': result.suffix}
         assert src == res
