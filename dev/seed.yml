@@ -161,6 +161,16 @@ study_subject:
         context_for_study_site: *dgoi-ss
         status_code: complete
         status_date: 2024-11-04T12:00:00
+        resulted_performed_observation_result:
+          - type: observation_result
+            type_code: { code: "767002", display_name: "White blood cell count" }
+            value: "8"
+          - type: observation_result
+            type_code: { code: "30630007", display_name: "Neutrophil count" }
+            value: "5"
+          - type: observation_result
+            type_code: { code: "61928009", display_name: "Platelet count" }
+            value: "200"
       - type: substance_administration
         containing_epoch: *aml-mrd-2018-induction
         executing_study_protocol_version: *aml-mrd-2018
