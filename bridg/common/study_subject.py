@@ -57,13 +57,13 @@ class StudySubject(Subject):
     __tablename__ = "study_subject"
     __mapper_args__ = {"concrete": True}
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
 
-    status: Mapped[Optional[Status]]
-    status_date: Mapped[Optional[datetime]]
+    status: Mapped[Optional[Status]] = mapped_column(default=None)
+    status_date: Mapped[Optional[datetime]] = mapped_column(default=None)
 
     assigned_study_subject_protocol_version_relationship: Mapped[List[StudySubjectProtocolVersionRelationship]] = (
-        relationship(back_populates="assigning_study_subject", cascade="all, delete-orphan")
+        relationship(back_populates="assigning_study_subject", cascade="all, delete-orphan", default_factory=list)
     )
     """
     Each StudySubjectProtocolVersionRelationship always is the assigned version for one StudySubject.
@@ -81,8 +81,13 @@ class StudySubject(Subject):
             "assigned_study_subject_protocol_version_relationship",
             "assigning_study_site_protocol_version_relationship",
             creator=__assigned_study_site_protocol_version_relationship_creator,
+            default_factory=list,
         )
     )
 
-    involving_performed_activity: Mapped[List[PerformedActivity]] = relationship(back_populates="involved_subject")
-    involving_scheduled_activity: Mapped[List[ScheduledActivity]] = relationship(back_populates="involved_subject")
+    involving_performed_activity: Mapped[List[PerformedActivity]] = relationship(
+        back_populates="involved_subject", default_factory=list
+    )
+    involving_scheduled_activity: Mapped[List[ScheduledActivity]] = relationship(
+        back_populates="involved_subject", default_factory=list
+    )

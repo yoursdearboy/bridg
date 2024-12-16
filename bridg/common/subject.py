@@ -1,14 +1,14 @@
 from typing import Optional
 
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, declared_attr, mapped_column, relationship, validates
+from sqlalchemy.orm import Mapped, MappedAsDataclass, declared_attr, mapped_column, relationship, validates
 
 from ..db import Base
 from .biologic_entity import BiologicEntity
 from .organization import Organization
 
 
-class Subject(Base):
+class Subject(MappedAsDataclass, Base):
     """
     DEFINITION:
     An entity of interest, either biological or otherwise.
@@ -27,17 +27,17 @@ class Subject(Base):
 
     __abstract__ = True
 
-    performing_biologic_entity_id: Mapped[Optional[int]] = mapped_column(ForeignKey("biologic_entity.id"))
+    performing_biologic_entity_id: Mapped[Optional[int]] = mapped_column(ForeignKey("biologic_entity.id"), default=None)
 
     @declared_attr
     def performing_biologic_entity(cls) -> Mapped[Optional[BiologicEntity]]:
-        return relationship()
+        return relationship(default=None)
 
-    performing_organization_id: Mapped[Optional[int]] = mapped_column(ForeignKey("organization.id"))
+    performing_organization_id: Mapped[Optional[int]] = mapped_column(ForeignKey("organization.id"), default=None)
 
     @declared_attr
     def performing_organization(cls) -> Mapped[Optional[Organization]]:
-        return relationship()
+        return relationship(default=None)
 
     @validates("performing_biologic_entity", "performing_organization")
     def validate_performing_entity(self, key, value):
