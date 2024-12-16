@@ -1,6 +1,5 @@
 from playwright.sync_api import Page, expect
-from toolz.dicttoolz import dissoc
-
+from toolz import dissoc
 from bridg import EntityName
 from web.db import db
 
