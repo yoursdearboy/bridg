@@ -3,6 +3,19 @@
 Implemented in Python with support for persistence using SQLAlchemy.
 Also a web interface for electronic data capture (EDC).
 
+## Configuration and Profiles
+
+The web app has notion of profiles.
+The profile can be set using `BRIDG_ENV` environment variable,
+which is `development` by default.
+
+Depending on the profile the app loads environment variables from `.env` file and profile specific `.env.xxx` file.
+Though the profile specific file doesn't override variables set in `.env` file.
+This is done for compatibility with `flask` cli command.
+
+By default the repository contains `.env.development` and `.env.testing` files for corresponding profiles.
+And the file for the production profile `.env.production` is added to `.gitignore`, so it won't be present in repository ever, because it may contain secrets.
+
 ## Build
 
 Bulding web assets.

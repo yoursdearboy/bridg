@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 from flask import Flask
 from flask_babel import Babel
 from flask_bootstrap import Bootstrap5
@@ -8,14 +7,17 @@ from .assets import assets
 from .assets import cli as assets_cli
 from .breadcrumbs import breadcrumbs
 from .db import db
+from .env import load_env
 from .htmx import htmx
 from .json import MyJSONProvider
 from .templating import bool_filter, date_filter, datetime_filter, iso_filter
 
-load_dotenv()
+ENV_PREFIX = "BRIDG"
+
+load_env(prefix=ENV_PREFIX)
 
 app = Flask(__name__)
-app.config.from_prefixed_env(prefix="BRIDG")
+app.config.from_prefixed_env(prefix=ENV_PREFIX)
 app.json_provider_class = MyJSONProvider
 app.json = MyJSONProvider(app)
 app.cli.add_command(assets_cli)
