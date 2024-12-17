@@ -3,7 +3,16 @@ import re
 
 from playwright.sync_api import Page, expect
 
-from bridg import PerformedActivity, StudySubject
+from bridg import (
+    AdministrativeGender,
+    BiologicEntity,
+    EntityName,
+    PerformedActivity,
+    PerformedObservation,
+    Status,
+    StudySiteProtocolVersionRelationship,
+    StudySubject,
+)
 from web.db import db
 
 
@@ -143,7 +152,22 @@ def test_create_subject_item(app, server, page: Page):
 
 def test_delete_subject(app, server, page: Page):
     with app.app_context():
-        subject = db.session.query(PerformedActivity).filter_by(id=2).all()
+        sspvr = db.session.query(
+            StudySiteProtocolVersionRelationship).first()
+        subject = StudySubject(performing_biologic_entity=BiologicEntity(
+            name=[EntityName(family='Test', given='Test')],
+            administrative_gender_code=AdministrativeGender.male,
+            death_indicator=False,
+            birth_date=datetime.date(1991, 1, 1)),
+            assigned_study_site_protocol_version_relationship=[sspvr])
+        db.session.add(subject)
+        db.session.commit()
+        url = app.url_for("subject.show", id=subject.id, space_id=1)
+        page.goto(url)
+        page.get_by_text("Delete").click()
+        page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/')
+        subject = db.session.query(
+            StudySiteProtocolVersionRelationship).filter_by(id=subject.id).all()
         assert not subject
 
 
