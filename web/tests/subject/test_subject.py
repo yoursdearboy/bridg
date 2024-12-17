@@ -60,17 +60,11 @@ def test_new_subject(app, server, page: Page):
             'birth_date': subject.performing_biologic_entity.birth_date,
             'assigned_study_site_protocol_version_relationship': str(subject.assigned_study_site_protocol_version_relationship[0])
         }
-    assert src == res
-
-
-def test_delete(app, server, page: Page):
-    page.goto(current_url)
-    page.locator("a").filter(has_text='Delete').click()
-    page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/')
-    with app.app_context():
-        subject = db.session.query(StudySubject).filter_by(id=current_id).all()
-        assert not subject
-
+        assert src == res
+        ss = db.session.query(StudySubject).filter_by(id=current_id).one()
+        db.session.delete(ss)
+        db.session.commit()
+        
 def test_edit_subject(app, server, page: Page):
     id = 1
     url = app.url_for("subject.edit", id=id, space_id=1)
@@ -141,6 +135,7 @@ def test_create_subject_item(app, server, page: Page):
     with app.app_context():
         subject = db.session.query(PerformedActivity).filter_by(
             involved_subject_id=2).one()
+        print(subject.__dict__)
         res = {'containing_epoch': subject.containing_epoch.id,
                'context_for_study_site': subject.context_for_study_site.id, 'status_code': subject.status_code.id, 'status_date': subject.status_date}
         assert src == res
@@ -172,9 +167,10 @@ def test_delete_subject(app, server, page: Page):
 
 
 def test_delete_subject_item(app, server, page: Page):
+    id=4
     activity = PerformedObservation(
         context_for_study_site_id=1,
-        id=4,
+        id=id,
         type='substance_administration',
         containing_epoch_id=2,
         executing_study_protocol_version_id=1,
@@ -185,12 +181,12 @@ def test_delete_subject_item(app, server, page: Page):
     with app.app_context():
         db.session.add(activity)
         db.session.commit()
-        url = app.url_for("subject.activity.edit", id=4,
+        url = app.url_for("subject.activity.edit", id=id,
                           subject_id=1, space_id=1)
         page.goto(url)
         page.get_by_text("Actions").click()
         page.get_by_text("Delete").click()
-        page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/1/4/edit')
+        page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/1/'+ str(id) + '/edit')
         subject = db.session.query(
-            PerformedActivity).filter_by(id=4).all()
+            PerformedActivity).filter_by(id=id).all()
         assert not subject
