@@ -9,6 +9,7 @@ from bridg import (
     EntityName,
     PerformedActivity,
     PerformedObservation,
+    PerformedSubstanceAdministration,
     Status,
     StudySiteProtocolVersionRelationship,
     StudySubject,
@@ -27,7 +28,7 @@ def test_new_subject(app, server, page: Page):
            'given': 'Test',
            'administrative_gender_code': "M",
            'death_indicator': False,
-           'birth_date': datetime.date(1991, 1, 1),
+           'birth_date': datetime.date(2000, 1, 1),
            'assigned_study_site_protocol_version_relationship': 'DGOI in AML-MRD-2018'}
     url = app.url_for("subject.new", space_id=1)
     page.goto(url)
@@ -48,8 +49,7 @@ def test_new_subject(app, server, page: Page):
     form = page.locator('#study-subject-form')
     submit = form.locator('[type ="submit"]')
     submit.click()
-    current_url = page.url
-    current_id = re.search(r'/subjects/(\d+)$', current_url)[1]
+    current_id = re.search(r'/subjects/(\d+)$', page.url)[1]
     with app.app_context():
         subject = db.session.query(StudySubject).filter_by(id=current_id).one()
         res = {
@@ -64,7 +64,8 @@ def test_new_subject(app, server, page: Page):
         ss = db.session.query(StudySubject).filter_by(id=current_id).one()
         db.session.delete(ss)
         db.session.commit()
-        
+
+
 def test_edit_subject(app, server, page: Page):
     id = 1
     url = app.url_for("subject.edit", id=id, space_id=1)
@@ -135,7 +136,6 @@ def test_create_subject_item(app, server, page: Page):
     with app.app_context():
         subject = db.session.query(PerformedActivity).filter_by(
             involved_subject_id=2).one()
-        print(subject.__dict__)
         res = {'containing_epoch': subject.containing_epoch.id,
                'context_for_study_site': subject.context_for_study_site.id, 'status_code': subject.status_code.id, 'status_date': subject.status_date}
         assert src == res
@@ -167,26 +167,22 @@ def test_delete_subject(app, server, page: Page):
 
 
 def test_delete_subject_item(app, server, page: Page):
-    id=4
-    activity = PerformedObservation(
-        context_for_study_site_id=1,
-        id=id,
-        type='substance_administration',
-        containing_epoch_id=2,
-        executing_study_protocol_version_id=1,
-        instantiated_defined_activity_id=4,
-        involved_subject_id=1
-    )
-
     with app.app_context():
+        activity = PerformedSubstanceAdministration(
+            context_for_study_site_id=1,
+            containing_epoch_id=2,
+            executing_study_protocol_version_id=1,
+            instantiated_defined_activity_id=4,
+            involved_subject_id=1
+        )
         db.session.add(activity)
         db.session.commit()
+        id = activity.id
         url = app.url_for("subject.activity.edit", id=id,
                           subject_id=1, space_id=1)
         page.goto(url)
         page.get_by_text("Actions").click()
         page.get_by_text("Delete").click()
-        page.wait_for_url('http://127.0.0.1:5000/space/1/subjects/1/'+ str(id) + '/edit')
-        subject = db.session.query(
-            PerformedActivity).filter_by(id=id).all()
+        page.wait_for_timeout(2)
+        subject = db.session.query(PerformedActivity).filter_by(id=id).all()
         assert not subject
