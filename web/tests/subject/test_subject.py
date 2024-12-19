@@ -2,6 +2,7 @@ import datetime
 import re
 
 from playwright.sync_api import Page, expect
+from toolz import dissoc
 
 from bridg import (
     AdministrativeGender,
@@ -24,6 +25,14 @@ def test_subject_index(app, server, page: Page):
 
 
 def test_new_subject(app, server, page: Page):
+    # {'id': 4,
+    #  'performing_biologic_entity_id': 9,
+    #  'status': <Status.candidate: 'candidate'>,
+    #  'status_date': datetime.datetime(2024, 12, 19, 9, 40, 51),
+    #  'performing_organization_id': None,
+    #  'performing_biologic_entity': <bridg.common.person.Person object at 0x7f77c3e7b290>,
+    #  'assigned_study_subject_protocol_version_relationship': [<bridg.study.study_subject_protocol_version_relationship.StudySubjectProtocolVersionRelationship object at 0x7f77c32c8e10>],
+    #  '_AssociationProxy_assigned_study_subject_protocol_version_relationship_140152649145232': (140152352317136, 140152600621392, [<bridg.study.study_site_protocol_version_relationship.StudySiteProtocolVersionRelationship object at 0x7f77c3f87990>])}
     src = {'family': 'Test',
            'given': 'Test',
            'administrative_gender_code': "M",
@@ -52,6 +61,7 @@ def test_new_subject(app, server, page: Page):
     current_id = re.search(r'/subjects/(\d+)$', page.url)[1]
     with app.app_context():
         subject = db.session.query(StudySubject).filter_by(id=current_id).one()
+        print(subject.__dict__)
         res = {
             'family': subject.performing_biologic_entity.name[0].family,
             'given': subject.performing_biologic_entity.name[0].given,
@@ -70,6 +80,11 @@ def test_edit_subject(app, server, page: Page):
     id = 1
     url = app.url_for("subject.edit", id=id, space_id=1)
     page.goto(url)
+    # src = {'id': 1,
+    #        'performing_biologic_entity_id': 7,
+    #        'status': Status.eligible ,
+    #        'status_date': datetime.datetime(2024, 11, 6, 12, 0),
+    #        'performing_organization_id': None}
     src = {'assigned_study_site_protocol_version_relationship': 'DGOI in AML-MRD-2018',
            'status': Status.eligible, 'status_date': datetime.datetime(2024, 11, 6, 12, 0)}
     page.locator(
@@ -96,21 +111,33 @@ def test_edit_subject_activity(app, server, page: Page):
     id = 2
     url = app.url_for("subject.activity.edit", id=id, subject_id=1, space_id=1)
     page.goto(url)
-    src = {'containing_epoch': 1, 'context_for_study_site': 1,
-           'status_code': 1, 'status_date': datetime.datetime(2024, 11, 6, 9, 0)}
+    src = {'repetition_number': None,
+           'instantiated_defined_activity_id': 1,
+           'name_code_modified_text': None,
+           'reason_code_id': None,
+           'negation_indicator': None,
+           'status_date': datetime.datetime(2024, 11, 6, 9, 0),
+           'status_code_id': 1,
+           'comment': '',
+           'id': 2,
+           'containing_epoch_id': 1,
+           'executing_study_protocol_version_id': 1,
+           'type': 'observation',
+           'using_project_id': None,
+           'context_for_study_site_id': 1,
+           'involved_subject_id': 1}
     page.locator("#containing_epoch").select_option(
-        str(src['containing_epoch']))
+        str(src['containing_epoch_id']))
     page.locator("#context_for_study_site").select_option(
-        str(src['context_for_study_site']))
-    page.locator("#status_code").select_option(str(src['status_code']))
+        str(src['context_for_study_site_id']))
+    page.locator("#status_code").select_option(str(src['status_code_id']))
     page.locator("#status_date").fill(
         src['status_date'].strftime('%Y-%m-%d %H:%M:%S'))
     submit = page.locator('[type ="submit"]')
     submit.click()
     with app.app_context():
         subject = db.session.query(PerformedActivity).filter_by(id=id).one()
-        res = {'containing_epoch': subject.containing_epoch.id,
-               'context_for_study_site': subject.context_for_study_site.id, 'status_code': subject.status_code.id, 'status_date': subject.status_date}
+        res = dissoc(subject.__dict__, '_sa_instance_state')
     assert src == res
 
 
@@ -122,13 +149,13 @@ def test_create_subject_item(app, server, page: Page):
     page.locator('a').filter(has_text='Immunophenotyping').click()
     page.wait_for_url(
         'http://127.0.0.1:5000/space/1/subjects/2/new?defined_activity_id=2')
-    src = {'containing_epoch': 1, 'context_for_study_site': 1,
-           'status_code': 1, 'status_date': datetime.datetime(2024, 11, 6, 9, 0)}
+    src = {'repetition_number': None, 'instantiated_defined_activity_id': 2, 'name_code_modified_text': None, 'reason_code_id': None, 'negation_indicator': None, 'status_date': datetime.datetime(
+        2024, 11, 6, 9, 0), 'status_code_id': 1, 'comment': '', 'id': 4, 'containing_epoch_id': 1, 'executing_study_protocol_version_id': 1, 'type': 'observation', 'using_project_id': 1, 'context_for_study_site_id': 1, 'involved_subject_id': 2}
     page.locator("#containing_epoch").select_option(
-        str(src['containing_epoch']))
+        str(src['containing_epoch_id']))
     page.locator("#context_for_study_site").select_option(
-        str(src['context_for_study_site']))
-    page.locator("#status_code").select_option(str(src['status_code']))
+        str(src['context_for_study_site_id']))
+    page.locator("#status_code").select_option(str(src['status_code_id']))
     page.locator("#status_date").fill(
         src['status_date'].strftime('%Y-%m-%d %H:%M:%S'))
     submit = page.locator('[type ="submit"]')
@@ -136,8 +163,7 @@ def test_create_subject_item(app, server, page: Page):
     with app.app_context():
         subject = db.session.query(PerformedActivity).filter_by(
             involved_subject_id=2).one()
-        res = {'containing_epoch': subject.containing_epoch.id,
-               'context_for_study_site': subject.context_for_study_site.id, 'status_code': subject.status_code.id, 'status_date': subject.status_date}
+        res = dissoc(subject.__dict__, '_sa_instance_state')
         assert src == res
         ss = db.session.query(PerformedActivity).filter_by(
             involved_subject_id=2).one()
