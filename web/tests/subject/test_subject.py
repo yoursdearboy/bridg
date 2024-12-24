@@ -71,13 +71,13 @@ def test_new_subject(app, server, page: Page):
             StudySubject).options(joinedload(StudySubject.performing_biologic_entity)
                                   .subqueryload(BiologicEntity.name)).filter_by(id=current_id).one()
         res = converter.unstructure(subject)
+        res = assoc(res, 'assigned_study_site_protocol_version_relationship',
+                    subject.assigned_study_site_protocol_version_relationship)
         res = dissoc(res, 'id')
         res['performing_biologic_entity']['name'] = dissoc(
             res['performing_biologic_entity']['name'][0], 'biologic_entity_id', 'id')
         res['performing_biologic_entity'] = dissoc(
             res['performing_biologic_entity'], 'id', 'type')
-        src = dissoc(src, 'assigned_study_site_protocol_version_relationship')
-
         assert src == res
         ss = db.session.query(StudySubject).filter_by(id=current_id).one()
         db.session.delete(ss)
