@@ -4,6 +4,8 @@ from typing import List, TypeVar, get_type_hints
 from cattr import Converter
 from sqlalchemy import inspect
 from sqlalchemy.orm import Relationship
+from sqlalchemy.orm.collections import InstrumentedList
+from toolz import dissoc
 
 import bridg
 
@@ -87,3 +89,6 @@ def identity_date_hook(x: datetime, _) -> date:
 
 
 converter.register_structure_hook_func(lambda x: issubclass(x, Base), make_model_hook())
+
+converter.register_unstructure_hook(Base, lambda x: converter.unstructure(dissoc(x.__dict__, "_sa_instance_state")))
+converter.register_unstructure_hook(InstrumentedList, lambda x: converter.unstructure(list(x)))
