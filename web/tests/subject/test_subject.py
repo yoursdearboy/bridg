@@ -2,7 +2,7 @@ import datetime
 import re
 
 from playwright.sync_api import Page, expect
-from toolz import dissoc
+from toolz import assoc, dissoc
 
 from bridg import (
     AdministrativeGender,
@@ -10,6 +10,7 @@ from bridg import (
     EntityName,
     PerformedActivity,
     PerformedSubstanceAdministration,
+    Person,
     Status,
     StudySiteProtocolVersionRelationship,
     StudySubject,
@@ -27,15 +28,16 @@ def test_new_subject(app, server, page: Page):
     with app.app_context():
         sspvr = db.session.query(
             StudySiteProtocolVersionRelationship).first()
-        src = {'id': 4,
-               'performing_biologic_entity_id': 9,
+        src = {'performing_biologic_entity_id': 9,
                'status': Status.candidate,
-               'status_date': datetime.datetime(2024, 12, 19, 9, 40, 51),
+               'status_date': datetime.datetime.now().replace(microsecond=0),
                'performing_organization_id': None,
-               'performing_biologic_entity': BiologicEntity(
+               'performing_biologic_entity': Person(
+                   death_date=None,
                    name=[EntityName(family='Test', given='Test')],
                    administrative_gender_code=AdministrativeGender.male,
                    death_indicator=False,
+                   death_date_estimated_indicator=False,
                    birth_date=datetime.date(2000, 1, 1)),
                'assigned_study_site_protocol_version_relationship': [sspvr]}
         url = app.url_for("subject.new", space_id=1)
@@ -54,13 +56,28 @@ def test_new_subject(app, server, page: Page):
         page.wait_for_load_state()
         page.locator("li").filter(
             has_text=str(src['assigned_study_site_protocol_version_relationship'][0])).click()
+        page.locator(
+            '[class="card col-lg-8 mb-3"]').get_by_text("Extra").click()
+        page.locator("#status").select_option(src['status'].value)
+        page.locator("#status_date").fill(
+            src['status_date'].strftime('%Y-%m-%d %H:%M:%S'))
         form = page.locator('#study-subject-form')
         submit = form.locator('[type ="submit"]')
         submit.click()
         current_id = re.search(r'/subjects/(\d+)$', page.url)[1]
-        subject = db.session.query(StudySubject).filter_by(id=current_id).one()
+        subject = db.session.query(
+            StudySubject).filter_by(id=current_id).one()
+        print(subject.performing_biologic_entity.name[0].__dict__)
         res = dissoc(subject.__dict__, '_sa_instance_state')
-        print(src, res)
+        res = dissoc(res, 'id')
+        res = assoc(res, 'performing_biologic_entity',
+                    subject.performing_biologic_entity)
+        # assoc(subject.performing_biologic_entity, 'name', subject.performing_biologic_entity))
+        res = assoc(res, 'assigned_study_site_protocol_version_relationship',
+                    subject.assigned_study_site_protocol_version_relationship)
+        # print(subject.__dict__,
+        #       src['performing_biologic_entity'].__dict__,
+        #       res['performing_biologic_entity'].__dict__)
         assert src == res
         ss = db.session.query(StudySubject).filter_by(id=current_id).one()
         db.session.delete(ss)
