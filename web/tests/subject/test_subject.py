@@ -109,7 +109,6 @@ def test_edit_subject(app, server, page: Page):
         res = converter.unstructure(subject)
         res = assoc(res, 'assigned_study_site_protocol_version_relationship',
                     subject.assigned_study_site_protocol_version_relationship)
-        print(src, res)
         assert src == res
 
 
@@ -148,7 +147,8 @@ def test_edit_subject_activity(app, server, page: Page):
 
 
 def test_create_subject_item(app, server, page: Page):
-    url = app.url_for("subject.show", id=2, space_id=1)
+    id = 2
+    url = app.url_for("subject.show", id=id, space_id=1)
     page.goto(url)
     page.locator('button').filter(has_text='New').click()
     page.locator('a').filter(has_text='Laboratory').click()
@@ -156,7 +156,7 @@ def test_create_subject_item(app, server, page: Page):
     page.wait_for_url(
         'http://127.0.0.1:5000/space/1/subjects/2/new?defined_activity_id=2')
     src = {'repetition_number': None, 'instantiated_defined_activity_id': 2, 'name_code_modified_text': None, 'reason_code_id': None, 'negation_indicator': None, 'status_date': datetime.datetime(
-        2024, 11, 6, 9, 0), 'status_code_id': 1, 'comment': '', 'id': 4, 'containing_epoch_id': 1, 'executing_study_protocol_version_id': 1, 'type': 'observation', 'using_project_id': 1, 'context_for_study_site_id': 1, 'involved_subject_id': 2}
+        2024, 11, 6, 9, 0), 'status_code_id': 1, 'comment': '', 'containing_epoch_id': 1, 'executing_study_protocol_version_id': 1, 'type': 'observation', 'using_project_id': 1, 'context_for_study_site_id': 1, 'involved_subject_id': 2}
     page.locator("#containing_epoch").select_option(
         str(src['containing_epoch_id']))
     page.locator("#context_for_study_site").select_option(
@@ -168,11 +168,11 @@ def test_create_subject_item(app, server, page: Page):
     submit.click()
     with app.app_context():
         subject = db.session.query(PerformedActivity).filter_by(
-            involved_subject_id=2).one()
-        res = dissoc(subject.__dict__, '_sa_instance_state')
+            involved_subject_id=id).one()
+        res = dissoc(subject.__dict__, '_sa_instance_state', 'id')
         assert src == res
         ss = db.session.query(PerformedActivity).filter_by(
-            involved_subject_id=2).one()
+            involved_subject_id=id).one()
         db.session.delete(ss)
         db.session.commit()
 
