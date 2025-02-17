@@ -1,0 +1,15 @@
+<form id="person-name-form" method="POST">
+    {{ form.csrf_token() }}
+
+    {{ render_hidden_errors(form) }}
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="w-64-tw">{{ render_field(form.address) }}</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">{{ _("Save") }}</button>
+</form>

@@ -2,7 +2,7 @@
     <div class="card-header">
         <div class="d-flex">
             <b>{{ _("Telecom") }}</b>
-            <a class="ms-auto" href="#">
+            <a class="ms-auto" href="{{ url_for('.telecom_address.new', person_id=person.id) }}">
                 <i class="fa-solid fa-plus"></i>
                 {{ _("Add") }}
             </a>
@@ -15,7 +15,7 @@
                 <tr>
                     <td>{{ tel }}</td>
                     <td class="text-end">
-                        <a href="#">
+                        <a href="{{ url_for('.telecom_address.edit', person_id=person.id, id=tel.id) }}">
                             <i class="fa-solid fa-pencil"></i>
                         </a>
                     </td>
