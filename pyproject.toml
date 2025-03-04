@@ -27,7 +27,7 @@ toolz = "^1.0.0"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.4"
-ruff = "^0.5.5"
+ruff = "^0.9.9"
 sqlalchemy-schemadisplay = "^2.0"
 mkdocstrings = {extras = ["python"], version = "^0.25.2"}
 mkdocs = "^1.6.0"
@@ -51,7 +51,13 @@ addopts = "--cov --cov-report html"
 line-length = 120
 
 [tool.ruff.lint]
-extend-select = ["I"]
+extend-select = ["I", "TID"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401", "F403"]
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"bridg.common".msg = "Use bridg instead."
+"bridg.core".msg = "Use bridg instead."
+"bridg.protocol".msg = "Use bridg instead."
+"bridg.study".msg = "Use bridg instead."
