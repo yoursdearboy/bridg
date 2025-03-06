@@ -1,8 +1,7 @@
-from playwright.sync_api import Page, expect
-from sqlalchemy.orm import joinedload
+from playwright.sync_api import Page
 from toolz import dissoc
 
-from bridg import Person, converter
+from bridg import converter
 from bridg.common.person import PostalAddress
 from web.db import db
 
