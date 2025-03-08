@@ -1,48 +1,45 @@
-[tool.poetry]
+[project]
 name = "bridg"
 version = "0.1.0"
 description = ""
 authors = ["Kirill Voronin <yoursdearboy@gmail.com>"]
 readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "uvicorn[standard]<1.0.0,>=0.29.0",
+    "sqlalchemy<3.0.0,>=2.0.29",
+    "psycopg2-binary<3.0.0,>=2.9.9",
+    "flask<4.0.0,>=3.0.3",
+    "flask-sqlalchemy<4.0.0,>=3.1.1",
+    "python-dotenv<2.0.0,>=1.0.1",
+    "bootstrap-flask<3.0.0,>=2.4.0",
+    "flask-babel<5.0.0,>=4.0.0",
+    "flask-wtf<2.0.0,>=1.2.1",
+    "wtforms-alchemy<1.0.0,>=0.18.0",
+    "flask-htmx<1.0.0,>=0.3.2",
+    "flask-assets<3.0.0,>=2.1.0",
+    "pyyaml<7.0.0,>=6.0.2",
+    "pydantic<3.0.0,>=2.9.2",
+    "cattrs<25.0.0,>=24.1.2",
+    "toolz<2.0.0,>=1.0.0",
+    "litestar[sqlalchemy]<3.0.0,>=2.15.1",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-uvicorn = {extras = ["standard"], version = "^0.29.0"}
-sqlalchemy = "^2.0.29"
-psycopg2-binary = "^2.9.9"
-flask = "^3.0.3"
-flask-sqlalchemy = "^3.1.1"
-python-dotenv = "^1.0.1"
-bootstrap-flask = "^2.4.0"
-flask-babel = "^4.0.0"
-flask-wtf = "^1.2.1"
-wtforms-alchemy = "^0.18.0"
-flask-htmx = "^0.3.2"
-flask-assets = "^2.1.0"
-pyyaml = "^6.0.2"
-pydantic = "^2.9.2"
-cattrs = "^24.1.2"
-toolz = "^1.0.0"
-
-
-[tool.poetry.group.dev.dependencies]
-ipykernel = "^6.29.4"
-ruff = "^0.9.9"
-sqlalchemy-schemadisplay = "^2.0"
-mkdocstrings = {extras = ["python"], version = "^0.25.2"}
-mkdocs = "^1.6.0"
-mkdocs-material = "^9.5.30"
-libsass = "^0.23.0"
-
-
-[tool.poetry.group.test.dependencies]
-pytest = "^8.3.3"
-pytest-playwright = "^0.5.2"
-pytest-cov = "^6.0.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "ipykernel<7.0.0,>=6.29.4",
+    "ruff<1.0.0,>=0.9.9",
+    "sqlalchemy-schemadisplay<3.0,>=2.0",
+    "mkdocstrings[python]<1.0.0,>=0.25.2",
+    "mkdocs<2.0.0,>=1.6.0",
+    "mkdocs-material<10.0.0,>=9.5.30",
+    "libsass<1.0.0,>=0.23.0",
+]
+test = [
+    "pytest<9.0.0,>=8.3.3",
+    "pytest-playwright<1.0.0,>=0.5.2",
+    "pytest-cov<7.0.0,>=6.0.0",
+]
 
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report html"
