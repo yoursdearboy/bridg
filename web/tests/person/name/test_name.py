@@ -1,6 +1,5 @@
 from playwright.sync_api import Page, expect
-from toolz.dicttoolz import dissoc
-
+from toolz import dissoc
 from bridg import EntityName
 from web.db import db
 
@@ -29,7 +28,9 @@ def test_person_editname_save(app, server, page: Page):
     page.locator("id=given").fill(src['given'])
     page.locator("id=middle").fill(src['middle'])
     page.locator("id=suffix").fill(src['suffix'])
-    page.get_by_text("Save").all()[1].click()
+    form = page.locator('#person-name-form')
+    submit = form.locator('[type ="submit"]')
+    submit.click()
     with app.app_context():
         result = db.session.query(EntityName).filter_by(id=5).one()
         res = dissoc(result.__dict__, '_sa_instance_state')

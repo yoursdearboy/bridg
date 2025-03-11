@@ -3,12 +3,12 @@
 {% extends "standard.html" %}
 
 {% block titlebar_title %}
-    {{ object | default("New name", true) }}
+    {{ object | default("New postal address", true) }}
 {% endblock %}
 
 {% block titlebar_right %}
     <div class="btn-group">
-        <button class="btn btn-primary" type="submit" form="person-name-form">{{ _("Save") }}</button>
+        <button class="btn btn-primary" type="submit" form="person-postal-form">{{ _("Save") }}</button>
         <div class="btn-group">
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                 {{ _("Actions") }}
@@ -28,6 +28,6 @@
 
 {% block content %}
 
-{% include "person/name/form.html" %}
+{% include "person/postal_address/form.html" %}
 
 {% endblock %}

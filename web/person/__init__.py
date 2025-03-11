@@ -5,7 +5,7 @@ from bridg import Person
 from web.db import db
 from web.views import BreadcrumbsMixin, EditView, ShowView
 
-from . import name
+from . import name, postal_address, telecom_address
 from .form import PersonForm
 
 blueprint = Blueprint("person", __name__, url_prefix="/persons")
@@ -48,4 +48,9 @@ class PersonEditView(BreadcrumbsMixin, EditView):
 
 blueprint.add_url_rule("/<id>", view_func=PersonShowView.as_view("show"))
 blueprint.add_url_rule("/<id>/edit", view_func=PersonEditView.as_view("edit"))
-blueprint.register_blueprint(name.blueprint, url_prefix=f"/<int:person_id>/{name.blueprint.url_prefix}")
+blueprint.register_blueprint(
+    name.blueprint, url_prefix=f"/<int:person_id>/{name.blueprint.url_prefix}")
+blueprint.register_blueprint(
+    postal_address.blueprint, url_prefix=f"/<int:person_id>/{postal_address.blueprint.url_prefix}")
+blueprint.register_blueprint(
+    telecom_address.blueprint, url_prefix=f"/<int:person_id>/{telecom_address.blueprint.url_prefix}")
