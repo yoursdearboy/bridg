@@ -22,7 +22,6 @@ dependencies = [
     "pydantic<3.0.0,>=2.9.2",
     "cattrs<25.0.0,>=24.1.2",
     "toolz<2.0.0,>=1.0.0",
-    "litestar[sqlalchemy]<3.0.0,>=2.15.1",
 ]
 
 [dependency-groups]
