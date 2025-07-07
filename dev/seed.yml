@@ -84,8 +84,10 @@ study:
           acronym: AML-MRD-2018
           executing_study_site_protocol_version_relationship:
             - &dgoi-aml-mrd-2018
+              id: 1 # FIXME: for sqlite
               executing_study_site: *dgoi-ss 
             - &ekb-aml-mrd-2018
+              id: 2 # FIXME: for sqlite
               executing_study_site: *ekb-ss
           intended_planned_study_subject:
             - performing_biologic_entity:
@@ -117,7 +119,8 @@ study:
                 category_code: treatment
         - acronym: AML-MRD-2024
           executing_study_site_protocol_version_relationship:
-            - executing_study_site: *dgoi-ss
+            - id: 3 # FIXME: for sqlite
+              executing_study_site: *dgoi-ss
           intended_planned_study_subject:
             - performing_biologic_entity:
                 type: person
@@ -130,6 +133,7 @@ study:
         - acronym: A-2024
           executing_study_site_protocol_version_relationship:
             - &dgoi-a-2024
+              id: 4 # FIXME: for sqlite
               executing_study_site: *dgoi-ss
           intended_planned_study_subject:
             - performing_organization: {}
@@ -145,7 +149,8 @@ study_subject:
     status: eligible
     status_date: 2024-11-06T12:00:00
     assigned_study_subject_protocol_version_relationship:
-      - assigning_study_site_protocol_version_relationship: *dgoi-aml-mrd-2018
+      - id: 1 # FIXME: for sqlite
+        assigning_study_site_protocol_version_relationship: *dgoi-aml-mrd-2018
     involving_performed_activity:
       - type: observation
         containing_epoch: *aml-mrd-2018-screening
@@ -187,9 +192,11 @@ study_subject:
     status: eligible
     status_date: 2024-11-06T12:00:00
     assigned_study_subject_protocol_version_relationship:
-      - assigning_study_site_protocol_version_relationship: *ekb-aml-mrd-2018
+      - id: 2 # FIXME: for sqlite
+        assigning_study_site_protocol_version_relationship: *ekb-aml-mrd-2018
   - performing_organization: *4d-org
     status: eligible
     status_date: 2024-11-11T12:00:00
     assigned_study_subject_protocol_version_relationship:
-      - assigning_study_site_protocol_version_relationship: *dgoi-a-2024
+      - id: 3 # FIXME: for sqlite
+        assigning_study_site_protocol_version_relationship: *dgoi-a-2024
