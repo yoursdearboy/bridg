@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -15,11 +16,11 @@ if TYPE_CHECKING:
 class StudyActivity(Base):
     __tablename__ = "study_activity"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
     study_focus_indicator: Mapped[Optional[bool]]
 
-    using_study_protocol_version_id: Mapped[Optional[int]] = mapped_column(ForeignKey("study_protocol_version.id"))
+    using_study_protocol_version_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("study_protocol_version.id"))
     using_study_protocol_version: Mapped[Optional[StudyProtocolVersion]] = relationship(
         back_populates="used_study_activity"
     )
@@ -28,7 +29,7 @@ class StudyActivity(Base):
     Each StudyProtocolVersion might use one or more StudyActivity.
     """
 
-    used_defined_activity_id: Mapped[int] = mapped_column(ForeignKey("defined_activity.id"))
+    used_defined_activity_id: Mapped[UUID] = mapped_column(ForeignKey("defined_activity.id"))
     used_defined_activity: Mapped[DefinedActivity] = relationship(back_populates="using_study_activity")
     """
     Each StudyActivity always uses one DefinedActivity.

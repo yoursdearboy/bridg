@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Optional
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
@@ -31,11 +32,11 @@ class HealthcareProvider(Base):
 
     __tablename__ = "healthcare_provider"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
     role: Mapped[Optional[str]]
 
-    performing_person_id: Mapped[int] = mapped_column(ForeignKey("person.id"))
+    performing_person_id: Mapped[UUID] = mapped_column(ForeignKey("person.id"))
     performing_person: Mapped[Person] = relationship(
         back_populates="performed_healthcare_provider",
         cascade="all, delete-orphan",
@@ -46,7 +47,7 @@ class HealthcareProvider(Base):
     Each Person might function as one or more HealthcareProvider.
     """
 
-    staffed_healthcare_facility_id: Mapped[Optional[int]] = mapped_column(ForeignKey("healthcare_facility.id"))
+    staffed_healthcare_facility_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("healthcare_facility.id"))
     staffed_healthcare_facility: Mapped[Optional[HealthcareFacility]] = relationship(
         back_populates="staffing_healthcare_provider"
     )
@@ -55,7 +56,7 @@ class HealthcareProvider(Base):
     Each HealthcareFacility might be staffed by one or more HealthcareProvider.
     """
 
-    employing_organization_id: Mapped[Optional[int]] = mapped_column(ForeignKey("organization.id"))
+    employing_organization_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("organization.id"))
     employing_organization: Mapped[Optional[Organization]] = relationship()
     """
     Each HealthcareProvider might belong to a department at one Organization.

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, List
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -23,9 +24,9 @@ class StudyProtocol(Base):
 
     __tablename__ = "study_protocol"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
-    planned_study_id: Mapped[int] = mapped_column(ForeignKey("project.id"))
+    planned_study_id: Mapped[UUID] = mapped_column(ForeignKey("project.id"))
     planned_study: Mapped[Study] = relationship(back_populates="planning_study_protocol")
     """
     Each StudyProtocol always is the plan for one Study.

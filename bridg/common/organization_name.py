@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -14,11 +15,11 @@ if TYPE_CHECKING:
 class OrganizationName(Base):
     __tablename__ = "organization_name"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
     value: Mapped[Optional[str]]
 
-    organization_id: Mapped[int] = mapped_column(ForeignKey("organization.id"))
+    organization_id: Mapped[UUID] = mapped_column(ForeignKey("organization.id"))
     organization: Mapped[Organization] = relationship(back_populates="name")
 
     def __str__(self):

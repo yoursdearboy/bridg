@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -29,10 +30,10 @@ class ProjectConduct(Base):
         "polymorphic_on": "kind",
     }
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     kind: Mapped[str]
 
-    instantiating_project_id: Mapped[int] = mapped_column(ForeignKey("project.id"))
+    instantiating_project_id: Mapped[UUID] = mapped_column(ForeignKey("project.id"))
     instantiating_project: Mapped[Project] = relationship(back_populates="instantiated_project_execution")
     """
     Each ProjectConduct always is the execution of one Project.

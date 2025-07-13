@@ -1,6 +1,7 @@
 from dataclasses import Field, fields, is_dataclass
 from datetime import date, datetime
 from typing import List, TypeVar, get_origin, get_type_hints
+from uuid import UUID
 
 from cattr import Converter
 from sqlalchemy import inspect
@@ -138,3 +139,8 @@ def dataclass_hook(x, cls):
 
 
 converter.register_structure_hook_func(is_dataclass, dataclass_hook)
+
+
+@converter.register_structure_hook
+def uuid_hook(x: str, _) -> UUID:
+    return UUID(x)

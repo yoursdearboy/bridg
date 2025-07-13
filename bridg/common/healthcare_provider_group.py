@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, List
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
@@ -30,9 +31,9 @@ class HealthcareProviderGroup(Base):
 
     __tablename__ = "healthcare_provider_group"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
-    performing_organization_id: Mapped[int] = mapped_column(ForeignKey("organization.id"))
+    performing_organization_id: Mapped[UUID] = mapped_column(ForeignKey("organization.id"))
     performing_organization: Mapped[Organization] = relationship(
         back_populates="performed_healthcare_provider_group",
         cascade="all, delete-orphan",
@@ -43,7 +44,7 @@ class HealthcareProviderGroup(Base):
     Each Organization might function as one HealthcareProviderGroup.
     """
 
-    using_healthcare_facility_id: Mapped[int] = mapped_column(ForeignKey("healthcare_facility.id"))
+    using_healthcare_facility_id: Mapped[UUID] = mapped_column(ForeignKey("healthcare_facility.id"))
     using_healthcare_facility: Mapped[HealthcareFacility] = relationship(
         back_populates="used_healthcare_provider_group"
     )

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -26,9 +27,9 @@ class HealthcareProviderGroupMember(Base):
 
     __tablename__ = "healthcare_provider_group_member"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
-    grouping_healthcare_provider_group_id: Mapped[int] = mapped_column(ForeignKey("healthcare_provider_group.id"))
+    grouping_healthcare_provider_group_id: Mapped[UUID] = mapped_column(ForeignKey("healthcare_provider_group.id"))
     grouping_healthcare_provider_group: Mapped[HealthcareProviderGroup] = relationship(
         back_populates="grouped_healthcare_provider_group_member"
     )
@@ -37,7 +38,7 @@ class HealthcareProviderGroupMember(Base):
     Each HealthcareProviderGroup always contains one or more HealthcareProviderGroupMember.
     """
 
-    performing_healthcare_provider_id: Mapped[int] = mapped_column(ForeignKey("healthcare_provider.id"))
+    performing_healthcare_provider_id: Mapped[UUID] = mapped_column(ForeignKey("healthcare_provider.id"))
     performing_healthcare_provider: Mapped[HealthcareProvider] = relationship(
         back_populates="performed_healthcare_provider_group_member"
     )

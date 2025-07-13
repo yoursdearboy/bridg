@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Optional
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
@@ -31,11 +32,11 @@ class StudyProtocolVersion(Base):
 
     __tablename__ = "study_protocol_version"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
     acronym: Mapped[Optional[str]]
 
-    versioned_study_protocol_id: Mapped[int] = mapped_column(ForeignKey("study_protocol.id"))
+    versioned_study_protocol_id: Mapped[UUID] = mapped_column(ForeignKey("study_protocol.id"))
     versioned_study_protocol: Mapped[StudyProtocol] = relationship(back_populates="versioning_study_protocol_version")
     """
     Each StudyProtocolVersion always is a version of one StudyProtocol.

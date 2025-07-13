@@ -1,4 +1,5 @@
 from typing import Optional
+from uuid import UUID, uuid4
 
 from sqlalchemy import CheckConstraint, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -19,14 +20,14 @@ class Epoch(Base):
     __tablename__ = "epoch"
     __table_args__ = (CheckConstraint("sequence_number >= 0"),)
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
     name: Mapped[Optional[str]]
     type_code: Mapped[Optional[str]]
     sequence_number: Mapped[Optional[int]]
     description: Mapped[Optional[str]]
 
-    subdivided_study_protocol_version_id: Mapped[int] = mapped_column(ForeignKey("study_protocol_version.id"))
+    subdivided_study_protocol_version_id: Mapped[UUID] = mapped_column(ForeignKey("study_protocol_version.id"))
     subdivided_study_protocol_version: Mapped[StudyProtocolVersion] = relationship(back_populates="subdividing_epoch")
     """
     Each Epoch always is a division of one StudyProtocolVersion.

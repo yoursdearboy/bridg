@@ -15,14 +15,13 @@ person:
 
 healthcare_facility:
   - &dgoi-hf
-    id: 1
+    id: 5ff0365b-62df-4f4d-98b8-87bceb005017
     performing_organization: &dgoi-org
-      id: 1
+      id: 549bf476-9534-4446-aa99-d6c3ed109b1b
       name: [{ value: DGOI }]
   - &ekb-hf
-    id: 2
+    id: 07991d84-78f7-4e08-9939-3d78233a59d6
     performing_organization:
-      id: 2
       name: [{ value: EKB }]
 
 healthcare_provider:
@@ -32,19 +31,18 @@ healthcare_provider:
     employing_organization: *dgoi-org
 
 healthcare_provider_group:
-  - id: 1
-    performing_organization: &4d-org
-      id: 3
+  - performing_organization: &4d-org
+      id: 52f4b187-c0aa-4831-a1d1-6330b60cdf4b
       name: [{ value: 4D }]
     using_healthcare_facility: *dgoi-hf
 
 study_site:
   - &dgoi-ss
-    id: 1
+    id: 7cbc3369-7d06-4742-b6f1-b83f62d72f1e
     lead: true
     performing_healthcare_facility: *dgoi-hf
   - &ekb-ss
-    id: 2
+    id: c2b94f17-7877-46b1-b1e3-2d09addec278
     lead: false
     performing_healthcare_facility: *ekb-hf
 
@@ -55,7 +53,7 @@ defined_activity.category_code:
     display_name: Treatment
 defined_observation:
   - &cbc
-    id: 1
+    id: f83ddbf8-dd6d-4737-98e3-a5795995bbd8
     name_code: { code: "26604007", display_name: Complete blood count }
     category_code: lab
     produced_defined_observation_result:
@@ -66,7 +64,7 @@ defined_observation:
       - type: observation_result
         type_code: { code: "61928009", display_name: "Platelet count" }
   - &ipt
-    id: 2
+    id: 845ffa00-a139-4d38-8ccc-e53a89a2de03
     name_code: { code: ipt, display_name: Immunophenotyping }
     category_code: lab
     context_for_study_site: *dgoi-ss
@@ -91,15 +89,15 @@ study:
     planning_study_protocol:
       versioning_study_protocol_version:
         - &aml-mrd-2018
-          id: 1
+          id: ce946229-9746-46cd-8dd3-b27a2fbfd48a
           acronym: AML-MRD-2018
           executing_study_site_protocol_version_relationship:
             - &dgoi-aml-mrd-2018
-              id: 1 # FIXME: for sqlite
+              id: 6a8e6e2b-9537-408f-bd92-a5b83ad2e750 # FIXME: for sqlite
               executing_study_site: *dgoi-ss
               executed_study_protocol_version: *aml-mrd-2018
             - &ekb-aml-mrd-2018
-              id: 2 # FIXME: for sqlite
+              id: 3a819069-2aa2-49df-a979-e4237f77cf6e # FIXME: for sqlite
               executing_study_site: *ekb-ss
               executed_study_protocol_version: *aml-mrd-2018
           intended_planned_study_subject:
@@ -113,9 +111,9 @@ study:
               quantity_range: 10
           subdividing_epoch:
             - &aml-mrd-2018-screening
-              { id: 1, name: "Screening", type_code: "screening" }
+              { id: 4c0e30ba-8ef8-450f-b3c0-d489fa053c35, name: "Screening", type_code: "screening" }
             - &aml-mrd-2018-induction
-              { id: 2, name: "Induction", type_code: "treatment" }
+              { id: 07205390-86e4-4955-a17b-0684fb70b1ef, name: "Induction", type_code: "treatment" }
             - { name: "Consolidation I", type_code: "treatment" }
             - { name: "Consolidation II", type_code: "treatment" }
             - { name: "Follow-Up", type_code: "follow-up" }
@@ -123,20 +121,20 @@ study:
             - used_defined_activity: *ipt
             - used_defined_activity: *cbc
             - used_defined_activity: &aml-mrd-2018-ame
-                id: 3
+                id: a20d96db-afc3-4e0d-a010-32662388c633
                 type: substance_administration
                 name_code: { code: ame, display_name: AME }
                 category_code: treatment
             - used_defined_activity: &aml-mrd-2018-ham
-                id: 4
+                id: ef556a4b-2665-4319-948a-2c5fd9baad3f
                 type: substance_administration
                 name_code: { code: ham, display_name: HAM }
                 category_code: treatment
         - &aml-mrd-2024
-          id: 2
+          id: 6a4c5ef3-874c-43bb-814e-55203d4a4727
           acronym: AML-MRD-2024
           executing_study_site_protocol_version_relationship:
-            - id: 3 # FIXME: for sqlite
+            - id: 55c54b18-da1f-41ae-885d-b140ccb0e239 # FIXME: for sqlite
               executing_study_site: *dgoi-ss
               executed_study_protocol_version: *aml-mrd-2024
           intended_planned_study_subject:
@@ -149,11 +147,11 @@ study:
     planning_study_protocol:
       versioning_study_protocol_version:
         - &a-2024
-          id: 3
+          id: fdfbef08-e7ce-470d-8cef-73eef2bc7c8a
           acronym: A-2024
           executing_study_site_protocol_version_relationship:
             - &dgoi-a-2024
-              id: 4 # FIXME: for sqlite
+              id: f53e341a-2897-4e9e-be42-57144ff53c5a # FIXME: for sqlite
               executing_study_site: *dgoi-ss
               executed_study_protocol_version: *a-2024
           intended_planned_study_subject:
@@ -170,7 +168,7 @@ study_subject:
     status: eligible
     status_date: 2024-11-06T12:00:00
     assigned_study_subject_protocol_version_relationship:
-      - id: 1 # FIXME: for sqlite
+      - id: 9866feeb-8c7c-4e79-9627-ff6e2c845e58 # FIXME: for sqlite
         assigning_study_site_protocol_version_relationship: *dgoi-aml-mrd-2018
     involving_performed_activity:
       - type: observation
@@ -213,11 +211,11 @@ study_subject:
     status: eligible
     status_date: 2024-11-06T12:00:00
     assigned_study_subject_protocol_version_relationship:
-      - id: 2 # FIXME: for sqlite
+      - id: 33564e87-ad36-4d25-94a5-89449eb6bc08 # FIXME: for sqlite
         assigning_study_site_protocol_version_relationship: *ekb-aml-mrd-2018
   - performing_organization: *4d-org
     status: eligible
     status_date: 2024-11-11T12:00:00
     assigned_study_subject_protocol_version_relationship:
-      - id: 3 # FIXME: for sqlite
+      - id: fa50d86a-f5b6-45e2-9576-eb3f89a2b6f7 # FIXME: for sqlite
         assigning_study_site_protocol_version_relationship: *dgoi-a-2024

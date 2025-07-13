@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
+from uuid import UUID
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, declared_attr, mapped_column, relationship
@@ -18,7 +19,7 @@ class Activity(Base):
 
     class ReasonCode(Code): ...
 
-    reason_code_id: Mapped[Optional[int]] = code_column(ReasonCode)
+    reason_code_id: Mapped[Optional[UUID]] = code_column(ReasonCode)
 
     @declared_attr
     def reason_code(cls) -> Mapped[Optional[ReasonCode]]:
@@ -26,7 +27,7 @@ class Activity(Base):
 
     comment: Mapped[Optional[str]]
 
-    using_project_id: Mapped[Optional[int]] = mapped_column(ForeignKey("project.id"))
+    using_project_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("project.id"))
 
     @declared_attr
     def using_project(cls) -> Mapped[Optional[Project]]:
@@ -36,7 +37,7 @@ class Activity(Base):
         """
         return relationship()
 
-    context_for_study_site_id: Mapped[Optional[int]] = mapped_column(ForeignKey("study_site.id"))
+    context_for_study_site_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("study_site.id"))
 
     @declared_attr
     def context_for_study_site(cls) -> Mapped[Optional[StudySite]]:

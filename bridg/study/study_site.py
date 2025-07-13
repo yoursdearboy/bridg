@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Optional
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
@@ -30,25 +31,25 @@ class StudySite(Base):
 
     __tablename__ = "study_site"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
     lead: Mapped[Optional[bool]]
 
-    performing_healthcare_facility_id: Mapped[Optional[int]] = mapped_column(ForeignKey("healthcare_facility.id"))
+    performing_healthcare_facility_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("healthcare_facility.id"))
     performing_healthcare_facility: Mapped[Optional[HealthcareFacility]] = relationship()
     """
     Each StudySite might be a function performed by one HealthcareFacility.
     Each HealthcareFacility might function as one or more StudySite.
     """
 
-    performing_organization_id: Mapped[Optional[int]] = mapped_column(ForeignKey("organization.id"))
+    performing_organization_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("organization.id"))
     performing_organization: Mapped[Optional[Organization]] = relationship()
     """
     Each StudySite might be a function performed by one Organization.
     Each Organization might function as one or more StudySite.
     """
 
-    executed_study_conduct_id: Mapped[Optional[int]] = mapped_column(ForeignKey("project_conduct.id"))
+    executed_study_conduct_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("project_conduct.id"))
     executed_study_conduct: Mapped[Optional[StudyConduct]] = relationship(back_populates="executing_study_site")
     """
     Each StudySite might execute one StudyConduct.

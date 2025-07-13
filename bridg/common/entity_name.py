@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -14,7 +15,7 @@ if TYPE_CHECKING:
 class EntityName(Base):
     __tablename__ = "biologic_entity_name"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
     use: Mapped[Optional[str]]
     family: Mapped[Optional[str]]
@@ -24,7 +25,7 @@ class EntityName(Base):
     prefix: Mapped[Optional[str]]
     suffix: Mapped[Optional[str]]
 
-    biologic_entity_id: Mapped[int] = mapped_column(ForeignKey("biologic_entity.id"))
+    biologic_entity_id: Mapped[UUID] = mapped_column(ForeignKey("biologic_entity.id"))
     biologic_entity: Mapped[BiologicEntity] = relationship(back_populates="name")
 
     @property

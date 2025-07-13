@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
+from uuid import UUID, uuid4
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -30,7 +31,7 @@ class Project(Base):
         "polymorphic_on": "kind",
     }
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     kind: Mapped[str]
 
     name: Mapped[Optional[str]]

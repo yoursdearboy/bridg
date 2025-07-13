@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, List
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -29,9 +30,9 @@ class HealthcareFacility(Base):
 
     __tablename__ = "healthcare_facility"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
-    performing_organization_id: Mapped[int] = mapped_column(ForeignKey("organization.id"))
+    performing_organization_id: Mapped[UUID] = mapped_column(ForeignKey("organization.id"))
     performing_organization: Mapped[Organization] = relationship(
         back_populates="performed_healthcare_facility",
         cascade="all, delete-orphan",

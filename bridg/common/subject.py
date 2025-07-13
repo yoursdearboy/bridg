@@ -1,4 +1,5 @@
 from typing import Optional
+from uuid import UUID
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, declared_attr, mapped_column, relationship, validates
@@ -27,13 +28,13 @@ class Subject(Base):
 
     __abstract__ = True
 
-    performing_biologic_entity_id: Mapped[Optional[int]] = mapped_column(ForeignKey("biologic_entity.id"))
+    performing_biologic_entity_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("biologic_entity.id"))
 
     @declared_attr
     def performing_biologic_entity(cls) -> Mapped[Optional[BiologicEntity]]:
         return relationship()
 
-    performing_organization_id: Mapped[Optional[int]] = mapped_column(ForeignKey("organization.id"))
+    performing_organization_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("organization.id"))
 
     @declared_attr
     def performing_organization(cls) -> Mapped[Optional[Organization]]:

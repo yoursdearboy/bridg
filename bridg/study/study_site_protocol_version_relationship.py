@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, List
+from uuid import UUID, uuid4
 
-from sqlalchemy import ForeignKey, Identity
+from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -30,9 +31,9 @@ class StudySiteProtocolVersionRelationship(Base):
 
     __tablename__ = "study_site_protocol_version_relationship"
 
-    id: Mapped[int] = mapped_column(Identity(), unique=True)
+    id: Mapped[UUID] = mapped_column(unique=True, default=uuid4)
 
-    executing_study_site_id: Mapped[int] = mapped_column(ForeignKey("study_site.id"), primary_key=True)
+    executing_study_site_id: Mapped[UUID] = mapped_column(ForeignKey("study_site.id"), primary_key=True)
     executing_study_site: Mapped[StudySite] = relationship(
         back_populates="executed_study_site_protocol_version_relationship"
     )
@@ -41,7 +42,7 @@ class StudySiteProtocolVersionRelationship(Base):
     Each StudySite might execute one or more StudySiteProtocolVersionRelationship.
     """
 
-    executed_study_protocol_version_id: Mapped[int] = mapped_column(
+    executed_study_protocol_version_id: Mapped[UUID] = mapped_column(
         ForeignKey("study_protocol_version.id"), primary_key=True
     )
     executed_study_protocol_version: Mapped[StudyProtocolVersion] = relationship(

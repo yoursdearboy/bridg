@@ -1,5 +1,6 @@
 import re
 from typing import Optional
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey, UniqueConstraint
 from sqlalchemy.orm import Mapped, declared_attr, mapped_column
@@ -24,7 +25,7 @@ class Code(Base):
     def __table_args__(cls):
         return (UniqueConstraint("code"),)
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
     code: Mapped[Optional[str]]
     display_name: Mapped[Optional[str]]

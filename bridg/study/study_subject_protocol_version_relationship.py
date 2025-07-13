@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from uuid import UUID, uuid4
 
-from sqlalchemy import ForeignKey, Identity
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
@@ -26,9 +27,9 @@ class StudySubjectProtocolVersionRelationship(Base):
 
     __tablename__ = "study_subject_protocol_version_relationship"
 
-    id: Mapped[int] = mapped_column(Identity(), unique=True)
+    id: Mapped[UUID] = mapped_column(unique=True, default=uuid4)
 
-    assigning_study_subject_id: Mapped[int] = mapped_column(ForeignKey("study_subject.id"), primary_key=True)
+    assigning_study_subject_id: Mapped[UUID] = mapped_column(ForeignKey("study_subject.id"), primary_key=True)
     assigning_study_subject: Mapped[StudySubject] = relationship(
         back_populates="assigned_study_subject_protocol_version_relationship",
     )
@@ -37,7 +38,7 @@ class StudySubjectProtocolVersionRelationship(Base):
     Each StudySubject might be assigned to one or more StudySubjectProtocolVersionRelationship.
     """
 
-    assigning_study_site_protocol_version_relationship_id: Mapped[int] = mapped_column(
+    assigning_study_site_protocol_version_relationship_id: Mapped[UUID] = mapped_column(
         ForeignKey("study_site_protocol_version_relationship.id"), primary_key=True
     )
     assigning_study_site_protocol_version_relationship: Mapped[StudySiteProtocolVersionRelationship] = relationship(
