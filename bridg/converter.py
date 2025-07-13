@@ -92,3 +92,22 @@ converter.register_structure_hook_func(lambda x: issubclass(x, Base), make_model
 
 converter.register_unstructure_hook(Base, lambda x: converter.unstructure(dissoc(x.__dict__, "_sa_instance_state")))
 converter.register_unstructure_hook(InstrumentedList, lambda x: converter.unstructure(list(x)))
+
+
+def dataclass_hook(x, cls):
+    "More robust than standard one, because it handles any object supporting getattr"
+
+    def pair(field: Field):
+        key = field.name
+        value = getattr(x, key)
+        ftype = field.type
+        assert isinstance(ftype, type) or get_origin(ftype) is not None
+        value = converter.structure(value, ftype)  # type: ignore
+        return (key, value)
+
+    kwargs = dict(map(pair, fields(cls)))
+    obj = cls(**kwargs)
+    return obj
+
+
+converter.register_structure_hook_func(is_dataclass, dataclass_hook)
