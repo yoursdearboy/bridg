@@ -1,5 +1,6 @@
+from dataclasses import Field, fields, is_dataclass
 from datetime import date, datetime
-from typing import List, TypeVar, get_type_hints
+from typing import List, TypeVar, get_origin, get_type_hints
 
 from cattr import Converter
 from sqlalchemy import inspect
