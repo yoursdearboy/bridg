@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, List, TypedDict
 
 import yaml
 
@@ -38,36 +38,38 @@ def make_code_hook():
 bridg.converter.register_structure_hook_func(lambda x: issubclass(x, bridg.Code), make_code_hook())
 
 
-MAP = {
-    "defined_activity.name_code": bridg.DefinedActivity.NameCode,
-    "defined_activity.category_code": bridg.DefinedActivity.CategoryCode,
-    "defined_activity.subcategory_code": bridg.DefinedActivity.SubcategoryCode,
-    "defined_activity": bridg.DefinedActivity,
-    "defined_eligibility_criterion": bridg.DefinedEligibilityCriterion,
-    "defined_exclusion_criterion": bridg.DefinedExclusionCriterion,
-    "defined_inclusion_criterion": bridg.DefinedInclusionCriterion,
-    "defined_observation": bridg.DefinedObservation,
-    "defined_procedure": bridg.DefinedProcedure,
-    "defined_substance_administration": bridg.DefinedSubstanceAdministration,
-    "performed_activity.status_code": bridg.PerformedActivity.StatusCode,
-    "performed_activity": bridg.PerformedActivity,
-    "person": bridg.Person,
-    "healthcare_facility": bridg.HealthcareFacility,
-    "healthcare_provider": bridg.HealthcareProvider,
-    "healthcare_provider_group": bridg.HealthcareProviderGroup,
-    "study": bridg.Study,
-    "study_site": bridg.StudySite,
-    "study_subject": bridg.StudySubject,
-}
+Root = TypedDict(
+    "Root",
+    {
+        "defined_activity.name_code": List[bridg.DefinedActivity.NameCode],
+        "defined_activity.category_code": List[bridg.DefinedActivity.CategoryCode],
+        "defined_activity.subcategory_code": List[bridg.DefinedActivity.SubcategoryCode],
+        "defined_activity": List[bridg.DefinedActivity],
+        "defined_eligibility_criterion": List[bridg.DefinedEligibilityCriterion],
+        "defined_exclusion_criterion": List[bridg.DefinedExclusionCriterion],
+        "defined_inclusion_criterion": List[bridg.DefinedInclusionCriterion],
+        "defined_observation": List[bridg.DefinedObservation],
+        "defined_procedure": List[bridg.DefinedProcedure],
+        "defined_substance_administration": List[bridg.DefinedSubstanceAdministration],
+        "performed_activity.status_code": List[bridg.PerformedActivity.StatusCode],
+        "performed_activity": List[bridg.PerformedActivity],
+        "person": List[bridg.Person],
+        "healthcare_facility": List[bridg.HealthcareFacility],
+        "healthcare_provider": List[bridg.HealthcareProvider],
+        "healthcare_provider_group": List[bridg.HealthcareProviderGroup],
+        "study": List[bridg.Study],
+        "study_site": List[bridg.StudySite],
+        "study_subject": List[bridg.StudySubject],
+    },
+    total=False,
+)
 
 
 def structure(data: Dict[str, List[Any]]):
-    for key, values in data.items():
-        class_ = MAP.get(key)
-        if class_ is None:
-            raise RuntimeError(f"Unknown root model with key {key}")
+    root = bridg.converter.structure(data, Root)
+    for values in root.values():
         for value in values:
-            yield bridg.converter.structure(value, class_)
+            yield value
 
 
 with open("dev/seed.yml") as f:
