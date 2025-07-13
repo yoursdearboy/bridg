@@ -15,10 +15,14 @@ person:
 
 healthcare_facility:
   - &dgoi-hf
+    id: 1
     performing_organization: &dgoi-org
+      id: 1
       name: [{ value: DGOI }]
   - &ekb-hf
+    id: 2
     performing_organization:
+      id: 2
       name: [{ value: EKB }]
 
 healthcare_provider:
@@ -28,15 +32,19 @@ healthcare_provider:
     employing_organization: *dgoi-org
 
 healthcare_provider_group:
-  - performing_organization: &4d-org
+  - id: 1
+    performing_organization: &4d-org
+      id: 3
       name: [{ value: 4D }]
     using_healthcare_facility: *dgoi-hf
 
 study_site:
   - &dgoi-ss
+    id: 1
     lead: true
     performing_healthcare_facility: *dgoi-hf
   - &ekb-ss
+    id: 2
     lead: false
     performing_healthcare_facility: *ekb-hf
 
@@ -47,6 +55,7 @@ defined_activity.category_code:
     display_name: Treatment
 defined_observation:
   - &cbc
+    id: 1
     name_code: { code: "26604007", display_name: Complete blood count }
     category_code: lab
     produced_defined_observation_result:
@@ -57,6 +66,7 @@ defined_observation:
       - type: observation_result
         type_code: { code: "61928009", display_name: "Platelet count" }
   - &ipt
+    id: 2
     name_code: { code: ipt, display_name: Immunophenotyping }
     category_code: lab
     context_for_study_site: *dgoi-ss
@@ -81,14 +91,17 @@ study:
     planning_study_protocol:
       versioning_study_protocol_version:
         - &aml-mrd-2018
+          id: 1
           acronym: AML-MRD-2018
           executing_study_site_protocol_version_relationship:
             - &dgoi-aml-mrd-2018
               id: 1 # FIXME: for sqlite
-              executing_study_site: *dgoi-ss 
+              executing_study_site: *dgoi-ss
+              executed_study_protocol_version: *aml-mrd-2018
             - &ekb-aml-mrd-2018
               id: 2 # FIXME: for sqlite
               executing_study_site: *ekb-ss
+              executed_study_protocol_version: *aml-mrd-2018
           intended_planned_study_subject:
             - performing_biologic_entity:
                 type: person
@@ -100,9 +113,9 @@ study:
               quantity_range: 10
           subdividing_epoch:
             - &aml-mrd-2018-screening
-              { name: "Screening", type_code: "screening" }
+              { id: 1, name: "Screening", type_code: "screening" }
             - &aml-mrd-2018-induction
-              { name: "Induction", type_code: "treatment" }
+              { id: 2, name: "Induction", type_code: "treatment" }
             - { name: "Consolidation I", type_code: "treatment" }
             - { name: "Consolidation II", type_code: "treatment" }
             - { name: "Follow-Up", type_code: "follow-up" }
@@ -110,17 +123,22 @@ study:
             - used_defined_activity: *ipt
             - used_defined_activity: *cbc
             - used_defined_activity: &aml-mrd-2018-ame
+                id: 3
                 type: substance_administration
                 name_code: { code: ame, display_name: AME }
                 category_code: treatment
             - used_defined_activity: &aml-mrd-2018-ham
+                id: 4
                 type: substance_administration
                 name_code: { code: ham, display_name: HAM }
                 category_code: treatment
-        - acronym: AML-MRD-2024
+        - &aml-mrd-2024
+          id: 2
+          acronym: AML-MRD-2024
           executing_study_site_protocol_version_relationship:
             - id: 3 # FIXME: for sqlite
               executing_study_site: *dgoi-ss
+              executed_study_protocol_version: *aml-mrd-2024
           intended_planned_study_subject:
             - performing_biologic_entity:
                 type: person
@@ -130,11 +148,14 @@ study:
     description: Audit of organizations.
     planning_study_protocol:
       versioning_study_protocol_version:
-        - acronym: A-2024
+        - &a-2024
+          id: 3
+          acronym: A-2024
           executing_study_site_protocol_version_relationship:
             - &dgoi-a-2024
               id: 4 # FIXME: for sqlite
               executing_study_site: *dgoi-ss
+              executed_study_protocol_version: *a-2024
           intended_planned_study_subject:
             - performing_organization: {}
               quantity_range: 3

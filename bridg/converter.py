@@ -19,30 +19,54 @@ class Cache:
     def __init__(self):
         self._values = {}
 
-    def hash(self, key):
-        return id(key)
-
     def get(self, key):
-        key = self.hash(key)
         return self._values.get(key)
 
     def set(self, key, value):
-        key = self.hash(key)
         self._values[key] = value
 
 
 T = TypeVar("T", bound=Base)
 
 
+def _cache_key(data: dict, class_: type[T]) -> str | None:
+    info = inspect(class_)
+
+    def _get_foreign_key(key):
+        for rel in info.relationships:
+            if key in rel.local_columns:
+                k1 = rel.key
+                k2 = list(rel.remote_side)[0].key
+                return data.get(k1, {}).get(k2)
+
+    def _get_key(key):
+        if key.foreign_keys:
+            return _get_foreign_key(key)
+        return data.get(key.name)
+
+    key = ""
+    for pk in info.primary_key:
+        value = _get_key(pk)
+        if value is not None:
+            key += "-" + str(value)
+        else:
+            return
+
+    return class_.__tablename__ + "-" + key
+
+
 def make_model_hook():
     cache = Cache()
 
-    def f(data: dict | T, class_: type[T]) -> T:
+    def f(data: dict, class_: type[T]) -> T:
         if isinstance(data, class_):
             return data
 
-        if cached := cache.get(data):
-            return cached
+        key = _cache_key(data, class_)
+
+        if key is not None:
+            if cached := cache.get(key):
+                return cached
 
         info = inspect(class_)
         if (polymorphic_on := info.polymorphic_on) is not None:
@@ -51,7 +75,9 @@ def make_model_hook():
                 info = inspect(class_)
 
         obj = class_()
-        cache.set(data, obj)
+
+        if key is not None:
+            cache.set(key, obj)
 
         annotations = get_type_hints(class_, localns=bridg.__dict__)
 
