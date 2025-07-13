@@ -73,7 +73,6 @@ defined_observation:
 
 defined_procedure:
   - &surgery
-    id: 5
     name_code: { code: surg, display_name: Surgery }
     category_code: surg
 
@@ -117,9 +116,9 @@ study:
               { id: 1, name: "Screening", type_code: "screening" }
             - &aml-mrd-2018-induction
               { id: 2, name: "Induction", type_code: "treatment" }
-            - { id: 3, name: "Consolidation I", type_code: "treatment" }
-            - { id: 4, name: "Consolidation II", type_code: "treatment" }
-            - { id: 5, name: "Follow-Up", type_code: "follow-up" }
+            - { name: "Consolidation I", type_code: "treatment" }
+            - { name: "Consolidation II", type_code: "treatment" }
+            - { name: "Follow-Up", type_code: "follow-up" }
           used_study_activity:
             - used_defined_activity: *ipt
             - used_defined_activity: *cbc
@@ -158,7 +157,7 @@ study:
               executing_study_site: *dgoi-ss
               executed_study_protocol_version: *a-2024
           intended_planned_study_subject:
-            - performing_organization: {id: 5}
+            - performing_organization: {}
               quantity_range: 3
 
 study_subject:
