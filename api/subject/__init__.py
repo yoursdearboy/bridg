@@ -107,3 +107,6 @@ def create(space_id: UUID, data: NewStudySubject, db: Session = Depends(get_db))
     db.commit()
 
     return obj
+
+
+openapi_tag = {"name": "subjects"}
