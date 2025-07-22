@@ -22,8 +22,6 @@ class StudySubject(BaseModel):
         death_date_estimated_indicator: Optional[bool]
         death_indicator: Optional[bool]
         primary_name: Optional[str]
-        postal_address: List[bridg.PostalAddress]
-        telecom_address: List[bridg.TelecommunicationAddress]
 
         @field_validator("primary_name", mode="before")
         @classmethod
