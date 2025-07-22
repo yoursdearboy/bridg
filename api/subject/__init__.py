@@ -109,4 +109,4 @@ def create(space_id: UUID, data: NewStudySubject, db: Session = Depends(get_db))
     return obj
 
 
-openapi_tag = {"name": "subjects"}
+openapi_tag = [{"name": "subjects"}]

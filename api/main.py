@@ -1,12 +1,7 @@
-from fastapi import APIRouter, FastAPI
+from fastapi import FastAPI
 
-from api import site, subject
+from api import space
 
-space_router = APIRouter(prefix="/space/{space_id:uuid}")
-space_router.include_router(subject.router)
-space_router.include_router(site.router)
-
-openapi_tags = [subject.openapi_tag]
-
-app = FastAPI(openapi_tags=openapi_tags)
-app.include_router(space_router)
+openapi_tags = [*space.openapi_tags]
+app = FastAPI(openapi_tags=space.openapi_tags)
+app.include_router(space.router)

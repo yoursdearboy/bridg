@@ -2,6 +2,10 @@
 
 # Space
 
+### Index spaces
+
+GET {{base}}/space
+
 ## Sites
 
 ### Index sites in space
