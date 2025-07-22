@@ -2,6 +2,12 @@
 
 # Space
 
+## Sites
+
+### Index sites in space
+
+GET {{base}}/space/ce946229-9746-46cd-8dd3-b27a2fbfd48a/sites
+
 ## Subjects
 
 ### Index subjects in space
