@@ -10,7 +10,7 @@ from api import site, subject
 from api.base_model import BaseModel
 from api.db import get_db
 
-router = APIRouter(prefix="/space")
+router = APIRouter(prefix="/spaces")
 
 
 class StudyProtocolVersion(BaseModel):
