@@ -1,0 +1,36 @@
+@base=http://127.0.0.1:8000
+
+# Space
+
+## Subjects
+
+### Index subjects in space
+
+GET {{base}}/space/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects
+
+### Show subject in space
+
+GET {{base}}/space/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/f0519f08-d22f-40ff-8800-cee82c4e925b
+
+### Create subject in space
+
+POST {{base}}/space/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects
+Content-Type: application/json
+
+{
+  "status": "candidate",
+  "status_date": "2025-03-01T12:00:00",
+  "performing_biologic_entity": {
+    "administrative_gender_code": "M",
+    "birth_date": "2000-03-01",
+    "death_date": null,
+    "death_date_estimated_indicator": false,
+    "death_indicator": false,
+    "name": [
+      { "use": "official", "family": "Test", "given": "Dude" }
+    ]
+  },
+  "assigned_study_site_protocol_version_relationship": [
+    "6a8e6e2b-9537-408f-bd92-a5b83ad2e750"
+  ]
+}

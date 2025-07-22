@@ -22,6 +22,7 @@ dependencies = [
     "pydantic<3.0.0,>=2.9.2",
     "cattrs<25.0.0,>=24.1.2",
     "toolz<2.0.0,>=1.0.0",
+    "fastapi[standard]>=0.116.1",
 ]
 
 [dependency-groups]
@@ -51,9 +52,3 @@ extend-select = ["I", "TID"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401", "F403"]
-
-[tool.ruff.lint.flake8-tidy-imports.banned-api]
-"bridg.common".msg = "Use bridg instead."
-"bridg.core".msg = "Use bridg instead."
-"bridg.protocol".msg = "Use bridg instead."
-"bridg.study".msg = "Use bridg instead."
