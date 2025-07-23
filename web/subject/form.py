@@ -8,11 +8,10 @@ from wtforms import (
     FieldList,
     Form,
     FormField,
-    IntegerField,
     StringField,
     TextAreaField,
 )
-from wtforms.validators import DataRequired, Optional
+from wtforms.validators import DataRequired, Optional, UUID
 from wtforms_alchemy.fields import QuerySelectMultipleField
 
 from bridg import AdministrativeGender, Status
@@ -60,9 +59,9 @@ class OrganizationForm(Form):
 
 class NewStudySubjectForm(FlaskForm):
     performing_biologic_entity = FormField(BiologicEntityForm)
-    performing_biologic_entity_id = IntegerField(validators=[Optional()])
+    performing_biologic_entity_id = StringField(validators=[Optional(), UUID()])
     performing_organization = FormField(OrganizationForm)
-    performing_organization_id = IntegerField(validators=[Optional()])
+    performing_organization_id = StringField(validators=[Optional(), UUID()])
     status = SelectEnumField(_("Status"), Status, default=Status.candidate)
     status_date = DateTimeField(_("Status date"), default=datetime.now())
     assigned_study_site_protocol_version_relationship = QuerySelectMultipleField(

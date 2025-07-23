@@ -77,5 +77,5 @@ blueprint.add_url_rule(
     "/versions/new", view_func=CreateProtocolVersionView.as_view("new_version")
 )
 blueprint.add_url_rule(
-    "/versions/<id>/edit", view_func=EditProtocolVersionView.as_view("edit_version")
+    "/versions/<uuid:id>/edit", view_func=EditProtocolVersionView.as_view("edit_version")
 )

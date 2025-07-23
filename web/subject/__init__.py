@@ -30,7 +30,7 @@ from .form import EditStudySubjectForm, NewStudySubjectForm
 from .lookup import lookup
 from .schema import StudySubjectList, StudySubjectLookupList
 
-blueprint = Blueprint("subject", __name__, url_prefix="/space/<space_id>/subjects")
+blueprint = Blueprint("subject", __name__, url_prefix="/space/<uuid:space_id>/subjects")
 
 
 def _get_study_site_protocol_version_relationship(version: StudyProtocolVersion):
@@ -180,7 +180,7 @@ class SubjectDeleteView(HTMXDeleteMixin, DeleteView):
 blueprint.add_url_rule("/", view_func=SubjectIndexView.as_view("index"))
 blueprint.add_url_rule("/new", view_func=SubjectCreateView.as_view("new"))
 blueprint.add_url_rule("/lookup", view_func=SubjectLookupView.as_view("lookup"))
-blueprint.add_url_rule("/<id>", view_func=SubjectShowView.as_view("show"))
-blueprint.add_url_rule("/<id>/edit", view_func=SubjectEditView.as_view("edit"))
-blueprint.add_url_rule("/<id>", view_func=SubjectDeleteView.as_view("delete"))
-blueprint.register_blueprint(activity.blueprint, url_prefix="/<subject_id>")
+blueprint.add_url_rule("/<uuid:id>", view_func=SubjectShowView.as_view("show"))
+blueprint.add_url_rule("/<uuid:id>/edit", view_func=SubjectEditView.as_view("edit"))
+blueprint.add_url_rule("/<uuid:id>", view_func=SubjectDeleteView.as_view("delete"))
+blueprint.register_blueprint(activity.blueprint, url_prefix="/<uuid:subject_id>")

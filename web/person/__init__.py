@@ -46,11 +46,11 @@ class PersonEditView(BreadcrumbsMixin, EditView):
         self.add_breadcrumb(".edit", _("Edit"))
 
 
-blueprint.add_url_rule("/<id>", view_func=PersonShowView.as_view("show"))
-blueprint.add_url_rule("/<id>/edit", view_func=PersonEditView.as_view("edit"))
+blueprint.add_url_rule("/<uuid:id>", view_func=PersonShowView.as_view("show"))
+blueprint.add_url_rule("/<uuid:id>/edit", view_func=PersonEditView.as_view("edit"))
 blueprint.register_blueprint(
-    name.blueprint, url_prefix=f"/<int:person_id>/{name.blueprint.url_prefix}")
+    name.blueprint, url_prefix=f"/<uuid:person_id>/{name.blueprint.url_prefix}")
 blueprint.register_blueprint(
-    postal_address.blueprint, url_prefix=f"/<int:person_id>/{postal_address.blueprint.url_prefix}")
+    postal_address.blueprint, url_prefix=f"/<uuid:person_id>/{postal_address.blueprint.url_prefix}")
 blueprint.register_blueprint(
-    telecom_address.blueprint, url_prefix=f"/<int:person_id>/{telecom_address.blueprint.url_prefix}")
+    telecom_address.blueprint, url_prefix=f"/<uuid:person_id>/{telecom_address.blueprint.url_prefix}")

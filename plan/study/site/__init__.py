@@ -49,4 +49,4 @@ class DeleteStudySiteView(HTMXDeleteMixin, DeleteView):
 
 
 blueprint.add_url_rule("/new", view_func=CreateStudySiteView.as_view("new"))
-blueprint.add_url_rule("/<id>", view_func=DeleteStudySiteView.as_view("delete"))
+blueprint.add_url_rule("/<uuid:id>", view_func=DeleteStudySiteView.as_view("delete"))

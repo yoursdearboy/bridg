@@ -1,5 +1,6 @@
 from datetime import date, datetime
 from typing import Any, List, Optional, Self
+from uuid import UUID
 
 from flask import url_for
 from pydantic import (
@@ -31,7 +32,7 @@ class BiologicEntity(BaseModel):
     class Config:
         from_attributes = True
 
-    id: int
+    id: UUID
     administrative_gender_code: Optional[str]
     birth_date: Optional[date]
     death_date: Optional[date]
@@ -51,7 +52,7 @@ class Organization(BaseModel):
     class Config:
         from_attributes = True
 
-    id: int
+    id: UUID
     type: Optional[str]
     description: Optional[str]
     primary_name: Optional[OrganizationName]
@@ -61,12 +62,12 @@ class StudySubject(BaseModel):
     class Config:
         from_attributes = True
 
-    id: Optional[int]
+    id: Optional[UUID]
     performing_biologic_entity: Optional[BiologicEntity]
     performing_organization: Optional[Organization]
     status: Optional[str]
     status_date: Optional[datetime]
-    _study_protocol_version_id: int
+    _study_protocol_version_id: UUID
 
     @model_validator(mode="wrap")
     @classmethod
@@ -98,7 +99,7 @@ class StudySubjectLookup(BaseModel):
     class Config:
         from_attributes = True
 
-    id: Optional[int]
+    id: Optional[UUID]
     performing_biologic_entity: Optional[BiologicEntity]
     performing_organization: Optional[Organization]
     status: Optional[str]

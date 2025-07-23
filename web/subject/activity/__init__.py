@@ -1,3 +1,4 @@
+from uuid import UUID
 from flask import Blueprint, url_for
 from flask_babel import lazy_gettext as _
 from flask_wtf import FlaskForm
@@ -15,10 +16,10 @@ blueprint = Blueprint("activity", __name__, url_prefix="/activity")
 
 
 class SubjectMixin(ContextMixin, SQLAlchemyMixin):
-    def _get_subject(self, id: int):
+    def _get_subject(self, id: UUID):
         return self.db.session.query(StudySubject).filter_by(id=id).one()
 
-    def setup(self, subject_id: int, **kwargs):
+    def setup(self, subject_id: UUID, **kwargs):
         self.subject = self._get_subject(id=subject_id)
         super().setup(subject_id=subject_id, **kwargs)
 
@@ -44,10 +45,11 @@ class ActivityCreateView(SubjectMixin, SpaceMixin, BreadcrumbsMixin, CreateView[
     form_class = ActivityForm
     template_name = "subject/activity/new.html"
 
-    def _get_defined_activity(self, id: int):
+    def _get_defined_activity(self, id: UUID):
         return self.db.session.query(DefinedActivity).filter_by(id=id).one()
 
     def setup(self, defined_activity_id, **kwargs):
+        defined_activity_id = UUID(defined_activity_id)
         self.defined_activity = self._get_defined_activity(defined_activity_id)
         super().setup(defined_activity_id=defined_activity_id, **kwargs)
 
@@ -115,5 +117,5 @@ class ActivityDeleteView(HTMXDeleteMixin, DeleteView[PerformedActivity]):
 
 
 blueprint.add_url_rule("/new", view_func=ActivityCreateView.as_view("new"))
-blueprint.add_url_rule("/<id>/edit", view_func=ActivityEditView.as_view("edit"))
-blueprint.add_url_rule("/<id>", view_func=ActivityDeleteView.as_view("delete"))
+blueprint.add_url_rule("/<uuid:id>/edit", view_func=ActivityEditView.as_view("edit"))
+blueprint.add_url_rule("/<uuid:id>", view_func=ActivityDeleteView.as_view("delete"))

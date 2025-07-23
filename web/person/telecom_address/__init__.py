@@ -1,3 +1,4 @@
+from uuid import UUID
 from flask import Blueprint, url_for
 from flask_babel import lazy_gettext as _
 
@@ -12,7 +13,7 @@ blueprint = Blueprint("telecom_address", __name__, url_prefix="/telecom_address"
 
 
 class PersonMixin(ContextMixin, SQLAlchemyMixin):
-    def setup(self, person_id: int, **kwargs):
+    def setup(self, person_id: UUID, **kwargs):
         self.person = db.session.query(Person).filter_by(id=person_id).one()
         super().setup(person_id=person_id, **kwargs)
 
@@ -66,5 +67,5 @@ class TelecomFormDeleteView(HTMXDeleteMixin, DeleteView):
 
 
 blueprint.add_url_rule("/new", view_func=TelecomCreateView.as_view("new"))
-blueprint.add_url_rule("/<id>/edit", view_func=TelecomEditView.as_view("edit"))
-blueprint.add_url_rule("/<id>", view_func=TelecomFormDeleteView.as_view("delete"))
+blueprint.add_url_rule("/<uuid:id>/edit", view_func=TelecomEditView.as_view("edit"))
+blueprint.add_url_rule("/<uuid:id>", view_func=TelecomFormDeleteView.as_view("delete"))
