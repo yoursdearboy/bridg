@@ -1,7 +1,13 @@
-import { DefaultApi, Configuration } from "bridg-ts";
+import { DefaultApi as SpacesApi, Configuration, SubjectsApi } from "bridg-ts";
 
 const config = new Configuration({
   basePath: "/api",
 });
 
-export default new DefaultApi(config);
+export const spaces = new SpacesApi(config);
+export const subjects = new SubjectsApi(config);
+
+export default {
+  spaces,
+  subjects,
+};
