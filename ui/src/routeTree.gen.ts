@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SpacesSpaceIdSubjectsIndexRouteImport } from './routes/spaces/$spaceId/subjects/index'
+import { Route as SpacesSpaceIdSubjectsNewRouteImport } from './routes/spaces/$spaceId/subjects/new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,30 +24,44 @@ const SpacesSpaceIdSubjectsIndexRoute =
     path: '/spaces/$spaceId/subjects/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const SpacesSpaceIdSubjectsNewRoute =
+  SpacesSpaceIdSubjectsNewRouteImport.update({
+    id: '/spaces/$spaceId/subjects/new',
+    path: '/spaces/$spaceId/subjects/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects/': typeof SpacesSpaceIdSubjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/spaces/$spaceId/subjects'
+  fullPaths: '/' | '/spaces/$spaceId/subjects/new' | '/spaces/$spaceId/subjects'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/spaces/$spaceId/subjects'
-  id: '__root__' | '/' | '/spaces/$spaceId/subjects/'
+  to: '/' | '/spaces/$spaceId/subjects/new' | '/spaces/$spaceId/subjects'
+  id:
+    | '__root__'
+    | '/'
+    | '/spaces/$spaceId/subjects/new'
+    | '/spaces/$spaceId/subjects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SpacesSpaceIdSubjectsNewRoute: typeof SpacesSpaceIdSubjectsNewRoute
   SpacesSpaceIdSubjectsIndexRoute: typeof SpacesSpaceIdSubjectsIndexRoute
 }
 
@@ -66,11 +81,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SpacesSpaceIdSubjectsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/spaces/$spaceId/subjects/new': {
+      id: '/spaces/$spaceId/subjects/new'
+      path: '/spaces/$spaceId/subjects/new'
+      fullPath: '/spaces/$spaceId/subjects/new'
+      preLoaderRoute: typeof SpacesSpaceIdSubjectsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SpacesSpaceIdSubjectsNewRoute: SpacesSpaceIdSubjectsNewRoute,
   SpacesSpaceIdSubjectsIndexRoute: SpacesSpaceIdSubjectsIndexRoute,
 }
 export const routeTree = rootRouteImport
