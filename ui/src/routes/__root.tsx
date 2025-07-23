@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-import api from "../api";
+import api from "@/api";
 
 function Nav() {
   const query = useQuery({

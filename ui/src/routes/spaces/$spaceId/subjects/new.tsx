@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import api from "../../../../api";
-import useAppForm from "../../../../form";
+import api from "@/api";
+import useAppForm from "@/form";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
   loader: async ({ params }) => ({
