@@ -143,4 +143,6 @@ converter.register_structure_hook_func(is_dataclass, dataclass_hook)
 
 @converter.register_structure_hook
 def uuid_hook(x: str, _) -> UUID:
+    if isinstance(x, UUID):
+        return x
     return UUID(x)
