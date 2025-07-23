@@ -1,3 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
+import api from "./api";
+
 export default function App() {
-  return <h1>Works</h1>;
+  const query = useQuery({
+    queryKey: ["spaces"],
+    queryFn: () => api.indexSpacesGet(),
+  });
+
+  return (
+    <div>
+      <pre>{JSON.stringify(query.data)}</pre>
+    </div>
+  );
 }
