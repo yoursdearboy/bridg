@@ -2,6 +2,7 @@ import api from "@/api";
 import {
   Alert,
   Button,
+  Card,
   Flex,
   MultiSelect,
   Select,
@@ -74,60 +75,73 @@ function RouteComponent() {
     <>
       {mutation.isError && <Alert color="red">{mutation.error.message}</Alert>}
       {!mutation.isPending && (
-        <form onSubmit={form.onSubmit((x) => mutation.mutate(x))}>
-          <Flex gap="md">
-            <TextInput
-              label="Family"
-              {...form.getInputProps("performingBiologicEntity.name.family")}
-            />
-            <TextInput
-              label="Given"
-              {...form.getInputProps("performingBiologicEntity.name.given")}
-            />
-            <TextInput
-              label="Patronymic"
-              {...form.getInputProps(
-                "performingBiologicEntity.name.patronymic"
-              )}
-            />
-          </Flex>
+        <form
+          onSubmit={form.onSubmit((x) => mutation.mutate(x))}
+          style={{ maxWidth: 600 }}
+        >
+          <Stack gap="md">
+            <Card withBorder>
+              <Flex gap="md">
+                <TextInput
+                  label="Family"
+                  {...form.getInputProps(
+                    "performingBiologicEntity.name.family"
+                  )}
+                />
+                <TextInput
+                  label="Given"
+                  {...form.getInputProps("performingBiologicEntity.name.given")}
+                />
+                <TextInput
+                  label="Patronymic"
+                  {...form.getInputProps(
+                    "performingBiologicEntity.name.patronymic"
+                  )}
+                />
+              </Flex>
+            </Card>
 
-          <Stack align="flex-start" gap="md">
-            <Select
-              label="Administrative gender"
-              data={genders}
-              {...form.getInputProps(
-                "performingBiologicEntity.administrativeGenderCode"
-              )}
-            />
-            <DateInput
-              label="Birth date"
-              valueFormat="YYYY-MM-DD"
-              {...form.getInputProps("performingBiologicEntity.birthDate")}
-            />
-          </Stack>
+            <Card withBorder>
+              <Stack align="flex-start" gap="md">
+                <Select
+                  label="Administrative gender"
+                  data={genders}
+                  {...form.getInputProps(
+                    "performingBiologicEntity.administrativeGenderCode"
+                  )}
+                />
+                <DateInput
+                  label="Birth date"
+                  valueFormat="YYYY-MM-DD"
+                  {...form.getInputProps("performingBiologicEntity.birthDate")}
+                />
+              </Stack>
+            </Card>
 
-          <Stack align="flex-start" gap="md">
-            <Select
-              label="Status"
-              data={statuses}
-              {...form.getInputProps("status")}
-            />
-            <DateInput
-              label="Status date"
-              valueFormat="YYYY-MM-DD"
-              {...form.getInputProps("statusDate")}
-            />
-            <MultiSelect
-              label="Study sites"
-              data={sites.map((s) => ({
-                value: s.id,
-                label: s.executingStudySite,
-              }))}
-              {...form.getInputProps(
-                "assignedStudySiteProtocolVersionRelationship"
-              )}
-            />
+            <Card withBorder>
+              <Stack align="flex-start" gap="md">
+                <Select
+                  label="Status"
+                  data={statuses}
+                  {...form.getInputProps("status")}
+                />
+                <DateInput
+                  label="Status date"
+                  valueFormat="YYYY-MM-DD"
+                  {...form.getInputProps("statusDate")}
+                />
+                <MultiSelect
+                  label="Study sites"
+                  data={sites.map((s) => ({
+                    value: s.id,
+                    label: s.executingStudySite,
+                  }))}
+                  {...form.getInputProps(
+                    "assignedStudySiteProtocolVersionRelationship"
+                  )}
+                />
+              </Stack>
+            </Card>
             <Button type="submit">Submit</Button>
           </Stack>
         </form>
