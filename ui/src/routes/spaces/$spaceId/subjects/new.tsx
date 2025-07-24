@@ -1,5 +1,12 @@
 import api from "@/api";
-import { Button, MultiSelect, Select, Stack } from "@mantine/core";
+import {
+  Button,
+  Flex,
+  MultiSelect,
+  Select,
+  Stack,
+  TextInput,
+} from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { createFileRoute } from "@tanstack/react-router";
@@ -27,7 +34,7 @@ function RouteComponent() {
     performingBiologicEntity: {
       administrativeGenderCode: null,
       birthDate: null,
-      name: [],
+      name: {},
     },
     status: Status.Candidate,
     statusDate: new Date(),
@@ -47,16 +54,33 @@ function RouteComponent() {
         console.log(values);
       })}
     >
+      <Flex gap="md">
+        <TextInput
+          label="Family"
+          {...form.getInputProps("performingBiologicEntity.name.family")}
+        />
+        <TextInput
+          label="Given"
+          {...form.getInputProps("performingBiologicEntity.name.given")}
+        />
+        <TextInput
+          label="Patronymic"
+          {...form.getInputProps("performingBiologicEntity.name.patronymic")}
+        />
+      </Flex>
+
       <Stack align="flex-start" gap="md">
         <Select
           label="Administrative gender"
           data={genders}
-          {...form.getInputProps("administrativeGenderCode")}
+          {...form.getInputProps(
+            "performingBiologicEntity.administrativeGenderCode"
+          )}
         />
         <DateInput
           label="Birth date"
           valueFormat="YYYY-MM-DD"
-          {...form.getInputProps("birthDate")}
+          {...form.getInputProps("performingBiologicEntity.birthDate")}
         />
       </Stack>
 
