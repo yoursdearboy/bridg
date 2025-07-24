@@ -84,7 +84,14 @@ class NewStudySubject(BaseModel[bridg.StudySubject]):
         death_date: Optional[date] = None
         death_date_estimated_indicator: Optional[bool] = None
         death_indicator: Optional[bool] = None
-        name: List[EntityName]
+        name: Optional[EntityName] = None
+
+        def model_dump_sa(self) -> bridg.Person:
+            data = dict(self)
+            name = data.pop("name")
+            name = [name] if name is not None else []
+            data["name"] = name
+            return super().model_dump_sa(data)
 
     status: Optional[bridg.Status] = None
     status_date: Optional[datetime] = None

@@ -36,9 +36,9 @@ Content-Type: application/json
     "death_date": null,
     "death_date_estimated_indicator": false,
     "death_indicator": false,
-    "name": [
-      { "use": "official", "family": "Test", "given": "Dude" }
-    ]
+    "name": {
+      "use": "official", "family": "Test", "given": "Dude"
+    }
   },
   "assigned_study_site_protocol_version_relationship": [
     "6a8e6e2b-9537-408f-bd92-a5b83ad2e750"

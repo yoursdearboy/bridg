@@ -72,10 +72,10 @@ export interface PersonInput {
     deathIndicator?: boolean | null;
     /**
      * 
-     * @type {Array<EntityName>}
+     * @type {EntityName}
      * @memberof PersonInput
      */
-    name: Array<EntityName>;
+    name?: EntityName | null;
 }
 
 
@@ -84,7 +84,6 @@ export interface PersonInput {
  * Check if a given object implements the PersonInput interface.
  */
 export function instanceOfPersonInput(value: object): value is PersonInput {
-    if (!('name' in value) || value['name'] === undefined) return false;
     return true;
 }
 
@@ -104,7 +103,7 @@ export function PersonInputFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'deathDate': json['death_date'] == null ? undefined : (new Date(json['death_date'])),
         'deathDateEstimatedIndicator': json['death_date_estimated_indicator'] == null ? undefined : json['death_date_estimated_indicator'],
         'deathIndicator': json['death_indicator'] == null ? undefined : json['death_indicator'],
-        'name': ((json['name'] as Array<any>).map(EntityNameFromJSON)),
+        'name': json['name'] == null ? undefined : EntityNameFromJSON(json['name']),
     };
 }
 
@@ -125,7 +124,7 @@ export function PersonInputToJSONTyped(value?: PersonInput | null, ignoreDiscrim
         'death_date': value['deathDate'] === null ? null : ((value['deathDate'] as any)?.toISOString().substring(0,10)),
         'death_date_estimated_indicator': value['deathDateEstimatedIndicator'],
         'death_indicator': value['deathIndicator'],
-        'name': ((value['name'] as Array<any>).map(EntityNameToJSON)),
+        'name': EntityNameToJSON(value['name']),
     };
 }
 
