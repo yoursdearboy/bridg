@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/dates": "^8.2.1",
+    "@mantine/form": "^8.2.1",
     "@tanstack/react-form": "^1.14.2",
     "@tanstack/react-query": "^5.83.0",
     "@tanstack/react-router": "^1.129.8",
+    "dayjs": "^1.11.13",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
