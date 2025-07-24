@@ -1,6 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Route as newRoute } from "./new";
 import api from "@/api";
+import ButtonLink from "@/components/ButtonLink";
+import { createFileRoute } from "@tanstack/react-router";
+import { Route as newRoute } from "./new";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/")({
   loader: ({ params }) => api.subjects.indexSpacesSpaceIdSubjectsGet(params),
@@ -11,9 +12,9 @@ function RouteComponent() {
   const subjects = Route.useLoaderData();
   return (
     <div>
-      <Link from={Route.to} to={newRoute.to}>
+      <ButtonLink from={Route.to} to={newRoute.to}>
         New
-      </Link>
+      </ButtonLink>
       <ul>
         {subjects.map((s) => (
           <li>{s.performingBiologicEntity?.primaryName}</li>
