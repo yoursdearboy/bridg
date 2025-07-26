@@ -1,4 +1,11 @@
-import { AppShell, Button, Flex, Menu, Title } from "@mantine/core";
+import {
+  AppShell,
+  Button,
+  Flex,
+  Menu,
+  Title,
+  useMantineTheme,
+} from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import api from "@/api";
@@ -30,10 +37,13 @@ function Nav() {
 }
 
 function Header() {
+  const theme = useMantineTheme();
   return (
     <Flex px="lg" py="4" direction="row" gap="lg">
-      <Link style={{ textDecoration: "none", color: "black" }} to="/">
-        <Title size="h3">BRIDG</Title>
+      <Link style={{ textDecoration: "none" }} to="/">
+        <Title size="h3" c={theme.primaryColor}>
+          BRIDG
+        </Title>
       </Link>
       <Nav />
     </Flex>

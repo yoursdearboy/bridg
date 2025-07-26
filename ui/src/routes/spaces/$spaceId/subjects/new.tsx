@@ -1,6 +1,7 @@
 import api from "@/api";
 import {
   Alert,
+  Box,
   Button,
   Card,
   Flex,
@@ -80,7 +81,7 @@ function RouteComponent() {
           style={{ maxWidth: 600 }}
         >
           <Stack gap="md">
-            <Card withBorder>
+            <Card>
               <Flex gap="md">
                 <TextInput
                   label="Family"
@@ -101,7 +102,7 @@ function RouteComponent() {
               </Flex>
             </Card>
 
-            <Card withBorder>
+            <Card>
               <Stack align="flex-start" gap="md">
                 <Select
                   label="Administrative gender"
@@ -118,7 +119,7 @@ function RouteComponent() {
               </Stack>
             </Card>
 
-            <Card withBorder>
+            <Card>
               <Stack align="flex-start" gap="md">
                 <Select
                   label="Status"
@@ -142,7 +143,9 @@ function RouteComponent() {
                 />
               </Stack>
             </Card>
-            <Button type="submit">Submit</Button>
+            <Box>
+              <Button type="submit">Submit</Button>
+            </Box>
           </Stack>
         </form>
       )}
