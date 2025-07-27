@@ -2,6 +2,8 @@ import { Breadcrumbs as MantineBreadcrumbs, Anchor, Text } from "@mantine/core";
 import { Link, useRouterState } from "@tanstack/react-router";
 
 export function Breadcrumbs() {
+  // Replace with router context
+  // see bottom https://tanstack.com/router/v1/docs/framework/react/guide/router-context
   const routerState = useRouterState();
   const currentPath = routerState.location.pathname;
 

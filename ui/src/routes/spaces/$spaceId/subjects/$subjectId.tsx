@@ -9,6 +9,9 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
   component: RouteComponent,
   loader: ({ params }) =>
     api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet(params),
+  beforeLoad: () => ({
+    title: "Subject info",
+  }),
 });
 
 function RouteComponent() {
@@ -16,6 +19,7 @@ function RouteComponent() {
 
   return (
     <Stack gap="md">
+      {/* FIXME: Move to layout, i.e. __root.tsx Layout component */}
       <Breadcrumbs />
       <Group justify="space-between">
         <Title order={2}>Patient Information</Title>
