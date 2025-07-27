@@ -1,50 +1,25 @@
-import { Card, Stack, Text, Group, Title, Button } from "@mantine/core";
-import dayjs from "dayjs";
-import {
-  createFileRoute,
-  useLocation,
-  useNavigate,
-} from "@tanstack/react-router";
+import api from "@/api";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import ButtonLink from "@/components/ButtonLink";
+import { Card, Group, Stack, Text, Title } from "@mantine/core";
+import { createFileRoute } from "@tanstack/react-router";
+import dayjs from "dayjs";
 
-export const Route = createFileRoute("/spaces/$spaceId/subjects/info")({
+export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
   component: RouteComponent,
+  loader: ({ params }) =>
+    api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet(params),
 });
 
 function RouteComponent() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { spaceId } = Route.useParams();
-
-  const subject = location.state?.subject;
-
-  if (!subject) {
-    return (
-      <Stack>
-        <Text>Patient data not found</Text>
-        <Button
-          onClick={() =>
-            navigate({ to: "/spaces/$spaceId/subjects", params: { spaceId } })
-          }
-        >
-          Back to Patients List
-        </Button>
-      </Stack>
-    );
-  }
+  const subject = Route.useLoaderData();
 
   return (
     <Stack gap="md">
       <Breadcrumbs />
       <Group justify="space-between">
         <Title order={2}>Patient Information</Title>
-        <Button
-          onClick={() =>
-            navigate({ to: "/spaces/$spaceId/subjects", params: { spaceId } })
-          }
-        >
-          Back to List
-        </Button>
+        <ButtonLink to="..">Back to List</ButtonLink>
       </Group>
 
       <Card withBorder shadow="sm" padding="lg">
