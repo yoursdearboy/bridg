@@ -17,12 +17,12 @@ import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AdministrativeGender, type NewStudySubject, Status } from "bridg-ts";
 import dayjs from "dayjs";
-import { useState,useMemo} from "react";
+import { useState, useMemo } from "react";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
   loader: async ({ params }) => ({
     sites: await api.sites.indexSpacesSpaceIdSitesGet(params),
-    subjects: await api.subjects.indexSpacesSpaceIdSubjectsGet(params) // Добавляем загрузку субъектов
+    subjects: await api.subjects.indexSpacesSpaceIdSubjectsGet(params), // Добавляем загрузку субъектов
   }),
   component: RouteComponent,
 });
@@ -32,31 +32,27 @@ function RouteComponent() {
   const { spaceId } = Route.useParams();
 
   const { sites, subjects } = Route.useLoaderData();
-  const [searchQuery, setSearchQuery] = useState('');
-
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [isSearchActive, setIsSearchActive] = useState(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.currentTarget.value);
     setIsSearchActive(e.currentTarget.value.length > 0);
-  }
+  };
 
-const filteredSubjects = useMemo(() => {
+  const filteredSubjects = useMemo(() => {
     if (!searchQuery) return subjects;
-    
+
     return subjects.filter((subject) => {
       const searchLower = searchQuery.toLowerCase();
-      const primaryName = subject.performingBiologicEntity?.primaryName?.toLowerCase() || '';
-     
-      return (
-        primaryName.includes(searchLower) 
-       
-           );
+      const primaryName =
+        subject.performingBiologicEntity?.primaryName?.toLowerCase() || "";
+
+      return primaryName.includes(searchLower);
     });
   }, [subjects, searchQuery]);
 
-  
   const genders = Object.entries(AdministrativeGender).map(([key, value]) => ({
     label: key,
     value,
@@ -106,7 +102,9 @@ const filteredSubjects = useMemo(() => {
       {mutation.isError && <Alert color="red">{mutation.error.message}</Alert>}
       <Card withBorder mb="md">
         <Group justify="space-between" mb="md">
-          <Text fw={500} size="lg">Existing Patients</Text>
+          <Text fw={500} size="lg">
+            Existing Patients
+          </Text>
           <TextInput
             placeholder="Search patients..."
             value={searchQuery}
@@ -114,9 +112,9 @@ const filteredSubjects = useMemo(() => {
             style={{ width: 300 }}
           />
         </Group>
-        
-        {isSearchActive && ( // Показываем результаты только при активном поиске
-          filteredSubjects.length > 0 ? (
+
+        {isSearchActive && // Показываем результаты только при активном поиске
+          (filteredSubjects.length > 0 ? (
             <Stack gap="xs">
               {filteredSubjects.map((subject) => (
                 <Card withBorder key={subject.id} padding="sm">
@@ -124,10 +122,11 @@ const filteredSubjects = useMemo(() => {
                     {subject.performingBiologicEntity?.primaryName?.trim()}
                   </Text>
                   <Text size="sm" c="dimmed">
-                    {subject.performingBiologicEntity?.administrativeGenderCode && 
-                     `${subject.performingBiologicEntity.administrativeGenderCode}, `}
-                    {subject.performingBiologicEntity?.birthDate && 
-                     `Born: ${dayjs(subject.performingBiologicEntity.birthDate).format('YYYY-MM-DD')}`}
+                    {subject.performingBiologicEntity
+                      ?.administrativeGenderCode &&
+                      `${subject.performingBiologicEntity.administrativeGenderCode}, `}
+                    {subject.performingBiologicEntity?.birthDate &&
+                      `Born: ${dayjs(subject.performingBiologicEntity.birthDate).format("YYYY-MM-DD")}`}
                   </Text>
                 </Card>
               ))}
@@ -136,11 +135,10 @@ const filteredSubjects = useMemo(() => {
             <Text c="dimmed" ta="center" py="md">
               No matching patients found
             </Text>
-          )
-        )}
+          ))}
       </Card>
-    
-     {!mutation.isPending && (
+
+      {!mutation.isPending && (
         <form
           onSubmit={form.onSubmit((x) => mutation.mutate(x))}
           style={{ maxWidth: 600 }}
