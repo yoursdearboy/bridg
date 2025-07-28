@@ -17,6 +17,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AdministrativeGender, type NewStudySubject, Status } from "bridg-ts";
 import dayjs from "dayjs";
+import debounce from "@/debounce";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
   loader: async ({ params }) => ({
@@ -37,7 +38,6 @@ function RouteComponent() {
     label: key,
     value,
   }));
-  // FIXME: Debounce lookup
   const lookup = useQuery({
     queryKey: [],
     queryFn: () =>
@@ -46,6 +46,7 @@ function RouteComponent() {
         lookupStudySubject: form.getValues(),
       }),
   });
+  const doLookup = debounce(lookup.refetch, 1000);
   const initialValues: NewStudySubject = {
     performingBiologicEntity: {
       administrativeGenderCode: null,
@@ -63,7 +64,7 @@ function RouteComponent() {
   const form = useForm<NewStudySubject>({
     mode: "uncontrolled",
     initialValues,
-    onValuesChange: () => lookup.refetch(),
+    onValuesChange: () => doLookup(),
     transformValues: (values: NewStudySubject) => {
       if (values?.performingBiologicEntity?.birthDate) {
         values.performingBiologicEntity.birthDate = dayjs(
