@@ -37,6 +37,7 @@ function RouteComponent() {
     label: key,
     value,
   }));
+  // FIXME: Debounce lookup
   const lookup = useQuery({
     queryKey: [],
     queryFn: () =>
