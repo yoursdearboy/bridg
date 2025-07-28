@@ -20,13 +20,13 @@ import {
     StatusToJSON,
     StatusToJSONTyped,
 } from './Status';
-import type { PersonInput } from './PersonInput';
+import type { ApiSubjectNewStudySubjectPerson } from './ApiSubjectNewStudySubjectPerson';
 import {
-    PersonInputFromJSON,
-    PersonInputFromJSONTyped,
-    PersonInputToJSON,
-    PersonInputToJSONTyped,
-} from './PersonInput';
+    ApiSubjectNewStudySubjectPersonFromJSON,
+    ApiSubjectNewStudySubjectPersonFromJSONTyped,
+    ApiSubjectNewStudySubjectPersonToJSON,
+    ApiSubjectNewStudySubjectPersonToJSONTyped,
+} from './ApiSubjectNewStudySubjectPerson';
 
 /**
  * 
@@ -48,10 +48,10 @@ export interface NewStudySubject {
     statusDate?: Date | null;
     /**
      * 
-     * @type {PersonInput}
+     * @type {ApiSubjectNewStudySubjectPerson}
      * @memberof NewStudySubject
      */
-    performingBiologicEntity?: PersonInput | null;
+    performingBiologicEntity?: ApiSubjectNewStudySubjectPerson | null;
     /**
      * 
      * @type {Array<string>}
@@ -82,7 +82,7 @@ export function NewStudySubjectFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'status': json['status'] == null ? undefined : StatusFromJSON(json['status']),
         'statusDate': json['status_date'] == null ? undefined : (new Date(json['status_date'])),
-        'performingBiologicEntity': json['performing_biologic_entity'] == null ? undefined : PersonInputFromJSON(json['performing_biologic_entity']),
+        'performingBiologicEntity': json['performing_biologic_entity'] == null ? undefined : ApiSubjectNewStudySubjectPersonFromJSON(json['performing_biologic_entity']),
         'assignedStudySiteProtocolVersionRelationship': json['assigned_study_site_protocol_version_relationship'],
     };
 }
@@ -100,7 +100,7 @@ export function NewStudySubjectToJSONTyped(value?: NewStudySubject | null, ignor
         
         'status': StatusToJSON(value['status']),
         'status_date': value['statusDate'] === null ? null : ((value['statusDate'] as any)?.toISOString()),
-        'performing_biologic_entity': PersonInputToJSON(value['performingBiologicEntity']),
+        'performing_biologic_entity': ApiSubjectNewStudySubjectPersonToJSON(value['performingBiologicEntity']),
         'assigned_study_site_protocol_version_relationship': value['assignedStudySiteProtocolVersionRelationship'],
     };
 }

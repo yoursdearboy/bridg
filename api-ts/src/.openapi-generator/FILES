@@ -4,11 +4,14 @@ apis/SubjectsApi.ts
 apis/index.ts
 index.ts
 models/AdministrativeGender.ts
+models/ApiSubjectLookupStudySubjectPerson.ts
+models/ApiSubjectNewStudySubjectPerson.ts
 models/EntityName.ts
+models/FoundStudySubject.ts
 models/HTTPValidationError.ts
+models/LookupStudySubject.ts
 models/NewStudySubject.ts
 models/Organization.ts
-models/PersonInput.ts
 models/PersonOutput.ts
 models/Status.ts
 models/StudyProtocolVersion.ts

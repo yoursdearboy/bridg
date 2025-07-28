@@ -1,11 +1,14 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './AdministrativeGender';
+export * from './ApiSubjectLookupStudySubjectPerson';
+export * from './ApiSubjectNewStudySubjectPerson';
 export * from './EntityName';
+export * from './FoundStudySubject';
 export * from './HTTPValidationError';
+export * from './LookupStudySubject';
 export * from './NewStudySubject';
 export * from './Organization';
-export * from './PersonInput';
 export * from './PersonOutput';
 export * from './Status';
 export * from './StudyProtocolVersion';

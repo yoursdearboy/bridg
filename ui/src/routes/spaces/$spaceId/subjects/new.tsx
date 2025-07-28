@@ -8,11 +8,12 @@ import {
   MultiSelect,
   Select,
   Stack,
+  Table,
   TextInput,
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { hasLength, useForm } from "@mantine/form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AdministrativeGender, type NewStudySubject, Status } from "bridg-ts";
 import dayjs from "dayjs";
@@ -36,11 +37,23 @@ function RouteComponent() {
     label: key,
     value,
   }));
+  const lookup = useQuery({
+    queryKey: [],
+    queryFn: () =>
+      api.subjects.lookupSpacesSpaceIdSubjectsLookupPost({
+        spaceId,
+        lookupStudySubject: form.getValues(),
+      }),
+  });
   const initialValues: NewStudySubject = {
     performingBiologicEntity: {
       administrativeGenderCode: null,
       birthDate: null,
-      name: {},
+      name: {
+        family: "",
+        given: "",
+        patronymic: "",
+      },
     },
     status: Status.Candidate,
     statusDate: new Date(),
@@ -49,6 +62,7 @@ function RouteComponent() {
   const form = useForm<NewStudySubject>({
     mode: "uncontrolled",
     initialValues,
+    onValuesChange: () => lookup.refetch(),
     transformValues: (values: NewStudySubject) => {
       if (values?.performingBiologicEntity?.birthDate) {
         values.performingBiologicEntity.birthDate = dayjs(
@@ -78,71 +92,93 @@ function RouteComponent() {
       {!mutation.isPending && (
         <form
           onSubmit={form.onSubmit((x) => mutation.mutate(x))}
-          style={{ maxWidth: 600 }}
+          style={{ maxWidth: 800 }}
         >
           <Stack gap="md">
-            <Card>
-              <Flex gap="md">
-                <TextInput
-                  label="Family"
-                  {...form.getInputProps(
-                    "performingBiologicEntity.name.family"
-                  )}
-                />
-                <TextInput
-                  label="Given"
-                  {...form.getInputProps("performingBiologicEntity.name.given")}
-                />
-                <TextInput
-                  label="Patronymic"
-                  {...form.getInputProps(
-                    "performingBiologicEntity.name.patronymic"
-                  )}
-                />
-              </Flex>
-            </Card>
+            <Flex gap="md">
+              <Stack gap="md">
+                <Card>
+                  <Flex gap="md">
+                    <TextInput
+                      label="Family"
+                      {...form.getInputProps(
+                        "performingBiologicEntity.name.family"
+                      )}
+                    />
+                    <TextInput
+                      label="Given"
+                      {...form.getInputProps(
+                        "performingBiologicEntity.name.given"
+                      )}
+                    />
+                    <TextInput
+                      label="Patronymic"
+                      {...form.getInputProps(
+                        "performingBiologicEntity.name.patronymic"
+                      )}
+                    />
+                  </Flex>
+                </Card>
 
-            <Card>
-              <Stack align="flex-start" gap="md">
-                <Select
-                  label="Administrative gender"
-                  data={genders}
-                  {...form.getInputProps(
-                    "performingBiologicEntity.administrativeGenderCode"
-                  )}
-                />
-                <DateInput
-                  label="Birth date"
-                  valueFormat="YYYY-MM-DD"
-                  {...form.getInputProps("performingBiologicEntity.birthDate")}
-                />
-              </Stack>
-            </Card>
+                <Card>
+                  <Stack align="flex-start" gap="md">
+                    <Select
+                      label="Administrative gender"
+                      data={genders}
+                      {...form.getInputProps(
+                        "performingBiologicEntity.administrativeGenderCode"
+                      )}
+                    />
+                    <DateInput
+                      label="Birth date"
+                      valueFormat="YYYY-MM-DD"
+                      {...form.getInputProps(
+                        "performingBiologicEntity.birthDate"
+                      )}
+                    />
+                  </Stack>
+                </Card>
 
-            <Card>
-              <Stack align="flex-start" gap="md">
-                <Select
-                  label="Status"
-                  data={statuses}
-                  {...form.getInputProps("status")}
-                />
-                <DateInput
-                  label="Status date"
-                  valueFormat="YYYY-MM-DD"
-                  {...form.getInputProps("statusDate")}
-                />
-                <MultiSelect
-                  label="Study sites"
-                  data={sites.map((s) => ({
-                    value: s.id,
-                    label: s.executingStudySite,
-                  }))}
-                  {...form.getInputProps(
-                    "assignedStudySiteProtocolVersionRelationship"
-                  )}
-                />
+                <Card>
+                  <Stack align="flex-start" gap="md">
+                    <Select
+                      label="Status"
+                      data={statuses}
+                      {...form.getInputProps("status")}
+                    />
+                    <DateInput
+                      label="Status date"
+                      valueFormat="YYYY-MM-DD"
+                      {...form.getInputProps("statusDate")}
+                    />
+                    <MultiSelect
+                      label="Study sites"
+                      data={sites.map((s) => ({
+                        value: s.id,
+                        label: s.executingStudySite,
+                      }))}
+                      {...form.getInputProps(
+                        "assignedStudySiteProtocolVersionRelationship"
+                      )}
+                    />
+                  </Stack>
+                </Card>
               </Stack>
-            </Card>
+              <Card style={{ minWidth: 300 }}>
+                <Table>
+                  <Table.Tbody>
+                    {lookup.data &&
+                      lookup.data.map((subject) => (
+                        <Table.Tr key={subject.performingBiologicEntityId}>
+                          <Table.Td>
+                            {subject.performingBiologicEntity}
+                          </Table.Td>
+                        </Table.Tr>
+                      ))}
+                  </Table.Tbody>
+                </Table>
+              </Card>
+            </Flex>
             <Box>
               <Button type="submit">Submit</Button>
             </Box>

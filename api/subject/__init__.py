@@ -116,4 +116,35 @@ def create(space_id: UUID, data: NewStudySubject, db: Session = Depends(get_db))
     return obj
 
 
+class LookupStudySubject(BaseModel):
+    class Person(BaseModel):
+        class EntityName(BaseModel):
+            use: Optional[str] = None
+            family: Optional[str] = None
+            given: Optional[str] = None
+            middle: Optional[str] = None
+            patronymic: Optional[str] = None
+            prefix: Optional[str] = None
+            suffix: Optional[str] = None
+
+        name: Optional[EntityName] = None
+
+    performing_biologic_entity: Optional[Person] = None
+
+
+class FoundStudySubject(BaseModel):
+    performing_biologic_entity: Optional[str] = None
+    performing_biologic_entity_id: Optional[UUID] = None
+
+
+@router.post("/lookup", response_model=List[FoundStudySubject])
+def lookup(space_id: UUID, data: LookupStudySubject, db: Session = Depends(get_db)):
+    q = db.query(bridg.BiologicEntity)
+    if (pbe := data.performing_biologic_entity) and (n := pbe.name):
+        q = q.filter(bridg.BiologicEntity.name.any(bridg.EntityName.family.ilike(f"%{n.family}%")))
+        q = q.limit(10)
+        return [FoundStudySubject(performing_biologic_entity=str(be), performing_biologic_entity_id=be.id) for be in q]
+    raise RuntimeError("Unknown performing entity")
+
+
 openapi_tag = [{"name": "subjects"}]
