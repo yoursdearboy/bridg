@@ -3,12 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import api from "@/api";
 import MenuItemLink from "@/components/MenuItemLink";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 function Nav() {
   const query = useQuery({
     queryKey: ["spaces"],
     queryFn: () => api.spaces.indexSpacesGet(),
   });
+  
   return (
     <Menu>
       <Menu.Target>
@@ -17,6 +19,7 @@ function Nav() {
       <Menu.Dropdown>
         {query.data?.map((s) => (
           <MenuItemLink
+            key={s.id}
             to="/spaces/$spaceId/subjects"
             params={{ spaceId: s.id }}
             className="[&.active]:font-bold"
@@ -31,7 +34,7 @@ function Nav() {
 
 function Header() {
   return (
-    <Flex px="lg" py="4" direction="row" gap="lg">
+    <Flex px="lg" py="4" direction="row" gap="lg" align="center">
       <Link style={{ textDecoration: "none", color: "black" }} to="/">
         <Title size="h3">BRIDG</Title>
       </Link>
@@ -42,11 +45,12 @@ function Header() {
 
 function Layout() {
   return (
-    <AppShell padding="md" header={{ height: 40 }}>
+    <AppShell padding="md" header={{ height: 60 }}>
       <AppShell.Header>
         <Header />
       </AppShell.Header>
       <AppShell.Main>
+        <Breadcrumbs />
         <Outlet />
       </AppShell.Main>
     </AppShell>
@@ -55,4 +59,7 @@ function Layout() {
 
 export const Route = createRootRoute({
   component: Layout,
+  beforeLoad: () => ({
+    breadcrumb: 'Spaces',
+  }),
 });

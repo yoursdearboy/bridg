@@ -1,53 +1,35 @@
 import { Breadcrumbs as MantineBreadcrumbs, Anchor, Text } from "@mantine/core";
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useMatches } from "@tanstack/react-router";
 
 export function Breadcrumbs() {
-  // Replace with router context
-  // see bottom https://tanstack.com/router/v1/docs/framework/react/guide/router-context
-  const routerState = useRouterState();
-  const currentPath = routerState.location.pathname;
+  const matches = useMatches();
 
-  const getBreadcrumbItems = () => {
-    const items = [{ title: "Home", path: "/", show: true }];
+  const crumbs = matches
+    .filter((match) => match.context?.breadcrumb)
+    .map((match, index, all) => {
+      const title =
+        typeof match.context.breadcrumb === "function"
+          ? match.context.breadcrumb(match.params)
+          : match.context.breadcrumb;
 
-    if (currentPath.includes("/spaces/") && currentPath.includes("/subjects")) {
-      // Страница списка пациентов
-      if (!currentPath.endsWith("/info")) {
-        items.push(
-          { title: "Spaces", path: "/spaces", show: false },
-          { title: "Patients", path: currentPath, show: true }
-        );
-      }
-      // Страница информации о пациенте
-      else {
-        items.push(
-          { title: "Spaces", path: "/spaces", show: false },
-          {
-            title: "Patients",
-            path: currentPath.replace("/info", ""),
-            show: true,
-          },
-          { title: "Patients info", path: currentPath, show: true }
-        );
-      }
-    }
-
-    return items.filter((item) => item.show);
-  };
-
-  const items = getBreadcrumbItems();
+      return {
+        title,
+        path: match.pathname,
+        isCurrent: index === all.length - 1,
+      };
+    });
 
   return (
-    <MantineBreadcrumbs separator="→" mb="md">
-      {items.map((item, index) =>
-        index < items.length - 1 ? (
-          <Anchor component={Link} to={item.path} key={index} size="sm">
-            {item.title}
-          </Anchor>
-        ) : (
+    <MantineBreadcrumbs separator="→" mb="md" px="md">
+      {crumbs.map((crumb, index) =>
+        crumb.isCurrent ? (
           <Text c="dimmed" size="sm" key={index}>
-            {item.title}
+            {crumb.title}
           </Text>
+        ) : (
+          <Anchor component={Link} to={crumb.path} key={index} size="sm">
+            {crumb.title}
+          </Anchor>
         )
       )}
     </MantineBreadcrumbs>

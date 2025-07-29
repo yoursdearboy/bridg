@@ -16,12 +16,22 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AdministrativeGender, type NewStudySubject, Status } from "bridg-ts";
 import dayjs from "dayjs";
 
-export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
+export const Route = createFileRoute("/spaces/:$spaceId/subjects/new")({
   loader: async ({ params }) => ({
     sites: await api.sites.indexSpacesSpaceIdSitesGet(params),
   }),
+    beforeLoad: () => ({
+    breadcrumb: "New", 
+  }),
   component: RouteComponent,
 });
+
+
+
+
+
+
+
 
 function RouteComponent() {
   const navigate = useNavigate();
