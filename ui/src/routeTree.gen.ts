@@ -10,59 +10,88 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SpacesSpaceIdSubjectsRouteRouteImport } from './routes/spaces/$spaceId/subjects/route'
 import { Route as SpacesSpaceIdSubjectsIndexRouteImport } from './routes/spaces/$spaceId/subjects/index'
 import { Route as SpacesSpaceIdSubjectsNewRouteImport } from './routes/spaces/$spaceId/subjects/new'
+import { Route as SpacesSpaceIdSubjectsSubjectIdRouteImport } from './routes/spaces/$spaceId/subjects/$subjectId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SpacesSpaceIdSubjectsRouteRoute =
+  SpacesSpaceIdSubjectsRouteRouteImport.update({
+    id: '/spaces/$spaceId/subjects',
+    path: '/spaces/$spaceId/subjects',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SpacesSpaceIdSubjectsIndexRoute =
   SpacesSpaceIdSubjectsIndexRouteImport.update({
-    id: '/spaces/$spaceId/subjects/',
-    path: '/spaces/$spaceId/subjects/',
-    getParentRoute: () => rootRouteImport,
+    id: '/',
+    path: '/',
+    getParentRoute: () => SpacesSpaceIdSubjectsRouteRoute,
   } as any)
 const SpacesSpaceIdSubjectsNewRoute =
   SpacesSpaceIdSubjectsNewRouteImport.update({
-    id: '/spaces/$spaceId/subjects/new',
-    path: '/spaces/$spaceId/subjects/new',
-    getParentRoute: () => rootRouteImport,
+    id: '/new',
+    path: '/new',
+    getParentRoute: () => SpacesSpaceIdSubjectsRouteRoute,
+  } as any)
+const SpacesSpaceIdSubjectsSubjectIdRoute =
+  SpacesSpaceIdSubjectsSubjectIdRouteImport.update({
+    id: '/$subjectId',
+    path: '/$subjectId',
+    getParentRoute: () => SpacesSpaceIdSubjectsRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsRouteRouteWithChildren
+  '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRoute
   '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
-  '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsIndexRoute
+  '/spaces/$spaceId/subjects/': typeof SpacesSpaceIdSubjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRoute
   '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsRouteRouteWithChildren
+  '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRoute
   '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects/': typeof SpacesSpaceIdSubjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/spaces/$spaceId/subjects/new' | '/spaces/$spaceId/subjects'
+  fullPaths:
+    | '/'
+    | '/spaces/$spaceId/subjects'
+    | '/spaces/$spaceId/subjects/$subjectId'
+    | '/spaces/$spaceId/subjects/new'
+    | '/spaces/$spaceId/subjects/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/spaces/$spaceId/subjects/new' | '/spaces/$spaceId/subjects'
+  to:
+    | '/'
+    | '/spaces/$spaceId/subjects/$subjectId'
+    | '/spaces/$spaceId/subjects/new'
+    | '/spaces/$spaceId/subjects'
   id:
     | '__root__'
     | '/'
+    | '/spaces/$spaceId/subjects'
+    | '/spaces/$spaceId/subjects/$subjectId'
     | '/spaces/$spaceId/subjects/new'
     | '/spaces/$spaceId/subjects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  SpacesSpaceIdSubjectsNewRoute: typeof SpacesSpaceIdSubjectsNewRoute
-  SpacesSpaceIdSubjectsIndexRoute: typeof SpacesSpaceIdSubjectsIndexRoute
+  SpacesSpaceIdSubjectsRouteRoute: typeof SpacesSpaceIdSubjectsRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -74,27 +103,58 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/spaces/$spaceId/subjects/': {
-      id: '/spaces/$spaceId/subjects/'
+    '/spaces/$spaceId/subjects': {
+      id: '/spaces/$spaceId/subjects'
       path: '/spaces/$spaceId/subjects'
       fullPath: '/spaces/$spaceId/subjects'
-      preLoaderRoute: typeof SpacesSpaceIdSubjectsIndexRouteImport
+      preLoaderRoute: typeof SpacesSpaceIdSubjectsRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/spaces/$spaceId/subjects/': {
+      id: '/spaces/$spaceId/subjects/'
+      path: '/'
+      fullPath: '/spaces/$spaceId/subjects/'
+      preLoaderRoute: typeof SpacesSpaceIdSubjectsIndexRouteImport
+      parentRoute: typeof SpacesSpaceIdSubjectsRouteRoute
     }
     '/spaces/$spaceId/subjects/new': {
       id: '/spaces/$spaceId/subjects/new'
-      path: '/spaces/$spaceId/subjects/new'
+      path: '/new'
       fullPath: '/spaces/$spaceId/subjects/new'
       preLoaderRoute: typeof SpacesSpaceIdSubjectsNewRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof SpacesSpaceIdSubjectsRouteRoute
+    }
+    '/spaces/$spaceId/subjects/$subjectId': {
+      id: '/spaces/$spaceId/subjects/$subjectId'
+      path: '/$subjectId'
+      fullPath: '/spaces/$spaceId/subjects/$subjectId'
+      preLoaderRoute: typeof SpacesSpaceIdSubjectsSubjectIdRouteImport
+      parentRoute: typeof SpacesSpaceIdSubjectsRouteRoute
     }
   }
 }
 
+interface SpacesSpaceIdSubjectsRouteRouteChildren {
+  SpacesSpaceIdSubjectsSubjectIdRoute: typeof SpacesSpaceIdSubjectsSubjectIdRoute
+  SpacesSpaceIdSubjectsNewRoute: typeof SpacesSpaceIdSubjectsNewRoute
+  SpacesSpaceIdSubjectsIndexRoute: typeof SpacesSpaceIdSubjectsIndexRoute
+}
+
+const SpacesSpaceIdSubjectsRouteRouteChildren: SpacesSpaceIdSubjectsRouteRouteChildren =
+  {
+    SpacesSpaceIdSubjectsSubjectIdRoute: SpacesSpaceIdSubjectsSubjectIdRoute,
+    SpacesSpaceIdSubjectsNewRoute: SpacesSpaceIdSubjectsNewRoute,
+    SpacesSpaceIdSubjectsIndexRoute: SpacesSpaceIdSubjectsIndexRoute,
+  }
+
+const SpacesSpaceIdSubjectsRouteRouteWithChildren =
+  SpacesSpaceIdSubjectsRouteRoute._addFileChildren(
+    SpacesSpaceIdSubjectsRouteRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  SpacesSpaceIdSubjectsNewRoute: SpacesSpaceIdSubjectsNewRoute,
-  SpacesSpaceIdSubjectsIndexRoute: SpacesSpaceIdSubjectsIndexRoute,
+  SpacesSpaceIdSubjectsRouteRoute: SpacesSpaceIdSubjectsRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

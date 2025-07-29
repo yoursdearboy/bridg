@@ -23,6 +23,9 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
   loader: async ({ params }) => ({
     sites: await api.sites.indexSpacesSpaceIdSitesGet(params),
   }),
+  beforeLoad: () => ({
+    breadcrumb: "New subject",
+  }),
   component: RouteComponent,
 });
 
