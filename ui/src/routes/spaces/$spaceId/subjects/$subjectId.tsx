@@ -4,32 +4,25 @@ import ButtonLink from "@/components/ButtonLink";
 import { Card, Group, Stack, Text, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
-export const Route = createFileRoute('/spaces/:$spaceId/subjects/$subjectId/')({
-  component: RouteComponent,
-  loader: async ({ params }) => {
-    const data = await api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet(params);
-    return data;
-  },
-beforeLoad: ({ params }) => ({
-  breadcrumb: `(subj)Patient ${params.subjectId}`
-})
 
+export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
+  component: RouteComponent,
+  loader: ({ params }) =>
+    api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet(params),
+  beforeLoad: ({ params }) => ({
+    breadcrumb: `(subj)Patient ${params.subjectId}`,
+  }),
 });
 
-
-
-
 function RouteComponent() {
- const subject = Route.useLoaderData();
-  const { spaceId } = Route.useParams();
-
+  const subject = Route.useLoaderData();
 
   return (
     <Stack gap="md">
       {/* FIXME: Move to layout, i.e. __root.tsx Layout component */}
       <Breadcrumbs />
       <Group justify="space-between">
-        <Title order={2}>PATIENT Information</Title>
+        <Title order={2}>Patient Information</Title>
         <ButtonLink to="..">Back to List</ButtonLink>
       </Group>
 

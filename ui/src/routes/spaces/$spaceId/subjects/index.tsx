@@ -7,17 +7,13 @@ import dayjs from "dayjs";
 import { Route as infoRoute } from "./$subjectId";
 import { Route as newRoute } from "./new";
 
-export const Route = createFileRoute("/spaces/:$spaceId/subjects/")({
+export const Route = createFileRoute("/spaces/$spaceId/subjects/")({
   loader: ({ params }) => api.subjects.indexSpacesSpaceIdSubjectsGet(params),
-  beforeLoad: () => ({
-    breadcrumb: "Patients", 
-  }),
   component: RouteComponent,
+  beforeLoad: () => ({
+    breadcrumb: "Patients",
+  }),
 });
-
-
-
-
 
 function RouteComponent() {
   const subjects = Route.useLoaderData();
@@ -43,7 +39,7 @@ function RouteComponent() {
           to={infoRoute.to}
           params={{ spaceId, subjectId: subject.id }}
         >
-          View
+          Info
         </ButtonLink>
       </Table.Td>
     </Table.Tr>

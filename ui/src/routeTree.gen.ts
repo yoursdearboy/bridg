@@ -120,7 +120,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  
   SpacesSpaceIdSubjectsSubjectIdRoute: SpacesSpaceIdSubjectsSubjectIdRoute,
   SpacesSpaceIdSubjectsNewRoute: SpacesSpaceIdSubjectsNewRoute,
   SpacesSpaceIdSubjectsIndexRoute: SpacesSpaceIdSubjectsIndexRoute,

@@ -10,7 +10,6 @@ function Nav() {
     queryKey: ["spaces"],
     queryFn: () => api.spaces.indexSpacesGet(),
   });
-  
   return (
     <Menu>
       <Menu.Target>
@@ -60,6 +59,6 @@ function Layout() {
 export const Route = createRootRoute({
   component: Layout,
   beforeLoad: () => ({
-    breadcrumb: 'Spaces',
+    breadcrumb: "Spaces",
   }),
 });
