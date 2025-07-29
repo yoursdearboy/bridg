@@ -20,14 +20,12 @@ export function Breadcrumbs() {
     });
 
   return (
-    <MantineBreadcrumbs separator="→" mb="md" px="md">
+    <MantineBreadcrumbs separator="→" mb="md">
       {crumbs.map((crumb, index) =>
         crumb.isCurrent ? (
-          <Text c="dimmed" size="sm" key={index}>
-            {crumb.title}
-          </Text>
+          <Text key={index}>{crumb.title}</Text>
         ) : (
-          <Anchor component={Link} to={crumb.path} key={index} size="sm">
+          <Anchor component={Link} to={crumb.path} key={index}>
             {crumb.title}
           </Anchor>
         )

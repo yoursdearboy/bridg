@@ -33,7 +33,7 @@ function Nav() {
 
 function Header() {
   return (
-    <Flex px="lg" py="4" direction="row" gap="lg" align="center">
+    <Flex px="lg" py="4" direction="row" gap="lg">
       <Link style={{ textDecoration: "none", color: "black" }} to="/">
         <Title size="h3">BRIDG</Title>
       </Link>
@@ -44,7 +44,7 @@ function Header() {
 
 function Layout() {
   return (
-    <AppShell padding="md" header={{ height: 60 }}>
+    <AppShell padding="md" header={{ height: 40 }}>
       <AppShell.Header>
         <Header />
       </AppShell.Header>
