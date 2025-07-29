@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import api from "@/api";
 import MenuItemLink from "@/components/MenuItemLink";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 function Nav() {
   const query = useQuery({
@@ -24,6 +25,7 @@ function Nav() {
       <Menu.Dropdown>
         {query.data?.map((s) => (
           <MenuItemLink
+            key={s.id}
             to="/spaces/$spaceId/subjects"
             params={{ spaceId: s.id }}
             className="[&.active]:font-bold"
@@ -57,6 +59,7 @@ function Layout() {
         <Header />
       </AppShell.Header>
       <AppShell.Main>
+        <Breadcrumbs />
         <Outlet />
       </AppShell.Main>
     </AppShell>
