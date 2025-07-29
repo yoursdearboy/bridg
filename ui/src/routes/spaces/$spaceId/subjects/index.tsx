@@ -47,9 +47,6 @@ function RouteComponent() {
 
   return (
     <Stack gap="md">
-      {/* FIXME: Move to layout, i.e. __root.tsx Layout component */}
-      <Breadcrumbs />
-
       <Group justify="space-between">
         <Text size="xl" fw={700}>
           Patients
