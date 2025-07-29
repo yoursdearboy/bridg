@@ -1,5 +1,4 @@
 import api from "@/api";
-import debounce from "@/debounce";
 import {
   Alert,
   Button,
@@ -18,6 +17,7 @@ import {
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { hasLength, useForm, type UseFormReturnType } from "@mantine/form";
+import { useDebouncedCallback } from "@mantine/hooks";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
@@ -198,7 +198,7 @@ function RouteComponent() {
         lookupStudySubject: form.getValues(),
       }),
   });
-  const doLookup = debounce(lookup.refetch, 1000);
+  const doLookup = useDebouncedCallback(lookup.refetch, 1000);
 
   const form = useForm<NewStudySubject>({
     initialValues: {
