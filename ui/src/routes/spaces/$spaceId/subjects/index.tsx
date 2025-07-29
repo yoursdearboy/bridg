@@ -9,6 +9,9 @@ import { Route as newRoute } from "./new";
 export const Route = createFileRoute("/spaces/$spaceId/subjects/")({
   loader: ({ params }) => api.subjects.indexSpacesSpaceIdSubjectsGet(params),
   component: RouteComponent,
+  beforeLoad: () => ({
+    breadcrumb: null,
+  }),
 });
 
 function RouteComponent() {

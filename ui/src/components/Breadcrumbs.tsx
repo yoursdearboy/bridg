@@ -9,7 +9,7 @@ export function Breadcrumbs() {
     .map((match, index, all) => {
       const title =
         typeof match.context.breadcrumb === "function"
-          ? match.context.breadcrumb(match.params)
+          ? match.context.breadcrumb(match)
           : match.context.breadcrumb;
 
       return {

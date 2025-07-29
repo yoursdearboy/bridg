@@ -58,7 +58,4 @@ function Layout() {
 
 export const Route = createRootRoute({
   component: Layout,
-  beforeLoad: () => ({
-    breadcrumb: "Spaces",
-  }),
 });

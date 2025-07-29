@@ -2,6 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects")({
   beforeLoad: () => ({
-    breadcrumb: "Patients",
+    breadcrumb: "Subjects",
   }),
 });

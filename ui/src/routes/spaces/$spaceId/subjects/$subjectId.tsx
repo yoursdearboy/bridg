@@ -2,14 +2,16 @@ import api from "@/api";
 import ButtonLink from "@/components/ButtonLink";
 import { Card, Group, Stack, Text, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
+import type { StudySubject } from "bridg-ts";
 import dayjs from "dayjs";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
   component: RouteComponent,
   loader: ({ params }) =>
     api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet(params),
-  beforeLoad: ({ params }) => ({
-    breadcrumb: `(subj)Patient ${params.subjectId}`,
+  beforeLoad: () => ({
+    breadcrumb: ({ loaderData: subject }: { loaderData: StudySubject }) =>
+      subject.performingBiologicEntity?.primaryName || "Anonymous subject",
   }),
 });
 

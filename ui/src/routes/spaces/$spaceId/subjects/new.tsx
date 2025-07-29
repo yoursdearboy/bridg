@@ -21,7 +21,7 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
     sites: await api.sites.indexSpacesSpaceIdSitesGet(params),
   }),
   beforeLoad: () => ({
-    breadcrumb: "New",
+    breadcrumb: "New subject",
   }),
   component: RouteComponent,
 });
