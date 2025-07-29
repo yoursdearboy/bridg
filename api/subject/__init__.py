@@ -96,8 +96,15 @@ class NewStudySubject(BaseModel[bridg.StudySubject]):
     status: Optional[bridg.Status] = None
     status_date: Optional[datetime] = None
     performing_biologic_entity: Optional[Person] = None
+    performing_biologic_entity_id: Optional[UUID] = None
 
     assigned_study_site_protocol_version_relationship: List[UUID]
+
+    def model_dump_sa(self) -> bridg.StudySubject:
+        data = dict(self)
+        if self.performing_biologic_entity_id is not None:
+            del data["performing_biologic_entity"]
+        return super().model_dump_sa(data)
 
 
 @router.post("", response_model=StudySubject)

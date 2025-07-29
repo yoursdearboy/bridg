@@ -54,6 +54,12 @@ export interface NewStudySubject {
     performingBiologicEntity?: ApiSubjectNewStudySubjectPerson | null;
     /**
      * 
+     * @type {string}
+     * @memberof NewStudySubject
+     */
+    performingBiologicEntityId?: string | null;
+    /**
+     * 
      * @type {Array<string>}
      * @memberof NewStudySubject
      */
@@ -83,6 +89,7 @@ export function NewStudySubjectFromJSONTyped(json: any, ignoreDiscriminator: boo
         'status': json['status'] == null ? undefined : StatusFromJSON(json['status']),
         'statusDate': json['status_date'] == null ? undefined : (new Date(json['status_date'])),
         'performingBiologicEntity': json['performing_biologic_entity'] == null ? undefined : ApiSubjectNewStudySubjectPersonFromJSON(json['performing_biologic_entity']),
+        'performingBiologicEntityId': json['performing_biologic_entity_id'] == null ? undefined : json['performing_biologic_entity_id'],
         'assignedStudySiteProtocolVersionRelationship': json['assigned_study_site_protocol_version_relationship'],
     };
 }
@@ -101,6 +108,7 @@ export function NewStudySubjectToJSONTyped(value?: NewStudySubject | null, ignor
         'status': StatusToJSON(value['status']),
         'status_date': value['statusDate'] === null ? null : ((value['statusDate'] as any)?.toISOString()),
         'performing_biologic_entity': ApiSubjectNewStudySubjectPersonToJSON(value['performingBiologicEntity']),
+        'performing_biologic_entity_id': value['performingBiologicEntityId'],
         'assigned_study_site_protocol_version_relationship': value['assignedStudySiteProtocolVersionRelationship'],
     };
 }
