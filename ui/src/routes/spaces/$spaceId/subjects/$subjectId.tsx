@@ -1,5 +1,4 @@
 import api from "@/api";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ButtonLink from "@/components/ButtonLink";
 import { Card, Group, Stack, Text, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
