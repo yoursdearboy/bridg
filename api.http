@@ -57,3 +57,27 @@ Content-Type: application/json
     }
   }
 }
+
+## Persons
+
+### Show a person
+
+GET {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285
+
+### Names
+
+#### Show a person names
+
+GET {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names
+
+#### Create a person name
+
+POST {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names
+Content-Type: application/json
+
+{
+  "use": "official",
+  "family": "Works",
+  "given": "Good",
+  "prefix": "Jr."
+}
