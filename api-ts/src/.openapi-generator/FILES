@@ -1,4 +1,5 @@
 apis/DefaultApi.ts
+apis/PersonsApi.ts
 apis/SitesApi.ts
 apis/SubjectsApi.ts
 apis/index.ts
@@ -10,6 +11,8 @@ models/EntityName.ts
 models/FoundStudySubject.ts
 models/HTTPValidationError.ts
 models/LookupStudySubject.ts
+models/Name.ts
+models/NameWithId.ts
 models/NewStudySubject.ts
 models/Organization.ts
 models/PersonOutput.ts

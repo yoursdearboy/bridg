@@ -7,6 +7,8 @@ export * from './EntityName';
 export * from './FoundStudySubject';
 export * from './HTTPValidationError';
 export * from './LookupStudySubject';
+export * from './Name';
+export * from './NameWithId';
 export * from './NewStudySubject';
 export * from './Organization';
 export * from './PersonOutput';
