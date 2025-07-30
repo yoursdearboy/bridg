@@ -56,7 +56,7 @@ def index(space_id: UUID, db: Session = Depends(get_db)):
     )
 
 
-@router.get("{subject_id:uuid}", response_model=StudySubject)
+@router.get("/{subject_id:uuid}", response_model=StudySubject)
 def show(space_id: UUID, subject_id: UUID, db: Session = Depends(get_db)) -> Optional[bridg.StudySubject]:
     return db.query(bridg.StudySubject).filter_by(id=subject_id).one_or_none()
 
