@@ -1,9 +1,12 @@
+// src/routes/spaces/$spaceId/subjects/$subjectId.tsx
 import api from "@/api";
+
 import ButtonLink from "@/components/ButtonLink";
-import { Card, Group, Stack, Text, Title } from "@mantine/core";
+import { PatientCard } from "@/components/PatientCard";
+import { SubjectInfoCard } from "@/components/SubjectInfoCard";
+import { Grid, Group, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { StudySubject } from "bridg-ts";
-import dayjs from "dayjs";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
   component: RouteComponent,
@@ -16,68 +19,61 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
 });
 
 function RouteComponent() {
+  const { spaceId, subjectId } = Route.useParams();
   const subject = Route.useLoaderData();
+
+  const handleEditSubject = () => {
+    // Navigation will be handled by the SubjectInfoCard's built-in link
+    console.log("Edit subject:", subjectId);
+  };
+
+  const handleEditPatient = () => {
+    // Navigation will be handled by the PatientCard's built-in link
+    console.log("Edit patient:", subject.performingBiologicEntity?.id);
+  };
+
+  const getTitle = () => {
+    if (subject.performingBiologicEntity?.primaryName) {
+      return subject.performingBiologicEntity.primaryName;
+    }
+    if (subject.performingOrganization?.primaryName) {
+      return subject.performingOrganization.primaryName;
+    }
+    return "Anonymous Subject";
+  };
 
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Title order={2}>Patient Information</Title>
+        <Title order={2}>{getTitle()}</Title>
         <ButtonLink to="..">Back to List</ButtonLink>
       </Group>
 
-      <Card withBorder shadow="sm" padding="lg">
-        <Stack gap="sm">
-          <Group>
-            <Text fw={600} w={150}>
-              Full Name:
-            </Text>
-            <Text>
-              {subject.performingBiologicEntity?.primaryName?.trim() || "N/A"}
-            </Text>
-          </Group>
+      <Grid>
+        {/* Patient Card (only shown for biologic entities) */}
+        {subject.performingBiologicEntity && (
+          <Grid.Col span={{ base: 12, md: 6 }}>
+            <PatientCard
+              subject={subject}
+              onEdit={handleEditPatient}
+              spaceId={spaceId}
+              subjectId={subjectId}
+            />
+          </Grid.Col>
+        )}
 
-          <Group>
-            <Text fw={600} w={150}>
-              Gender:
-            </Text>
-            <Text>
-              {subject.performingBiologicEntity?.administrativeGenderCode ||
-                "N/A"}
-            </Text>
-          </Group>
-
-          <Group>
-            <Text fw={600} w={150}>
-              Birth Date:
-            </Text>
-            <Text>
-              {subject.performingBiologicEntity?.birthDate
-                ? dayjs(subject.performingBiologicEntity.birthDate).format(
-                    "YYYY-MM-DD"
-                  )
-                : "N/A"}
-            </Text>
-          </Group>
-
-          <Group>
-            <Text fw={600} w={150}>
-              Status:
-            </Text>
-            <Text>{subject.status || "N/A"}</Text>
-          </Group>
-
-          <Group>
-            <Text fw={600} w={150}>
-              Status Date:
-            </Text>
-            <Text>
-              {subject.statusDate
-                ? dayjs(subject.statusDate).format("YYYY-MM-DD")
-                : "N/A"}
-            </Text>
-          </Group>
-        </Stack>
-      </Card>
+        {/* Subject Info Card (always shown) */}
+        <Grid.Col
+          span={{ base: 12, md: subject.performingBiologicEntity ? 6 : 12 }}
+        >
+          <SubjectInfoCard
+            subject={subject}
+            spaceId={spaceId}
+            subjectId={subjectId}
+            onEdit={handleEditSubject}
+          />
+        </Grid.Col>
+      </Grid>
     </Stack>
   );
 }
