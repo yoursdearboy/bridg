@@ -19,10 +19,14 @@ const App = ({ children }: React.PropsWithChildren) => {
   );
 };
 
-export const renderRoute = (r: AnyRoute) => {
+export const renderRoute = (
+  r: AnyRoute,
+  { params }: { params?: object } = {}
+) => {
   const rootRoute = createRootRoute();
   const testRoute = createRoute({
     ...r.options,
+    params: params,
     getParentRoute: () => rootRoute,
     path: "/",
   });
