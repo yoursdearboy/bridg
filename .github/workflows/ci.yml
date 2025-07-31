@@ -2,9 +2,9 @@ name: BRIDG CI
 
 on:
   push:
-    branches: [ main, api, tests ]
+    branches: [ main, api ]
   pull_request:
-    branches: [ main, api, tests ]
+    branches: [ main, api ]
 
 jobs:
   ui-tests:
@@ -27,8 +27,11 @@ jobs:
     - name: Install dependencies
       run: npm ci
     
-    - name: Link Typescript classes
+    - name: Link API client
       run: npm link ../api-ts
+
+    - name: Run linter
+      run: npm run lint
 
     - name: Run tests
       run: npm test

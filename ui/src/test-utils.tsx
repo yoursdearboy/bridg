@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { act, render } from "@testing-library/react";
 
+// eslint-disable-next-line react-refresh/only-export-components
 const App = ({ children }: React.PropsWithChildren) => {
   const queryClient = new QueryClient();
 
