@@ -116,7 +116,7 @@ const PerformingBiologicEntitySelect = ({
             data.map((subject) => (
               <Combobox.Option
                 key={subject.performingBiologicEntityId}
-                value={subject.performingBiologicEntityId}
+                value={subject.performingBiologicEntityId!}
                 bg={
                   (subject.performingBiologicEntityId === value &&
                     "var(--mantine-color-dark-7)") ||
