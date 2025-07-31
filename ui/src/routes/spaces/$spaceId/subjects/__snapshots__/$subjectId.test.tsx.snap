@@ -1,0 +1,409 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`show page rendered correctly 1`] = `
+<DocumentFragment>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <div
+    class="m_6d731127 mantine-Stack-root"
+    style="--stack-gap: var(--mantine-spacing-md); --stack-align: stretch; --stack-justify: flex-start;"
+  >
+    <div
+      class="m_4081bf90 mantine-Group-root"
+      style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    >
+      <h2
+        class="m_8a5d1357 mantine-Title-root"
+        data-order="2"
+        style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+      >
+        Patient Information
+      </h2>
+      <button
+        aria-current="page"
+        class="mantine-focus-auto mantine-active active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+        data-status="active"
+        href="/"
+        style="--button-color: var(--mantine-color-white);"
+        type="button"
+      >
+        <span
+          class="m_80f1301b mantine-Button-inner"
+        >
+          <span
+            class="m_811560b9 mantine-Button-label"
+          >
+            Back to List
+          </span>
+        </span>
+      </button>
+    </div>
+    <div
+      class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+      data-with-border="true"
+      style="--paper-shadow: var(--mantine-shadow-sm); --card-padding: var(--mantine-spacing-lg);"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-sm); --stack-align: stretch; --stack-justify: flex-start;"
+      >
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Full Name:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            Donald Trump Jr
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Gender:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            M
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Birth Date:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            1991-01-01
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Status:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            eligible
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Status Date:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            2024-11-06
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`show page renders correctly 1`] = `
+<DocumentFragment>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <div
+    class="m_6d731127 mantine-Stack-root"
+    style="--stack-gap: var(--mantine-spacing-md); --stack-align: stretch; --stack-justify: flex-start;"
+  >
+    <div
+      class="m_4081bf90 mantine-Group-root"
+      style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    >
+      <h2
+        class="m_8a5d1357 mantine-Title-root"
+        data-order="2"
+        style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+      >
+        Patient Information
+      </h2>
+      <button
+        aria-current="page"
+        class="mantine-focus-auto mantine-active active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+        data-status="active"
+        href="/"
+        style="--button-color: var(--mantine-color-white);"
+        type="button"
+      >
+        <span
+          class="m_80f1301b mantine-Button-inner"
+        >
+          <span
+            class="m_811560b9 mantine-Button-label"
+          >
+            Back to List
+          </span>
+        </span>
+      </button>
+    </div>
+    <div
+      class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+      data-with-border="true"
+      style="--paper-shadow: var(--mantine-shadow-sm); --card-padding: var(--mantine-spacing-lg);"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-sm); --stack-align: stretch; --stack-justify: flex-start;"
+      >
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Full Name:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            Donald Trump Jr
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Gender:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            M
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Birth Date:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            1991-01-01
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Status:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            eligible
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Status Date:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            2024-11-06
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`toUpperCase 1`] = `
+<DocumentFragment>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <div
+    class="m_6d731127 mantine-Stack-root"
+    style="--stack-gap: var(--mantine-spacing-md); --stack-align: stretch; --stack-justify: flex-start;"
+  >
+    <div
+      class="m_4081bf90 mantine-Group-root"
+      style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    >
+      <h2
+        class="m_8a5d1357 mantine-Title-root"
+        data-order="2"
+        style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+      >
+        Patient Information
+      </h2>
+      <button
+        aria-current="page"
+        class="mantine-focus-auto mantine-active active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+        data-status="active"
+        href="/"
+        style="--button-color: var(--mantine-color-white);"
+        type="button"
+      >
+        <span
+          class="m_80f1301b mantine-Button-inner"
+        >
+          <span
+            class="m_811560b9 mantine-Button-label"
+          >
+            Back to List
+          </span>
+        </span>
+      </button>
+    </div>
+    <div
+      class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+      data-with-border="true"
+      style="--paper-shadow: var(--mantine-shadow-sm); --card-padding: var(--mantine-spacing-lg);"
+    >
+      <div
+        class="m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-sm); --stack-align: stretch; --stack-justify: flex-start;"
+      >
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Full Name:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            Donald Trump Jr
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Gender:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            M
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Birth Date:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            1991-01-01
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Status:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            eligible
+          </p>
+        </div>
+        <div
+          class="m_4081bf90 mantine-Group-root"
+          style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+        >
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+            style="font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+          >
+            Status Date:
+          </p>
+          <p
+            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          >
+            2024-11-06
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
