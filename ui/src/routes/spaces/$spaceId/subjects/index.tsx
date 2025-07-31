@@ -20,6 +20,9 @@ function RouteComponent() {
 
   const rows = subjects.map((subject) => (
     <Table.Tr key={subject.id}>
+           <Table.Td>
+        <Text>{subject.performingBiologicEntity?.id?.trim()}</Text>
+      </Table.Td>
       <Table.Td>
         <Text>{subject.performingBiologicEntity?.primaryName?.trim()}</Text>
       </Table.Td>
@@ -33,12 +36,37 @@ function RouteComponent() {
             )
           : "N/A"}
       </Table.Td>
+   <Table.Td>
+  <Text>
+    {subject.performingBiologicEntity?.deathIndicator === true
+      ? "Yes"
+      : "No"}
+  </Text>
+  
+</Table.Td>
+<Table.Td>
+        {subject.performingBiologicEntity?.deathDate
+          ? dayjs(subject.performingBiologicEntity.deathDate).format(
+              "YYYY-MM-DD"
+            )
+          : "N/A"}
+      </Table.Td>
+           <Table.Td>
+        <Text>{subject.status?.trim()}</Text>
+      </Table.Td>
+           <Table.Td>
+        {subject.statusDate
+          ? dayjs(subject.statusDate).format(
+              "YYYY-MM-DD"
+            )
+          : "N/A"}
+      </Table.Td>
       <Table.Td>
         <ButtonLink
           to={infoRoute.to}
           params={{ spaceId, subjectId: subject.id }}
         >
-          Info
+          View
         </ButtonLink>
       </Table.Td>
     </Table.Tr>
@@ -59,10 +87,16 @@ function RouteComponent() {
         <Table striped highlightOnHover>
           <Table.Thead>
             <Table.Tr>
+              <Table.Th>ID</Table.Th>
               <Table.Th>Name</Table.Th>
               <Table.Th>Gender</Table.Th>
               <Table.Th>Birth Date</Table.Th>
+              <Table.Th>Death Indicator</Table.Th>
+              <Table.Th>Death date</Table.Th>
+                <Table.Th>Status</Table.Th>
+              <Table.Th>Status date</Table.Th>
               <Table.Th>Actions</Table.Th>
+           
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>
