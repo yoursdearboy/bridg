@@ -73,6 +73,11 @@ exports[`index pages renders correctly 1`] = `
                   <th
                     class="m_4e7aa4f3 mantine-Table-th"
                   >
+                    ID
+                  </th>
+                  <th
+                    class="m_4e7aa4f3 mantine-Table-th"
+                  >
                     Name
                   </th>
                   <th
@@ -84,6 +89,26 @@ exports[`index pages renders correctly 1`] = `
                     class="m_4e7aa4f3 mantine-Table-th"
                   >
                     Birth Date
+                  </th>
+                  <th
+                    class="m_4e7aa4f3 mantine-Table-th"
+                  >
+                    Death Indicator
+                  </th>
+                  <th
+                    class="m_4e7aa4f3 mantine-Table-th"
+                  >
+                    Death date
+                  </th>
+                  <th
+                    class="m_4e7aa4f3 mantine-Table-th"
+                  >
+                    Status
+                  </th>
+                  <th
+                    class="m_4e7aa4f3 mantine-Table-th"
+                  >
+                    Status date
                   </th>
                   <th
                     class="m_4e7aa4f3 mantine-Table-th"
@@ -107,6 +132,15 @@ exports[`index pages renders correctly 1`] = `
                     <p
                       class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                     >
+                      8498d20d-6c84-4f09-96c5-5af3a557b1e3
+                    </p>
+                  </td>
+                  <td
+                    class="m_4e7aa4ef mantine-Table-td"
+                  >
+                    <p
+                      class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    >
                       Donald Trump Jr
                     </p>
                   </td>
@@ -119,6 +153,34 @@ exports[`index pages renders correctly 1`] = `
                     class="m_4e7aa4ef mantine-Table-td"
                   >
                     1991-01-01
+                  </td>
+                  <td
+                    class="m_4e7aa4ef mantine-Table-td"
+                  >
+                    <p
+                      class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    >
+                      No
+                    </p>
+                  </td>
+                  <td
+                    class="m_4e7aa4ef mantine-Table-td"
+                  >
+                    N/A
+                  </td>
+                  <td
+                    class="m_4e7aa4ef mantine-Table-td"
+                  >
+                    <p
+                      class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    >
+                      eligible
+                    </p>
+                  </td>
+                  <td
+                    class="m_4e7aa4ef mantine-Table-td"
+                  >
+                    2024-11-06
                   </td>
                   <td
                     class="m_4e7aa4ef mantine-Table-td"
@@ -155,6 +217,15 @@ exports[`index pages renders correctly 1`] = `
                     <p
                       class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                     >
+                      ba6107f6-0891-44c5-8d84-01352f32ace2
+                    </p>
+                  </td>
+                  <td
+                    class="m_4e7aa4ef mantine-Table-td"
+                  >
+                    <p
+                      class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    >
                       Kamala Harris
                     </p>
                   </td>
@@ -167,6 +238,34 @@ exports[`index pages renders correctly 1`] = `
                     class="m_4e7aa4ef mantine-Table-td"
                   >
                     2001-01-01
+                  </td>
+                  <td
+                    class="m_4e7aa4ef mantine-Table-td"
+                  >
+                    <p
+                      class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    >
+                      No
+                    </p>
+                  </td>
+                  <td
+                    class="m_4e7aa4ef mantine-Table-td"
+                  >
+                    N/A
+                  </td>
+                  <td
+                    class="m_4e7aa4ef mantine-Table-td"
+                  >
+                    <p
+                      class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    >
+                      candidate
+                    </p>
+                  </td>
+                  <td
+                    class="m_4e7aa4ef mantine-Table-td"
+                  >
+                    2025-07-28
                   </td>
                   <td
                     class="m_4e7aa4ef mantine-Table-td"

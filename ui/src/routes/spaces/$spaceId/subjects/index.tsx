@@ -63,7 +63,7 @@ function RouteComponent() {
           to={infoRoute.to}
           params={{ spaceId, subjectId: subject.id }}
         >
-          View
+          Info
         </ButtonLink>
       </Table.Td>
     </Table.Tr>

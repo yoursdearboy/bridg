@@ -286,13 +286,13 @@ exports[`new page renders correctly 1`] = `
                       data-path="statusDate"
                       data-variant="default"
                       id="mantine-f4bipx4bi"
-                      value="2025-07-31"
+                      value="2025-08-01"
                     />
                   </div>
                 </div>
                 <input
                   type="hidden"
-                  value="2025-07-31"
+                  value="2025-08-01"
                 />
                 <div
                   class="m_46b77525 mantine-InputWrapper-root mantine-MultiSelect-root"
