@@ -1,17 +1,7 @@
 // src/components/SubjectInfoCard.tsx
-import {
-  Card,
-  Group,
-  Text,
-  Badge,
-  Divider,
-  Stack,
-  List,
-  Anchor,
-} from "@mantine/core";
-import dayjs from "dayjs";
+import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
 import type { StudySubject } from "bridg-ts";
-import { Link } from "@tanstack/react-router";
+import dayjs from "dayjs";
 
 interface SubjectInfoCardProps {
   subject: StudySubject;
@@ -19,13 +9,9 @@ interface SubjectInfoCardProps {
   onEdit?: () => void;
 }
 
-export function SubjectInfoCard({
-  subject,
-  spaceId,
-  onEdit,
-}: SubjectInfoCardProps) {
-  const person = subject.performing_biologic_entity;
-  const organization = subject.performing_organization;
+export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
+  const person = subject.performingBiologicEntity;
+  const organization = subject.performingOrganization;
 
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
@@ -36,16 +22,9 @@ export function SubjectInfoCard({
             Subject Information
           </Text>
           {onEdit && (
-            <Anchor
-              component={Link}
-              to="/spaces/$spaceId/subjects/$subjectId/edit"
-              params={{ spaceId, subjectId: subject.id }}
-              underline="never"
-            >
-              <Badge color="blue" style={{ cursor: "pointer" }}>
-                Edit
-              </Badge>
-            </Anchor>
+            <Badge color="blue" style={{ cursor: "pointer" }}>
+              Edit
+            </Badge>
           )}
         </Group>
 
@@ -56,20 +35,10 @@ export function SubjectInfoCard({
           label="Status"
           value={
             <>
-              <Badge
-                color={
-                  subject.status === "active"
-                    ? "green"
-                    : subject.status === "suspended"
-                      ? "yellow"
-                      : "gray"
-                }
-              >
-                {subject.status || "-"}
-              </Badge>
-              {subject.status_date && (
+              <Badge>{subject.status || "-"}</Badge>
+              {subject.statusDate && (
                 <Text span ml="sm">
-                  ({dayjs(subject.status_date).format("YYYY-MM-DD")})
+                  ({dayjs(subject.statusDate).format("YYYY-MM-DD")})
                 </Text>
               )}
             </>
@@ -90,22 +59,22 @@ export function SubjectInfoCard({
               Person Details
             </Text>
 
-            <InfoRow label="Full Name" value={person.primary_name} />
-            <InfoRow label="Gender" value={person.administrative_gender_code} />
+            <InfoRow label="Full Name" value={person.primaryName} />
+            <InfoRow label="Gender" value={person.administrativeGenderCode} />
             <InfoRow
               label="Date of Birth"
               value={
-                person.birth_date
-                  ? dayjs(person.birth_date).format("YYYY-MM-DD")
+                person.birthDate
+                  ? dayjs(person.birthDate).format("YYYY-MM-DD")
                   : undefined
               }
             />
-            {person.death_indicator && (
+            {person.deathIndicator && (
               <InfoRow
                 label="Date of Death"
                 value={
-                  person.death_date
-                    ? `${dayjs(person.death_date).format("YYYY-MM-DD")}${person.death_date_estimated_indicator ? " (estimated)" : ""}`
+                  person.deathDate
+                    ? `${dayjs(person.deathDate).format("YYYY-MM-DD")}${person.deathDateEstimatedIndicator ? " (estimated)" : ""}`
                     : undefined
                 }
               />
@@ -123,35 +92,11 @@ export function SubjectInfoCard({
 
             <InfoRow
               label="Organization Name"
-              value={organization.primary_name}
+              value={organization.primaryName}
             />
             <InfoRow label="Description" value={organization.description} />
           </>
         )}
-
-        {/* Study Site Relationships */}
-        <Divider my="xs" />
-        <Group align="flex-start">
-          <Text fw={600} w={150} c="dimmed">
-            Study Sites:
-          </Text>
-          <List size="sm" spacing="xs">
-            {subject.assigned_study_site_protocol_version_relationship
-              ?.length ? (
-              subject.assigned_study_site_protocol_version_relationship.map(
-                (asspvr, index) => (
-                  <List.Item key={index}>
-                    {typeof asspvr === "string"
-                      ? asspvr
-                      : JSON.stringify(asspvr)}
-                  </List.Item>
-                )
-              )
-            ) : (
-              <Text c="dimmed">No study sites assigned</Text>
-            )}
-          </List>
-        </Group>
       </Stack>
     </Card>
   );

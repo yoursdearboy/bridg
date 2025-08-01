@@ -43,12 +43,7 @@ function RouteComponent() {
         {/* Patient Card (only shown for biologic entities) */}
         {subject.performingBiologicEntity && (
           <Grid.Col span={{ base: 12, md: 6 }}>
-            <PatientCard
-              subject={subject}
-              onEdit={handleEditPatient}
-              spaceId={spaceId}
-              subjectId={subjectId}
-            />
+            <PatientCard subject={subject} onEdit={handleEditPatient} />
           </Grid.Col>
         )}
 
@@ -59,7 +54,6 @@ function RouteComponent() {
           <SubjectInfoCard
             subject={subject}
             spaceId={spaceId}
-            subjectId={subjectId}
             onEdit={handleEditSubject}
           />
         </Grid.Col>
