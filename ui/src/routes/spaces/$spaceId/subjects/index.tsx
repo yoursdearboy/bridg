@@ -5,6 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import { Route as infoRoute } from "./$subjectId";
 import { Route as newRoute } from "./new";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/")({
   loader: ({ params }) => api.subjects.indexSpacesSpaceIdSubjectsGet(params),
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/")({
 });
 
 function RouteComponent() {
+  const { t } = useTranslation();
   const subjects = Route.useLoaderData();
   const { spaceId } = Route.useParams();
 
@@ -73,10 +75,10 @@ function RouteComponent() {
     <Stack gap="md">
       <Group justify="space-between">
         <Text size="xl" fw={700}>
-          Patients
+          {t("Patients")}
         </Text>
         <ButtonLink from={Route.to} to={newRoute.to} params={{ spaceId }}>
-          New Patient
+          {t("New Patient")}
         </ButtonLink>
       </Group>
 
@@ -84,8 +86,8 @@ function RouteComponent() {
         <Table striped highlightOnHover>
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>ID</Table.Th>
-              <Table.Th>Name</Table.Th>
+              <Table.Th>{t("ID")}</Table.Th>
+              <Table.Th>{t("Name")}</Table.Th>
               <Table.Th>Gender</Table.Th>
               <Table.Th>Birth Date</Table.Th>
               <Table.Th>Death Indicator</Table.Th>
