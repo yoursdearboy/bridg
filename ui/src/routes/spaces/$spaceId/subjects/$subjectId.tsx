@@ -32,16 +32,6 @@ function RouteComponent() {
     console.log("Edit patient:", subject.performingBiologicEntity?.id);
   };
 
-  const getTitle = () => {
-    if (subject.performingBiologicEntity?.primaryName) {
-      return subject.performingBiologicEntity.primaryName;
-    }
-    if (subject.performingOrganization?.primaryName) {
-      return subject.performingOrganization.primaryName;
-    }
-    return "Anonymous Subject";
-  };
-
   return (
     <Stack gap="md">
       <Group justify="space-between">
