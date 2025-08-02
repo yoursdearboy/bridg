@@ -80,7 +80,7 @@ const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
           />
           <DateInput
             label="Birth date"
-            valueFormat="YYYY-MM-DD"
+            valueFormat="L"
             {...form.getInputProps("performingBiologicEntity.birthDate")}
           />
         </Stack>
@@ -169,7 +169,7 @@ const StudySubjectFields = ({ form }: NewStudySubjectFormProps) => {
           />
           <DateInput
             label="Status date"
-            valueFormat="YYYY-MM-DD"
+            valueFormat="L"
             {...form.getInputProps("statusDate")}
           />
           <MultiSelect

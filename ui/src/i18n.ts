@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/en";
 import "dayjs/locale/ru";
 import duration from "dayjs/plugin/duration";
+import LocalizedFormat from "dayjs/plugin/LocalizedFormat";
 import relativeTime from "dayjs/plugin/relativeTime";
 import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
@@ -9,6 +10,7 @@ import { initReactI18next } from "react-i18next";
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
+dayjs.extend(LocalizedFormat);
 
 const resources = {
   en: {
