@@ -35,7 +35,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           label="Status"
           value={
             <>
-              <Badge>{subject.status || "-"}</Badge>
+              {subject.status || "-"}
               {subject.statusDate && (
                 <Text span ml="sm">
                   ({dayjs(subject.statusDate).format("YYYY-MM-DD")})

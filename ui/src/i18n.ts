@@ -15,14 +15,14 @@ const resources = {
     translation: {
       Patients: "Patients",
       intlDateTime: "{{val, datetime}}",
-      dayjsDuration: "{{val, duration}}",
+      dayjsDuration: "{{val, dayjsDuration}}",
     },
   },
   ru: {
     translation: {
       Patients: "Пациенты",
       intlDateTime: "{{val, datetime}}",
-      dayjsDuration: "{{val, duration}}",
+      dayjsDuration: "{{val, dayjsDuration}}",
     },
   },
 };
