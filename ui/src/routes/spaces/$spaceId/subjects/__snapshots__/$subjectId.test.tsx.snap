@@ -142,7 +142,7 @@ exports[`show page renders correctly 1`] = `
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                 >
-                  1991-01-01
+                  1&#x2F;1&#x2F;1991
                 </p>
               </div>
               <div
@@ -208,22 +208,16 @@ exports[`show page renders correctly 1`] = `
                 >
                   Subject Information
                 </p>
-                <a
-                  class="mantine-focus-auto m_849cf0da m_b6d8b162 mantine-Text-root mantine-Anchor-root"
-                  data-underline="never"
-                  href="/spaces/undefined/subjects/2703d0bc-7ed4-497c-91c6-30d86a8eb630/edit"
+                <div
+                  class="m_347db0ec mantine-Badge-root"
+                  style="--badge-bg: var(--mantine-color-blue-filled); --badge-color: var(--mantine-color-white); --badge-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; cursor: pointer;"
                 >
-                  <div
-                    class="m_347db0ec mantine-Badge-root"
-                    style="--badge-bg: var(--mantine-color-blue-filled); --badge-color: var(--mantine-color-white); --badge-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; cursor: pointer;"
+                  <span
+                    class="m_5add502a mantine-Badge-label"
                   >
-                    <span
-                      class="m_5add502a mantine-Badge-label"
-                    >
-                      Edit
-                    </span>
-                  </div>
-                </a>
+                    Edit
+                  </span>
+                </div>
               </div>
               <div
                 class="m_3eebeb36 mantine-Divider-root"
@@ -243,18 +237,15 @@ exports[`show page renders correctly 1`] = `
                 </p>
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                />
-                <div
-                  class="m_347db0ec mantine-Badge-root"
-                  style="--badge-bg: var(--mantine-color-gray-filled); --badge-color: var(--mantine-color-white); --badge-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
                 >
+                  eligible
                   <span
-                    class="m_5add502a mantine-Badge-label"
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    style="margin-left: var(--mantine-spacing-sm);"
                   >
-                    eligible
+                    (2024-11-06)
                   </span>
-                </div>
-                <p />
+                </p>
               </div>
               <div
                 class="m_4081bf90 mantine-Group-root"
@@ -269,7 +260,7 @@ exports[`show page renders correctly 1`] = `
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                 >
-                  Unknown
+                  Person
                 </p>
               </div>
               <div
@@ -278,6 +269,13 @@ exports[`show page renders correctly 1`] = `
                 role="separator"
                 style="margin-block: var(--mantine-spacing-xs);"
               />
+              <p
+                class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                data-size="sm"
+                style="--text-fz: var(--mantine-font-size-sm); --text-lh: var(--mantine-line-height-sm); color: var(--mantine-color-dimmed); font-weight: 600;"
+              >
+                Person Details
+              </p>
               <div
                 class="m_4081bf90 mantine-Group-root"
                 style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
@@ -286,20 +284,45 @@ exports[`show page renders correctly 1`] = `
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                   style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
                 >
-                  Study Sites:
+                  Full Name:
                 </p>
-                <ul
-                  class="m_abbac491 mantine-List-root"
-                  data-size="sm"
-                  style="--list-fz: var(--mantine-font-size-sm); --list-lh: var(--mantine-line-height-sm); --list-spacing: var(--mantine-spacing-xs);"
+                <p
+                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                 >
-                  <p
-                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                    style="color: var(--mantine-color-dimmed);"
-                  >
-                    No study sites assigned
-                  </p>
-                </ul>
+                  Donald Trump Jr
+                </p>
+              </div>
+              <div
+                class="m_4081bf90 mantine-Group-root"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
+              >
+                <p
+                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                >
+                  Gender:
+                </p>
+                <p
+                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                >
+                  M
+                </p>
+              </div>
+              <div
+                class="m_4081bf90 mantine-Group-root"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
+              >
+                <p
+                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                >
+                  Date of Birth:
+                </p>
+                <p
+                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                >
+                  1991-01-01
+                </p>
               </div>
             </div>
           </div>

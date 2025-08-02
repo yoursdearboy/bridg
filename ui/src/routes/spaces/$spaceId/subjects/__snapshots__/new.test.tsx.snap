@@ -237,7 +237,7 @@ exports[`new page renders correctly 1`] = `
                       data-variant="default"
                       id="mantine-f4bipx4bi"
                       readonly=""
-                      value="Candidate"
+                      value="candidate"
                     />
                     <div
                       class="m_82577fc2 mantine-Input-section mantine-Select-section"
@@ -286,7 +286,7 @@ exports[`new page renders correctly 1`] = `
                       data-path="statusDate"
                       data-variant="default"
                       id="mantine-f4bipx4bi"
-                      value="2025-08-01"
+                      value="08/01/2025"
                     />
                   </div>
                 </div>
