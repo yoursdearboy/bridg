@@ -2,7 +2,6 @@ import api from "@/api";
 import ButtonLink from "@/components/ButtonLink";
 import { Group, Stack, Table, Text } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
-import dayjs from "dayjs";
 import { Route as infoRoute } from "./$subjectId";
 import { Route as newRoute } from "./new";
 import { useTranslation } from "react-i18next";
