@@ -2,14 +2,19 @@ import api from "@/api";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import MenuItemLink from "@/components/MenuItemLink";
 import { languages } from "@/i18n";
+import logo from "@/logo.png";
 import {
   AppShell,
   Box,
   Button,
   Flex,
+  Group,
   Menu,
   MenuItem,
+  Switch,
   Title,
+  useComputedColorScheme,
+  useMantineColorScheme,
   useMantineTheme,
 } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
@@ -64,25 +69,64 @@ function Nav() {
   );
 }
 
-function Header() {
+function Logo() {
   const theme = useMantineTheme();
   return (
-    <Flex px="lg" py="4" direction="row" gap="lg">
+    <Group>
+      <img
+        src={logo}
+        width={25}
+        style={{ border: "1px solid #AA230F", borderRadius: 12 }}
+      />
+      <Title ml={-8} size="h3" c={theme.primaryColor}>
+        BRIDG
+      </Title>
+    </Group>
+  );
+}
+
+function ThemeSwitcher() {
+  const { setColorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme("light", {
+    getInitialValueInEffect: true,
+  });
+  const isLight = computedColorScheme === "light";
+  return (
+    <Switch
+      onClick={() => setColorScheme(isLight ? "dark" : "light")}
+      checked={isLight}
+      size="md"
+      color="dark.4"
+      withThumbIndicator={false}
+      onLabel={<Title size="h5">☀️</Title>}
+      offLabel={<Title size="h5">🌑</Title>}
+    />
+  );
+}
+
+function Header() {
+  return (
+    <Flex
+      px="lg"
+      direction="row"
+      gap="lg"
+      align="center"
+      style={{ height: 45 }}
+    >
       <Link style={{ textDecoration: "none" }} to="/">
-        <Title size="h3" c={theme.primaryColor}>
-          BRIDG
-        </Title>
+        <Logo />
       </Link>
       <Nav />
       <Box style={{ flex: 1 }} />
       <LanguageSwitcher />
+      <ThemeSwitcher />
     </Flex>
   );
 }
 
 function Layout() {
   return (
-    <AppShell padding="md" header={{ height: 40 }}>
+    <AppShell padding="md" header={{ height: 45 }}>
       <AppShell.Header>
         <Header />
       </AppShell.Header>
