@@ -3,7 +3,8 @@ import { createLink } from "@tanstack/react-router";
 import React from "react";
 
 const ButtonLink = createLink(
-  React.forwardRef<HTMLDivElement, ButtonProps>((props) => (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  React.forwardRef<HTMLDivElement, ButtonProps>((props, ref) => (
     <Button {...props} />
   ))
 );
