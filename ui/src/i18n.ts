@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/en";
 import "dayjs/locale/ru";
 import duration from "dayjs/plugin/duration";
-import LocalizedFormat from "dayjs/plugin/LocalizedFormat";
+import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import relativeTime from "dayjs/plugin/relativeTime";
 import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
