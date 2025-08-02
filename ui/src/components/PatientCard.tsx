@@ -1,7 +1,8 @@
 // src/components/PatientCard.tsx
-import { Card, Group, Text, Badge, Divider, Stack } from "@mantine/core";
-import dayjs from "dayjs";
+import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
 import type { StudySubject } from "bridg-ts";
+import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 interface PatientCardProps {
   subject: StudySubject;
@@ -10,6 +11,8 @@ interface PatientCardProps {
 
 export function PatientCard({ subject, onEdit }: PatientCardProps) {
   const person = subject.performingBiologicEntity;
+
+  const { t } = useTranslation();
 
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
@@ -43,7 +46,7 @@ export function PatientCard({ subject, onEdit }: PatientCardProps) {
           label="Date of Birth"
           value={
             person?.birthDate
-              ? dayjs(person.birthDate).format("YYYY-MM-DD")
+              ? t("intlDateTime", { val: person?.birthDate })
               : undefined
           }
         />
@@ -52,7 +55,12 @@ export function PatientCard({ subject, onEdit }: PatientCardProps) {
           label="Age"
           value={
             person?.birthDate
-              ? `${dayjs().diff(person.birthDate, "year")} years`
+              ? t("dayjsDuration", {
+                  val: dayjs.duration(
+                    dayjs().diff(person.birthDate, "year"),
+                    "year"
+                  ),
+                })
               : undefined
           }
         />
@@ -63,9 +71,9 @@ export function PatientCard({ subject, onEdit }: PatientCardProps) {
           value={
             person?.deathIndicator
               ? person?.deathDate
-                ? dayjs(person.deathDate).format("YYYY-MM-DD")
-                : "Date not specified"
-              : "Not deceased"
+                ? t("intlDateTime", { val: person.deathDate })
+                : t("Date not specified")
+              : t("Not deceased")
           }
         />
       </Stack>

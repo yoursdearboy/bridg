@@ -33,9 +33,9 @@ function RouteComponent() {
       </Table.Td>
       <Table.Td>
         {subject.performingBiologicEntity?.birthDate
-          ? dayjs(subject.performingBiologicEntity.birthDate).format(
-              "YYYY-MM-DD"
-            )
+          ? t("intlDateTime", {
+              val: subject.performingBiologicEntity.birthDate,
+            })
           : "N/A"}
       </Table.Td>
       <Table.Td>
@@ -47,9 +47,9 @@ function RouteComponent() {
       </Table.Td>
       <Table.Td>
         {subject.performingBiologicEntity?.deathDate
-          ? dayjs(subject.performingBiologicEntity.deathDate).format(
-              "YYYY-MM-DD"
-            )
+          ? t("intlDateTime", {
+              val: subject.performingBiologicEntity.deathDate,
+            })
           : "N/A"}
       </Table.Td>
       <Table.Td>
@@ -57,7 +57,7 @@ function RouteComponent() {
       </Table.Td>
       <Table.Td>
         {subject.statusDate
-          ? dayjs(subject.statusDate).format("YYYY-MM-DD")
+          ? t("intlDateTime", { val: subject.statusDate })
           : "N/A"}
       </Table.Td>
       <Table.Td>
