@@ -1,4 +1,5 @@
 import { MantineProvider } from "@mantine/core";
+import { DatesProvider } from "@mantine/dates";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   createRootRoute,
@@ -8,15 +9,18 @@ import {
   type AnyRoute,
 } from "@tanstack/react-router";
 import { act, render } from "@testing-library/react";
+import "./i18n";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const App = ({ children }: React.PropsWithChildren) => {
   const queryClient = new QueryClient();
 
   return (
-    <MantineProvider defaultColorScheme="auto">
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </MantineProvider>
+    <QueryClientProvider client={queryClient}>
+      <MantineProvider defaultColorScheme="auto">
+        <DatesProvider settings={{ locale: "en" }}>{children}</DatesProvider>
+      </MantineProvider>
+    </QueryClientProvider>
   );
 };
 
