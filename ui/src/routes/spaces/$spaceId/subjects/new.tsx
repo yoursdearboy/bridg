@@ -27,6 +27,7 @@ import {
   Status,
 } from "bridg-ts";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
   loader: async ({ params }) => ({
@@ -43,8 +44,9 @@ type NewStudySubjectFormProps = {
 };
 
 const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
+  const { t } = useTranslation();
   const genders = Object.entries(AdministrativeGender).map(([key, value]) => ({
-    label: key,
+    label: t(`Gender.${key}`),
     value,
   }));
 
@@ -149,9 +151,10 @@ const PerformingBiologicEntityCard = ({
 );
 
 const StudySubjectFields = ({ form }: NewStudySubjectFormProps) => {
+  const { t } = useTranslation();
   const { sites } = Route.useLoaderData();
   const statuses = Object.entries(Status).map(([key, value]) => ({
-    label: key,
+    label: t(`Status.${key}`),
     value,
   }));
 
