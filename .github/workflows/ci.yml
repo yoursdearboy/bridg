@@ -34,8 +34,8 @@ jobs:
       run: npm run lint
         # Telegram Notification Step
     - name: Send Telegram Notification
-      uses: ./.github/workflows/telegram-notification.yml
       if: always()
+      uses: ./.github/workflows/telegram-notification
       with:
         working_directory: './ui'
         status_text:  ${{ steps.linter-tests.outcome == 'success' && 'success' || 'failure' }}
@@ -73,7 +73,7 @@ jobs:
 
     # Telegram Notification Step
     - name: Send Telegram Notification
-      uses: ./.github/workflows/telegram-notification.yml
+      uses: ./.github/workflows/telegram-notification
       if: always()
       with:
         working_directory: './ui'
