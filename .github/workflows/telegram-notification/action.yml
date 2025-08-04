@@ -28,12 +28,11 @@ jobs:
   send-notification:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
       - name: Send Telegram Notification
         run: |
             # Construct message
             MESSAGE=$(cat <<EOF
-            ${{ inputs.status_emoji }} GitHub Actions CI Report for [${{ inputs.stage_name }}] ${{ inputs.status_emoji }}
+            ${{ inputs.status_emoji }} GitHub Actions CI Report for [${{ stage_name }}] ${{ inputs.status_emoji }}
 
             Repository: ${{ github.repository }}
             Workflow: ${{ github.workflow }}
