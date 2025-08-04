@@ -42,8 +42,8 @@ jobs:
         status_emoji: ${{ steps.linter-tests.outcome == 'success' && '✅' || '❌' }}
         stage_name: "LINTER"
       secrets:
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+        bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
 
   ui-tests:
@@ -85,5 +85,5 @@ jobs:
         status_emoji: ${{ steps.ui-tests.outcome == 'success' && '✅' || '❌' }}
         stage_name: "UI"
       secrets:
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+        bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}

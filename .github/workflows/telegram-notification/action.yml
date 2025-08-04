@@ -20,9 +20,9 @@ on:
         default: ""
         description: "Project directory (e.g., ./ui)"
     secrets:
-      TELEGRAM_CHAT_ID:
+      chat_id:
         required: true
-      TELEGRAM_BOT_TOKEN:
+      bot_token:
         required: true
 
 jobs:
@@ -33,8 +33,8 @@ jobs:
       - name: Send Telegram Notification
         env:
           WORKING_DIR: ${{ inputs.working_directory }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.chat_id }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.bot_token }}
           STATUS_TEXT: ${{ inputs.status_text }}
           STATUS_EMOJI: ${{ inputs.status_emoji }}
           STAGE_NAME: ${{ inputs.stage_name }}
