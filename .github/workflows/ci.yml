@@ -6,52 +6,12 @@ on:
   pull_request:
     branches: [ main, api ]
 
-jobs:
-  ui-tests:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./ui
+telegram-env: &telegram-env
+  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
-    strategy:
-      matrix:
-        node-version: [ 22.17.x ]
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Link API client
-      run: npm link ../api-ts
-
-    - name: Run linter
-      run: npm run lint
-
-    - name: Run tests
-      run: npm test
-
-    # Telegram Notification Step
-    - name: Send Telegram Notification
-      if: always()
-      env:
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      run: |
-        # Determine message based on job status
-        if [ "${{ job.status }}" == "success" ]; then
-          STATUS_EMOJI="✅"
-          STATUS_TEXT="Succeeded"
-        else
-          STATUS_EMOJI="❌"
-          STATUS_TEXT="Failed"
-        fi
-
+telergam-base-job: &telergam-base-job
+  run: |
         # Construct message
         MESSAGE=$(cat <<EOF
         ${STATUS_EMOJI} GitHub Actions CI Report ${STATUS_EMOJI}
@@ -86,3 +46,52 @@ jobs:
           echo "$RESPONSE"
           exit 1
         fi
+
+telegram-success: &telegram-success
+  env:
+    <<: *telegram-env
+    STATUS_EMOJI: "✅"
+    STATUS_TEXT: "Succeeded"
+  <<: *telegram-base-job
+
+telegram-failure: &telegram-failure
+  env:
+    <<: *telegram-env
+    STATUS_EMOJI: "❌"
+    STATUS_TEXT: "Failed"
+  <<: *telegram-base-job
+
+jobs:
+  linter-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ui
+
+    strategy:
+      matrix:
+        node-version: [ 22.17.x ]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Link API client
+      run: npm link ../api-ts
+
+    - name: Run linter
+      run: npm run lint
+
+    - name: Run tests
+      run: npm test
+
+    # Telegram Notification Step
+    - name: Send Telegram Notification
+      if: success()
+      run: *telegram-success
