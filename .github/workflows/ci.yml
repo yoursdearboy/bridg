@@ -34,7 +34,7 @@ jobs:
       run: npm run lint
         # Telegram Notification Step
     - name: Send Telegram Notification
-      uses: ./.github/workflows/telegram-notification.yml@ci
+      uses: ./.github/workflows/telegram-notification.yml
       if: always()
       with:
         working_directory: './ui'
@@ -73,7 +73,7 @@ jobs:
 
     # Telegram Notification Step
     - name: Send Telegram Notification
-      uses: ./.github/workflows/telegram-notification.yml@ci
+      uses: ./.github/workflows/telegram-notification.yml
       if: always()
       with:
         working_directory: './ui'
