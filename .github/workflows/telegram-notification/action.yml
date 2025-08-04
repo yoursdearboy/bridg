@@ -32,7 +32,7 @@ jobs:
         run: |
             # Construct message
             MESSAGE=$(cat <<EOF
-            ${{ inputs.status_emoji }} GitHub Actions CI Report for [${{ stage_name }}] ${{ inputs.status_emoji }}
+            ${{ status_emoji }} GitHub Actions CI Report for [${{ stage_name }}] ${{ status_emoji }}
 
             Repository: ${{ github.repository }}
             Workflow: ${{ github.workflow }}
