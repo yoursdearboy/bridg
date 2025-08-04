@@ -157,7 +157,6 @@ const StudySubjectFields = ({ form }: NewStudySubjectFormProps) => {
     label: t(`Status.${key}`),
     value,
   }));
-  <style></style>;
   return (
     <>
       <Card>
