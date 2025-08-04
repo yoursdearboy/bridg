@@ -3,25 +3,22 @@ name: Telegram CI Notification
 on:
   workflow_call:
     inputs:
-      status:
+      status_text:
         type: string
         required: true
         description: "Job status (success/failure)"
+      status_emoji:
+        type: string
+        required: true
+        description: "Job status emoji (success/failure)"
+      stage_name:
+        type: string
+        required: true
+        description: Job stage name
       working_directory:
         type: string
         default: ""
         description: "Project directory (e.g., ./ui)"
-    secrets:
-      TELEGRAM_BOT_TOKEN:
-        required: true
-      TELEGRAM_CHAT_ID:
-        required: true
-      STATUS_TEXT:
-        required: true
-      STATUS_EMOJI:
-        required: true
-      STAGE_NAME:
-        required: true
 
 jobs:
   send-notification:
@@ -30,6 +27,11 @@ jobs:
       - name: Send Telegram Notification
         env:
           WORKING_DIR: ${{ inputs.working_directory }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          STATUS_TEXT: ${{ inputs.status_text }}
+          STATUS_EMOJI: ${{ inputs.status_emoji }}
+          STAGE_NAME: ${{ inputs.stage_name }}
         run: |
             # Construct message
             MESSAGE=$(cat <<EOF
