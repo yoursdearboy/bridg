@@ -30,21 +30,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Send Telegram Notification
-        env:
-          WORKING_DIR: ${{ inputs.working_directory }}
-          TELEGRAM_CHAT_ID: ${{ inputs.chat_id }}
-          TELEGRAM_BOT_TOKEN: ${{ inputs.bot_token }}
-          STATUS_TEXT: ${{ inputs.status_text }}
-          STATUS_EMOJI: ${{ inputs.status_emoji }}
-          STAGE_NAME: ${{ inputs.stage_name }}
         run: |
             # Construct message
             MESSAGE=$(cat <<EOF
-            ${STATUS_EMOJI} GitHub Actions CI Report for [${STAGE_NAME}] ${STATUS_EMOJI}
+            ${{ inputs.status_emoji }} GitHub Actions CI Report for [${{ inputs.stage_name }}] ${{ inputs.status_emoji }}
 
             Repository: ${{ github.repository }}
             Workflow: ${{ github.workflow }}
-            Status: ${STATUS_TEXT}
+            Status: ${{ inputs.status_text }}
             
             Commit: ${{ github.sha }}
             Branch: ${{ github.ref_name }}
@@ -58,10 +51,10 @@ jobs:
             ENCODED_MESSAGE=$(printf '%s' "$MESSAGE" | jq -sRr @uri)
 
             # Send message via Telegram Bot API
-            TELEGRAM_API_URL="https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage"
+            TELEGRAM_API_URL="https://api.telegram.org/bot${{ inputs.bot_token }}/sendMessage"
             
             RESPONSE=$(curl -s -X POST "$TELEGRAM_API_URL" \
-            -d "chat_id=${TELEGRAM_CHAT_ID}" \
+            -d "chat_id=${{ inputs.chat_id }}" \
             -d "text=${ENCODED_MESSAGE}")
 
             # Check if message was sent successfully
