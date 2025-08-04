@@ -15,7 +15,7 @@ dayjs.extend(LocalizedFormat);
 const resources = {
   en: {
     translation: {
-      PatientCardInfo: " Patient Information",
+      PatientCardInfo: "Patient Information",
       Edit: "Edit",
       Patients: "Patients",
       intlDateTime: "{{val, datetime}}",
@@ -36,9 +36,9 @@ const resources = {
         Withdrawn: "withdrawn",
       },
       Gender: {
-        F: "Female",
-        M: "Male",
-        U: "Unknown",
+        F: "F",
+        M: "M",
+        U: "U",
       },
     },
   },
