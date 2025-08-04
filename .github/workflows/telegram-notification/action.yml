@@ -20,10 +20,8 @@ on:
         default: ""
         description: "Project directory (e.g., ./ui)"
       chat_id:
-        type: string
         required: true
       bot_token:
-        type: string
         required: true
 
 jobs:
