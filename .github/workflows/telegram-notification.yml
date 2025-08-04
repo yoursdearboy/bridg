@@ -1,0 +1,67 @@
+name: Telegram CI Notification
+
+on:
+  workflow_call:
+    inputs:
+      status:
+        type: string
+        required: true
+        description: "Job status (success/failure)"
+      working_directory:
+        type: string
+        default: ""
+        description: "Project directory (e.g., ./ui)"
+    secrets:
+      TELEGRAM_BOT_TOKEN:
+        required: true
+      TELEGRAM_CHAT_ID:
+        required: true
+      STATUS_TEXT:
+        required: true
+      STATUS_EMOJI:
+        required: true
+      STAGE_NAME:
+        required: true
+
+jobs:
+  send-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram Notification
+        env:
+          WORKING_DIR: ${{ inputs.working_directory }}
+        run: |
+            # Construct message
+            MESSAGE=$(cat <<EOF
+            ${STATUS_EMOJI} GitHub Actions CI Report for [${STAGE_NAME}] ${STATUS_EMOJI}
+
+            Repository: ${{ github.repository }}
+            Workflow: ${{ github.workflow }}
+            Status: ${STATUS_TEXT}
+            
+            Commit: ${{ github.sha }}
+            Branch: ${{ github.ref_name }}
+            Author: ${{ github.actor }}
+
+            Details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            EOF
+            )
+
+            # URL encode the message
+            ENCODED_MESSAGE=$(printf '%s' "$MESSAGE" | jq -sRr @uri)
+
+            # Send message via Telegram Bot API
+            TELEGRAM_API_URL="https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage"
+            
+            RESPONSE=$(curl -s -X POST "$TELEGRAM_API_URL" \
+            -d "chat_id=${TELEGRAM_CHAT_ID}" \
+            -d "text=${ENCODED_MESSAGE}")
+
+            # Check if message was sent successfully
+            if echo "$RESPONSE" | grep -q '"ok":true'; then
+            echo "Telegram notification sent successfully"
+            else
+            echo "Failed to send Telegram notification"
+            echo "$RESPONSE"
+            exit 1
+            fi
