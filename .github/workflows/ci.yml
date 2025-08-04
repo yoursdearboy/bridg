@@ -57,9 +57,9 @@ name: BRIDG CI
 
 on:
   push:
-    branches: [ main, api ]
+    branches: [ main, api, telegram_notify ]
   pull_request:
-    branches: [ main, api ]
+    branches: [ main, api, telegram_notify ]
 
 jobs:
   linter-tests:
