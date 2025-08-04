@@ -14,6 +14,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
   const person = subject.performingBiologicEntity;
   const organization = subject.performingOrganization;
   const { t } = useTranslation();
+
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">

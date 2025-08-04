@@ -42,12 +42,11 @@ export function PatientCard({ subject, onEdit }: PatientCardProps) {
 
         <InfoRow label="Gender" value={person?.administrativeGenderCode} />
 
-        {/* change to format without t() because idk why it doesn't work with english language */}
         <InfoRow
           label="Date of Birth"
           value={
             person?.birthDate
-              ? dayjs(person.birthDate).format("DD.MM.YYYY")
+              ? t("intlDateTime", { val: person.birthDate })
               : undefined
           }
         />

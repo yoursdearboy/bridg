@@ -36,9 +36,9 @@ const resources = {
         Withdrawn: "withdrawn",
       },
       Gender: {
-        F: "F",
-        M: "M",
-        U: "U",
+        F: "Female",
+        M: "Male",
+        U: "Unknown",
       },
     },
   },
