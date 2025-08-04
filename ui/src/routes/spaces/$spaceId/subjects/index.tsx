@@ -28,7 +28,10 @@ function RouteComponent() {
         <Text>{subject.performingBiologicEntity?.primaryName?.trim()}</Text>
       </Table.Td>
       <Table.Td>
-        {subject.performingBiologicEntity?.administrativeGenderCode}
+        {subject.performingBiologicEntity?.administrativeGenderCode &&
+          t(
+            `Gender.${subject.performingBiologicEntity.administrativeGenderCode}`
+          )}
       </Table.Td>
       <Table.Td>
         {subject.performingBiologicEntity?.birthDate
