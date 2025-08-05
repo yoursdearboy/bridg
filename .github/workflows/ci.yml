@@ -79,7 +79,7 @@ jobs:
   ui-telegram-notification:
     needs: ui-tests
     if: ${{ always() }}
-    uses: ./.github/workflows/telegram-notification
+    uses: ./.github/workflows/telegram-notification.yml
     with:
       working_directory: "./ui"
       status_text: ${{ needs.ui-tests.result == 'success' && 'success' || 'failure' }}
