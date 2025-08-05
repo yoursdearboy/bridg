@@ -33,15 +33,14 @@ jobs:
       - name: Run linter
         run:
           npm run lint
-          # Telegram Notification Step
   
   linter-telegram-notification:
     needs: linter-tests
     uses: ./.github/workflows/telegram-notification.yml
     with:
       working_directory: "./ui"
-      status_text: ${{ needs.linter-tests.outcome == 'success' && 'success' || 'failure' }}
-      status_emoji: ${{ needs.linter-tests.outcome == 'success' && '✅' || '❌' }}
+      status_text: ${{ needs.linter-tests.result == 'success' && 'success' || 'failure' }}
+      status_emoji: ${{ needs.linter-tests.result == 'success' && '✅' || '❌' }}
       stage_name: "LINTER"
     secrets:
       chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
