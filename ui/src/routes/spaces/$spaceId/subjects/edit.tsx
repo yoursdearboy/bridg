@@ -7,8 +7,6 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/edit")({
 });
 
 function EditComponent() {
-  const { spaceId, subjectId } = Route.useParams();
-
   return (
     <div>
       <Text>edit space</Text>

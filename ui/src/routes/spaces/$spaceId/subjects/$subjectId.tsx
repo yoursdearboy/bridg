@@ -20,7 +20,7 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
 });
 
 function RouteComponent() {
-  const { spaceId, subjectId } = Route.useParams();
+  const { spaceId } = Route.useParams();
   const subject = Route.useLoaderData();
   const { t } = useTranslation();
 
