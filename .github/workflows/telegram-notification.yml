@@ -34,17 +34,10 @@ jobs:
           # Construct message
           MESSAGE=$(cat <<EOF
           ${{ inputs.status_emoji }} GitHub Actions CI Report for [${{ inputs.stage_name }}] ${{ inputs.status_emoji }}
-
-          Repository: ${{ github.repository }}
-          Workflow: ${{ github.workflow }}
-          Status: ${{ inputs.status_text }}
-
           Commit: ${{ github.sha }}
-          Branch: ${{ github.ref_name }}
           Author: ${{ github.actor }}
-
-          Pull request url: ${{ github.event.pull_request.html_url }}
-          Details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          PR url: ${{ github.event.pull_request.html_url }}
+          CI LOG: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           EOF
           )
 
