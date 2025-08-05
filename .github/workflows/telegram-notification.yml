@@ -43,7 +43,7 @@ jobs:
           Branch: ${{ github.ref_name }}
           Author: ${{ github.actor }}
 
-          GITHUB_REF: ${{ github.github_ref }}
+          Pull request url: ${{ github.event.pull_request.html_url }}
           Details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           EOF
           )
