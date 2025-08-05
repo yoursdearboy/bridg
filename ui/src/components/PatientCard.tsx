@@ -57,16 +57,6 @@ export function PatientCard({ subject }: PatientCardProps) {
               : undefined
           }
         />
-
-        <InfoRow
-          label={t("DateOfBirth")}
-          value={
-            person?.birthDate
-              ? dayjs(person.birthDate).format("DD.MM.YYYY")
-              : undefined
-          }
-        />
-
         <InfoRow
           label={t("DateOfBirth")}
           value={
@@ -75,6 +65,20 @@ export function PatientCard({ subject }: PatientCardProps) {
               : undefined
           }
         />
+        <InfoRow
+          label={t("Age")}
+          value={
+            person?.birthDate
+              ? t("dayjsDuration", {
+                  val: dayjs.duration(
+                    dayjs().diff(person.birthDate, "year"),
+                    "year"
+                  ),
+                })
+              : undefined
+          }
+        />
+
         {/* Информация о смерти (если есть) */}
         <InfoRow
           label={t("DateOfDeath")}
