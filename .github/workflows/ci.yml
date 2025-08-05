@@ -34,17 +34,18 @@ jobs:
         run:
           npm run lint
           # Telegram Notification Step
-      - name: Send Telegram Notification
-        if: always()
-        uses: ./.github/workflows/telegram-notification
-        with:
-          working_directory: "./ui"
-          status_text: ${{ steps.linter-tests.outcome == 'success' && 'success' || 'failure' }}
-          status_emoji: ${{ steps.linter-tests.outcome == 'success' && '✅' || '❌' }}
-          stage_name: "LINTER"
-        secrets:
-          chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
-          bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  
+  linter-telegram-notification:
+    needs: linter-tests
+    uses: ./.github/workflows/telegram-notification.yml
+    with:
+      working_directory: "./ui"
+      status_text: ${{ needs.linter-tests.outcome == 'success' && 'success' || 'failure' }}
+      status_emoji: ${{ needs.linter-tests.outcome == 'success' && '✅' || '❌' }}
+      stage_name: "LINTER"
+    secrets:
+      chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+      bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
   ui-tests:
     runs-on: ubuntu-latest
@@ -74,16 +75,16 @@ jobs:
 
       - name: Run tests
         run: npm test
-
-      # Telegram Notification Step
-      - name: Send Telegram Notification
-        uses: ./.github/workflows/telegram-notification
-        if: always()
-        with:
-          working_directory: "./ui"
-          status_text: ${{ steps.ui-tests.outcome == 'success' && 'success' || 'failure' }}
-          status_emoji: ${{ steps.ui-tests.outcome == 'success' && '✅' || '❌' }}
-          stage_name: "UI"
-        secrets:
-          chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
-          bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  
+  ui-telegram-notification:
+    needs: ui-tests
+    if: ${{ always() }}
+    uses: ./.github/workflows/telegram-notification
+    with:
+      working_directory: "./ui"
+      status_text: ${{ needs.ui-tests.result == 'success' && 'success' || 'failure' }}
+      status_emoji: ${{ needs.ui-tests.result == 'success' && '✅' || '❌' }}
+      stage_name: "UI"
+    secrets:
+      chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+      bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
