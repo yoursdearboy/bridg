@@ -81,3 +81,41 @@ Content-Type: application/json
   "given": "Good",
   "prefix": "Jr."
 }
+
+### Postal addresses
+
+#### Show a person postal addresses
+
+GET {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/postal_addresses
+
+#### Create a person postal address
+
+POST {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/postal_addresses
+Content-Type: application/json
+
+{
+  "use": "tmp",
+  "street": "Pushkina",
+  "building": "Kolotushkina",
+  "country": "Lukomorje",
+  "municipality": "Great tree",
+  "state": "",
+  "zip": "111111",
+}
+
+### Telecommunication addresses
+
+#### Show a person telecommunication addresses
+
+GET {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/telecommunication_addresses
+
+#### Create a person telecommunication address
+
+POST {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/telecommunication_addresses
+Content-Type: application/json
+
+{
+  "use": "h",
+  "shema": "tel",
+  "address": "8(800)5553535"
+}
