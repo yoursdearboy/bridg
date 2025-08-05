@@ -19,6 +19,7 @@ on:
         type: string
         default: ""
         description: "Project directory (e.g., ./ui)"
+    secrets:
       chat_id:
         required: true
       bot_token:
@@ -30,37 +31,37 @@ jobs:
     steps:
       - name: Send Telegram Notification
         run: |
-            # Construct message
-            MESSAGE=$(cat <<EOF
-            ${{ status_emoji }} GitHub Actions CI Report for [${{ stage_name }}] ${{ status_emoji }}
+          # Construct message
+          MESSAGE=$(cat <<EOF
+          ${{ inputs.status_emoji }} GitHub Actions CI Report for [${{ inputs.stage_name }}] ${{ inputs.status_emoji }}
 
-            Repository: ${{ github.repository }}
-            Workflow: ${{ github.workflow }}
-            Status: ${{ inputs.status_text }}
-            
-            Commit: ${{ github.sha }}
-            Branch: ${{ github.ref_name }}
-            Author: ${{ github.actor }}
+          Repository: ${{ github.repository }}
+          Workflow: ${{ github.workflow }}
+          Status: ${{ inputs.status_text }}
 
-            Details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-            EOF
-            )
+          Commit: ${{ github.sha }}
+          Branch: ${{ github.ref_name }}
+          Author: ${{ github.actor }}
 
-            # URL encode the message
-            ENCODED_MESSAGE=$(printf '%s' "$MESSAGE" | jq -sRr @uri)
+          Details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          EOF
+          )
 
-            # Send message via Telegram Bot API
-            TELEGRAM_API_URL="https://api.telegram.org/bot${{ inputs.bot_token }}/sendMessage"
-            
-            RESPONSE=$(curl -s -X POST "$TELEGRAM_API_URL" \
-            -d "chat_id=${{ inputs.chat_id }}" \
-            -d "text=${ENCODED_MESSAGE}")
+          # URL encode the message
+          ENCODED_MESSAGE=$(printf '%s' "$MESSAGE" | jq -sRr @uri)
 
-            # Check if message was sent successfully
-            if echo "$RESPONSE" | grep -q '"ok":true'; then
-            echo "Telegram notification sent successfully"
-            else
-            echo "Failed to send Telegram notification"
-            echo "$RESPONSE"
-            exit 1
-            fi
+          # Send message via Telegram Bot API
+          TELEGRAM_API_URL="https://api.telegram.org/bot${{ secrets.bot_token }}/sendMessage"
+
+          RESPONSE=$(curl -s -X POST "$TELEGRAM_API_URL" \
+          -d "chat_id=${{ secrets.chat_id }}" \
+          -d "text=${ENCODED_MESSAGE}")
+
+          # Check if message was sent successfully
+          if echo "$RESPONSE" | grep -q '"ok":true'; then
+          echo "Telegram notification sent successfully"
+          else
+          echo "Failed to send Telegram notification"
+          echo "$RESPONSE"
+          exit 1
+          fi
