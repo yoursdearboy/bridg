@@ -49,14 +49,14 @@ export function PatientCard({ subject }: PatientCardProps) {
           )}
         </InfoRow>
 
- <InfoRow
-  label={t("GenderName")}
-  value={
-    person?.administrativeGenderCode
-      ? t(`Gender.${person.administrativeGenderCode}`)
-      : undefined
-  }
-/>
+        <InfoRow
+          label={t("GenderName")}
+          value={
+            person?.administrativeGenderCode
+              ? t(`Gender.${person.administrativeGenderCode}`)
+              : undefined
+          }
+        />
 
         <InfoRow
           label={t("DateOfBirth")}

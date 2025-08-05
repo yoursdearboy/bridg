@@ -20,7 +20,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         {/* Card Header */}
         <Group justify="space-between">
           <Text size="xl" fw={700}>
-            Subject Information
+            {t("SubCardInfo")}
           </Text>
           {onEdit && (
             <Badge color="blue" style={{ cursor: "pointer" }}>
@@ -33,7 +33,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
         {/* Status Information */}
         <InfoRow
-          label="Status"
+          label={t("StatusName")}
           value={
             <>
               {subject.status || "-"}
@@ -48,7 +48,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
         {/* Subject Type */}
         <InfoRow
-          label="Subject Type"
+          label={t("SubjectType")}
           value={person ? "Person" : organization ? "Organization" : "Unknown"}
         />
 
@@ -57,16 +57,23 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           <>
             <Divider my="xs" />
             <Text fw={600} size="sm" c="dimmed">
-              Person Details
+              {t("PersonDetails")}
             </Text>
 
-            <InfoRow label="Full Name" value={person.primaryName} />
-            <InfoRow label="Gender" value={person.administrativeGenderCode} />
+            <InfoRow label={t("FullName")} value={person.primaryName} />
             <InfoRow
-              label="Date of Birth"
+              label={t("GenderName")}
               value={
-                person.birthDate
-                  ? dayjs(person.birthDate).format("YYYY-MM-DD")
+                person?.administrativeGenderCode
+                  ? t(`Gender.${person.administrativeGenderCode}`)
+                  : undefined
+              }
+            />
+            <InfoRow
+              label={t("DateOfBirth")}
+              value={
+                person?.birthDate
+                  ? t("intlDateTime", { val: person?.birthDate })
                   : undefined
               }
             />
