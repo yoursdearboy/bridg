@@ -2,11 +2,50 @@ name: BRIDG CI
 
 on:
   push:
-    branches: [ main, api ]
+    branches: [main]
   pull_request:
-    branches: [ main, api ]
+    branches: [main]
 
 jobs:
+  linter-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ui
+
+    strategy:
+      matrix:
+        node-version: [22.17.x]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Link API client
+        run: npm link ../api-ts
+
+      - name: Run linter
+        run:
+          npm run lint
+  
+  linter-telegram-notification:
+    needs: linter-tests
+    uses: ./.github/workflows/telegram-notification.yml
+    with:
+      working_directory: "./ui"
+      status_text: ${{ needs.linter-tests.result == 'success' && 'success' || 'failure' }}
+      status_emoji: ${{ needs.linter-tests.result == 'success' && '✅' || '❌' }}
+      stage_name: "LINTER"
+    secrets:
+      chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+      bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
   ui-tests:
     runs-on: ubuntu-latest
     defaults:
@@ -15,24 +54,36 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 22.17.x ]
+        node-version: [22.17.x]
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Link API client
-      run: npm link ../api-ts
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Run linter
-      run: npm run lint
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Run tests
-      run: npm test
+      - name: Link API client
+        run: npm link ../api-ts
 
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+  
+  ui-telegram-notification:
+    needs: ui-tests
+    if: ${{ always() }}
+    uses: ./.github/workflows/telegram-notification.yml
+    with:
+      working_directory: "./ui"
+      status_text: ${{ needs.ui-tests.result == 'success' && 'success' || 'failure' }}
+      status_emoji: ${{ needs.ui-tests.result == 'success' && '✅' || '❌' }}
+      stage_name: "UI"
+    secrets:
+      chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+      bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
