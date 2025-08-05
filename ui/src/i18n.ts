@@ -16,7 +16,7 @@ const resources = {
   en: {
     translation: {
       PatientCardInfo: "Patient Information",
-      SubCardInfo: " Subject Information",
+      SubCardInfo: "Subject Information",
       Edit: "Edit",
       StatusName: "Status",
       FullName: "Full Name",

@@ -73,7 +73,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
               label={t("DateOfBirth")}
               value={
                 person?.birthDate
-                  ? t("intlDateTime", { val: person?.birthDate })
+                  ? new Date(person.birthDate).toISOString().split("T")[0]
                   : undefined
               }
             />
