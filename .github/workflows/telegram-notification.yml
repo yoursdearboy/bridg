@@ -49,6 +49,7 @@ jobs:
 
           RESPONSE=$(curl -s -X POST "$TELEGRAM_API_URL" \
           -d "chat_id=${{ secrets.chat_id }}" \
+          -d "disable_web_page_preview= true" \
           -d "text=${ENCODED_MESSAGE}")
 
           # Check if message was sent successfully
