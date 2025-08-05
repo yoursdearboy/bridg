@@ -8,7 +8,6 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import { Link, useParams } from "@tanstack/react-router";
 import type { StudySubject } from "bridg-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
@@ -19,32 +18,21 @@ interface PatientCardProps {
 
 export function PatientCard({ subject }: PatientCardProps) {
   const person = subject.performingBiologicEntity;
-  const { spaceId } = useParams({ strict: false });
   const { t } = useTranslation();
-  console.log("Navigation params:", {
-    spaceId,
-    subjectId: subject.id,
-    fullPath: `/spaces/${spaceId}/subjects/${subject.id}/edit`,
-  });
 
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
-        {/* Header with edit button */}
+        {/* Заголовок карточки с кнопкой редактирования */}
         <Group justify="space-between">
           <Text size="xl" fw={700}>
             {t("PatientCardInfo")}
           </Text>
-
           <Button
-            component={Link}
-            to="/spaces/$spaceId/subjects/edit"
-            params={{
-              spaceId: spaceId!,
-            }}
-            variant="light"
+            variant="outline"
             color="blue"
             size="sm"
+            onClick={() => console.log("Edit clicked")} // Заглушка
           >
             {t("Edit")}
           </Button>
@@ -52,28 +40,29 @@ export function PatientCard({ subject }: PatientCardProps) {
 
         <Divider my="xs" />
 
-        {/* Patient information */}
-        <InfoRow label={t("Full Name")} value={person?.primaryName?.trim()}>
+        {/* Основная информация */}
+        <InfoRow label={t("FullName")} value={person?.primaryName?.trim()}>
           {person?.deathIndicator && (
             <Badge color="red" ml="sm">
-              {t("Deceased")}
+              Deceased
             </Badge>
           )}
         </InfoRow>
 
-        <InfoRow
-          label={t("Gender")}
-          value={
-            person?.administrativeGenderCode &&
-            t(person.administrativeGenderCode)
-          }
-        />
+ <InfoRow
+  label={t("GenderName")}
+  value={
+    person?.administrativeGenderCode
+      ? t(`Gender.${person.administrativeGenderCode}`)
+      : undefined
+  }
+/>
 
         <InfoRow
-          label={t("Date of Birth")}
+          label={t("DateOfBirth")}
           value={
             person?.birthDate
-              ? dayjs(person.birthDate).format("DD.MM.YYYY")
+              ? t("intlDateTime", { val: person?.birthDate })
               : undefined
           }
         />
@@ -92,14 +81,15 @@ export function PatientCard({ subject }: PatientCardProps) {
           }
         />
 
+        {/* Информация о смерти (если есть) */}
         <InfoRow
-          label={t("Date of Death")}
+          label={t("DateOfDeath")}
           value={
             person?.deathIndicator
               ? person?.deathDate
-                ? dayjs(person.deathDate).format("DD.MM.YYYY")
-                : t("Date not specified")
-              : t("Not deceased")
+                ? t("intlDateTime", { val: person.deathDate })
+                : t("DateNotSpecified")
+              : t("NotDeceased")
           }
         />
       </Stack>
@@ -107,6 +97,7 @@ export function PatientCard({ subject }: PatientCardProps) {
   );
 }
 
+// Вспомогательный компонент для строк информации
 interface InfoRowProps {
   label: string;
   value?: React.ReactNode;
