@@ -10,7 +10,7 @@ import bridg
 from api.base_model import BaseModel
 from api.db import get_db
 
-from . import name
+from . import name, telecommunication_address
 
 router = APIRouter(prefix="/persons", tags=["persons"])
 
@@ -36,6 +36,7 @@ def show(person_id: UUID, db: Session = Depends(get_db)) -> Optional[bridg.Perso
 
 
 router.include_router(name.router, prefix="/{person_id:uuid}")
+router.include_router(telecommunication_address.router, prefix="/{person_id:uuid}")
 
 
-openapi_tags = [{"name": "persons"}]
+openapi_tags = [{"name": "persons", "telecommunication_address": "persons"}]
