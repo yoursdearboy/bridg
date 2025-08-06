@@ -19,6 +19,10 @@ import type {
   Name,
   NameWithId,
   PersonOutput,
+  PostalAddress,
+  PostalAddressWithId,
+  TelecommunicationAddress,
+  TelecommunicationAddressWithId,
 } from '../models/index';
 import {
     HTTPValidationErrorFromJSON,
@@ -29,6 +33,14 @@ import {
     NameWithIdToJSON,
     PersonOutputFromJSON,
     PersonOutputToJSON,
+    PostalAddressFromJSON,
+    PostalAddressToJSON,
+    PostalAddressWithIdFromJSON,
+    PostalAddressWithIdToJSON,
+    TelecommunicationAddressFromJSON,
+    TelecommunicationAddressToJSON,
+    TelecommunicationAddressWithIdFromJSON,
+    TelecommunicationAddressWithIdToJSON,
 } from '../models/index';
 
 export interface CreatePersonsPersonIdNamesPostRequest {
@@ -36,7 +48,25 @@ export interface CreatePersonsPersonIdNamesPostRequest {
     name: Name;
 }
 
+export interface CreatePersonsPersonIdPostalAddressesPostRequest {
+    personId: string;
+    postalAddress: PostalAddress;
+}
+
+export interface CreatePersonsPersonIdTelecommunicationAddressesPostRequest {
+    personId: string;
+    telecommunicationAddress: TelecommunicationAddress;
+}
+
 export interface IndexPersonsPersonIdNamesGetRequest {
+    personId: string;
+}
+
+export interface IndexPersonsPersonIdPostalAddressesGetRequest {
+    personId: string;
+}
+
+export interface IndexPersonsPersonIdTelecommunicationAddressesGetRequest {
     personId: string;
 }
 
@@ -97,6 +127,100 @@ export class PersonsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Create
+     */
+    async createPersonsPersonIdPostalAddressesPostRaw(requestParameters: CreatePersonsPersonIdPostalAddressesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PostalAddress>> {
+        if (requestParameters['personId'] == null) {
+            throw new runtime.RequiredError(
+                'personId',
+                'Required parameter "personId" was null or undefined when calling createPersonsPersonIdPostalAddressesPost().'
+            );
+        }
+
+        if (requestParameters['postalAddress'] == null) {
+            throw new runtime.RequiredError(
+                'postalAddress',
+                'Required parameter "postalAddress" was null or undefined when calling createPersonsPersonIdPostalAddressesPost().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/persons/{person_id}/postal_addresses`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PostalAddressToJSON(requestParameters['postalAddress']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PostalAddressFromJSON(jsonValue));
+    }
+
+    /**
+     * Create
+     */
+    async createPersonsPersonIdPostalAddressesPost(requestParameters: CreatePersonsPersonIdPostalAddressesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostalAddress> {
+        const response = await this.createPersonsPersonIdPostalAddressesPostRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Create
+     */
+    async createPersonsPersonIdTelecommunicationAddressesPostRaw(requestParameters: CreatePersonsPersonIdTelecommunicationAddressesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TelecommunicationAddress>> {
+        if (requestParameters['personId'] == null) {
+            throw new runtime.RequiredError(
+                'personId',
+                'Required parameter "personId" was null or undefined when calling createPersonsPersonIdTelecommunicationAddressesPost().'
+            );
+        }
+
+        if (requestParameters['telecommunicationAddress'] == null) {
+            throw new runtime.RequiredError(
+                'telecommunicationAddress',
+                'Required parameter "telecommunicationAddress" was null or undefined when calling createPersonsPersonIdTelecommunicationAddressesPost().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/persons/{person_id}/telecommunication_addresses`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: TelecommunicationAddressToJSON(requestParameters['telecommunicationAddress']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TelecommunicationAddressFromJSON(jsonValue));
+    }
+
+    /**
+     * Create
+     */
+    async createPersonsPersonIdTelecommunicationAddressesPost(requestParameters: CreatePersonsPersonIdTelecommunicationAddressesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TelecommunicationAddress> {
+        const response = await this.createPersonsPersonIdTelecommunicationAddressesPostRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Index
      */
     async indexPersonsPersonIdNamesGetRaw(requestParameters: IndexPersonsPersonIdNamesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<NameWithId>>> {
@@ -130,6 +254,80 @@ export class PersonsApi extends runtime.BaseAPI {
      */
     async indexPersonsPersonIdNamesGet(requestParameters: IndexPersonsPersonIdNamesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<NameWithId>> {
         const response = await this.indexPersonsPersonIdNamesGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Index
+     */
+    async indexPersonsPersonIdPostalAddressesGetRaw(requestParameters: IndexPersonsPersonIdPostalAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PostalAddressWithId>>> {
+        if (requestParameters['personId'] == null) {
+            throw new runtime.RequiredError(
+                'personId',
+                'Required parameter "personId" was null or undefined when calling indexPersonsPersonIdPostalAddressesGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/persons/{person_id}/postal_addresses`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PostalAddressWithIdFromJSON));
+    }
+
+    /**
+     * Index
+     */
+    async indexPersonsPersonIdPostalAddressesGet(requestParameters: IndexPersonsPersonIdPostalAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PostalAddressWithId>> {
+        const response = await this.indexPersonsPersonIdPostalAddressesGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Index
+     */
+    async indexPersonsPersonIdTelecommunicationAddressesGetRaw(requestParameters: IndexPersonsPersonIdTelecommunicationAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<TelecommunicationAddressWithId>>> {
+        if (requestParameters['personId'] == null) {
+            throw new runtime.RequiredError(
+                'personId',
+                'Required parameter "personId" was null or undefined when calling indexPersonsPersonIdTelecommunicationAddressesGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/persons/{person_id}/telecommunication_addresses`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TelecommunicationAddressWithIdFromJSON));
+    }
+
+    /**
+     * Index
+     */
+    async indexPersonsPersonIdTelecommunicationAddressesGet(requestParameters: IndexPersonsPersonIdTelecommunicationAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<TelecommunicationAddressWithId>> {
+        const response = await this.indexPersonsPersonIdTelecommunicationAddressesGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
