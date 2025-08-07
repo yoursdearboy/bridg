@@ -8,6 +8,7 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
+import { Link } from "@tanstack/react-router";
 import type { StudySubject } from "bridg-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
@@ -20,10 +21,13 @@ export function PatientCard({ subject }: PatientCardProps) {
   const person = subject.performingBiologicEntity;
   const { t } = useTranslation();
 
+  if (!person) {
+    return <Card withBorder>No patient information available</Card>;
+  }
+
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
-        {/* Заголовок карточки с кнопкой редактирования */}
         <Group justify="space-between">
           <Text size="xl" fw={700}>
             {t("PatientCardInfo")}
@@ -32,7 +36,8 @@ export function PatientCard({ subject }: PatientCardProps) {
             variant="outline"
             color="blue"
             size="sm"
-            onClick={() => console.log("Edit clicked")} // Заглушка
+            component={Link}
+            to="/spaces/$spaceId/subjects/$subjectId/edit"
           >
             {t("Edit")}
           </Button>
@@ -40,11 +45,10 @@ export function PatientCard({ subject }: PatientCardProps) {
 
         <Divider my="xs" />
 
-        {/* Основная информация */}
-        <InfoRow label={t("FullName")} value={person?.primaryName?.trim()}>
-          {person?.deathIndicator && (
+        <InfoRow label={t("FullName")} value={person.primaryName?.trim()}>
+          {person.deathIndicator && (
             <Badge color="red" ml="sm">
-              Deceased
+              {t("Deceased")}
             </Badge>
           )}
         </InfoRow>
@@ -52,20 +56,21 @@ export function PatientCard({ subject }: PatientCardProps) {
         <InfoRow
           label={t("GenderName")}
           value={
-            person?.administrativeGenderCode
+            person.administrativeGenderCode
               ? t(`Gender.${person.administrativeGenderCode}`)
-              : undefined
+              : "N/A"
           }
         />
-        <InfoRow
-          label={t("DateOfBirth")}
-          value={
-            person?.birthDate
-              ? new Date(person.birthDate).toISOString().split("T")[0]
-              : undefined
-          }
-        />
-        <InfoRow
+
+         <InfoRow
+              label={t("DateOfBirth")}
+              value={
+                person?.birthDate
+                  ? new Date(person.birthDate).toISOString().split("T")[0]
+                  : undefined
+              }
+            />
+  <InfoRow
           label={t("Age")}
           value={
             person?.birthDate
@@ -78,14 +83,12 @@ export function PatientCard({ subject }: PatientCardProps) {
               : undefined
           }
         />
-
-        {/* Информация о смерти (если есть) */}
         <InfoRow
           label={t("DateOfDeath")}
           value={
-            person?.deathIndicator
-              ? person?.deathDate
-                ? t("intlDateTime", { val: person.deathDate })
+            person.deathIndicator
+              ? person.deathDate
+                ? dayjs(person.deathDate).format("DD.MM.YYYY")
                 : t("DateNotSpecified")
               : t("NotDeceased")
           }
@@ -95,7 +98,6 @@ export function PatientCard({ subject }: PatientCardProps) {
   );
 }
 
-// Вспомогательный компонент для строк информации
 interface InfoRowProps {
   label: string;
   value?: React.ReactNode;

@@ -1,11 +1,10 @@
 // src/routes/spaces/$spaceId/subjects/$subjectId.tsx
 import api from "@/api";
-
 import ButtonLink from "@/components/ButtonLink";
 import { PatientCard } from "@/components/PatientCard";
 import { SubjectInfoCard } from "@/components/SubjectInfoCard";
 import { Grid, Group, Stack, Title } from "@mantine/core";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 import type { StudySubject } from "bridg-ts";
 import { useTranslation } from "react-i18next";
 
@@ -44,6 +43,9 @@ function RouteComponent() {
           <SubjectInfoCard subject={subject} spaceId={spaceId} />
         </Grid.Col>
       </Grid>
+
+      {/* Место для отображения вложенных маршрутов */}
+      <Outlet />
     </Stack>
   );
 }
