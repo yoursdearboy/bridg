@@ -17,9 +17,9 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
       subject.performingBiologicEntity?.primaryName || "Anonymous subject",
   }),
 });
-
+// src/routes/spaces/$spaceId/subjects/$subjectId.tsx
 function RouteComponent() {
-  const { spaceId } = Route.useParams();
+  const { spaceId } = Route.useParams(); // Получаем оба параметра
   const subject = Route.useLoaderData();
   const { t } = useTranslation();
 
@@ -33,7 +33,10 @@ function RouteComponent() {
       <Grid>
         {subject.performingBiologicEntity && (
           <Grid.Col span={{ base: 12, md: 6 }}>
-            <PatientCard subject={subject} />
+            <PatientCard
+              subject={subject}
+              spaceId={spaceId} // Передаем spaceId в PatientCard
+            />
           </Grid.Col>
         )}
 
@@ -44,7 +47,6 @@ function RouteComponent() {
         </Grid.Col>
       </Grid>
 
-      {/* Место для отображения вложенных маршрутов */}
       <Outlet />
     </Stack>
   );

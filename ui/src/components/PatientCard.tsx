@@ -15,9 +15,10 @@ import { useTranslation } from "react-i18next";
 
 interface PatientCardProps {
   subject: StudySubject;
+  spaceId: string;
 }
 
-export function PatientCard({ subject }: PatientCardProps) {
+export function PatientCard({ subject, spaceId }: PatientCardProps) {
   const person = subject.performingBiologicEntity;
   const { t } = useTranslation();
 
@@ -33,11 +34,8 @@ export function PatientCard({ subject }: PatientCardProps) {
             {t("PatientCardInfo")}
           </Text>
           <Button
-            variant="outline"
-            color="blue"
-            size="sm"
             component={Link}
-            to="/spaces/$spaceId/subjects/$subjectId/edit"
+            to={`/spaces/${spaceId}/subjects/edit?subjectId=${subject.id}`}
           >
             {t("Edit")}
           </Button>
@@ -62,15 +60,15 @@ export function PatientCard({ subject }: PatientCardProps) {
           }
         />
 
-         <InfoRow
-              label={t("DateOfBirth")}
-              value={
-                person?.birthDate
-                  ? new Date(person.birthDate).toISOString().split("T")[0]
-                  : undefined
-              }
-            />
-  <InfoRow
+        <InfoRow
+          label={t("DateOfBirth")}
+          value={
+            person?.birthDate
+              ? new Date(person.birthDate).toISOString().split("T")[0]
+              : undefined
+          }
+        />
+        <InfoRow
           label={t("Age")}
           value={
             person?.birthDate

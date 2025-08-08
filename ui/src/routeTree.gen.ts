@@ -15,7 +15,6 @@ import { Route as SpacesSpaceIdSubjectsIndexRouteImport } from './routes/spaces/
 import { Route as SpacesSpaceIdSubjectsNewRouteImport } from './routes/spaces/$spaceId/subjects/new'
 import { Route as SpacesSpaceIdSubjectsEditRouteImport } from './routes/spaces/$spaceId/subjects/edit'
 import { Route as SpacesSpaceIdSubjectsSubjectIdRouteImport } from './routes/spaces/$spaceId/subjects/$subjectId'
-import { Route as SpacesSpaceIdSubjectsSubjectIdEditRouteImport } from './routes/spaces/$spaceId/subjects/$subjectId/edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,39 +51,30 @@ const SpacesSpaceIdSubjectsSubjectIdRoute =
     path: '/$subjectId',
     getParentRoute: () => SpacesSpaceIdSubjectsRouteRoute,
   } as any)
-const SpacesSpaceIdSubjectsSubjectIdEditRoute =
-  SpacesSpaceIdSubjectsSubjectIdEditRouteImport.update({
-    id: '/edit',
-    path: '/edit',
-    getParentRoute: () => SpacesSpaceIdSubjectsSubjectIdRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsRouteRouteWithChildren
-  '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRouteWithChildren
+  '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRoute
   '/spaces/$spaceId/subjects/edit': typeof SpacesSpaceIdSubjectsEditRoute
   '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects/': typeof SpacesSpaceIdSubjectsIndexRoute
-  '/spaces/$spaceId/subjects/$subjectId/edit': typeof SpacesSpaceIdSubjectsSubjectIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRouteWithChildren
+  '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRoute
   '/spaces/$spaceId/subjects/edit': typeof SpacesSpaceIdSubjectsEditRoute
   '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsIndexRoute
-  '/spaces/$spaceId/subjects/$subjectId/edit': typeof SpacesSpaceIdSubjectsSubjectIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsRouteRouteWithChildren
-  '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRouteWithChildren
+  '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRoute
   '/spaces/$spaceId/subjects/edit': typeof SpacesSpaceIdSubjectsEditRoute
   '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects/': typeof SpacesSpaceIdSubjectsIndexRoute
-  '/spaces/$spaceId/subjects/$subjectId/edit': typeof SpacesSpaceIdSubjectsSubjectIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -95,7 +85,6 @@ export interface FileRouteTypes {
     | '/spaces/$spaceId/subjects/edit'
     | '/spaces/$spaceId/subjects/new'
     | '/spaces/$spaceId/subjects/'
-    | '/spaces/$spaceId/subjects/$subjectId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -103,7 +92,6 @@ export interface FileRouteTypes {
     | '/spaces/$spaceId/subjects/edit'
     | '/spaces/$spaceId/subjects/new'
     | '/spaces/$spaceId/subjects'
-    | '/spaces/$spaceId/subjects/$subjectId/edit'
   id:
     | '__root__'
     | '/'
@@ -112,7 +100,6 @@ export interface FileRouteTypes {
     | '/spaces/$spaceId/subjects/edit'
     | '/spaces/$spaceId/subjects/new'
     | '/spaces/$spaceId/subjects/'
-    | '/spaces/$spaceId/subjects/$subjectId/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -164,33 +151,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SpacesSpaceIdSubjectsSubjectIdRouteImport
       parentRoute: typeof SpacesSpaceIdSubjectsRouteRoute
     }
-    '/spaces/$spaceId/subjects/$subjectId/edit': {
-      id: '/spaces/$spaceId/subjects/$subjectId/edit'
-      path: '/edit'
-      fullPath: '/spaces/$spaceId/subjects/$subjectId/edit'
-      preLoaderRoute: typeof SpacesSpaceIdSubjectsSubjectIdEditRouteImport
-      parentRoute: typeof SpacesSpaceIdSubjectsSubjectIdRoute
-    }
   }
 }
-
-interface SpacesSpaceIdSubjectsSubjectIdRouteChildren {
-  SpacesSpaceIdSubjectsSubjectIdEditRoute: typeof SpacesSpaceIdSubjectsSubjectIdEditRoute
-}
-
-const SpacesSpaceIdSubjectsSubjectIdRouteChildren: SpacesSpaceIdSubjectsSubjectIdRouteChildren =
-  {
-    SpacesSpaceIdSubjectsSubjectIdEditRoute:
-      SpacesSpaceIdSubjectsSubjectIdEditRoute,
-  }
-
-const SpacesSpaceIdSubjectsSubjectIdRouteWithChildren =
-  SpacesSpaceIdSubjectsSubjectIdRoute._addFileChildren(
-    SpacesSpaceIdSubjectsSubjectIdRouteChildren,
-  )
 
 interface SpacesSpaceIdSubjectsRouteRouteChildren {
-  SpacesSpaceIdSubjectsSubjectIdRoute: typeof SpacesSpaceIdSubjectsSubjectIdRouteWithChildren
+  SpacesSpaceIdSubjectsSubjectIdRoute: typeof SpacesSpaceIdSubjectsSubjectIdRoute
   SpacesSpaceIdSubjectsEditRoute: typeof SpacesSpaceIdSubjectsEditRoute
   SpacesSpaceIdSubjectsNewRoute: typeof SpacesSpaceIdSubjectsNewRoute
   SpacesSpaceIdSubjectsIndexRoute: typeof SpacesSpaceIdSubjectsIndexRoute
@@ -198,8 +163,7 @@ interface SpacesSpaceIdSubjectsRouteRouteChildren {
 
 const SpacesSpaceIdSubjectsRouteRouteChildren: SpacesSpaceIdSubjectsRouteRouteChildren =
   {
-    SpacesSpaceIdSubjectsSubjectIdRoute:
-      SpacesSpaceIdSubjectsSubjectIdRouteWithChildren,
+    SpacesSpaceIdSubjectsSubjectIdRoute: SpacesSpaceIdSubjectsSubjectIdRoute,
     SpacesSpaceIdSubjectsEditRoute: SpacesSpaceIdSubjectsEditRoute,
     SpacesSpaceIdSubjectsNewRoute: SpacesSpaceIdSubjectsNewRoute,
     SpacesSpaceIdSubjectsIndexRoute: SpacesSpaceIdSubjectsIndexRoute,
