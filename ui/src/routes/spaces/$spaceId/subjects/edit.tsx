@@ -69,7 +69,7 @@ function EditComponent() {
 
         <Divider my="xs" />
 
-        <InfoRow label={t("Full name")} value={person.primaryName?.trim()}>
+        <InfoRow label={t("Full Name")} value={person.primaryName?.trim()}>
           {person.deathIndicator && (
             <Badge color="red" ml="sm">
               {t("Deceased")}

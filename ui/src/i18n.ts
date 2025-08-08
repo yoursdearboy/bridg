@@ -19,7 +19,7 @@ const resources = {
       "Subject Information": "Subject Information",
       Edit: "Edit",
       Status_: "Status",
-      "Full name": "Full Name",
+      "Full Name": "Full Name",
       Gender_: "Gender",
       "Person Details": "Person Details",
       "Subject Type": "Subject Type",
@@ -57,7 +57,7 @@ const resources = {
     translation: {
       "Patient Information": "Информация о пациенте",
       Edit: "Редактировать",
-      "Full name": "ФИО",
+      "Full Name": "ФИО",
       "Person Details": "Персональные данные",
       "Subject Type": "Тип субъекта",
       "Subject Information": "Информация о субъекте",
