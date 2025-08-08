@@ -64,7 +64,7 @@ export function PatientCard({ subject, spaceId }: PatientCardProps) {
           label={t("Date of Birth")}
           value={
             person?.birthDate
-              ? new Date(person.birthDate).toISOString().split("T")[0]
+              ? t("intlDateTime", { val: person.birthDate })
               : undefined
           }
         />
@@ -88,7 +88,7 @@ export function PatientCard({ subject, spaceId }: PatientCardProps) {
           value={
             person.deathIndicator
               ? person.deathDate
-                ? dayjs(person.deathDate).format("DD.MM.YYYY")
+                ? t("intlDateTime", { val: person.deathDate })
                 : t("Date not specified")
               : t("Not deceased")
           }

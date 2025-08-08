@@ -65,7 +65,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
             <InfoRow
               label={t("Gender_")}
               value={
-                person?.administrativeGenderCode
+                person.administrativeGenderCode
                   ? t(`Gender.${person.administrativeGenderCode}`)
                   : undefined
               }
@@ -73,8 +73,8 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
             <InfoRow
               label={t("Date of Birth")}
               value={
-                person?.birthDate
-                  ? new Date(person.birthDate).toISOString().split("T")[0]
+                person.birthDate
+                  ? t("intlDateTime", { val: person.birthDate })
                   : undefined
               }
             />
@@ -82,9 +82,11 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
               <InfoRow
                 label="Date of Death"
                 value={
-                  person.deathDate
-                    ? `${dayjs(person.deathDate).format("YYYY-MM-DD")}${person.deathDateEstimatedIndicator ? " (estimated)" : ""}`
-                    : undefined
+                  person.deathIndicator
+                    ? person.deathDate
+                      ? t("intlDateTime", { val: person.deathDate })
+                      : t("Date not specified")
+                    : t("Not deceased")
                 }
               />
             )}
