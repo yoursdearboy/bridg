@@ -7,6 +7,7 @@ import { SubjectInfoCard } from "@/components/SubjectInfoCard";
 import { Grid, Group, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { StudySubject } from "bridg-ts";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
   component: RouteComponent,
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
 function RouteComponent() {
   const { spaceId, subjectId } = Route.useParams();
   const subject = Route.useLoaderData();
+  const { t } = useTranslation();
 
   const handleEditSubject = () => {
     // Navigation will be handled by the SubjectInfoCard's built-in link
@@ -35,7 +37,7 @@ function RouteComponent() {
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Title order={2}>Patient Information</Title>
+        <Title order={2}>{t("Patient Information")}</Title>
         <ButtonLink to="..">Back to List</ButtonLink>
       </Group>
 

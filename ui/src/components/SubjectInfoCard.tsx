@@ -2,6 +2,7 @@
 import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
 import type { StudySubject } from "bridg-ts";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 interface SubjectInfoCardProps {
   subject: StudySubject;
@@ -12,6 +13,7 @@ interface SubjectInfoCardProps {
 export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
   const person = subject.performingBiologicEntity;
   const organization = subject.performingOrganization;
+  const { t } = useTranslation();
 
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
@@ -23,7 +25,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           </Text>
           {onEdit && (
             <Badge color="blue" style={{ cursor: "pointer" }}>
-              Edit
+              {t("Edit")}
             </Badge>
           )}
         </Group>

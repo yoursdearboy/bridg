@@ -20,11 +20,11 @@ export function PatientCard({ subject, onEdit }: PatientCardProps) {
         {/* Заголовок карточки с кнопкой редактирования */}
         <Group justify="space-between">
           <Text size="xl" fw={700}>
-            Patient Information
+            {t("Patient Information")}
           </Text>
           {onEdit && (
             <Badge color="blue" style={{ cursor: "pointer" }} onClick={onEdit}>
-              Edit
+              {t("Edit")}
             </Badge>
           )}
         </Group>
@@ -46,7 +46,7 @@ export function PatientCard({ subject, onEdit }: PatientCardProps) {
           label="Date of Birth"
           value={
             person?.birthDate
-              ? t("intlDateTime", { val: person?.birthDate })
+              ? t("intlDateTime", { val: person.birthDate })
               : undefined
           }
         />
