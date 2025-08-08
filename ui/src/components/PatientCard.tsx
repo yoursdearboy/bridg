@@ -52,7 +52,7 @@ export function PatientCard({ subject, spaceId }: PatientCardProps) {
         </InfoRow>
 
         <InfoRow
-          label={t("Gender")}
+          label={t("Gender_")}
           value={
             person.administrativeGenderCode
               ? t(`Gender.${person.administrativeGenderCode}`)
