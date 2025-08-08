@@ -33,7 +33,10 @@ function RouteComponent() {
       <Grid>
         {subject.performingBiologicEntity && (
           <Grid.Col span={{ base: 12, md: 6 }}>
-            <PatientCard subject={subject} spaceId={spaceId} />
+            <PatientCard
+              person={subject.performingBiologicEntity}
+              spaceId={spaceId}
+            />
           </Grid.Col>
         )}
 

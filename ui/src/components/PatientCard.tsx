@@ -9,22 +9,17 @@ import {
   Text,
 } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
-import type { StudySubject } from "bridg-ts";
+import type { PersonOutput } from "bridg-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 
 interface PatientCardProps {
-  subject: StudySubject;
+  person: PersonOutput;
   spaceId: string;
 }
 
-export function PatientCard({ subject, spaceId }: PatientCardProps) {
-  const person = subject.performingBiologicEntity;
+export function PatientCard({ person }: PatientCardProps) {
   const { t } = useTranslation();
-
-  if (!person) {
-    return <Card withBorder>No patient information available</Card>;
-  }
 
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
@@ -33,10 +28,7 @@ export function PatientCard({ subject, spaceId }: PatientCardProps) {
           <Text size="xl" fw={700}>
             {t("Patient Information")}
           </Text>
-          <Button
-            component={Link}
-            to={`/spaces/${spaceId}/subjects/edit?subjectId=${subject.id}`}
-          >
+          <Button component={Link} to={"#"}>
             {t("Edit")}
           </Button>
         </Group>
