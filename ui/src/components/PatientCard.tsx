@@ -68,6 +68,7 @@ export function PatientCard({ subject, spaceId }: PatientCardProps) {
               : undefined
           }
         />
+
         <InfoRow
           label={t("Age")}
           value={
@@ -81,6 +82,7 @@ export function PatientCard({ subject, spaceId }: PatientCardProps) {
               : undefined
           }
         />
+
         <InfoRow
           label={t("Date of Death")}
           value={
