@@ -37,7 +37,7 @@ function RouteComponent() {
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Title order={2}>{t("PatientCardInfo")}</Title>
+        <Title order={2}>{t("Patient Information")}</Title>
         <ButtonLink to="..">Back to List</ButtonLink>
       </Group>
 

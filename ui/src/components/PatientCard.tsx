@@ -20,7 +20,7 @@ export function PatientCard({ subject, onEdit }: PatientCardProps) {
         {/* Заголовок карточки с кнопкой редактирования */}
         <Group justify="space-between">
           <Text size="xl" fw={700}>
-            {t("PatientCardInfo")}
+            {t("Patient Information")}
           </Text>
           {onEdit && (
             <Badge color="blue" style={{ cursor: "pointer" }} onClick={onEdit}>
