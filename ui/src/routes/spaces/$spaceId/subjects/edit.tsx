@@ -69,7 +69,7 @@ function EditComponent() {
 
         <Divider my="xs" />
 
-        <InfoRow label={t("FullName")} value={person.primaryName?.trim()}>
+        <InfoRow label={t("Full name")} value={person.primaryName?.trim()}>
           {person.deathIndicator && (
             <Badge color="red" ml="sm">
               {t("Deceased")}
@@ -78,7 +78,7 @@ function EditComponent() {
         </InfoRow>
 
         <InfoRow
-          label={t("GenderName")}
+          label={t("Gender_")}
           value={
             person.administrativeGenderCode
               ? t(`Gender.${person.administrativeGenderCode}`)
@@ -87,7 +87,7 @@ function EditComponent() {
         />
 
         <InfoRow
-          label={t("DateOfBirth")}
+          label={t("Date of Birth")}
           value={
             person?.birthDate
               ? new Date(person.birthDate).toISOString().split("T")[0]
@@ -110,13 +110,13 @@ function EditComponent() {
         />
 
         <InfoRow
-          label={t("DateOfDeath")}
+          label={t("Date of Death")}
           value={
             person.deathIndicator
               ? person.deathDate
                 ? dayjs(person.deathDate).format("DD.MM.YYYY")
-                : t("DateNotSpecified")
-              : t("NotDeceased")
+                : t("Date not specified")
+              : t("Not deceased")
           }
         />
 
@@ -128,7 +128,6 @@ function EditComponent() {
   );
 }
 
-// Вынесенный компонент InfoRow для сохранения единообразия
 function InfoRow({
   label,
   value,

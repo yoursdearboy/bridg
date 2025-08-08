@@ -43,7 +43,7 @@ export function PatientCard({ subject, spaceId }: PatientCardProps) {
 
         <Divider my="xs" />
 
-        <InfoRow label={t("FullName")} value={person.primaryName?.trim()}>
+        <InfoRow label={t("Full Name")} value={person.primaryName?.trim()}>
           {person.deathIndicator && (
             <Badge color="red" ml="sm">
               {t("Deceased")}
@@ -52,7 +52,7 @@ export function PatientCard({ subject, spaceId }: PatientCardProps) {
         </InfoRow>
 
         <InfoRow
-          label={t("GenderName")}
+          label={t("Gender")}
           value={
             person.administrativeGenderCode
               ? t(`Gender.${person.administrativeGenderCode}`)
@@ -61,7 +61,7 @@ export function PatientCard({ subject, spaceId }: PatientCardProps) {
         />
 
         <InfoRow
-          label={t("DateOfBirth")}
+          label={t("Date of Birth")}
           value={
             person?.birthDate
               ? new Date(person.birthDate).toISOString().split("T")[0]
@@ -82,13 +82,13 @@ export function PatientCard({ subject, spaceId }: PatientCardProps) {
           }
         />
         <InfoRow
-          label={t("DateOfDeath")}
+          label={t("Date of Death")}
           value={
             person.deathIndicator
               ? person.deathDate
                 ? dayjs(person.deathDate).format("DD.MM.YYYY")
-                : t("DateNotSpecified")
-              : t("NotDeceased")
+                : t("Date not specified")
+              : t("Not deceased")
           }
         />
       </Stack>

@@ -21,7 +21,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         {/* Card Header */}
         <Group justify="space-between">
           <Text size="xl" fw={700}>
-            {t("SubCardInfo")}
+            {t("Subject Information")}
           </Text>
           {onEdit && (
             <Badge color="blue" style={{ cursor: "pointer" }}>
@@ -34,7 +34,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
         {/* Status Information */}
         <InfoRow
-          label={t("StatusName")}
+          label={t("Status_")}
           value={
             <>
               {subject.status || "-"}
@@ -49,7 +49,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
         {/* Subject Type */}
         <InfoRow
-          label={t("SubjectType")}
+          label={t("Subject Type")}
           value={person ? "Person" : organization ? "Organization" : "Unknown"}
         />
 
@@ -58,12 +58,12 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           <>
             <Divider my="xs" />
             <Text fw={600} size="sm" c="dimmed">
-              {t("PersonDetails")}
+              {t("Person Details")}
             </Text>
 
-            <InfoRow label={t("FullName")} value={person.primaryName} />
+            <InfoRow label={t("Full Name")} value={person.primaryName} />
             <InfoRow
-              label={t("GenderName")}
+              label={t("Gender_")}
               value={
                 person?.administrativeGenderCode
                   ? t(`Gender.${person.administrativeGenderCode}`)
@@ -71,7 +71,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
               }
             />
             <InfoRow
-              label={t("DateOfBirth")}
+              label={t("Date of Birth")}
               value={
                 person?.birthDate
                   ? new Date(person.birthDate).toISOString().split("T")[0]
