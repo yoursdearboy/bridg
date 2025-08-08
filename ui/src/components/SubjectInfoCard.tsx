@@ -21,7 +21,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         {/* Card Header */}
         <Group justify="space-between">
           <Text size="xl" fw={700}>
-            Subject Information
+            {t("Subject Information")}
           </Text>
           {onEdit && (
             <Badge color="blue" style={{ cursor: "pointer" }}>
@@ -34,7 +34,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
         {/* Status Information */}
         <InfoRow
-          label="Status"
+          label={t("Status_")}
           value={
             <>
               {subject.status || "-"}
@@ -49,7 +49,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
         {/* Subject Type */}
         <InfoRow
-          label="Subject Type"
+          label={t("Subject Type")}
           value={person ? "Person" : organization ? "Organization" : "Unknown"}
         />
 
@@ -58,16 +58,23 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           <>
             <Divider my="xs" />
             <Text fw={600} size="sm" c="dimmed">
-              Person Details
+              {t("Person Details")}
             </Text>
 
-            <InfoRow label="Full Name" value={person.primaryName} />
-            <InfoRow label="Gender" value={person.administrativeGenderCode} />
+            <InfoRow label={t("Full Name")} value={person.primaryName} />
             <InfoRow
-              label="Date of Birth"
+              label={t("Gender_")}
+              value={
+                person.administrativeGenderCode
+                  ? t(`Gender.${person.administrativeGenderCode}`)
+                  : undefined
+              }
+            />
+            <InfoRow
+              label={t("Date of Birth")}
               value={
                 person.birthDate
-                  ? dayjs(person.birthDate).format("YYYY-MM-DD")
+                  ? t("intlDateTime", { val: person.birthDate })
                   : undefined
               }
             />
@@ -75,9 +82,11 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
               <InfoRow
                 label="Date of Death"
                 value={
-                  person.deathDate
-                    ? `${dayjs(person.deathDate).format("YYYY-MM-DD")}${person.deathDateEstimatedIndicator ? " (estimated)" : ""}`
-                    : undefined
+                  person.deathIndicator
+                    ? person.deathDate
+                      ? t("intlDateTime", { val: person.deathDate })
+                      : t("Date not specified")
+                    : t("Not deceased")
                 }
               />
             )}

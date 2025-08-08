@@ -1,35 +1,69 @@
-// src/components/PatientCard.tsx
+import { createFileRoute } from "@tanstack/react-router";
 import {
-  Badge,
-  Button,
-  Card,
-  Divider,
-  Group,
-  Stack,
   Text,
+  LoadingOverlay,
+  Card,
+  Stack,
+  Group,
+  Badge,
+  Divider,
+  Button,
 } from "@mantine/core";
-import { Link } from "@tanstack/react-router";
-import type { PersonOutput } from "bridg-ts";
-import dayjs from "dayjs";
+import { useQuery } from "@tanstack/react-query";
+import api from "@/api";
+
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
+import { Link } from "@tanstack/react-router";
 
-interface PatientCardProps {
-  person: PersonOutput;
-  spaceId: string;
-}
+export const Route = createFileRoute("/spaces/$spaceId/subjects/edit")({
+  component: EditComponent,
+  beforeLoad: () => ({
+    breadcrumb: "Edit Patient",
+  }),
+});
 
-export function PatientCard({ person }: PatientCardProps) {
+function EditComponent() {
+  const { spaceId } = Route.useParams();
+  const searchParams = new URLSearchParams(window.location.search);
+  const subjectId = searchParams.get("subjectId");
   const { t } = useTranslation();
+
+  const {
+    data: subject,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["subject", spaceId, subjectId],
+    queryFn: () =>
+      api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet({
+        spaceId,
+        subjectId: subjectId as string,
+      }),
+    enabled: !!subjectId,
+  });
+
+  if (isLoading) return <LoadingOverlay visible />;
+  if (error) return <Text color="red">{t("Failed to load patient data")}</Text>;
+  if (!subject) return <Text>{t("Patient not found")}</Text>;
+
+  const person = subject.performingBiologicEntity;
+  if (!person)
+    return <Card withBorder>{t("No patient information available")}</Card>;
 
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
         <Group justify="space-between">
           <Text size="xl" fw={700}>
-            {t("Patient Information")}
+            {t("Editing Patient")}
           </Text>
-          <Button component={Link} to={"#"}>
-            {t("Edit")}
+          <Button
+            component={Link}
+            to={`/spaces/${spaceId}/subjects/${subjectId}`}
+            variant="outline"
+          >
+            {t("Back")}
           </Button>
         </Group>
 
@@ -56,7 +90,7 @@ export function PatientCard({ person }: PatientCardProps) {
           label={t("Date of Birth")}
           value={
             person?.birthDate
-              ? t("intlDateTime", { val: person.birthDate })
+              ? new Date(person.birthDate).toISOString().split("T")[0]
               : undefined
           }
         />
@@ -80,23 +114,29 @@ export function PatientCard({ person }: PatientCardProps) {
           value={
             person.deathIndicator
               ? person.deathDate
-                ? t("intlDateTime", { val: person.deathDate })
+                ? dayjs(person.deathDate).format("DD.MM.YYYY")
                 : t("Date not specified")
               : t("Not deceased")
           }
         />
+
+        <Group mt="md">
+          <Button variant="outline">{t("Edit")}</Button>
+        </Group>
       </Stack>
     </Card>
   );
 }
 
-interface InfoRowProps {
+function InfoRow({
+  label,
+  value,
+  children,
+}: {
   label: string;
   value?: React.ReactNode;
   children?: React.ReactNode;
-}
-
-function InfoRow({ label, value, children }: InfoRowProps) {
+}) {
   return (
     <Group>
       <Text fw={600} w={150} c="dimmed">

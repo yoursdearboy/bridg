@@ -1,11 +1,10 @@
 // src/routes/spaces/$spaceId/subjects/$subjectId.tsx
 import api from "@/api";
-
 import ButtonLink from "@/components/ButtonLink";
 import { PatientCard } from "@/components/PatientCard";
 import { SubjectInfoCard } from "@/components/SubjectInfoCard";
 import { Grid, Group, Stack, Title } from "@mantine/core";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 import type { StudySubject } from "bridg-ts";
 import { useTranslation } from "react-i18next";
 
@@ -20,19 +19,9 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
 });
 
 function RouteComponent() {
-  const { spaceId, subjectId } = Route.useParams();
+  const { spaceId } = Route.useParams();
   const subject = Route.useLoaderData();
   const { t } = useTranslation();
-
-  const handleEditSubject = () => {
-    // Navigation will be handled by the SubjectInfoCard's built-in link
-    console.log("Edit subject:", subjectId);
-  };
-
-  const handleEditPatient = () => {
-    // Navigation will be handled by the PatientCard's built-in link
-    console.log("Edit patient:", subject.performingBiologicEntity?.id);
-  };
 
   return (
     <Stack gap="md">
@@ -42,24 +31,23 @@ function RouteComponent() {
       </Group>
 
       <Grid>
-        {/* Patient Card (only shown for biologic entities) */}
         {subject.performingBiologicEntity && (
           <Grid.Col span={{ base: 12, md: 6 }}>
-            <PatientCard subject={subject} onEdit={handleEditPatient} />
+            <PatientCard
+              person={subject.performingBiologicEntity}
+              spaceId={spaceId}
+            />
           </Grid.Col>
         )}
 
-        {/* Subject Info Card (always shown) */}
         <Grid.Col
           span={{ base: 12, md: subject.performingBiologicEntity ? 6 : 12 }}
         >
-          <SubjectInfoCard
-            subject={subject}
-            spaceId={spaceId}
-            onEdit={handleEditSubject}
-          />
+          <SubjectInfoCard subject={subject} spaceId={spaceId} />
         </Grid.Col>
       </Grid>
+
+      <Outlet />
     </Stack>
   );
 }

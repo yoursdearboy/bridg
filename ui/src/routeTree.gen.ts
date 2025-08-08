@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SpacesSpaceIdSubjectsRouteRouteImport } from './routes/spaces/$spaceId/subjects/route'
 import { Route as SpacesSpaceIdSubjectsIndexRouteImport } from './routes/spaces/$spaceId/subjects/index'
 import { Route as SpacesSpaceIdSubjectsNewRouteImport } from './routes/spaces/$spaceId/subjects/new'
+import { Route as SpacesSpaceIdSubjectsEditRouteImport } from './routes/spaces/$spaceId/subjects/edit'
 import { Route as SpacesSpaceIdSubjectsSubjectIdRouteImport } from './routes/spaces/$spaceId/subjects/$subjectId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -38,6 +39,12 @@ const SpacesSpaceIdSubjectsNewRoute =
     path: '/new',
     getParentRoute: () => SpacesSpaceIdSubjectsRouteRoute,
   } as any)
+const SpacesSpaceIdSubjectsEditRoute =
+  SpacesSpaceIdSubjectsEditRouteImport.update({
+    id: '/edit',
+    path: '/edit',
+    getParentRoute: () => SpacesSpaceIdSubjectsRouteRoute,
+  } as any)
 const SpacesSpaceIdSubjectsSubjectIdRoute =
   SpacesSpaceIdSubjectsSubjectIdRouteImport.update({
     id: '/$subjectId',
@@ -49,12 +56,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsRouteRouteWithChildren
   '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRoute
+  '/spaces/$spaceId/subjects/edit': typeof SpacesSpaceIdSubjectsEditRoute
   '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects/': typeof SpacesSpaceIdSubjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRoute
+  '/spaces/$spaceId/subjects/edit': typeof SpacesSpaceIdSubjectsEditRoute
   '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsIndexRoute
 }
@@ -63,6 +72,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsRouteRouteWithChildren
   '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRoute
+  '/spaces/$spaceId/subjects/edit': typeof SpacesSpaceIdSubjectsEditRoute
   '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects/': typeof SpacesSpaceIdSubjectsIndexRoute
 }
@@ -72,12 +82,14 @@ export interface FileRouteTypes {
     | '/'
     | '/spaces/$spaceId/subjects'
     | '/spaces/$spaceId/subjects/$subjectId'
+    | '/spaces/$spaceId/subjects/edit'
     | '/spaces/$spaceId/subjects/new'
     | '/spaces/$spaceId/subjects/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/spaces/$spaceId/subjects/$subjectId'
+    | '/spaces/$spaceId/subjects/edit'
     | '/spaces/$spaceId/subjects/new'
     | '/spaces/$spaceId/subjects'
   id:
@@ -85,6 +97,7 @@ export interface FileRouteTypes {
     | '/'
     | '/spaces/$spaceId/subjects'
     | '/spaces/$spaceId/subjects/$subjectId'
+    | '/spaces/$spaceId/subjects/edit'
     | '/spaces/$spaceId/subjects/new'
     | '/spaces/$spaceId/subjects/'
   fileRoutesById: FileRoutesById
@@ -124,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SpacesSpaceIdSubjectsNewRouteImport
       parentRoute: typeof SpacesSpaceIdSubjectsRouteRoute
     }
+    '/spaces/$spaceId/subjects/edit': {
+      id: '/spaces/$spaceId/subjects/edit'
+      path: '/edit'
+      fullPath: '/spaces/$spaceId/subjects/edit'
+      preLoaderRoute: typeof SpacesSpaceIdSubjectsEditRouteImport
+      parentRoute: typeof SpacesSpaceIdSubjectsRouteRoute
+    }
     '/spaces/$spaceId/subjects/$subjectId': {
       id: '/spaces/$spaceId/subjects/$subjectId'
       path: '/$subjectId'
@@ -136,6 +156,7 @@ declare module '@tanstack/react-router' {
 
 interface SpacesSpaceIdSubjectsRouteRouteChildren {
   SpacesSpaceIdSubjectsSubjectIdRoute: typeof SpacesSpaceIdSubjectsSubjectIdRoute
+  SpacesSpaceIdSubjectsEditRoute: typeof SpacesSpaceIdSubjectsEditRoute
   SpacesSpaceIdSubjectsNewRoute: typeof SpacesSpaceIdSubjectsNewRoute
   SpacesSpaceIdSubjectsIndexRoute: typeof SpacesSpaceIdSubjectsIndexRoute
 }
@@ -143,6 +164,7 @@ interface SpacesSpaceIdSubjectsRouteRouteChildren {
 const SpacesSpaceIdSubjectsRouteRouteChildren: SpacesSpaceIdSubjectsRouteRouteChildren =
   {
     SpacesSpaceIdSubjectsSubjectIdRoute: SpacesSpaceIdSubjectsSubjectIdRoute,
+    SpacesSpaceIdSubjectsEditRoute: SpacesSpaceIdSubjectsEditRoute,
     SpacesSpaceIdSubjectsNewRoute: SpacesSpaceIdSubjectsNewRoute,
     SpacesSpaceIdSubjectsIndexRoute: SpacesSpaceIdSubjectsIndexRoute,
   }
