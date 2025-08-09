@@ -23,15 +23,20 @@ function RouteComponent() {
   const { spaceId, subjectId } = Route.useParams();
   const subject = Route.useLoaderData();
   const { t } = useTranslation();
+  const navigate = Route.useNavigate();
 
   const handleEditSubject = () => {
-    // Navigation will be handled by the SubjectInfoCard's built-in link
     console.log("Edit subject:", subjectId);
   };
 
   const handleEditPatient = () => {
-    // Navigation will be handled by the PatientCard's built-in link
-    console.log("Edit patient:", subject.performingBiologicEntity?.id);
+    if (subject.performingBiologicEntity?.id) {
+      navigate({
+        to: "/spaces/$spaceId/subjects/edit",
+        params: { spaceId },
+        search: { subjectId: subjectId }, // Передаем subjectId через search params
+      });
+    }
   };
 
   return (

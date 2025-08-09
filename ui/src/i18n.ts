@@ -15,9 +15,16 @@ dayjs.extend(LocalizedFormat);
 const resources = {
   en: {
     translation: {
+      "Date of Birth": "Date of Birth",
+      Age: "Age",
+      "Date of Death": "Date of Death",
       "Patient Information": "Patient Information",
       Edit: "Edit",
+      "Editing Patient": "Editing Patient",
       Patients: "Patients",
+      Back: "Back",
+      "Gender Name": "Gender",
+      "Full Name": "Full Name",
       intlDateTime: "{{val, datetime}}",
       dayjsDuration: "{{val, dayjsDuration}}",
       Status: {
@@ -44,9 +51,16 @@ const resources = {
   },
   ru: {
     translation: {
+      "Date of Birth": "Дата рождения",
+      Age: "Возраст",
+      "Date of Death": "Дата смерти",
       "Patient Information": "Информация о пациенте",
       Edit: "Редактировать",
+      "Editing Patient": "Редактирование пациента",
       Patients: "Пациенты",
+      Back: "Назад",
+      "Full Name": "ФИО",
+      "Gender Name": "Пол",
       intlDateTime: "{{val, datetime}}",
       dayjsDuration: "{{val, dayjsDuration}}",
       Status: {

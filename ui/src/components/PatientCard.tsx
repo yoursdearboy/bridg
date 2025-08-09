@@ -32,7 +32,7 @@ export function PatientCard({ subject, onEdit }: PatientCardProps) {
         <Divider my="xs" />
 
         {/* Основная информация */}
-        <InfoRow label="Full Name" value={person?.primaryName?.trim()}>
+        <InfoRow label={t("Full Name")} value={person?.primaryName?.trim()}>
           {person?.deathIndicator && (
             <Badge color="red" ml="sm">
               Deceased
@@ -40,10 +40,13 @@ export function PatientCard({ subject, onEdit }: PatientCardProps) {
           )}
         </InfoRow>
 
-        <InfoRow label="Gender" value={person?.administrativeGenderCode} />
+        <InfoRow
+          label={t("Gender Name")}
+          value={person?.administrativeGenderCode}
+        />
 
         <InfoRow
-          label="Date of Birth"
+          label={t("Date of Birth")}
           value={
             person?.birthDate
               ? t("intlDateTime", { val: person.birthDate })
@@ -67,7 +70,7 @@ export function PatientCard({ subject, onEdit }: PatientCardProps) {
 
         {/* Информация о смерти (если есть) */}
         <InfoRow
-          label="Date of Death"
+          label={t("Date of Death")}
           value={
             person?.deathIndicator
               ? person?.deathDate
