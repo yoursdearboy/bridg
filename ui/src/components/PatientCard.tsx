@@ -6,47 +6,38 @@ import { useTranslation } from "react-i18next";
 
 interface PatientCardProps {
   subject: StudySubject;
-  onEdit?: () => void;
+  editLink?: React.ReactNode;
 }
 
-export function PatientCard({ subject, onEdit }: PatientCardProps) {
+export function PatientCard({ subject, editLink }: PatientCardProps) {
   const person = subject.performingBiologicEntity;
-
   const { t } = useTranslation();
 
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
-        {/* Заголовок карточки с кнопкой редактирования */}
         <Group justify="space-between">
           <Text size="xl" fw={700}>
-            {t("Patient Information")}
+            {"Patient Information"}
           </Text>
-          {onEdit && (
-            <Badge color="blue" style={{ cursor: "pointer" }} onClick={onEdit}>
-              {t("Edit")}
-            </Badge>
-          )}
+          {editLink}
         </Group>
 
         <Divider my="xs" />
 
         {/* Основная информация */}
-        <InfoRow label={t("Full Name")} value={person?.primaryName?.trim()}>
+        <InfoRow label="Full Name" value={person?.primaryName?.trim()}>
           {person?.deathIndicator && (
             <Badge color="red" ml="sm">
-              Deceased
+              {"Deceased"}
             </Badge>
           )}
         </InfoRow>
 
-        <InfoRow
-          label={t("Gender Name")}
-          value={person?.administrativeGenderCode}
-        />
+        <InfoRow label="Gender Name" value={person?.administrativeGenderCode} />
 
         <InfoRow
-          label={t("Date of Birth")}
+          label="Date of Birth"
           value={
             person?.birthDate
               ? t("intlDateTime", { val: person.birthDate })
@@ -68,15 +59,14 @@ export function PatientCard({ subject, onEdit }: PatientCardProps) {
           }
         />
 
-        {/* Информация о смерти (если есть) */}
         <InfoRow
-          label={t("Date of Death")}
+          label="Date of Death"
           value={
             person?.deathIndicator
               ? person?.deathDate
                 ? t("intlDateTime", { val: person.deathDate })
-                : t("Date not specified")
-              : t("Not deceased")
+                : "Date not specified"
+              : "Not deceased"
           }
         />
       </Stack>
@@ -84,7 +74,6 @@ export function PatientCard({ subject, onEdit }: PatientCardProps) {
   );
 }
 
-// Вспомогательный компонент для строк информации
 interface InfoRowProps {
   label: string;
   value?: React.ReactNode;

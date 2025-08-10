@@ -1,11 +1,10 @@
 // src/routes/spaces/$spaceId/subjects/$subjectId.tsx
 import api from "@/api";
-
 import ButtonLink from "@/components/ButtonLink";
 import { PatientCard } from "@/components/PatientCard";
 import { SubjectInfoCard } from "@/components/SubjectInfoCard";
-import { Grid, Group, Stack, Title } from "@mantine/core";
-import { createFileRoute } from "@tanstack/react-router";
+import { Badge, Grid, Group, Stack, Title } from "@mantine/core";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import type { StudySubject } from "bridg-ts";
 import { useTranslation } from "react-i18next";
 
@@ -23,20 +22,10 @@ function RouteComponent() {
   const { spaceId, subjectId } = Route.useParams();
   const subject = Route.useLoaderData();
   const { t } = useTranslation();
-  const navigate = Route.useNavigate();
+  const personId = subject.performingBiologicEntity?.id;
 
   const handleEditSubject = () => {
     console.log("Edit subject:", subjectId);
-  };
-
-  const handleEditPatient = () => {
-    if (subject.performingBiologicEntity?.id) {
-      navigate({
-        to: "/spaces/$spaceId/subjects/edit",
-        params: { spaceId },
-        search: { subjectId: subjectId }, // Передаем subjectId через search params
-      });
-    }
   };
 
   return (
@@ -50,11 +39,23 @@ function RouteComponent() {
         {/* Patient Card (only shown for biologic entities) */}
         {subject.performingBiologicEntity && (
           <Grid.Col span={{ base: 12, md: 6 }}>
-            <PatientCard subject={subject} onEdit={handleEditPatient} />
+            <PatientCard
+              subject={subject}
+              editLink={
+                <Link
+                  to="/spaces/$spaceId/subjects/edit"
+                  params={{ spaceId }}
+                  search={{ personId }}
+                >
+                  <Badge color="blue" style={{ cursor: "pointer" }}>
+                    {t("Edit")}
+                  </Badge>
+                </Link>
+              }
+            />
           </Grid.Col>
         )}
 
-        {/* Subject Info Card (always shown) */}
         <Grid.Col
           span={{ base: 12, md: subject.performingBiologicEntity ? 6 : 12 }}
         >

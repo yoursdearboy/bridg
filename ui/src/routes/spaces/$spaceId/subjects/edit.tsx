@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Text,
-  LoadingOverlay,
   Card,
   Stack,
   Group,
@@ -9,58 +8,49 @@ import {
   Divider,
   Button,
 } from "@mantine/core";
-import { useQuery } from "@tanstack/react-query";
+
 import api from "@/api";
 
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
-import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/edit")({
   component: EditComponent,
+  loader: ({ params }) => api.subjects.indexSpacesSpaceIdSubjectsGet(params),
   beforeLoad: () => ({
     breadcrumb: "Edit Patient",
   }),
 });
 
 function EditComponent() {
-  const { spaceId } = Route.useParams();
+  console.log("EditComponent rendered");
+
   const searchParams = new URLSearchParams(window.location.search);
-  const subjectId = searchParams.get("subjectId");
+  const personId = searchParams.get("personId");
+  console.log("personId ID from URL:", personId);
   const { t } = useTranslation();
-
-  const {
-    data: subject,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["subject", spaceId, subjectId],
-    queryFn: () =>
-      api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet({
-        spaceId,
-        subjectId: subjectId as string,
-      }),
-    enabled: !!subjectId,
-  });
-
-  if (isLoading) return <LoadingOverlay visible />;
-  if (error) return <Text color="red">{t("Failed to load patient data")}</Text>;
-  if (!subject) return <Text>{t("Patient not found")}</Text>;
-
-  const person = subject.performingBiologicEntity;
-  if (!person)
-    return <Card withBorder>{t("No patient information available")}</Card>;
+  const subjects = Route.useLoaderData();
+  const subject = subjects.find(
+    (s) => s.performingBiologicEntity?.id === personId
+  );
+  const person = subject?.performingBiologicEntity;
+  if (!subject || !person) {
+    return (
+      <Card withBorder>
+        <Text color="red">{"Patient not found"}</Text>
+      </Card>
+    );
+  }
 
   return (
     <Stack gap="md">
-      {/* Имя пациента над карточкой */}
       <Group>
         <Text size="xl" fw={700}>
           {person.primaryName?.trim()}
         </Text>
         {person.deathIndicator && (
           <Badge color="red" ml="sm">
-            {t("Deceased")}
+            {"Deceased"}
           </Badge>
         )}
       </Group>
@@ -69,21 +59,14 @@ function EditComponent() {
         <Stack gap="sm">
           <Group justify="space-between">
             <Text size="xl" fw={700}>
-              {t("Editing Patient")}
+              {"Editing Patient"}
             </Text>
-            <Button
-              component={Link}
-              to={`/spaces/${spaceId}/subjects/${subjectId}`}
-              variant="outline"
-            >
-              {t("Back")}
-            </Button>
           </Group>
 
           <Divider my="xs" />
 
           <InfoRow
-            label={t("Gender Name")}
+            label={"Gender Name"}
             value={
               person.administrativeGenderCode
                 ? t(`Gender.${person.administrativeGenderCode}`)
@@ -92,16 +75,16 @@ function EditComponent() {
           />
 
           <InfoRow
-            label={t("Date of Birth")}
+            label={"Date of Birth"}
             value={
               person?.birthDate
-                ? new Date(person.birthDate).toISOString().split("T")[0]
+                ? t("intlDateTime", { val: person.birthDate })
                 : undefined
             }
           />
 
           <InfoRow
-            label={t("Age")}
+            label={"Age"}
             value={
               person?.birthDate
                 ? t("dayjsDuration", {
@@ -115,13 +98,13 @@ function EditComponent() {
           />
 
           <InfoRow
-            label={t("Date of Death")}
+            label={"Date of Death"}
             value={
-              person.deathIndicator
-                ? person.deathDate
-                  ? dayjs(person.deathDate).format("DD.MM.YYYY")
-                  : t("DateNotSpecified")
-                : t("NotDeceased")
+              person?.deathIndicator
+                ? person?.deathDate
+                  ? t("intlDateTime", { val: person.deathDate })
+                  : "Date not specified"
+                : "Not deceased"
             }
           />
 
@@ -138,20 +121,20 @@ function EditComponent() {
             </Text>
             {person.deathIndicator && (
               <Badge color="red" ml="sm">
-                {t("Deceased")}
+                {"Deceased"}
               </Badge>
             )}
           </Group>
 
           <Group>
             <Button variant="outline" onClick={() => console.log("Добавить")}>
-              {t("Add")}
+              {"Add"}
             </Button>
             <Button
               variant="outline"
               onClick={() => console.log("Редактировать текущее имя")}
             >
-              {t("Edit Name")}
+              {"Edit Name"}
             </Button>
           </Group>
         </Group>
@@ -160,14 +143,14 @@ function EditComponent() {
       <Card withBorder shadow="sm" padding="lg" radius="md">
         <Group justify="space-between" align="center">
           <Text size="xl" fw={700}>
-            {t("Addresses")}
+            {"Addresses"}
           </Text>
           <Group>
             <Button
               variant="outline"
               onClick={() => console.log("Add address")}
             >
-              {t("Add Address")}
+              {"Add Address"}
             </Button>
           </Group>
         </Group>
