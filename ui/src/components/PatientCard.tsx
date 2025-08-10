@@ -18,7 +18,7 @@ export function PatientCard({ subject, editLink }: PatientCardProps) {
       <Stack gap="sm">
         <Group justify="space-between">
           <Text size="xl" fw={700}>
-            {"Patient Information"}
+            {t("Patient Information")}
           </Text>
           {editLink}
         </Group>
@@ -26,18 +26,25 @@ export function PatientCard({ subject, editLink }: PatientCardProps) {
         <Divider my="xs" />
 
         {/* Основная информация */}
-        <InfoRow label="Full Name" value={person?.primaryName?.trim()}>
+        <InfoRow label={t("Full Name")} value={person?.primaryName?.trim()}>
           {person?.deathIndicator && (
             <Badge color="red" ml="sm">
-              {"Deceased"}
+              {t("Deceased")}
             </Badge>
           )}
         </InfoRow>
 
-        <InfoRow label="Gender Name" value={person?.administrativeGenderCode} />
+        <InfoRow
+          label={t("Gender Name")}
+          value={
+            person?.administrativeGenderCode
+              ? t(`Gender.${person.administrativeGenderCode}`)
+              : "N/A"
+          }
+        />
 
         <InfoRow
-          label="Date of Birth"
+          label={t("Date of Birth")}
           value={
             person?.birthDate
               ? t("intlDateTime", { val: person.birthDate })
@@ -46,7 +53,7 @@ export function PatientCard({ subject, editLink }: PatientCardProps) {
         />
 
         <InfoRow
-          label="Age"
+          label={t("Age")}
           value={
             person?.birthDate
               ? t("dayjsDuration", {
@@ -60,13 +67,13 @@ export function PatientCard({ subject, editLink }: PatientCardProps) {
         />
 
         <InfoRow
-          label="Date of Death"
+          label={t("Date of Death")}
           value={
             person?.deathIndicator
               ? person?.deathDate
                 ? t("intlDateTime", { val: person.deathDate })
-                : "Date not specified"
-              : "Not deceased"
+                : t("Date not specified")
+              : t("Not deceased")
           }
         />
       </Stack>
