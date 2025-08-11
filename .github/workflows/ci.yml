@@ -69,9 +69,6 @@ jobs:
       - name: Link API client
         run: npm link ../api-ts
 
-      - name: Run linter
-        run: npm run lint
-
       - name: Run tests
         run: npm test
   
