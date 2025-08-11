@@ -30,7 +30,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
   if (error) return "An error has occurred: " + error.message;
 
   const rows = data.map((element) => (
-    <Table.Tr key={element.name}>
+    <Table.Tr key={element.use}>
       <Table.Td>{element.family}</Table.Td>
       <Table.Td>{element.given}</Table.Td>
       <Table.Td>{element.middle}</Table.Td>
