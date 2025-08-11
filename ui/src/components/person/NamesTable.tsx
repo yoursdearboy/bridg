@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
 import api from "@/api";
-import { Card, Alert, Stack, Group, Text, Divider, Table } from "@mantine/core";
+import { Card, Stack, Group, Text, Divider, Table } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import {
   QueryClient,
