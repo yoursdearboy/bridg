@@ -2,8 +2,13 @@
 import api from "@/api";
 import ButtonLink from "@/components/ButtonLink";
 import { PatientCard } from "@/components/PatientCard";
-import { SubjectInfoCard } from "@/components/SubjectInfoCard";
-import { Badge, Grid, Group, Stack, Title } from "@mantine/core";
+import {
+  Badge,
+  Grid,
+  Group,
+  Stack,
+  Title,
+} from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type { StudySubject } from "bridg-ts";
 import { useTranslation } from "react-i18next";
@@ -19,14 +24,10 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
 });
 
 function RouteComponent() {
-  const { spaceId, subjectId } = Route.useParams();
+  const { spaceId } = Route.useParams();
   const subject = Route.useLoaderData();
   const { t } = useTranslation();
   const personId = subject.performingBiologicEntity?.id;
-
-  const handleEditSubject = () => {
-    console.log("Edit subject:", subjectId);
-  };
 
   return (
     <Stack gap="md">
@@ -55,16 +56,6 @@ function RouteComponent() {
             />
           </Grid.Col>
         )}
-
-        <Grid.Col
-          span={{ base: 12, md: subject.performingBiologicEntity ? 6 : 12 }}
-        >
-          <SubjectInfoCard
-            subject={subject}
-            spaceId={spaceId}
-            onEdit={handleEditSubject}
-          />
-        </Grid.Col>
       </Grid>
     </Stack>
   );

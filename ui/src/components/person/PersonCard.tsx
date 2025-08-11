@@ -1,33 +1,18 @@
-// src/components/PatientCard.tsx
-import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
-import type { StudySubject } from "bridg-ts";
+import { Badge, Card, Divider, Group, Text, Stack } from "@mantine/core";
+import type { PersonOutput } from "bridg-ts";
 import dayjs from "dayjs";
-import type React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "@tanstack/react-router";
 
-interface PatientCardProps {
-  subject: StudySubject;
-  editLink?: React.ReactNode;
-  personLink?: React.ReactNode;
+interface PersonCardProps {
+  person: PersonOutput;
 }
 
-export function PatientCard({ subject, editLink }: PatientCardProps) {
-  const person = subject.performingBiologicEntity;
+export const PersonCard = ({ person }: PersonCardProps) => {
   const { t } = useTranslation();
 
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
-        <Group justify="space-between">
-          <Text size="xl" fw={700}>
-            {"Patient Information"}
-          </Text>
-          {editLink}
-        </Group>
-
-        <Divider my="xs" />
-
         {/* Основная информация */}
         <InfoRow label="Full Name" value={person?.primaryName?.trim()}>
           {person?.deathIndicator && (
@@ -73,16 +58,9 @@ export function PatientCard({ subject, editLink }: PatientCardProps) {
           }
         />
       </Stack>
-      <Divider size="sm"></Divider>
-      <>
-        Перейти к
-        <Link to="/persons/$personId" params={{ personId: person.id }}>
-          {subject.performingBiologicEntity?.primaryName}
-        </Link>
-      </>
     </Card>
   );
-}
+};
 
 interface InfoRowProps {
   label: string;

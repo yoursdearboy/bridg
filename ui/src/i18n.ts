@@ -27,6 +27,31 @@ const resources = {
       "Full Name": "Full Name",
       intlDateTime: "{{val, datetime}}",
       dayjsDuration: "{{val, dayjsDuration}}",
+      Person: {
+        Names: {
+          use: "Use",
+          family: "Family name",
+          given: "Given name",
+          middle: "Middle name",
+          patronymic: "Patronymic",
+          prefix: "Prefix",
+          suffix: "Suffix",
+        },
+        Addresses: {
+          use: "use",
+          street: "street",
+          building: "building",
+          country: "country",
+          municipality: "municipality",
+          state: "state",
+          zip: "zip",
+        },
+        TelecommunicationAddresses: {
+          use: "use",
+          scheme: "scheme",
+          address: "address",
+        },
+      },
       Status: {
         Candidate: "candidate",
         Eligible: "eligible",
@@ -63,6 +88,31 @@ const resources = {
       "Gender Name": "Пол",
       intlDateTime: "{{val, datetime}}",
       dayjsDuration: "{{val, dayjsDuration}}",
+      Person: {
+        Names: {
+          use: "Use",
+          family: "Фамилия",
+          given: "Имя",
+          middle: "Среднее имя",
+          patronymic: "Отчество",
+          prefix: "Перфикс",
+          suffix: "Суффик",
+        },
+        Addresses: {
+          use: "use",
+          street: "Улица",
+          building: "Дом",
+          country: "Страна",
+          municipality: "Район",
+          state: "Город",
+          zip: "Почтовый индекс",
+        },
+        TelecommunicationAddresses: {
+          use: "use",
+          scheme: "scheme",
+          address: "address",
+        },
+      },
       Status: {
         Candidate: "Кандидат",
         Eligible: "eligible",
