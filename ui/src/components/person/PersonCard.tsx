@@ -1,4 +1,4 @@
-import { Badge, Card, Divider, Group, Text, Stack } from "@mantine/core";
+import { Badge, Card, Group, Text, Stack } from "@mantine/core";
 import type { PersonOutput } from "bridg-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";

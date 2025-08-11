@@ -1,6 +1,5 @@
 import api from "@/api";
 import { Card, Stack, Group, Text, Divider, Table } from "@mantine/core";
-import { useTranslation } from "react-i18next";
 import {
   QueryClient,
   QueryClientProvider,
@@ -15,8 +14,6 @@ interface TelecommunicationAddressesTableProps {
 export const TelecommunicationAddressesTable = ({
   personId,
 }: TelecommunicationAddressesTableProps) => {
-  const { t } = useTranslation();
-
   const { isPending, error, data } = useQuery({
     queryKey: ["fetchPersonTelecommunicationAddresses"],
     queryFn: () =>
@@ -45,7 +42,7 @@ export const TelecommunicationAddressesTable = ({
         <Stack gap="sm">
           <Group justify="space-between">
             <Text size="xl" fw={700}>
-              {t("Person telecommunication addresses")}
+              Person telecommunication addresses
             </Text>
           </Group>
           <Divider my="xs" />
@@ -53,15 +50,9 @@ export const TelecommunicationAddressesTable = ({
           <Table>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th>
-                  {t("Persons.TelecommunicationAddresses.use")}
-                </Table.Th>
-                <Table.Th>
-                  {t("Persons.TelecommunicationAddresses.scheme")}
-                </Table.Th>
-                <Table.Th>
-                  {t("Persons.TelecommunicationAddresses.address")}
-                </Table.Th>
+                <Table.Th>Use</Table.Th>
+                <Table.Th>Scheme</Table.Th>
+                <Table.Th>Address</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>

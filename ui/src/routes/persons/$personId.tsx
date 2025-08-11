@@ -6,7 +6,6 @@ import { TelecommunicationAddressesTable } from "@/components/person/Telecommuni
 import { Grid, Group, Stack, Title, Space } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { PersonOutput } from "bridg-ts";
-import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: RouteComponent,
@@ -21,12 +20,11 @@ export const Route = createFileRoute("/persons/$personId")({
 function RouteComponent() {
   const { personId } = Route.useParams();
   const person = Route.useLoaderData();
-  const { t } = useTranslation();
 
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Title order={2}>{t("Person Information")}</Title>
+        <Title order={2}>Person information</Title>
       </Group>
       <Grid>
         <Grid.Col span={{ base: 12, md: 4 }}>

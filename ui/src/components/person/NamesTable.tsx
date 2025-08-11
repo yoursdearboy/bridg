@@ -1,6 +1,5 @@
 import api from "@/api";
 import { Card, Stack, Group, Text, Divider, Table } from "@mantine/core";
-import { useTranslation } from "react-i18next";
 import {
   QueryClient,
   QueryClientProvider,
@@ -13,8 +12,6 @@ interface NamesTableProps {
 }
 
 export const NamesTable = ({ personId }: NamesTableProps) => {
-  const { t } = useTranslation();
-
   const { isPending, error, data } = useQuery({
     queryKey: ["fetchPersonNames"],
     queryFn: () =>
@@ -44,7 +41,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
         <Stack gap="sm">
           <Group justify="space-between">
             <Text size="xl" fw={700}>
-              {t("Person names")}
+              Person names
             </Text>
           </Group>
           <Divider my="xs" />
@@ -52,10 +49,10 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
           <Table>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th>{t("Persons.Names.family")}</Table.Th>
-                <Table.Th>{t("Persons.Names.given")}</Table.Th>
-                <Table.Th>{t("Persons.Names.middle")}</Table.Th>
-                <Table.Th>{t("Persons.Names.patronymic")}</Table.Th>
+                <Table.Th>Family name</Table.Th>
+                <Table.Th>Given name</Table.Th>
+                <Table.Th>Middle name</Table.Th>
+                <Table.Th>Patronymic</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>
