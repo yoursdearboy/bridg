@@ -16,6 +16,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
   const { t } = useTranslation();
 
   const { isPending, error, data } = useQuery({
+    queryKey: ["fetchPersonNames"],
     queryFn: () =>
       api.persons
         .indexPersonsPersonIdNamesGet({

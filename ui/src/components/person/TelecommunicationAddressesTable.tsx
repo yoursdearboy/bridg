@@ -18,6 +18,7 @@ export const TelecommunicationAddressesTable = ({
   const { t } = useTranslation();
 
   const { isPending, error, data } = useQuery({
+    queryKey: ["fetchPersonTelecommunicationAddresses"],
     queryFn: () =>
       api.persons
         .indexPersonsPersonIdTelecommunicationAddressesGet({

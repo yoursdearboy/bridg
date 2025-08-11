@@ -15,6 +15,7 @@ interface AddressesTableProps {
 export const AddressesTable = ({ personId }: AddressesTableProps) => {
   const { t } = useTranslation();
   const { isPending, error, data } = useQuery({
+    queryKey: ["fetchPersonAddresses"],
     queryFn: () =>
       api.persons
         .indexPersonsPersonIdPostalAddressesGet({
