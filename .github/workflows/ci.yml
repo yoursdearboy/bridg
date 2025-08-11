@@ -27,9 +27,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Link API client
-        run: npm link ../api-ts
-
       - name: Run linter
         run:
           npm run lint
@@ -65,9 +62,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Link API client
-        run: npm link ../api-ts
 
       - name: Run tests
         run: npm test
