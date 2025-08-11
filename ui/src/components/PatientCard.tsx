@@ -1,5 +1,5 @@
 // src/components/PatientCard.tsx
-import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
+import { Badge, Button, Card, Divider, Group, Stack, Text } from "@mantine/core";
 import type { StudySubject } from "bridg-ts";
 import dayjs from "dayjs";
 import type React from "react";
@@ -73,13 +73,13 @@ export function PatientCard({ subject, editLink }: PatientCardProps) {
           }
         />
       </Stack>
-      <Divider size="sm"></Divider>
-      <>
-        Перейти к
-        <Link to="/persons/$personId" params={{ personId: person.id }}>
-          {subject.performingBiologicEntity?.primaryName}
-        </Link>
-      </>
+      {person ? (
+        <Button
+          component={Link}
+          href={`/persons/${person.id}`}
+          variant="light"
+        >Перейти к {person.primaryName}</Button>
+      ) : null}
     </Card>
   );
 }
