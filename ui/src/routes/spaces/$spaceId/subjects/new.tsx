@@ -27,6 +27,7 @@ import {
   Status,
 } from "bridg-ts";
 import dayjs from "dayjs";
+import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
@@ -55,15 +56,15 @@ const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
       <Card>
         <Flex gap="md">
           <TextInput
-            label="Family"
+            label={t("Family")}
             {...form.getInputProps("performingBiologicEntity.name.family")}
           />
           <TextInput
-            label="Given"
+            label={t("Given")}
             {...form.getInputProps("performingBiologicEntity.name.given")}
           />
           <TextInput
-            label="Patronymic"
+            label={t("Patronymic")}
             {...form.getInputProps("performingBiologicEntity.name.patronymic")}
           />
         </Flex>
@@ -104,7 +105,7 @@ const PerformingBiologicEntitySelect = ({
   return (
     <Card style={{ width: 300 }}>
       <Text fw={500} mb="sm">
-        Select existing biologic entity:
+        {t("Select existing biologic entity:")}
       </Text>
       <Combobox
         store={store}
@@ -163,17 +164,17 @@ const StudySubjectFields = ({ form }: NewStudySubjectFormProps) => {
       <Card>
         <Stack align="flex-start" gap="md">
           <Select
-            label="Status"
+            label={t("Status")}
             data={statuses}
             {...form.getInputProps("status")}
           />
           <DateInput
-            label="Status date"
+            label={t("Status date")}
             valueFormat="L"
             {...form.getInputProps("statusDate")}
           />
           <MultiSelect
-            label="Study sites"
+            label={t("Study sites")}
             data={sites.map((s) => ({
               value: s.id,
               label: s.executingStudySite,
@@ -278,7 +279,7 @@ function RouteComponent() {
             </Grid.Col>
           </Grid>
           <Button mt="md" type="submit">
-            Submit
+            {t("Submit")}
           </Button>
         </form>
       )}

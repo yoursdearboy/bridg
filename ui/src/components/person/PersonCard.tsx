@@ -1,6 +1,7 @@
 import { Badge, Card, Group, Stack, Text } from "@mantine/core";
 import type { PersonOutput } from "bridg-ts";
 import dayjs from "dayjs";
+import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 interface PersonCardProps {
@@ -13,7 +14,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
-        <InfoRow label="Full Name" value={person.primaryName}>
+        <InfoRow label={t("Full Name")} value={person.primaryName}>
           {person.deathIndicator && (
             <Badge color="red" ml="sm">
               {"Deceased"}
@@ -21,10 +22,13 @@ export const PersonCard = ({ person }: PersonCardProps) => {
           )}
         </InfoRow>
 
-        <InfoRow label="Gender Name" value={person.administrativeGenderCode} />
+        <InfoRow
+          label={t("Gender Name")}
+          value={person.administrativeGenderCode}
+        />
 
         <InfoRow
-          label="Date of Birth"
+          label={t("Date of Birth")}
           value={
             person.birthDate
               ? t("intlDateTime", { val: person.birthDate })
@@ -33,7 +37,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         />
 
         <InfoRow
-          label="Age"
+          label={t("Age")}
           value={
             person.birthDate
               ? t("dayjsDuration", {
@@ -47,13 +51,13 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         />
 
         <InfoRow
-          label="Date of Death"
+          label={t("Date of Death")}
           value={
             person.deathIndicator
               ? person.deathDate
                 ? t("intlDateTime", { val: person.deathDate })
-                : "Date not specified"
-              : "Not deceased"
+                : t("Date not specified")
+              : t("Not deceased")
           }
         />
       </Stack>
@@ -74,7 +78,7 @@ function InfoRow({ label, value, children }: InfoRowProps) {
         {label}:
       </Text>
       <Text>
-        {value || "N/A"}
+        {value || t("N/A")}
         {children}
       </Text>
     </Group>

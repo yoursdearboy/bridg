@@ -67,7 +67,7 @@ function RouteComponent() {
           to={infoRoute.to}
           params={{ spaceId, subjectId: subject.id }}
         >
-          Info
+          {t("Info")}
         </ButtonLink>
       </Table.Td>
     </Table.Tr>
@@ -89,14 +89,14 @@ function RouteComponent() {
           <Table.Thead>
             <Table.Tr>
               <Table.Th>{t("ID")}</Table.Th>
-              <Table.Th>{t("Name")}</Table.Th>
-              <Table.Th>Gender</Table.Th>
-              <Table.Th>Birth Date</Table.Th>
-              <Table.Th>Death Indicator</Table.Th>
-              <Table.Th>Death date</Table.Th>
-              <Table.Th>Status</Table.Th>
-              <Table.Th>Status date</Table.Th>
-              <Table.Th>Actions</Table.Th>
+              <Table.Th>{t("Full Name")}</Table.Th>
+              <Table.Th>{t("Gender Name")}</Table.Th>
+              <Table.Th>{t("Date of Birth")}</Table.Th>
+              <Table.Th>{t("Death Indicator")}</Table.Th>
+              <Table.Th>{t("Date of Death")}</Table.Th>
+              <Table.Th>{t("Status Name")}</Table.Th>
+              <Table.Th>{t("Status date")}</Table.Th>
+              <Table.Th>{t("Actions")}</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>

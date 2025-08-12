@@ -5,6 +5,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import { t } from "i18next";
 const queryClient = new QueryClient();
 
 interface NamesTableProps {
@@ -39,7 +40,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
         <Stack gap="sm">
           <Group justify="space-between">
             <Text size="xl" fw={700}>
-              Person names
+              {t("Person names")}
             </Text>
           </Group>
           <Divider my="xs" />
@@ -47,10 +48,10 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
           <Table>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th>Family name</Table.Th>
-                <Table.Th>Given name</Table.Th>
-                <Table.Th>Middle name</Table.Th>
-                <Table.Th>Patronymic</Table.Th>
+                <Table.Th> {t("Family name")} </Table.Th>
+                <Table.Th> {t("Given name")} </Table.Th>
+                <Table.Th> {t("Middle name")} </Table.Th>
+                <Table.Th> {t("atronymic")} </Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>

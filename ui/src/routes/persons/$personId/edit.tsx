@@ -51,23 +51,23 @@ function EditPersonComponent() {
         <Group justify="space-between">
           <Group>
             <Text size="xl" fw={700}>
-              Editing: {person.primaryName}
+              {t("Editing:")} {person.primaryName}
             </Text>
             {person.deathIndicator && (
               <Badge color="red" ml="sm">
-                Deceased
+                {t("Deceased")}
               </Badge>
             )}
           </Group>
           <ButtonLink to={indexRoute.to} params={params} variant="subtle">
-            Cancel
+            {t("Cancel")}
           </ButtonLink>
         </Group>
 
         <Card withBorder shadow="sm" padding="lg" radius="md">
           <Stack gap="sm">
             <Text size="xl" fw={700}>
-              Personal Information
+              {t("Personal Information")}
             </Text>
             <Divider my="xs" />
 
@@ -86,7 +86,7 @@ function EditPersonComponent() {
 
             <Group>
               <Button type="submit" variant="filled">
-                Save Changes
+                {t("Save Changes")}
               </Button>
             </Group>
           </Stack>
@@ -95,13 +95,13 @@ function EditPersonComponent() {
         <Card withBorder shadow="sm" padding="lg" radius="md">
           <Group justify="space-between" align="center">
             <Text size="xl" fw={700}>
-              Names
+              {t("Names")}
             </Text>
             <Button
               variant="outline"
               onClick={() => console.log("Add new name")}
             >
-              Add Name
+              {t("Add Name")}
             </Button>
           </Group>
         </Card>
@@ -109,13 +109,13 @@ function EditPersonComponent() {
         <Card withBorder shadow="sm" padding="lg" radius="md">
           <Group justify="space-between" align="center">
             <Text size="xl" fw={700}>
-              Addresses
+              {t("Addresses")}
             </Text>
             <Button
               variant="outline"
               onClick={() => console.log("Add new address")}
             >
-              Add Address
+              {t("Add Address")}
             </Button>
           </Group>
         </Card>
