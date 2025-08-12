@@ -1,4 +1,3 @@
-// src/components/PatientCard.tsx
 import {
   Badge,
   Button,
@@ -8,18 +7,18 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import type { StudySubject } from "bridg-ts";
+import type { PersonOutput } from "bridg-ts";
 import dayjs from "dayjs";
 import type React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "@tanstack/react-router";
+import { Route as personRoute } from "@/routes/persons/$personId";
 
 interface PatientCardProps {
-  subject: StudySubject;
+  person: PersonOutput;
 }
 
-export function PatientCard({ subject }: PatientCardProps) {
-  const person = subject.performingBiologicEntity;
+export function PatientCard({ person }: PatientCardProps) {
   const { t } = useTranslation();
 
   return (
@@ -27,27 +26,26 @@ export function PatientCard({ subject }: PatientCardProps) {
       <Stack gap="sm">
         <Group justify="space-between">
           <Text size="xl" fw={700}>
-            {"Patient Information"}
+            {t("Patient Information")}
           </Text>
         </Group>
 
         <Divider my="xs" />
 
-        {/* Основная информация */}
-        <InfoRow label="Full Name" value={person?.primaryName?.trim()}>
-          {person?.deathIndicator && (
+        <InfoRow label="Full Name" value={person.primaryName}>
+          {person.deathIndicator && (
             <Badge color="red" ml="sm">
-              {"Deceased"}
+              Deceased
             </Badge>
           )}
         </InfoRow>
 
-        <InfoRow label="Gender" value={person?.administrativeGenderCode} />
+        <InfoRow label="Gender" value={person.administrativeGenderCode} />
 
         <InfoRow
           label="Date of Birth"
           value={
-            person?.birthDate
+            person.birthDate
               ? t("intlDateTime", { val: person.birthDate })
               : undefined
           }
@@ -56,7 +54,7 @@ export function PatientCard({ subject }: PatientCardProps) {
         <InfoRow
           label="Age"
           value={
-            person?.birthDate
+            person.birthDate
               ? t("dayjsDuration", {
                   val: dayjs.duration(
                     dayjs().diff(person.birthDate, "year"),
@@ -70,19 +68,17 @@ export function PatientCard({ subject }: PatientCardProps) {
         <InfoRow
           label="Date of Death"
           value={
-            person?.deathIndicator
-              ? person?.deathDate
+            person.deathIndicator
+              ? person.deathDate
                 ? t("intlDateTime", { val: person.deathDate })
-                : "Date not specified"
-              : "Not deceased"
+                : t("Date not specified")
+              : t("Not deceased")
           }
         />
       </Stack>
-      {person ? (
-        <Button component={Link} href={`/persons/${person.id}`} variant="light">
-          Перейти к {person.primaryName}
-        </Button>
-      ) : null}
+      <Button component={Link} href={personRoute.to} variant="light">
+        Go to {person.primaryName}
+      </Button>
     </Card>
   );
 }

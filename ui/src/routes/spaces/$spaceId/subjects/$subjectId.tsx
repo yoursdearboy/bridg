@@ -19,14 +19,8 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
 });
 
 function RouteComponent() {
-  // const { spaceId, subjectId } = Route.useParams();
   const subject = Route.useLoaderData();
   const { t } = useTranslation();
-  // const personId = subject.performingBiologicEntity?.id;
-
-  // const handleEditSubject = () => {
-  //   console.log("Edit subject:", subjectId);
-  // };
 
   return (
     <Stack gap="md">
@@ -39,7 +33,7 @@ function RouteComponent() {
         {/* Patient Card (only shown for biologic entities) */}
         {subject.performingBiologicEntity && (
           <Grid.Col span={{ base: 12, md: 6 }}>
-            <PatientCard subject={subject} />
+            <PatientCard person={subject.performingBiologicEntity} />
           </Grid.Col>
         )}
       </Grid>
