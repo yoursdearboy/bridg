@@ -27,7 +27,6 @@ import {
   Status,
 } from "bridg-ts";
 import dayjs from "dayjs";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
@@ -73,14 +72,14 @@ const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
       <Card>
         <Stack align="flex-start" gap="md">
           <Select
-            label="Administrative gender"
+            label={t("Administrative gender")}
             data={genders}
             {...form.getInputProps(
               "performingBiologicEntity.administrativeGenderCode"
             )}
           />
           <DateInput
-            label="Birth date"
+            label={t("Birth date")}
             valueFormat="L"
             {...form.getInputProps("performingBiologicEntity.birthDate")}
           />

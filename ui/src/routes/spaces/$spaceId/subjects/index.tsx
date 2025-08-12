@@ -43,8 +43,8 @@ function RouteComponent() {
       <Table.Td>
         <Text>
           {subject.performingBiologicEntity?.deathIndicator === true
-            ? "Yes"
-            : "No"}
+            ? t("Yes")
+            : t("No")}
         </Text>
       </Table.Td>
       <Table.Td>

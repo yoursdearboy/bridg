@@ -1,7 +1,6 @@
 import { Badge, Card, Group, Stack, Text } from "@mantine/core";
 import type { PersonOutput } from "bridg-ts";
 import dayjs from "dayjs";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 interface PersonCardProps {
@@ -17,14 +16,14 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         <InfoRow label={t("Full Name")} value={person.primaryName}>
           {person.deathIndicator && (
             <Badge color="red" ml="sm">
-              {"Deceased"}
+              {t("Deceased")}
             </Badge>
           )}
         </InfoRow>
 
         <InfoRow
           label={t("Gender Name")}
-          value={person.administrativeGenderCode}
+          value={t(`Gender.${person.administrativeGenderCode}`)}
         />
 
         <InfoRow
@@ -32,7 +31,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
           value={
             person.birthDate
               ? t("intlDateTime", { val: person.birthDate })
-              : undefined
+              : "N/A"
           }
         />
 
@@ -46,7 +45,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
                     "year"
                   ),
                 })
-              : undefined
+              : "N/A"
           }
         />
 
@@ -78,7 +77,7 @@ function InfoRow({ label, value, children }: InfoRowProps) {
         {label}:
       </Text>
       <Text>
-        {value || t("N/A")}
+        {value || "N/A"}
         {children}
       </Text>
     </Group>

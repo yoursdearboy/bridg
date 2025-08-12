@@ -5,7 +5,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 const queryClient = new QueryClient();
 
 interface TelecommunicationAddressesTableProps {
@@ -23,9 +23,11 @@ export const TelecommunicationAddressesTable = ({
       }),
   });
 
-  if (isPending) return "Loading...";
+  const { t } = useTranslation();
 
-  if (error) return "An error has occurred: " + error.message;
+  if (isPending) return t("Loading...");
+
+  if (error) return t("An error has occurred: ") + error.message;
 
   const rows = data.map((element) => (
     <Table.Tr key={element.address}>
@@ -49,7 +51,7 @@ export const TelecommunicationAddressesTable = ({
           <Table>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th> {t("Use")}</Table.Th>
+                <Table.Th>{t("Use")}</Table.Th>
                 <Table.Th>{t("Scheme")}</Table.Th>
                 <Table.Th>{t("Address")}</Table.Th>
               </Table.Tr>

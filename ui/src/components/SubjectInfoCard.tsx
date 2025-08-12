@@ -72,7 +72,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
             <InfoRow label={t("Full Name")} value={person.primaryName} />
             <InfoRow
               label={t("Gender")}
-              value={person.administrativeGenderCode}
+              value={t(`Gender.${person.administrativeGenderCode}`)}
             />
 
             <InfoRow
@@ -80,7 +80,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
               value={
                 person.birthDate
                   ? t("intlDateTime", { val: person.birthDate })
-                  : undefined
+                  : "N/A"
               }
             />
 

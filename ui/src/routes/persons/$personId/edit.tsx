@@ -72,14 +72,14 @@ function EditPersonComponent() {
             <Divider my="xs" />
 
             <TextInput
-              label="Full Name"
-              placeholder="Enter full name"
+              label={t("Full Name")}
+              placeholder={t("Enter full name")}
               {...form.getInputProps("primaryName")}
             />
 
             <Select
-              label="Gender"
-              placeholder="Select gender"
+              label={t("Gender")}
+              placeholder={t("Select gender")}
               data={genders}
               {...form.getInputProps("administrativeGenderCode")}
             />

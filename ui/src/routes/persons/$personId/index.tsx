@@ -8,7 +8,7 @@ import { Grid, Group, Space, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { PersonOutput } from "bridg-ts";
 import { Route as editRoute } from "./edit";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/persons/$personId/")({
   component: PersonViewComponent,
@@ -22,6 +22,8 @@ export const Route = createFileRoute("/persons/$personId/")({
 function PersonViewComponent() {
   const { personId } = Route.useParams();
   const person = Route.useLoaderData();
+
+  const { t } = useTranslation();
 
   return (
     <Stack gap="md">
