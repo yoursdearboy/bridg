@@ -38,16 +38,18 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
               {subject.status || "-"}
               {subject.statusDate && (
                 <Text span ml="sm">
-                  ({t("intlDate", { 
+                  (
+                  {t("intlDate", {
                     val: new Date(subject.statusDate),
                     formatParams: {
                       val: {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit'
-                      }
-                    }
-                  })})
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                      },
+                    },
+                  })}
+                  )
                 </Text>
               )}
             </>
@@ -57,7 +59,13 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         {/* Subject Type */}
         <InfoRow
           label={t("Subject Type")}
-          value={person ? t("Person") : organization ? t("Organization") : t("Unknown")}
+          value={
+            person
+              ? t("Person")
+              : organization
+                ? t("Organization")
+                : t("Unknown")
+          }
         />
 
         {/* Person Information */}
@@ -69,26 +77,28 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
             </Text>
 
             <InfoRow label={t("Full Name")} value={person.primaryName} />
-            <InfoRow 
-              label={t("Gender")} 
-              value={person.administrativeGenderCode ? 
-                t(`gender.${person.administrativeGenderCode}`) : 
-                "-"}
+            <InfoRow
+              label={t("Gender")}
+              value={
+                person.administrativeGenderCode
+                  ? t(`gender.${person.administrativeGenderCode}`)
+                  : "-"
+              }
             />
-            
+
             <InfoRow
               label={t("Date of Birth")}
               value={
                 person.birthDate
-                  ? t("intlDate", { 
+                  ? t("intlDate", {
                       val: new Date(person.birthDate),
                       formatParams: {
                         val: {
-                          year: 'numeric',
-                          month: '2-digit',
-                          day: '2-digit'
-                        }
-                      }
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                        },
+                      },
                     })
                   : "-"
               }
@@ -104,14 +114,15 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
                           val: new Date(person.deathDate),
                           formatParams: {
                             val: {
-                              year: 'numeric',
-                              month: '2-digit',
-                              day: '2-digit'
-                            }
-                          }
+                              year: "numeric",
+                              month: "2-digit",
+                              day: "2-digit",
+                            },
+                          },
                         }),
-                        suffix: person.deathDateEstimatedIndicator ? 
-                          ` ${t("(estimated)")}` : ""
+                        suffix: person.deathDateEstimatedIndicator
+                          ? ` ${t("(estimated)")}`
+                          : "",
                       })
                     : t("Not specified")
                 }
@@ -132,8 +143,8 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
               label={t("Organization Name")}
               value={organization.primaryName}
             />
-            <InfoRow 
-              label={t("Description")} 
+            <InfoRow
+              label={t("Description")}
               value={organization.description || "-"}
             />
           </>
