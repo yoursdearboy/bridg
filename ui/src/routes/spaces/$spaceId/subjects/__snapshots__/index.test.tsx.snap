@@ -78,7 +78,7 @@ exports[`index pages renders correctly 1`] = `
                   <th
                     class="m_4e7aa4f3 mantine-Table-th"
                   >
-                    Name
+                    Full Name
                   </th>
                   <th
                     class="m_4e7aa4f3 mantine-Table-th"
@@ -88,7 +88,7 @@ exports[`index pages renders correctly 1`] = `
                   <th
                     class="m_4e7aa4f3 mantine-Table-th"
                   >
-                    Birth Date
+                    Birthdate
                   </th>
                   <th
                     class="m_4e7aa4f3 mantine-Table-th"

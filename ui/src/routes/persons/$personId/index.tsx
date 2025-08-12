@@ -8,6 +8,7 @@ import { Grid, Group, Space, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { PersonOutput } from "bridg-ts";
 import { Route as editRoute } from "./edit";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/persons/$personId/")({
   component: PersonViewComponent,
@@ -22,12 +23,14 @@ function PersonViewComponent() {
   const { personId } = Route.useParams();
   const person = Route.useLoaderData();
 
+  const { t } = useTranslation();
+
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Title order={2}>Person information</Title>
+        <Title order={2}>{t("Person information")}</Title>
         <ButtonLink to={editRoute.to} params={{ personId }} variant="outline">
-          Edit Person
+          {t("Edit Person")}
         </ButtonLink>
       </Group>
 

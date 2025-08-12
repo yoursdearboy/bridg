@@ -5,6 +5,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 const queryClient = new QueryClient();
 
 interface AddressesTableProps {
@@ -18,9 +19,11 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
       api.persons.indexPersonsPersonIdPostalAddressesGet({ personId }),
   });
 
-  if (isPending) return "Loading...";
+  const { t } = useTranslation();
 
-  if (error) return "An error has occurred: " + error.message;
+  if (isPending) return t("Loading...");
+
+  if (error) return t("An error has occurred: ") + error.message;
 
   const rows = data.map((element) => (
     <Table.Tr key={element.zip}>
@@ -37,7 +40,7 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
         <Stack gap="sm">
           <Group justify="space-between">
             <Text size="xl" fw={700}>
-              Person addresses
+              {t("Person addresses")}
             </Text>
           </Group>
           <Divider my="xs" />
@@ -45,10 +48,10 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
           <Table>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th>Country</Table.Th>
-                <Table.Th>State</Table.Th>
-                <Table.Th>Street</Table.Th>
-                <Table.Th>Building</Table.Th>
+                <Table.Th>{t("Country")}</Table.Th>
+                <Table.Th>{t("State")}</Table.Th>
+                <Table.Th>{t("Street")}</Table.Th>
+                <Table.Th>{t("Building")}</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>

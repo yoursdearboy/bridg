@@ -5,6 +5,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 const queryClient = new QueryClient();
 
 interface NamesTableProps {
@@ -20,9 +21,11 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
       }),
   });
 
-  if (isPending) return "Loading...";
+  const { t } = useTranslation();
 
-  if (error) return "An error has occurred: " + error.message;
+  if (isPending) return t("Loading...");
+
+  if (error) return t("An error has occurred: ") + error.message;
 
   const rows = data.map((element) => (
     <Table.Tr key={element.use}>
@@ -39,7 +42,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
         <Stack gap="sm">
           <Group justify="space-between">
             <Text size="xl" fw={700}>
-              Person names
+              {t("Person names")}
             </Text>
           </Group>
           <Divider my="xs" />
@@ -47,10 +50,10 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
           <Table>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th>Family name</Table.Th>
-                <Table.Th>Given name</Table.Th>
-                <Table.Th>Middle name</Table.Th>
-                <Table.Th>Patronymic</Table.Th>
+                <Table.Th>{t("Family name")}</Table.Th>
+                <Table.Th>{t("Given name")}</Table.Th>
+                <Table.Th>{t("Middle name")}</Table.Th>
+                <Table.Th>{t("Patronymic")}</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>

@@ -1,7 +1,6 @@
 import { InfoRow } from "@/components/InfoRow";
 import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
 import type { StudySubject } from "bridg-ts";
-import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 
 interface SubjectInfoCardProps {
@@ -20,7 +19,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
       <Stack gap="sm">
         <Group justify="space-between">
           <Text size="xl" fw={700}>
-            Subject Information
+            {t("Subject Information")}
           </Text>
           {onEdit && (
             <Badge color="blue" style={{ cursor: "pointer" }}>
@@ -32,13 +31,17 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         <Divider my="xs" />
 
         <InfoRow
-          label="Status"
+          label={t("Status_")}
           value={
             <>
-              {subject.status || "-"}
+              {subject.status}
               {subject.statusDate && (
                 <Text span ml="sm">
-                  ({dayjs(subject.statusDate).format("YYYY-MM-DD")})
+                  (
+                  {t("intlDate", {
+                    val: subject.statusDate,
+                  })}
+                  )
                 </Text>
               )}
             </>
@@ -46,34 +49,47 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         />
 
         <InfoRow
-          label="Subject Type"
-          value={person ? "Person" : organization ? "Organization" : "Unknown"}
+          label={t("Subject Type")}
+          value={
+            person
+              ? t("Person")
+              : organization
+                ? t("Organization")
+                : t("Unknown")
+          }
         />
 
         {person && (
           <>
             <Divider my="xs" />
             <Text fw={600} size="sm" c="dimmed">
-              Person Details
+              {t("Person Details")}
             </Text>
 
-            <InfoRow label="Full Name" value={person.primaryName} />
-            <InfoRow label="Gender" value={person.administrativeGenderCode} />
+            <InfoRow label={t("Full Name")} value={person.primaryName} />
             <InfoRow
-              label="Date of Birth"
+              label={t("Gender_")}
+              value={t(`Gender.${person.administrativeGenderCode}`)}
+            />
+
+            <InfoRow
+              label={t("Birthdate")}
               value={
                 person.birthDate
-                  ? dayjs(person.birthDate).format("YYYY-MM-DD")
-                  : undefined
+                  ? t("intlDateTime", { val: person.birthDate })
+                  : "N/A"
               }
             />
+
             {person.deathIndicator && (
               <InfoRow
-                label="Date of Death"
+                label={t("Death date")}
                 value={
-                  person.deathDate
-                    ? `${dayjs(person.deathDate).format("YYYY-MM-DD")}${person.deathDateEstimatedIndicator ? " (estimated)" : ""}`
-                    : undefined
+                  person.deathIndicator
+                    ? person.deathDate
+                      ? t("intlDateTime", { val: person.deathDate })
+                      : t("Date not specified")
+                    : t("Not deceased")
                 }
               />
             )}
@@ -84,14 +100,17 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           <>
             <Divider my="xs" />
             <Text fw={600} size="sm" c="dimmed">
-              Organization Details
+              {t("Organization Details")}
             </Text>
 
             <InfoRow
-              label="Organization Name"
+              label={t("Organization Name")}
               value={organization.primaryName}
             />
-            <InfoRow label="Description" value={organization.description} />
+            <InfoRow
+              label={t("Description")}
+              value={organization.description}
+            />
           </>
         )}
       </Stack>
