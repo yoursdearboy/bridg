@@ -1,7 +1,5 @@
-// src/components/SubjectInfoCard.tsx
 import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
 import type { StudySubject } from "bridg-ts";
-import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 
 interface SubjectInfoCardProps {
@@ -21,11 +19,10 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         {/* Card Header */}
         <Group justify="space-between">
           <Text size="xl" fw={700}>
-            {/* TODO: Repalce with t() */}
-            Subject Information
+            {t("Subject Information")}
           </Text>
           {onEdit && (
-            <Badge color="blue" style={{ cursor: "pointer" }}>
+            <Badge color="blue" style={{ cursor: "pointer" }} onClick={onEdit}>
               {t("Edit")}
             </Badge>
           )}
@@ -35,14 +32,22 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
         {/* Status Information */}
         <InfoRow
-          label="Status"
+          label={t("Status")}
           value={
             <>
               {subject.status || "-"}
-              {/* TODO: Replace dayjs with t() */}
               {subject.statusDate && (
                 <Text span ml="sm">
-                  ({dayjs(subject.statusDate).format("YYYY-MM-DD")})
+                  ({t("intlDate", { 
+                    val: new Date(subject.statusDate),
+                    formatParams: {
+                      val: {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                      }
+                    }
+                  })})
                 </Text>
               )}
             </>
@@ -51,8 +56,8 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
         {/* Subject Type */}
         <InfoRow
-          label="Subject Type"
-          value={person ? "Person" : organization ? "Organization" : "Unknown"}
+          label={t("Subject Type")}
+          value={person ? t("Person") : organization ? t("Organization") : t("Unknown")}
         />
 
         {/* Person Information */}
@@ -60,28 +65,55 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           <>
             <Divider my="xs" />
             <Text fw={600} size="sm" c="dimmed">
-              Person Details
+              {t("Person Details")}
             </Text>
 
-            <InfoRow label="Full Name" value={person.primaryName} />
-            <InfoRow label="Gender" value={person.administrativeGenderCode} />
-            {/* TODO: Replace dayjs with t() */}
+            <InfoRow label={t("Full Name")} value={person.primaryName} />
+            <InfoRow 
+              label={t("Gender")} 
+              value={person.administrativeGenderCode ? 
+                t(`gender.${person.administrativeGenderCode}`) : 
+                "-"}
+            />
+            
             <InfoRow
-              label="Date of Birth"
+              label={t("Date of Birth")}
               value={
                 person.birthDate
-                  ? dayjs(person.birthDate).format("YYYY-MM-DD")
-                  : undefined
+                  ? t("intlDate", { 
+                      val: new Date(person.birthDate),
+                      formatParams: {
+                        val: {
+                          year: 'numeric',
+                          month: '2-digit',
+                          day: '2-digit'
+                        }
+                      }
+                    })
+                  : "-"
               }
             />
-            {/* TODO: Replace dayjs with t() */}
+
             {person.deathIndicator && (
               <InfoRow
-                label="Date of Death"
+                label={t("Date of Death")}
                 value={
                   person.deathDate
-                    ? `${dayjs(person.deathDate).format("YYYY-MM-DD")}${person.deathDateEstimatedIndicator ? " (estimated)" : ""}`
-                    : undefined
+                    ? t("dateWithSuffix", {
+                        date: t("intlDate", {
+                          val: new Date(person.deathDate),
+                          formatParams: {
+                            val: {
+                              year: 'numeric',
+                              month: '2-digit',
+                              day: '2-digit'
+                            }
+                          }
+                        }),
+                        suffix: person.deathDateEstimatedIndicator ? 
+                          ` ${t("(estimated)")}` : ""
+                      })
+                    : t("Not specified")
                 }
               />
             )}
@@ -93,14 +125,17 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           <>
             <Divider my="xs" />
             <Text fw={600} size="sm" c="dimmed">
-              Organization Details
+              {t("Organization Details")}
             </Text>
 
             <InfoRow
-              label="Organization Name"
+              label={t("Organization Name")}
               value={organization.primaryName}
             />
-            <InfoRow label="Description" value={organization.description} />
+            <InfoRow 
+              label={t("Description")} 
+              value={organization.description || "-"}
+            />
           </>
         )}
       </Stack>
@@ -122,7 +157,7 @@ function InfoRow({ label, value, children }: InfoRowProps) {
         {label}:
       </Text>
       <Text>
-        {value || "-"}
+        {value !== undefined ? value : "-"}
         {children}
       </Text>
     </Group>
