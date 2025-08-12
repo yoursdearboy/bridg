@@ -2,7 +2,6 @@
 import api from "@/api";
 import ButtonLink from "@/components/ButtonLink";
 import { PatientCard } from "@/components/PatientCard";
-
 import { Grid, Group, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { StudySubject } from "bridg-ts";
