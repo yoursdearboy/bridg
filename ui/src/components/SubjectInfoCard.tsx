@@ -1,4 +1,3 @@
-// src/components/SubjectInfoCard.tsx
 import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
 import type { StudySubject } from "bridg-ts";
 import dayjs from "dayjs";

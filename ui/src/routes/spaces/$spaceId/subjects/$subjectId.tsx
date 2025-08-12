@@ -1,4 +1,3 @@
-// src/routes/spaces/$spaceId/subjects/$subjectId.tsx
 import api from "@/api";
 import ButtonLink from "@/components/ButtonLink";
 import { PersonCard } from "@/components/person/PersonCard";
