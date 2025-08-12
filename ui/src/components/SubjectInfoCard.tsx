@@ -22,7 +22,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
             {t("Subject Information")}
           </Text>
           {onEdit && (
-            <Badge color="blue" style={{ cursor: "pointer" }} onClick={onEdit}>
+            <Badge color="blue" style={{ cursor: "pointer" }}>
               {t("Edit")}
             </Badge>
           )}
@@ -35,19 +35,12 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           label={t("Status")}
           value={
             <>
-              {subject.status || "-"}
+              {subject.status}
               {subject.statusDate && (
                 <Text span ml="sm">
                   (
                   {t("intlDate", {
-                    val: new Date(subject.statusDate),
-                    formatParams: {
-                      val: {
-                        year: "numeric",
-                        month: "2-digit",
-                        day: "2-digit",
-                      },
-                    },
+                    val: subject.statusDate,
                   })}
                   )
                 </Text>
@@ -79,28 +72,15 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
             <InfoRow label={t("Full Name")} value={person.primaryName} />
             <InfoRow
               label={t("Gender")}
-              value={
-                person.administrativeGenderCode
-                  ? t(`gender.${person.administrativeGenderCode}`)
-                  : "-"
-              }
+              value={person.administrativeGenderCode}
             />
 
             <InfoRow
               label={t("Date of Birth")}
               value={
                 person.birthDate
-                  ? t("intlDate", {
-                      val: new Date(person.birthDate),
-                      formatParams: {
-                        val: {
-                          year: "numeric",
-                          month: "2-digit",
-                          day: "2-digit",
-                        },
-                      },
-                    })
-                  : "-"
+                  ? t("intlDateTime", { val: person.birthDate })
+                  : undefined
               }
             />
 
@@ -108,23 +88,11 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
               <InfoRow
                 label={t("Date of Death")}
                 value={
-                  person.deathDate
-                    ? t("dateWithSuffix", {
-                        date: t("intlDate", {
-                          val: new Date(person.deathDate),
-                          formatParams: {
-                            val: {
-                              year: "numeric",
-                              month: "2-digit",
-                              day: "2-digit",
-                            },
-                          },
-                        }),
-                        suffix: person.deathDateEstimatedIndicator
-                          ? ` ${t("(estimated)")}`
-                          : "",
-                      })
-                    : t("Not specified")
+                  person.deathIndicator
+                    ? person.deathDate
+                      ? t("intlDateTime", { val: person.deathDate })
+                      : t("Date not specified")
+                    : t("Not deceased")
                 }
               />
             )}
@@ -145,7 +113,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
             />
             <InfoRow
               label={t("Description")}
-              value={organization.description || "-"}
+              value={organization.description}
             />
           </>
         )}

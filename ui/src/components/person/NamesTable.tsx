@@ -51,7 +51,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
                 <Table.Th> {t("Family name")} </Table.Th>
                 <Table.Th> {t("Given name")} </Table.Th>
                 <Table.Th> {t("Middle name")} </Table.Th>
-                <Table.Th> {t("atronymic")} </Table.Th>
+                <Table.Th> {t("Patronymic")} </Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>
