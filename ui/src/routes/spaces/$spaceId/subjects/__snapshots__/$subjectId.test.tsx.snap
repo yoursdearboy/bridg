@@ -71,24 +71,6 @@ exports[`show page renders correctly 1`] = `
             >
               <div
                 class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
-              >
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                  data-size="xl"
-                  style="--text-fz: var(--mantine-font-size-xl); --text-lh: var(--mantine-line-height-xl); font-weight: 700;"
-                >
-                  Patient Information
-                </p>
-              </div>
-              <div
-                class="m_3eebeb36 mantine-Divider-root"
-                data-orientation="horizontal"
-                role="separator"
-                style="margin-block: var(--mantine-spacing-xs);"
-              />
-              <div
-                class="m_4081bf90 mantine-Group-root"
                 style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
               >
                 <p
@@ -111,7 +93,7 @@ exports[`show page renders correctly 1`] = `
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                   style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
                 >
-                  Gender:
+                  Gender Name:
                 </p>
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
@@ -168,26 +150,26 @@ exports[`show page renders correctly 1`] = `
                 </p>
               </div>
             </div>
-            <button
-              aria-current="page"
-              class="mantine-focus-auto mantine-active active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
-              data-status="active"
-              data-variant="light"
-              href="/"
-              style="--button-bg: var(--mantine-color-blue-light); --button-hover: var(--mantine-color-blue-light-hover); --button-color: var(--mantine-color-blue-light-color); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
-              type="button"
+          </div>
+          <button
+            aria-current="page"
+            class="mantine-focus-auto mantine-active active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+            data-status="active"
+            data-variant="light"
+            href="/"
+            style="--button-bg: var(--mantine-color-blue-light); --button-hover: var(--mantine-color-blue-light-hover); --button-color: var(--mantine-color-blue-light-color); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; margin-top: var(--mantine-spacing-md);"
+            type="button"
+          >
+            <span
+              class="m_80f1301b mantine-Button-inner"
             >
               <span
-                class="m_80f1301b mantine-Button-inner"
+                class="m_811560b9 mantine-Button-label"
               >
-                <span
-                  class="m_811560b9 mantine-Button-label"
-                >
-                  Go to Donald Trump Jr
-                </span>
+                Go to person page
               </span>
-            </button>
-          </div>
+            </span>
+          </button>
         </div>
       </div>
     </div>

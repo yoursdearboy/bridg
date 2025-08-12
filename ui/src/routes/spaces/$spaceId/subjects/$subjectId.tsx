@@ -6,6 +6,7 @@ import { Grid, Group, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { StudySubject } from "bridg-ts";
 import { useTranslation } from "react-i18next";
+import { Route as personRoute } from "@/routes/persons/$personId";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
   component: RouteComponent,
@@ -29,10 +30,17 @@ function RouteComponent() {
       </Group>
 
       <Grid>
-        {/* Patient Card (only shown for biologic entities) */}
         {subject.performingBiologicEntity && (
           <Grid.Col span={{ base: 12, md: 6 }}>
             <PersonCard person={subject.performingBiologicEntity} />
+            <ButtonLink
+              mt="md"
+              to={personRoute.to}
+              params={{ personId: subject.performingBiologicEntity.id }}
+              variant="light"
+            >
+              Go to person page
+            </ButtonLink>
           </Grid.Col>
         )}
       </Grid>
