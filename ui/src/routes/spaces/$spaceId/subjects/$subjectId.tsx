@@ -1,7 +1,7 @@
 // src/routes/spaces/$spaceId/subjects/$subjectId.tsx
 import api from "@/api";
 import ButtonLink from "@/components/ButtonLink";
-import { PatientCard } from "@/components/PatientCard";
+import { PersonCard } from "@/components/person/PersonCard";
 import { Grid, Group, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { StudySubject } from "bridg-ts";
@@ -32,7 +32,7 @@ function RouteComponent() {
         {/* Patient Card (only shown for biologic entities) */}
         {subject.performingBiologicEntity && (
           <Grid.Col span={{ base: 12, md: 6 }}>
-            <PatientCard person={subject.performingBiologicEntity} />
+            <PersonCard person={subject.performingBiologicEntity} />
           </Grid.Col>
         )}
       </Grid>
