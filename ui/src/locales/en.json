@@ -1,0 +1,42 @@
+{
+    "translation": {
+        "submit": "Submit",
+        "PerformingBiologicEntitySelect": {
+            "text": "Select existing biologic entity:"
+        },
+        "EntityName": {
+            "family": "Family",
+            "given": "Given",
+            "patronymic": "Patronymic"
+        },
+        "Person": {
+            "administrativeGenderCode": "Gender",
+            "birthDate": "Birth date"
+        },
+        "StudySubject": {
+            "status": "Status",
+            "statusDate": "Status date",
+            "assignedStudySiteProtocolVersionRelationship": "Study sites"
+        },
+        "Status": {
+            "candidate": "candidate",
+            "eligible": "Eligible",
+            "follow-up": "FollowUp",
+            "ineligible": "Ineligible",
+            "not-registered": "NotRegistered",
+            "off-study": "OffStudy",
+            "on-study": "OnStudy",
+            "on-study-intervention": "OnStudyIntervention",
+            "on-study-observation": "OnStudyObservation",
+            "pending-on-study": "PendingOnStudy",
+            "potential-candidate": "PotentialCandidate",
+            "screening": "Screening",
+            "withdrawn": "Withdrawn"
+        },
+        "Gender": {
+            "F": "Female",
+            "M": "Male",
+            "U": "Unknown"
+        }
+    }
+}
