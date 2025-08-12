@@ -3,6 +3,7 @@ import {
   Configuration,
   SubjectsApi,
   SitesApi,
+  PersonsApi,
 } from "bridg-ts";
 
 const config = new Configuration({
@@ -12,9 +13,11 @@ const config = new Configuration({
 export const sites = new SitesApi(config);
 export const spaces = new SpacesApi(config);
 export const subjects = new SubjectsApi(config);
+export const persons = new PersonsApi(config);
 
 export default {
   sites,
   spaces,
   subjects,
+  persons,
 };

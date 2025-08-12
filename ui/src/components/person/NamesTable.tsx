@@ -1,0 +1,62 @@
+import api from "@/api";
+import { Card, Stack, Group, Text, Divider, Table } from "@mantine/core";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+const queryClient = new QueryClient();
+
+interface NamesTableProps {
+  personId: string;
+}
+
+export const NamesTable = ({ personId }: NamesTableProps) => {
+  const { isPending, error, data } = useQuery({
+    queryKey: ["person", personId, "names"],
+    queryFn: () =>
+      api.persons.indexPersonsPersonIdNamesGet({
+        personId,
+      }),
+  });
+
+  if (isPending) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
+  const rows = data.map((element) => (
+    <Table.Tr key={element.use}>
+      <Table.Td>{element.family}</Table.Td>
+      <Table.Td>{element.given}</Table.Td>
+      <Table.Td>{element.middle}</Table.Td>
+      <Table.Td>{element.patronymic}</Table.Td>
+    </Table.Tr>
+  ));
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Card withBorder shadow="sm" padding="lg" radius="md">
+        <Stack gap="sm">
+          <Group justify="space-between">
+            <Text size="xl" fw={700}>
+              Person names
+            </Text>
+          </Group>
+          <Divider my="xs" />
+
+          <Table>
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th>Family name</Table.Th>
+                <Table.Th>Given name</Table.Th>
+                <Table.Th>Middle name</Table.Th>
+                <Table.Th>Patronymic</Table.Th>
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody>{rows}</Table.Tbody>
+          </Table>
+        </Stack>
+      </Card>
+    </QueryClientProvider>
+  );
+};

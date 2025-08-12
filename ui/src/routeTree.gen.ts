@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PersonsPersonIdIndexRouteImport } from './routes/persons/$personId/index'
+import { Route as PersonsPersonIdEditRouteImport } from './routes/persons/$personId/edit'
 import { Route as SpacesSpaceIdSubjectsRouteRouteImport } from './routes/spaces/$spaceId/subjects/route'
 import { Route as SpacesSpaceIdSubjectsIndexRouteImport } from './routes/spaces/$spaceId/subjects/index'
 import { Route as SpacesSpaceIdSubjectsNewRouteImport } from './routes/spaces/$spaceId/subjects/new'
@@ -18,6 +20,16 @@ import { Route as SpacesSpaceIdSubjectsSubjectIdRouteImport } from './routes/spa
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PersonsPersonIdIndexRoute = PersonsPersonIdIndexRouteImport.update({
+  id: '/persons/$personId/',
+  path: '/persons/$personId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PersonsPersonIdEditRoute = PersonsPersonIdEditRouteImport.update({
+  id: '/persons/$personId/edit',
+  path: '/persons/$personId/edit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SpacesSpaceIdSubjectsRouteRoute =
@@ -48,12 +60,16 @@ const SpacesSpaceIdSubjectsSubjectIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsRouteRouteWithChildren
+  '/persons/$personId/edit': typeof PersonsPersonIdEditRoute
+  '/persons/$personId': typeof PersonsPersonIdIndexRoute
   '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRoute
   '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects/': typeof SpacesSpaceIdSubjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/persons/$personId/edit': typeof PersonsPersonIdEditRoute
+  '/persons/$personId': typeof PersonsPersonIdIndexRoute
   '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRoute
   '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsIndexRoute
@@ -62,6 +78,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/spaces/$spaceId/subjects': typeof SpacesSpaceIdSubjectsRouteRouteWithChildren
+  '/persons/$personId/edit': typeof PersonsPersonIdEditRoute
+  '/persons/$personId/': typeof PersonsPersonIdIndexRoute
   '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdRoute
   '/spaces/$spaceId/subjects/new': typeof SpacesSpaceIdSubjectsNewRoute
   '/spaces/$spaceId/subjects/': typeof SpacesSpaceIdSubjectsIndexRoute
@@ -71,12 +89,16 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/spaces/$spaceId/subjects'
+    | '/persons/$personId/edit'
+    | '/persons/$personId'
     | '/spaces/$spaceId/subjects/$subjectId'
     | '/spaces/$spaceId/subjects/new'
     | '/spaces/$spaceId/subjects/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/persons/$personId/edit'
+    | '/persons/$personId'
     | '/spaces/$spaceId/subjects/$subjectId'
     | '/spaces/$spaceId/subjects/new'
     | '/spaces/$spaceId/subjects'
@@ -84,6 +106,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/spaces/$spaceId/subjects'
+    | '/persons/$personId/edit'
+    | '/persons/$personId/'
     | '/spaces/$spaceId/subjects/$subjectId'
     | '/spaces/$spaceId/subjects/new'
     | '/spaces/$spaceId/subjects/'
@@ -92,6 +116,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SpacesSpaceIdSubjectsRouteRoute: typeof SpacesSpaceIdSubjectsRouteRouteWithChildren
+  PersonsPersonIdEditRoute: typeof PersonsPersonIdEditRoute
+  PersonsPersonIdIndexRoute: typeof PersonsPersonIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -101,6 +127,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/persons/$personId/': {
+      id: '/persons/$personId/'
+      path: '/persons/$personId'
+      fullPath: '/persons/$personId'
+      preLoaderRoute: typeof PersonsPersonIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/persons/$personId/edit': {
+      id: '/persons/$personId/edit'
+      path: '/persons/$personId/edit'
+      fullPath: '/persons/$personId/edit'
+      preLoaderRoute: typeof PersonsPersonIdEditRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/spaces/$spaceId/subjects': {
@@ -155,6 +195,8 @@ const SpacesSpaceIdSubjectsRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SpacesSpaceIdSubjectsRouteRoute: SpacesSpaceIdSubjectsRouteRouteWithChildren,
+  PersonsPersonIdEditRoute: PersonsPersonIdEditRoute,
+  PersonsPersonIdIndexRoute: PersonsPersonIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

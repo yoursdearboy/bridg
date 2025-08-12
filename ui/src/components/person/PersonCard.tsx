@@ -1,38 +1,27 @@
-import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
+import { Badge, Card, Group, Stack, Text } from "@mantine/core";
 import type { PersonOutput } from "bridg-ts";
 import dayjs from "dayjs";
-import type React from "react";
 import { useTranslation } from "react-i18next";
-import { Route as personRoute } from "@/routes/persons/$personId";
-import ButtonLink from "./ButtonLink";
 
-interface PatientCardProps {
+interface PersonCardProps {
   person: PersonOutput;
 }
 
-export function PatientCard({ person }: PatientCardProps) {
+export const PersonCard = ({ person }: PersonCardProps) => {
   const { t } = useTranslation();
 
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
-        <Group justify="space-between">
-          <Text size="xl" fw={700}>
-            {t("Patient Information")}
-          </Text>
-        </Group>
-
-        <Divider my="xs" />
-
         <InfoRow label="Full Name" value={person.primaryName}>
           {person.deathIndicator && (
             <Badge color="red" ml="sm">
-              Deceased
+              {"Deceased"}
             </Badge>
           )}
         </InfoRow>
 
-        <InfoRow label="Gender" value={person.administrativeGenderCode} />
+        <InfoRow label="Gender Name" value={person.administrativeGenderCode} />
 
         <InfoRow
           label="Date of Birth"
@@ -63,21 +52,14 @@ export function PatientCard({ person }: PatientCardProps) {
             person.deathIndicator
               ? person.deathDate
                 ? t("intlDateTime", { val: person.deathDate })
-                : t("Date not specified")
-              : t("Not deceased")
+                : "Date not specified"
+              : "Not deceased"
           }
         />
       </Stack>
-      <ButtonLink
-        to={personRoute.to}
-        params={{ personId: person.id }}
-        variant="light"
-      >
-        Go to {person.primaryName}
-      </ButtonLink>
     </Card>
   );
-}
+};
 
 interface InfoRowProps {
   label: string;

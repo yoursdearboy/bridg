@@ -15,11 +15,43 @@ dayjs.extend(LocalizedFormat);
 const resources = {
   en: {
     translation: {
+      "Date of Birth": "Date of Birth",
+      Age: "Age",
+      "Date of Death": "Date of Death",
       "Patient Information": "Patient Information",
       Edit: "Edit",
+      "Editing Patient": "Editing Patient",
       Patients: "Patients",
+      Back: "Back",
+      "Gender Name": "Gender",
+      "Full Name": "Full Name",
       intlDateTime: "{{val, datetime}}",
       dayjsDuration: "{{val, dayjsDuration}}",
+      Person: {
+        Names: {
+          use: "Use",
+          family: "Family name",
+          given: "Given name",
+          middle: "Middle name",
+          patronymic: "Patronymic",
+          prefix: "Prefix",
+          suffix: "Suffix",
+        },
+        Addresses: {
+          use: "use",
+          street: "street",
+          building: "building",
+          country: "country",
+          municipality: "municipality",
+          state: "state",
+          zip: "zip",
+        },
+        TelecommunicationAddresses: {
+          use: "use",
+          scheme: "scheme",
+          address: "address",
+        },
+      },
       Status: {
         Candidate: "candidate",
         Eligible: "eligible",
@@ -44,11 +76,43 @@ const resources = {
   },
   ru: {
     translation: {
+      "Date of Birth": "Дата рождения",
+      Age: "Возраст",
+      "Date of Death": "Дата смерти",
       "Patient Information": "Информация о пациенте",
       Edit: "Редактировать",
+      "Editing Patient": "Редактирование пациента",
       Patients: "Пациенты",
+      Back: "Назад",
+      "Full Name": "ФИО",
+      "Gender Name": "Пол",
       intlDateTime: "{{val, datetime}}",
       dayjsDuration: "{{val, dayjsDuration}}",
+      Person: {
+        Names: {
+          use: "Use",
+          family: "Фамилия",
+          given: "Имя",
+          middle: "Среднее имя",
+          patronymic: "Отчество",
+          prefix: "Перфикс",
+          suffix: "Суффик",
+        },
+        Addresses: {
+          use: "use",
+          street: "Улица",
+          building: "Дом",
+          country: "Страна",
+          municipality: "Район",
+          state: "Город",
+          zip: "Почтовый индекс",
+        },
+        TelecommunicationAddresses: {
+          use: "use",
+          scheme: "scheme",
+          address: "address",
+        },
+      },
       Status: {
         Candidate: "Кандидат",
         Eligible: "eligible",
