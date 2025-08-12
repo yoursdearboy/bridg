@@ -1,5 +1,13 @@
 // src/components/PatientCard.tsx
-import { Badge, Button, Card, Divider, Group, Stack, Text } from "@mantine/core";
+import {
+  Badge,
+  Button,
+  Card,
+  Divider,
+  Group,
+  Stack,
+  Text,
+} from "@mantine/core";
 import type { StudySubject } from "bridg-ts";
 import dayjs from "dayjs";
 import type React from "react";
@@ -8,11 +16,9 @@ import { Link } from "@tanstack/react-router";
 
 interface PatientCardProps {
   subject: StudySubject;
-  editLink?: React.ReactNode;
-  personLink?: React.ReactNode;
 }
 
-export function PatientCard({ subject, editLink }: PatientCardProps) {
+export function PatientCard({ subject }: PatientCardProps) {
   const person = subject.performingBiologicEntity;
   const { t } = useTranslation();
 
@@ -23,7 +29,6 @@ export function PatientCard({ subject, editLink }: PatientCardProps) {
           <Text size="xl" fw={700}>
             {"Patient Information"}
           </Text>
-          {editLink}
         </Group>
 
         <Divider my="xs" />
@@ -37,7 +42,7 @@ export function PatientCard({ subject, editLink }: PatientCardProps) {
           )}
         </InfoRow>
 
-        <InfoRow label="Gender Name" value={person?.administrativeGenderCode} />
+        <InfoRow label="Gender" value={person?.administrativeGenderCode} />
 
         <InfoRow
           label="Date of Birth"
@@ -74,11 +79,9 @@ export function PatientCard({ subject, editLink }: PatientCardProps) {
         />
       </Stack>
       {person ? (
-        <Button
-          component={Link}
-          href={`/persons/${person.id}`}
-          variant="light"
-        >Перейти к {person.primaryName}</Button>
+        <Button component={Link} href={`/persons/${person.id}`} variant="light">
+          Перейти к {person.primaryName}
+        </Button>
       ) : null}
     </Card>
   );

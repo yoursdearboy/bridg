@@ -2,14 +2,9 @@
 import api from "@/api";
 import ButtonLink from "@/components/ButtonLink";
 import { PatientCard } from "@/components/PatientCard";
-import {
-  Badge,
-  Grid,
-  Group,
-  Stack,
-  Title,
-} from "@mantine/core";
-import { createFileRoute, Link } from "@tanstack/react-router";
+
+import { Grid, Group, Stack, Title } from "@mantine/core";
+import { createFileRoute } from "@tanstack/react-router";
 import type { StudySubject } from "bridg-ts";
 import { useTranslation } from "react-i18next";
 
@@ -24,10 +19,14 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
 });
 
 function RouteComponent() {
-  const { spaceId } = Route.useParams();
+  // const { spaceId, subjectId } = Route.useParams();
   const subject = Route.useLoaderData();
   const { t } = useTranslation();
-  const personId = subject.performingBiologicEntity?.id;
+  // const personId = subject.performingBiologicEntity?.id;
+
+  // const handleEditSubject = () => {
+  //   console.log("Edit subject:", subjectId);
+  // };
 
   return (
     <Stack gap="md">
@@ -40,20 +39,7 @@ function RouteComponent() {
         {/* Patient Card (only shown for biologic entities) */}
         {subject.performingBiologicEntity && (
           <Grid.Col span={{ base: 12, md: 6 }}>
-            <PatientCard
-              subject={subject}
-              editLink={
-                <Link
-                  to="/spaces/$spaceId/subjects/edit"
-                  params={{ spaceId }}
-                  search={{ personId }}
-                >
-                  <Badge color="blue" style={{ cursor: "pointer" }}>
-                    {t("Edit")}
-                  </Badge>
-                </Link>
-              }
-            />
+            <PatientCard subject={subject} />
           </Grid.Col>
         )}
       </Grid>
