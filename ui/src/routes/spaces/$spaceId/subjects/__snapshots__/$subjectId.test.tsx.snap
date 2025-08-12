@@ -93,12 +93,12 @@ exports[`show page renders correctly 1`] = `
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                   style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
                 >
-                  Gender Name:
+                  Gender:
                 </p>
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                 >
-                  M
+                  Male
                 </p>
               </div>
               <div
@@ -109,7 +109,7 @@ exports[`show page renders correctly 1`] = `
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                   style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
                 >
-                  Date of Birth:
+                  Birthdate:
                 </p>
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
@@ -141,7 +141,7 @@ exports[`show page renders correctly 1`] = `
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                   style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
                 >
-                  Date of Death:
+                  Death date:
                 </p>
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"

@@ -27,7 +27,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         />
 
         <InfoRow
-          label={t("Date of Birth")}
+          label={t("Birthdate")}
           value={
             person.birthDate
               ? t("intlDateTime", { val: person.birthDate })
@@ -50,7 +50,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         />
 
         <InfoRow
-          label={t("Date of Death")}
+          label={t("Death date")}
           value={
             person.deathIndicator
               ? person.deathDate

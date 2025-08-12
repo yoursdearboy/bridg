@@ -76,7 +76,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
             />
 
             <InfoRow
-              label={t("Date of Birth")}
+              label={t("Birthdate")}
               value={
                 person.birthDate
                   ? t("intlDateTime", { val: person.birthDate })
@@ -86,7 +86,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
             {person.deathIndicator && (
               <InfoRow
-                label={t("Date of Death")}
+                label={t("Death date")}
                 value={
                   person.deathIndicator
                     ? person.deathDate
