@@ -1,4 +1,5 @@
-import { Badge, Card, Group, Stack, Text } from "@mantine/core";
+import { InfoRow } from "@/components/InfoRow";
+import { Badge, Card, Stack } from "@mantine/core";
 import type { PersonOutput } from "bridg-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
@@ -60,23 +61,3 @@ export const PersonCard = ({ person }: PersonCardProps) => {
     </Card>
   );
 };
-
-interface InfoRowProps {
-  label: string;
-  value?: React.ReactNode;
-  children?: React.ReactNode;
-}
-
-function InfoRow({ label, value, children }: InfoRowProps) {
-  return (
-    <Group>
-      <Text fw={600} w={150} c="dimmed">
-        {label}:
-      </Text>
-      <Text>
-        {value || "N/A"}
-        {children}
-      </Text>
-    </Group>
-  );
-}

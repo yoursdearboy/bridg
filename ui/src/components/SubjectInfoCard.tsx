@@ -1,3 +1,4 @@
+import { InfoRow } from "@/components/InfoRow";
 import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
 import type { StudySubject } from "bridg-ts";
 import dayjs from "dayjs";
@@ -95,25 +96,5 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         )}
       </Stack>
     </Card>
-  );
-}
-
-interface InfoRowProps {
-  label: string;
-  value?: React.ReactNode;
-  children?: React.ReactNode;
-}
-
-function InfoRow({ label, value, children }: InfoRowProps) {
-  return (
-    <Group align="flex-start">
-      <Text fw={600} w={150} c="dimmed">
-        {label}:
-      </Text>
-      <Text>
-        {value || "-"}
-        {children}
-      </Text>
-    </Group>
   );
 }
