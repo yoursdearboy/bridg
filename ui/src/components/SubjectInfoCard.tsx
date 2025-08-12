@@ -1,9 +1,9 @@
 // src/components/SubjectInfoCard.tsx
+import { InfoRow } from "@/components/InfoRow";
 import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
 import type { StudySubject } from "bridg-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
-import { InfoRow } from "./InfoRow";
 
 interface SubjectInfoCardProps {
   subject: StudySubject;
