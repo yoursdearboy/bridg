@@ -1,3 +1,4 @@
+import { InfoRow } from "@/components/InfoRow";
 import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
 import type { StudySubject } from "bridg-ts";
 import { useTranslation } from "react-i18next";
@@ -16,7 +17,6 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
-        {/* Card Header */}
         <Group justify="space-between">
           <Text size="xl" fw={700}>
             {t("Subject Information")}
@@ -30,7 +30,6 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
         <Divider my="xs" />
 
-        {/* Status Information */}
         <InfoRow
           label={t("Status_")}
           value={
@@ -49,7 +48,6 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           }
         />
 
-        {/* Subject Type */}
         <InfoRow
           label={t("Subject Type")}
           value={
@@ -61,7 +59,6 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           }
         />
 
-        {/* Person Information */}
         {person && (
           <>
             <Divider my="xs" />
@@ -99,7 +96,6 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           </>
         )}
 
-        {/* Organization Information */}
         {organization && (
           <>
             <Divider my="xs" />
@@ -119,26 +115,5 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         )}
       </Stack>
     </Card>
-  );
-}
-
-// InfoRow component
-interface InfoRowProps {
-  label: string;
-  value?: React.ReactNode;
-  children?: React.ReactNode;
-}
-
-function InfoRow({ label, value, children }: InfoRowProps) {
-  return (
-    <Group align="flex-start">
-      <Text fw={600} w={150} c="dimmed">
-        {label}:
-      </Text>
-      <Text>
-        {value !== undefined ? value : "-"}
-        {children}
-      </Text>
-    </Group>
   );
 }

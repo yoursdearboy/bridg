@@ -71,7 +71,7 @@ exports[`show page renders correctly 1`] = `
             >
               <div
                 class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
               >
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
@@ -87,7 +87,7 @@ exports[`show page renders correctly 1`] = `
               </div>
               <div
                 class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
               >
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
@@ -103,7 +103,7 @@ exports[`show page renders correctly 1`] = `
               </div>
               <div
                 class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
               >
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
@@ -119,7 +119,7 @@ exports[`show page renders correctly 1`] = `
               </div>
               <div
                 class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
               >
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
@@ -135,7 +135,7 @@ exports[`show page renders correctly 1`] = `
               </div>
               <div
                 class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
               >
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
