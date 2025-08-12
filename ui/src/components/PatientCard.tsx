@@ -1,18 +1,10 @@
-import {
-  Badge,
-  Button,
-  Card,
-  Divider,
-  Group,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
 import type { PersonOutput } from "bridg-ts";
 import dayjs from "dayjs";
 import type React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "@tanstack/react-router";
 import { Route as personRoute } from "@/routes/persons/$personId";
+import ButtonLink from "./ButtonLink";
 
 interface PatientCardProps {
   person: PersonOutput;
@@ -76,9 +68,13 @@ export function PatientCard({ person }: PatientCardProps) {
           }
         />
       </Stack>
-      <Button component={Link} href={personRoute.to} variant="light">
+      <ButtonLink
+        to={personRoute.to}
+        params={{ personId: person.id }}
+        variant="light"
+      >
         Go to {person.primaryName}
-      </Button>
+      </ButtonLink>
     </Card>
   );
 }
