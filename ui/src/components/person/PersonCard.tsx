@@ -1,4 +1,4 @@
-import { Badge, Card, Group, Text, Stack } from "@mantine/core";
+import { Badge, Card, Group, Stack, Text } from "@mantine/core";
 import type { PersonOutput } from "bridg-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
@@ -13,21 +13,20 @@ export const PersonCard = ({ person }: PersonCardProps) => {
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
-        {/* Основная информация */}
-        <InfoRow label="Full Name" value={person?.primaryName?.trim()}>
-          {person?.deathIndicator && (
+        <InfoRow label="Full Name" value={person.primaryName}>
+          {person.deathIndicator && (
             <Badge color="red" ml="sm">
               {"Deceased"}
             </Badge>
           )}
         </InfoRow>
 
-        <InfoRow label="Gender Name" value={person?.administrativeGenderCode} />
+        <InfoRow label="Gender Name" value={person.administrativeGenderCode} />
 
         <InfoRow
           label="Date of Birth"
           value={
-            person?.birthDate
+            person.birthDate
               ? t("intlDateTime", { val: person.birthDate })
               : undefined
           }
@@ -36,7 +35,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         <InfoRow
           label="Age"
           value={
-            person?.birthDate
+            person.birthDate
               ? t("dayjsDuration", {
                   val: dayjs.duration(
                     dayjs().diff(person.birthDate, "year"),
@@ -50,8 +49,8 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         <InfoRow
           label="Date of Death"
           value={
-            person?.deathIndicator
-              ? person?.deathDate
+            person.deathIndicator
+              ? person.deathDate
                 ? t("intlDateTime", { val: person.deathDate })
                 : "Date not specified"
               : "Not deceased"

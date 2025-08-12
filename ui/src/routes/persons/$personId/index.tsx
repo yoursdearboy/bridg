@@ -1,11 +1,13 @@
 import api from "@/api";
+import ButtonLink from "@/components/ButtonLink";
 import { AddressesTable } from "@/components/person/AddressesTable";
 import { NamesTable } from "@/components/person/NamesTable";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
-import { Grid, Group, Stack, Title, Space, Button } from "@mantine/core";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Grid, Group, Space, Stack, Title } from "@mantine/core";
+import { createFileRoute } from "@tanstack/react-router";
 import type { PersonOutput } from "bridg-ts";
+import { Route as editRoute } from "./edit";
 
 export const Route = createFileRoute("/persons/$personId/")({
   component: PersonViewComponent,
@@ -24,14 +26,9 @@ function PersonViewComponent() {
     <Stack gap="md">
       <Group justify="space-between">
         <Title order={2}>Person information</Title>
-        <Button
-          component={Link}
-          to="/persons/$personId/edit"
-          //   params={{ personId }}
-          variant="outline"
-        >
+        <ButtonLink to={editRoute.to} params={{ personId }} variant="outline">
           Edit Person
-        </Button>
+        </ButtonLink>
       </Group>
 
       <Grid>

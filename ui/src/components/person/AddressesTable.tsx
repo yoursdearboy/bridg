@@ -1,5 +1,5 @@
 import api from "@/api";
-import { Card, Stack, Group, Text, Divider, Table } from "@mantine/core";
+import { Card, Divider, Group, Stack, Table, Text } from "@mantine/core";
 import {
   QueryClient,
   QueryClientProvider,
@@ -13,13 +13,9 @@ interface AddressesTableProps {
 
 export const AddressesTable = ({ personId }: AddressesTableProps) => {
   const { isPending, error, data } = useQuery({
-    queryKey: ["fetchPersonAddresses"],
+    queryKey: ["person", personId, "addresses"],
     queryFn: () =>
-      api.persons
-        .indexPersonsPersonIdPostalAddressesGet({
-          personId,
-        })
-        .then((res) => res),
+      api.persons.indexPersonsPersonIdPostalAddressesGet({ personId }),
   });
 
   if (isPending) return "Loading...";

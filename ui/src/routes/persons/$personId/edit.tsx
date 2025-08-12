@@ -1,66 +1,57 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import api from "@/api";
+import ButtonLink from "@/components/ButtonLink";
 import {
-  Text,
-  Card,
-  Stack,
-  Group,
   Badge,
-  Divider,
   Button,
-  TextInput,
+  Card,
+  Divider,
+  Group,
   Select,
+  Stack,
+  Text,
+  TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import api from "@/api";
-// import { useTranslation } from "react-i18next";
+import { createFileRoute } from "@tanstack/react-router";
+import { AdministrativeGender } from "bridg-ts";
+import { useTranslation } from "react-i18next";
+import { Route as indexRoute } from "./index";
 
 export const Route = createFileRoute("/persons/$personId/edit")({
   component: EditPersonComponent,
-  loader: async ({ params }) => {
-    if (!params.personId) throw new Error("personId is required");
-    return api.persons.showPersonsPersonIdGet({ personId: params.personId });
-  },
+  loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
   beforeLoad: () => ({
     breadcrumb: "Edit Person",
   }),
 });
 
 function EditPersonComponent() {
+  const params = Route.useParams();
   const person = Route.useLoaderData();
-  // const { t } = useTranslation();
+
+  const { t } = useTranslation();
+  const genders = Object.entries(AdministrativeGender).map(([key, value]) => ({
+    label: t(`Gender.${key}`),
+    value,
+  }));
 
   const form = useForm({
     initialValues: {
-      primaryName: person?.primaryName || "",
-      administrativeGenderCode: person?.administrativeGenderCode || "",
-      birthDate: person?.birthDate ? new Date(person.birthDate) : null,
-      deathIndicator: person?.deathIndicator || false,
-      deathDate: person?.deathDate ? new Date(person.deathDate) : null,
+      primaryName: person.primaryName || "",
+      administrativeGenderCode: person.administrativeGenderCode || "",
+      birthDate: person.birthDate ? new Date(person.birthDate) : null,
+      deathIndicator: person.deathIndicator || false,
+      deathDate: person.deathDate ? new Date(person.deathDate) : null,
     },
   });
 
-  const handleSubmit = (values: typeof form.values) => {
-    console.log("Submitting:", values);
-  };
-
-  if (!person) {
-    return (
-      <Card withBorder>
-        <Text color="red">Person not found</Text>
-        <Button component={Link} to="/persons" mt="md">
-          Back to Persons List
-        </Button>
-      </Card>
-    );
-  }
-
   return (
-    <form onSubmit={form.onSubmit(handleSubmit)}>
+    <form>
       <Stack gap="md">
         <Group justify="space-between">
           <Group>
             <Text size="xl" fw={700}>
-              Editing: {person.primaryName?.trim()}
+              Editing: {person.primaryName}
             </Text>
             {person.deathIndicator && (
               <Badge color="red" ml="sm">
@@ -68,12 +59,11 @@ function EditPersonComponent() {
               </Badge>
             )}
           </Group>
-          <Button component={Link} to="/persons/$personId" variant="subtle">
+          <ButtonLink to={indexRoute.to} params={params} variant="subtle">
             Cancel
-          </Button>
+          </ButtonLink>
         </Group>
 
-        {/* Основная информация */}
         <Card withBorder shadow="sm" padding="lg" radius="md">
           <Stack gap="sm">
             <Text size="xl" fw={700}>
@@ -90,24 +80,13 @@ function EditPersonComponent() {
             <Select
               label="Gender"
               placeholder="Select gender"
-              data={[
-                { value: "male", label: "Male" },
-                { value: "female", label: "Female" },
-                { value: "other", label: "Other" },
-              ]}
+              data={genders}
               {...form.getInputProps("administrativeGenderCode")}
             />
 
             <Group>
               <Button type="submit" variant="filled">
                 Save Changes
-              </Button>
-              <Button
-                variant="outline"
-                component={Link}
-                to="/persons/$personId"
-              >
-                Discard Changes
               </Button>
             </Group>
           </Stack>

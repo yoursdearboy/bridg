@@ -13,13 +13,11 @@ interface NamesTableProps {
 
 export const NamesTable = ({ personId }: NamesTableProps) => {
   const { isPending, error, data } = useQuery({
-    queryKey: ["fetchPersonNames"],
+    queryKey: ["person", personId, "names"],
     queryFn: () =>
-      api.persons
-        .indexPersonsPersonIdNamesGet({
-          personId,
-        })
-        .then((res) => res),
+      api.persons.indexPersonsPersonIdNamesGet({
+        personId,
+      }),
   });
 
   if (isPending) return "Loading...";
