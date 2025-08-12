@@ -21,6 +21,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         {/* Card Header */}
         <Group justify="space-between">
           <Text size="xl" fw={700}>
+            {/* TODO: Repalce with t() */}
             Subject Information
           </Text>
           {onEdit && (
@@ -38,6 +39,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           value={
             <>
               {subject.status || "-"}
+              {/* TODO: Replace dayjs with t() */}
               {subject.statusDate && (
                 <Text span ml="sm">
                   ({dayjs(subject.statusDate).format("YYYY-MM-DD")})
@@ -63,6 +65,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
             <InfoRow label="Full Name" value={person.primaryName} />
             <InfoRow label="Gender" value={person.administrativeGenderCode} />
+            {/* TODO: Replace dayjs with t() */}
             <InfoRow
               label="Date of Birth"
               value={
@@ -71,6 +74,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
                   : undefined
               }
             />
+            {/* TODO: Replace dayjs with t() */}
             {person.deathIndicator && (
               <InfoRow
                 label="Date of Death"
