@@ -1,4 +1,3 @@
-// src/components/SubjectInfoCard.tsx
 import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
 import type { StudySubject } from "bridg-ts";
 import dayjs from "dayjs";
@@ -18,7 +17,6 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
-        {/* Card Header */}
         <Group justify="space-between">
           <Text size="xl" fw={700}>
             Subject Information
@@ -32,7 +30,6 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
         <Divider my="xs" />
 
-        {/* Status Information */}
         <InfoRow
           label="Status"
           value={
@@ -47,13 +44,11 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           }
         />
 
-        {/* Subject Type */}
         <InfoRow
           label="Subject Type"
           value={person ? "Person" : organization ? "Organization" : "Unknown"}
         />
 
-        {/* Person Information */}
         {person && (
           <>
             <Divider my="xs" />
@@ -84,7 +79,6 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           </>
         )}
 
-        {/* Organization Information */}
         {organization && (
           <>
             <Divider my="xs" />
@@ -104,7 +98,6 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
   );
 }
 
-// InfoRow component
 interface InfoRowProps {
   label: string;
   value?: React.ReactNode;
