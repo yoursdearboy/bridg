@@ -80,16 +80,6 @@ exports[`show page renders correctly 1`] = `
                 >
                   Patient Information
                 </p>
-                <div
-                  class="m_347db0ec mantine-Badge-root"
-                  style="--badge-bg: var(--mantine-color-blue-filled); --badge-color: var(--mantine-color-white); --badge-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; cursor: pointer;"
-                >
-                  <span
-                    class="m_5add502a mantine-Badge-label"
-                  >
-                    Edit
-                  </span>
-                </div>
               </div>
               <div
                 class="m_3eebeb36 mantine-Divider-root"
@@ -178,153 +168,25 @@ exports[`show page renders correctly 1`] = `
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-        <style
-          data-mantine-styles="inline"
-        >
-          .__m__-«ru»{--col-flex-grow:auto;--col-flex-basis:100%;--col-max-width:100%;}@media(min-width: 62em){.__m__-«ru»{--col-flex-grow:auto;--col-flex-basis:50%;--col-max-width:50%;}}
-        </style>
-        <div
-          class="m_96bdd299 mantine-Grid-col __m__-«ru»"
-        >
-          <div
-            class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
-            data-with-border="true"
-            style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm); --card-padding: var(--mantine-spacing-lg);"
-          >
-            <div
-              class="m_6d731127 mantine-Stack-root"
-              style="--stack-gap: var(--mantine-spacing-sm); --stack-align: stretch; --stack-justify: flex-start;"
+            <button
+              aria-current="page"
+              class="mantine-focus-auto mantine-active active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+              data-status="active"
+              data-variant="light"
+              href="/"
+              style="--button-bg: var(--mantine-color-blue-light); --button-hover: var(--mantine-color-blue-light-hover); --button-color: var(--mantine-color-blue-light-color); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
+              type="button"
             >
-              <div
-                class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+              <span
+                class="m_80f1301b mantine-Button-inner"
               >
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                  data-size="xl"
-                  style="--text-fz: var(--mantine-font-size-xl); --text-lh: var(--mantine-line-height-xl); font-weight: 700;"
+                <span
+                  class="m_811560b9 mantine-Button-label"
                 >
-                  Subject Information
-                </p>
-                <div
-                  class="m_347db0ec mantine-Badge-root"
-                  style="--badge-bg: var(--mantine-color-blue-filled); --badge-color: var(--mantine-color-white); --badge-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; cursor: pointer;"
-                >
-                  <span
-                    class="m_5add502a mantine-Badge-label"
-                  >
-                    Edit
-                  </span>
-                </div>
-              </div>
-              <div
-                class="m_3eebeb36 mantine-Divider-root"
-                data-orientation="horizontal"
-                role="separator"
-                style="margin-block: var(--mantine-spacing-xs);"
-              />
-              <div
-                class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
-              >
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                  style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
-                >
-                  Status:
-                </p>
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                >
-                  eligible
-                  <span
-                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                    style="margin-left: var(--mantine-spacing-sm);"
-                  >
-                    (2024-11-06)
-                  </span>
-                </p>
-              </div>
-              <div
-                class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
-              >
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                  style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
-                >
-                  Subject Type:
-                </p>
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                >
-                  Person
-                </p>
-              </div>
-              <div
-                class="m_3eebeb36 mantine-Divider-root"
-                data-orientation="horizontal"
-                role="separator"
-                style="margin-block: var(--mantine-spacing-xs);"
-              />
-              <p
-                class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                data-size="sm"
-                style="--text-fz: var(--mantine-font-size-sm); --text-lh: var(--mantine-line-height-sm); color: var(--mantine-color-dimmed); font-weight: 600;"
-              >
-                Person Details
-              </p>
-              <div
-                class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
-              >
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                  style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
-                >
-                  Full Name:
-                </p>
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                >
-                  Donald Trump Jr
-                </p>
-              </div>
-              <div
-                class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
-              >
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                  style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
-                >
-                  Gender:
-                </p>
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                >
-                  M
-                </p>
-              </div>
-              <div
-                class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
-              >
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                  style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
-                >
-                  Date of Birth:
-                </p>
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                >
-                  1991-01-01
-                </p>
-              </div>
-            </div>
+                  Go to Donald Trump Jr
+                </span>
+              </span>
+            </button>
           </div>
         </div>
       </div>
