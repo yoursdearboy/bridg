@@ -90,11 +90,11 @@ function RouteComponent() {
             <Table.Tr>
               <Table.Th>{t("ID")}</Table.Th>
               <Table.Th>{t("Full Name")}</Table.Th>
-              <Table.Th>{t("Gender Name")}</Table.Th>
+              <Table.Th>{t("Gender_")}</Table.Th>
               <Table.Th>{t("Date of Birth")}</Table.Th>
               <Table.Th>{t("Death Indicator")}</Table.Th>
               <Table.Th>{t("Date of Death")}</Table.Th>
-              <Table.Th>{t("Status Name")}</Table.Th>
+              <Table.Th>{t("Status_")}</Table.Th>
               <Table.Th>{t("Status date")}</Table.Th>
               <Table.Th>{t("Actions")}</Table.Th>
             </Table.Tr>

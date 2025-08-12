@@ -23,8 +23,9 @@ const resources = {
       "Editing Patient": "Editing Patient",
       Patients: "Patients",
       Back: "Back",
-      "Gender Name": "Gender",
+      Gender_: "Gender",
       "Full Name": "Full Name",
+      Status_: "Status",
       intlDateTime: "{{val, datetime}}",
       dayjsDuration: "{{val, dayjsDuration}}",
       Person: {
@@ -85,7 +86,8 @@ const resources = {
       Patients: "Пациенты",
       Back: "Назад",
       "Full Name": "ФИО",
-      "Gender Name": "Пол",
+      Gender_: "Пол",
+      Status_: "Статус",
       intlDateTime: "{{val, datetime}}",
       dayjsDuration: "{{val, dayjsDuration}}",
       Person: {

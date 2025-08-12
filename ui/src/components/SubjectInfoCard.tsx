@@ -32,7 +32,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
         {/* Status Information */}
         <InfoRow
-          label={t("Status")}
+          label={t("Status_")}
           value={
             <>
               {subject.status}
@@ -71,7 +71,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
 
             <InfoRow label={t("Full Name")} value={person.primaryName} />
             <InfoRow
-              label={t("Gender")}
+              label={t("Gender_")}
               value={t(`Gender.${person.administrativeGenderCode}`)}
             />
 

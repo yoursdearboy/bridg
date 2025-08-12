@@ -101,6 +101,9 @@ const PerformingBiologicEntitySelect = ({
   const store = useCombobox({
     opened: true,
   });
+
+  const { t } = useTranslation();
+
   return (
     <Card style={{ width: 300 }}>
       <Text fw={500} mb="sm">
@@ -163,7 +166,7 @@ const StudySubjectFields = ({ form }: NewStudySubjectFormProps) => {
       <Card>
         <Stack align="flex-start" gap="md">
           <Select
-            label={t("Status")}
+            label={t("Status_")}
             data={statuses}
             {...form.getInputProps("status")}
           />
@@ -192,6 +195,8 @@ function RouteComponent() {
   const { spaceId } = Route.useParams();
 
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   const lookup = useQuery({
     queryKey: [],

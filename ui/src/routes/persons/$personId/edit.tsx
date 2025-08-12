@@ -78,7 +78,7 @@ function EditPersonComponent() {
             />
 
             <Select
-              label={t("Gender")}
+              label={t("Gender_")}
               placeholder={t("Select gender")}
               data={genders}
               {...form.getInputProps("administrativeGenderCode")}
