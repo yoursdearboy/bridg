@@ -13,6 +13,8 @@ class BaseModel(PydanticBaseModel, Generic[T]):
     _sa: type[T] = PrivateAttr()
 
     def model_dump_sa(self, data=None) -> T:
+        "Deprecated"
+
         def dump(kv):
             k, v = kv
             if v is None:

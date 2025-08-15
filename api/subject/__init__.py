@@ -1,48 +1,29 @@
-from datetime import date, datetime
-from typing import List, Optional
+from typing import Annotated, List, Optional
 from uuid import UUID
 
 from fastapi import APIRouter, Depends
-from pydantic import field_validator
 from sqlalchemy.orm import Session
 
 import bridg
-from api.base_model import BaseModel
 from api.db import get_db
 
+from .service import (
+    FoundStudySubject,
+    LookupStudySubject,
+    NewStudySubject,
+    StudySubject,
+    StudySubjectService,
+)
+
+
+def get_study_subject_service(db: Session = Depends(get_db)):
+    return StudySubjectService(db)
+
+
+StudySubjectServiceDep = Annotated[StudySubjectService, Depends(get_study_subject_service)]
+
+
 router = APIRouter(prefix="/subjects", tags=["subjects"])
-
-
-class StudySubject(BaseModel):
-    class Person(BaseModel):
-        id: UUID
-        administrative_gender_code: Optional[bridg.AdministrativeGender]
-        birth_date: Optional[date]
-        death_date: Optional[date]
-        death_date_estimated_indicator: Optional[bool]
-        death_indicator: Optional[bool]
-        primary_name: Optional[str]
-
-        @field_validator("primary_name", mode="before")
-        @classmethod
-        def convert_primary_name(cls, value: bridg.EntityName) -> str:
-            return str(value)
-
-    class Organization(BaseModel):
-        id: UUID
-        description: Optional[str]
-        primary_name: Optional[str]
-
-        @field_validator("primary_name", mode="before")
-        @classmethod
-        def convert_primary_name(cls, value: bridg.OrganizationName) -> str:
-            return str(value)
-
-    id: UUID
-    status: Optional[bridg.Status]
-    status_date: Optional[datetime]
-    performing_biologic_entity: Optional[Person]
-    performing_organization: Optional[Organization]
 
 
 @router.get("", response_model=List[StudySubject])
@@ -61,97 +42,14 @@ def show(space_id: UUID, subject_id: UUID, db: Session = Depends(get_db)) -> Opt
     return db.query(bridg.StudySubject).filter_by(id=subject_id).one_or_none()
 
 
-class NewStudySubject(BaseModel[bridg.StudySubject]):
-    _sa = bridg.StudySubject
-
-    class Person(BaseModel[bridg.Person]):
-        _sa = bridg.Person
-
-        class EntityName(BaseModel[bridg.EntityName]):
-            _sa = bridg.EntityName
-
-            use: Optional[str] = None
-            family: Optional[str] = None
-            given: Optional[str] = None
-            middle: Optional[str] = None
-            patronymic: Optional[str] = None
-            prefix: Optional[str] = None
-            suffix: Optional[str] = None
-
-        type: str = "person"
-        administrative_gender_code: Optional[bridg.AdministrativeGender] = None
-        birth_date: Optional[date] = None
-        death_date: Optional[date] = None
-        death_date_estimated_indicator: Optional[bool] = None
-        death_indicator: Optional[bool] = None
-        name: Optional[EntityName] = None
-
-        def model_dump_sa(self) -> bridg.Person:
-            data = dict(self)
-            name = data.pop("name")
-            name = [name] if name is not None else []
-            data["name"] = name
-            return super().model_dump_sa(data)
-
-    status: Optional[bridg.Status] = None
-    status_date: Optional[datetime] = None
-    performing_biologic_entity: Optional[Person] = None
-    performing_biologic_entity_id: Optional[UUID] = None
-
-    assigned_study_site_protocol_version_relationship: List[UUID]
-
-    def model_dump_sa(self) -> bridg.StudySubject:
-        data = dict(self)
-        if self.performing_biologic_entity_id is not None:
-            del data["performing_biologic_entity"]
-        return super().model_dump_sa(data)
-
-
 @router.post("", response_model=StudySubject)
-def create(space_id: UUID, data: NewStudySubject, db: Session = Depends(get_db)):
-    def _find_sspvr(id):
-        return db.query(bridg.StudySiteProtocolVersionRelationship).filter_by(id=id).one()
-
-    obj = data.model_dump_sa()
-    obj.assigned_study_site_protocol_version_relationship = [
-        _find_sspvr(x) for x in data.assigned_study_site_protocol_version_relationship
-    ]
-
-    db.add(obj)
-    db.commit()
-
-    return obj
-
-
-class LookupStudySubject(BaseModel):
-    class Person(BaseModel):
-        class EntityName(BaseModel):
-            use: Optional[str] = None
-            family: Optional[str] = None
-            given: Optional[str] = None
-            middle: Optional[str] = None
-            patronymic: Optional[str] = None
-            prefix: Optional[str] = None
-            suffix: Optional[str] = None
-
-        name: Optional[EntityName] = None
-
-    performing_biologic_entity: Optional[Person] = None
-
-
-class FoundStudySubject(BaseModel):
-    performing_biologic_entity: Optional[str] = None
-    performing_biologic_entity_id: Optional[UUID] = None
+def create(space_id: UUID, data: NewStudySubject, service: StudySubjectServiceDep):
+    return service.create(data)
 
 
 @router.post("/lookup", response_model=List[FoundStudySubject])
-def lookup(space_id: UUID, data: LookupStudySubject, db: Session = Depends(get_db)):
-    q = db.query(bridg.BiologicEntity)
-    if (pbe := data.performing_biologic_entity) and (n := pbe.name):
-        q = q.filter(bridg.BiologicEntity.name.any(bridg.EntityName.family.ilike(f"%{n.family}%")))
-        q = q.limit(10)
-        return [FoundStudySubject(performing_biologic_entity=str(be), performing_biologic_entity_id=be.id) for be in q]
-    raise RuntimeError("Unknown performing entity")
+def lookup(space_id: UUID, data: LookupStudySubject, service: StudySubjectServiceDep):
+    return service.lookup(data)
 
 
 openapi_tag = [{"name": "subjects"}]
