@@ -53,6 +53,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
 
             <Button
               variant="outline"
+              fw={500}
               onClick={() => console.log("Add new name")}
             >
               {t("Add Name")}

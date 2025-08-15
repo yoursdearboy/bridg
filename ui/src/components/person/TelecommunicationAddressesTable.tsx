@@ -53,6 +53,7 @@ export const TelecommunicationAddressesTable = ({
             <Text fw={500}>{t("Person telecommunication addresses")}</Text>
             <Button
               variant="outline"
+              fw={500}
               onClick={() => console.log("Add new telecommunication address")}
             >
               {t("Add")}

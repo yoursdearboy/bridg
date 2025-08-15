@@ -4,7 +4,7 @@ import { AddressesTable } from "@/components/person/AddressesTable";
 import { NamesTable } from "@/components/person/NamesTable";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
-import { Grid, Group, Space, Stack, Title } from "@mantine/core";
+import { Card, Grid, Group, Space, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { PersonOutput } from "bridg-ts";
 import { Route as editRoute } from "./edit";
@@ -28,7 +28,9 @@ function PersonViewComponent() {
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Title order={2}>{t("Person information")}</Title>
+        <Title fw={500} order={2}>
+          {t("Person information")}
+        </Title>
         <ButtonLink to={editRoute.to} params={{ personId }} variant="outline">
           {t("Edit Person")}
         </ButtonLink>
