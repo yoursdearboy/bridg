@@ -11,6 +11,12 @@
             "given": "Given",
             "patronymic": "Patronymic"
         },
+        "SubjectIndexPage": {
+          "info": "Info",
+          "patients": "Patients",
+          "newPatiet": "New patient",
+          "actions": "Actions"
+        },
         "SubjectInfoCard": {
           "title": "Subject information",
           "person": "Person",
@@ -31,6 +37,7 @@
           "title": "Person addresses"
         },
         "Person": {
+            "id": "ID",
             "administrativeGenderCode": "Gender",
             "birthDate": "Birth date",
             "deathDate": "Death date",
@@ -90,6 +97,12 @@
             "F": "Female",
             "M": "Male",
             "U": "Unknown"
+        },
+        "Boolean": {
+          "0": "No",
+          "1": "Yes",
+          "no": "No",
+          "yes": "Yes"
         }
     }
 }
