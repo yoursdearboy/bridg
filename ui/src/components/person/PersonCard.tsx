@@ -14,7 +14,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
-        <InfoRow label={t("Full Name")} value={person.primaryName}>
+        <InfoRow label={t("Person.primaryName")} value={person.primaryName}>
           {person.deathIndicator && (
             <Badge color="red" ml="sm">
               {t("Deceased")}
@@ -23,12 +23,12 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         </InfoRow>
 
         <InfoRow
-          label={t("Gender_")}
+          label={t("Person.administrativeGenderCode")}
           value={t(`Gender.${person.administrativeGenderCode}`)}
         />
 
         <InfoRow
-          label={t("Birthdate")}
+          label={t("Person.birthDate")}
           value={
             person.birthDate
               ? t("intlDateTime", { val: person.birthDate })
@@ -37,7 +37,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         />
 
         <InfoRow
-          label={t("Age")}
+          label={t("Person.age")}
           value={
             person.birthDate
               ? t("dayjsDuration", {
@@ -51,7 +51,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         />
 
         <InfoRow
-          label={t("Death date")}
+          label={t("Person.deathDate")}
           value={
             person.deathIndicator
               ? person.deathDate

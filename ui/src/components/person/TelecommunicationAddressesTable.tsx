@@ -25,7 +25,7 @@ export const TelecommunicationAddressesTable = ({
 
   const { t } = useTranslation();
 
-  if (isPending) return t("Loading...");
+  if (isPending) return t("loading");
 
   if (error) return t("An error has occurred: ") + error.message;
 
@@ -43,7 +43,7 @@ export const TelecommunicationAddressesTable = ({
         <Stack gap="sm">
           <Group justify="space-between">
             <Text size="xl" fw={700}>
-              {t("Person telecommunication addresses")}
+              {t("TelecommunicationAddressesTable.title")}
             </Text>
           </Group>
           <Divider my="xs" />
@@ -51,9 +51,9 @@ export const TelecommunicationAddressesTable = ({
           <Table>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th>{t("Use")}</Table.Th>
-                <Table.Th>{t("Scheme")}</Table.Th>
-                <Table.Th>{t("Address")}</Table.Th>
+                <Table.Th>{t("TelecommunicationAddress.use")}</Table.Th>
+                <Table.Th>{t("TelecommunicationAddress.scheme")}</Table.Th>
+                <Table.Th>{t("TelecommunicationAddress.address")}</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>

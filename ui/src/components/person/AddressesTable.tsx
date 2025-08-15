@@ -21,7 +21,7 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
 
   const { t } = useTranslation();
 
-  if (isPending) return t("Loading...");
+  if (isPending) return t("loading");
 
   if (error) return t("An error has occurred: ") + error.message;
 
@@ -40,7 +40,7 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
         <Stack gap="sm">
           <Group justify="space-between">
             <Text size="xl" fw={700}>
-              {t("Person addresses")}
+              {t("AddressesTable.title")}
             </Text>
           </Group>
           <Divider my="xs" />
@@ -48,10 +48,10 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
           <Table>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th>{t("Country")}</Table.Th>
-                <Table.Th>{t("State")}</Table.Th>
-                <Table.Th>{t("Street")}</Table.Th>
-                <Table.Th>{t("Building")}</Table.Th>
+                <Table.Th>{t("PostalAddress.country")}</Table.Th>
+                <Table.Th>{t("PostalAddress.state")}</Table.Th>
+                <Table.Th>{t("PostalAddress.street")}</Table.Th>
+                <Table.Th>{t("PostalAddress.building")}</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>

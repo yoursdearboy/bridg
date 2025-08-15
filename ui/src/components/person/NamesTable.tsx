@@ -23,7 +23,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
 
   const { t } = useTranslation();
 
-  if (isPending) return t("Loading...");
+  if (isPending) return t("loading");
 
   if (error) return t("An error has occurred: ") + error.message;
 
@@ -42,7 +42,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
         <Stack gap="sm">
           <Group justify="space-between">
             <Text size="xl" fw={700}>
-              {t("Person names")}
+              {t("NamesTable.title")}
             </Text>
           </Group>
           <Divider my="xs" />
@@ -50,10 +50,10 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
           <Table>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th>{t("Family name")}</Table.Th>
-                <Table.Th>{t("Given name")}</Table.Th>
-                <Table.Th>{t("Middle name")}</Table.Th>
-                <Table.Th>{t("Patronymic")}</Table.Th>
+                <Table.Th>{t("Name.family")}</Table.Th>
+                <Table.Th>{t("Name.given")}</Table.Th>
+                <Table.Th>{t("Name.middle")}</Table.Th>
+                <Table.Th>{t("Name.patronymic")}</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>
