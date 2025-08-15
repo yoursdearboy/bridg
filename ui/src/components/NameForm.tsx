@@ -1,12 +1,5 @@
 import api from "@/api";
-import {
-  Button,
-  Group,
-  TextInput,
-  Stack,
-  LoadingOverlay,
-  Alert,
-} from "@mantine/core";
+import { Button, Group, TextInput, Stack, LoadingOverlay } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMutation } from "@tanstack/react-query";
 import type { Name } from "bridg-ts";
@@ -47,30 +40,16 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
       onSuccess();
       onClose();
     },
-    onError: (error: any) => {
-      if (error.response?.data?.detail) {
-        form.setErrors(
-          Object.fromEntries(
-            error.response.data.detail.map((err: any) => [
-              err.loc[err.loc.length - 1],
-              err.msg,
-            ])
-          )
-        );
-      }
-    },
   });
 
+  const handleSubmit = (values: Name) => {
+    mutation.mutate(values);
+  };
+
   return (
-    <form onSubmit={form.onSubmit((values) => mutation.mutate(values))}>
+    <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="md" pos="relative">
         <LoadingOverlay visible={mutation.isPending} />
-
-        {mutation.isError && !mutation.error.response?.data?.detail && (
-          <Alert color="red" title={t("Error")}>
-            {t("Failed to save name:")} {mutation.error.message}
-          </Alert>
-        )}
 
         <Group grow>
           <TextInput label={t("Use")} {...form.getInputProps("use")} />

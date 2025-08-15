@@ -1,14 +1,21 @@
 import api from "@/api";
-import { Card, Group, Text, Table, Button, Modal } from "@mantine/core";
+import {
+  Card,
+  Group,
+  Text,
+  Table,
+  Button,
+  Modal,
+  LoadingOverlay,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
-  QueryClient,
   QueryClientProvider,
   useQuery,
+  useQueryClient,
 } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { NameForm } from "../NameForm";
-const queryClient = new QueryClient();
 
 interface NamesTableProps {
   personId: string;
@@ -16,47 +23,55 @@ interface NamesTableProps {
 
 export const NamesTable = ({ personId }: NamesTableProps) => {
   const [opened, { open, close }] = useDisclosure(false);
-  const { isPending, error, data } = useQuery({
-    queryKey: ["person", personId, "names"],
-    queryFn: () =>
-      api.persons.indexPersonsPersonIdNamesGet({
-        personId,
-      }),
-  });
-
+  const queryClient = useQueryClient();
   const { t } = useTranslation();
 
-  if (isPending) return t("Loading...");
+  const {
+    isPending,
+    error,
+    data: names,
+  } = useQuery({
+    queryKey: ["person", personId, "names"],
+    queryFn: () => api.persons.indexPersonsPersonIdNamesGet({ personId }),
+  });
 
-  if (error) return t("An error has occurred: ") + error.message;
+  const handleSuccess = () => {
+    queryClient.invalidateQueries({
+      queryKey: ["person", personId, "names"],
+    });
+    close();
+  };
 
-  const rows = data.map((element) => (
-    <Table.Tr key={element.use}>
-      <Table.Td>{element.family}</Table.Td>
-      <Table.Td>{element.given}</Table.Td>
-      <Table.Td>{element.middle}</Table.Td>
-      <Table.Td>{element.patronymic}</Table.Td>
-    </Table.Tr>
-  ));
+  if (isPending) return <LoadingOverlay visible />;
+  if (error)
+    return (
+      <Text color="red">
+        {t("Error loading names:")} {error.message}
+      </Text>
+    );
 
-  function handleSuccess(): void {
-    throw new Error("Function not implemented.");
-  }
-
+  const rows =
+    names?.map((name, index) => (
+      <Table.Tr key={`${name.family}-${name.given}-${name.use}-${index}`}>
+        <Table.Td>{name.family || "-"}</Table.Td>
+        <Table.Td>{name.given || "-"}</Table.Td>
+        <Table.Td>{name.middle || "-"}</Table.Td>
+        <Table.Td>{name.patronymic || "-"}</Table.Td>
+      </Table.Tr>
+    )) || [];
   return (
     <QueryClientProvider client={queryClient}>
       <Card withBorder shadow="sm" radius="md">
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
             <Text fw={500}>{t("Person names")}</Text>
-
-            <Button variant="outline" fw={500} size="compact-sm" onClick={open}>
+            <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
               {t("Add")}
             </Button>
           </Group>
         </Card.Section>
 
-        <Table>
+        <Table striped highlightOnHover>
           <Table.Thead>
             <Table.Tr>
               <Table.Th>{t("Family name")}</Table.Th>
@@ -68,10 +83,16 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
           <Table.Tbody>{rows}</Table.Tbody>
         </Table>
       </Card>
-      <Modal opened={opened} onClose={close} title={t("Add new name")}>
+
+      <Modal
+        opened={opened}
+        onClose={close}
+        title={t("Add new name")}
+        size="lg"
+      >
         <NameForm
-          onClose={close}
           personId={personId}
+          onClose={close}
           onSuccess={handleSuccess}
         />
       </Modal>
