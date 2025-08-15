@@ -31,10 +31,10 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
   });
 
   const mutation = useMutation({
-    mutationFn: (nameData: Name) =>
+    mutationFn: (name: Name) =>
       api.persons.createPersonsPersonIdNamesPost({
         personId,
-        name: nameData,
+        name,
       }),
     onSuccess: () => {
       onSuccess();
