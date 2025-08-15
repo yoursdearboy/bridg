@@ -1,11 +1,13 @@
 import api from "@/api";
 import { Card, Group, Text, Table, Button } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import {
   QueryClient,
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { NameForm } from "../NameForm";
 const queryClient = new QueryClient();
 
 interface NamesTableProps {
@@ -13,6 +15,7 @@ interface NamesTableProps {
 }
 
 export const NamesTable = ({ personId }: NamesTableProps) => {
+  const [opened, { open, close }] = useDisclosure(false);
   const { isPending, error, data } = useQuery({
     queryKey: ["person", personId, "names"],
     queryFn: () =>
@@ -43,12 +46,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
           <Group justify="space-between">
             <Text fw={500}>{t("Person names")}</Text>
 
-            <Button
-              variant="outline"
-              fw={500}
-              size="compact-sm"
-              onClick={() => console.log("Add new name")}
-            >
+            <Button variant="outline" fw={500} size="compact-sm" onClick={open}>
               {t("Add")}
             </Button>
           </Group>
@@ -66,6 +64,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
           <Table.Tbody>{rows}</Table.Tbody>
         </Table>
       </Card>
+      <NameForm opened={opened} onClose={close} />
     </QueryClientProvider>
   );
 };
