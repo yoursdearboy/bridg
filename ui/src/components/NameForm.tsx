@@ -1,17 +1,20 @@
-import { Modal } from "@mantine/core";
+import { Button, Group, TextInput } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 
 interface NameFormProps {
-  opened: boolean;
   onClose: () => void;
 }
 
-export const NameForm = ({ opened, onClose }: NameFormProps) => {
+export const NameForm = ({ onClose }: NameFormProps) => {
   const { t } = useTranslation();
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    onClose();
+  };
+
   return (
-    <Modal opened={opened} onClose={onClose} title={t("Add new name")}>
-      <div>{t("form")}</div>
-    </Modal>
+ "form"
   );
 };

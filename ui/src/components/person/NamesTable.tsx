@@ -1,5 +1,5 @@
 import api from "@/api";
-import { Card, Group, Text, Table, Button } from "@mantine/core";
+import { Card, Group, Text, Table, Button, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   QueryClient,
@@ -64,7 +64,9 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
           <Table.Tbody>{rows}</Table.Tbody>
         </Table>
       </Card>
-      <NameForm opened={opened} onClose={close} />
+      <Modal opened={opened} onClose={close} title={t("Add new name")}>
+        <NameForm onClose={close}  />
+      </Modal>
     </QueryClientProvider>
   );
 };
