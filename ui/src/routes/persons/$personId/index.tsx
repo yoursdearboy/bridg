@@ -28,7 +28,9 @@ function PersonViewComponent() {
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Title order={2}>{t("Person information")}</Title>
+        <Title fw={500} order={2}>
+          {t("Person information")}
+        </Title>
         <ButtonLink to={editRoute.to} params={{ personId }} variant="outline">
           {t("Edit Person")}
         </ButtonLink>
