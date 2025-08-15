@@ -3,6 +3,9 @@
         "submit": "Submit",
         "edit": "Edit",
         "loading": "Loading...",
+        "add": "Add",
+        "select": "Select",
+        "enter": "enter",
         "PerformingBiologicEntitySelect": {
             "text": "Select existing biologic entity:"
         },
@@ -35,6 +38,12 @@
         "PersonShowPage": {
           "title": "Person information",
           "edit": "Edit person"
+        },
+        "PersonEditPage": {
+          "title": "Editing:",
+          "cancel": "Cancel",
+          "personalInfo": "Personal information",
+          "primaryNamePlaceholder": "John Doe"
         },
         "NamesTable": {
           "title": "Person names"
