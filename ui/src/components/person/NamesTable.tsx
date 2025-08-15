@@ -46,12 +46,10 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Card withBorder shadow="sm" padding="lg" radius="md">
-        <Stack gap="sm">
+      <Card withBorder shadow="sm" radius="md">
+        <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
-            <Text size="xl" fw={700}>
-              {t("Person names")}
-            </Text>
+            <Text fw={500}>{t("Person names")}</Text>
 
             <Button
               variant="outline"
@@ -60,20 +58,19 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
               {t("Add Name")}
             </Button>
           </Group>
-          <Divider my="xs" />
+        </Card.Section>
 
-          <Table>
-            <Table.Thead>
-              <Table.Tr>
-                <Table.Th>{t("Family name")}</Table.Th>
-                <Table.Th>{t("Given name")}</Table.Th>
-                <Table.Th>{t("Middle name")}</Table.Th>
-                <Table.Th>{t("Patronymic")}</Table.Th>
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>{rows}</Table.Tbody>
-          </Table>
-        </Stack>
+        <Table>
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>{t("Family name")}</Table.Th>
+              <Table.Th>{t("Given name")}</Table.Th>
+              <Table.Th>{t("Middle name")}</Table.Th>
+              <Table.Th>{t("Patronymic")}</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>{rows}</Table.Tbody>
+        </Table>
       </Card>
     </QueryClientProvider>
   );

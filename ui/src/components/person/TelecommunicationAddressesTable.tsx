@@ -47,12 +47,10 @@ export const TelecommunicationAddressesTable = ({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Card withBorder shadow="sm" padding="lg" radius="md">
-        <Stack gap="sm">
+      <Card withBorder shadow="sm" radius="md">
+        <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
-            <Text size="xl" fw={700}>
-              {t("Person telecommunication addresses")}
-            </Text>
+            <Text fw={500}>{t("Person telecommunication addresses")}</Text>
             <Button
               variant="outline"
               onClick={() => console.log("Add new telecommunication address")}
@@ -60,19 +58,18 @@ export const TelecommunicationAddressesTable = ({
               {t("Add")}
             </Button>
           </Group>
-          <Divider my="xs" />
+        </Card.Section>
 
-          <Table>
-            <Table.Thead>
-              <Table.Tr>
-                <Table.Th>{t("Use")}</Table.Th>
-                <Table.Th>{t("Scheme")}</Table.Th>
-                <Table.Th>{t("Address")}</Table.Th>
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>{rows}</Table.Tbody>
-          </Table>
-        </Stack>
+        <Table>
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>{t("Use")}</Table.Th>
+              <Table.Th>{t("Scheme")}</Table.Th>
+              <Table.Th>{t("Address")}</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>{rows}</Table.Tbody>
+        </Table>
       </Card>
     </QueryClientProvider>
   );

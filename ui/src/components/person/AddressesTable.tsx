@@ -2,6 +2,7 @@ import api from "@/api";
 import {
   Button,
   Card,
+  CardSection,
   Divider,
   Group,
   Stack,
@@ -44,12 +45,10 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Card withBorder shadow="sm" padding="lg" radius="md">
-        <Stack gap="sm">
+      <Card withBorder shadow="sm" radius="md">
+        <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
-            <Text size="xl" fw={700}>
-              {t("Person addresses")}
-            </Text>
+            <Text fw={500}>{t("Person addresses")}</Text>
             <Button
               variant="outline"
               onClick={() => console.log("Add new address")}
@@ -57,20 +56,19 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
               {t("Add Address")}
             </Button>
           </Group>
-          <Divider my="xs" />
+        </Card.Section>
 
-          <Table>
-            <Table.Thead>
-              <Table.Tr>
-                <Table.Th>{t("Country")}</Table.Th>
-                <Table.Th>{t("State")}</Table.Th>
-                <Table.Th>{t("Street")}</Table.Th>
-                <Table.Th>{t("Building")}</Table.Th>
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>{rows}</Table.Tbody>
-          </Table>
-        </Stack>
+        <Table>
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>{t("Country")}</Table.Th>
+              <Table.Th>{t("State")}</Table.Th>
+              <Table.Th>{t("Street")}</Table.Th>
+              <Table.Th>{t("Building")}</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>{rows}</Table.Tbody>
+        </Table>
       </Card>
     </QueryClientProvider>
   );
