@@ -39,6 +39,10 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
     </Table.Tr>
   ));
 
+  function handleSuccess(): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <Card withBorder shadow="sm" radius="md">
@@ -65,7 +69,11 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
         </Table>
       </Card>
       <Modal opened={opened} onClose={close} title={t("Add new name")}>
-        <NameForm onClose={close}  />
+        <NameForm
+          onClose={close}
+          personId={personId}
+          onSuccess={handleSuccess}
+        />
       </Modal>
     </QueryClientProvider>
   );
