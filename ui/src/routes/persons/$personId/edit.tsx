@@ -91,34 +91,6 @@ function EditPersonComponent() {
             </Group>
           </Stack>
         </Card>
-
-        <Card withBorder shadow="sm" padding="lg" radius="md">
-          <Group justify="space-between" align="center">
-            <Text size="xl" fw={700}>
-              {t("Names")}
-            </Text>
-            <Button
-              variant="outline"
-              onClick={() => console.log("Add new name")}
-            >
-              {t("Add Name")}
-            </Button>
-          </Group>
-        </Card>
-
-        <Card withBorder shadow="sm" padding="lg" radius="md">
-          <Group justify="space-between" align="center">
-            <Text size="xl" fw={700}>
-              {t("Addresses")}
-            </Text>
-            <Button
-              variant="outline"
-              onClick={() => console.log("Add new address")}
-            >
-              {t("Add Address")}
-            </Button>
-          </Group>
-        </Card>
       </Stack>
     </form>
   );
