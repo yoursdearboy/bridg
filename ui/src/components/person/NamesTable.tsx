@@ -51,7 +51,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
     );
 
   const rows = names.map((name) => (
-    <Table.Tr key={`${name.id}`}>
+    <Table.Tr key={name.id}>
       <Table.Td>{name.family || "-"}</Table.Td>
       <Table.Td>{name.given || "-"}</Table.Td>
       <Table.Td>{name.middle || "-"}</Table.Td>
