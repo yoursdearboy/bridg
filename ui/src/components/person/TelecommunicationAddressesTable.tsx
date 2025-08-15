@@ -25,7 +25,7 @@ export const TelecommunicationAddressesTable = ({
 
   const { t } = useTranslation();
 
-  if (isPending) return t("Loading...");
+  if (isPending) return t("loading");
 
   if (error) return t("An error has occurred: ") + error.message;
 
@@ -42,14 +42,14 @@ export const TelecommunicationAddressesTable = ({
       <Card withBorder shadow="sm" radius="md">
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
-            <Text fw={500}>{t("Person telecommunication addresses")}</Text>
+            <Text fw={500}>{t("TelecommunicationAddressesTable.title")}</Text>
             <Button
               variant="outline"
               fw={500}
               size="compact-sm"
               onClick={() => console.log("Add new telecommunication address")}
             >
-              {t("Add")}
+              {t("add")}
             </Button>
           </Group>
         </Card.Section>
@@ -57,9 +57,9 @@ export const TelecommunicationAddressesTable = ({
         <Table>
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>{t("Use")}</Table.Th>
-              <Table.Th>{t("Scheme")}</Table.Th>
-              <Table.Th>{t("Address")}</Table.Th>
+               <Table.Th>{t("TelecommunicationAddress.use")}</Table.Th>
+              <Table.Th>{t("TelecommunicationAddress.scheme")}</Table.Th>
+              <Table.Th>{t("TelecommunicationAddress.address")}</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>

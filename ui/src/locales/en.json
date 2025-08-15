@@ -1,6 +1,8 @@
 {
     "translation": {
         "submit": "Submit",
+        "edit": "Edit",
+        "loading": "Loading...",
         "PerformingBiologicEntitySelect": {
             "text": "Select existing biologic entity:"
         },
@@ -9,9 +11,60 @@
             "given": "Given",
             "patronymic": "Patronymic"
         },
+        "SubjectInfoCard": {
+          "title": "Subject information",
+          "person": "Person",
+          "status": "Status",
+          "organization": "Organization",
+          "subjectType": "Subkject type",
+          "unknown": "Unkown",
+          "personDetails": "Person details",
+          "organizationDetails": "Organization details"
+        },
+        "NamesTable": {
+          "title": "Person names"
+        },
+        "TelecommunicationAddressesTable": {
+          "title": "Person telecommunication addresses"
+        },
+        "AddressesTable": {
+          "title": "Person addresses"
+        },
         "Person": {
             "administrativeGenderCode": "Gender",
-            "birthDate": "Birth date"
+            "birthDate": "Birth date",
+            "deathDate": "Death date",
+            "deathDateEstimatedIndicator": "Death date estimated indicator",
+            "deathIndicator": "Death indicator",
+            "primaryName": "Primary name",
+            "age": "Age"
+        },
+        "Organization": {
+          "description": "Description",
+          "primaryName": "Primary name"
+        },
+        "Name": {
+          "use": "use",
+          "family": "Family name",
+          "given": "Given name",
+          "middle": "Middle name",
+          "patronymic": "Patronymic",
+          "prefix": "Prefix",
+          "suffix": "Suffix"
+        },
+        "TelecommunicationAddress": {
+          "use": "Use",
+          "scheme": "Scheme",
+          "address": "Address"
+        },
+        "PostalAddress" : {
+          "use": "Use",
+          "street": "Street",
+          "building": "Building",
+          "country": "Country",
+          "municipality": "Municipality",
+          "state": "State",
+          "zip": "Zip"
         },
         "StudySubject": {
             "status": "Status",
