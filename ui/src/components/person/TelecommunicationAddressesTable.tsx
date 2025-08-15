@@ -1,5 +1,13 @@
 import api from "@/api";
-import { Card, Divider, Group, Stack, Table, Text } from "@mantine/core";
+import {
+  Button,
+  Card,
+  Divider,
+  Group,
+  Stack,
+  Table,
+  Text,
+} from "@mantine/core";
 import {
   QueryClient,
   QueryClientProvider,
@@ -45,6 +53,12 @@ export const TelecommunicationAddressesTable = ({
             <Text size="xl" fw={700}>
               {t("Person telecommunication addresses")}
             </Text>
+            <Button
+              variant="outline"
+              onClick={() => console.log("Add new telecommunication address")}
+            >
+              {t("Add")}
+            </Button>
           </Group>
           <Divider my="xs" />
 

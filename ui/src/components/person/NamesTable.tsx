@@ -1,5 +1,13 @@
 import api from "@/api";
-import { Card, Stack, Group, Text, Divider, Table } from "@mantine/core";
+import {
+  Card,
+  Stack,
+  Group,
+  Text,
+  Divider,
+  Table,
+  Button,
+} from "@mantine/core";
 import {
   QueryClient,
   QueryClientProvider,
@@ -44,6 +52,13 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
             <Text size="xl" fw={700}>
               {t("Person names")}
             </Text>
+
+            <Button
+              variant="outline"
+              onClick={() => console.log("Add new name")}
+            >
+              {t("Add Name")}
+            </Button>
           </Group>
           <Divider my="xs" />
 
