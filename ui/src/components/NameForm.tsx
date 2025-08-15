@@ -1,5 +1,12 @@
 import api from "@/api";
-import { Button, Group, TextInput, Stack, LoadingOverlay } from "@mantine/core";
+import {
+  Button,
+  Group,
+  TextInput,
+  Stack,
+  LoadingOverlay,
+  Alert,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMutation } from "@tanstack/react-query";
 import type { Name } from "bridg-ts";
@@ -38,7 +45,6 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
       }),
     onSuccess: () => {
       onSuccess();
-      onClose();
     },
   });
 
@@ -50,7 +56,11 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="md" pos="relative">
         <LoadingOverlay visible={mutation.isPending} />
-
+        {mutation.isError && (
+          <Alert color="red" mb="md">
+            {mutation.error.message}
+          </Alert>
+        )}
         <Group grow>
           <TextInput label={t("Use")} {...form.getInputProps("use")} />
           <TextInput label={t("Prefix")} {...form.getInputProps("prefix")} />

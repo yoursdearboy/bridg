@@ -50,15 +50,14 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
       </Text>
     );
 
-  const rows =
-    names?.map((name, index) => (
-      <Table.Tr key={`${name.family}-${name.given}-${name.use}-${index}`}>
-        <Table.Td>{name.family || "-"}</Table.Td>
-        <Table.Td>{name.given || "-"}</Table.Td>
-        <Table.Td>{name.middle || "-"}</Table.Td>
-        <Table.Td>{name.patronymic || "-"}</Table.Td>
-      </Table.Tr>
-    )) || [];
+  const rows = names.map((name) => (
+    <Table.Tr key={`${name.id}`}>
+      <Table.Td>{name.family || "-"}</Table.Td>
+      <Table.Td>{name.given || "-"}</Table.Td>
+      <Table.Td>{name.middle || "-"}</Table.Td>
+      <Table.Td>{name.patronymic || "-"}</Table.Td>
+    </Table.Tr>
+  ));
   return (
     <QueryClientProvider client={queryClient}>
       <Card withBorder shadow="sm" radius="md">
