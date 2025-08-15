@@ -4,7 +4,7 @@ import { AddressesTable } from "@/components/person/AddressesTable";
 import { NamesTable } from "@/components/person/NamesTable";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
-import { Card, Grid, Group, Space, Stack, Title } from "@mantine/core";
+import { Grid, Group, Space, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { PersonOutput } from "bridg-ts";
 import { Route as editRoute } from "./edit";

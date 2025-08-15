@@ -1,13 +1,5 @@
 import api from "@/api";
-import {
-  Card,
-  Stack,
-  Group,
-  Text,
-  Divider,
-  Table,
-  Button,
-} from "@mantine/core";
+import { Card, Group, Text, Table, Button } from "@mantine/core";
 import {
   QueryClient,
   QueryClientProvider,
