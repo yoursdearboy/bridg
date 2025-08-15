@@ -9,11 +9,7 @@ import {
   LoadingOverlay,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import {
-  QueryClientProvider,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { NameForm } from "../NameForm";
 
@@ -59,7 +55,7 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
     </Table.Tr>
   ));
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <Card withBorder shadow="sm" radius="md">
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
@@ -95,6 +91,6 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
           onSuccess={handleSuccess}
         />
       </Modal>
-    </QueryClientProvider>
+    </>
   );
 };
