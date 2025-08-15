@@ -1,16 +1,18 @@
 import { Breadcrumbs as MantineBreadcrumbs, Anchor, Text } from "@mantine/core";
 import { Link, useMatches, type AnyRouteMatch } from "@tanstack/react-router";
 
+type Breadcrumb = string | ((match: AnyRouteMatch) => string);
+type Context = { breadcrumb?: Breadcrumb };
+
 export function Breadcrumbs() {
   const matches = useMatches();
 
   const crumbs = matches
-    .filter((match: AnyRouteMatch) => match.context?.breadcrumb)
+    .filter((match: AnyRouteMatch) => (match.context as Context).breadcrumb)
     .map((match: AnyRouteMatch, index, all) => {
+      const breadcrumb = (match.context as Context).breadcrumb;
       const title =
-        typeof match.context?.breadcrumb === "function"
-          ? match.context.breadcrumb(match)
-          : match.context.breadcrumb;
+        typeof breadcrumb === "function" ? breadcrumb(match) : breadcrumb;
 
       return {
         title,

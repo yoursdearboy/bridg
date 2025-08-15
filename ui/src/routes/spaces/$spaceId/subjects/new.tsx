@@ -117,20 +117,19 @@ const PerformingBiologicEntitySelect = ({
         }}
       >
         <Combobox.Options>
-          {data &&
-            data.map((subject) => (
-              <Combobox.Option
-                key={subject.performingBiologicEntityId}
-                value={subject.performingBiologicEntityId!}
-                bg={
-                  (subject.performingBiologicEntityId === value &&
-                    "var(--mantine-color-dark-7)") ||
-                  ""
-                }
-              >
-                {subject.performingBiologicEntity}
-              </Combobox.Option>
-            ))}
+          {data.map((subject) => (
+            <Combobox.Option
+              key={subject.performingBiologicEntityId}
+              value={subject.performingBiologicEntityId!}
+              bg={
+                subject.performingBiologicEntityId === value
+                  ? "var(--mantine-color-dark-7)"
+                  : ""
+              }
+            >
+              {subject.performingBiologicEntity}
+            </Combobox.Option>
+          ))}
         </Combobox.Options>
       </Combobox>
     </Card>
@@ -226,7 +225,7 @@ function RouteComponent() {
     },
     onValuesChange: () => doLookup(),
     transformValues: (values: NewStudySubject) => {
-      if (values?.performingBiologicEntity?.birthDate) {
+      if (values.performingBiologicEntity?.birthDate) {
         values.performingBiologicEntity.birthDate = dayjs(
           values.performingBiologicEntity.birthDate
         ).toDate();
@@ -266,12 +265,14 @@ function RouteComponent() {
           <Grid>
             <Grid.Col span={6}>
               <Stack>
-                {(selectedLookup && (
+                {selectedLookup ? (
                   <PerformingBiologicEntityCard
                     form={form}
                     subject={selectedLookup}
                   />
-                )) || <PerformingBiologicEntityFields form={form} />}
+                ) : (
+                  <PerformingBiologicEntityFields form={form} />
+                )}
                 <StudySubjectFields form={form} />
               </Stack>
             </Grid.Col>
