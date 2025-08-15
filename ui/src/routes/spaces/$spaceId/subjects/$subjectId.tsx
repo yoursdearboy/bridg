@@ -24,8 +24,8 @@ function RouteComponent() {
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Title order={2}>{t("Patient Information")}</Title>
-        <ButtonLink to="..">{t("Back to List")}</ButtonLink>
+        <Title order={2}>{t("SubjectShowPage.title")}</Title>
+        <ButtonLink to="..">{t("SubjectShowPage.back")}</ButtonLink>
       </Group>
 
       <Grid>
@@ -38,7 +38,7 @@ function RouteComponent() {
               params={{ personId: subject.performingBiologicEntity.id }}
               variant="light"
             >
-              {t("Go to person page")}
+              {t("SubjectShowPage.toPerson")}
             </ButtonLink>
           </Grid.Col>
         )}
