@@ -54,9 +54,10 @@ export const NamesTable = ({ personId }: NamesTableProps) => {
             <Button
               variant="outline"
               fw={500}
+              size="compact-sm"
               onClick={() => console.log("Add new name")}
             >
-              {t("Add Name")}
+              {t("Add")}
             </Button>
           </Group>
         </Card.Section>

@@ -51,10 +51,11 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
             <Text fw={500}>{t("Person addresses")}</Text>
             <Button
               variant="outline"
+              size="compact-sm"
               fw={500}
               onClick={() => console.log("Add new address")}
             >
-              {t("Add Address")}
+              {t("Add")}
             </Button>
           </Group>
         </Card.Section>

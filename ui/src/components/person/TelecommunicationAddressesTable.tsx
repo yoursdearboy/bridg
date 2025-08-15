@@ -54,6 +54,7 @@ export const TelecommunicationAddressesTable = ({
             <Button
               variant="outline"
               fw={500}
+              size="compact-sm"
               onClick={() => console.log("Add new telecommunication address")}
             >
               {t("Add")}
