@@ -27,6 +27,11 @@
           "personDetails": "Person details",
           "organizationDetails": "Organization details"
         },
+        "SubjectShowPage": {
+          "title": "Patient information",
+          "back": "Back to list",
+          "toPerson": "Go to person page"
+        },
         "NamesTable": {
           "title": "Person names"
         },
