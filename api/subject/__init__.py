@@ -1,19 +1,12 @@
-from typing import Annotated, List, Optional
+from typing import Annotated, Optional
 from uuid import UUID
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-import bridg
 from api.db import get_db
 
-from .service import (
-    FoundStudySubject,
-    LookupStudySubject,
-    NewStudySubject,
-    StudySubject,
-    StudySubjectService,
-)
+from .service import LookupStudySubject, NewStudySubject, StudySubject, StudySubjectService
 
 
 def get_study_subject_service(db: Session = Depends(get_db)):
@@ -26,28 +19,22 @@ StudySubjectServiceDep = Annotated[StudySubjectService, Depends(get_study_subjec
 router = APIRouter(prefix="/subjects", tags=["subjects"])
 
 
-@router.get("", response_model=List[StudySubject])
-def index(space_id: UUID, db: Session = Depends(get_db)):
-    spvr = db.query(bridg.StudyProtocolVersion).filter_by(id=space_id).one()
-    return (
-        db.query(bridg.StudySubject)
-        .join(bridg.StudySubject.assigned_study_subject_protocol_version_relationship)
-        .join(bridg.StudySubjectProtocolVersionRelationship.assigning_study_site_protocol_version_relationship)
-        .filter(bridg.StudySiteProtocolVersionRelationship.executed_study_protocol_version == spvr)
-    )
+@router.get("")
+def index(space_id: UUID, service: StudySubjectServiceDep):
+    return service.list(space_id=space_id)
 
 
-@router.get("/{subject_id:uuid}", response_model=StudySubject)
-def show(space_id: UUID, subject_id: UUID, db: Session = Depends(get_db)) -> Optional[bridg.StudySubject]:
-    return db.query(bridg.StudySubject).filter_by(id=subject_id).one_or_none()
+@router.get("/{subject_id:uuid}")
+def show(space_id: UUID, subject_id: UUID, service: StudySubjectServiceDep) -> Optional[StudySubject]:
+    return service.get(subject_id)
 
 
-@router.post("", response_model=StudySubject)
+@router.post("")
 def create(space_id: UUID, data: NewStudySubject, service: StudySubjectServiceDep):
     return service.create(data)
 
 
-@router.post("/lookup", response_model=List[FoundStudySubject])
+@router.post("/lookup")
 def lookup(space_id: UUID, data: LookupStudySubject, service: StudySubjectServiceDep):
     return service.lookup(data)
 
