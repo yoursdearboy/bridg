@@ -32,6 +32,10 @@
           "back": "Back to list",
           "toPerson": "Go to person page"
         },
+        "PersonShowPage": {
+          "title": "Person information",
+          "edit": "Edit person"
+        },
         "NamesTable": {
           "title": "Person names"
         },
