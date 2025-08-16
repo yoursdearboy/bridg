@@ -32,7 +32,7 @@ function LanguageSwitcher() {
       </Menu.Target>
       <Menu.Dropdown>
         {languages.map((lang) => (
-          <MenuItem key={lang} onClick={() => i18n.changeLanguage(lang)}>
+          <MenuItem key={lang} onClick={() => void i18n.changeLanguage(lang)}>
             {lang.toUpperCase()}
           </MenuItem>
         ))}

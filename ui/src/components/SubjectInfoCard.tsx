@@ -81,18 +81,16 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
               }
             />
 
-            {person.deathIndicator && (
-              <InfoRow
-                label={t("Death date")}
-                value={
-                  person.deathIndicator
-                    ? person.deathDate
-                      ? t("intlDateTime", { val: person.deathDate })
-                      : t("Date not specified")
-                    : t("Not deceased")
-                }
-              />
-            )}
+            <InfoRow
+              label={t("Death date")}
+              value={
+                person.deathIndicator
+                  ? person.deathDate
+                    ? t("intlDateTime", { val: person.deathDate })
+                    : t("Date not specified")
+                  : t("Not deceased")
+              }
+            />
           </>
         )}
 

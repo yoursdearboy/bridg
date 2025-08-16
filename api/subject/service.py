@@ -125,6 +125,20 @@ class StudySubjectService:
     def to_schema(self, obj):
         return StudySubject.model_validate(obj)
 
+    def list(self, space_id: Optional[UUID] = None) -> List[StudySubject]:
+        q = self.db.query(bridg.StudySubject)
+        if space_id:
+            q = (
+                q.join(bridg.StudySubject.assigned_study_subject_protocol_version_relationship)
+                .join(bridg.StudySubjectProtocolVersionRelationship.assigning_study_site_protocol_version_relationship)
+                .filter(bridg.StudySiteProtocolVersionRelationship.executed_study_protocol_version_id == space_id)
+            )
+        return [StudySubject.model_validate(o) for o in q]
+
+    def get(self, id: UUID) -> StudySubject | None:
+        if obj := self.db.query(bridg.StudySubject).filter_by(id=id).one_or_none():
+            return StudySubject.model_validate(obj)
+
     def create(self, data: NewStudySubject) -> StudySubject:
         obj = self.new(data)
         self.db.add(obj)

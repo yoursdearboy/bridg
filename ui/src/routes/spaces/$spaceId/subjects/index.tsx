@@ -22,7 +22,7 @@ function RouteComponent() {
   const rows = subjects.map((subject) => (
     <Table.Tr key={subject.id}>
       <Table.Td>
-        <Text>{subject.performingBiologicEntity?.id?.trim()}</Text>
+        <Text>{subject.performingBiologicEntity?.id.trim()}</Text>
       </Table.Td>
       <Table.Td>
         <Text>{subject.performingBiologicEntity?.primaryName?.trim()}</Text>
