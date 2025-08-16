@@ -43,9 +43,8 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
         personId,
         name,
       }),
-    onSuccess: () => {
-      onSuccess();
-    },
+
+    onSuccess,
   });
 
   const handleSubmit = (values: Name) => {

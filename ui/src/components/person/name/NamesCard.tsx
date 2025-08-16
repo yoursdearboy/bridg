@@ -1,6 +1,6 @@
 import { Modal, LoadingOverlay, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { NameForm } from "./NameForm";
 import { NamesTable } from "./NamesTable";
 import api from "@/api";
@@ -12,7 +12,7 @@ interface NamesCardProps {
 
 export const NamesCard = ({ personId }: NamesCardProps) => {
   const [opened, { open, close }] = useDisclosure(false);
-
+  const queryClient = useQueryClient();
   const { t } = useTranslation();
 
   const {
@@ -26,6 +26,9 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
   });
 
   const handleSuccess = () => {
+    queryClient.invalidateQueries({
+      queryKey: ["person", personId, "names"],
+    });
     close();
   };
 
