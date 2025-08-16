@@ -1,7 +1,6 @@
 import api from "@/api";
 import ButtonLink from "@/components/ButtonLink";
 import { AddressesTable } from "@/components/person/AddressesTable";
-import { NamesTable } from "@/components/person/NamesTable";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
 import { Grid, Group, Space, Stack, Title } from "@mantine/core";
@@ -9,6 +8,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type { PersonOutput } from "bridg-ts";
 import { Route as editRoute } from "./edit";
 import { useTranslation } from "react-i18next";
+import { NamesCard } from "@/components/person/name/NamesCard";
 
 export const Route = createFileRoute("/persons/$personId/")({
   component: PersonViewComponent,
@@ -41,7 +41,7 @@ function PersonViewComponent() {
           <PersonCard person={person} />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 8 }}>
-          <NamesTable personId={personId} />
+          <NamesCard personId={personId} />
           <Space h="md" />
           <AddressesTable personId={personId} />
           <Space h="md" />
