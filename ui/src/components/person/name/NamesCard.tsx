@@ -41,13 +41,14 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
 
   return (
     <>
-      <NamesTable names={names} onAddClick={open} />
+      <NamesTable names={names} onAddClick={open} isLoading={isPending} />
 
       <Modal
         opened={opened}
         onClose={close}
         title={t("Add new name")}
         size="lg"
+        centered
       >
         <NameForm
           personId={personId}

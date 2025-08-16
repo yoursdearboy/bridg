@@ -12,9 +12,14 @@ interface NameData {
 interface NamesTableProps {
   names: NameData[];
   onAddClick?: () => void;
+  isLoading?: boolean;
 }
 
-export const NamesTable = ({ names, onAddClick }: NamesTableProps) => {
+export const NamesTable = ({
+  names,
+  onAddClick,
+  isLoading,
+}: NamesTableProps) => {
   const { t } = useTranslation();
 
   const rows = names.map((name) => (
@@ -37,6 +42,7 @@ export const NamesTable = ({ names, onAddClick }: NamesTableProps) => {
               size="compact-sm"
               onClick={onAddClick}
               fw={500}
+              loading={isLoading}
             >
               {t("Add")}
             </Button>
@@ -53,7 +59,17 @@ export const NamesTable = ({ names, onAddClick }: NamesTableProps) => {
             <Table.Th>{t("Patronymic")}</Table.Th>
           </Table.Tr>
         </Table.Thead>
-        <Table.Tbody>{rows}</Table.Tbody>
+        <Table.Tbody>
+          {names.length === 0 ? (
+            <Table.Tr>
+              <Table.Td colSpan={4} style={{ textAlign: "center" }}>
+                {isLoading ? t("Loading...") : t("No names found")}
+              </Table.Td>
+            </Table.Tr>
+          ) : (
+            rows
+          )}
+        </Table.Tbody>
       </Table>
     </Card>
   );
