@@ -65,7 +65,7 @@ class EntityName(BaseModel):
     suffix: Optional[str] = None
 
 
-def _parse_en(data: EntityName) -> bridg.EntityName:
+def parse_en(data: EntityName) -> bridg.EntityName:
     return bridg.EntityName(
         use=data.use,
         family=data.family,
@@ -77,13 +77,9 @@ def _parse_en(data: EntityName) -> bridg.EntityName:
     )
 
 
-class WithName(Protocol):
-    name: Optional[EntityName]
-
-
-def _map_primary_name(data: WithName) -> List[bridg.EntityName]:
-    if data.name:
-        return [_parse_en(data.name)]
+def parse_optional_en(data: Optional[EntityName]) -> List[bridg.EntityName]:
+    if data:
+        return [parse_en(data)]
     return []
 
 
@@ -105,16 +101,16 @@ class NewStudySubject(BaseModel):
     assigned_study_site_protocol_version_relationship: List[UUID]
 
 
-def _new_ss(data: NewStudySubject, db: Session) -> bridg.StudySubject:
-    def _find_or_new_pbe(data: NewStudySubject) -> bridg.Person | None:
+def parse_new_ss(data: NewStudySubject, db: Session) -> bridg.StudySubject:
+    def find_or_parse_pbe(data: NewStudySubject) -> bridg.Person | None:
         if data.performing_biologic_entity_id is not None:
             return
         if data.performing_biologic_entity:
-            return _new_pbe(data.performing_biologic_entity)
+            return parse_pbe(data.performing_biologic_entity)
 
-    def _new_pbe(data: NewStudySubject.Person) -> bridg.Person:
+    def parse_pbe(data: NewStudySubject.Person) -> bridg.Person:
         return bridg.Person(
-            name=_map_primary_name(data),
+            name=parse_optional_en(data.name),
             administrative_gender_code=data.administrative_gender_code,
             birth_date=data.birth_date,
             death_date=data.death_date,
@@ -122,16 +118,16 @@ def _new_ss(data: NewStudySubject, db: Session) -> bridg.StudySubject:
             death_indicator=data.death_indicator,
         )
 
-    def _find_sspvr(id: UUID) -> bridg.StudySiteProtocolVersionRelationship:
+    def find_sspvr(id: UUID) -> bridg.StudySiteProtocolVersionRelationship:
         return db.query(bridg.StudySiteProtocolVersionRelationship).filter_by(id=id).one()
 
     return bridg.StudySubject(
         status=data.status,
         status_date=data.status_date,
-        performing_biologic_entity=_find_or_new_pbe(data),
+        performing_biologic_entity=find_or_parse_pbe(data),
         performing_biologic_entity_id=data.performing_biologic_entity_id,
         assigned_study_site_protocol_version_relationship=[
-            _find_sspvr(id) for id in data.assigned_study_site_protocol_version_relationship
+            find_sspvr(id) for id in data.assigned_study_site_protocol_version_relationship
         ],
     )
 
@@ -143,12 +139,12 @@ class LookupStudySubject(BaseModel):
     performing_biologic_entity: Optional[Person] = None
 
 
-def _parse_ss(data: LookupStudySubject) -> bridg.StudySubject:
-    def _parse_pbe(data: LookupStudySubject.Person) -> bridg.Person:
-        return bridg.Person(name=_map_primary_name(data))
+def parse_lookup_ss(data: LookupStudySubject) -> bridg.StudySubject:
+    def parse_pbe(data: LookupStudySubject.Person) -> bridg.Person:
+        return bridg.Person(name=parse_optional_en(data.name))
 
     if pbe := data.performing_biologic_entity:
-        return bridg.StudySubject(performing_biologic_entity=_parse_pbe(pbe))
+        return bridg.StudySubject(performing_biologic_entity=parse_pbe(pbe))
     raise RuntimeError("Unknown performing entity")
 
 
@@ -157,7 +153,7 @@ class FoundStudySubject(BaseModel):
     performing_biologic_entity_id: Optional[UUID] = None
 
 
-def _dump_found(ss: bridg.StudySubject) -> FoundStudySubject:
+def dump_found(ss: bridg.StudySubject) -> FoundStudySubject:
     if pbe := ss.performing_biologic_entity:
         return FoundStudySubject(
             performing_biologic_entity=str(pbe),
@@ -181,13 +177,13 @@ def show(space_id: UUID, subject_id: UUID, repo: StudySubjectRepositoryDep) -> O
 def create(
     space_id: UUID, data: NewStudySubject, repo: StudySubjectRepositoryDep, db: Session = Depends(get_db)
 ) -> StudySubject:
-    obj = repo.create(_new_ss(data, db))
+    obj = repo.create(parse_new_ss(data, db))
     return StudySubject.model_validate(obj)
 
 
 @router.post("/lookup")
 def lookup(space_id: UUID, data: LookupStudySubject, repo: StudySubjectRepositoryDep):
-    return [_dump_found(ss) for ss in repo.lookup(_parse_ss(data))]
+    return [dump_found(ss) for ss in repo.lookup(parse_lookup_ss(data))]
 
 
 openapi_tag = [{"name": "subjects"}]
