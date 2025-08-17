@@ -118,14 +118,31 @@ def show(space_id: UUID, subject_id: UUID, repo: StudySubjectRepositoryDep) -> O
 def create(
     space_id: UUID, data: NewStudySubject, repo: StudySubjectRepositoryDep, db: Session = Depends(get_db)
 ) -> StudySubject:
-    def _find_pbe(data: NewStudySubject) -> bridg.Person | None:
+    def _new_ss(data: NewStudySubject) -> bridg.StudySubject:
+        return bridg.StudySubject(
+            performing_biologic_entity=_find_or_new_pbe(data),
+            assigned_study_site_protocol_version_relationship=map(
+                _find_sspvr, data.assigned_study_site_protocol_version_relationship
+            ),
+            **data.model_dump(
+                exclude={
+                    "performing_biologic_entity",
+                    "assigned_study_site_protocol_version_relationship",
+                }
+            ),
+        )
+
+    def _find_or_new_pbe(data: NewStudySubject) -> bridg.Person | None:
         if data.performing_biologic_entity_id is not None:
             return
-        if data_pbe := data.performing_biologic_entity:
-            return bridg.Person(
-                name=[_new_en(n) for n in [data_pbe.name] if n],
-                **data_pbe.model_dump(exclude={"name"}),
-            )
+        if data.performing_biologic_entity:
+            return _new_pbe(data.performing_biologic_entity)
+
+    def _new_pbe(data: NewStudySubject.Person) -> bridg.Person:
+        return bridg.Person(
+            name=[_new_en(n) for n in [data.name] if n],
+            **data.model_dump(exclude={"name"}),
+        )
 
     def _new_en(data: NewStudySubject.Person.EntityName) -> bridg.EntityName:
         return bridg.EntityName(**data.model_dump())
@@ -133,43 +150,36 @@ def create(
     def _find_sspvr(id: UUID) -> bridg.StudySiteProtocolVersionRelationship:
         return db.query(bridg.StudySiteProtocolVersionRelationship).filter_by(id=id).one()
 
-    ss = bridg.StudySubject(
-        performing_biologic_entity=_find_pbe(data),
-        assigned_study_site_protocol_version_relationship=map(
-            _find_sspvr, data.assigned_study_site_protocol_version_relationship
-        ),
-        **data.model_dump(
-            exclude={
-                "performing_biologic_entity",
-                "assigned_study_site_protocol_version_relationship",
-            }
-        ),
-    )
-
-    obj = repo.create(ss)
+    obj = repo.create(_new_ss(data))
 
     return StudySubject.model_validate(obj)
 
 
 @router.post("/lookup")
 def lookup(space_id: UUID, data: LookupStudySubject, repo: StudySubjectRepositoryDep):
-    ss = bridg.StudySubject(
-        performing_biologic_entity=bridg.Person(
-            name=[bridg.EntityName(**data.performing_biologic_entity.name.model_dump())]
-            if data.performing_biologic_entity.name
-            else None,
-            **data.performing_biologic_entity.model_dump(exclude={"name"}),
+    def _parse_ss(data: LookupStudySubject) -> bridg.StudySubject:
+        if pbe := data.performing_biologic_entity:
+            return bridg.StudySubject(performing_biologic_entity=_parse_pbe(pbe))
+        raise RuntimeError("Unknown performing entity")
+
+    def _parse_pbe(data: LookupStudySubject.Person) -> bridg.Person:
+        return bridg.Person(
+            name=[_parse_en(n) for n in [data.name] if n],
+            **data.model_dump(exclude={"name"}),
         )
-        if data.performing_biologic_entity
-        else None
-    )
-    return [
-        FoundStudySubject(
-            performing_biologic_entity=str(f.performing_biologic_entity) if f.performing_biologic_entity else None,
-            performing_biologic_entity_id=f.performing_biologic_entity.id if f.performing_biologic_entity else None,
-        )
-        for f in repo.lookup(ss)
-    ]
+
+    def _parse_en(data: LookupStudySubject.Person.EntityName) -> bridg.EntityName:
+        return bridg.EntityName(**data.model_dump())
+
+    def _dump_found(ss: bridg.StudySubject) -> FoundStudySubject:
+        if pbe := ss.performing_biologic_entity:
+            return FoundStudySubject(
+                performing_biologic_entity=str(pbe),
+                performing_biologic_entity_id=pbe.id,
+            )
+        raise RuntimeError("Unknown performing entity")
+
+    return [_dump_found(ss) for ss in repo.lookup(_parse_ss(data))]
 
 
 openapi_tag = [{"name": "subjects"}]
