@@ -120,16 +120,13 @@ def create(
 ) -> StudySubject:
     def _new_ss(data: NewStudySubject) -> bridg.StudySubject:
         return bridg.StudySubject(
+            status=data.status,
+            status_date=data.status_date,
             performing_biologic_entity=_find_or_new_pbe(data),
-            assigned_study_site_protocol_version_relationship=map(
-                _find_sspvr, data.assigned_study_site_protocol_version_relationship
-            ),
-            **data.model_dump(
-                exclude={
-                    "performing_biologic_entity",
-                    "assigned_study_site_protocol_version_relationship",
-                }
-            ),
+            performing_biologic_entity_id=data.performing_biologic_entity_id,
+            assigned_study_site_protocol_version_relationship=[
+                _find_sspvr(id) for id in data.assigned_study_site_protocol_version_relationship
+            ],
         )
 
     def _find_or_new_pbe(data: NewStudySubject) -> bridg.Person | None:
@@ -141,11 +138,23 @@ def create(
     def _new_pbe(data: NewStudySubject.Person) -> bridg.Person:
         return bridg.Person(
             name=[_new_en(n) for n in [data.name] if n],
-            **data.model_dump(exclude={"name"}),
+            administrative_gender_code=data.administrative_gender_code,
+            birth_date=data.birth_date,
+            death_date=data.death_date,
+            death_date_estimated_indicator=data.death_date_estimated_indicator,
+            death_indicator=data.death_indicator,
         )
 
     def _new_en(data: NewStudySubject.Person.EntityName) -> bridg.EntityName:
-        return bridg.EntityName(**data.model_dump())
+        return bridg.EntityName(
+            use=data.use,
+            family=data.family,
+            given=data.given,
+            middle=data.middle,
+            patronymic=data.patronymic,
+            prefix=data.prefix,
+            suffix=data.suffix,
+        )
 
     def _find_sspvr(id: UUID) -> bridg.StudySiteProtocolVersionRelationship:
         return db.query(bridg.StudySiteProtocolVersionRelationship).filter_by(id=id).one()
@@ -163,13 +172,18 @@ def lookup(space_id: UUID, data: LookupStudySubject, repo: StudySubjectRepositor
         raise RuntimeError("Unknown performing entity")
 
     def _parse_pbe(data: LookupStudySubject.Person) -> bridg.Person:
-        return bridg.Person(
-            name=[_parse_en(n) for n in [data.name] if n],
-            **data.model_dump(exclude={"name"}),
-        )
+        return bridg.Person(name=[_parse_en(n) for n in [data.name] if n])
 
     def _parse_en(data: LookupStudySubject.Person.EntityName) -> bridg.EntityName:
-        return bridg.EntityName(**data.model_dump())
+        return bridg.EntityName(
+            use=data.use,
+            family=data.family,
+            given=data.given,
+            middle=data.middle,
+            patronymic=data.patronymic,
+            prefix=data.prefix,
+            suffix=data.suffix,
+        )
 
     def _dump_found(ss: bridg.StudySubject) -> FoundStudySubject:
         if pbe := ss.performing_biologic_entity:
