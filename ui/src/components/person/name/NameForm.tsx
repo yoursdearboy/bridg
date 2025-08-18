@@ -21,10 +21,6 @@ interface NameFormProps {
 export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
   const { t } = useTranslation();
 
-  const reqiuredMessage = (fieldName: string) => {
-    return t("fieldRequiredMessage", { fieldName });
-  };
-
   const form = useForm<Name>({
     initialValues: {
       use: "",
@@ -37,8 +33,13 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
     },
     validate: {
       family: (value) =>
-        value ? null : reqiuredMessage(t("EntityName.family")),
-      given: (value) => (value ? null : reqiuredMessage(t("EntityName.given"))),
+        value
+          ? null
+          : t("fieldRequiredMessage", { fieldName: t("EntityName.family") }),
+      given: (value) =>
+        value
+          ? null
+          : t("fieldRequiredMessage", { fieldName: t("EntityName.given") }),
     },
   });
 
