@@ -29,7 +29,7 @@
         "SubjectIndexPage": {
           "info": "Info",
           "patients": "Patients",
-          "newPatiet": "New patient",
+          "newPatient": "New patient",
           "actions": "Actions"
         },
         "SubjectInfoCard": {

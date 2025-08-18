@@ -80,7 +80,7 @@ function RouteComponent() {
           {t("SubjectIndexPage.patients")}
         </Text>
         <ButtonLink from={Route.to} to={newRoute.to} params={{ spaceId }}>
-          {t("SubjectIndexPage.newPatiet")}
+          {t("SubjectIndexPage.newPatient")}
         </ButtonLink>
       </Group>
 
