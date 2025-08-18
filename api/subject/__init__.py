@@ -3,7 +3,6 @@ from typing import Annotated, List, Optional, Protocol
 from uuid import UUID
 
 from fastapi import APIRouter, Depends
-from pydantic import field_validator
 from sqlalchemy.orm import Session
 
 import bridg
@@ -33,26 +32,46 @@ class StudySubject(BaseModel):
         death_indicator: Optional[bool]
         primary_name: Optional[str]
 
-        @field_validator("primary_name", mode="before")
-        @classmethod
-        def convert_primary_name(cls, value: bridg.EntityName) -> str:
-            return str(value)
-
     class Organization(BaseModel):
         id: UUID
         description: Optional[str]
         primary_name: Optional[str]
-
-        @field_validator("primary_name", mode="before")
-        @classmethod
-        def convert_primary_name(cls, value: bridg.OrganizationName) -> str:
-            return str(value)
 
     id: UUID
     status: Optional[bridg.Status]
     status_date: Optional[datetime]
     performing_biologic_entity: Optional[Person]
     performing_organization: Optional[Organization]
+
+
+def dump_ss(data: bridg.StudySubject) -> StudySubject:
+    def dump_pbe(data: bridg.BiologicEntity) -> StudySubject.Person:
+        return StudySubject.Person(
+            id=data.id,
+            administrative_gender_code=data.administrative_gender_code,
+            birth_date=data.birth_date,
+            death_date=data.death_date,
+            death_date_estimated_indicator=data.death_date_estimated_indicator,
+            death_indicator=data.death_indicator,
+            primary_name=str(data.primary_name) if data.primary_name else None,
+        )
+
+    def dump_org(data: bridg.Organization) -> StudySubject.Organization:
+        return StudySubject.Organization(
+            id=data.id,
+            description=data.description,
+            primary_name=str(data.primary_name) if data.primary_name else None,
+        )
+
+    return StudySubject(
+        id=data.id,
+        status=data.status,
+        status_date=data.status_date,
+        performing_biologic_entity=dump_pbe(data.performing_biologic_entity)
+        if data.performing_biologic_entity
+        else None,
+        performing_organization=dump_org(data.performing_organization) if data.performing_organization else None,
+    )
 
 
 class EntityName(BaseModel):
@@ -164,13 +183,13 @@ def dump_found(ss: bridg.StudySubject) -> FoundStudySubject:
 
 @router.get("")
 def index(space_id: UUID, repo: StudySubjectRepositoryDep) -> List[StudySubject]:
-    return [StudySubject.model_validate(obj) for obj in repo.list(space_id=space_id)]
+    return [dump_ss(obj) for obj in repo.list(space_id=space_id)]
 
 
 @router.get("/{subject_id:uuid}")
 def show(space_id: UUID, subject_id: UUID, repo: StudySubjectRepositoryDep) -> Optional[StudySubject]:
     if obj := repo.get(subject_id):
-        return StudySubject.model_validate(obj)
+        return dump_ss(obj)
 
 
 @router.post("")
@@ -178,7 +197,7 @@ def create(
     space_id: UUID, data: NewStudySubject, repo: StudySubjectRepositoryDep, db: Session = Depends(get_db)
 ) -> StudySubject:
     obj = repo.create(parse_new_ss(data, db))
-    return StudySubject.model_validate(obj)
+    return dump_ss(obj)
 
 
 @router.post("/lookup")
