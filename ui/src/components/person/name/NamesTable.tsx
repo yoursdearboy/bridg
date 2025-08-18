@@ -15,11 +15,7 @@ interface NamesTableProps {
   isLoading?: boolean;
 }
 
-export const NamesTable = ({
-  names,
-  onAddClick,
-  isLoading,
-}: NamesTableProps) => {
+export const NamesTable = ({ names, onAddClick, isLoading }: NamesTableProps) => {
   const { t } = useTranslation();
 
   const rows = names.map((name) => (
@@ -62,7 +58,7 @@ export const NamesTable = ({
         <Table.Tbody>
           {names.length === 0 ? (
             <Table.Tr>
-              <Table.Td colSpan={4} style={{ textAlign: "center" }}>
+              <Table.Td colSpan={4} style={{ textAlign: 'center' }}>
                 {isLoading ? t("Loading...") : t("No names found")}
               </Table.Td>
             </Table.Tr>
