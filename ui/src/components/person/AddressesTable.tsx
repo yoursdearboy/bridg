@@ -23,7 +23,7 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
 
   if (isPending) return t("loading");
 
-  if (error) return t("An error has occurred: ") + error.message;
+  if (error) return t("errorMessage", { error: error.message });
 
   const rows = data.map((element) => (
     <Table.Tr key={element.zip}>

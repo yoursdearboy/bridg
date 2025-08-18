@@ -6,6 +6,7 @@
         "add": "Add",
         "select": "Select",
         "enter": "enter",
+        "errorMessage": "An error has occured: {{error}}",
         "PerformingBiologicEntitySelect": {
             "text": "Select existing biologic entity:"
         },
