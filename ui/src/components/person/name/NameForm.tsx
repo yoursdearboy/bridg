@@ -22,8 +22,8 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
   const { t } = useTranslation();
 
   const reqiuredMessage = (fieldName: string) => {
-    return t("fieldRequiredMessage", {fieldName})
-  }
+    return t("fieldRequiredMessage", { fieldName });
+  };
 
   const form = useForm<Name>({
     initialValues: {
@@ -36,7 +36,8 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
       suffix: "",
     },
     validate: {
-      family: (value) => (value ? null : reqiuredMessage(t("EntityName.family"))),
+      family: (value) =>
+        value ? null : reqiuredMessage(t("EntityName.family")),
       given: (value) => (value ? null : reqiuredMessage(t("EntityName.given"))),
     },
   });
@@ -65,9 +66,18 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
           </Alert>
         )}
         <Group grow>
-          <TextInput label={t("EntityName.use")} {...form.getInputProps("use")} />
-          <TextInput label={t("EntityName.prefix")} {...form.getInputProps("prefix")} />
-          <TextInput label={t("EntityName.suffix")} {...form.getInputProps("suffix")} />
+          <TextInput
+            label={t("EntityName.use")}
+            {...form.getInputProps("use")}
+          />
+          <TextInput
+            label={t("EntityName.prefix")}
+            {...form.getInputProps("prefix")}
+          />
+          <TextInput
+            label={t("EntityName.suffix")}
+            {...form.getInputProps("suffix")}
+          />
         </Group>
 
         <TextInput

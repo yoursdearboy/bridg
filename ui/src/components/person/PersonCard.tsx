@@ -24,7 +24,11 @@ export const PersonCard = ({ person }: PersonCardProps) => {
 
         <InfoRow
           label={t("Person.administrativeGenderCode")}
-          value={person.administrativeGenderCode ? t(`Gender.${person.administrativeGenderCode}`) : t("na")}
+          value={
+            person.administrativeGenderCode
+              ? t(`Gender.${person.administrativeGenderCode}`)
+              : t("na")
+          }
         />
 
         <InfoRow
