@@ -77,7 +77,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
               value={
                 person.birthDate
                   ? t("intlDateTime", { val: person.birthDate })
-                  : "N/A"
+                  : t("na")
               }
             />
             <InfoRow

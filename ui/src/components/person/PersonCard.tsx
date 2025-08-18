@@ -32,7 +32,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
           value={
             person.birthDate
               ? t("intlDateTime", { val: person.birthDate })
-              : "N/A"
+              : t("na")
           }
         />
 
@@ -46,7 +46,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
                     "year"
                   ),
                 })
-              : "N/A"
+              : t("na")
           }
         />
 
