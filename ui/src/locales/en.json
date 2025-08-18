@@ -10,9 +10,13 @@
             "text": "Select existing biologic entity:"
         },
         "EntityName": {
-            "family": "Family",
-            "given": "Given",
-            "patronymic": "Patronymic"
+          "use": "use",
+          "family": "Family name",
+          "given": "Given name",
+          "middle": "Middle name",
+          "patronymic": "Patronymic",
+          "prefix": "Prefix",
+          "suffix": "Suffix"
         },
         "SubjectIndexPage": {
           "info": "Info",
@@ -67,15 +71,6 @@
         "Organization": {
           "description": "Description",
           "primaryName": "Primary name"
-        },
-        "Name": {
-          "use": "use",
-          "family": "Family name",
-          "given": "Given name",
-          "middle": "Middle name",
-          "patronymic": "Patronymic",
-          "prefix": "Prefix",
-          "suffix": "Suffix"
         },
         "TelecommunicationAddress": {
           "use": "Use",
