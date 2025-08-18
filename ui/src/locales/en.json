@@ -120,8 +120,6 @@
             "U": "Unknown"
         },
         "Boolean": {
-          "0": "No",
-          "1": "Yes",
           "no": "No",
           "yes": "Yes"
         }
