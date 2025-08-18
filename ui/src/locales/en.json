@@ -38,7 +38,7 @@
       "person": "Person",
       "status": "Status",
       "organization": "Organization",
-      "subjectType": "Subkject type",
+      "subjectType": "Subject type",
       "unknown": "Unkown",
       "personDetails": "Person details",
       "organizationDetails": "Organization details"

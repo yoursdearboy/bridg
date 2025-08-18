@@ -60,7 +60,7 @@ function EditPersonComponent() {
             )}
           </Group>
           <ButtonLink to={indexRoute.to} params={params} variant="subtle">
-            {t("PersonEditPage.cancel")}
+            {t("cancel")}
           </ButtonLink>
         </Group>
 
