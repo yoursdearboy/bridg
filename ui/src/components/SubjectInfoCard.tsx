@@ -31,7 +31,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         <Divider my="xs" />
 
         <InfoRow
-          label={t("SubjectInfoCard.status")}
+          label={t("StudySubject.status")}
           value={
             <>
               {subject.status}
@@ -49,12 +49,12 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         />
 
         <InfoRow
-          label={t("SubjectInfoCard.subjectType")}
+          label={t("StudySubject.type")}
           value={
             person
-              ? t("SubjectInfoCard.person")
+              ? t("StudySubject.performingBiologicEntity")
               : organization
-                ? t("SubjectInfoCard.organization")
+                ? t("StudySubject.performingOrganization")
                 : t("SubjectInfoCard.unknown")
           }
         />

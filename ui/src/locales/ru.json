@@ -36,9 +36,6 @@
     "SubjectInfoCard": {
       "title": "Информация об объект наблюдения",
       "person": "Личность",
-      "status": "Статус",
-      "organization": "Организация",
-      "subjectType": "Тип объекта наблюдения",
       "unknown": "Неизвестно",
       "personDetails": "Данные личности",
       "organizationDetails": "Данные организации"
@@ -88,7 +85,7 @@
     },
     "TelecommunicationAddress": {
       "use": "Тип",
-      "scheme": "Scheme",
+      "scheme": "Схема",
       "address": "Адрес"
     },
     "PostalAddress": {
@@ -103,6 +100,9 @@
     "StudySubject": {
       "status": "Статус",
       "statusDate": "Дата статуса",
+      "performingBiologicEntity": "Личность",
+      "performingOrganization": "Организация",
+      "type": "Тип",
       "assignedStudySiteProtocolVersionRelationship": "Область изучения"
     },
     "Status": {

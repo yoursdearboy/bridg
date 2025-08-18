@@ -36,9 +36,6 @@
     "SubjectInfoCard": {
       "title": "Subject information",
       "person": "Person",
-      "status": "Status",
-      "organization": "Organization",
-      "subjectType": "Subject type",
       "unknown": "Unkown",
       "personDetails": "Person details",
       "organizationDetails": "Organization details"
@@ -104,6 +101,9 @@
     "StudySubject": {
       "status": "Status",
       "statusDate": "Status date",
+      "performingBiologicEntity": "Person",
+      "performingOrganization": "Organization",
+      "type": "Type",
       "assignedStudySiteProtocolVersionRelationship": "Study sites"
     },
     "Status": {
