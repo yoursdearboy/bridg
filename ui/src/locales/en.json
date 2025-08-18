@@ -7,6 +7,13 @@
         "select": "Select",
         "enter": "enter",
         "errorMessage": "An error has occured: {{error}}",
+        "intlDate": "{{val}}",
+        "intlDateTime": "{{val, datetime}}",
+        "dayjsDuration": "{{val, dayjsDuration}}",
+        "dateNotSpecified": "Date not specified",
+        "notDeceased": "Not deceased",
+        "deceased": "Deceased",
+        "na": "N/A",
         "PerformingBiologicEntitySelect": {
             "text": "Select existing biologic entity:"
         },

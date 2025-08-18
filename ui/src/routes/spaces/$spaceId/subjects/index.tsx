@@ -38,7 +38,7 @@ function RouteComponent() {
           ? t("intlDateTime", {
               val: subject.performingBiologicEntity.birthDate,
             })
-          : "N/A"}
+          : t("na")}
       </Table.Td>
       <Table.Td>
         <Text>
@@ -52,7 +52,7 @@ function RouteComponent() {
           ? t("intlDateTime", {
               val: subject.performingBiologicEntity.deathDate,
             })
-          : "N/A"}
+          : t("na")}
       </Table.Td>
       <Table.Td>
         <Text>{subject.status?.trim()}</Text>
@@ -60,7 +60,7 @@ function RouteComponent() {
       <Table.Td>
         {subject.statusDate
           ? t("intlDateTime", { val: subject.statusDate })
-          : "N/A"}
+          : t("na")}
       </Table.Td>
       <Table.Td>
         <ButtonLink

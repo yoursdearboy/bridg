@@ -17,7 +17,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         <InfoRow label={t("Person.primaryName")} value={person.primaryName}>
           {person.deathIndicator && (
             <Badge color="red" ml="sm">
-              {t("Deceased")}
+              {t("deceased")}
             </Badge>
           )}
         </InfoRow>
@@ -56,8 +56,8 @@ export const PersonCard = ({ person }: PersonCardProps) => {
             person.deathIndicator
               ? person.deathDate
                 ? t("intlDateTime", { val: person.deathDate })
-                : t("Date not specified")
-              : t("Not deceased")
+                : t("dateNotSpecified")
+              : t("notDeceased")
           }
         />
       </Stack>

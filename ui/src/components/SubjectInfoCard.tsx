@@ -86,8 +86,8 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
                 person.deathIndicator
                   ? person.deathDate
                     ? t("intlDateTime", { val: person.deathDate })
-                    : t("Date not specified")
-                  : t("Not deceased")
+                    : t("dateNotSpecified")
+                  : t("notDeceased")
               }
             />
           </>
