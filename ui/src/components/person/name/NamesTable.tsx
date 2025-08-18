@@ -1,23 +1,17 @@
 import { Table } from "@mantine/core";
+import type { Name } from "bridg-ts";
 import { useTranslation } from "react-i18next";
 
-interface NameData {
-  id: string;
-  family?: string | null;
-  given?: string | null;
-  middle?: string | null;
-  patronymic?: string | null;
-}
 
 interface NamesTableProps {
-  names: NameData[];
+  names: Name[];
 }
 
 export const NamesTable = ({ names }: NamesTableProps) => {
   const { t } = useTranslation();
-
+//FIXME: Add key when available
   const rows = names.map((name) => (
-    <Table.Tr key={name.id}>
+    <Table.Tr >
       <Table.Td>{name.family || "-"}</Table.Td>
       <Table.Td>{name.given || "-"}</Table.Td>
       <Table.Td>{name.middle || "-"}</Table.Td>
