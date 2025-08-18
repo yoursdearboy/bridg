@@ -57,7 +57,7 @@ export const TelecommunicationAddressesTable = ({
         <Table>
           <Table.Thead>
             <Table.Tr>
-               <Table.Th>{t("TelecommunicationAddress.use")}</Table.Th>
+              <Table.Th>{t("TelecommunicationAddress.use")}</Table.Th>
               <Table.Th>{t("TelecommunicationAddress.scheme")}</Table.Th>
               <Table.Th>{t("TelecommunicationAddress.address")}</Table.Th>
             </Table.Tr>
