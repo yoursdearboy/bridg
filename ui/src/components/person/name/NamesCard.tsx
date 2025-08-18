@@ -1,4 +1,11 @@
-import { Modal, LoadingOverlay, Text, Card } from "@mantine/core";
+import {
+  Modal,
+  LoadingOverlay,
+  Text,
+  Card,
+  Group,
+  Button,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { NameForm } from "./NameForm";
@@ -45,7 +52,22 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
   return (
     <>
       <Card withBorder shadow="sm" radius="md">
-        <NamesTable names={names} onAddClick={open} isLoading={isPending} />
+        <Card.Section withBorder inheritPadding py="xs">
+          <Group justify="space-between">
+            <Text fw={500}>{t("Person names")}</Text>
+
+            <Button
+              variant="outline"
+              size="compact-sm"
+              onClick={open}
+              fw={500}
+              loading={isPending}
+            >
+              {t("Add")}
+            </Button>
+          </Group>
+        </Card.Section>
+        <NamesTable names={names} />
       </Card>
 
       <Modal

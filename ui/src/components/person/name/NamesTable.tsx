@@ -1,4 +1,4 @@
-import { Card, Table, Text, Group, Button } from "@mantine/core";
+import { Table } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 
 interface NameData {
@@ -11,15 +11,9 @@ interface NameData {
 
 interface NamesTableProps {
   names: NameData[];
-  onAddClick?: () => void;
-  isLoading?: boolean;
 }
 
-export const NamesTable = ({
-  names,
-  onAddClick,
-  isLoading,
-}: NamesTableProps) => {
+export const NamesTable = ({ names }: NamesTableProps) => {
   const { t } = useTranslation();
 
   const rows = names.map((name) => (
@@ -33,23 +27,6 @@ export const NamesTable = ({
 
   return (
     <>
-      <Card.Section withBorder inheritPadding py="xs">
-        <Group justify="space-between">
-          <Text fw={500}>{t("Person names")}</Text>
-          {onAddClick && (
-            <Button
-              variant="outline"
-              size="compact-sm"
-              onClick={onAddClick}
-              fw={500}
-              loading={isLoading}
-            >
-              {t("Add")}
-            </Button>
-          )}
-        </Group>
-      </Card.Section>
-
       <Table striped highlightOnHover>
         <Table.Thead>
           <Table.Tr>
@@ -62,9 +39,7 @@ export const NamesTable = ({
         <Table.Tbody>
           {names.length === 0 ? (
             <Table.Tr>
-              <Table.Td colSpan={4} style={{ textAlign: "center" }}>
-                {isLoading ? t("Loading...") : t("No names found")}
-              </Table.Td>
+              <Table.Td colSpan={4} style={{ textAlign: "center" }}></Table.Td>
             </Table.Tr>
           ) : (
             rows
