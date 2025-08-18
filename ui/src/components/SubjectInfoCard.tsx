@@ -69,7 +69,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
             <InfoRow label={t("Person.primaryName")} value={person.primaryName} />
             <InfoRow
               label={t("Person.administrativeGenderCode")}
-              value={t(`Gender.${person.administrativeGenderCode}`)}
+              value={person.administrativeGenderCode ? t(`Gender.${person.administrativeGenderCode}`) : t("na")}
             />
 
             <InfoRow
