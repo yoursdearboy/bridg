@@ -1,0 +1,130 @@
+{
+  "translation": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "add": "Add",
+    "select": "Select",
+    "enter": "enter",
+    "errorMessage": "An error has occured: {{error}}",
+    "intlDate": "{{val}}",
+    "intlDateTime": "{{val, datetime}}",
+    "dayjsDuration": "{{val, dayjsDuration}}",
+    "na": "N/A",
+    "yes": "Yes",
+    "no": "No",
+    "fieldRequiredMessage": "{{fieldName}} is required",
+    "PerformingBiologicEntitySelect": {
+      "text": "Select existing biologic entity:"
+    },
+    "Name": {
+      "use": "use",
+      "family": "Family name",
+      "given": "Given name",
+      "middle": "Middle name",
+      "patronymic": "Patronymic",
+      "prefix": "Prefix",
+      "suffix": "Suffix"
+    },
+    "SubjectIndexPage": {
+      "info": "Info",
+      "patients": "Patients",
+      "newPatient": "New patient",
+      "actions": "Actions"
+    },
+    "SubjectInfoCard": {
+      "title": "Subject information",
+      "person": "Person",
+      "unknown": "Unkown",
+      "personDetails": "Person details",
+      "organizationDetails": "Organization details"
+    },
+    "SubjectShowPage": {
+      "title": "Patient information",
+      "back": "Back to list",
+      "toPerson": "Go to person page"
+    },
+    "PersonShowPage": {
+      "title": "Person information",
+      "edit": "Edit person"
+    },
+    "PersonEditPage": {
+      "title": "Editing:",
+      "cancel": "Cancel",
+      "personalInfo": "Personal information",
+      "primaryNamePlaceholder": "John Doe",
+      "deceased": "Deceased"
+    },
+    "PersonCard": {
+      "deceased": "Deceased",
+      "notDeceased": "Not deceased",
+      "dateNotSpecified": "Date not specified"
+    },
+    "NamesCard": {
+      "title": "Person names"
+    },
+    "TelecommunicationAddressesTable": {
+      "title": "Person telecommunication addresses"
+    },
+    "AddressesTable": {
+      "title": "Person addresses"
+    },
+    "Person": {
+      "id": "ID",
+      "administrativeGenderCode": "Gender",
+      "birthDate": "Birth date",
+      "deathDate": "Death date",
+      "deathDateEstimatedIndicator": "Death date estimated indicator",
+      "deathIndicator": "Death indicator",
+      "primaryName": "Primary name",
+      "age": "Age"
+    },
+    "Organization": {
+      "description": "Description",
+      "primaryName": "Primary name"
+    },
+    "TelecommunicationAddress": {
+      "use": "Use",
+      "scheme": "Scheme",
+      "address": "Address"
+    },
+    "PostalAddress": {
+      "use": "Use",
+      "street": "Street",
+      "building": "Building",
+      "country": "Country",
+      "municipality": "Municipality",
+      "state": "State",
+      "zip": "Zip"
+    },
+    "StudySubject": {
+      "status": "Status",
+      "statusDate": "Status date",
+      "performingBiologicEntity": "Person",
+      "performingOrganization": "Organization",
+      "type": "Type",
+      "assignedStudySiteProtocolVersionRelationship": "Study sites"
+    },
+    "Status": {
+      "candidate": "candidate",
+      "eligible": "Eligible",
+      "follow-up": "FollowUp",
+      "ineligible": "Ineligible",
+      "not-registered": "NotRegistered",
+      "off-study": "OffStudy",
+      "on-study": "OnStudy",
+      "on-study-intervention": "OnStudyIntervention",
+      "on-study-observation": "OnStudyObservation",
+      "pending-on-study": "PendingOnStudy",
+      "potential-candidate": "PotentialCandidate",
+      "screening": "Screening",
+      "withdrawn": "Withdrawn"
+    },
+    "Gender": {
+      "F": "Female",
+      "M": "Male",
+      "U": "Unknown"
+    }
+  }
+}

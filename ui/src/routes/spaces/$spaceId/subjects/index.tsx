@@ -8,13 +8,13 @@ import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/")({
   loader: ({ params }) => api.subjects.indexSpacesSpaceIdSubjectsGet(params),
-  component: RouteComponent,
+  component: SubjectIndexPage,
   beforeLoad: () => ({
     breadcrumb: null,
   }),
 });
 
-function RouteComponent() {
+function SubjectIndexPage() {
   const { t } = useTranslation();
   const subjects = Route.useLoaderData();
   const { spaceId } = Route.useParams();
@@ -38,13 +38,13 @@ function RouteComponent() {
           ? t("intlDateTime", {
               val: subject.performingBiologicEntity.birthDate,
             })
-          : "N/A"}
+          : t("na")}
       </Table.Td>
       <Table.Td>
         <Text>
           {subject.performingBiologicEntity?.deathIndicator === true
-            ? t("Yes")
-            : t("No")}
+            ? t("yes")
+            : t("no")}
         </Text>
       </Table.Td>
       <Table.Td>
@@ -52,7 +52,7 @@ function RouteComponent() {
           ? t("intlDateTime", {
               val: subject.performingBiologicEntity.deathDate,
             })
-          : "N/A"}
+          : t("na")}
       </Table.Td>
       <Table.Td>
         <Text>{subject.status?.trim()}</Text>
@@ -60,14 +60,14 @@ function RouteComponent() {
       <Table.Td>
         {subject.statusDate
           ? t("intlDateTime", { val: subject.statusDate })
-          : "N/A"}
+          : t("na")}
       </Table.Td>
       <Table.Td>
         <ButtonLink
           to={infoRoute.to}
           params={{ spaceId, subjectId: subject.id }}
         >
-          {t("Info")}
+          {t("SubjectIndexPage.info")}
         </ButtonLink>
       </Table.Td>
     </Table.Tr>
@@ -77,10 +77,10 @@ function RouteComponent() {
     <Stack gap="md">
       <Group justify="space-between">
         <Text size="xl" fw={700}>
-          {t("Patients")}
+          {t("SubjectIndexPage.patients")}
         </Text>
         <ButtonLink from={Route.to} to={newRoute.to} params={{ spaceId }}>
-          {t("New Patient")}
+          {t("SubjectIndexPage.newPatient")}
         </ButtonLink>
       </Group>
 
@@ -88,15 +88,15 @@ function RouteComponent() {
         <Table striped highlightOnHover>
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>{t("ID")}</Table.Th>
-              <Table.Th>{t("Full Name")}</Table.Th>
-              <Table.Th>{t("Gender_")}</Table.Th>
-              <Table.Th>{t("Birthdate")}</Table.Th>
-              <Table.Th>{t("Death Indicator")}</Table.Th>
-              <Table.Th>{t("Death date")}</Table.Th>
-              <Table.Th>{t("Status_")}</Table.Th>
-              <Table.Th>{t("Status date")}</Table.Th>
-              <Table.Th>{t("Actions")}</Table.Th>
+              <Table.Th>{t("Person.id")}</Table.Th>
+              <Table.Th>{t("Person.primaryName")}</Table.Th>
+              <Table.Th>{t("Person.administrativeGenderCode")}</Table.Th>
+              <Table.Th>{t("Person.birthDate")}</Table.Th>
+              <Table.Th>{t("Person.deathIndicator")}</Table.Th>
+              <Table.Th>{t("Person.deathDate")}</Table.Th>
+              <Table.Th>{t("StudySubject.status")}</Table.Th>
+              <Table.Th>{t("StudySubject.statusDate")}</Table.Th>
+              <Table.Th>{t("SubjectIndexPage.actions")}</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>

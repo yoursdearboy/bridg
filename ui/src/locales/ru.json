@@ -1,0 +1,129 @@
+{
+  "translation": {
+    "submit": "Сохранить",
+    "cancel": "Отменить",
+    "edit": "Редактировать",
+    "loading": "Загрузить...",
+    "add": "Добавить",
+    "select": "Выберите",
+    "enter": "Введите",
+    "errorMessage": "Произошла ошибка: {{error}}",
+    "intlDate": "{{val}}",
+    "intlDateTime": "{{val, datetime}}",
+    "dayjsDuration": "{{val, dayjsDuration}}",
+    "na": "N/A",
+    "yes": "Да",
+    "no": "Нет",
+    "fieldRequiredMessage": "Поле \"{{fieldName}}\" необходимо заполнить",
+    "PerformingBiologicEntitySelect": {
+      "text": "Выберите существующую запись:"
+    },
+    "Name": {
+      "use": "use",
+      "family": "Фамилия",
+      "given": "Имя",
+      "middle": "Среднее имя",
+      "patronymic": "Отчество",
+      "prefix": "Префикс",
+      "suffix": "Суффикс"
+    },
+    "SubjectIndexPage": {
+      "info": "Информация",
+      "patients": "Пациенты",
+      "newPatient": "Новый пациент",
+      "actions": "Действия"
+    },
+    "SubjectInfoCard": {
+      "title": "Информация об объект наблюдения",
+      "person": "Личность",
+      "unknown": "Неизвестно",
+      "personDetails": "Данные личности",
+      "organizationDetails": "Данные организации"
+    },
+    "SubjectShowPage": {
+      "title": "Данные пациента",
+      "back": "Назад к списку",
+      "toPerson": "На страницу личности"
+    },
+    "PersonShowPage": {
+      "title": "Данные личности",
+      "edit": "Редактировать личность"
+    },
+    "PersonEditPage": {
+      "title": "Редактирование:",
+      "personalInfo": "Личная информация",
+      "primaryNamePlaceholder": "Иван Иванов",
+      "deceased": "Умерший"
+    },
+    "PersonCard": {
+      "deceased": "Умерший",
+      "notDeceased": "Живой",
+      "dateNotSpecified": "Дата не указана"
+    },
+    "NamesCard": {
+      "title": "Имена личности"
+    },
+    "TelecommunicationAddressesTable": {
+      "title": "Контактные данные"
+    },
+    "AddressesTable": {
+      "title": "Адреса"
+    },
+    "Person": {
+      "id": "ID",
+      "administrativeGenderCode": "Пол",
+      "birthDate": "Дата рождения",
+      "deathDate": "Дата смерта",
+      "deathDateEstimatedIndicator": "Предполагаемый показатель даты смерти",
+      "deathIndicator": "Показатель смертности",
+      "primaryName": "Текущее имя",
+      "age": "Возраст"
+    },
+    "Organization": {
+      "description": "Описание",
+      "primaryName": "Текущее название"
+    },
+    "TelecommunicationAddress": {
+      "use": "Тип",
+      "scheme": "Схема",
+      "address": "Адрес"
+    },
+    "PostalAddress": {
+      "use": "Тип",
+      "street": "Улица",
+      "building": "Здание",
+      "country": "Страна",
+      "municipality": "Муниципалитет",
+      "state": "Штат",
+      "zip": "Индекс"
+    },
+    "StudySubject": {
+      "status": "Статус",
+      "statusDate": "Дата статуса",
+      "performingBiologicEntity": "Личность",
+      "performingOrganization": "Организация",
+      "type": "Тип",
+      "assignedStudySiteProtocolVersionRelationship": "Область изучения"
+    },
+    "Status": {
+      "candidate": "Кандидат",
+      "eligible": "Пригодные",
+      "follow-up": "Отслеживается",
+      "ineligible": "Непригодные",
+      "not-registered": "Не зарегистрирован",
+      "off-study": "Вне исследования",
+      "on-study": "Исследуется",
+      "on-study-intervention": "OnStudyIntervention",
+      "on-study-observation": "OnStudyObservation",
+      "pending-on-study": "Ожидает исследование",
+      "potential-candidate": "Потенциальный кандидат",
+      "screening": "Обследуется",
+      "withdrawn": "Отклонен"
+    },
+    "Gender": {
+      "F": "Женщина",
+      "M": "Мужчина",
+      "U": "Не известно"
+    }
+  }
+}

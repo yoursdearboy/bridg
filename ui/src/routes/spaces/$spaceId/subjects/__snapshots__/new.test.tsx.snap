@@ -46,7 +46,7 @@ exports[`new page renders correctly 1`] = `
                     for="mantine-f4bipx4bi"
                     id="mantine-f4bipx4bi-label"
                   >
-                    Family
+                    Family name
                   </label>
                   <div
                     class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
@@ -70,7 +70,7 @@ exports[`new page renders correctly 1`] = `
                     for="mantine-f4bipx4bi"
                     id="mantine-f4bipx4bi-label"
                   >
-                    Given
+                    Given name
                   </label>
                   <div
                     class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
@@ -127,7 +127,7 @@ exports[`new page renders correctly 1`] = `
                     for="mantine-f4bipx4bi"
                     id="mantine-f4bipx4bi-label"
                   >
-                    Administrative gender
+                    Gender
                   </label>
                   <div
                     class="m_6c018570 mantine-Input-wrapper mantine-Select-wrapper"

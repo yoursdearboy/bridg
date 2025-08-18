@@ -18,20 +18,20 @@ import { useTranslation } from "react-i18next";
 import { Route as indexRoute } from "./index";
 
 export const Route = createFileRoute("/persons/$personId/edit")({
-  component: EditPersonComponent,
+  component: PersonEditPage,
   loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
   beforeLoad: () => ({
     breadcrumb: "Edit Person",
   }),
 });
 
-function EditPersonComponent() {
+function PersonEditPage() {
   const params = Route.useParams();
   const person = Route.useLoaderData();
 
   const { t } = useTranslation();
-  const genders = Object.entries(AdministrativeGender).map(([key, value]) => ({
-    label: t(`Gender.${key}`),
+  const genders = Object.values(AdministrativeGender).map((value) => ({
+    label: t(`Gender.${value}`),
     value,
   }));
 
@@ -51,42 +51,42 @@ function EditPersonComponent() {
         <Group justify="space-between">
           <Group>
             <Text size="xl" fw={700}>
-              {t("Editing:")} {person.primaryName}
+              {t("PersonEditPage.title")} {person.primaryName}
             </Text>
             {person.deathIndicator && (
               <Badge color="red" ml="sm">
-                {t("Deceased")}
+                {t("PersonEditPage.deceased")}
               </Badge>
             )}
           </Group>
           <ButtonLink to={indexRoute.to} params={params} variant="subtle">
-            {t("Cancel")}
+            {t("cancel")}
           </ButtonLink>
         </Group>
 
         <Card withBorder shadow="sm" padding="lg" radius="md">
           <Stack gap="sm">
             <Text size="xl" fw={700}>
-              {t("Personal Information")}
+              {t("PersonEditPage.personalInfo")}
             </Text>
             <Divider my="xs" />
 
             <TextInput
-              label={t("Full Name")}
-              placeholder={t("Enter full name")}
+              label={t("Person.primaryName")}
+              placeholder={t("PersonEditPage.primaryNamePlaceholder")}
               {...form.getInputProps("primaryName")}
             />
 
             <Select
-              label={t("Gender_")}
-              placeholder={t("Select gender")}
+              label={t("Person.administrativeGenderCode")}
+              placeholder={t("select")}
               data={genders}
               {...form.getInputProps("administrativeGenderCode")}
             />
 
             <Group>
               <Button type="submit" variant="filled">
-                {t("Save Changes")}
+                {t("submit")}
               </Button>
             </Group>
           </Stack>

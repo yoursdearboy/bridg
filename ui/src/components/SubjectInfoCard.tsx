@@ -19,11 +19,11 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
       <Stack gap="sm">
         <Group justify="space-between">
           <Text size="xl" fw={700}>
-            {t("Subject Information")}
+            {t("SubjectInfoCard.title")}
           </Text>
           {onEdit && (
             <Badge color="blue" style={{ cursor: "pointer" }}>
-              {t("Edit")}
+              {t("edit")}
             </Badge>
           )}
         </Group>
@@ -31,7 +31,7 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         <Divider my="xs" />
 
         <InfoRow
-          label={t("Status_")}
+          label={t("StudySubject.status")}
           value={
             <>
               {subject.status}
@@ -49,13 +49,13 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
         />
 
         <InfoRow
-          label={t("Subject Type")}
+          label={t("StudySubject.type")}
           value={
             person
-              ? t("Person")
+              ? t("StudySubject.performingBiologicEntity")
               : organization
-                ? t("Organization")
-                : t("Unknown")
+                ? t("StudySubject.performingOrganization")
+                : t("SubjectInfoCard.unknown")
           }
         />
 
@@ -63,32 +63,38 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           <>
             <Divider my="xs" />
             <Text fw={600} size="sm" c="dimmed">
-              {t("Person Details")}
+              {t("SubjectInfoCard.personDetails")}
             </Text>
 
-            <InfoRow label={t("Full Name")} value={person.primaryName} />
             <InfoRow
-              label={t("Gender_")}
-              value={t(`Gender.${person.administrativeGenderCode}`)}
+              label={t("Person.primaryName")}
+              value={person.primaryName}
             />
-
             <InfoRow
-              label={t("Birthdate")}
+              label={t("Person.administrativeGenderCode")}
               value={
-                person.birthDate
-                  ? t("intlDateTime", { val: person.birthDate })
-                  : "N/A"
+                person.administrativeGenderCode
+                  ? t(`Gender.${person.administrativeGenderCode}`)
+                  : t("na")
               }
             />
 
             <InfoRow
-              label={t("Death date")}
+              label={t("Person.birthDate")}
+              value={
+                person.birthDate
+                  ? t("intlDateTime", { val: person.birthDate })
+                  : t("na")
+              }
+            />
+            <InfoRow
+              label={t("Person.deathDate")}
               value={
                 person.deathIndicator
                   ? person.deathDate
                     ? t("intlDateTime", { val: person.deathDate })
-                    : t("Date not specified")
-                  : t("Not deceased")
+                    : t("PersonCard.dateNotSpecified")
+                  : t("PersonCard.notDeceased")
               }
             />
           </>
@@ -98,15 +104,15 @@ export function SubjectInfoCard({ subject, onEdit }: SubjectInfoCardProps) {
           <>
             <Divider my="xs" />
             <Text fw={600} size="sm" c="dimmed">
-              {t("Organization Details")}
+              {t("SubjectInfoCard.organizationDetails")}
             </Text>
 
             <InfoRow
-              label={t("Organization Name")}
+              label={t("Organization.primaryName")}
               value={organization.primaryName}
             />
             <InfoRow
-              label={t("Description")}
+              label={t("Organization.description")}
               value={organization.description}
             />
           </>

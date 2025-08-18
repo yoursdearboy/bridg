@@ -14,30 +14,34 @@ export const PersonCard = ({ person }: PersonCardProps) => {
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
-        <InfoRow label={t("Full Name")} value={person.primaryName}>
+        <InfoRow label={t("Person.primaryName")} value={person.primaryName}>
           {person.deathIndicator && (
             <Badge color="red" ml="sm">
-              {t("Deceased")}
+              {t("PersonCard.deceased")}
             </Badge>
           )}
         </InfoRow>
 
         <InfoRow
-          label={t("Gender_")}
-          value={t(`Gender.${person.administrativeGenderCode}`)}
-        />
-
-        <InfoRow
-          label={t("Birthdate")}
+          label={t("Person.administrativeGenderCode")}
           value={
-            person.birthDate
-              ? t("intlDateTime", { val: person.birthDate })
-              : "N/A"
+            person.administrativeGenderCode
+              ? t(`Gender.${person.administrativeGenderCode}`)
+              : t("na")
           }
         />
 
         <InfoRow
-          label={t("Age")}
+          label={t("Person.birthDate")}
+          value={
+            person.birthDate
+              ? t("intlDateTime", { val: person.birthDate })
+              : t("na")
+          }
+        />
+
+        <InfoRow
+          label={t("Person.age")}
           value={
             person.birthDate
               ? t("dayjsDuration", {
@@ -46,18 +50,18 @@ export const PersonCard = ({ person }: PersonCardProps) => {
                     "year"
                   ),
                 })
-              : "N/A"
+              : t("na")
           }
         />
 
         <InfoRow
-          label={t("Death date")}
+          label={t("Person.deathDate")}
           value={
             person.deathIndicator
               ? person.deathDate
                 ? t("intlDateTime", { val: person.deathDate })
-                : t("Date not specified")
-              : t("Not deceased")
+                : t("PersonCard.dateNotSpecified")
+              : t("PersonCard.notDeceased")
           }
         />
       </Stack>

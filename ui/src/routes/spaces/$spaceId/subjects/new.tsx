@@ -45,8 +45,8 @@ type NewStudySubjectFormProps = {
 
 const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
   const { t } = useTranslation();
-  const genders = Object.entries(AdministrativeGender).map(([key, value]) => ({
-    label: t(`Gender.${key}`),
+  const genders = Object.values(AdministrativeGender).map((value) => ({
+    label: t(`Gender.${value}`),
     value,
   }));
 
@@ -55,15 +55,15 @@ const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
       <Card>
         <Flex gap="md">
           <TextInput
-            label={t("Family")}
+            label={t("Name.family")}
             {...form.getInputProps("performingBiologicEntity.name.family")}
           />
           <TextInput
-            label={t("Given")}
+            label={t("Name.given")}
             {...form.getInputProps("performingBiologicEntity.name.given")}
           />
           <TextInput
-            label={t("Patronymic")}
+            label={t("Name.patronymic")}
             {...form.getInputProps("performingBiologicEntity.name.patronymic")}
           />
         </Flex>
@@ -72,14 +72,14 @@ const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
       <Card>
         <Stack align="flex-start" gap="md">
           <Select
-            label={t("Administrative gender")}
+            label={t("Person.administrativeGenderCode")}
             data={genders}
             {...form.getInputProps(
               "performingBiologicEntity.administrativeGenderCode"
             )}
           />
           <DateInput
-            label={t("Birth date")}
+            label={t("Person.birthDate")}
             valueFormat="L"
             {...form.getInputProps("performingBiologicEntity.birthDate")}
           />
@@ -107,7 +107,7 @@ const PerformingBiologicEntitySelect = ({
   return (
     <Card style={{ width: 300 }}>
       <Text fw={500} mb="sm">
-        {t("Select existing biologic entity:")}
+        {t("PerformingBiologicEntitySelect.text")}
       </Text>
       <Combobox
         store={store}
@@ -155,8 +155,8 @@ const PerformingBiologicEntityCard = ({
 const StudySubjectFields = ({ form }: NewStudySubjectFormProps) => {
   const { t } = useTranslation();
   const { sites } = Route.useLoaderData();
-  const statuses = Object.entries(Status).map(([key, value]) => ({
-    label: t(`Status.${key}`),
+  const statuses = Object.values(Status).map((value) => ({
+    label: t(`Status.${value}`),
     value,
   }));
 
@@ -165,17 +165,19 @@ const StudySubjectFields = ({ form }: NewStudySubjectFormProps) => {
       <Card>
         <Stack align="flex-start" gap="md">
           <Select
-            label={t("Status_")}
+            label={t("StudySubject.status")}
             data={statuses}
             {...form.getInputProps("status")}
           />
           <DateInput
-            label={t("Status date")}
+            label={t("StudySubject.statusDate")}
             valueFormat="L"
             {...form.getInputProps("statusDate")}
           />
           <MultiSelect
-            label={t("Study sites")}
+            label={t(
+              "StudySubject.assignedStudySiteProtocolVersionRelationship"
+            )}
             data={sites.map((s) => ({
               value: s.id,
               label: s.executingStudySite,
@@ -284,7 +286,7 @@ function RouteComponent() {
             </Grid.Col>
           </Grid>
           <Button mt="md" type="submit">
-            {t("Submit")}
+            {t("submit")}
           </Button>
         </form>
       )}

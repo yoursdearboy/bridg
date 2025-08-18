@@ -50,9 +50,7 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
 
   if (isError) {
     return (
-      <Text color="red">
-        {t("Error loading names:")} {error.message}
-      </Text>
+      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
     );
   }
 
@@ -61,7 +59,7 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
       <Card withBorder shadow="sm" radius="md">
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
-            <Text fw={500}>{t("Person names")}</Text>
+            <Text fw={500}>{t("NamesCard.title")}</Text>
 
             <Button
               variant="outline"
@@ -70,7 +68,7 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
               fw={500}
               loading={isPending}
             >
-              {t("Add")}
+              {t("add")}
             </Button>
           </Group>
         </Card.Section>
@@ -80,7 +78,7 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
       <Modal
         opened={opened}
         onClose={close}
-        title={t("Add new name")}
+        title={t("add")}
         size="lg"
         centered
       >

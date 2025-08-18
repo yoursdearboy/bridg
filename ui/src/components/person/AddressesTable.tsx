@@ -21,9 +21,9 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
 
   const { t } = useTranslation();
 
-  if (isPending) return t("Loading...");
+  if (isPending) return t("loading");
 
-  if (error) return t("An error has occurred: ") + error.message;
+  if (error) return t("errorMessage", { error: error.message });
 
   const rows = data.map((element) => (
     <Table.Tr key={element.zip}>
@@ -39,14 +39,14 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
       <Card withBorder shadow="sm" radius="md">
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
-            <Text fw={500}>{t("Person addresses")}</Text>
+            <Text fw={500}>{t("AddressesTable.title")}</Text>
             <Button
               variant="outline"
               size="compact-sm"
               fw={500}
               onClick={() => console.log("Add new address")}
             >
-              {t("Add")}
+              {t("add")}
             </Button>
           </Group>
         </Card.Section>
@@ -54,10 +54,10 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
         <Table>
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>{t("Country")}</Table.Th>
-              <Table.Th>{t("State")}</Table.Th>
-              <Table.Th>{t("Street")}</Table.Th>
-              <Table.Th>{t("Building")}</Table.Th>
+              <Table.Th>{t("PostalAddress.country")}</Table.Th>
+              <Table.Th>{t("PostalAddress.state")}</Table.Th>
+              <Table.Th>{t("PostalAddress.street")}</Table.Th>
+              <Table.Th>{t("PostalAddress.building")}</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>

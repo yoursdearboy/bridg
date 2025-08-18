@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { NamesCard } from "@/components/person/name/NamesCard";
 
 export const Route = createFileRoute("/persons/$personId/")({
-  component: PersonViewComponent,
+  component: PersonShowPage,
   loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
   beforeLoad: () => ({
     breadcrumb: ({ loaderData: person }: { loaderData: PersonOutput }) =>
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/persons/$personId/")({
   }),
 });
 
-function PersonViewComponent() {
+function PersonShowPage() {
   const { personId } = Route.useParams();
   const person = Route.useLoaderData();
 
@@ -29,10 +29,10 @@ function PersonViewComponent() {
     <Stack gap="md">
       <Group justify="space-between">
         <Title fw={500} order={2}>
-          {t("Person information")}
+          {t("PersonShowPage.title")}
         </Title>
         <ButtonLink to={editRoute.to} params={{ personId }} variant="outline">
-          {t("Edit Person")}
+          {t("PersonShowPage.edit")}
         </ButtonLink>
       </Group>
 

@@ -36,7 +36,7 @@ exports[`index pages renders correctly 1`] = `
           <span
             class="m_811560b9 mantine-Button-label"
           >
-            New Patient
+            New patient
           </span>
         </span>
       </button>
@@ -78,7 +78,7 @@ exports[`index pages renders correctly 1`] = `
                   <th
                     class="m_4e7aa4f3 mantine-Table-th"
                   >
-                    Full Name
+                    Primary name
                   </th>
                   <th
                     class="m_4e7aa4f3 mantine-Table-th"
@@ -88,12 +88,12 @@ exports[`index pages renders correctly 1`] = `
                   <th
                     class="m_4e7aa4f3 mantine-Table-th"
                   >
-                    Birthdate
+                    Birth date
                   </th>
                   <th
                     class="m_4e7aa4f3 mantine-Table-th"
                   >
-                    Death Indicator
+                    Death indicator
                   </th>
                   <th
                     class="m_4e7aa4f3 mantine-Table-th"
