@@ -9,15 +9,23 @@ export default tseslint.config([
   globalIgnores(["dist"]),
   {
     files: ["**/*.{ts,tsx}"],
+    ignores: ["vite.config.ts"],
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
+      tseslint.configs.recommendedTypeChecked,
       reactHooks.configs["recommended-latest"],
       reactRefresh.configs.vite,
     ],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    rules: {
+      "@typescript-eslint/no-unnecessary-condition": "error",
     },
   },
 ]);
