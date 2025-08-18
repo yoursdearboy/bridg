@@ -30,8 +30,8 @@ function EditPersonComponent() {
   const person = Route.useLoaderData();
 
   const { t } = useTranslation();
-  const genders = Object.entries(AdministrativeGender).map(([key, value]) => ({
-    label: t(`Gender.${key}`),
+  const genders = Object.entries(AdministrativeGender).map(([, value]) => ({
+    label: t(`Gender.${value}`),
     value,
   }));
 
