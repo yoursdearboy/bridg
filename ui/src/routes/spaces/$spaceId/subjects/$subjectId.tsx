@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { Route as personRoute } from "@/routes/persons/$personId";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
-  component: RouteComponent,
+  component: SubjectShowPage,
   loader: ({ params }) =>
     api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet(params),
   beforeLoad: () => ({
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
   }),
 });
 
-function RouteComponent() {
+function SubjectShowPage() {
   const subject = Route.useLoaderData();
   const { t } = useTranslation();
 

@@ -18,19 +18,19 @@ import { useTranslation } from "react-i18next";
 import { Route as indexRoute } from "./index";
 
 export const Route = createFileRoute("/persons/$personId/edit")({
-  component: EditPersonComponent,
+  component: PersonEditPage,
   loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
   beforeLoad: () => ({
     breadcrumb: "Edit Person",
   }),
 });
 
-function EditPersonComponent() {
+function PersonEditPage() {
   const params = Route.useParams();
   const person = Route.useLoaderData();
 
   const { t } = useTranslation();
-  const genders = Object.entries(AdministrativeGender).map(([, value]) => ({
+  const genders = Object.values(AdministrativeGender).map((value) => ({
     label: t(`Gender.${value}`),
     value,
   }));

@@ -8,13 +8,13 @@ import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/")({
   loader: ({ params }) => api.subjects.indexSpacesSpaceIdSubjectsGet(params),
-  component: RouteComponent,
+  component: SubjectIndexPage,
   beforeLoad: () => ({
     breadcrumb: null,
   }),
 });
 
-function RouteComponent() {
+function SubjectIndexPage() {
   const { t } = useTranslation();
   const subjects = Route.useLoaderData();
   const { spaceId } = Route.useParams();
