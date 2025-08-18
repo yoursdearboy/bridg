@@ -55,7 +55,7 @@ function EditPersonComponent() {
             </Text>
             {person.deathIndicator && (
               <Badge color="red" ml="sm">
-                {t("deceased")}
+                {t("PersonEditPage.deceased")}
               </Badge>
             )}
           </Group>

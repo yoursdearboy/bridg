@@ -10,10 +10,9 @@
         "intlDate": "{{val}}",
         "intlDateTime": "{{val, datetime}}",
         "dayjsDuration": "{{val, dayjsDuration}}",
-        "dateNotSpecified": "Date not specified",
-        "notDeceased": "Not deceased",
-        "deceased": "Deceased",
         "na": "N/A",
+        "yes": "Yes",
+        "no": "No",
         "PerformingBiologicEntitySelect": {
             "text": "Select existing biologic entity:"
         },
@@ -55,7 +54,13 @@
           "title": "Editing:",
           "cancel": "Cancel",
           "personalInfo": "Personal information",
-          "primaryNamePlaceholder": "John Doe"
+          "primaryNamePlaceholder": "John Doe",
+          "deceased": "Deceased"
+        },
+        "PersonCard": {
+          "deceased": "Deceased",
+          "notDeceased": "Not deceased",
+          "dateNotSpecified": "Date not specified"
         },
         "NamesTable": {
           "title": "Person names"
@@ -118,10 +123,6 @@
             "F": "Female",
             "M": "Male",
             "U": "Unknown"
-        },
-        "Boolean": {
-          "no": "No",
-          "yes": "Yes"
         }
     }
 }
