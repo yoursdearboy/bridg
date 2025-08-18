@@ -37,15 +37,13 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
     },
   });
 
-  const handleSuccess = async () => {
-    try {
-      await queryClient.invalidateQueries({
+  const handleSuccess = () => {
+    queryClient
+      .invalidateQueries({
         queryKey: ["person", personId, "names"],
-      });
-      close();
-    } catch (err) {
-      console.error("Failed to invalidate queries:", err);
-    }
+      })
+      .then(close)
+      .catch((err) => console.error("Query invalidation failed:", err));
   };
 
   if (isPending) return <LoadingOverlay visible />;
