@@ -1,6 +1,7 @@
 {
     "translation": {
         "submit": "Submit",
+        "cancel": "Cancel",
         "edit": "Edit",
         "loading": "Loading...",
         "add": "Add",
@@ -13,6 +14,7 @@
         "na": "N/A",
         "yes": "Yes",
         "no": "No",
+        "fieldRequiredMessage": "{{fieldName}} is required",
         "PerformingBiologicEntitySelect": {
             "text": "Select existing biologic entity:"
         },
@@ -62,7 +64,7 @@
           "notDeceased": "Not deceased",
           "dateNotSpecified": "Date not specified"
         },
-        "NamesTable": {
+        "NamesCard": {
           "title": "Person names"
         },
         "TelecommunicationAddressesTable": {

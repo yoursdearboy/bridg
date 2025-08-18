@@ -21,6 +21,10 @@ interface NameFormProps {
 export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
   const { t } = useTranslation();
 
+  const reqiuredMessage = (fieldName: string) => {
+    return t("fieldRequiredMessage", {fieldName})
+  }
+
   const form = useForm<Name>({
     initialValues: {
       use: "",
@@ -32,8 +36,8 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
       suffix: "",
     },
     validate: {
-      family: (value) => (value ? null : t("Family name is required")),
-      given: (value) => (value ? null : t("Given name is required")),
+      family: (value) => (value ? null : reqiuredMessage(t("EntityName.family"))),
+      given: (value) => (value ? null : reqiuredMessage(t("EntityName.given"))),
     },
   });
 
@@ -61,31 +65,31 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
           </Alert>
         )}
         <Group grow>
-          <TextInput label={t("Use")} {...form.getInputProps("use")} />
-          <TextInput label={t("Prefix")} {...form.getInputProps("prefix")} />
-          <TextInput label={t("Suffix")} {...form.getInputProps("suffix")} />
+          <TextInput label={t("EntityName.use")} {...form.getInputProps("use")} />
+          <TextInput label={t("EntityName.prefix")} {...form.getInputProps("prefix")} />
+          <TextInput label={t("EntityName.suffix")} {...form.getInputProps("suffix")} />
         </Group>
 
         <TextInput
-          label={t("Family name")}
+          label={t("EntityName.family")}
           withAsterisk
           {...form.getInputProps("family")}
         />
 
         <Group grow>
           <TextInput
-            label={t("Given name")}
+            label={t("EntityName.given")}
             withAsterisk
             {...form.getInputProps("given")}
           />
           <TextInput
-            label={t("Middle name")}
+            label={t("EntityName.middle")}
             {...form.getInputProps("middle")}
           />
         </Group>
 
         <TextInput
-          label={t("Patronymic")}
+          label={t("EntityName.patronymic")}
           {...form.getInputProps("patronymic")}
         />
 
@@ -95,10 +99,10 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
             onClick={onClose}
             disabled={mutation.isPending}
           >
-            {t("Cancel")}
+            {t("cancel")}
           </Button>
           <Button type="submit" loading={mutation.isPending}>
-            {t("Save")}
+            {t("submit")}
           </Button>
         </Group>
       </Stack>
