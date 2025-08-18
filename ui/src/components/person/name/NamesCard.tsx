@@ -1,4 +1,4 @@
-import { Modal, LoadingOverlay, Text } from "@mantine/core";
+import { Modal, LoadingOverlay, Text, Card } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { NameForm } from "./NameForm";
@@ -44,7 +44,9 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
 
   return (
     <>
-      <NamesTable names={names} onAddClick={open} isLoading={isPending} />
+      <Card withBorder shadow="sm" radius="md">
+        <NamesTable names={names} onAddClick={open} isLoading={isPending} />
+      </Card>
 
       <Modal
         opened={opened}

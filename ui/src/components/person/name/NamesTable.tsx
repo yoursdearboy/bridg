@@ -15,7 +15,11 @@ interface NamesTableProps {
   isLoading?: boolean;
 }
 
-export const NamesTable = ({ names, onAddClick, isLoading }: NamesTableProps) => {
+export const NamesTable = ({
+  names,
+  onAddClick,
+  isLoading,
+}: NamesTableProps) => {
   const { t } = useTranslation();
 
   const rows = names.map((name) => (
@@ -28,7 +32,7 @@ export const NamesTable = ({ names, onAddClick, isLoading }: NamesTableProps) =>
   ));
 
   return (
-    <Card withBorder shadow="sm" radius="md">
+    <>
       <Card.Section withBorder inheritPadding py="xs">
         <Group justify="space-between">
           <Text fw={500}>{t("Person names")}</Text>
@@ -58,7 +62,7 @@ export const NamesTable = ({ names, onAddClick, isLoading }: NamesTableProps) =>
         <Table.Tbody>
           {names.length === 0 ? (
             <Table.Tr>
-              <Table.Td colSpan={4} style={{ textAlign: 'center' }}>
+              <Table.Td colSpan={4} style={{ textAlign: "center" }}>
                 {isLoading ? t("Loading...") : t("No names found")}
               </Table.Td>
             </Table.Tr>
@@ -67,6 +71,6 @@ export const NamesTable = ({ names, onAddClick, isLoading }: NamesTableProps) =>
           )}
         </Table.Tbody>
       </Table>
-    </Card>
+    </>
   );
 };
