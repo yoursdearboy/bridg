@@ -14,6 +14,7 @@ dayjs.extend(duration);
 dayjs.extend(relativeTime);
 dayjs.extend(LocalizedFormat);
 
+export const defaultNS = "common";
 export const resources = { en, ru };
 
 export const languages = Object.keys(resources);
@@ -22,6 +23,7 @@ i18next
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    defaultNS,
     supportedLngs: languages,
     resources,
   })

@@ -7,7 +7,7 @@ interface NamesTableProps {
 }
 
 export const NamesTable = ({ names }: NamesTableProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("Name");
   //FIXME: Add key when available
   const rows = names.map((name) => (
     <Table.Tr>
@@ -23,10 +23,10 @@ export const NamesTable = ({ names }: NamesTableProps) => {
       <Table striped highlightOnHover>
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>{t("Name.family")}</Table.Th>
-            <Table.Th>{t("Name.given")}</Table.Th>
-            <Table.Th>{t("Name.middle")}</Table.Th>
-            <Table.Th>{t("Name.patronymic")}</Table.Th>
+            <Table.Th>{t("family")}</Table.Th>
+            <Table.Th>{t("given")}</Table.Th>
+            <Table.Th>{t("middle")}</Table.Th>
+            <Table.Th>{t("patronymic")}</Table.Th>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>

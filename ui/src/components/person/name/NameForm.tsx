@@ -19,7 +19,8 @@ interface NameFormProps {
 }
 
 export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
-  const { t } = useTranslation();
+  const { t: tc } = useTranslation();
+  const { t } = useTranslation("Name");
 
   const form = useForm<Name>({
     initialValues: {
@@ -33,13 +34,9 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
     },
     validate: {
       family: (value) =>
-        value
-          ? null
-          : t("fieldRequiredMessage", { fieldName: t("Name.family") }),
+        value ? null : tc("fieldRequiredMessage", { fieldName: t("family") }),
       given: (value) =>
-        value
-          ? null
-          : t("fieldRequiredMessage", { fieldName: t("Name.given") }),
+        value ? null : tc("fieldRequiredMessage", { fieldName: t("given") }),
     },
   });
 
@@ -67,37 +64,28 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
           </Alert>
         )}
         <Group grow>
-          <TextInput label={t("Name.use")} {...form.getInputProps("use")} />
-          <TextInput
-            label={t("Name.prefix")}
-            {...form.getInputProps("prefix")}
-          />
-          <TextInput
-            label={t("Name.suffix")}
-            {...form.getInputProps("suffix")}
-          />
+          <TextInput label={t("use")} {...form.getInputProps("use")} />
+          <TextInput label={t("prefix")} {...form.getInputProps("prefix")} />
+          <TextInput label={t("suffix")} {...form.getInputProps("suffix")} />
         </Group>
 
         <TextInput
-          label={t("Name.family")}
+          label={t("family")}
           withAsterisk
           {...form.getInputProps("family")}
         />
 
         <Group grow>
           <TextInput
-            label={t("Name.given")}
+            label={t("given")}
             withAsterisk
             {...form.getInputProps("given")}
           />
-          <TextInput
-            label={t("Name.middle")}
-            {...form.getInputProps("middle")}
-          />
+          <TextInput label={t("middle")} {...form.getInputProps("middle")} />
         </Group>
 
         <TextInput
-          label={t("Name.patronymic")}
+          label={t("patronymic")}
           {...form.getInputProps("patronymic")}
         />
 
@@ -107,10 +95,10 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
             onClick={onClose}
             disabled={mutation.isPending}
           >
-            {t("cancel")}
+            {tc("cancel")}
           </Button>
           <Button type="submit" loading={mutation.isPending}>
-            {t("submit")}
+            {tc("submit")}
           </Button>
         </Group>
       </Stack>

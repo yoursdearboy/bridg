@@ -20,7 +20,8 @@ interface NamesCardProps {
 export const NamesCard = ({ personId }: NamesCardProps) => {
   const [opened, { open, close }] = useDisclosure(false);
   const queryClient = useQueryClient();
-  const { t } = useTranslation();
+  const { t: tc } = useTranslation();
+  const { t } = useTranslation("NamesCard");
 
   const {
     isPending,
@@ -50,7 +51,7 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
 
   if (isError) {
     return (
-      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
+      <Text color="red">{tc("errorMessage", { error: error.message })}</Text>
     );
   }
 
@@ -59,7 +60,7 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
       <Card withBorder shadow="sm" radius="md">
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
-            <Text fw={500}>{t("NamesCard.title")}</Text>
+            <Text fw={500}>{t("title")}</Text>
 
             <Button
               variant="outline"
@@ -68,7 +69,7 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
               fw={500}
               loading={isPending}
             >
-              {t("add")}
+              {tc("add")}
             </Button>
           </Group>
         </Card.Section>
@@ -78,7 +79,7 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
       <Modal
         opened={opened}
         onClose={close}
-        title={t("add")}
+        title={tc("add")}
         size="lg"
         centered
       >

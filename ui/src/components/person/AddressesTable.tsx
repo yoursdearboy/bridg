@@ -19,11 +19,13 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
       api.persons.indexPersonsPersonIdPostalAddressesGet({ personId }),
   });
 
-  const { t } = useTranslation();
+  const { t } = useTranslation("AddressesTable");
+  const { t: tc } = useTranslation();
+  const { t: tpa } = useTranslation("PostalAddress");
 
-  if (isPending) return t("loading");
+  if (isPending) return tc("loading");
 
-  if (error) return t("errorMessage", { error: error.message });
+  if (error) return tc("errorMessage", { error: error.message });
 
   const rows = data.map((element) => (
     <Table.Tr key={element.zip}>
@@ -39,14 +41,14 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
       <Card withBorder shadow="sm" radius="md">
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
-            <Text fw={500}>{t("AddressesTable.title")}</Text>
+            <Text fw={500}>{t("title")}</Text>
             <Button
               variant="outline"
               size="compact-sm"
               fw={500}
               onClick={() => console.log("Add new address")}
             >
-              {t("add")}
+              {tc("add")}
             </Button>
           </Group>
         </Card.Section>
@@ -54,10 +56,10 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
         <Table>
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>{t("PostalAddress.country")}</Table.Th>
-              <Table.Th>{t("PostalAddress.state")}</Table.Th>
-              <Table.Th>{t("PostalAddress.street")}</Table.Th>
-              <Table.Th>{t("PostalAddress.building")}</Table.Th>
+              <Table.Th>{tpa("country")}</Table.Th>
+              <Table.Th>{tpa("state")}</Table.Th>
+              <Table.Th>{tpa("street")}</Table.Th>
+              <Table.Th>{tpa("building")}</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>
