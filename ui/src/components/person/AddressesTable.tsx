@@ -46,7 +46,7 @@ export const AddressesTable = ({ personId }: AddressesTableProps) => {
               fw={500}
               onClick={() => console.log("Add new address")}
             >
-              {t("Add")}
+              {t("add")}
             </Button>
           </Group>
         </Card.Section>
