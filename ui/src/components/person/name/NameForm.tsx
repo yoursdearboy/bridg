@@ -35,11 +35,11 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
       family: (value) =>
         value
           ? null
-          : t("fieldRequiredMessage", { fieldName: t("EntityName.family") }),
+          : t("fieldRequiredMessage", { fieldName: t("Name.family") }),
       given: (value) =>
         value
           ? null
-          : t("fieldRequiredMessage", { fieldName: t("EntityName.given") }),
+          : t("fieldRequiredMessage", { fieldName: t("Name.given") }),
     },
   });
 
@@ -67,40 +67,37 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
           </Alert>
         )}
         <Group grow>
+          <TextInput label={t("Name.use")} {...form.getInputProps("use")} />
           <TextInput
-            label={t("EntityName.use")}
-            {...form.getInputProps("use")}
-          />
-          <TextInput
-            label={t("EntityName.prefix")}
+            label={t("Name.prefix")}
             {...form.getInputProps("prefix")}
           />
           <TextInput
-            label={t("EntityName.suffix")}
+            label={t("Name.suffix")}
             {...form.getInputProps("suffix")}
           />
         </Group>
 
         <TextInput
-          label={t("EntityName.family")}
+          label={t("Name.family")}
           withAsterisk
           {...form.getInputProps("family")}
         />
 
         <Group grow>
           <TextInput
-            label={t("EntityName.given")}
+            label={t("Name.given")}
             withAsterisk
             {...form.getInputProps("given")}
           />
           <TextInput
-            label={t("EntityName.middle")}
+            label={t("Name.middle")}
             {...form.getInputProps("middle")}
           />
         </Group>
 
         <TextInput
-          label={t("EntityName.patronymic")}
+          label={t("Name.patronymic")}
           {...form.getInputProps("patronymic")}
         />
 

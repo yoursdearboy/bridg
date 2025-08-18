@@ -23,10 +23,10 @@ export const NamesTable = ({ names }: NamesTableProps) => {
       <Table striped highlightOnHover>
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>{t("EntityName.family")}</Table.Th>
-            <Table.Th>{t("EntityName.given")}</Table.Th>
-            <Table.Th>{t("EntityName.middle")}</Table.Th>
-            <Table.Th>{t("EntityName.patronymic")}</Table.Th>
+            <Table.Th>{t("Name.family")}</Table.Th>
+            <Table.Th>{t("Name.given")}</Table.Th>
+            <Table.Th>{t("Name.middle")}</Table.Th>
+            <Table.Th>{t("Name.patronymic")}</Table.Th>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>

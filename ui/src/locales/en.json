@@ -18,7 +18,7 @@
     "PerformingBiologicEntitySelect": {
       "text": "Select existing biologic entity:"
     },
-    "EntityName": {
+    "Name": {
       "use": "use",
       "family": "Family name",
       "given": "Given name",
