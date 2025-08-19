@@ -8,7 +8,7 @@ import {
   RouterProvider,
   type AnyRoute,
 } from "@tanstack/react-router";
-import { act, render, type RenderResult } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 import "./i18n";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -47,7 +47,6 @@ export const renderRoute = (
     )
   );
 };
-
 
 export const renderComponent = (component: React.ReactNode) =>
   render(<App>{component}</App>);
