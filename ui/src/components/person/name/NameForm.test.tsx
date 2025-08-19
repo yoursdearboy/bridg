@@ -1,22 +1,10 @@
-import { render } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
-
-import api from "@/api";
+import { describe, it, expect } from "vitest";
 import { NameForm } from "./NameForm";
+import { renderComponent } from "@/test-utils";
 
 describe("NameForm", () => {
   it("matches snapshot", () => {
-    vi.spyOn(api.persons, "createPersonsPersonIdNamesPost").mockResolvedValue({
-      use: "official",
-      family: "James",
-      given: "Valya",
-      middle: "Gold",
-      patronymic: "Gold",
-      prefix: "Ms.",
-      suffix: "Jr.",
-    });
-
-    const { asFragment } = render(
+    const { asFragment } = renderComponent(
       <NameForm
         personId="2703d0bc-7ed4-497c-91c6-30d86a8eb630"
         onClose={() => {}}

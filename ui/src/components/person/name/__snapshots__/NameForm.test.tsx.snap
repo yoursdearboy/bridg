@@ -1,0 +1,248 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NameForm > matches snapshot 1`] = `
+<DocumentFragment>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <form>
+    <div
+      class="m_6d731127 mantine-Stack-root"
+      style="--stack-gap: var(--mantine-spacing-md); --stack-align: stretch; --stack-justify: flex-start; position: relative;"
+    >
+      <div
+        class="m_4081bf90 mantine-Group-root"
+        data-grow="true"
+        style="--group-child-width: calc(33.333333333333336% - (var(--mantine-spacing-md) - var(--mantine-spacing-md) / 3)); --group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+      >
+        <div
+          class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
+        >
+          <label
+            class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+            for="mantine-ve80r1go2"
+            id="mantine-ve80r1go2-label"
+          >
+            use
+          </label>
+          <div
+            class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
+            data-variant="default"
+          >
+            <input
+              aria-invalid="false"
+              class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
+              data-path="use"
+              data-variant="default"
+              id="mantine-ve80r1go2"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
+        >
+          <label
+            class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+            for="mantine-irou3bvu2"
+            id="mantine-irou3bvu2-label"
+          >
+            Prefix
+          </label>
+          <div
+            class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
+            data-variant="default"
+          >
+            <input
+              aria-invalid="false"
+              class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
+              data-path="prefix"
+              data-variant="default"
+              id="mantine-irou3bvu2"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
+        >
+          <label
+            class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+            for="mantine-77n6t7ttg"
+            id="mantine-77n6t7ttg-label"
+          >
+            Suffix
+          </label>
+          <div
+            class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
+            data-variant="default"
+          >
+            <input
+              aria-invalid="false"
+              class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
+              data-path="suffix"
+              data-variant="default"
+              id="mantine-77n6t7ttg"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
+      >
+        <label
+          class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+          data-required="true"
+          for="mantine-1i03a8kau"
+          id="mantine-1i03a8kau-label"
+        >
+          Family name
+          <span
+            aria-hidden="true"
+            class="m_78a94662 mantine-InputWrapper-required mantine-TextInput-required"
+          >
+             *
+          </span>
+        </label>
+        <div
+          class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
+          data-variant="default"
+        >
+          <input
+            aria-invalid="false"
+            class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
+            data-path="family"
+            data-variant="default"
+            id="mantine-1i03a8kau"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="m_4081bf90 mantine-Group-root"
+        data-grow="true"
+        style="--group-child-width: calc(50% - (var(--mantine-spacing-md) - var(--mantine-spacing-md) / 2)); --group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+      >
+        <div
+          class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
+        >
+          <label
+            class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+            data-required="true"
+            for="mantine-t1vodvvrw"
+            id="mantine-t1vodvvrw-label"
+          >
+            Given name
+            <span
+              aria-hidden="true"
+              class="m_78a94662 mantine-InputWrapper-required mantine-TextInput-required"
+            >
+               *
+            </span>
+          </label>
+          <div
+            class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
+            data-variant="default"
+          >
+            <input
+              aria-invalid="false"
+              class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
+              data-path="given"
+              data-variant="default"
+              id="mantine-t1vodvvrw"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
+        >
+          <label
+            class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+            for="mantine-xqfwm9fhx"
+            id="mantine-xqfwm9fhx-label"
+          >
+            Middle name
+          </label>
+          <div
+            class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
+            data-variant="default"
+          >
+            <input
+              aria-invalid="false"
+              class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
+              data-path="middle"
+              data-variant="default"
+              id="mantine-xqfwm9fhx"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
+      >
+        <label
+          class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+          for="mantine-vt8jz8pyq"
+          id="mantine-vt8jz8pyq-label"
+        >
+          Patronymic
+        </label>
+        <div
+          class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
+          data-variant="default"
+        >
+          <input
+            aria-invalid="false"
+            class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
+            data-path="patronymic"
+            data-variant="default"
+            id="mantine-vt8jz8pyq"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="m_4081bf90 mantine-Group-root"
+        style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-end; --group-wrap: wrap; margin-top: var(--mantine-spacing-md);"
+      >
+        <button
+          class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+          data-variant="outline"
+          style="--button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline);"
+          type="button"
+        >
+          <span
+            class="m_80f1301b mantine-Button-inner"
+          >
+            <span
+              class="m_811560b9 mantine-Button-label"
+            >
+              Cancel
+            </span>
+          </span>
+        </button>
+        <button
+          class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+          style="--button-color: var(--mantine-color-white);"
+          type="submit"
+        >
+          <span
+            class="m_80f1301b mantine-Button-inner"
+          >
+            <span
+              class="m_811560b9 mantine-Button-label"
+            >
+              Submit
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </form>
+</DocumentFragment>
+`;
