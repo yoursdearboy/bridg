@@ -7,7 +7,7 @@ describe("NamesTable", () => {
   it("matches snapshot", () => {
     const { asFragment } = renderComponent(
       <NamesTable
-    names={[
+        names={[
           { family: "Charlie", given: "Kai", middle: "May", patronymic: "—" },
           { family: "Nancy", given: "Mia", middle: "Jonson", patronymic: "—" },
         ]}
