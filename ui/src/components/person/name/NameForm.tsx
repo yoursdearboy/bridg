@@ -32,14 +32,8 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
       suffix: "",
     },
     validate: {
-      family: (value) =>
-        value
-          ? null
-          : t("fieldRequiredMessage", { fieldName: t("Name.family") }),
-      given: (value) =>
-        value
-          ? null
-          : t("fieldRequiredMessage", { fieldName: t("Name.given") }),
+      family: (value) => (value ? null : t("Family name is required")),
+      given: (value) => (value ? null : t("Given name is required")),
     },
   });
 
@@ -67,37 +61,31 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
           </Alert>
         )}
         <Group grow>
-          <TextInput label={t("Name.use")} {...form.getInputProps("use")} />
-          <TextInput
-            label={t("Name.prefix")}
-            {...form.getInputProps("prefix")}
-          />
-          <TextInput
-            label={t("Name.suffix")}
-            {...form.getInputProps("suffix")}
-          />
+          <TextInput label={t("Use")} {...form.getInputProps("use")} />
+          <TextInput label={t("Prefix")} {...form.getInputProps("prefix")} />
+          <TextInput label={t("Suffix")} {...form.getInputProps("suffix")} />
         </Group>
 
         <TextInput
-          label={t("Name.family")}
+          label={t("Family name")}
           withAsterisk
           {...form.getInputProps("family")}
         />
 
         <Group grow>
           <TextInput
-            label={t("Name.given")}
+            label={t("Given name")}
             withAsterisk
             {...form.getInputProps("given")}
           />
           <TextInput
-            label={t("Name.middle")}
+            label={t("Middle name")}
             {...form.getInputProps("middle")}
           />
         </Group>
 
         <TextInput
-          label={t("Name.patronymic")}
+          label={t("Patronymic")}
           {...form.getInputProps("patronymic")}
         />
 
@@ -107,10 +95,10 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
             onClick={onClose}
             disabled={mutation.isPending}
           >
-            {t("cancel")}
+            {t("Cancel")}
           </Button>
           <Button type="submit" loading={mutation.isPending}>
-            {t("submit")}
+            {t("Save")}
           </Button>
         </Group>
       </Stack>

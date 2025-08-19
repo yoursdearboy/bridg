@@ -47,3 +47,5 @@ export const renderRoute = (
     )
   );
 };
+
+export { render };
