@@ -25,29 +25,3 @@ exports[`NamesCard > matches snapshot 1`] = `
   </div>
 </DocumentFragment>
 `;
-
-exports[`NamesCard renders correctly 1`] = `
-<DocumentFragment>
-  <style
-    data-mantine-styles="classes"
-  >
-    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
-  </style>
-  <div
-    class="m_6e45937b mantine-LoadingOverlay-root"
-    style="--lo-z-index: 400;"
-  >
-    <span
-      class="m_b34414df m_e8eb006c mantine-LoadingOverlay-loader m_5ae2e3c mantine-Loader-root"
-    />
-    <div
-      class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-dark-hidden"
-      style="--overlay-bg: rgba(255, 255, 255, 0.75); --overlay-z-index: 200;"
-    />
-    <div
-      class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-light-hidden"
-      style="--overlay-bg: rgba(59, 59, 59, 0.75); --overlay-z-index: 200;"
-    />
-  </div>
-</DocumentFragment>
-`;
