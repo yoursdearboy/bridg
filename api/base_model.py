@@ -12,11 +12,8 @@ class BaseModel(PydanticBaseModel, Generic[T]):
     model_config = ConfigDict(from_attributes=True, arbitrary_types_allowed=True)
     _sa: type[T] = PrivateAttr()
 
-    def model_dump_sa(self, data=None) -> T:
-        "Deprecated"
-
-        def dump(kv):
-            k, v = kv
+    def model_dump_sa(self, exclude={}) -> T:
+        def dump(k, v):
             if v is None:
                 return (k, v)
             annotation = self.model_fields[k].annotation
@@ -34,6 +31,6 @@ class BaseModel(PydanticBaseModel, Generic[T]):
                 return (k, v.model_dump_sa())
             return (k, v)
 
-        data = dict(self) if data is None else data
-        data = dict(dump(kv) for kv in data.items())
+        data = dict(self)
+        data = dict(dump(k, v) for k, v in data.items() if k not in exclude)
         return self._sa(**data)

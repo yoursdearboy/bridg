@@ -55,7 +55,9 @@ class StudySubject(BaseModel):
     performing_organization: Optional[Organization]
 
 
-class EntityName(BaseModel):
+class EntityName(BaseModel[bridg.EntityName]):
+    _sa = bridg.EntityName
+
     use: Optional[str] = None
     family: Optional[str] = None
     given: Optional[str] = None
@@ -64,20 +66,13 @@ class EntityName(BaseModel):
     prefix: Optional[str] = None
     suffix: Optional[str] = None
 
-    def model_dump_sa(self) -> bridg.EntityName:
-        return bridg.EntityName(
-            use=self.use,
-            family=self.family,
-            given=self.given,
-            middle=self.middle,
-            patronymic=self.patronymic,
-            prefix=self.prefix,
-            suffix=self.suffix,
-        )
 
+class NewStudySubject(BaseModel[bridg.StudySubject]):
+    _sa = bridg.StudySubject
 
-class NewStudySubject(BaseModel):
-    class Person(BaseModel):
+    class Person(BaseModel[bridg.Person]):
+        _sa = bridg.Person
+
         type: str = "person"
         administrative_gender_code: Optional[bridg.AdministrativeGender] = None
         birth_date: Optional[date] = None
@@ -124,12 +119,18 @@ class NewStudySubject(BaseModel):
         )
 
 
-class LookupStudySubject(BaseModel):
-    class Person(BaseModel):
+class LookupStudySubject(BaseModel[bridg.StudySubject]):
+    _sa = bridg.StudySubject
+
+    class Person(BaseModel[bridg.Person]):
+        _sa = bridg.Person
+
         name: Optional[EntityName] = None
 
         def model_dump_sa(self) -> bridg.Person:
-            return bridg.Person(name=[self.name.model_dump_sa()] if self.name else [])
+            return bridg.Person(
+                name=[self.name.model_dump_sa()] if self.name else [],
+            )
 
     performing_biologic_entity: Optional[Person] = None
 
