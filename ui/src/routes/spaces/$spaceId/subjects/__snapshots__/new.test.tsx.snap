@@ -43,8 +43,8 @@ exports[`new page renders correctly 1`] = `
                 >
                   <label
                     class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-                    for="mantine-f4bipx4bi"
-                    id="mantine-f4bipx4bi-label"
+                    for="mantine-7lzvq3tar"
+                    id="mantine-7lzvq3tar-label"
                   >
                     Family name
                   </label>
@@ -57,7 +57,7 @@ exports[`new page renders correctly 1`] = `
                       class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
                       data-path="performingBiologicEntity.name.family"
                       data-variant="default"
-                      id="mantine-f4bipx4bi"
+                      id="mantine-7lzvq3tar"
                       value=""
                     />
                   </div>
@@ -67,8 +67,8 @@ exports[`new page renders correctly 1`] = `
                 >
                   <label
                     class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-                    for="mantine-f4bipx4bi"
-                    id="mantine-f4bipx4bi-label"
+                    for="mantine-m75qc1lk3"
+                    id="mantine-m75qc1lk3-label"
                   >
                     Given name
                   </label>
@@ -81,7 +81,7 @@ exports[`new page renders correctly 1`] = `
                       class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
                       data-path="performingBiologicEntity.name.given"
                       data-variant="default"
-                      id="mantine-f4bipx4bi"
+                      id="mantine-m75qc1lk3"
                       value=""
                     />
                   </div>
@@ -91,8 +91,8 @@ exports[`new page renders correctly 1`] = `
                 >
                   <label
                     class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-                    for="mantine-f4bipx4bi"
-                    id="mantine-f4bipx4bi-label"
+                    for="mantine-0imsgk2bo"
+                    id="mantine-0imsgk2bo-label"
                   >
                     Patronymic
                   </label>
@@ -105,7 +105,7 @@ exports[`new page renders correctly 1`] = `
                       class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
                       data-path="performingBiologicEntity.name.patronymic"
                       data-variant="default"
-                      id="mantine-f4bipx4bi"
+                      id="mantine-0imsgk2bo"
                       value=""
                     />
                   </div>
@@ -124,8 +124,8 @@ exports[`new page renders correctly 1`] = `
                 >
                   <label
                     class="m_8fdc1311 mantine-InputWrapper-label mantine-Select-label"
-                    for="mantine-f4bipx4bi"
-                    id="mantine-f4bipx4bi-label"
+                    for="mantine-jhev6j6u6"
+                    id="mantine-jhev6j6u6-label"
                   >
                     Gender
                   </label>
@@ -143,7 +143,7 @@ exports[`new page renders correctly 1`] = `
                       class="m_8fb7ebe7 mantine-Input-input mantine-Select-input"
                       data-path="performingBiologicEntity.administrativeGenderCode"
                       data-variant="default"
-                      id="mantine-f4bipx4bi"
+                      id="mantine-jhev6j6u6"
                       readonly=""
                       value=""
                     />
@@ -177,8 +177,8 @@ exports[`new page renders correctly 1`] = `
                 >
                   <label
                     class="m_8fdc1311 mantine-InputWrapper-label mantine-DateInput-label"
-                    for="mantine-f4bipx4bi"
-                    id="mantine-f4bipx4bi-label"
+                    for="mantine-11o0aec4h"
+                    id="mantine-11o0aec4h-label"
                   >
                     Birth date
                   </label>
@@ -193,7 +193,7 @@ exports[`new page renders correctly 1`] = `
                       data-dates-input="true"
                       data-path="performingBiologicEntity.birthDate"
                       data-variant="default"
-                      id="mantine-f4bipx4bi"
+                      id="mantine-11o0aec4h"
                       value=""
                     />
                   </div>
@@ -216,8 +216,8 @@ exports[`new page renders correctly 1`] = `
                 >
                   <label
                     class="m_8fdc1311 mantine-InputWrapper-label mantine-Select-label"
-                    for="mantine-f4bipx4bi"
-                    id="mantine-f4bipx4bi-label"
+                    for="mantine-uze695zgg"
+                    id="mantine-uze695zgg-label"
                   >
                     Status
                   </label>
@@ -235,7 +235,7 @@ exports[`new page renders correctly 1`] = `
                       class="m_8fb7ebe7 mantine-Input-input mantine-Select-input"
                       data-path="status"
                       data-variant="default"
-                      id="mantine-f4bipx4bi"
+                      id="mantine-uze695zgg"
                       readonly=""
                       value="candidate"
                     />
@@ -269,8 +269,8 @@ exports[`new page renders correctly 1`] = `
                 >
                   <label
                     class="m_8fdc1311 mantine-InputWrapper-label mantine-DateInput-label"
-                    for="mantine-f4bipx4bi"
-                    id="mantine-f4bipx4bi-label"
+                    for="mantine-30lma4f8h"
+                    id="mantine-30lma4f8h-label"
                   >
                     Status date
                   </label>
@@ -285,7 +285,7 @@ exports[`new page renders correctly 1`] = `
                       data-dates-input="true"
                       data-path="statusDate"
                       data-variant="default"
-                      id="mantine-f4bipx4bi"
+                      id="mantine-30lma4f8h"
                       value="08/01/2025"
                     />
                   </div>
@@ -301,8 +301,8 @@ exports[`new page renders correctly 1`] = `
                   <label
                     class="m_8fdc1311 mantine-InputWrapper-label mantine-MultiSelect-label"
                     data-size="sm"
-                    for="mantine-f4bipx4bi"
-                    id="mantine-f4bipx4bi-label"
+                    for="mantine-wx7spkr4s"
+                    id="mantine-wx7spkr4s-label"
                   >
                     Study sites
                   </label>
@@ -333,7 +333,7 @@ exports[`new page renders correctly 1`] = `
                           data-path="assignedStudySiteProtocolVersionRelationship"
                           data-pointer="true"
                           data-type="hidden"
-                          id="mantine-f4bipx4bi"
+                          id="mantine-wx7spkr4s"
                           readonly=""
                           type="text"
                           value=""
@@ -389,7 +389,7 @@ exports[`new page renders correctly 1`] = `
             </p>
             <div
               class="m_b2821a6e mantine-Combobox-options"
-              id="mantine-f4bipx4bi"
+              id="mantine-5b3t0mg07"
               role="listbox"
               style="--combobox-option-fz: var(--mantine-font-size-sm); --combobox-option-padding: var(--combobox-option-padding-sm);"
             >

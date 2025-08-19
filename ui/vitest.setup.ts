@@ -23,7 +23,20 @@ vi.stubGlobal(
   }))
 );
 
+// Credits: https://stackoverflow.com/a/47593316
+function splitmix32(a: number) {
+  return function () {
+    a |= 0;
+    a = (a + 0x9e3779b9) | 0;
+    let t = a ^ (a >>> 16);
+    t = Math.imul(t, 0x21f0aaad);
+    t = t ^ (t >>> 15);
+    t = Math.imul(t, 0x735a2d97);
+    return ((t = t ^ (t >>> 15)) >>> 0) / 4294967296;
+  };
+}
+
 beforeAll(() => {
-  Math.random = () => 0.42;
+  Math.random = splitmix32(42);
   vi.setSystemTime(new Date("2025-08-01T12:00:00Z"));
 });
