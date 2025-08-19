@@ -10,7 +10,6 @@ import {
 } from "@tanstack/react-router";
 import { act, render } from "@testing-library/react";
 import "./i18n";
-import { vi } from "vitest";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const App = ({ children }: React.PropsWithChildren) => {
@@ -49,9 +48,5 @@ export const renderRoute = (
   );
 };
 
-export const renderComponent = (component: React.ReactNode) => {
-  const spy = vi.spyOn(Math, "random").mockReturnValue(42);
-  const res = render(<App>{component}</App>);
-  spy.mockRestore();
-  return res;
-};
+export const renderComponent = (component: React.ReactNode) =>
+  render(<App>{component}</App>);

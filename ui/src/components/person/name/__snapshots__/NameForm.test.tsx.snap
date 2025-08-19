@@ -22,8 +22,8 @@ exports[`NameForm > matches snapshot 1`] = `
         >
           <label
             class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-            for="mantine-"
-            id="mantine--label"
+            for="mantine-f4bipx4bi"
+            id="mantine-f4bipx4bi-label"
           >
             use
           </label>
@@ -36,7 +36,7 @@ exports[`NameForm > matches snapshot 1`] = `
               class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
               data-path="use"
               data-variant="default"
-              id="mantine-"
+              id="mantine-f4bipx4bi"
               value=""
             />
           </div>
@@ -46,8 +46,8 @@ exports[`NameForm > matches snapshot 1`] = `
         >
           <label
             class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-            for="mantine-"
-            id="mantine--label"
+            for="mantine-f4bipx4bi"
+            id="mantine-f4bipx4bi-label"
           >
             Prefix
           </label>
@@ -60,7 +60,7 @@ exports[`NameForm > matches snapshot 1`] = `
               class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
               data-path="prefix"
               data-variant="default"
-              id="mantine-"
+              id="mantine-f4bipx4bi"
               value=""
             />
           </div>
@@ -70,8 +70,8 @@ exports[`NameForm > matches snapshot 1`] = `
         >
           <label
             class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-            for="mantine-"
-            id="mantine--label"
+            for="mantine-f4bipx4bi"
+            id="mantine-f4bipx4bi-label"
           >
             Suffix
           </label>
@@ -84,7 +84,7 @@ exports[`NameForm > matches snapshot 1`] = `
               class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
               data-path="suffix"
               data-variant="default"
-              id="mantine-"
+              id="mantine-f4bipx4bi"
               value=""
             />
           </div>
@@ -96,8 +96,8 @@ exports[`NameForm > matches snapshot 1`] = `
         <label
           class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
           data-required="true"
-          for="mantine-"
-          id="mantine--label"
+          for="mantine-f4bipx4bi"
+          id="mantine-f4bipx4bi-label"
         >
           Family name
           <span
@@ -116,7 +116,7 @@ exports[`NameForm > matches snapshot 1`] = `
             class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
             data-path="family"
             data-variant="default"
-            id="mantine-"
+            id="mantine-f4bipx4bi"
             value=""
           />
         </div>
@@ -132,8 +132,8 @@ exports[`NameForm > matches snapshot 1`] = `
           <label
             class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
             data-required="true"
-            for="mantine-"
-            id="mantine--label"
+            for="mantine-f4bipx4bi"
+            id="mantine-f4bipx4bi-label"
           >
             Given name
             <span
@@ -152,7 +152,7 @@ exports[`NameForm > matches snapshot 1`] = `
               class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
               data-path="given"
               data-variant="default"
-              id="mantine-"
+              id="mantine-f4bipx4bi"
               value=""
             />
           </div>
@@ -162,8 +162,8 @@ exports[`NameForm > matches snapshot 1`] = `
         >
           <label
             class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-            for="mantine-"
-            id="mantine--label"
+            for="mantine-f4bipx4bi"
+            id="mantine-f4bipx4bi-label"
           >
             Middle name
           </label>
@@ -176,7 +176,7 @@ exports[`NameForm > matches snapshot 1`] = `
               class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
               data-path="middle"
               data-variant="default"
-              id="mantine-"
+              id="mantine-f4bipx4bi"
               value=""
             />
           </div>
@@ -187,8 +187,8 @@ exports[`NameForm > matches snapshot 1`] = `
       >
         <label
           class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-          for="mantine-"
-          id="mantine--label"
+          for="mantine-f4bipx4bi"
+          id="mantine-f4bipx4bi-label"
         >
           Patronymic
         </label>
@@ -201,7 +201,7 @@ exports[`NameForm > matches snapshot 1`] = `
             class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
             data-path="patronymic"
             data-variant="default"
-            id="mantine-"
+            id="mantine-f4bipx4bi"
             value=""
           />
         </div>

@@ -1,13 +1,7 @@
 import api from "@/api";
 import { renderRoute } from "@/test-utils";
-import { beforeAll, expect, it, vi } from "vitest";
+import { expect, it, vi } from "vitest";
 import { Route } from "./new";
-
-// To fix Mantine's random generated ids
-beforeAll(() => {
-  Math.random = () => 0.42;
-  vi.setSystemTime(new Date("2025-08-01T12:00:00Z"));
-});
 
 it("new page renders correctly", async () => {
   vi.spyOn(api.sites, "indexSpacesSpaceIdSitesGet").mockResolvedValue([

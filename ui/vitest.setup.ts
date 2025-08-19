@@ -1,4 +1,4 @@
-import { vi } from "vitest";
+import { beforeAll, vi } from "vitest";
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
@@ -22,3 +22,8 @@ vi.stubGlobal(
     disconnect: vi.fn(),
   }))
 );
+
+beforeAll(() => {
+  Math.random = () => 0.42;
+  vi.setSystemTime(new Date("2025-08-01T12:00:00Z"));
+});
