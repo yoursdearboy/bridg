@@ -8,8 +8,20 @@ describe("NamesTable", () => {
     const { asFragment } = renderComponent(
       <NamesTable
         names={[
-          { family: "Charlie", given: "Kai", middle: "May", patronymic: "—" },
-          { family: "Nancy", given: "Mia", middle: "Jonson", patronymic: "—" },
+          {
+            id: "1",
+            family: "Charlie",
+            given: "Kai",
+            middle: "May",
+            patronymic: "—",
+          },
+          {
+            id: "2",
+            family: "Nancy",
+            given: "Mia",
+            middle: "Jonson",
+            patronymic: "—",
+          },
         ]}
       />
     );

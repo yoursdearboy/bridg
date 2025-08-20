@@ -9,11 +9,10 @@ models/AdministrativeGender.ts
 models/ApiSubjectLookupStudySubjectPerson.ts
 models/ApiSubjectNewStudySubjectPerson.ts
 models/EntityName.ts
+models/EntityNameWithId.ts
 models/FoundStudySubject.ts
 models/HTTPValidationError.ts
 models/LookupStudySubject.ts
-models/Name.ts
-models/NameWithId.ts
 models/NewStudySubject.ts
 models/Organization.ts
 models/PersonOutput.ts

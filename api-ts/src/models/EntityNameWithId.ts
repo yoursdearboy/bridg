@@ -16,70 +16,78 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Name
+ * @interface EntityNameWithId
  */
-export interface Name {
+export interface EntityNameWithId {
     /**
      * 
      * @type {string}
-     * @memberof Name
+     * @memberof EntityNameWithId
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EntityNameWithId
      */
     use?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Name
+     * @memberof EntityNameWithId
      */
     family?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Name
+     * @memberof EntityNameWithId
      */
     given?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Name
+     * @memberof EntityNameWithId
      */
     middle?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Name
+     * @memberof EntityNameWithId
      */
     patronymic?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Name
+     * @memberof EntityNameWithId
      */
     prefix?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Name
+     * @memberof EntityNameWithId
      */
     suffix?: string | null;
 }
 
 /**
- * Check if a given object implements the Name interface.
+ * Check if a given object implements the EntityNameWithId interface.
  */
-export function instanceOfName(value: object): value is Name {
+export function instanceOfEntityNameWithId(value: object): value is EntityNameWithId {
+    if (!('id' in value) || value['id'] === undefined) return false;
     return true;
 }
 
-export function NameFromJSON(json: any): Name {
-    return NameFromJSONTyped(json, false);
+export function EntityNameWithIdFromJSON(json: any): EntityNameWithId {
+    return EntityNameWithIdFromJSONTyped(json, false);
 }
 
-export function NameFromJSONTyped(json: any, ignoreDiscriminator: boolean): Name {
+export function EntityNameWithIdFromJSONTyped(json: any, ignoreDiscriminator: boolean): EntityNameWithId {
     if (json == null) {
         return json;
     }
     return {
         
+        'id': json['id'],
         'use': json['use'] == null ? undefined : json['use'],
         'family': json['family'] == null ? undefined : json['family'],
         'given': json['given'] == null ? undefined : json['given'],
@@ -90,17 +98,18 @@ export function NameFromJSONTyped(json: any, ignoreDiscriminator: boolean): Name
     };
 }
 
-export function NameToJSON(json: any): Name {
-    return NameToJSONTyped(json, false);
+export function EntityNameWithIdToJSON(json: any): EntityNameWithId {
+    return EntityNameWithIdToJSONTyped(json, false);
 }
 
-export function NameToJSONTyped(value?: Name | null, ignoreDiscriminator: boolean = false): any {
+export function EntityNameWithIdToJSONTyped(value?: EntityNameWithId | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
+        'id': value['id'],
         'use': value['use'],
         'family': value['family'],
         'given': value['given'],

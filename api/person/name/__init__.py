@@ -12,7 +12,7 @@ from api.extra_typing import with_id
 router = APIRouter(prefix="/names")
 
 
-class Name(BaseModel[bridg.EntityName]):
+class EntityName(BaseModel[bridg.EntityName]):
     _sa = bridg.EntityName
 
     use: Optional[str] = None
@@ -24,13 +24,13 @@ class Name(BaseModel[bridg.EntityName]):
     suffix: Optional[str] = None
 
 
-@router.get("", response_model=List[with_id(Name)])
+@router.get("", response_model=List[with_id(EntityName)])
 def index(person_id: UUID, db: Session = Depends(get_db)) -> List[bridg.EntityName]:
     return db.query(bridg.EntityName).filter_by(biologic_entity_id=person_id).all()
 
 
-@router.post("", response_model=Name)
-def create(person_id: UUID, data: Name, db: Session = Depends(get_db)):
+@router.post("", response_model=with_id(EntityName))
+def create(person_id: UUID, data: EntityName, db: Session = Depends(get_db)):
     obj = data.model_dump_sa()
     obj.biologic_entity_id = person_id
 

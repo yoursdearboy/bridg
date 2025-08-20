@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMutation } from "@tanstack/react-query";
-import type { Name } from "bridg-ts";
+import type { EntityName } from "bridg-ts";
 import { useTranslation } from "react-i18next";
 
 interface NameFormProps {
@@ -21,7 +21,7 @@ interface NameFormProps {
 export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
   const { t } = useTranslation();
 
-  const form = useForm<Name>({
+  const form = useForm<EntityName>({
     initialValues: {
       use: "",
       family: "",
@@ -44,16 +44,16 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
   });
 
   const mutation = useMutation({
-    mutationFn: (name: Name) =>
+    mutationFn: (entityName: EntityName) =>
       api.persons.createPersonsPersonIdNamesPost({
         personId,
-        name,
+        entityName,
       }),
 
     onSuccess,
   });
 
-  const handleSubmit = (values: Name) => {
+  const handleSubmit = (values: EntityName) => {
     mutation.mutate(values);
   };
 
