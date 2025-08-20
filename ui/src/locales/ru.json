@@ -23,7 +23,7 @@
       "use": "use",
       "family": "Фамилия",
       "given": "Имя",
-      "middle": "Среднее имя",
+      "middle": "Отчество",
       "patronymic": "Отчество",
       "prefix": "Префикс",
       "suffix": "Суффикс"
@@ -36,19 +36,19 @@
     },
     "SubjectInfoCard": {
       "title": "Информация об объект наблюдения",
-      "person": "Личность",
+      "person": "Человек",
       "unknown": "Неизвестно",
-      "personDetails": "Данные личности",
+      "personDetails": "Данные человека",
       "organizationDetails": "Данные организации"
     },
     "SubjectShowPage": {
       "title": "Данные пациента",
       "back": "Назад к списку",
-      "toPerson": "На страницу личности"
+      "toPerson": "На страницу человека"
     },
     "PersonShowPage": {
-      "title": "Данные личности",
-      "edit": "Редактировать личность"
+      "title": "Данные человека",
+      "edit": "Редактировать"
     },
     "PersonEditPage": {
       "title": "Редактирование:",
@@ -62,10 +62,10 @@
       "dateNotSpecified": "Дата не указана"
     },
     "NamesCard": {
-      "title": "Имена личности"
+      "title": "Имена"
     },
     "TelecommunicationAddressesTable": {
-      "title": "Контактные данные"
+      "title": "Контакты"
     },
     "AddressesTable": {
       "title": "Адреса"
@@ -101,7 +101,7 @@
     "StudySubject": {
       "status": "Статус",
       "statusDate": "Дата статуса",
-      "performingBiologicEntity": "Личность",
+      "performingBiologicEntity": "Человек",
       "performingOrganization": "Организация",
       "type": "Тип",
       "assignedStudySiteProtocolVersionRelationship": "Область изучения"
