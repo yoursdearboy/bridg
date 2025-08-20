@@ -2,6 +2,7 @@ from typing import List, Optional
 from uuid import UUID
 
 from fastapi import APIRouter, Depends
+from pydantic import Field
 from sqlalchemy.orm import Session
 
 import bridg
@@ -25,19 +26,28 @@ class EntityNameData(BaseModel[bridg.EntityName]):
 
 class EntityName(EntityNameData):
     id: UUID
+    label: str = Field(default="Anonymous")
+
+    @classmethod
+    def model_validate(cls, o: bridg.EntityName, **kwargs):
+        obj = super().model_validate(o, **kwargs)
+        obj.label = str(o)
+        return obj
 
 
-@router.get("", response_model=List[EntityName])
-def index(person_id: UUID, db: Session = Depends(get_db)) -> List[bridg.EntityName]:
-    return db.query(bridg.EntityName).filter_by(biologic_entity_id=person_id).all()
+@router.get("")
+def index(person_id: UUID, db: Session = Depends(get_db)) -> List[EntityName]:
+    objs = db.query(bridg.EntityName).filter_by(biologic_entity_id=person_id)
+    res = [EntityName.model_validate(o) for o in objs]
+    return res
 
 
-@router.post("", response_model=EntityName)
-def create(person_id: UUID, data: EntityNameData, db: Session = Depends(get_db)):
+@router.post("")
+def create(person_id: UUID, data: EntityNameData, db: Session = Depends(get_db)) -> EntityName:
     obj = data.model_dump_sa()
     obj.biologic_entity_id = person_id
 
     db.add(obj)
     db.commit()
 
-    return obj
+    return EntityName.model_validate(obj)

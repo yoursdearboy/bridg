@@ -67,6 +67,12 @@ export interface EntityName {
      * @memberof EntityName
      */
     id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EntityName
+     */
+    label?: string;
 }
 
 /**
@@ -95,6 +101,7 @@ export function EntityNameFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'prefix': json['prefix'] == null ? undefined : json['prefix'],
         'suffix': json['suffix'] == null ? undefined : json['suffix'],
         'id': json['id'],
+        'label': json['label'] == null ? undefined : json['label'],
     };
 }
 
@@ -117,6 +124,7 @@ export function EntityNameToJSONTyped(value?: EntityName | null, ignoreDiscrimin
         'prefix': value['prefix'],
         'suffix': value['suffix'],
         'id': value['id'],
+        'label': value['label'],
     };
 }
 
