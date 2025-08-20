@@ -23,7 +23,6 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
 
   const form = useForm<EntityNameData>({
     initialValues: {
-      use: "",
       family: "",
       given: "",
       middle: "",
@@ -66,25 +65,13 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
             {mutation.error.message}
           </Alert>
         )}
-        <Group grow>
-          <TextInput label={t("Name.use")} {...form.getInputProps("use")} />
-          <TextInput
-            label={t("Name.prefix")}
-            {...form.getInputProps("prefix")}
-          />
-          <TextInput
-            label={t("Name.suffix")}
-            {...form.getInputProps("suffix")}
-          />
-        </Group>
-
-        <TextInput
-          label={t("Name.family")}
-          withAsterisk
-          {...form.getInputProps("family")}
-        />
 
         <Group grow>
+          <TextInput
+            label={t("Name.family")}
+            withAsterisk
+            {...form.getInputProps("family")}
+          />
           <TextInput
             label={t("Name.given")}
             withAsterisk
@@ -96,10 +83,23 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
           />
         </Group>
 
-        <TextInput
-          label={t("Name.patronymic")}
-          {...form.getInputProps("patronymic")}
-        />
+        <details>
+          <summary>{t("extra")}</summary>
+          <Group grow>
+            <TextInput
+              label={t("Name.prefix")}
+              {...form.getInputProps("prefix")}
+            />
+            <TextInput
+              label={t("Name.suffix")}
+              {...form.getInputProps("suffix")}
+            />
+          </Group>
+          <TextInput
+            label={t("Name.patronymic")}
+            {...form.getInputProps("patronymic")}
+          />
+        </details>
 
         <Group justify="flex-end" mt="md">
           <Button
