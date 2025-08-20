@@ -26,13 +26,13 @@ class EntityNameData(BaseModel[bridg.EntityName]):
 
 class EntityName(EntityNameData):
     id: UUID
-    label: str = Field(default="Anonymous")
+    label: str
 
     @classmethod
-    def model_validate(cls, o: bridg.EntityName, **kwargs):
-        obj = super().model_validate(o, **kwargs)
-        obj.label = str(o)
-        return obj
+    def model_validate(cls, obj: bridg.EntityName, **kwargs):
+        data = obj.__dict__
+        data["label"] = str(obj)
+        return super().model_validate(data, **kwargs)
 
 
 @router.get("")
