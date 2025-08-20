@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/en";
 import "dayjs/locale/ru";
 import duration, { type Duration } from "dayjs/plugin/duration";
-import LocalizedFormat from "dayjs/plugin/localizedFormat";
+import localizedFormat from "dayjs/plugin/localizedFormat";
 import relativeTime from "dayjs/plugin/relativeTime";
 import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
@@ -12,7 +12,7 @@ import ru from "./locales/ru.json";
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
-dayjs.extend(LocalizedFormat);
+dayjs.extend(localizedFormat);
 
 export const resources = { en, ru };
 
