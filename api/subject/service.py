@@ -39,5 +39,5 @@ class StudySubjectRepository:
         if (pbe := data.performing_biologic_entity) and (n := next(iter(pbe.name), None)):
             q = q.filter(BiologicEntity.name.any(EntityName.family.ilike(f"%{n.family}%")))
             q = q.limit(10)
-            return [StudySubject(performing_biologic_entity=be) for be in q]
+            return [StudySubject(performing_biologic_entity=be, performing_biologic_entity_id=be.id) for be in q]
         raise RuntimeError("Unknown performing entity")

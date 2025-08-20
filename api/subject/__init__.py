@@ -171,7 +171,7 @@ def create(
 
 
 @router.post("/lookup")
-def lookup(space_id: UUID, data: LookupStudySubject, repo: StudySubjectRepositoryDep):
+def lookup(space_id: UUID, data: LookupStudySubject, repo: StudySubjectRepositoryDep) -> List[FoundStudySubject]:
     q = data.model_dump_sa()
     objs = repo.lookup(q)
     return [FoundStudySubject.model_validate(obj) for obj in objs]
