@@ -35,12 +35,14 @@ class PostalAddress(PostalAddressData):
         return super().model_validate(data, **kwargs)
 
 
-@router.get("", response_model=List[with_id(PostalAddress)])
-def index(person_id: UUID, db: Session = Depends(get_db)) -> List[bridg.common.person.PostalAddress]:
-    return db.query(bridg.common.person.PostalAddress).filter_by(person_id=person_id).all()
+@router.get("")
+def index(person_id: UUID, db: Session = Depends(get_db)) -> List[PostalAddress]:
+    objs = db.query(bridg.common.person.PostalAddress).filter_by(person_id=person_id).all()
+    res = [PostalAddress.model_validate(o) for o in objs]
+    return res
 
 
-@router.post("", response_model=PostalAddress)
+@router.post("")
 def create(person_id: UUID, data: PostalAddress, db: Session = Depends(get_db)) -> PostalAddress:
     obj = data.model_dump_sa()
     obj.person_id = person_id
@@ -51,7 +53,7 @@ def create(person_id: UUID, data: PostalAddress, db: Session = Depends(get_db)) 
     return PostalAddress.model_validate(obj)
 
 
-@router.patch("/{name_id:uuid}")
+@router.patch("/{address_id:uuid}")
 def update(person_id: UUID, address_id: UUID, data: PostalAddress, db: Session = Depends(get_db)) -> PostalAddress:
     obj = db.query(bridg.common.person.PostalAddress).filter_by(id=address_id).one()
 
