@@ -82,6 +82,18 @@ Content-Type: application/json
   "prefix": "Jr."
 }
 
+#### Update a person name
+
+PATCH {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names/aea59ce0-7630-442d-ba45-8ef490e891c6
+Content-Type: application/json
+
+{
+  "use": "official",
+  "family": "Works",
+  "given": "Better",
+  "prefix": null
+}
+
 #### Delete a person name
 
 DELETE {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names/b0f79211-0160-42c4-9f75-74b38ba156ca

@@ -52,6 +52,18 @@ def create(person_id: UUID, data: EntityNameData, db: Session = Depends(get_db))
     return EntityName.model_validate(obj)
 
 
+@router.patch("/{name_id:uuid}")
+def update(person_id: UUID, name_id: UUID, data: EntityNameData, db: Session = Depends(get_db)) -> EntityName:
+    obj = db.query(bridg.EntityName).filter_by(id=name_id).one()
+
+    data.model_update_sa(obj)
+
+    db.add(obj)
+    db.commit()
+
+    return EntityName.model_validate(obj)
+
+
 @router.delete("/{name_id:uuid}")
 def delete(person_id: UUID, name_id: UUID, db: Session = Depends(get_db)):
     db.query(bridg.EntityName).filter_by(id=name_id).delete()

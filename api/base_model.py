@@ -34,3 +34,12 @@ class BaseModel(PydanticBaseModel, Generic[T]):
         data = dict(self)
         data = dict(dump(k, v) for k, v in data.items() if k not in exclude)
         return self._sa(**data)
+
+    # FIXME: make it recursive
+    def model_update_sa(self, obj: T, exclude={}) -> T:
+        data = dict(self)
+        for k, v in data.items():
+            if k in exclude:
+                continue
+            setattr(obj, k, v)
+        return obj
