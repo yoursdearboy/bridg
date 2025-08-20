@@ -68,7 +68,8 @@
       "title": "Контакты"
     },
     "AddressesTable": {
-      "title": "Адреса"
+      "title": "Адреса",
+      "deleteConfirm": "Вы действительно хотите удалить адрес?"
     },
     "Person": {
       "id": "ID",
