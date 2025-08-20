@@ -29,12 +29,10 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
     data: names = [],
   } = useQuery({
     queryKey: ["person", personId, "names"],
-    queryFn: async () => {
-      const response = await api.persons.indexPersonsPersonIdNamesGet({
+    queryFn: () =>
+      api.persons.indexPersonsPersonIdNamesGet({
         personId,
-      });
-      return response;
-    },
+      }),
   });
 
   const handleSuccess = () => {

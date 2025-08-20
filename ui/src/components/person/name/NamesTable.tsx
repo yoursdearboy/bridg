@@ -1,16 +1,11 @@
 import { Table } from "@mantine/core";
-import type { Name } from "bridg-ts";
+import type { NameWithId } from "bridg-ts";
 import { useTranslation } from "react-i18next";
 
-interface NamesTableProps {
-  names: Name[];
-}
-
-export const NamesTable = ({ names }: NamesTableProps) => {
+export const NamesTable = ({ names }: { names: NameWithId[] }) => {
   const { t } = useTranslation();
-  //FIXME: Add key when available
   const rows = names.map((name) => (
-    <Table.Tr>
+    <Table.Tr key={name.id}>
       <Table.Td>{name.family || "-"}</Table.Td>
       <Table.Td>{name.given || "-"}</Table.Td>
       <Table.Td>{name.middle || "-"}</Table.Td>
