@@ -16,6 +16,7 @@ exports[`NamesTable > matches snapshot 1`] = `
     >
       <tr
         class="m_4e7aa4fd mantine-Table-tr"
+        data-hover="true"
         data-with-row-border="true"
       >
         <td
@@ -24,9 +25,14 @@ exports[`NamesTable > matches snapshot 1`] = `
         >
           Charlie May Kai
         </td>
+        <td
+          class="m_4e7aa4ef mantine-Table-td"
+          style="width: 40px; padding-inline: 0rem;"
+        />
       </tr>
       <tr
         class="m_4e7aa4fd mantine-Table-tr"
+        data-hover="true"
         data-with-row-border="true"
       >
         <td
@@ -35,6 +41,10 @@ exports[`NamesTable > matches snapshot 1`] = `
         >
           Nancy Jonson Mia
         </td>
+        <td
+          class="m_4e7aa4ef mantine-Table-td"
+          style="width: 40px; padding-inline: 0rem;"
+        />
       </tr>
     </tbody>
   </table>

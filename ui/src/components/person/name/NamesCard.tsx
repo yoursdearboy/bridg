@@ -70,7 +70,11 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
             </Button>
           </Group>
         </Card.Section>
-        <NamesTable names={names} />
+        <NamesTable
+          names={names}
+          personId={personId}
+          onDeleteSuccess={handleSuccess}
+        />
       </Card>
 
       <Modal
