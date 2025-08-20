@@ -51,3 +51,21 @@ def create(person_id: UUID, data: PostalAddress, db: Session = Depends(get_db)) 
     db.commit()
 
     return PostalAddress.model_validate(obj)
+
+
+@router.patch("/{name_id:uuid}")
+def update(person_id: UUID, address_id: UUID, data: PostalAddress, db: Session = Depends(get_db)) -> PostalAddress:
+    obj = db.query(bridg.common.person.PostalAddress).filter_by(id=address_id).one()
+
+    data.model_update_sa(obj)
+
+    db.add(obj)
+    db.commit()
+
+    return PostalAddress.model_validate(obj)
+
+
+@router.delete("/{address_id:uuid}")
+def delete(person_id: UUID, address_id: UUID, db: Session = Depends(get_db)):
+    db.query(bridg.common.person.PostalAddress).filter_by(id=address_id).delete()
+    db.commit()
