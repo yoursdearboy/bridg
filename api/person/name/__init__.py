@@ -50,3 +50,9 @@ def create(person_id: UUID, data: EntityNameData, db: Session = Depends(get_db))
     db.commit()
 
     return EntityName.model_validate(obj)
+
+
+@router.delete("/{name_id:uuid}")
+def delete(person_id: UUID, name_id: UUID, db: Session = Depends(get_db)):
+    db.query(bridg.EntityName).filter_by(id=name_id).delete()
+    db.commit()

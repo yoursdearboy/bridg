@@ -82,6 +82,10 @@ Content-Type: application/json
   "prefix": "Jr."
 }
 
+#### Delete a person name
+
+DELETE {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names/b0f79211-0160-42c4-9f75-74b38ba156ca
+
 ### Postal addresses
 
 #### Show a person postal addresses
