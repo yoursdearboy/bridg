@@ -58,6 +58,11 @@ export interface CreatePersonsPersonIdTelecommunicationAddressesPostRequest {
     telecommunicationAddress: TelecommunicationAddress;
 }
 
+export interface DeletePersonsPersonIdNamesNameIdDeleteRequest {
+    personId: string;
+    nameId: string;
+}
+
 export interface IndexPersonsPersonIdNamesGetRequest {
     personId: string;
 }
@@ -217,6 +222,55 @@ export class PersonsApi extends runtime.BaseAPI {
      */
     async createPersonsPersonIdTelecommunicationAddressesPost(requestParameters: CreatePersonsPersonIdTelecommunicationAddressesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TelecommunicationAddress> {
         const response = await this.createPersonsPersonIdTelecommunicationAddressesPostRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Delete
+     */
+    async deletePersonsPersonIdNamesNameIdDeleteRaw(requestParameters: DeletePersonsPersonIdNamesNameIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+        if (requestParameters['personId'] == null) {
+            throw new runtime.RequiredError(
+                'personId',
+                'Required parameter "personId" was null or undefined when calling deletePersonsPersonIdNamesNameIdDelete().'
+            );
+        }
+
+        if (requestParameters['nameId'] == null) {
+            throw new runtime.RequiredError(
+                'nameId',
+                'Required parameter "nameId" was null or undefined when calling deletePersonsPersonIdNamesNameIdDelete().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/persons/{person_id}/names/{name_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+        urlPath = urlPath.replace(`{${"name_id"}}`, encodeURIComponent(String(requestParameters['nameId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<any>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
+    }
+
+    /**
+     * Delete
+     */
+    async deletePersonsPersonIdNamesNameIdDelete(requestParameters: DeletePersonsPersonIdNamesNameIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+        const response = await this.deletePersonsPersonIdNamesNameIdDeleteRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

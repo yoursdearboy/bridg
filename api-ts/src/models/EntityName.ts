@@ -72,7 +72,7 @@ export interface EntityName {
      * @type {string}
      * @memberof EntityName
      */
-    label?: string;
+    label: string;
 }
 
 /**
@@ -80,6 +80,7 @@ export interface EntityName {
  */
 export function instanceOfEntityName(value: object): value is EntityName {
     if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('label' in value) || value['label'] === undefined) return false;
     return true;
 }
 
@@ -101,7 +102,7 @@ export function EntityNameFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'prefix': json['prefix'] == null ? undefined : json['prefix'],
         'suffix': json['suffix'] == null ? undefined : json['suffix'],
         'id': json['id'],
-        'label': json['label'] == null ? undefined : json['label'],
+        'label': json['label'],
     };
 }
 
