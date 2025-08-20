@@ -12,7 +12,6 @@ export * from './NewStudySubject';
 export * from './Organization';
 export * from './PersonOutput';
 export * from './PostalAddress';
-export * from './PostalAddressWithId';
 export * from './Status';
 export * from './StudyProtocolVersion';
 export * from './StudySiteProtocolVersionRelationship';

@@ -17,7 +17,6 @@ models/NewStudySubject.ts
 models/Organization.ts
 models/PersonOutput.ts
 models/PostalAddress.ts
-models/PostalAddressWithId.ts
 models/Status.ts
 models/StudyProtocolVersion.ts
 models/StudySiteProtocolVersionRelationship.ts
