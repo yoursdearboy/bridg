@@ -79,6 +79,12 @@ export interface ShowPersonsPersonIdGetRequest {
     personId: string;
 }
 
+export interface UpdatePersonsPersonIdNamesNameIdPatchRequest {
+    personId: string;
+    nameId: string;
+    entityNameData: EntityNameData;
+}
+
 /**
  * 
  */
@@ -419,6 +425,61 @@ export class PersonsApi extends runtime.BaseAPI {
      */
     async showPersonsPersonIdGet(requestParameters: ShowPersonsPersonIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PersonOutput> {
         const response = await this.showPersonsPersonIdGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update
+     */
+    async updatePersonsPersonIdNamesNameIdPatchRaw(requestParameters: UpdatePersonsPersonIdNamesNameIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EntityName>> {
+        if (requestParameters['personId'] == null) {
+            throw new runtime.RequiredError(
+                'personId',
+                'Required parameter "personId" was null or undefined when calling updatePersonsPersonIdNamesNameIdPatch().'
+            );
+        }
+
+        if (requestParameters['nameId'] == null) {
+            throw new runtime.RequiredError(
+                'nameId',
+                'Required parameter "nameId" was null or undefined when calling updatePersonsPersonIdNamesNameIdPatch().'
+            );
+        }
+
+        if (requestParameters['entityNameData'] == null) {
+            throw new runtime.RequiredError(
+                'entityNameData',
+                'Required parameter "entityNameData" was null or undefined when calling updatePersonsPersonIdNamesNameIdPatch().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/persons/{person_id}/names/{name_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+        urlPath = urlPath.replace(`{${"name_id"}}`, encodeURIComponent(String(requestParameters['nameId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EntityNameDataToJSON(requestParameters['entityNameData']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EntityNameFromJSON(jsonValue));
+    }
+
+    /**
+     * Update
+     */
+    async updatePersonsPersonIdNamesNameIdPatch(requestParameters: UpdatePersonsPersonIdNamesNameIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EntityName> {
+        const response = await this.updatePersonsPersonIdNamesNameIdPatchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
