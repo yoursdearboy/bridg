@@ -1,6 +1,5 @@
 import { Table, CloseButton } from "@mantine/core";
-
-import { useState } from "react";
+import { useHover } from "@mantine/hooks";
 import type { EntityName } from "bridg-ts";
 import api from "@/api";
 
@@ -13,18 +12,31 @@ export const NamesTable = ({
   personId: string;
   onDeleteSuccess: () => void;
 }) => {
-  const [hoveredId, setHoveredId] = useState("");
+  const NamesTableRow = ({ name }: { name: EntityName }) => {
+    const { hovered, ref } = useHover();
 
-  const handleDelete = async (id: string) => {
-    const ok = window.confirm("Удалить выбранное значение?");
-    if (!ok) return;
+    const handleDelete = async () => {
+      const ok = window.confirm("Удалить выбранное значение?");
+      if (!ok) return;
 
-    await api.persons.deletePersonsPersonIdNamesNameIdDelete({
-      personId,
-      nameId: id,
-    });
+      await api.persons.deletePersonsPersonIdNamesNameIdDelete({
+        personId,
+        nameId: name.id,
+      });
 
-    onDeleteSuccess();
+      onDeleteSuccess();
+    };
+
+    return (
+      <Table.Tr ref={ref}>
+        <Table.Td px={0}>{name.label}</Table.Td>
+        <Table.Td px={0} style={{ width: 40 }}>
+          {hovered && (
+            <CloseButton color="red" onClick={() => void handleDelete()} />
+          )}
+        </Table.Td>
+      </Table.Tr>
+    );
   };
 
   return (
@@ -35,23 +47,7 @@ export const NamesTable = ({
             <Table.Td px={0} style={{ textAlign: "center" }}></Table.Td>
           </Table.Tr>
         ) : (
-          names.map((name) => (
-            <Table.Tr
-              key={name.id}
-              onMouseEnter={() => setHoveredId(name.id)}
-              onMouseLeave={() => setHoveredId("")}
-            >
-              <Table.Td px={0}>{name.label}</Table.Td>
-              <Table.Td px={0} style={{ width: 40 }}>
-                {hoveredId === name.id && (
-                  <CloseButton
-                    color="red"
-                    onClick={() => handleDelete(name.id)}
-                  />
-                )}
-              </Table.Td>
-            </Table.Tr>
-          ))
+          names.map((name) => <NamesTableRow key={name.id} name={name} />)
         )}
       </Table.Tbody>
     </Table>
