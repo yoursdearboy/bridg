@@ -39,8 +39,7 @@ function PersonShowPage() {
       <Grid>
         <Grid.Col span={{ base: 12, md: 4 }}>
           <PersonCard person={person} />
-        </Grid.Col>
-        <Grid.Col span={{ base: 12, md: 8 }}>
+          <Space h="md" />
           <NamesCard personId={personId} />
           <Space h="md" />
           <AddressesTable personId={personId} />
