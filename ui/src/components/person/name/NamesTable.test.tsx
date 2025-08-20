@@ -10,17 +10,11 @@ describe("NamesTable", () => {
         names={[
           {
             id: "1",
-            family: "Charlie",
-            given: "Kai",
-            middle: "May",
-            patronymic: "—",
+            label: "Charlie May Kai",
           },
           {
             id: "2",
-            family: "Nancy",
-            given: "Mia",
-            middle: "Jonson",
-            patronymic: "—",
+            label: "Nancy Jonson Mia",
           },
         ]}
       />

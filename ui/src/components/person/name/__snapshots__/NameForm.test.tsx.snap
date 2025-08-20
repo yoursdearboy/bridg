@@ -22,10 +22,17 @@ exports[`NameForm > matches snapshot 1`] = `
         >
           <label
             class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+            data-required="true"
             for="mantine-4miilw5eg"
             id="mantine-4miilw5eg-label"
           >
-            use
+            Family name
+            <span
+              aria-hidden="true"
+              class="m_78a94662 mantine-InputWrapper-required mantine-TextInput-required"
+            >
+               *
+            </span>
           </label>
           <div
             class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
@@ -34,7 +41,7 @@ exports[`NameForm > matches snapshot 1`] = `
             <input
               aria-invalid="false"
               class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
-              data-path="use"
+              data-path="family"
               data-variant="default"
               id="mantine-4miilw5eg"
               value=""
@@ -46,94 +53,9 @@ exports[`NameForm > matches snapshot 1`] = `
         >
           <label
             class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+            data-required="true"
             for="mantine-17gjn16kc"
             id="mantine-17gjn16kc-label"
-          >
-            Prefix
-          </label>
-          <div
-            class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
-            data-variant="default"
-          >
-            <input
-              aria-invalid="false"
-              class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
-              data-path="prefix"
-              data-variant="default"
-              id="mantine-17gjn16kc"
-              value=""
-            />
-          </div>
-        </div>
-        <div
-          class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
-        >
-          <label
-            class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-            for="mantine-2pbrvloro"
-            id="mantine-2pbrvloro-label"
-          >
-            Suffix
-          </label>
-          <div
-            class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
-            data-variant="default"
-          >
-            <input
-              aria-invalid="false"
-              class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
-              data-path="suffix"
-              data-variant="default"
-              id="mantine-2pbrvloro"
-              value=""
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
-      >
-        <label
-          class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-          data-required="true"
-          for="mantine-pfqyzivqd"
-          id="mantine-pfqyzivqd-label"
-        >
-          Family name
-          <span
-            aria-hidden="true"
-            class="m_78a94662 mantine-InputWrapper-required mantine-TextInput-required"
-          >
-             *
-          </span>
-        </label>
-        <div
-          class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
-          data-variant="default"
-        >
-          <input
-            aria-invalid="false"
-            class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
-            data-path="family"
-            data-variant="default"
-            id="mantine-pfqyzivqd"
-            value=""
-          />
-        </div>
-      </div>
-      <div
-        class="m_4081bf90 mantine-Group-root"
-        data-grow="true"
-        style="--group-child-width: calc(50% - (var(--mantine-spacing-md) - var(--mantine-spacing-md) / 2)); --group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
-      >
-        <div
-          class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
-        >
-          <label
-            class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-            data-required="true"
-            for="mantine-7lzvq3tar"
-            id="mantine-7lzvq3tar-label"
           >
             Given name
             <span
@@ -152,7 +74,7 @@ exports[`NameForm > matches snapshot 1`] = `
               class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
               data-path="given"
               data-variant="default"
-              id="mantine-7lzvq3tar"
+              id="mantine-17gjn16kc"
               value=""
             />
           </div>
@@ -162,8 +84,8 @@ exports[`NameForm > matches snapshot 1`] = `
         >
           <label
             class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-            for="mantine-m75qc1lk3"
-            id="mantine-m75qc1lk3-label"
+            for="mantine-2pbrvloro"
+            id="mantine-2pbrvloro-label"
           >
             Middle name
           </label>
@@ -176,36 +98,95 @@ exports[`NameForm > matches snapshot 1`] = `
               class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
               data-path="middle"
               data-variant="default"
-              id="mantine-m75qc1lk3"
+              id="mantine-2pbrvloro"
               value=""
             />
           </div>
         </div>
       </div>
-      <div
-        class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
-      >
-        <label
-          class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
-          for="mantine-0imsgk2bo"
-          id="mantine-0imsgk2bo-label"
-        >
-          Patronymic
-        </label>
+      <details>
+        <summary>
+          Extra
+        </summary>
         <div
-          class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
-          data-variant="default"
+          class="m_4081bf90 mantine-Group-root"
+          data-grow="true"
+          style="--group-child-width: calc(50% - (var(--mantine-spacing-md) - var(--mantine-spacing-md) / 2)); --group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
         >
-          <input
-            aria-invalid="false"
-            class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
-            data-path="patronymic"
-            data-variant="default"
-            id="mantine-0imsgk2bo"
-            value=""
-          />
+          <div
+            class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
+          >
+            <label
+              class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+              for="mantine-pfqyzivqd"
+              id="mantine-pfqyzivqd-label"
+            >
+              Prefix
+            </label>
+            <div
+              class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
+              data-variant="default"
+            >
+              <input
+                aria-invalid="false"
+                class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
+                data-path="prefix"
+                data-variant="default"
+                id="mantine-pfqyzivqd"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
+          >
+            <label
+              class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+              for="mantine-7lzvq3tar"
+              id="mantine-7lzvq3tar-label"
+            >
+              Suffix
+            </label>
+            <div
+              class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
+              data-variant="default"
+            >
+              <input
+                aria-invalid="false"
+                class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
+                data-path="suffix"
+                data-variant="default"
+                id="mantine-7lzvq3tar"
+                value=""
+              />
+            </div>
+          </div>
         </div>
-      </div>
+        <div
+          class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
+        >
+          <label
+            class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+            for="mantine-m75qc1lk3"
+            id="mantine-m75qc1lk3-label"
+          >
+            Patronymic
+          </label>
+          <div
+            class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
+            data-variant="default"
+          >
+            <input
+              aria-invalid="false"
+              class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
+              data-path="patronymic"
+              data-variant="default"
+              id="mantine-m75qc1lk3"
+              value=""
+            />
+          </div>
+        </div>
+      </details>
       <div
         class="m_4081bf90 mantine-Group-root"
         style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-end; --group-wrap: wrap; margin-top: var(--mantine-spacing-md);"
