@@ -17,6 +17,8 @@ describe("NamesTable", () => {
             label: "Nancy Jonson Mia",
           },
         ]}
+        personId="1"
+        onDeleteSuccess={() => {}}
       />
     );
 

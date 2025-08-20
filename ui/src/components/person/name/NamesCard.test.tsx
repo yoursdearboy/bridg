@@ -7,18 +7,12 @@ describe("NamesCard", () => {
   it("matches snapshot", () => {
     vi.spyOn(api.persons, "indexPersonsPersonIdNamesGet").mockResolvedValue([
       {
-        family: "Mandy",
-        given: "Gigi",
-        middle: "Gim",
-        patronymic: "—",
         id: "1",
+        label: "Charlie May Kai",
       },
       {
-        family: "Volsi",
-        given: "Wolf",
-        middle: "Fin",
-        patronymic: "—",
         id: "2",
+        label: "Nancy Jonson Mia",
       },
     ]);
 
