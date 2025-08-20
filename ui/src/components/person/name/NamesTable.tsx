@@ -1,8 +1,8 @@
 import { Table } from "@mantine/core";
-import type { EntityNameWithId } from "bridg-ts";
+import type { EntityName } from "bridg-ts";
 import { useTranslation } from "react-i18next";
 
-export const NamesTable = ({ names }: { names: EntityNameWithId[] }) => {
+export const NamesTable = ({ names }: { names: EntityName[] }) => {
   const { t } = useTranslation();
   const rows = names.map((name) => (
     <Table.Tr key={name.id}>

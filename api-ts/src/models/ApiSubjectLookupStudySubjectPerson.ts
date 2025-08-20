@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { EntityName } from './EntityName';
+import type { EntityNameData } from './EntityNameData';
 import {
-    EntityNameFromJSON,
-    EntityNameFromJSONTyped,
-    EntityNameToJSON,
-    EntityNameToJSONTyped,
-} from './EntityName';
+    EntityNameDataFromJSON,
+    EntityNameDataFromJSONTyped,
+    EntityNameDataToJSON,
+    EntityNameDataToJSONTyped,
+} from './EntityNameData';
 
 /**
  * 
@@ -29,10 +29,10 @@ import {
 export interface ApiSubjectLookupStudySubjectPerson {
     /**
      * 
-     * @type {EntityName}
+     * @type {EntityNameData}
      * @memberof ApiSubjectLookupStudySubjectPerson
      */
-    name?: EntityName | null;
+    name?: EntityNameData | null;
 }
 
 /**
@@ -52,7 +52,7 @@ export function ApiSubjectLookupStudySubjectPersonFromJSONTyped(json: any, ignor
     }
     return {
         
-        'name': json['name'] == null ? undefined : EntityNameFromJSON(json['name']),
+        'name': json['name'] == null ? undefined : EntityNameDataFromJSON(json['name']),
     };
 }
 
@@ -67,7 +67,7 @@ export function ApiSubjectLookupStudySubjectPersonToJSONTyped(value?: ApiSubject
 
     return {
         
-        'name': EntityNameToJSON(value['name']),
+        'name': EntityNameDataToJSON(value['name']),
     };
 }
 

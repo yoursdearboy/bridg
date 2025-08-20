@@ -4,7 +4,7 @@ export * from './AdministrativeGender';
 export * from './ApiSubjectLookupStudySubjectPerson';
 export * from './ApiSubjectNewStudySubjectPerson';
 export * from './EntityName';
-export * from './EntityNameWithId';
+export * from './EntityNameData';
 export * from './FoundStudySubject';
 export * from './HTTPValidationError';
 export * from './LookupStudySubject';

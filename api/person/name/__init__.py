@@ -7,12 +7,11 @@ from sqlalchemy.orm import Session
 import bridg
 from api.base_model import BaseModel
 from api.db import get_db
-from api.extra_typing import with_id
 
 router = APIRouter(prefix="/names")
 
 
-class EntityName(BaseModel[bridg.EntityName]):
+class EntityNameData(BaseModel[bridg.EntityName]):
     _sa = bridg.EntityName
 
     use: Optional[str] = None
@@ -24,13 +23,17 @@ class EntityName(BaseModel[bridg.EntityName]):
     suffix: Optional[str] = None
 
 
-@router.get("", response_model=List[with_id(EntityName)])
+class EntityName(EntityNameData):
+    id: UUID
+
+
+@router.get("", response_model=List[EntityName])
 def index(person_id: UUID, db: Session = Depends(get_db)) -> List[bridg.EntityName]:
     return db.query(bridg.EntityName).filter_by(biologic_entity_id=person_id).all()
 
 
-@router.post("", response_model=with_id(EntityName))
-def create(person_id: UUID, data: EntityName, db: Session = Depends(get_db)):
+@router.post("", response_model=EntityName)
+def create(person_id: UUID, data: EntityNameData, db: Session = Depends(get_db)):
     obj = data.model_dump_sa()
     obj.biologic_entity_id = person_id
 

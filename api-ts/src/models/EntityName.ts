@@ -61,12 +61,19 @@ export interface EntityName {
      * @memberof EntityName
      */
     suffix?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EntityName
+     */
+    id: string;
 }
 
 /**
  * Check if a given object implements the EntityName interface.
  */
 export function instanceOfEntityName(value: object): value is EntityName {
+    if (!('id' in value) || value['id'] === undefined) return false;
     return true;
 }
 
@@ -87,6 +94,7 @@ export function EntityNameFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'patronymic': json['patronymic'] == null ? undefined : json['patronymic'],
         'prefix': json['prefix'] == null ? undefined : json['prefix'],
         'suffix': json['suffix'] == null ? undefined : json['suffix'],
+        'id': json['id'],
     };
 }
 
@@ -108,6 +116,7 @@ export function EntityNameToJSONTyped(value?: EntityName | null, ignoreDiscrimin
         'patronymic': value['patronymic'],
         'prefix': value['prefix'],
         'suffix': value['suffix'],
+        'id': value['id'],
     };
 }
 

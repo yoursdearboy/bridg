@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { EntityName } from './EntityName';
+import type { EntityNameData } from './EntityNameData';
 import {
-    EntityNameFromJSON,
-    EntityNameFromJSONTyped,
-    EntityNameToJSON,
-    EntityNameToJSONTyped,
-} from './EntityName';
+    EntityNameDataFromJSON,
+    EntityNameDataFromJSONTyped,
+    EntityNameDataToJSON,
+    EntityNameDataToJSONTyped,
+} from './EntityNameData';
 import type { AdministrativeGender } from './AdministrativeGender';
 import {
     AdministrativeGenderFromJSON,
@@ -72,10 +72,10 @@ export interface ApiSubjectNewStudySubjectPerson {
     deathIndicator?: boolean | null;
     /**
      * 
-     * @type {EntityName}
+     * @type {EntityNameData}
      * @memberof ApiSubjectNewStudySubjectPerson
      */
-    name?: EntityName | null;
+    name?: EntityNameData | null;
 }
 
 
@@ -103,7 +103,7 @@ export function ApiSubjectNewStudySubjectPersonFromJSONTyped(json: any, ignoreDi
         'deathDate': json['death_date'] == null ? undefined : (new Date(json['death_date'])),
         'deathDateEstimatedIndicator': json['death_date_estimated_indicator'] == null ? undefined : json['death_date_estimated_indicator'],
         'deathIndicator': json['death_indicator'] == null ? undefined : json['death_indicator'],
-        'name': json['name'] == null ? undefined : EntityNameFromJSON(json['name']),
+        'name': json['name'] == null ? undefined : EntityNameDataFromJSON(json['name']),
     };
 }
 
@@ -124,7 +124,7 @@ export function ApiSubjectNewStudySubjectPersonToJSONTyped(value?: ApiSubjectNew
         'death_date': value['deathDate'] === null ? null : ((value['deathDate'] as any)?.toISOString().substring(0,10)),
         'death_date_estimated_indicator': value['deathDateEstimatedIndicator'],
         'death_indicator': value['deathIndicator'],
-        'name': EntityNameToJSON(value['name']),
+        'name': EntityNameDataToJSON(value['name']),
     };
 }
 

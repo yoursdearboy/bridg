@@ -55,7 +55,7 @@ class StudySubject(BaseModel):
     performing_organization: Optional[Organization]
 
 
-class EntityName(BaseModel[bridg.EntityName]):
+class EntityNameData(BaseModel[bridg.EntityName]):
     _sa = bridg.EntityName
 
     use: Optional[str] = None
@@ -79,7 +79,7 @@ class NewStudySubject(BaseModel[bridg.StudySubject]):
         death_date: Optional[date] = None
         death_date_estimated_indicator: Optional[bool] = None
         death_indicator: Optional[bool] = None
-        name: Optional[EntityName] = None
+        name: Optional[EntityNameData] = None
 
         def model_dump_sa(self) -> bridg.Person:
             return bridg.Person(
@@ -125,7 +125,7 @@ class LookupStudySubject(BaseModel[bridg.StudySubject]):
     class Person(BaseModel[bridg.Person]):
         _sa = bridg.Person
 
-        name: Optional[EntityName] = None
+        name: Optional[EntityNameData] = None
 
         def model_dump_sa(self) -> bridg.Person:
             return bridg.Person(
