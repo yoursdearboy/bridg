@@ -6,11 +6,11 @@ import { TelecommunicationAddressesTable } from "@/components/person/Telecommuni
 import { Grid, Group, Space, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { PersonOutput } from "bridg-ts";
-import { Route as editRoute } from "./edit";
+import { Route as editRoute } from "./$personId/edit";
 import { useTranslation } from "react-i18next";
 import { NamesCard } from "@/components/person/name/NamesCard";
 
-export const Route = createFileRoute("/persons/$personId/")({
+export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
   loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
   beforeLoad: () => ({

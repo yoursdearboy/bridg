@@ -15,7 +15,7 @@ import { useForm } from "@mantine/form";
 import { createFileRoute } from "@tanstack/react-router";
 import { AdministrativeGender } from "bridg-ts";
 import { useTranslation } from "react-i18next";
-import { Route as indexRoute } from "./index";
+import { Route as indexRoute } from "../$personId";
 
 export const Route = createFileRoute("/persons/$personId/edit")({
   component: PersonEditPage,
