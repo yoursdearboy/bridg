@@ -8,7 +8,9 @@ from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
-from .study_subject_protocol_version_relationship import StudySubjectProtocolVersionRelationship
+from .study_subject_protocol_version_relationship import (
+    StudySubjectProtocolVersionRelationship,
+)
 
 if TYPE_CHECKING:
     from ..common import StudySubject

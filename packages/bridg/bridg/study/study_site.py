@@ -8,7 +8,9 @@ from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship, validates
 
 from ..db import Base
-from .study_site_protocol_version_relationship import StudySiteProtocolVersionRelationship
+from .study_site_protocol_version_relationship import (
+    StudySiteProtocolVersionRelationship,
+)
 
 if TYPE_CHECKING:
     from ..common import HealthcareFacility, Organization
