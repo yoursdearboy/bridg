@@ -16,78 +16,70 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface PostalAddressWithId
+ * @interface PostalAddressData
  */
-export interface PostalAddressWithId {
+export interface PostalAddressData {
     /**
      * 
      * @type {string}
-     * @memberof PostalAddressWithId
-     */
-    id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PostalAddressWithId
+     * @memberof PostalAddressData
      */
     use?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PostalAddressWithId
+     * @memberof PostalAddressData
      */
     street?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PostalAddressWithId
+     * @memberof PostalAddressData
      */
     building?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PostalAddressWithId
+     * @memberof PostalAddressData
      */
     country?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PostalAddressWithId
+     * @memberof PostalAddressData
      */
     municipality?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PostalAddressWithId
+     * @memberof PostalAddressData
      */
     state?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PostalAddressWithId
+     * @memberof PostalAddressData
      */
     zip?: string | null;
 }
 
 /**
- * Check if a given object implements the PostalAddressWithId interface.
+ * Check if a given object implements the PostalAddressData interface.
  */
-export function instanceOfPostalAddressWithId(value: object): value is PostalAddressWithId {
-    if (!('id' in value) || value['id'] === undefined) return false;
+export function instanceOfPostalAddressData(value: object): value is PostalAddressData {
     return true;
 }
 
-export function PostalAddressWithIdFromJSON(json: any): PostalAddressWithId {
-    return PostalAddressWithIdFromJSONTyped(json, false);
+export function PostalAddressDataFromJSON(json: any): PostalAddressData {
+    return PostalAddressDataFromJSONTyped(json, false);
 }
 
-export function PostalAddressWithIdFromJSONTyped(json: any, ignoreDiscriminator: boolean): PostalAddressWithId {
+export function PostalAddressDataFromJSONTyped(json: any, ignoreDiscriminator: boolean): PostalAddressData {
     if (json == null) {
         return json;
     }
     return {
         
-        'id': json['id'],
         'use': json['use'] == null ? undefined : json['use'],
         'street': json['street'] == null ? undefined : json['street'],
         'building': json['building'] == null ? undefined : json['building'],
@@ -98,18 +90,17 @@ export function PostalAddressWithIdFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function PostalAddressWithIdToJSON(json: any): PostalAddressWithId {
-    return PostalAddressWithIdToJSONTyped(json, false);
+export function PostalAddressDataToJSON(json: any): PostalAddressData {
+    return PostalAddressDataToJSONTyped(json, false);
 }
 
-export function PostalAddressWithIdToJSONTyped(value?: PostalAddressWithId | null, ignoreDiscriminator: boolean = false): any {
+export function PostalAddressDataToJSONTyped(value?: PostalAddressData | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'id': value['id'],
         'use': value['use'],
         'street': value['street'],
         'building': value['building'],

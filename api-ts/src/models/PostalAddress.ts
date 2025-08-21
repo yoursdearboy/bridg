@@ -61,12 +61,26 @@ export interface PostalAddress {
      * @memberof PostalAddress
      */
     zip?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PostalAddress
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PostalAddress
+     */
+    label: string;
 }
 
 /**
  * Check if a given object implements the PostalAddress interface.
  */
 export function instanceOfPostalAddress(value: object): value is PostalAddress {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('label' in value) || value['label'] === undefined) return false;
     return true;
 }
 
@@ -87,6 +101,8 @@ export function PostalAddressFromJSONTyped(json: any, ignoreDiscriminator: boole
         'municipality': json['municipality'] == null ? undefined : json['municipality'],
         'state': json['state'] == null ? undefined : json['state'],
         'zip': json['zip'] == null ? undefined : json['zip'],
+        'id': json['id'],
+        'label': json['label'],
     };
 }
 
@@ -108,6 +124,8 @@ export function PostalAddressToJSONTyped(value?: PostalAddress | null, ignoreDis
         'municipality': value['municipality'],
         'state': value['state'],
         'zip': value['zip'],
+        'id': value['id'],
+        'label': value['label'],
     };
 }
 
