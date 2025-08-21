@@ -1,6 +1,7 @@
 import api from "@/api";
 import { useHover } from "@mantine/hooks";
-import { CloseButton, Table } from "@mantine/core";
+import { Box, Table } from "@mantine/core";
+import { IconX } from "@tabler/icons-react";
 import type { PostalAddress } from "bridg-ts";
 import { useTranslation } from "react-i18next";
 
@@ -37,7 +38,7 @@ export const AddressesTable = ({
         <Table.Td px={0}>{address.label}</Table.Td>
         <Table.Td px={0} style={{ width: 40 }}>
           {hovered && (
-            <CloseButton color="red" onClick={() => void handleDelete()} />
+            <IconX size={16} color="red" onClick={() => void handleDelete()} />
           )}
         </Table.Td>
       </Table.Tr>
@@ -45,18 +46,20 @@ export const AddressesTable = ({
   };
 
   return (
-    <Table highlightOnHover>
-      <Table.Tbody>
-        {addresses.length === 0 ? (
-          <Table.Tr>
-            <Table.Td px={0} style={{ textAlign: "center" }}></Table.Td>
-          </Table.Tr>
-        ) : (
-          addresses.map((address) => (
-            <AddressesTableRow key={address.id} address={address} />
-          ))
-        )}
-      </Table.Tbody>
-    </Table>
+    <Box pt="md">
+      <Table highlightOnHover>
+        <Table.Tbody>
+          {addresses.length === 0 ? (
+            <Table.Tr>
+              <Table.Td px={0} style={{ textAlign: "center" }}></Table.Td>
+            </Table.Tr>
+          ) : (
+            addresses.map((address) => (
+              <AddressesTableRow key={address.id} address={address} />
+            ))
+          )}
+        </Table.Tbody>
+      </Table>
+    </Box>
   );
 };
