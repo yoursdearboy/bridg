@@ -1,11 +1,11 @@
 import api from "@/api";
 import { useHover } from "@mantine/hooks";
 import { CloseButton, Table } from "@mantine/core";
-import type { PostalAddressWithId } from "bridg-ts";
+import type { PostalAddress } from "bridg-ts";
 import { useTranslation } from "react-i18next";
 
 interface AddressesTableProps {
-  addresses: PostalAddressWithId[];
+  addresses: PostalAddress[];
   personId: string;
   onDeleteSuccess: () => void;
 }
@@ -17,14 +17,17 @@ export const AddressesTable = ({
 }: AddressesTableProps) => {
   const { t } = useTranslation();
 
-  const AddressesTableRow = ({ address }: { address: PostalAddressWithId }) => {
+  const AddressesTableRow = ({ address }: { address: PostalAddress }) => {
     const { hovered, ref } = useHover();
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
       const ok = window.confirm(t("AddressesTable.deleteConfirm"));
       if (!ok) return;
 
-      console.log('delete person address', personId)
+      await api.persons.deletePersonsPersonIdPostalAddressesAddressIdDelete({
+        personId,
+        addressId: address.id
+      });
 
       onDeleteSuccess();
     };
