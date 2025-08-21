@@ -1,8 +1,7 @@
 from typing import TypeVar
 
-from polyfactory.factories.sqlalchemy_factory import SQLAlchemyFactory
-
 from bridg.db import Base
+from polyfactory.factories.sqlalchemy_factory import SQLAlchemyFactory
 
 T = TypeVar("T", bound=Base)
 

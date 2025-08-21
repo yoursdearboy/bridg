@@ -1,7 +1,7 @@
-from polyfactory import Ignore, Use
-from tests.factory.base import BaseFactory
-
 import bridg
+from polyfactory import Ignore, Use
+
+from tests.factory.base import BaseFactory
 
 
 class EntityNameFactory(BaseFactory[bridg.EntityName]):
