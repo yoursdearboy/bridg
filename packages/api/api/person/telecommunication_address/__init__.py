@@ -1,10 +1,10 @@
 from typing import List, Optional
 from uuid import UUID
 
+import bridg
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-import bridg
 from api.base_model import BaseModel
 from api.db import get_db
 from api.extra_typing import with_id
