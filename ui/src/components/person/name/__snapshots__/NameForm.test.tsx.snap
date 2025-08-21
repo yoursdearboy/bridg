@@ -44,7 +44,7 @@ exports[`NameForm > matches snapshot 1`] = `
               data-path="family"
               data-variant="default"
               id="mantine-4miilw5eg"
-              value=""
+              value="Moly"
             />
           </div>
         </div>
@@ -75,7 +75,7 @@ exports[`NameForm > matches snapshot 1`] = `
               data-path="given"
               data-variant="default"
               id="mantine-17gjn16kc"
-              value=""
+              value="Holy"
             />
           </div>
         </div>
