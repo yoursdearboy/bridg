@@ -1,4 +1,4 @@
-import { Table, CloseButton, Box } from "@mantine/core";
+import { Table, Box } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import type { EntityName } from "bridg-ts";
 import api from "@/api";
@@ -28,11 +28,11 @@ export const NamesTable = ({
     };
 
     return (
-      <Table.Tr  ref={ref}>
-        <Table.Td  px={0}>{name.label}</Table.Td>
+      <Table.Tr ref={ref}>
+        <Table.Td px={0}>{name.label}</Table.Td>
         <Table.Td px={0} style={{ width: 40 }}>
           {hovered && (
-            <IconX  size={16} color="red" onClick={() => void handleDelete()} />
+            <IconX size={16} color="red" onClick={() => void handleDelete()} />
           )}
         </Table.Td>
       </Table.Tr>
@@ -40,18 +40,18 @@ export const NamesTable = ({
   };
 
   return (
-     <Box pt="md">
-    <Table highlightOnHover >
-      <Table.Tbody  >
-        {names.length === 0 ? (
-          <Table.Tr>
-            <Table.Td px={0} style={{ textAlign: "center" }}></Table.Td>
-          </Table.Tr>
-        ) : (
-          names.map((name) => <NamesTableRow key={name.id} name={name} />)
-        )}
-      </Table.Tbody>
-    </Table>
+    <Box pt="md">
+      <Table highlightOnHover>
+        <Table.Tbody>
+          {names.length === 0 ? (
+            <Table.Tr>
+              <Table.Td px={0} style={{ textAlign: "center" }}></Table.Td>
+            </Table.Tr>
+          ) : (
+            names.map((name) => <NamesTableRow key={name.id} name={name} />)
+          )}
+        </Table.Tbody>
+      </Table>
     </Box>
   );
 };
