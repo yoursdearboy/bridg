@@ -1,7 +1,7 @@
-from polyfactory import Ignore
-from tests.factory.base import BaseFactory
-
 import bridg
+from polyfactory import Ignore
+
+from tests.factory.base import BaseFactory
 
 
 class PersonFactory(BaseFactory[bridg.Person]):

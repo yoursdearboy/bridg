@@ -1,7 +1,7 @@
 import pytest
-from tests.factory.base import BaseFactory
 
 from api.db import SessionLocal
+from tests.factory.base import BaseFactory
 
 __session__ = SessionLocal()
 

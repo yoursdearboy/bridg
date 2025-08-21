@@ -1,9 +1,9 @@
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
-from tests.factory.person import PersonFactory
-from tests.factory.person.name import EntityNameFactory
 
 from api.main import app
+from tests.factory.person import PersonFactory
+from tests.factory.person.name import EntityNameFactory
 
 client = TestClient(app)
 
