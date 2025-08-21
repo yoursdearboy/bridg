@@ -2,7 +2,7 @@ import { Table, CloseButton } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import type { EntityName } from "bridg-ts";
 import api from "@/api";
-
+import { IconX } from "@tabler/icons-react";
 export const NamesTable = ({
   names,
   personId,
@@ -32,7 +32,7 @@ export const NamesTable = ({
         <Table.Td px={0}>{name.label}</Table.Td>
         <Table.Td px={0} style={{ width: 40 }}>
           {hovered && (
-            <CloseButton color="red" onClick={() => void handleDelete()} />
+            <IconX size={16} color="red" onClick={() => void handleDelete()} />
           )}
         </Table.Td>
       </Table.Tr>
