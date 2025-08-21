@@ -74,6 +74,7 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
           names={names}
           personId={personId}
           onDeleteSuccess={handleSuccess}
+          onUpdateSuccess={handleSuccess}
         />
       </Card>
 
