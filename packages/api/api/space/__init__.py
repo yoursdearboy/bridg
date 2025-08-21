@@ -1,11 +1,11 @@
 from typing import List
 from uuid import UUID
 
+import bridg
 from fastapi import APIRouter, Depends
 from pydantic import model_validator
 from sqlalchemy.orm import Session
 
-import bridg
 from api import site, subject
 from api.base_model import BaseModel
 from api.db import get_db

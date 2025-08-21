@@ -1,8 +1,7 @@
 from typing import Any, Dict, List, TypedDict
 
-import yaml
-
 import bridg
+import yaml
 
 from .db import SessionLocal
 

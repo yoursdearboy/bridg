@@ -1,9 +1,8 @@
 import os
 
+from common.env import load_env
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
-from common.env import load_env
 
 load_env(prefix="BRIDG")
 

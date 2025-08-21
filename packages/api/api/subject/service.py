@@ -1,8 +1,6 @@
 from typing import List, Optional
 from uuid import UUID
 
-from sqlalchemy.orm import Session
-
 from bridg import (
     BiologicEntity,
     EntityName,
@@ -10,6 +8,7 @@ from bridg import (
     StudySubject,
     StudySubjectProtocolVersionRelationship,
 )
+from sqlalchemy.orm import Session
 
 
 class StudySubjectRepository:

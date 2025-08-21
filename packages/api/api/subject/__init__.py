@@ -2,11 +2,11 @@ from datetime import date, datetime
 from typing import Annotated, List, Optional
 from uuid import UUID
 
+import bridg
 from fastapi import APIRouter, Depends
 from pydantic import field_validator
 from sqlalchemy.orm import Session
 
-import bridg
 from api.base_model import BaseModel
 from api.db import get_db
 
