@@ -26,7 +26,7 @@ export const AddressesTable = ({
 
       await api.persons.deletePersonsPersonIdPostalAddressesAddressIdDelete({
         personId,
-        addressId: address.id
+        addressId: address.id,
       });
 
       onDeleteSuccess();
