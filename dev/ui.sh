@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cd ui && npm run dev
+npm run dev -w ui
