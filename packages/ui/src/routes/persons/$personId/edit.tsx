@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { createFileRoute } from "@tanstack/react-router";
-import { AdministrativeGender } from "bridg-ts";
+import { AdministrativeGender } from "api-ts";
 import { useTranslation } from "react-i18next";
 import { Route as indexRoute } from "../$personId";
 

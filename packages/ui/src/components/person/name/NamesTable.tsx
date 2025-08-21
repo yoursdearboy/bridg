@@ -1,6 +1,6 @@
 import { Table, Box } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
-import type { EntityName } from "bridg-ts";
+import type { EntityName } from "api-ts";
 import api from "@/api";
 import { IconX } from "@tabler/icons-react";
 export const NamesTable = ({

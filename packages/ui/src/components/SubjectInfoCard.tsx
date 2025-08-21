@@ -1,6 +1,6 @@
 import { InfoRow } from "@/components/InfoRow";
 import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
-import type { StudySubject } from "bridg-ts";
+import type { StudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
 
 interface SubjectInfoCardProps {

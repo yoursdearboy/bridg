@@ -1,6 +1,6 @@
 import { InfoRow } from "@/components/InfoRow";
 import { Badge, Card, Stack } from "@mantine/core";
-import type { PersonOutput } from "bridg-ts";
+import type { PersonOutput } from "api-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 

@@ -3,7 +3,7 @@ import ButtonLink from "@/components/ButtonLink";
 import { PersonCard } from "@/components/person/PersonCard";
 import { Grid, Group, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
-import type { StudySubject } from "bridg-ts";
+import type { StudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
 import { Route as personRoute } from "@/routes/persons/$personId";
 

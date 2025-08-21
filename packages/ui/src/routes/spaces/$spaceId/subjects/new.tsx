@@ -25,7 +25,7 @@ import {
   type FoundStudySubject,
   type NewStudySubject,
   Status,
-} from "bridg-ts";
+} from "api-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 

@@ -4,7 +4,7 @@ import {
   SubjectsApi,
   SitesApi,
   PersonsApi,
-} from "bridg-ts";
+} from "api-ts";
 
 const config = new Configuration({
   basePath: "/api",

@@ -1,6 +1,6 @@
 import { Box, Table } from "@mantine/core";
 import api from "@/api";
-import type { PostalAddress } from "bridg-ts";
+import type { PostalAddress } from "api-ts";
 import { useHover } from "@mantine/hooks";
 import { IconX } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
