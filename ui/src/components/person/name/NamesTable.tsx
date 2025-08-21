@@ -1,4 +1,4 @@
-import { Table, CloseButton } from "@mantine/core";
+import { Table, CloseButton, Box } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import type { EntityName } from "bridg-ts";
 import api from "@/api";
@@ -28,8 +28,8 @@ export const NamesTable = ({
     };
 
     return (
-      <Table.Tr ref={ref}>
-        <Table.Td px={0}>{name.label}</Table.Td>
+      <Table.Tr  ref={ref}>
+        <Table.Td  px={0}>{name.label}</Table.Td>
         <Table.Td px={0} style={{ width: 40 }}>
           {hovered && (
             <IconX  size={16} color="red" onClick={() => void handleDelete()} />
@@ -40,8 +40,9 @@ export const NamesTable = ({
   };
 
   return (
-    <Table highlightOnHover>
-      <Table.Tbody>
+     <Box pt="md">
+    <Table highlightOnHover >
+      <Table.Tbody  >
         {names.length === 0 ? (
           <Table.Tr>
             <Table.Td px={0} style={{ textAlign: "center" }}></Table.Td>
@@ -51,5 +52,6 @@ export const NamesTable = ({
         )}
       </Table.Tbody>
     </Table>
+    </Box>
   );
 };
