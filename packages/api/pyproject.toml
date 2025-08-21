@@ -1,0 +1,30 @@
+[project]
+name = "api"
+version = "0.1.0"
+description = "HTTP API for BRIDG"
+dependencies = [
+    "bridg",
+    "common",
+    "uvicorn[standard]<1.0.0,>=0.29.0",
+    "pydantic<3.0.0,>=2.9.2",
+    "cattrs<25.0.0,>=24.1.2",
+    "toolz<2.0.0,>=1.0.0",
+    "fastapi[standard]>=0.116.1",
+]
+
+[dependency-groups]
+test = [
+    "pytest<9.0.0,>=8.3.3",
+    "pytest-cov<7.0.0,>=6.0.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.12,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-root = ""
+
+[tool.uv.sources]
+bridg = { workspace = true }
+common = { workspace = true }

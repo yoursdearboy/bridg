@@ -1,7 +1,3 @@
 #!/bin/sh
 
-ROOTPATH=$(pwd)
-
-export PYTHONPATH=$ROOTPATH
-
-fastapi dev $ROOTPATH/api/main.py
+uv run --package api fastapi dev packages/api/api/main.py
