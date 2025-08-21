@@ -16,7 +16,7 @@ interface NameFormProps {
   personId: string;
   onClose: () => void;
   onSuccess: () => void;
-  initialValues: EntityName;
+  initialValues?: EntityName;
 }
 
 export const NameForm = ({
@@ -30,12 +30,12 @@ export const NameForm = ({
   const form = useForm<EntityNameData>({
     initialValues: initialValues
       ? {
-          family: initialValues.family || "",
-          given: initialValues.given || "",
-          middle: initialValues.middle || "",
-          patronymic: initialValues.patronymic || "",
-          prefix: initialValues.prefix || "",
-          suffix: initialValues.suffix || "",
+          family: initialValues.family,
+          given: initialValues.given,
+          middle: initialValues.middle,
+          patronymic: initialValues.patronymic,
+          prefix: initialValues.prefix,
+          suffix: initialValues.suffix,
         }
       : {
           family: "",
@@ -60,14 +60,13 @@ export const NameForm = ({
   const mutation = useMutation({
     mutationFn: (data: EntityNameData) => {
       if (initialValues) {
-       
         return api.persons.updatePersonsPersonIdNamesNameIdPatch({
           personId,
           nameId: initialValues.id,
           entityNameData: data,
         });
       }
-     
+
       return api.persons.createPersonsPersonIdNamesPost({
         personId,
         entityNameData: data,

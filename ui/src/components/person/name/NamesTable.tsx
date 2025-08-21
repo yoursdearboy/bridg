@@ -39,8 +39,8 @@ const NamesTableRow = ({
       <Table.Td px={0} style={{ width: 80, display: "flex", gap: 8 }}>
         {hovered && (
           <>
-            <IconPencil size={16} color="blue" onClick={() => onEdit(name)} />
-            <IconX size={16} color="red" onClick={() =>  handleDelete()} />
+            <IconPencil size={16} color="green" onClick={() => onEdit(name)} />
+            <IconX size={16} color="red" onClick={() => void handleDelete()} />
           </>
         )}
       </Table.Td>

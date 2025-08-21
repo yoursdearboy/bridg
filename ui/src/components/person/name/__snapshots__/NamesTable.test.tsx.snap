@@ -31,7 +31,7 @@ exports[`NamesTable > matches snapshot 1`] = `
           </td>
           <td
             class="m_4e7aa4ef mantine-Table-td"
-            style="width: 40px; padding-inline: 0rem;"
+            style="width: 80px; display: flex; gap: 8px; padding-inline: 0rem;"
           />
         </tr>
         <tr
@@ -47,7 +47,7 @@ exports[`NamesTable > matches snapshot 1`] = `
           </td>
           <td
             class="m_4e7aa4ef mantine-Table-td"
-            style="width: 40px; padding-inline: 0rem;"
+            style="width: 80px; display: flex; gap: 8px; padding-inline: 0rem;"
           />
         </tr>
       </tbody>
