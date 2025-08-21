@@ -69,7 +69,9 @@
       "title": "Person telecommunication addresses"
     },
     "AddressesTable": {
-      "title": "Person addresses",
+      "title": "Person addresses"
+    },
+    "AddressesTableRow": {
       "deleteConfirm": "Do you confirm address deletion?"
     },
     "Person": {
