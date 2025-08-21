@@ -1,52 +1,11 @@
-from typing import TypeVar
-
-import bridg
-from api.db import SessionLocal
-from api.main import app
 from fastapi.testclient import TestClient
-from polyfactory import Ignore, Use
-from polyfactory.factories.sqlalchemy_factory import SQLAlchemyFactory
+from sqlalchemy.orm import Session
+from tests.factory.person import PersonFactory
+from tests.factory.person.name import EntityNameFactory
+
+from api.main import app
 
 client = TestClient(app)
-
-
-T = TypeVar("T")
-
-
-session = SessionLocal()
-
-
-class BaseFactory(SQLAlchemyFactory[T]):
-    __session__ = session
-    __is_base_factory__ = True
-    __set_relationships__ = False
-    __set_association_proxy__ = False
-    __check_model__ = True
-
-
-class PersonFactory(BaseFactory[bridg.Person]):
-    __set_relationships__ = True
-
-    id = Ignore()
-    type = Ignore()
-    # administrative_gender_code
-    death_date = None
-    death_date_estimated_indicator = None
-    death_indicator = False
-    # name
-
-
-class EntityNameFactory(BaseFactory[bridg.EntityName]):
-    __set_as_default_factory_for_type__ = True
-
-    id = Ignore()
-    use = None
-    family = Use(BaseFactory.__faker__.last_name)
-    given = Use(BaseFactory.__faker__.first_name)
-    middle = None
-    patronymic = None
-    prefix = None
-    suffix = None
 
 
 def test_person_names():
@@ -128,7 +87,7 @@ def test_person_name_update():
     }
 
 
-def test_person_name_delete():
+def test_person_name_delete(session: Session):
     en = EntityNameFactory.build()
     person = PersonFactory.create_sync(name=[en])
     assert len(person.name) == 1
