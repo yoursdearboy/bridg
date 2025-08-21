@@ -9,9 +9,6 @@ on:
 jobs:
   ui-tests:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./ui
 
     strategy:
       matrix:
@@ -28,7 +25,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test
+        run: npm run test --workspaces --if-present
   
   ui-telegram-notification:
     needs: ui-tests
@@ -45,9 +42,6 @@ jobs:
 
   linter-tests:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./ui
 
     strategy:
       matrix:
@@ -65,7 +59,7 @@ jobs:
 
       - name: Run linter
         run:
-          npm run lint
+          npm run lint --workspaces --if-present
   
   linter-telegram-notification:
     needs: linter-tests
