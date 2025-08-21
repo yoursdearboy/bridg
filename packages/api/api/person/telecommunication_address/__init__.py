@@ -19,6 +19,7 @@ class TelecommunicationAddress(BaseModel[bridg.common.person.TelecommunicationAd
     scheme: Optional[str] = None
     address: Optional[str] = None
 
+
 @router.get("", response_model=List[with_id(TelecommunicationAddress)])
 def index(person_id: UUID, db: Session = Depends(get_db)) -> List[bridg.common.person.TelecommunicationAddress]:
     return db.query(bridg.common.person.TelecommunicationAddress).filter_by(person_id=person_id).all()

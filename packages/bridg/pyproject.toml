@@ -17,5 +17,14 @@ test = [
 requires = ["uv_build>=0.8.12,<0.9.0"]
 build-backend = "uv_build"
 
+[tool.ruff]
+extend = "../../pyproject.toml"
+
+[tool.ruff.lint]
+ignore = ["TID252"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "F403"]
+
 [tool.uv.build-backend]
 module-root = ""
