@@ -15,6 +15,7 @@ dependencies = [
 [dependency-groups]
 test = [
     "httpx>=0.28.1",
+    "polyfactory>=2.22.2",
     "pytest<9.0.0,>=8.3.3",
     "pytest-cov<7.0.0,>=6.0.0",
 ]
