@@ -9,27 +9,42 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMutation } from "@tanstack/react-query";
-import type { EntityNameData } from "bridg-ts";
+import type { EntityName, EntityNameData } from "bridg-ts";
 import { useTranslation } from "react-i18next";
 
 interface NameFormProps {
   personId: string;
   onClose: () => void;
   onSuccess: () => void;
+  initialValues: EntityName;
 }
 
-export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
+export const NameForm = ({
+  personId,
+  onClose,
+  onSuccess,
+  initialValues,
+}: NameFormProps) => {
   const { t } = useTranslation();
 
   const form = useForm<EntityNameData>({
-    initialValues: {
-      family: "",
-      given: "",
-      middle: "",
-      patronymic: "",
-      prefix: "",
-      suffix: "",
-    },
+    initialValues: initialValues
+      ? {
+          family: initialValues.family || "",
+          given: initialValues.given || "",
+          middle: initialValues.middle || "",
+          patronymic: initialValues.patronymic || "",
+          prefix: initialValues.prefix || "",
+          suffix: initialValues.suffix || "",
+        }
+      : {
+          family: "",
+          given: "",
+          middle: "",
+          patronymic: "",
+          prefix: "",
+          suffix: "",
+        },
     validate: {
       family: (value) =>
         value
@@ -43,12 +58,21 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
   });
 
   const mutation = useMutation({
-    mutationFn: (entityNameData: EntityNameData) =>
-      api.persons.createPersonsPersonIdNamesPost({
+    mutationFn: (data: EntityNameData) => {
+      if (initialValues) {
+       
+        return api.persons.updatePersonsPersonIdNamesNameIdPatch({
+          personId,
+          nameId: initialValues.id,
+          entityNameData: data,
+        });
+      }
+     
+      return api.persons.createPersonsPersonIdNamesPost({
         personId,
-        entityNameData,
-      }),
-
+        entityNameData: data,
+      });
+    },
     onSuccess,
   });
 
