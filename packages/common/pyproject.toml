@@ -1,0 +1,14 @@
+[project]
+name = "common"
+version = "0.1.0"
+description = "Common utilities"
+dependencies = [
+    "python-dotenv<2.0.0,>=1.0.1"
+]
+
+[build-system]
+requires = ["uv_build>=0.8.12,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-root = ""
