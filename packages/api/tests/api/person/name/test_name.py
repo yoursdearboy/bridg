@@ -14,6 +14,7 @@ T = TypeVar("T")
 
 
 class BaseFactory(SQLAlchemyFactory[T]):
+    __session__ = SessionLocal()
     __is_base_factory__ = True
     __set_relationships__ = False
     __set_association_proxy__ = False
@@ -44,7 +45,6 @@ class EntityNameFactory(BaseFactory[bridg.EntityName]):
 
 
 def test_answer():
-    PersonFactory.__session__ = SessionLocal()
     person = PersonFactory.create_sync()
     response = client.get(f"/persons/{person.id}/names")
     assert response.status_code == 200
