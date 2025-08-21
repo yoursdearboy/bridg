@@ -43,7 +43,7 @@ def index(person_id: UUID, db: Session = Depends(get_db)) -> List[PostalAddress]
 
 
 @router.post("")
-def create(person_id: UUID, data: PostalAddress, db: Session = Depends(get_db)) -> PostalAddress:
+def create(person_id: UUID, data: PostalAddressData, db: Session = Depends(get_db)) -> PostalAddress:
     obj = data.model_dump_sa()
     obj.person_id = person_id
 
@@ -54,7 +54,7 @@ def create(person_id: UUID, data: PostalAddress, db: Session = Depends(get_db)) 
 
 
 @router.patch("/{address_id:uuid}")
-def update(person_id: UUID, address_id: UUID, data: PostalAddress, db: Session = Depends(get_db)) -> PostalAddress:
+def update(person_id: UUID, address_id: UUID, data: PostalAddressData, db: Session = Depends(get_db)) -> PostalAddress:
     obj = db.query(bridg.common.person.PostalAddress).filter_by(id=address_id).one()
 
     data.model_update_sa(obj)
