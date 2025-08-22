@@ -8,10 +8,11 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { NameForm } from "./NameForm";
+
 import { NamesTable } from "./NamesTable";
 import api from "@/api";
 import { useTranslation } from "react-i18next";
+import { NewNameForm } from "./NewNameForm";
 
 interface NamesCardProps {
   personId: string;
@@ -77,7 +78,6 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
           onUpdateSuccess={handleSuccess}
         />
       </Card>
-
       <Modal
         opened={opened}
         onClose={close}
@@ -85,7 +85,7 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
         size="lg"
         centered
       >
-        <NameForm
+        <NewNameForm
           personId={personId}
           onClose={close}
           onSuccess={handleSuccess}

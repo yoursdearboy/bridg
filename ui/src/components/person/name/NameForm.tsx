@@ -1,50 +1,30 @@
-import api from "@/api";
-import {
-  Button,
-  Group,
-  TextInput,
-  Stack,
-  LoadingOverlay,
-  Alert,
-} from "@mantine/core";
+import { Button, Group, TextInput, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useMutation } from "@tanstack/react-query";
-import type { EntityName, EntityNameData } from "bridg-ts";
 import { useTranslation } from "react-i18next";
+import type { EntityNameData } from "bridg-ts";
 
 interface NameFormProps {
-  personId: string;
+  initialValues?: EntityNameData;
+  onSubmit: (values: EntityNameData) => void;
   onClose: () => void;
-  onSuccess: () => void;
-  initialValues: EntityName;
 }
 
 export const NameForm = ({
-  personId,
-  onClose,
-  onSuccess,
   initialValues,
+  onSubmit,
+  onClose,
 }: NameFormProps) => {
   const { t } = useTranslation();
 
   const form = useForm<EntityNameData>({
-    initialValues: initialValues
-      ? {
-          family: initialValues.family || "",
-          given: initialValues.given || "",
-          middle: initialValues.middle || "",
-          patronymic: initialValues.patronymic || "",
-          prefix: initialValues.prefix || "",
-          suffix: initialValues.suffix || "",
-        }
-      : {
-          family: "",
-          given: "",
-          middle: "",
-          patronymic: "",
-          prefix: "",
-          suffix: "",
-        },
+    initialValues: {
+      family: initialValues?.family || "",
+      given: initialValues?.given || "",
+      middle: initialValues?.middle || "",
+      patronymic: initialValues?.patronymic || "",
+      prefix: initialValues?.prefix || "",
+      suffix: initialValues?.suffix || "",
+    },
     validate: {
       family: (value) =>
         value
@@ -57,39 +37,9 @@ export const NameForm = ({
     },
   });
 
-  const mutation = useMutation({
-    mutationFn: (data: EntityNameData) => {
-      if (initialValues) {
-       
-        return api.persons.updatePersonsPersonIdNamesNameIdPatch({
-          personId,
-          nameId: initialValues.id,
-          entityNameData: data,
-        });
-      }
-     
-      return api.persons.createPersonsPersonIdNamesPost({
-        personId,
-        entityNameData: data,
-      });
-    },
-    onSuccess,
-  });
-
-  const handleSubmit = (values: EntityNameData) => {
-    mutation.mutate(values);
-  };
-
   return (
-    <form onSubmit={form.onSubmit(handleSubmit)}>
+    <form onSubmit={form.onSubmit(onSubmit)}>
       <Stack gap="md" pos="relative">
-        <LoadingOverlay visible={mutation.isPending} />
-        {mutation.isError && (
-          <Alert color="red" mb="md">
-            {mutation.error.message}
-          </Alert>
-        )}
-
         <Group grow>
           <TextInput
             label={t("Name.family")}
@@ -126,16 +76,10 @@ export const NameForm = ({
         </details>
 
         <Group justify="flex-end" mt="md">
-          <Button
-            variant="outline"
-            onClick={onClose}
-            disabled={mutation.isPending}
-          >
+          <Button variant="outline" onClick={onClose}>
             {t("cancel")}
           </Button>
-          <Button type="submit" loading={mutation.isPending}>
-            {t("submit")}
-          </Button>
+          <Button type="submit">{t("submit")}</Button>
         </Group>
       </Stack>
     </form>
