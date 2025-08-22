@@ -2,13 +2,12 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 from api.main import app
-from tests.factory.person import PersonFactory
-from tests.factory.person.name import EntityNameFactory
+from tests.factory import EntityNameFactory, PersonFactory
 
 client = TestClient(app)
 
 
-def test_person_names():
+def test_person_names_index():
     person = PersonFactory.create_sync()
     response = client.get(f"/persons/{person.id}/names")
     assert response.status_code == 200

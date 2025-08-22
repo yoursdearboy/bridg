@@ -1,10 +1,12 @@
-import bridg
 from polyfactory import Ignore
 
-from tests.factory.base import BaseFactory
+from bridg.common import Person
+
+from ..base import BaseFactory
 
 
-class PersonFactory(BaseFactory[bridg.Person]):
+class PersonFactory(BaseFactory[Person]):
+    __set_as_default_factory_for_type__ = True
     __set_relationships__ = True
 
     id = Ignore()

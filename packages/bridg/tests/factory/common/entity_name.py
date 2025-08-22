@@ -1,10 +1,11 @@
-import bridg
 from polyfactory import Ignore, Use
 
-from tests.factory.base import BaseFactory
+from bridg.common import EntityName
+
+from ..base import BaseFactory
 
 
-class EntityNameFactory(BaseFactory[bridg.EntityName]):
+class EntityNameFactory(BaseFactory[EntityName]):
     __set_as_default_factory_for_type__ = True
 
     id = Ignore()
