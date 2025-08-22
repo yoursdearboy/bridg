@@ -1,12 +1,12 @@
-from typing import List, Optional
+from typing import Annotated, List, Optional
 from uuid import UUID
 
 import bridg
+from bridg import Repository
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
 
 from api.base_model import BaseModel
-from api.db import get_db
+from api.db import get_repository
 
 router = APIRouter(prefix="/names")
 
@@ -34,37 +34,35 @@ class EntityName(EntityNameData):
         return super().model_validate(data, **kwargs)
 
 
+class EntityNameRepository(Repository[bridg.EntityName]):
+    _sa = bridg.EntityName
+
+
+EntityNameRepositoryDep = Annotated[EntityNameRepository, Depends(get_repository(EntityNameRepository))]
+
+
 @router.get("")
-def index(person_id: UUID, db: Session = Depends(get_db)) -> List[EntityName]:
-    objs = db.query(bridg.EntityName).filter_by(biologic_entity_id=person_id)
-    res = [EntityName.model_validate(o) for o in objs]
-    return res
+def index(person_id: UUID, repo: EntityNameRepositoryDep) -> List[EntityName]:
+    objs = repo.all(bridg.EntityName.biologic_entity_id == person_id)
+    return [EntityName.model_validate(o) for o in objs]
 
 
 @router.post("")
-def create(person_id: UUID, data: EntityNameData, db: Session = Depends(get_db)) -> EntityName:
+def create(person_id: UUID, data: EntityNameData, repo: EntityNameRepositoryDep) -> EntityName:
     obj = data.model_dump_sa()
     obj.biologic_entity_id = person_id
-
-    db.add(obj)
-    db.commit()
-
+    obj = repo.create(obj)
     return EntityName.model_validate(obj)
 
 
 @router.patch("/{name_id:uuid}")
-def update(person_id: UUID, name_id: UUID, data: EntityNameData, db: Session = Depends(get_db)) -> EntityName:
-    obj = db.query(bridg.EntityName).filter_by(id=name_id).one()
-
-    data.model_update_sa(obj)
-
-    db.add(obj)
-    db.commit()
-
+def update(person_id: UUID, name_id: UUID, data: EntityNameData, repo: EntityNameRepositoryDep) -> EntityName:
+    obj = repo.one(name_id)
+    obj = data.model_update_sa(obj)
+    obj = repo.update(obj)
     return EntityName.model_validate(obj)
 
 
 @router.delete("/{name_id:uuid}")
-def delete(person_id: UUID, name_id: UUID, db: Session = Depends(get_db)):
-    db.query(bridg.EntityName).filter_by(id=name_id).delete()
-    db.commit()
+def delete(person_id: UUID, name_id: UUID, repo: EntityNameRepositoryDep):
+    repo.delete(name_id)

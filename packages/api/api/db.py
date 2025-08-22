@@ -1,8 +1,9 @@
 import os
 
 from common.env import load_env
+from fastapi import Depends
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session, sessionmaker
 
 load_env(prefix="BRIDG")
 
@@ -19,3 +20,10 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+def get_repository(cls):
+    def f(db: Session = Depends(get_db)):
+        return cls(db)
+
+    return f
