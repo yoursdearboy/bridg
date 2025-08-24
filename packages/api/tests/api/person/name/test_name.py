@@ -7,7 +7,7 @@ from tests.factory import EntityNameFactory, PersonFactory
 client = TestClient(app)
 
 
-def test_person_names_index():
+def test_person_name_index():
     person = PersonFactory.create_sync()
     response = client.get(f"/persons/{person.id}/names")
     assert response.status_code == 200
