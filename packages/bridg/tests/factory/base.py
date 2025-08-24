@@ -1,13 +1,14 @@
 from typing import TypeVar
 
-from bridg.db import Base
 from polyfactory.factories.sqlalchemy_factory import SQLAlchemyFactory
+
+from bridg.db import Base
 
 T = TypeVar("T", bound=Base)
 
 
 class BaseFactory(SQLAlchemyFactory[T]):
     __is_base_factory__ = True
-    __set_relationships__ = False
-    __set_association_proxy__ = False
+    __set_relationships__ = True
+    __set_association_proxy__ = True
     __check_model__ = True
