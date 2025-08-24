@@ -8,7 +8,8 @@ client = TestClient(app)
 
 
 def test_person_name_index():
-    person = PersonFactory.create_sync()
+    name = EntityNameFactory.batch(2)
+    person = PersonFactory.create_sync(name=name)
     response = client.get(f"/persons/{person.id}/names")
     assert response.status_code == 200
     assert response.json() == [
@@ -23,7 +24,7 @@ def test_person_name_index():
             "prefix": en.prefix,
             "suffix": en.suffix,
         }
-        for en in person.name
+        for en in name
     ]
 
 
@@ -40,23 +41,18 @@ def test_person_name_create():
         "suffix": en.suffix,
     }
     response = client.post(f"/persons/{person.id}/names", json=data)
-    obj = person.primary_name
-    assert obj
     assert response.status_code == 200
+    assert len(person.name) == 1
+    obj = person.name[0]
+    assert data.items() <= obj.__dict__.items()
     assert response.json() == {
         "id": str(obj.id),
-        "label": str(en),
-        "use": None,
-        "family": en.family,
-        "given": en.given,
-        "middle": en.middle,
-        "patronymic": en.patronymic,
-        "prefix": en.prefix,
-        "suffix": en.suffix,
+        "label": str(obj),
+        **data,
     }
 
 
-def test_person_name_update():
+def test_person_name_update(session: Session):
     en = EntityNameFactory.build()
     en2 = EntityNameFactory.build()
     person = PersonFactory.create_sync(name=[en])
@@ -70,26 +66,22 @@ def test_person_name_update():
         "suffix": en2.suffix,
     }
     response = client.patch(f"/persons/{person.id}/names/{en.id}", json=patch)
-    obj = person.primary_name
-    assert obj
+    session.expire_all()
     assert response.status_code == 200
+    assert len(person.name) == 1
+    obj = person.name[0]
+    assert patch.items() <= obj.__dict__.items()
     assert response.json() == {
         "id": str(obj.id),
-        "label": str(en2),
-        "use": None,
-        "family": en2.family,
-        "given": en2.given,
-        "middle": en2.middle,
-        "patronymic": en2.patronymic,
-        "prefix": en2.prefix,
-        "suffix": en2.suffix,
+        "label": str(obj),
+        **patch,
     }
 
 
 def test_person_name_delete(session: Session):
     en = EntityNameFactory.build()
     person = PersonFactory.create_sync(name=[en])
-    assert len(person.name) == 1
-    client.delete(f"/persons/{person.id}/names/{en.id}")
-    session.refresh(person)
-    assert len(person.name) == 0
+    response = client.delete(f"/persons/{person.id}/names/{en.id}")
+    session.expire_all()
+    assert response.status_code == 200
+    assert person.name == []
