@@ -6,7 +6,7 @@ from api.main import app
 from tests.factory import StudyProtocolVersionFactory, StudySubjectFactory
 from tests.factory.common.entity_name import EntityNameFactory
 from tests.factory.common.person import PersonFactory
-from tests.utils import _date_to_str, _enum_to_str, _or
+from tests.utils import _or, date_str, enum_str
 
 client = TestClient(app)
 
@@ -25,14 +25,12 @@ def test_subject_index():
     assert response.json() == [
         {
             "id": str(s.id),
-            "status": s.status.value if s.status else None,
-            "status_date": s.status_date.isoformat() if s.status_date else None,
+            "status": _or(enum_str, s.status),
+            "status_date": _or(date_str, s.status_date),
             "performing_biologic_entity": {
                 "id": str(p.id),
-                "administrative_gender_code": p.administrative_gender_code.value
-                if p.administrative_gender_code
-                else None,
-                "birth_date": str(p.birth_date) if p.birth_date else None,
+                "administrative_gender_code": _or(enum_str, p.administrative_gender_code),
+                "birth_date": _or(date_str, p.birth_date),
                 "death_date": None,
                 "death_date_estimated_indicator": None,
                 "death_indicator": False,
@@ -56,12 +54,12 @@ def test_subject_show():
     assert response.status_code == 200
     assert response.json() == {
         "id": str(s.id),
-        "status": s.status.value if s.status else None,
-        "status_date": s.status_date.isoformat() if s.status_date else None,
+        "status": _or(enum_str, s.status),
+        "status_date": _or(date_str, s.status_date),
         "performing_biologic_entity": {
             "id": str(p.id),
-            "administrative_gender_code": p.administrative_gender_code.value if p.administrative_gender_code else None,
-            "birth_date": str(p.birth_date) if p.birth_date else None,
+            "administrative_gender_code": _or(enum_str, p.administrative_gender_code),
+            "birth_date": _or(date_str, p.birth_date),
             "death_date": None,
             "death_date_estimated_indicator": None,
             "death_indicator": False,
@@ -85,11 +83,11 @@ def test_subject_create(session: Session):
     s = StudySubjectFactory.build(performing_biologic_entity=p, performing_organization=None)
     en = p.name[0]
     data = {
-        "status": _or(s.status, _enum_to_str),
-        "status_date": _or(s.status_date, _date_to_str),
+        "status": _or(enum_str, s.status),
+        "status_date": _or(date_str, s.status_date),
         "performing_biologic_entity": {
-            "administrative_gender_code": _or(p.administrative_gender_code, _enum_to_str),
-            "birth_date": _or(p.birth_date, _date_to_str),
+            "administrative_gender_code": _or(enum_str, p.administrative_gender_code),
+            "birth_date": _or(date_str, p.birth_date),
             "name": {
                 "family": en.family,
                 "given": en.given,
@@ -109,12 +107,12 @@ def test_subject_create(session: Session):
     # assert data.items() <= obj.__dict__.items()
     assert response.json() == {
         "id": str(obj.id),
-        "status": _or(s.status, _enum_to_str),
-        "status_date": _or(s.status_date, _date_to_str),
+        "status": _or(enum_str, s.status),
+        "status_date": _or(date_str, s.status_date),
         "performing_biologic_entity": {
-            "id": _or(obj.performing_biologic_entity, lambda x: str(x.id)),
-            "administrative_gender_code": _or(p.administrative_gender_code, _enum_to_str),
-            "birth_date": _or(p.birth_date, _date_to_str),
+            "id": _or(lambda x: str(x.id), obj.performing_biologic_entity),
+            "administrative_gender_code": _or(enum_str, p.administrative_gender_code),
+            "birth_date": _or(date_str, p.birth_date),
             "death_date": None,
             "death_date_estimated_indicator": None,
             "death_indicator": None,
