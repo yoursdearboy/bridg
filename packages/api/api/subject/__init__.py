@@ -3,7 +3,7 @@ from typing import Annotated, List, Optional
 from uuid import UUID
 
 import bridg
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import field_validator
 from sqlalchemy.orm import Session
 
@@ -155,6 +155,7 @@ def index(space_id: UUID, repo: StudySubjectRepositoryDep) -> List[StudySubject]
 def show(space_id: UUID, subject_id: UUID, repo: StudySubjectRepositoryDep) -> Optional[StudySubject]:
     if obj := repo.one_or_none(subject_id):
         return StudySubject.model_validate(obj)
+    raise HTTPException(status_code=404)
 
 
 @router.post("")

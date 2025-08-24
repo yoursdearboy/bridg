@@ -71,6 +71,13 @@ def test_subject_show():
     }
 
 
+def test_subject_show_404():
+    space = StudyProtocolVersionFactory.create_sync()
+    id = "12345678-1234-5678-1234-567812345678"
+    response = client.get(f"/spaces/{space.id}/subjects/{id}")
+    assert response.status_code == 404
+
+
 def test_subject_create(session: Session):
     space = StudyProtocolVersionFactory.create_sync()
     sspvr = space.executing_study_site_protocol_version_relationship[0]
