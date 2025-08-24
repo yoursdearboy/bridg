@@ -1,21 +1,20 @@
-from typing import List, Optional
+from typing import Iterable, Optional
 from uuid import UUID
 
 from bridg import (
     BiologicEntity,
     EntityName,
+    Repository,
     StudySiteProtocolVersionRelationship,
     StudySubject,
     StudySubjectProtocolVersionRelationship,
 )
-from sqlalchemy.orm import Session
 
 
-class StudySubjectRepository:
-    def __init__(self, db: Session) -> None:
-        self.db = db
+class StudySubjectRepository(Repository[StudySubject]):
+    _sa = StudySubject
 
-    def list(self, space_id: Optional[UUID] = None) -> List[StudySubject]:
+    def find_by(self, space_id: Optional[UUID] = None) -> Iterable[StudySubject]:
         q = self.db.query(StudySubject)
         if space_id:
             q = (
@@ -23,17 +22,9 @@ class StudySubjectRepository:
                 .join(StudySubjectProtocolVersionRelationship.assigning_study_site_protocol_version_relationship)
                 .filter(StudySiteProtocolVersionRelationship.executed_study_protocol_version_id == space_id)
             )
-        return q.all()
+        return q
 
-    def get(self, id: UUID) -> Optional[StudySubject]:
-        return self.db.query(StudySubject).filter_by(id=id).one_or_none()
-
-    def create(self, data: StudySubject) -> StudySubject:
-        self.db.add(data)
-        self.db.commit()
-        return data
-
-    def lookup(self, data: StudySubject) -> List[StudySubject]:
+    def lookup(self, data: StudySubject) -> Iterable[StudySubject]:
         q = self.db.query(BiologicEntity)
         if (pbe := data.performing_biologic_entity) and (n := next(iter(pbe.name), None)):
             q = q.filter(BiologicEntity.name.any(EntityName.family.ilike(f"%{n.family}%")))

@@ -8,17 +8,9 @@ from pydantic import field_validator
 from sqlalchemy.orm import Session
 
 from api.base_model import BaseModel
-from api.db import get_db
+from api.db import get_db, get_repository
 
 from .service import StudySubjectRepository
-
-
-def get_study_subject_repository(db: Session = Depends(get_db)):
-    return StudySubjectRepository(db)
-
-
-StudySubjectRepositoryDep = Annotated[StudySubjectRepository, Depends(get_study_subject_repository)]
-
 
 router = APIRouter(prefix="/subjects", tags=["subjects"])
 
@@ -150,15 +142,18 @@ class FoundStudySubject(BaseModel):
         return str(value)
 
 
+StudySubjectRepositoryDep = Annotated[StudySubjectRepository, Depends(get_repository(StudySubjectRepository))]
+
+
 @router.get("")
 def index(space_id: UUID, repo: StudySubjectRepositoryDep) -> List[StudySubject]:
-    objs = repo.list(space_id=space_id)
+    objs = repo.find_by(space_id=space_id)
     return [StudySubject.model_validate(obj) for obj in objs]
 
 
 @router.get("/{subject_id:uuid}")
 def show(space_id: UUID, subject_id: UUID, repo: StudySubjectRepositoryDep) -> Optional[StudySubject]:
-    if obj := repo.get(subject_id):
+    if obj := repo.one_or_none(subject_id):
         return StudySubject.model_validate(obj)
 
 
