@@ -8,9 +8,19 @@ GET {{base}}/spaces
 
 ## Sites
 
-### Index sites in the space
+### Index space sites
 
 GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/sites
+
+## Activities
+
+### List space activities
+
+GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/activity
+
+### Show space activitiy result
+
+GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/activity/f83ddbf8-dd6d-4737-98e3-a5795995bbd8/result
 
 ## Subjects
 
@@ -57,6 +67,16 @@ Content-Type: application/json
     }
   }
 }
+
+### Subject observations
+
+#### List subject observations
+
+GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/556c2b59-edc8-41db-961a-f08ea0d3b4ac/observation
+
+#### Show subject observation results
+
+GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/556c2b59-edc8-41db-961a-f08ea0d3b4ac/observation/e5450cdd-0f79-472f-928b-153b9e96d30f/result
 
 ## Persons
 

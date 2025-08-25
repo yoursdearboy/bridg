@@ -11,6 +11,7 @@ from api.base_model import BaseModel
 from api.db import get_db, get_repository
 from api.model import EntityName, EntityNameData
 
+from . import observation
 from .service import StudySubjectRepository
 
 router = APIRouter(prefix="/subjects", tags=["subjects"])
@@ -157,4 +158,6 @@ def lookup(space_id: UUID, data: LookupStudySubject, repo: StudySubjectRepositor
     return [FoundStudySubject.model_validate(obj) for obj in objs]
 
 
-openapi_tag = [{"name": "subjects"}]
+router.include_router(observation.router, prefix="/{subject_id:uuid}")
+
+openapi_tag = [{"name": "subjects"}, *observation.openapi_tags]
