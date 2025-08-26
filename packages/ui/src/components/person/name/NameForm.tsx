@@ -10,29 +10,29 @@ import { useForm } from "@mantine/form";
 
 import type { EntityNameData } from "api-ts";
 import { useTranslation } from "react-i18next";
-import { useMutation } from "@tanstack/react-query";
-import api from "@/api";
+
 interface NameFormProps {
-  personId: string;
   initialValues: EntityNameData;
-  onSuccess: () => void;
   onSubmit: (values: EntityNameData) => void;
   onClose: () => void;
+  mutation: {
+    isPending: boolean;
+    error: Error | null;
+    isError?: boolean;
+  };
 }
 
 export const NameForm = ({
   initialValues,
-
-  personId,
-  onSuccess,
   onSubmit,
   onClose,
+  mutation,
 }: NameFormProps) => {
   const { t } = useTranslation();
 
   const form = useForm<EntityNameData>({
     initialValues: {
-      family: initialValues.family,
+      family: initialValues.family || "",
       given: initialValues.given || "",
       middle: initialValues.middle || "",
       patronymic: initialValues.patronymic || "",
@@ -50,20 +50,12 @@ export const NameForm = ({
           : t("fieldRequiredMessage", { fieldName: t("Name.given") }),
     },
   });
-  const mutation = useMutation({
-    mutationFn: (entityNameData: EntityNameData) =>
-      api.persons.createPersonsPersonIdNamesPost({
-        personId,
-        entityNameData,
-      }),
-    onSuccess,
-  });
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
       <Stack gap="md" pos="relative">
         <LoadingOverlay visible={mutation.isPending} />
-        {mutation.isError && (
+        {mutation.error && (
           <Alert color="red" mb="md">
             {mutation.error.message}
           </Alert>

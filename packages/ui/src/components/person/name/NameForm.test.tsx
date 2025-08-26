@@ -9,11 +9,14 @@ describe("NameForm", () => {
       family: "Moly",
       given: "Holy",
     };
-
+    const mockMutation = {
+      isPending: false,
+      error: null,
+      isError: false,
+    };
     const { asFragment } = renderComponent(
       <NameForm
-        personId="123"
-        onSuccess={() => {}}
+        mutation={mockMutation}
         initialValues={initialValues}
         onClose={() => {}}
         onSubmit={() => {}}
