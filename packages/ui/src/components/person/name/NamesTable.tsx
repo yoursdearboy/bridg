@@ -1,10 +1,11 @@
-import api from "@/api";
-import { Box, Modal, Table } from "@mantine/core";
+import { Table, Box, Modal } from "@mantine/core";
 import { useDisclosure, useHover } from "@mantine/hooks";
-import { IconPencil, IconX } from "@tabler/icons-react";
 import type { EntityName } from "api-ts";
-import { t } from "i18next";
+import api from "@/api";
+import { IconX, IconPencil } from "@tabler/icons-react";
+
 import { EditNameForm } from "./EditNameForm";
+import { t } from "i18next";
 
 interface NamesTableRowProps {
   name: EntityName;
@@ -16,6 +17,7 @@ interface NamesTableRowProps {
 const NamesTableRow = ({
   name,
   personId,
+
   onDeleteSuccess,
   onUpdateSuccess,
 }: NamesTableRowProps) => {

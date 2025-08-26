@@ -1,16 +1,17 @@
-import api from "@/api";
 import {
-  Button,
+  Modal,
+  LoadingOverlay,
+  Text,
   Card,
   Group,
-  LoadingOverlay,
-  Modal,
-  Text,
+  Button,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
+
 import { NamesTable } from "./NamesTable";
+import api from "@/api";
+import { useTranslation } from "react-i18next";
 import { NewNameForm } from "./NewNameForm";
 
 interface NamesCardProps {
