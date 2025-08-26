@@ -23,6 +23,8 @@ export const EditNameForm = ({ personId, name, onClose, onSuccess }: Props) => {
 
   return (
     <NameForm
+      personId={personId}
+      onSuccess={onSuccess}
       initialValues={name}
       onSubmit={(data) => mutation.mutate(data)}
       onClose={onClose}

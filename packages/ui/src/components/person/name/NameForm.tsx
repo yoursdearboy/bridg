@@ -1,17 +1,30 @@
-import { Button, Group, TextInput, Stack } from "@mantine/core";
+import {
+  Button,
+  Group,
+  TextInput,
+  Alert,
+  Stack,
+  LoadingOverlay,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import type { EntityNameData } from "api-ts";
 import { useTranslation } from "react-i18next";
-
+import { useMutation } from "@tanstack/react-query";
+import api from "@/api";
 interface NameFormProps {
+  personId: string;
   initialValues: EntityNameData;
+  onSuccess: () => void;
   onSubmit: (values: EntityNameData) => void;
   onClose: () => void;
 }
 
 export const NameForm = ({
   initialValues,
+
+  personId,
+  onSuccess,
   onSubmit,
   onClose,
 }: NameFormProps) => {
@@ -37,10 +50,24 @@ export const NameForm = ({
           : t("fieldRequiredMessage", { fieldName: t("Name.given") }),
     },
   });
+  const mutation = useMutation({
+    mutationFn: (entityNameData: EntityNameData) =>
+      api.persons.createPersonsPersonIdNamesPost({
+        personId,
+        entityNameData,
+      }),
+    onSuccess,
+  });
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
       <Stack gap="md" pos="relative">
+        <LoadingOverlay visible={mutation.isPending} />
+        {mutation.isError && (
+          <Alert color="red" mb="md">
+            {mutation.error.message}
+          </Alert>
+        )}
         <Group grow>
           <TextInput
             label={t("Name.family")}

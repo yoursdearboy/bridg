@@ -12,6 +12,8 @@ describe("NameForm", () => {
 
     const { asFragment } = renderComponent(
       <NameForm
+        personId="123"
+        onSuccess={() => {}}
         initialValues={initialValues}
         onClose={() => {}}
         onSubmit={() => {}}
