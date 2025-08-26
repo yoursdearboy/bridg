@@ -19,6 +19,7 @@ describe("NamesTable", () => {
         ]}
         personId="1"
         onDeleteSuccess={() => {}}
+        onUpdateSuccess={() => {}}
       />
     );
 
