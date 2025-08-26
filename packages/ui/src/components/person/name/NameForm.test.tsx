@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { NameForm } from "./NameForm";
 import { renderComponent } from "@/test-utils";
-import type { EntityNameData } from "bridg-ts";
+import type { EntityNameData } from "api-ts";
 
 describe("NameForm", () => {
   it("matches snapshot", () => {
