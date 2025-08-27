@@ -61,8 +61,8 @@ const NamesTableRow = ({
   return (
     <>
       <Table.Tr ref={ref}>
-        <Table.Td px={0}>{name.label}</Table.Td>
-        <Table.Td px={0} style={{ width: 80, display: "flex", gap: 8 }}>
+        <Table.Td>{name.label}</Table.Td>
+        <Table.Td style={{ width: 80, display: "flex", gap: 8 }}>
           {hovered && (
             <>
               <IconPencil size={16} color="green" onClick={handleEdit} />
@@ -98,7 +98,7 @@ export const NamesTable = ({
   invalidateQuery,
 }: NamesTableProps) => {
   return (
-    <Box pt="md">
+    <Box pt="xs">
       <Table highlightOnHover>
         <Table.Tbody>
           {names.length === 0 ? (

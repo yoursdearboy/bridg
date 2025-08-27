@@ -75,10 +75,12 @@ export const NamesCard = ({
 
   return (
     <>
-      <Card withBorder shadow="sm" radius="md">
+      <Card withBorder shadow="sm" radius="md" padding="xs">
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
-            <Text fw={500}>{t("NamesCard.title")}</Text>
+            <Text fw={500} px="xs">
+              {t("NamesCard.title")}
+            </Text>
             <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
               {t("add")}
             </Button>
