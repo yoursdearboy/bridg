@@ -30,10 +30,14 @@
       "suffix": "Суффикс"
     },
     "SubjectIndexPage": {
+      "breadcrumb": "Пациенты",
       "info": "Информация",
       "patients": "Пациенты",
       "newPatient": "Новый пациент",
       "actions": "Действия"
+    },
+    "SubjectNewPage" : {
+      "breadcrumb": "Новый пациент"
     },
     "SubjectInfoCard": {
       "title": "Информация об объект наблюдения",

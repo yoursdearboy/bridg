@@ -31,9 +31,13 @@
     },
     "SubjectIndexPage": {
       "info": "Info",
+      "breadcrumb": "Patients",
       "patients": "Patients",
       "newPatient": "New patient",
       "actions": "Actions"
+    },
+    "SubjectNewPage" : {
+      "breadcrumb": "New Patient"
     },
     "SubjectInfoCard": {
       "title": "Subject information",
