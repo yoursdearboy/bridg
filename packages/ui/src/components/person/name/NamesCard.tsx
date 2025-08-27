@@ -8,56 +8,30 @@ import {
   Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import {
-  useQuery,
-  useQueryClient,
-  type UseQueryResult,
-} from "@tanstack/react-query";
+import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { NamesTable } from "./NamesTable";
 import { NewNameForm } from "./NewNameForm";
 import type { EntityName } from "api-ts";
 
 export const NamesCardWrapper = ({ personId }: { personId: string }) => {
-  const queryClient = useQueryClient();
-
-  const queryKey = ["person", personId, "names"];
-
   const query = useQuery({
-    queryKey,
+    queryKey: ["person", personId, "names"],
     queryFn: () =>
       api.persons.indexPersonsPersonIdNamesGet({
         personId,
       }),
   });
 
-  const invalidateQuery = () => {
-    queryClient
-      .invalidateQueries({ queryKey })
-      .then(close)
-      .catch((err) => console.error("Query invalidation failed:", err));
-  };
-
-  return (
-    <NamesCard
-      personId={personId}
-      query={query}
-      invalidateQuery={invalidateQuery}
-    />
-  );
+  return <NamesCard personId={personId} query={query} />;
 };
 
 interface NamesCardProps {
   personId: string;
   query: UseQueryResult<EntityName[], Error>;
-  invalidateQuery: () => void;
 }
 
-export const NamesCard = ({
-  personId,
-  query,
-  invalidateQuery,
-}: NamesCardProps) => {
+export const NamesCard = ({ personId, query }: NamesCardProps) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { t } = useTranslation();
 
@@ -86,11 +60,7 @@ export const NamesCard = ({
             </Button>
           </Group>
         </Card.Section>
-        <NamesTable
-          personId={personId}
-          names={names}
-          invalidateQuery={invalidateQuery}
-        />
+        <NamesTable personId={personId} names={names} />
       </Card>
       <Modal
         opened={opened}
@@ -102,10 +72,7 @@ export const NamesCard = ({
         <NewNameForm
           personId={personId}
           onCancel={close}
-          onSuccess={() => {
-            close();
-            invalidateQuery();
-          }}
+          onSuccess={() => close()}
         />
       </Modal>
     </>

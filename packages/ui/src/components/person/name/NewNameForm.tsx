@@ -11,6 +11,7 @@ interface Props {
 
 export const NewNameForm = ({ personId, onCancel, onSuccess }: Props) => {
   const mutation = useMutation({
+    mutationKey: ["person", personId, "names"],
     mutationFn: (data: EntityNameData) =>
       api.persons.createPersonsPersonIdNamesPost({
         personId,

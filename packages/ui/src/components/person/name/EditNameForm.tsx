@@ -17,6 +17,7 @@ export const EditNameForm = ({
   onSuccess,
 }: Props) => {
   const mutation = useMutation({
+    mutationKey: ["person", personId, "names", name.id],
     mutationFn: (data: EntityNameData) =>
       api.persons.updatePersonsPersonIdNamesNameIdPatch({
         personId,
