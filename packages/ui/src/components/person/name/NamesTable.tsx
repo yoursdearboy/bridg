@@ -13,6 +13,12 @@ interface NamesTableRowProps {
   onDeleteSuccess: () => void;
   onUpdateSuccess: () => void;
 }
+const deleteName = async (personId: string, nameId: string) => {
+  await api.persons.deletePersonsPersonIdNamesNameIdDelete({
+    personId,
+    nameId,
+  });
+};
 
 const NamesTableRow = ({
   name,
@@ -27,11 +33,7 @@ const NamesTableRow = ({
     const ok = window.confirm("Удалить выбранное значение?");
     if (!ok) return;
 
-    await api.persons.deletePersonsPersonIdNamesNameIdDelete({
-      personId,
-      nameId: name.id,
-    });
-
+    await deleteName(personId, name.id);
     onDeleteSuccess();
   };
   const handleEditClick = () => {
