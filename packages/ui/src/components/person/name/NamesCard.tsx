@@ -116,8 +116,7 @@ export const NamesCard = ({
       >
         <NewNameForm
           personId={personId}
-          onClose={close}
-          onSuccess={invalidateQuery}
+          onCancel={close}
         />
       </Modal>
     </>

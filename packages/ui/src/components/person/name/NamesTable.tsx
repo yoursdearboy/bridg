@@ -45,7 +45,7 @@ const NamesTableRow = ({
         <EditNameForm
           personId={personId}
           name={name}
-          onClose={close}
+          onCancel={close}
           onSuccess={() => {
             close();
             onUpdateSuccess();

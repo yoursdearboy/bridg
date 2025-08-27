@@ -13,13 +13,13 @@ import { useTranslation } from "react-i18next";
 
 interface NameFormProps {
   initialValues: EntityNameData;
-  onClose: () => void;
+  onCancel: () => void;
   mutation: UseMutationResult<EntityName, Error, EntityNameData, unknown>;
 }
 
 export const NameForm = ({
   initialValues,
-  onClose,
+  onCancel,
   mutation,
 }: NameFormProps) => {
   const { t } = useTranslation();
@@ -94,7 +94,7 @@ export const NameForm = ({
         <Group justify="flex-end" mt="md">
           <Button
             variant="outline"
-            onClick={onClose}
+            onClick={onCancel}
             disabled={mutation.isPending}
           >
             {t("cancel")}
