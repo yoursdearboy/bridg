@@ -1,34 +1,43 @@
-import api from "@/api";
 import {
   Button,
   Group,
   TextInput,
+  Alert,
   Stack,
   LoadingOverlay,
-  Alert,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useMutation } from "@tanstack/react-query";
+
 import type { EntityNameData } from "api-ts";
 import { useTranslation } from "react-i18next";
 
 interface NameFormProps {
-  personId: string;
+  initialValues: EntityNameData;
+  onSubmit: (values: EntityNameData) => void;
   onClose: () => void;
-  onSuccess: () => void;
+  mutation: {
+    isPending: boolean;
+    error: Error | null;
+    isError?: boolean;
+  };
 }
 
-export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
+export const NameForm = ({
+  initialValues,
+  onSubmit,
+  onClose,
+  mutation,
+}: NameFormProps) => {
   const { t } = useTranslation();
 
   const form = useForm<EntityNameData>({
     initialValues: {
-      family: "",
-      given: "",
-      middle: "",
-      patronymic: "",
-      prefix: "",
-      suffix: "",
+      family: initialValues.family || "",
+      given: initialValues.given || "",
+      middle: initialValues.middle || "",
+      patronymic: initialValues.patronymic || "",
+      prefix: initialValues.prefix || "",
+      suffix: initialValues.suffix || "",
     },
     validate: {
       family: (value) =>
@@ -42,30 +51,15 @@ export const NameForm = ({ personId, onClose, onSuccess }: NameFormProps) => {
     },
   });
 
-  const mutation = useMutation({
-    mutationFn: (entityNameData: EntityNameData) =>
-      api.persons.createPersonsPersonIdNamesPost({
-        personId,
-        entityNameData,
-      }),
-
-    onSuccess,
-  });
-
-  const handleSubmit = (values: EntityNameData) => {
-    mutation.mutate(values);
-  };
-
   return (
-    <form onSubmit={form.onSubmit(handleSubmit)}>
+    <form onSubmit={form.onSubmit(onSubmit)}>
       <Stack gap="md" pos="relative">
         <LoadingOverlay visible={mutation.isPending} />
-        {mutation.isError && (
+        {mutation.error && (
           <Alert color="red" mb="md">
             {mutation.error.message}
           </Alert>
         )}
-
         <Group grow>
           <TextInput
             label={t("Name.family")}

@@ -1,14 +1,25 @@
 import { describe, it, expect } from "vitest";
 import { NameForm } from "./NameForm";
 import { renderComponent } from "@/test-utils";
+import type { EntityNameData } from "api-ts";
 
 describe("NameForm", () => {
   it("matches snapshot", () => {
+    const initialValues: EntityNameData = {
+      family: "Moly",
+      given: "Holy",
+    };
+    const mockMutation = {
+      isPending: false,
+      error: null,
+      isError: false,
+    };
     const { asFragment } = renderComponent(
       <NameForm
-        personId="2703d0bc-7ed4-497c-91c6-30d86a8eb630"
+        mutation={mockMutation}
+        initialValues={initialValues}
         onClose={() => {}}
-        onSuccess={() => {}}
+        onSubmit={() => {}}
       />
     );
 
