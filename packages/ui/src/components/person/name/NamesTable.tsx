@@ -1,11 +1,10 @@
-import { Table, Box, Modal } from "@mantine/core";
+import { Box, Modal, Table } from "@mantine/core";
 import { useDisclosure, useHover } from "@mantine/hooks";
+import { IconPencil, IconX } from "@tabler/icons-react";
 import type { EntityName } from "api-ts";
-import api from "@/api";
-import { IconX, IconPencil } from "@tabler/icons-react";
-
-import { EditNameForm } from "./EditNameForm";
 import { t } from "i18next";
+import { EditNameForm } from "./EditNameForm";
+import api from "@/api";
 
 interface NamesTableRowProps {
   name: EntityName;

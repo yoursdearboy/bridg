@@ -1,13 +1,12 @@
 import {
+  Alert,
   Button,
   Group,
-  TextInput,
-  Alert,
-  Stack,
   LoadingOverlay,
+  Stack,
+  TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-
 import type { EntityNameData } from "api-ts";
 import { useTranslation } from "react-i18next";
 

@@ -1,7 +1,7 @@
-import { describe, it, expect } from "vitest";
-import { NameForm } from "./NameForm";
 import { renderComponent } from "@/test-utils";
 import type { EntityNameData } from "api-ts";
+import { describe, expect, it } from "vitest";
+import { NameForm } from "./NameForm";
 
 describe("NameForm", () => {
   it("matches snapshot", () => {

@@ -1,6 +1,5 @@
-import { describe, it, expect } from "vitest";
-
 import { renderComponent } from "@/test-utils";
+import { describe, expect, it } from "vitest";
 import { NamesTable } from "./NamesTable";
 
 describe("NamesTable", () => {

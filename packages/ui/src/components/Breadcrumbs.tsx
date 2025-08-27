@@ -1,5 +1,5 @@
-import { Breadcrumbs as MantineBreadcrumbs, Anchor, Text } from "@mantine/core";
-import { Link, useMatches, type AnyRouteMatch } from "@tanstack/react-router";
+import { Anchor, Breadcrumbs as MantineBreadcrumbs, Text } from "@mantine/core";
+import { type AnyRouteMatch, Link, useMatches } from "@tanstack/react-router";
 
 type Breadcrumb = string | ((match: AnyRouteMatch) => string);
 type Context = { breadcrumb?: Breadcrumb };

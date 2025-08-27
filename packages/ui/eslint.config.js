@@ -26,6 +26,19 @@ export default tseslint.config([
     },
     rules: {
       "@typescript-eslint/no-unnecessary-condition": "error",
+      "sort-imports": [
+        "error",
+        {
+          ignoreCase: true,
+          ignoreDeclarationSort: true,
+          ignoreMemberSort: false,
+          memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+        },
+      ],
+      "padding-line-between-statements": [
+        "error",
+        { blankLine: "never", prev: "import", next: "import" },
+      ],
     },
   },
 ]);

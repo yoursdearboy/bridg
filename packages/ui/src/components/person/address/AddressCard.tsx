@@ -1,8 +1,8 @@
 import api from "@/api";
 import { Button, Card, Group, Text } from "@mantine/core";
-import { useQueryClient, useQuery } from "@tanstack/react-query";
-import { AddressesTable } from "./AddressTable";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { AddressesTable } from "./AddressTable";
 
 interface AddressesTableProps {
   personId: string;

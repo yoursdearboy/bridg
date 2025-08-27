@@ -2,11 +2,11 @@ import { MantineProvider } from "@mantine/core";
 import { DatesProvider } from "@mantine/dates";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
+  type AnyRoute,
   createRootRoute,
   createRoute,
   createRouter,
   RouterProvider,
-  type AnyRoute,
 } from "@tanstack/react-router";
 import { act, render } from "@testing-library/react";
 import "./i18n";

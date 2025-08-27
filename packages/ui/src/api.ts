@@ -1,9 +1,9 @@
 import {
-  DefaultApi as SpacesApi,
   Configuration,
-  SubjectsApi,
-  SitesApi,
   PersonsApi,
+  SitesApi,
+  DefaultApi as SpacesApi,
+  SubjectsApi,
 } from "api-ts";
 
 const config = new Configuration({
