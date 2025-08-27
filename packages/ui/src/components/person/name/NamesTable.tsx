@@ -61,13 +61,20 @@ const NamesTableRow = ({
   return (
     <>
       <Table.Tr ref={ref}>
-        <Table.Td>{name.label}</Table.Td>
-        <Table.Td style={{ width: 80, display: "flex", gap: 8 }}>
+        <Table.Td
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingRight: 20,
+          }}
+        >
+          {name.label}
           {hovered && (
-            <>
+            <div style={{ display: "flex", gap: 8 }}>
               <IconPencil size={16} color="green" onClick={handleEdit} />
               <IconX size={16} color="red" onClick={handleDelete} />
-            </>
+            </div>
           )}
         </Table.Td>
       </Table.Tr>
