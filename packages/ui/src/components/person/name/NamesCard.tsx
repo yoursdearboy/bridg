@@ -53,7 +53,11 @@ interface NamesCardProps {
   invalidateQuery: () => void;
 }
 
-export const NamesCard = ({ personId, invalidateQuery }: NamesCardProps) => {
+export const NamesCard = ({
+  personId,
+  query,
+  invalidateQuery,
+}: NamesCardProps) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { t } = useTranslation();
 
@@ -101,6 +105,10 @@ export const NamesCard = ({ personId, invalidateQuery }: NamesCardProps) => {
         <NewNameForm
           personId={personId}
           onCancel={close}
+          onSuccess={() => {
+            close();
+            invalidateQuery();
+          }}
         />
       </Modal>
     </>
