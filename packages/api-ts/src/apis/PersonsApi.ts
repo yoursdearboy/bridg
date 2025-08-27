@@ -68,6 +68,11 @@ export interface DeletePersonsPersonIdPostalAddressesAddressIdDeleteRequest {
     addressId: string;
 }
 
+export interface DeletePersonsPersonIdTelecommunicationAddressesAddressIdDeleteRequest {
+    personId: string;
+    addressId: string;
+}
+
 export interface IndexPersonsPersonIdNamesGetRequest {
     personId: string;
 }
@@ -94,6 +99,12 @@ export interface UpdatePersonsPersonIdPostalAddressesAddressIdPatchRequest {
     personId: string;
     addressId: string;
     postalAddressData: PostalAddressData;
+}
+
+export interface UpdatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRequest {
+    personId: string;
+    addressId: string;
+    telecommunicationAddress: TelecommunicationAddress;
 }
 
 /**
@@ -337,6 +348,55 @@ export class PersonsApi extends runtime.BaseAPI {
      */
     async deletePersonsPersonIdPostalAddressesAddressIdDelete(requestParameters: DeletePersonsPersonIdPostalAddressesAddressIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
         const response = await this.deletePersonsPersonIdPostalAddressesAddressIdDeleteRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Delete
+     */
+    async deletePersonsPersonIdTelecommunicationAddressesAddressIdDeleteRaw(requestParameters: DeletePersonsPersonIdTelecommunicationAddressesAddressIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+        if (requestParameters['personId'] == null) {
+            throw new runtime.RequiredError(
+                'personId',
+                'Required parameter "personId" was null or undefined when calling deletePersonsPersonIdTelecommunicationAddressesAddressIdDelete().'
+            );
+        }
+
+        if (requestParameters['addressId'] == null) {
+            throw new runtime.RequiredError(
+                'addressId',
+                'Required parameter "addressId" was null or undefined when calling deletePersonsPersonIdTelecommunicationAddressesAddressIdDelete().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/persons/{person_id}/telecommunication_addresses/{address_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+        urlPath = urlPath.replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<any>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
+    }
+
+    /**
+     * Delete
+     */
+    async deletePersonsPersonIdTelecommunicationAddressesAddressIdDelete(requestParameters: DeletePersonsPersonIdTelecommunicationAddressesAddressIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+        const response = await this.deletePersonsPersonIdTelecommunicationAddressesAddressIdDeleteRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -595,6 +655,65 @@ export class PersonsApi extends runtime.BaseAPI {
      */
     async updatePersonsPersonIdPostalAddressesAddressIdPatch(requestParameters: UpdatePersonsPersonIdPostalAddressesAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostalAddress> {
         const response = await this.updatePersonsPersonIdPostalAddressesAddressIdPatchRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update
+     */
+    async updatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRaw(requestParameters: UpdatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+        if (requestParameters['personId'] == null) {
+            throw new runtime.RequiredError(
+                'personId',
+                'Required parameter "personId" was null or undefined when calling updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch().'
+            );
+        }
+
+        if (requestParameters['addressId'] == null) {
+            throw new runtime.RequiredError(
+                'addressId',
+                'Required parameter "addressId" was null or undefined when calling updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch().'
+            );
+        }
+
+        if (requestParameters['telecommunicationAddress'] == null) {
+            throw new runtime.RequiredError(
+                'telecommunicationAddress',
+                'Required parameter "telecommunicationAddress" was null or undefined when calling updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/persons/{person_id}/telecommunication_addresses/{address_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+        urlPath = urlPath.replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: TelecommunicationAddressToJSON(requestParameters['telecommunicationAddress']),
+        }, initOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<any>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
+    }
+
+    /**
+     * Update
+     */
+    async updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch(requestParameters: UpdatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+        const response = await this.updatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
