@@ -6,6 +6,7 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+
 const queryClient = new QueryClient();
 
 interface TelecommunicationAddressesTableProps {

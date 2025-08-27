@@ -38,6 +38,19 @@ export default tseslint.config([
       "padding-line-between-statements": [
         "error",
         { blankLine: "never", prev: "import", next: "import" },
+        {
+          blankLine: "always",
+          prev: "import",
+          next: [
+            "cjs-export",
+            "class",
+            "const",
+            "let",
+            "var",
+            "function",
+            "expression",
+          ],
+        },
       ],
     },
   },
