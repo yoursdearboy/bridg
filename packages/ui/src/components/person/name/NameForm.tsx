@@ -96,10 +96,16 @@ export const NameForm = ({
         </details>
 
         <Group justify="flex-end" mt="md">
-          <Button variant="outline" onClick={onClose}>
+          <Button
+            variant="outline"
+            onClick={onClose}
+            disabled={mutation.isPending}
+          >
             {t("cancel")}
           </Button>
-          <Button type="submit">{t("submit")}</Button>
+          <Button type="submit" loading={mutation.isPending}>
+            {t("submit")}
+          </Button>
         </Group>
       </Stack>
     </form>
