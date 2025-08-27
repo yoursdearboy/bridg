@@ -8,7 +8,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type { PersonOutput } from "api-ts";
 import { Route as editRoute } from "./$personId/edit";
 import { useTranslation } from "react-i18next";
-import { NamesAPI } from "@/components/person/name/NamesCard";
+import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
@@ -40,7 +40,7 @@ function PersonShowPage() {
         <Grid.Col span={{ base: 12, md: 4 }}>
           <PersonCard person={person} />
           <Space h="md" />
-          <NamesAPI personId={personId} />
+          <NamesCardWrapper personId={personId} />
           <Space h="md" />
           <AddressesCard personId={personId} />
           <Space h="md" />

@@ -6,23 +6,23 @@ import { t } from "i18next";
 import { EditNameForm } from "./EditNameForm";
 import api from "@/api";
 
-interface NamesTableRowActionsProps {
-  name: EntityName;
+interface NamesTableRowWrapperProps {
   personId: string;
-  onUpdateSuccess: () => void;
+  name: EntityName;
+  invalidateQuery: () => void;
 }
 
-const NamesTableRowActions = ({
-  name,
+const NamesTableRowWrapper = ({
   personId,
-  onUpdateSuccess,
-}: NamesTableRowActionsProps) => {
+  name,
+  invalidateQuery,
+}: NamesTableRowWrapperProps) => {
   const handleDelete = async () => {
     await api.persons.deletePersonsPersonIdNamesNameIdDelete({
       personId,
       nameId: name.id,
     });
-    onUpdateSuccess();
+    invalidateQuery();
   };
 
   return (
@@ -30,7 +30,7 @@ const NamesTableRowActions = ({
       name={name}
       personId={personId}
       onDelete={() => void handleDelete()}
-      onUpdateSuccess={onUpdateSuccess}
+      invalidateQuery={invalidateQuery}
     />
   );
 };
@@ -38,25 +38,25 @@ const NamesTableRowActions = ({
 interface NamesTableRowProps {
   name: EntityName;
   personId: string;
+  invalidateQuery: () => void;
   onDelete: (name: EntityName) => void;
-  onUpdateSuccess: () => void;
 }
 
 const NamesTableRow = ({
   name,
   personId,
   onDelete,
-  onUpdateSuccess,
+  invalidateQuery,
 }: NamesTableRowProps) => {
   const { hovered, ref } = useHover();
   const [opened, { open, close }] = useDisclosure(false);
+  const handleEdit = () => {
+    open();
+  };
   const handleDelete = () => {
     if (window.confirm("Удалить выбранное значение?")) {
       onDelete(name);
     }
-  };
-  const handleEdit = () => {
-    open();
   };
   return (
     <>
@@ -78,7 +78,7 @@ const NamesTableRow = ({
           onCancel={close}
           onSuccess={() => {
             close();
-            onUpdateSuccess();
+            invalidateQuery();
           }}
         />
       </Modal>
@@ -87,15 +87,15 @@ const NamesTableRow = ({
 };
 
 interface NamesTableProps {
-  names: EntityName[];
   personId: string;
-  onUpdateSuccess: () => void;
+  names: EntityName[];
+  invalidateQuery: () => void;
 }
 
 export const NamesTable = ({
-  names,
   personId,
-  onUpdateSuccess,
+  names,
+  invalidateQuery,
 }: NamesTableProps) => {
   return (
     <Box pt="md">
@@ -109,11 +109,11 @@ export const NamesTable = ({
             </Table.Tr>
           ) : (
             names.map((name) => (
-              <NamesTableRowActions
+              <NamesTableRowWrapper
                 key={name.id}
-                name={name}
                 personId={personId}
-                onUpdateSuccess={onUpdateSuccess}
+                name={name}
+                invalidateQuery={invalidateQuery}
               />
             ))
           )}

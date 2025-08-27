@@ -18,11 +18,13 @@ import { NamesTable } from "./NamesTable";
 import { NewNameForm } from "./NewNameForm";
 import type { EntityName } from "api-ts";
 
-export const NamesAPI = ({ personId }: { personId: string }) => {
+export const NamesCardWrapper = ({ personId }: { personId: string }) => {
   const queryClient = useQueryClient();
 
+  const queryKey = ["person", personId, "names"];
+
   const query = useQuery({
-    queryKey: ["person", personId, "names"],
+    queryKey,
     queryFn: () =>
       api.persons.indexPersonsPersonIdNamesGet({
         personId,
@@ -31,9 +33,7 @@ export const NamesAPI = ({ personId }: { personId: string }) => {
 
   const invalidateQuery = () => {
     queryClient
-      .invalidateQueries({
-        queryKey: ["person", personId, "names"],
-      })
+      .invalidateQueries({ queryKey })
       .then(close)
       .catch((err) => console.error("Query invalidation failed:", err));
   };
@@ -63,8 +63,10 @@ export const NamesCard = ({
 
   const { isPending, isError, error, data: names } = query;
 
+  // FIXME: Must be inside Card.Section
   if (isPending) return <LoadingOverlay visible />;
 
+  // FIXME: Must be inside Card.Section
   if (isError) {
     return (
       <Text color="red">{t("errorMessage", { error: error.message })}</Text>
@@ -77,22 +79,15 @@ export const NamesCard = ({
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
             <Text fw={500}>{t("NamesCard.title")}</Text>
-
-            <Button
-              variant="outline"
-              size="compact-sm"
-              onClick={open}
-              fw={500}
-              loading={isPending}
-            >
+            <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
               {t("add")}
             </Button>
           </Group>
         </Card.Section>
         <NamesTable
-          names={names}
           personId={personId}
-          onUpdateSuccess={invalidateQuery}
+          names={names}
+          invalidateQuery={invalidateQuery}
         />
       </Card>
       <Modal
