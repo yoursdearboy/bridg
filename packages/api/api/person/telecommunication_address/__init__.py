@@ -34,3 +34,22 @@ def create(person_id: UUID, data: TelecommunicationAddress, db: Session = Depend
     db.commit()
 
     return obj
+
+
+@router.patch("/{address_id:uuid}")
+def update(person_id: UUID, address_id: UUID, data: TelecommunicationAddress, db: Session = Depends(get_db)):
+    obj = db.query(bridg.common.person.TelecommunicationAddress).filter_by(id=address_id).one()
+
+    data.model_update_sa(obj)
+
+    db.add(obj)
+    db.commit()
+
+    return obj
+
+
+@router.delete("/{address_id:uuid}")
+def delete(person_id: UUID, address_id: UUID, db: Session = Depends(get_db)):
+    db.query(bridg.common.person.TelecommunicationAddress).filter_by(id=address_id).delete()
+    db.commit()
+
