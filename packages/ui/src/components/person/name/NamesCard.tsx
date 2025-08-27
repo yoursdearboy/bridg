@@ -38,19 +38,10 @@ export const NamesAPI = ({ personId }: { personId: string }) => {
       .catch((err) => console.error("Query invalidation failed:", err));
   };
 
-  const handleDelete = async (name: EntityName) => {
-    await api.persons.deletePersonsPersonIdNamesNameIdDelete({
-      personId,
-      nameId: name.id,
-    });
-    invalidateQuery();
-  };
-
   return (
     <NamesCard
       personId={personId}
       query={query}
-      onDelete={(name) => void handleDelete(name)}
       invalidateQuery={invalidateQuery}
     />
   );
@@ -59,16 +50,10 @@ export const NamesAPI = ({ personId }: { personId: string }) => {
 interface NamesCardProps {
   personId: string;
   query: UseQueryResult<EntityName[], Error>;
-  onDelete: (name: EntityName) => void;
   invalidateQuery: () => void;
 }
 
-export const NamesCard = ({
-  personId,
-  query,
-  onDelete,
-  invalidateQuery,
-}: NamesCardProps) => {
+export const NamesCard = ({ personId, invalidateQuery }: NamesCardProps) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { t } = useTranslation();
 
@@ -103,7 +88,6 @@ export const NamesCard = ({
         <NamesTable
           names={names}
           personId={personId}
-          onDelete={onDelete}
           onUpdateSuccess={invalidateQuery}
         />
       </Card>

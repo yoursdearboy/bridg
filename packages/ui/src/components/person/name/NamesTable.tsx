@@ -4,6 +4,36 @@ import { IconPencil, IconX } from "@tabler/icons-react";
 import type { EntityName } from "api-ts";
 import { t } from "i18next";
 import { EditNameForm } from "./EditNameForm";
+import api from "@/api";
+
+interface NamesTableRowActionsProps {
+  name: EntityName;
+  personId: string;
+  onUpdateSuccess: () => void;
+}
+
+const NamesTableRowActions = ({
+  name,
+  personId,
+  onUpdateSuccess,
+}: NamesTableRowActionsProps) => {
+  const handleDelete = async () => {
+    await api.persons.deletePersonsPersonIdNamesNameIdDelete({
+      personId,
+      nameId: name.id,
+    });
+    onUpdateSuccess();
+  };
+
+  return (
+    <NamesTableRow
+      name={name}
+      personId={personId}
+      onDelete={() => void handleDelete()}
+      onUpdateSuccess={onUpdateSuccess}
+    />
+  );
+};
 
 interface NamesTableRowProps {
   name: EntityName;
@@ -59,14 +89,12 @@ const NamesTableRow = ({
 interface NamesTableProps {
   names: EntityName[];
   personId: string;
-  onDelete: (name: EntityName) => void;
   onUpdateSuccess: () => void;
 }
 
 export const NamesTable = ({
   names,
   personId,
-  onDelete,
   onUpdateSuccess,
 }: NamesTableProps) => {
   return (
@@ -81,11 +109,10 @@ export const NamesTable = ({
             </Table.Tr>
           ) : (
             names.map((name) => (
-              <NamesTableRow
+              <NamesTableRowActions
                 key={name.id}
                 name={name}
                 personId={personId}
-                onDelete={onDelete}
                 onUpdateSuccess={onUpdateSuccess}
               />
             ))
