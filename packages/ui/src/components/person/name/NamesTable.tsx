@@ -4,36 +4,28 @@ import { IconPencil, IconX } from "@tabler/icons-react";
 import type { EntityName } from "api-ts";
 import { t } from "i18next";
 import { EditNameForm } from "./EditNameForm";
-import api from "@/api";
 
 interface NamesTableRowProps {
   name: EntityName;
   personId: string;
-  onDeleteSuccess: () => void;
+  onDelete: (name: EntityName) => void;
   onUpdateSuccess: () => void;
 }
 
 const NamesTableRow = ({
   name,
   personId,
-
-  onDeleteSuccess,
+  onDelete,
   onUpdateSuccess,
 }: NamesTableRowProps) => {
   const { hovered, ref } = useHover();
   const [opened, { open, close }] = useDisclosure(false);
-  const handleDelete = async () => {
-    const ok = window.confirm("Удалить выбранное значение?");
-    if (!ok) return;
-
-    await api.persons.deletePersonsPersonIdNamesNameIdDelete({
-      personId,
-      nameId: name.id,
-    });
-
-    onDeleteSuccess();
+  const handleDelete = () => {
+    if (window.confirm("Удалить выбранное значение?")) {
+      onDelete(name);
+    }
   };
-  const handleEditClick = () => {
+  const handleEdit = () => {
     open();
   };
   return (
@@ -43,16 +35,8 @@ const NamesTableRow = ({
         <Table.Td px={0} style={{ width: 80, display: "flex", gap: 8 }}>
           {hovered && (
             <>
-              <IconPencil
-                size={16}
-                color="green"
-                onClick={() => handleEditClick()}
-              />
-              <IconX
-                size={16}
-                color="red"
-                onClick={() => void handleDelete()}
-              />
+              <IconPencil size={16} color="green" onClick={handleEdit} />
+              <IconX size={16} color="red" onClick={handleDelete} />
             </>
           )}
         </Table.Td>
@@ -75,14 +59,14 @@ const NamesTableRow = ({
 interface NamesTableProps {
   names: EntityName[];
   personId: string;
-  onDeleteSuccess: () => void;
+  onDelete: (name: EntityName) => void;
   onUpdateSuccess: () => void;
 }
 
 export const NamesTable = ({
   names,
   personId,
-  onDeleteSuccess,
+  onDelete,
   onUpdateSuccess,
 }: NamesTableProps) => {
   return (
@@ -101,7 +85,7 @@ export const NamesTable = ({
                 key={name.id}
                 name={name}
                 personId={personId}
-                onDeleteSuccess={onDeleteSuccess}
+                onDelete={onDelete}
                 onUpdateSuccess={onUpdateSuccess}
               />
             ))

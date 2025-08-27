@@ -8,26 +8,20 @@ import {
   Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useQuery,
+  useQueryClient,
+  type UseQueryResult,
+} from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { NamesTable } from "./NamesTable";
 import { NewNameForm } from "./NewNameForm";
+import type { EntityName } from "api-ts";
 
-interface NamesCardProps {
-  personId: string;
-}
-
-export const NamesCard = ({ personId }: NamesCardProps) => {
-  const [opened, { open, close }] = useDisclosure(false);
+export const NamesAPI = ({ personId }: { personId: string }) => {
   const queryClient = useQueryClient();
-  const { t } = useTranslation();
 
-  const {
-    isPending,
-    isError,
-    error,
-    data: names = [],
-  } = useQuery({
+  const query = useQuery({
     queryKey: ["person", personId, "names"],
     queryFn: () =>
       api.persons.indexPersonsPersonIdNamesGet({
@@ -35,7 +29,7 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
       }),
   });
 
-  const handleSuccess = () => {
+  const invalidateQuery = () => {
     queryClient
       .invalidateQueries({
         queryKey: ["person", personId, "names"],
@@ -43,6 +37,42 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
       .then(close)
       .catch((err) => console.error("Query invalidation failed:", err));
   };
+
+  const handleDelete = async (name: EntityName) => {
+    await api.persons.deletePersonsPersonIdNamesNameIdDelete({
+      personId,
+      nameId: name.id,
+    });
+    invalidateQuery();
+  };
+
+  return (
+    <NamesCard
+      personId={personId}
+      query={query}
+      onDelete={(name) => void handleDelete(name)}
+      invalidateQuery={invalidateQuery}
+    />
+  );
+};
+
+interface NamesCardProps {
+  personId: string;
+  query: UseQueryResult<EntityName[], Error>;
+  onDelete: (name: EntityName) => void;
+  invalidateQuery: () => void;
+}
+
+export const NamesCard = ({
+  personId,
+  query,
+  onDelete,
+  invalidateQuery,
+}: NamesCardProps) => {
+  const [opened, { open, close }] = useDisclosure(false);
+  const { t } = useTranslation();
+
+  const { isPending, isError, error, data: names } = query;
 
   if (isPending) return <LoadingOverlay visible />;
 
@@ -73,8 +103,8 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
         <NamesTable
           names={names}
           personId={personId}
-          onDeleteSuccess={handleSuccess}
-          onUpdateSuccess={handleSuccess}
+          onDelete={onDelete}
+          onUpdateSuccess={invalidateQuery}
         />
       </Card>
       <Modal
@@ -87,7 +117,7 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
         <NewNameForm
           personId={personId}
           onClose={close}
-          onSuccess={handleSuccess}
+          onSuccess={invalidateQuery}
         />
       </Modal>
     </>
