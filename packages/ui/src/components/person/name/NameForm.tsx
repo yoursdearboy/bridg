@@ -7,23 +7,18 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import type { EntityNameData } from "api-ts";
+import type { UseMutationResult } from "@tanstack/react-query";
+import type { EntityName, EntityNameData } from "api-ts";
 import { useTranslation } from "react-i18next";
 
 interface NameFormProps {
   initialValues: EntityNameData;
-  onSubmit: (values: EntityNameData) => void;
   onClose: () => void;
-  mutation: {
-    isPending: boolean;
-    error: Error | null;
-    isError?: boolean;
-  };
+  mutation: UseMutationResult<EntityName, Error, EntityNameData, unknown>;
 }
 
 export const NameForm = ({
   initialValues,
-  onSubmit,
   onClose,
   mutation,
 }: NameFormProps) => {
@@ -50,8 +45,10 @@ export const NameForm = ({
     },
   });
 
+  const handleSubmit = (data: EntityNameData) => mutation.mutate(data);
+
   return (
-    <form onSubmit={form.onSubmit(onSubmit)}>
+    <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="md" pos="relative">
         <LoadingOverlay visible={mutation.isPending} />
         {mutation.error && (

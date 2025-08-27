@@ -22,11 +22,6 @@ export const EditNameForm = ({ personId, name, onClose, onSuccess }: Props) => {
   });
 
   return (
-    <NameForm
-      mutation={mutation}
-      initialValues={name}
-      onSubmit={(data) => mutation.mutate(data)}
-      onClose={onClose}
-    />
+    <NameForm mutation={mutation} initialValues={name} onClose={onClose} />
   );
 };

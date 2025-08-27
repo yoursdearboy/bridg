@@ -19,12 +19,5 @@ export const NewNameForm = ({ personId, onClose, onSuccess }: Props) => {
     onSuccess,
   });
 
-  return (
-    <NameForm
-      onSubmit={(data) => mutation.mutate(data)}
-      onClose={onClose}
-      initialValues={{}}
-      mutation={mutation}
-    />
-  );
+  return <NameForm onClose={onClose} initialValues={{}} mutation={mutation} />;
 };
