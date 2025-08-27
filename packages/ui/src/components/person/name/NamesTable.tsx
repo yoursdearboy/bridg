@@ -6,53 +6,67 @@ import { t } from "i18next";
 import { EditNameForm } from "./EditNameForm";
 import api from "@/api";
 
+interface NamesTableRowWrapperProps {
+  personId: string;
+  name: EntityName;
+  invalidateQuery: () => void;
+}
+
+const NamesTableRowWrapper = ({
+  personId,
+  name,
+  invalidateQuery,
+}: NamesTableRowWrapperProps) => {
+  const handleDelete = async () => {
+    await api.persons.deletePersonsPersonIdNamesNameIdDelete({
+      personId,
+      nameId: name.id,
+    });
+    invalidateQuery();
+  };
+
+  return (
+    <NamesTableRow
+      name={name}
+      personId={personId}
+      onDelete={() => void handleDelete()}
+      invalidateQuery={invalidateQuery}
+    />
+  );
+};
+
 interface NamesTableRowProps {
   name: EntityName;
   personId: string;
-  onDeleteSuccess: () => void;
-  onUpdateSuccess: () => void;
+  invalidateQuery: () => void;
+  onDelete: (name: EntityName) => void;
 }
 
 const NamesTableRow = ({
   name,
   personId,
-
-  onDeleteSuccess,
-  onUpdateSuccess,
+  onDelete,
+  invalidateQuery,
 }: NamesTableRowProps) => {
   const { hovered, ref } = useHover();
   const [opened, { open, close }] = useDisclosure(false);
-  const handleDelete = async () => {
-    const ok = window.confirm("Удалить выбранное значение?");
-    if (!ok) return;
-
-    await api.persons.deletePersonsPersonIdNamesNameIdDelete({
-      personId,
-      nameId: name.id,
-    });
-
-    onDeleteSuccess();
-  };
-  const handleEditClick = () => {
+  const handleEdit = () => {
     open();
+  };
+  const handleDelete = () => {
+    if (window.confirm("Удалить выбранное значение?")) {
+      onDelete(name);
+    }
   };
   return (
     <>
       <Table.Tr ref={ref}>
-        <Table.Td px={0}>{name.label}</Table.Td>
-        <Table.Td px={0} style={{ width: 80, display: "flex", gap: 8 }}>
+        <Table.Td>{name.label}</Table.Td>
+        <Table.Td style={{ width: 80, display: "flex", gap: 8 }}>
           {hovered && (
             <>
-              <IconPencil
-                size={16}
-                color="green"
-                onClick={() => handleEditClick()}
-              />
-              <IconX
-                size={16}
-                color="red"
-                onClick={() => void handleDelete()}
-              />
+              <IconPencil size={16} color="green" onClick={handleEdit} />
+              <IconX size={16} color="red" onClick={handleDelete} />
             </>
           )}
         </Table.Td>
@@ -61,10 +75,10 @@ const NamesTableRow = ({
         <EditNameForm
           personId={personId}
           name={name}
-          onClose={close}
+          onCancel={close}
           onSuccess={() => {
             close();
-            onUpdateSuccess();
+            invalidateQuery();
           }}
         />
       </Modal>
@@ -73,20 +87,18 @@ const NamesTableRow = ({
 };
 
 interface NamesTableProps {
-  names: EntityName[];
   personId: string;
-  onDeleteSuccess: () => void;
-  onUpdateSuccess: () => void;
+  names: EntityName[];
+  invalidateQuery: () => void;
 }
 
 export const NamesTable = ({
-  names,
   personId,
-  onDeleteSuccess,
-  onUpdateSuccess,
+  names,
+  invalidateQuery,
 }: NamesTableProps) => {
   return (
-    <Box pt="md">
+    <Box pt="xs">
       <Table highlightOnHover>
         <Table.Tbody>
           {names.length === 0 ? (
@@ -97,12 +109,11 @@ export const NamesTable = ({
             </Table.Tr>
           ) : (
             names.map((name) => (
-              <NamesTableRow
+              <NamesTableRowWrapper
                 key={name.id}
-                name={name}
                 personId={personId}
-                onDeleteSuccess={onDeleteSuccess}
-                onUpdateSuccess={onUpdateSuccess}
+                name={name}
+                invalidateQuery={invalidateQuery}
               />
             ))
           )}

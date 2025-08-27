@@ -5,11 +5,11 @@ import { type EntityNameData } from "api-ts";
 
 interface Props {
   personId: string;
-  onClose: () => void;
+  onCancel: () => void;
   onSuccess: () => void;
 }
 
-export const NewNameForm = ({ personId, onClose, onSuccess }: Props) => {
+export const NewNameForm = ({ personId, onCancel, onSuccess }: Props) => {
   const mutation = useMutation({
     mutationFn: (data: EntityNameData) =>
       api.persons.createPersonsPersonIdNamesPost({
@@ -20,11 +20,6 @@ export const NewNameForm = ({ personId, onClose, onSuccess }: Props) => {
   });
 
   return (
-    <NameForm
-      onSubmit={(data) => mutation.mutate(data)}
-      onClose={onClose}
-      initialValues={{}}
-      mutation={mutation}
-    />
+    <NameForm onCancel={onCancel} initialValues={{}} mutation={mutation} />
   );
 };

@@ -8,44 +8,65 @@ import {
   Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useQuery,
+  useQueryClient,
+  type UseQueryResult,
+} from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { NamesTable } from "./NamesTable";
 import { NewNameForm } from "./NewNameForm";
+import type { EntityName } from "api-ts";
 
-interface NamesCardProps {
-  personId: string;
-}
-
-export const NamesCard = ({ personId }: NamesCardProps) => {
-  const [opened, { open, close }] = useDisclosure(false);
+export const NamesCardWrapper = ({ personId }: { personId: string }) => {
   const queryClient = useQueryClient();
-  const { t } = useTranslation();
 
-  const {
-    isPending,
-    isError,
-    error,
-    data: names = [],
-  } = useQuery({
-    queryKey: ["person", personId, "names"],
+  const queryKey = ["person", personId, "names"];
+
+  const query = useQuery({
+    queryKey,
     queryFn: () =>
       api.persons.indexPersonsPersonIdNamesGet({
         personId,
       }),
   });
 
-  const handleSuccess = () => {
+  const invalidateQuery = () => {
     queryClient
-      .invalidateQueries({
-        queryKey: ["person", personId, "names"],
-      })
+      .invalidateQueries({ queryKey })
       .then(close)
       .catch((err) => console.error("Query invalidation failed:", err));
   };
 
+  return (
+    <NamesCard
+      personId={personId}
+      query={query}
+      invalidateQuery={invalidateQuery}
+    />
+  );
+};
+
+interface NamesCardProps {
+  personId: string;
+  query: UseQueryResult<EntityName[], Error>;
+  invalidateQuery: () => void;
+}
+
+export const NamesCard = ({
+  personId,
+  query,
+  invalidateQuery,
+}: NamesCardProps) => {
+  const [opened, { open, close }] = useDisclosure(false);
+  const { t } = useTranslation();
+
+  const { isPending, isError, error, data: names } = query;
+
+  // FIXME: Must be inside Card.Section
   if (isPending) return <LoadingOverlay visible />;
 
+  // FIXME: Must be inside Card.Section
   if (isError) {
     return (
       <Text color="red">{t("errorMessage", { error: error.message })}</Text>
@@ -54,27 +75,21 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
 
   return (
     <>
-      <Card withBorder shadow="sm" radius="md">
+      <Card withBorder shadow="sm" radius="md" padding="xs">
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
-            <Text fw={500}>{t("NamesCard.title")}</Text>
-
-            <Button
-              variant="outline"
-              size="compact-sm"
-              onClick={open}
-              fw={500}
-              loading={isPending}
-            >
+            <Text fw={500} px="xs">
+              {t("NamesCard.title")}
+            </Text>
+            <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
               {t("add")}
             </Button>
           </Group>
         </Card.Section>
         <NamesTable
-          names={names}
           personId={personId}
-          onDeleteSuccess={handleSuccess}
-          onUpdateSuccess={handleSuccess}
+          names={names}
+          invalidateQuery={invalidateQuery}
         />
       </Card>
       <Modal
@@ -86,8 +101,11 @@ export const NamesCard = ({ personId }: NamesCardProps) => {
       >
         <NewNameForm
           personId={personId}
-          onClose={close}
-          onSuccess={handleSuccess}
+          onCancel={close}
+          onSuccess={() => {
+            close();
+            invalidateQuery();
+          }}
         />
       </Modal>
     </>

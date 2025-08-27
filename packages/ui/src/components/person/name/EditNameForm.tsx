@@ -6,11 +6,16 @@ import type { EntityName, EntityNameData } from "api-ts";
 interface Props {
   personId: string;
   name: EntityName;
-  onClose: () => void;
+  onCancel: () => void;
   onSuccess: () => void;
 }
 
-export const EditNameForm = ({ personId, name, onClose, onSuccess }: Props) => {
+export const EditNameForm = ({
+  personId,
+  name,
+  onCancel,
+  onSuccess,
+}: Props) => {
   const mutation = useMutation({
     mutationFn: (data: EntityNameData) =>
       api.persons.updatePersonsPersonIdNamesNameIdPatch({
@@ -22,11 +27,6 @@ export const EditNameForm = ({ personId, name, onClose, onSuccess }: Props) => {
   });
 
   return (
-    <NameForm
-      mutation={mutation}
-      initialValues={name}
-      onSubmit={(data) => mutation.mutate(data)}
-      onClose={onClose}
-    />
+    <NameForm mutation={mutation} initialValues={name} onCancel={onCancel} />
   );
 };
