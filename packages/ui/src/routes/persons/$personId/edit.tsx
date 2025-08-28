@@ -16,12 +16,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AdministrativeGender } from "api-ts";
 import { useTranslation } from "react-i18next";
 import { Route as indexRoute } from "../$personId";
+import i18nnext from "../../../i18n";
 
 export const Route = createFileRoute("/persons/$personId/edit")({
   component: PersonEditPage,
   loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
   beforeLoad: () => ({
-    breadcrumb: "Edit Person",
+    breadcrumb: i18nnext.t("PersonEditPage.bredcrumb"),
   }),
 });
 

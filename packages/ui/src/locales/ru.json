@@ -49,17 +49,23 @@
     "SubjectShowPage": {
       "title": "Данные пациента",
       "back": "Назад к списку",
-      "toPerson": "На страницу человека"
+      "toPerson": "На страницу человека",
+      "breadcrumbDefault": "Неизвестный пациент"
+    },
+    "PersonIndexPage": {
+      "breadcrumb": "Люди"
     },
     "PersonShowPage": {
       "title": "Данные человека",
-      "edit": "Редактировать"
+      "edit": "Редактировать",
+      "bredcrumbDefault": "Неизвестный человек"
     },
     "PersonEditPage": {
       "title": "Редактирование:",
       "personalInfo": "Личная информация",
       "primaryNamePlaceholder": "Иван Иванов",
-      "deceased": "Умерший"
+      "deceased": "Умерший",
+      "bredcrumb": "Редактирование"
     },
     "PersonCard": {
       "deceased": "Умерший",

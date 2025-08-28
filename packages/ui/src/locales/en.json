@@ -46,6 +46,9 @@
       "personDetails": "Person details",
       "organizationDetails": "Organization details"
     },
+    "PersonIndexPage": {
+      "breadcrumb": "Persons"
+    },
     "SubjectShowPage": {
       "title": "Patient information",
       "back": "Back to list",
