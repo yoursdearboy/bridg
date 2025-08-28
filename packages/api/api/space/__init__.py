@@ -10,6 +10,8 @@ from api import site, subject
 from api.base_model import BaseModel
 from api.db import get_db
 
+from . import activity
+
 router = APIRouter(prefix="/spaces")
 
 
@@ -34,7 +36,8 @@ def index(db: Session = Depends(get_db)):
 space_router = APIRouter(prefix="/{space_id:uuid}")
 space_router.include_router(subject.router)
 space_router.include_router(site.router)
+space_router.include_router(activity.router)
 
 router.include_router(space_router)
 
-openapi_tags = [*subject.openapi_tag]
+openapi_tags = [*subject.openapi_tag, *activity.openapi_tags]
