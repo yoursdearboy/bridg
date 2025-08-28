@@ -1,13 +1,14 @@
 from datetime import date
-from typing import Optional
+from typing import Annotated, Optional
 from uuid import UUID
 
 import bridg
-from fastapi import APIRouter, Depends
+from bridg import Repository
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from api.base_model import BaseModel
-from api.db import get_db
+from api.db import get_db, get_repository
 from api.model import EntityName
 
 from . import name, postal_address, telecommunication_address
@@ -25,13 +26,25 @@ class Person(BaseModel):
     primary_name: Optional[EntityName]
 
 
-@router.get("/{person_id:uuid}", response_model=Person)
-def show(person_id: UUID, db: Session = Depends(get_db)) -> Optional[bridg.Person]:
-    return db.query(bridg.Person).filter_by(id=person_id).one_or_none()
+class PersonRepository(Repository[bridg.Person]):
+    _sa = bridg.Person
+
+
+PersonRepository = Annotated[PersonRepository,
+                             Depends(get_repository(PersonRepository))]
+
+
+@router.get("/{person_id:uuid}")
+def show(person_id: UUID, repo: PersonRepository) -> Optional[Person]:
+    if obj := repo.one_or_none(person_id):
+        return Person.model_validate(obj)
+    raise HTTPException(status_code=404)
 
 
 router.include_router(name.router, prefix="/{person_id:uuid}")
 router.include_router(postal_address.router, prefix="/{person_id:uuid}")
-router.include_router(telecommunication_address.router, prefix="/{person_id:uuid}")
+router.include_router(telecommunication_address.router,
+                      prefix="/{person_id:uuid}")
 
-openapi_tags = [{"name": "persons", "postal_address": "persons", "telecommunication_address": "persons"}]
+openapi_tags = [{"name": "persons", "postal_address": "persons",
+                 "telecommunication_address": "persons"}]
