@@ -2,7 +2,11 @@ import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { DatesProvider } from "@mantine/dates";
 import "@mantine/dates/styles.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  MutationCache,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,7 +14,20 @@ import "./i18n";
 import "./index.css";
 import { routeTree } from "./routeTree.gen";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  mutationCache: new MutationCache({
+    onSuccess: async (_data, _variables, _context, mutation) => {
+      if (!mutation.options.mutationKey) return;
+      await Promise.all(
+        mutation.options.mutationKey.map((key) =>
+          queryClient.invalidateQueries({
+            queryKey: [key],
+          })
+        )
+      );
+    },
+  }),
+});
 const router = createRouter({ routeTree });
 
 declare module "@tanstack/react-router" {

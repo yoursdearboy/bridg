@@ -1,36 +1,35 @@
+import api from "@/api";
 import { Box, Group, Modal, Table } from "@mantine/core";
 import { useDisclosure, useHover } from "@mantine/hooks";
 import { IconPencil, IconX } from "@tabler/icons-react";
+import { useMutation } from "@tanstack/react-query";
 import type { EntityName } from "api-ts";
 import { t } from "i18next";
 import { EditNameForm } from "./EditNameForm";
-import api from "@/api";
 
 interface NamesTableRowWrapperProps {
   personId: string;
   name: EntityName;
-  invalidateQuery: () => void;
 }
 
 const NamesTableRowWrapper = ({
   personId,
   name,
-  invalidateQuery,
 }: NamesTableRowWrapperProps) => {
-  const handleDelete = async () => {
-    await api.persons.deletePersonsPersonIdNamesNameIdDelete({
-      personId,
-      nameId: name.id,
-    });
-    invalidateQuery();
-  };
+  const mutation = useMutation({
+    mutationKey: ["person", personId, "names", name.id],
+    mutationFn: () =>
+      api.persons.deletePersonsPersonIdNamesNameIdDelete({
+        personId,
+        nameId: name.id,
+      }),
+  });
 
   return (
     <NamesTableRow
       name={name}
       personId={personId}
-      onDelete={() => void handleDelete()}
-      invalidateQuery={invalidateQuery}
+      onDelete={() => mutation.mutate()}
     />
   );
 };
@@ -38,16 +37,10 @@ const NamesTableRowWrapper = ({
 interface NamesTableRowProps {
   name: EntityName;
   personId: string;
-  invalidateQuery: () => void;
   onDelete: (name: EntityName) => void;
 }
 
-const NamesTableRow = ({
-  name,
-  personId,
-  onDelete,
-  invalidateQuery,
-}: NamesTableRowProps) => {
+const NamesTableRow = ({ name, personId, onDelete }: NamesTableRowProps) => {
   const { hovered, ref } = useHover();
   const [opened, { open, close }] = useDisclosure(false);
   const handleEdit = () => {
@@ -71,15 +64,12 @@ const NamesTableRow = ({
           )}
         </Table.Td>
       </Table.Tr>
-      <Modal opened={opened} onClose={close} title={t("edit")}>
+      <Modal opened={opened} onClose={close} title={t("edit")} size="lg">
         <EditNameForm
           personId={personId}
           name={name}
           onCancel={close}
-          onSuccess={() => {
-            close();
-            invalidateQuery();
-          }}
+          onSuccess={() => close()}
         />
       </Modal>
     </>
@@ -89,14 +79,9 @@ const NamesTableRow = ({
 interface NamesTableProps {
   personId: string;
   names: EntityName[];
-  invalidateQuery: () => void;
 }
 
-export const NamesTable = ({
-  personId,
-  names,
-  invalidateQuery,
-}: NamesTableProps) => {
+export const NamesTable = ({ personId, names }: NamesTableProps) => {
   return (
     <Box pt="xs">
       <Table highlightOnHover>
@@ -113,7 +98,6 @@ export const NamesTable = ({
                 key={name.id}
                 personId={personId}
                 name={name}
-                invalidateQuery={invalidateQuery}
               />
             ))
           )}
