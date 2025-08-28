@@ -62,13 +62,7 @@ export const NamesCard = ({ personId, query }: NamesCardProps) => {
         </Card.Section>
         <NamesTable personId={personId} names={names} />
       </Card>
-      <Modal
-        opened={opened}
-        onClose={close}
-        title={t("add")}
-        size="lg"
-        centered
-      >
+      <Modal opened={opened} onClose={close} title={t("add")} size="lg">
         <NewNameForm
           personId={personId}
           onCancel={close}
