@@ -59,7 +59,7 @@
       "title": "Person information",
       "edit": "Edit person",
       "breadcrumbDefault": "Anonymous person",
-      "rename":"Rename"
+      "rename": "Rename"
     },
     "PersonEditPage": {
       "title": "Editing:",
