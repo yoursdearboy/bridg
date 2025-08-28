@@ -3,13 +3,14 @@ import ButtonLink from "@/components/ButtonLink";
 import { AddressesCard } from "@/components/person/address/AddressCard";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
-import { Grid, Group, Space, Stack, Title } from "@mantine/core";
+import { Button, Grid, Group, Modal, Space, Stack, Text, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { PersonOutput } from "api-ts";
 import { Route as editRoute } from "./$personId/edit";
 import { useTranslation } from "react-i18next";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 import i18next from "@/i18n";
+import { useDisclosure } from "@mantine/hooks";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
@@ -22,23 +23,31 @@ export const Route = createFileRoute("/persons/$personId")({
 });
 
 function PersonShowPage() {
+   const [opened, { open, close }] = useDisclosure(false);
   const { personId } = Route.useParams();
   const person = Route.useLoaderData();
 
   const { t } = useTranslation();
 
   return (
+     <>
     <Stack gap="md">
       <Group justify="space-between">
         <Title fw={500} order={2}>
-          {t("PersonShowPage.title")}
+          {person.primaryName?.label}
         </Title>
-        <ButtonLink to={editRoute.to} params={{ personId }} variant="outline">
-          {t("PersonShowPage.edit")}
-        </ButtonLink>
+     <Group gap="xs" align="flex-end">
+  <ButtonLink to={editRoute.to} params={{ personId }} variant="outline">
+    {t("PersonShowPage.edit")}
+  </ButtonLink>
+  <Button>
+    {t("PersonShowPage.rename")}
+  </Button>
+</Group>
       </Group>
 
       <Grid>
+       
         <Grid.Col span={{ base: 12, md: 4 }}>
           <PersonCard person={person} />
           <Space h="md" />
@@ -50,5 +59,9 @@ function PersonShowPage() {
         </Grid.Col>
       </Grid>
     </Stack>
+    <Modal opened={opened} onClose={close} title={t("PersonShowPage.rename")} size="lg">
+          
+          </Modal>
+         </>
   );
 }

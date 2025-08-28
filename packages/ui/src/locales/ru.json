@@ -58,7 +58,8 @@
     "PersonShowPage": {
       "title": "Данные человека",
       "edit": "Редактировать",
-      "breadcrumbDefault": "Неизвестный человек"
+      "breadcrumbDefault": "Неизвестный человек",
+      "rename":"Переименовать"
     },
     "PersonEditPage": {
       "title": "Редактирование:",
