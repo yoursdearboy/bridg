@@ -1,71 +1,46 @@
-from typing import List, Optional
+from typing import Annotated, List
 from uuid import UUID
 
 import bridg
+from bridg import Repository
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
 
-from api.base_model import BaseModel
-from api.db import get_db
-from api.extra_typing import with_id
+from api.db import get_repository
+from api.model import PostalAddress, PostalAddressData
 
 router = APIRouter(prefix="/postal_addresses")
 
 
-class PostalAddressData(BaseModel[bridg.common.person.PostalAddress]):
+class PostalAddressRepository(Repository[bridg.PostalAddress]):
     _sa = bridg.common.person.PostalAddress
 
-    use: Optional[str] = None
-    street: Optional[str] = None
-    building: Optional[str] = None
-    country: Optional[str] = None
-    municipality: Optional[str] = None
-    state: Optional[str] = None
-    zip: Optional[str] = None
 
-
-class PostalAddress(PostalAddressData):
-    id: UUID
-    label: str
-
-    @classmethod
-    def model_validate(cls, obj: bridg.common.person.PostalAddress, **kwargs):
-        data = obj.__dict__
-        data["label"] = str(obj)
-        return super().model_validate(data, **kwargs)
+PostalAddressRepository = Annotated[PostalAddressRepository, Depends(
+    get_repository(PostalAddressRepository))]
 
 
 @router.get("")
-def index(person_id: UUID, db: Session = Depends(get_db)) -> List[PostalAddress]:
-    objs = db.query(bridg.common.person.PostalAddress).filter_by(person_id=person_id).all()
-    res = [PostalAddress.model_validate(o) for o in objs]
-    return res
+def index(person_id: UUID, repo: PostalAddressRepository) -> List[PostalAddress]:
+    objs = repo.all(bridg.common.person.PostalAddress.person_id == person_id)
+    return [PostalAddress.model_validate(o) for o in objs]
 
 
 @router.post("")
-def create(person_id: UUID, data: PostalAddressData, db: Session = Depends(get_db)) -> PostalAddress:
+def create(person_id: UUID, data: PostalAddressData, repo: PostalAddressRepository) -> PostalAddress:
     obj = data.model_dump_sa()
     obj.person_id = person_id
-
-    db.add(obj)
-    db.commit()
-
+    obj = repo.create(obj)
     return PostalAddress.model_validate(obj)
 
 
 @router.patch("/{address_id:uuid}")
-def update(person_id: UUID, address_id: UUID, data: PostalAddressData, db: Session = Depends(get_db)) -> PostalAddress:
-    obj = db.query(bridg.common.person.PostalAddress).filter_by(id=address_id).one()
-
+def update(person_id: UUID, address_id: UUID, data: PostalAddressData, repo: PostalAddressRepository) -> PostalAddress:
+    obj = repo.one(address_id)
     data.model_update_sa(obj)
-
-    db.add(obj)
-    db.commit()
-
+    obj = repo.update(obj)
     return PostalAddress.model_validate(obj)
 
 
 @router.delete("/{address_id:uuid}")
-def delete(person_id: UUID, address_id: UUID, db: Session = Depends(get_db)):
-    db.query(bridg.common.person.PostalAddress).filter_by(id=address_id).delete()
-    db.commit()
+def delete(person_id: UUID, address_id: UUID, repo: PostalAddressRepository):
+    repo.delete(address_id)
