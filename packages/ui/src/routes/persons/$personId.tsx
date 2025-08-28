@@ -16,7 +16,8 @@ export const Route = createFileRoute("/persons/$personId")({
   loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
   beforeLoad: () => ({
     breadcrumb: ({ loaderData: person }: { loaderData: PersonOutput }) =>
-      person.primaryName?.label || i18next.t("PersonShowPage.breadcrumbDefault"),
+      person.primaryName?.label ||
+      i18next.t("PersonShowPage.breadcrumbDefault"),
   }),
 });
 
