@@ -3,16 +3,7 @@ import ButtonLink from "@/components/ButtonLink";
 import { AddressesCard } from "@/components/person/address/AddressCard";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
-import {
-  Button,
-  Grid,
-  Group,
-  Modal,
-  Space,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
+import { Button, Grid, Group, Modal, Space, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import type { PersonOutput } from "api-ts";
 import { Route as editRoute } from "./$personId/edit";
