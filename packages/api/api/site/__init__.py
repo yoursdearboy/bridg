@@ -27,12 +27,15 @@ class StudySiteProtocolVersionRelationshipRepository(Repository[bridg.StudySiteP
     _sa = bridg.StudySiteProtocolVersionRelationship
 
 
-StudySiteProtocolVersionRelationshipRepository = Annotated[StudySiteProtocolVersionRelationship,
-                                                           Depends(get_repository(StudySiteProtocolVersionRelationshipRepository))]
+StudySiteProtocolVersionRelationshipRepositoryDep = Annotated[
+    StudySiteProtocolVersionRelationshipRepository,
+    Depends(get_repository(StudySiteProtocolVersionRelationshipRepository)),
+]
 
 
 @router.get("")
-def index(space_id: UUID, repo: StudySiteProtocolVersionRelationshipRepository) -> List[StudySiteProtocolVersionRelationship]:
-    objs = repo.all(
-        bridg.StudySiteProtocolVersionRelationship.executed_study_protocol_version_id == space_id)
+def index(
+    space_id: UUID, repo: StudySiteProtocolVersionRelationshipRepositoryDep
+) -> List[StudySiteProtocolVersionRelationship]:
+    objs = repo.all(bridg.StudySiteProtocolVersionRelationship.executed_study_protocol_version_id == space_id)
     return [StudySiteProtocolVersionRelationship.model_validate(o) for o in objs]

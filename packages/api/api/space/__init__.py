@@ -26,16 +26,17 @@ class StudyProtocolVersion(BaseModel):
         return obj
 
 
-class StudyProtocolVersionRepository(Repository[bridg.protocol.StudyProtocolVersion]):
+class StudyProtocolVersionRepository(Repository[bridg.StudyProtocolVersion]):
     _sa = bridg.StudyProtocolVersion
 
 
-StudyProtocolVersionRepository = Annotated[StudyProtocolVersionRepository,
-                                           Depends(get_repository(StudyProtocolVersionRepository))]
+StudyProtocolVersionRepositoryDep = Annotated[
+    StudyProtocolVersionRepository, Depends(get_repository(StudyProtocolVersionRepository))
+]
 
 
 @router.get("")
-def index(repo: StudyProtocolVersionRepository) -> List[StudyProtocolVersion]:
+def index(repo: StudyProtocolVersionRepositoryDep) -> List[StudyProtocolVersion]:
     objs = repo.all()
     return [StudyProtocolVersion.model_validate(o) for o in objs]
 
