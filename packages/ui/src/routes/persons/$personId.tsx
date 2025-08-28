@@ -9,7 +9,7 @@ import type { PersonOutput } from "api-ts";
 import { Route as editRoute } from "./$personId/edit";
 import { useTranslation } from "react-i18next";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
-import i18next from "../../i18n";
+import i18next from "@/i18n";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
