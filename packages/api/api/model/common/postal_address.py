@@ -25,8 +25,8 @@ class PostalAddress(PostalAddressData):
     @computed_field
     @property
     def label(self) -> str:
-        parts = [self.state, self.street, self.building]
+        parts = [self.street, self.building, self.municipality, self.state, self.country, self.zip]
         parts = [p for p in parts if p]
-        s = " ".join(parts)
-        s = "Unkown" if s == "" else s
+        s = ", ".join(parts)
+        s = "No address data" if s == "" else s
         return s
