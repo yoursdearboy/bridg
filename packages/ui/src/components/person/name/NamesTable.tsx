@@ -64,7 +64,13 @@ const NamesTableRow = ({ name, personId, onDelete }: NamesTableRowProps) => {
           )}
         </Table.Td>
       </Table.Tr>
-      <Modal opened={opened} onClose={close} title={t("edit")}>
+      <Modal
+        opened={opened}
+        onClose={close}
+        title={t("edit")}
+        size="lg"
+        centered
+      >
         <EditNameForm
           personId={personId}
           name={name}
