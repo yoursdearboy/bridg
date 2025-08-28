@@ -4,7 +4,7 @@ import { AddressesCard } from "@/components/person/address/AddressCard";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
 import { Button, Grid, Group, Modal, Space, Stack, Title } from "@mantine/core";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import type { PersonOutput } from "api-ts";
 import { Route as editRoute } from "./$personId/edit";
 import { useTranslation } from "react-i18next";
@@ -27,10 +27,8 @@ function PersonShowPage() {
   const [opened, { open, close }] = useDisclosure(false);
   const { personId } = Route.useParams();
   const person = Route.useLoaderData();
-  const handleEdit = () => {
-    open();
-  };
   const { t } = useTranslation();
+  const router = useRouter();
 
   return (
     <>
@@ -47,7 +45,7 @@ function PersonShowPage() {
             >
               {t("PersonShowPage.edit")}
             </ButtonLink>
-            <Button onClick={handleEdit}>{t("PersonShowPage.rename")}</Button>
+            <Button onClick={open}>{t("PersonShowPage.rename")}</Button>
           </Group>
         </Group>
 
@@ -74,7 +72,10 @@ function PersonShowPage() {
             personId={personId}
             name={person.primaryName}
             onCancel={close}
-            onSuccess={() => close()}
+            onSuccess={() => {
+              void router.invalidate();
+              close();
+            }}
           />
         </Modal>
       )}
