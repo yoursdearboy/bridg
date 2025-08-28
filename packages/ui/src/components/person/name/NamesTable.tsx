@@ -1,4 +1,4 @@
-import { Box, Modal, Table } from "@mantine/core";
+import { Box, Group, Modal, Table } from "@mantine/core";
 import { useDisclosure, useHover } from "@mantine/hooks";
 import { IconPencil, IconX } from "@tabler/icons-react";
 import type { EntityName } from "api-ts";
@@ -61,20 +61,13 @@ const NamesTableRow = ({
   return (
     <>
       <Table.Tr ref={ref}>
-        <Table.Td
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingRight: 20,
-          }}
-        >
-          {name.label}
+        <Table.Td>{name.label}</Table.Td>
+        <Table.Td width={60}>
           {hovered && (
-            <div style={{ display: "flex", gap: 8 }}>
+            <Group gap={8}>
               <IconPencil size={16} color="green" onClick={handleEdit} />
               <IconX size={16} color="red" onClick={handleDelete} />
-            </div>
+            </Group>
           )}
         </Table.Td>
       </Table.Tr>
