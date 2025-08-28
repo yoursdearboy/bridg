@@ -72,7 +72,7 @@ export interface EntityName {
      * @type {string}
      * @memberof EntityName
      */
-    label: string;
+    readonly label: string;
 }
 
 /**
@@ -110,7 +110,7 @@ export function EntityNameToJSON(json: any): EntityName {
     return EntityNameToJSONTyped(json, false);
 }
 
-export function EntityNameToJSONTyped(value?: EntityName | null, ignoreDiscriminator: boolean = false): any {
+export function EntityNameToJSONTyped(value?: Omit<EntityName, 'label'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -125,7 +125,6 @@ export function EntityNameToJSONTyped(value?: EntityName | null, ignoreDiscrimin
         'prefix': value['prefix'],
         'suffix': value['suffix'],
         'id': value['id'],
-        'label': value['label'],
     };
 }
 

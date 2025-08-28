@@ -15,6 +15,7 @@ def test_subject_index():
     space = StudyProtocolVersionFactory.create_sync()
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     p = PersonFactory.build()
+    en = p.name[0]
     s = StudySubjectFactory.create_sync(
         performing_biologic_entity=p,
         performing_organization=None,
@@ -34,7 +35,17 @@ def test_subject_index():
                 "death_date": None,
                 "death_date_estimated_indicator": None,
                 "death_indicator": False,
-                "primary_name": str(p),
+                "primary_name": {
+                    "family": en.family,
+                    "given": en.given,
+                    "id": str(en.id),
+                    "label": f"{en.given} {en.family}",
+                    "middle": None,
+                    "patronymic": None,
+                    "prefix": None,
+                    "suffix": None,
+                    "use": None,
+                },
             },
             "performing_organization": None,
         }
@@ -45,6 +56,7 @@ def test_subject_show():
     space = StudyProtocolVersionFactory.create_sync()
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     p = PersonFactory.build()
+    en = p.name[0]
     s = StudySubjectFactory.create_sync(
         performing_biologic_entity=p,
         performing_organization=None,
@@ -63,7 +75,17 @@ def test_subject_show():
             "death_date": None,
             "death_date_estimated_indicator": None,
             "death_indicator": False,
-            "primary_name": str(p),
+            "primary_name": {
+                "family": en.family,
+                "given": en.given,
+                "id": str(en.id),
+                "label": f"{en.given} {en.family}",
+                "middle": None,
+                "patronymic": None,
+                "prefix": None,
+                "suffix": None,
+                "use": None,
+            },
         },
         "performing_organization": None,
     }
@@ -116,7 +138,17 @@ def test_subject_create(session: Session):
             "death_date": None,
             "death_date_estimated_indicator": None,
             "death_indicator": None,
-            "primary_name": str(p),
+            "primary_name": {
+                "family": en.family,
+                "given": en.given,
+                "id": _or(lambda x: str(x.name[0].id), obj.performing_biologic_entity),
+                "label": f"{en.given} {en.family}",
+                "middle": None,
+                "patronymic": None,
+                "prefix": None,
+                "suffix": None,
+                "use": None,
+            },
         },
         "performing_organization": None,
     }

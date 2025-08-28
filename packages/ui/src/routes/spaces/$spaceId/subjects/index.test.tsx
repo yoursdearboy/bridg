@@ -17,7 +17,10 @@ it("index pages renders correctly", async () => {
         deathDate: null,
         deathDateEstimatedIndicator: null,
         deathIndicator: false,
-        primaryName: "Donald Trump Jr",
+        primaryName: {
+          id: "9de936fd-75b4-4021-a31f-4a243033b59f",
+          label: "Donald Trump Jr",
+        },
       },
       performingOrganization: null,
     },
@@ -32,7 +35,10 @@ it("index pages renders correctly", async () => {
         deathDate: null,
         deathDateEstimatedIndicator: null,
         deathIndicator: false,
-        primaryName: "Kamala Harris",
+        primaryName: {
+          id: "fe43f481-90e9-484e-8d9d-9aeb92bf609a",
+          label: "Kamala Harris",
+        },
       },
       performingOrganization: null,
     },

@@ -4,11 +4,11 @@ from uuid import UUID
 
 import bridg
 from fastapi import APIRouter, Depends
-from pydantic import field_validator
 from sqlalchemy.orm import Session
 
 from api.base_model import BaseModel
 from api.db import get_db
+from api.model import EntityName
 
 from . import name, postal_address, telecommunication_address
 
@@ -22,12 +22,7 @@ class Person(BaseModel):
     death_date: Optional[date]
     death_date_estimated_indicator: Optional[bool]
     death_indicator: Optional[bool]
-    primary_name: Optional[str]
-
-    @field_validator("primary_name", mode="before")
-    @classmethod
-    def convert_primary_name(cls, value: bridg.EntityName) -> str:
-        return str(value)
+    primary_name: Optional[EntityName]
 
 
 @router.get("/{person_id:uuid}", response_model=Person)

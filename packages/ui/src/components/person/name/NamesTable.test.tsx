@@ -17,7 +17,6 @@ describe("NamesTable", () => {
           },
         ]}
         personId="1"
-        invalidateQuery={() => {}}
       />
     );
 

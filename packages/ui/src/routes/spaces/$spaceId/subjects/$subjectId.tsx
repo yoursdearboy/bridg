@@ -14,7 +14,7 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
     api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet(params),
   beforeLoad: () => ({
     breadcrumb: ({ loaderData: subject }: { loaderData: StudySubject }) =>
-      subject.performingBiologicEntity?.primaryName || i18next.t("SubjectShowPage.breadcrumbDefault"),
+      subject.performingBiologicEntity?.primaryName?.label || i18next.t("SubjectShowPage.breadcrumbDefault"),
   }),
 });
 

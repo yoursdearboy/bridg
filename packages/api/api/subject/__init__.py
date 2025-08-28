@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 
 from api.base_model import BaseModel
 from api.db import get_db, get_repository
+from api.model import EntityName, EntityNameData
 
 from .service import StudySubjectRepository
 
@@ -23,12 +24,7 @@ class StudySubject(BaseModel):
         death_date: Optional[date]
         death_date_estimated_indicator: Optional[bool]
         death_indicator: Optional[bool]
-        primary_name: Optional[str]
-
-        @field_validator("primary_name", mode="before")
-        @classmethod
-        def convert_primary_name(cls, value: bridg.EntityName) -> str:
-            return str(value)
+        primary_name: Optional[EntityName]
 
     class Organization(BaseModel):
         id: UUID
@@ -45,18 +41,6 @@ class StudySubject(BaseModel):
     status_date: Optional[datetime]
     performing_biologic_entity: Optional[Person]
     performing_organization: Optional[Organization]
-
-
-class EntityNameData(BaseModel[bridg.EntityName]):
-    _sa = bridg.EntityName
-
-    use: Optional[str] = None
-    family: Optional[str] = None
-    given: Optional[str] = None
-    middle: Optional[str] = None
-    patronymic: Optional[str] = None
-    prefix: Optional[str] = None
-    suffix: Optional[str] = None
 
 
 class NewStudySubject(BaseModel[bridg.StudySubject]):

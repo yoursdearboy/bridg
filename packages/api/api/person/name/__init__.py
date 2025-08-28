@@ -1,37 +1,14 @@
-from typing import Annotated, List, Optional
+from typing import Annotated, List
 from uuid import UUID
 
 import bridg
 from bridg import Repository
 from fastapi import APIRouter, Depends
 
-from api.base_model import BaseModel
 from api.db import get_repository
+from api.model import EntityName, EntityNameData
 
 router = APIRouter(prefix="/names")
-
-
-class EntityNameData(BaseModel[bridg.EntityName]):
-    _sa = bridg.EntityName
-
-    use: Optional[str] = None
-    family: Optional[str] = None
-    given: Optional[str] = None
-    middle: Optional[str] = None
-    patronymic: Optional[str] = None
-    prefix: Optional[str] = None
-    suffix: Optional[str] = None
-
-
-class EntityName(EntityNameData):
-    id: UUID
-    label: str
-
-    @classmethod
-    def model_validate(cls, obj: bridg.EntityName, **kwargs):
-        data = obj.__dict__
-        data["label"] = str(obj)
-        return super().model_validate(data, **kwargs)
 
 
 class EntityNameRepository(Repository[bridg.EntityName]):

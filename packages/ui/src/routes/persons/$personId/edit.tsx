@@ -52,7 +52,7 @@ function PersonEditPage() {
         <Group justify="space-between">
           <Group>
             <Text size="xl" fw={700}>
-              {t("PersonEditPage.title")} {person.primaryName}
+              {t("PersonEditPage.title")} {person.primaryName?.label}
             </Text>
             {person.deathIndicator && (
               <Badge color="red" ml="sm">
