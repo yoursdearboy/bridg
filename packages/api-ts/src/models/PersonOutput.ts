@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { EntityName } from './EntityName';
+import {
+    EntityNameFromJSON,
+    EntityNameFromJSONTyped,
+    EntityNameToJSON,
+    EntityNameToJSONTyped,
+} from './EntityName';
 import type { AdministrativeGender } from './AdministrativeGender';
 import {
     AdministrativeGenderFromJSON,
@@ -65,10 +72,10 @@ export interface PersonOutput {
     deathIndicator: boolean | null;
     /**
      * 
-     * @type {string}
+     * @type {EntityName}
      * @memberof PersonOutput
      */
-    primaryName: string | null;
+    primaryName: EntityName | null;
 }
 
 
@@ -103,7 +110,7 @@ export function PersonOutputFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'deathDate': (json['death_date'] == null ? null : new Date(json['death_date'])),
         'deathDateEstimatedIndicator': json['death_date_estimated_indicator'],
         'deathIndicator': json['death_indicator'],
-        'primaryName': json['primary_name'],
+        'primaryName': EntityNameFromJSON(json['primary_name']),
     };
 }
 
@@ -124,7 +131,7 @@ export function PersonOutputToJSONTyped(value?: PersonOutput | null, ignoreDiscr
         'death_date': ((value['deathDate'] as any).toISOString().substring(0,10)),
         'death_date_estimated_indicator': value['deathDateEstimatedIndicator'],
         'death_indicator': value['deathIndicator'],
-        'primary_name': value['primaryName'],
+        'primary_name': EntityNameToJSON(value['primaryName']),
     };
 }
 

@@ -14,7 +14,10 @@ export const PersonCard = ({ person }: PersonCardProps) => {
   return (
     <Card withBorder shadow="sm" padding="lg" radius="md">
       <Stack gap="sm">
-        <InfoRow label={t("Person.primaryName")} value={person.primaryName}>
+        <InfoRow
+          label={t("Person.primaryName")}
+          value={person.primaryName?.label}
+        >
           {person.deathIndicator && (
             <Badge color="red" ml="sm">
               {t("PersonCard.deceased")}

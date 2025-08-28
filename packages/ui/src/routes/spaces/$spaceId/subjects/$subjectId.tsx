@@ -13,7 +13,8 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
     api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet(params),
   beforeLoad: () => ({
     breadcrumb: ({ loaderData: subject }: { loaderData: StudySubject }) =>
-      subject.performingBiologicEntity?.primaryName || "Anonymous subject",
+      subject.performingBiologicEntity?.primaryName?.label ||
+      "Anonymous subject",
   }),
 });
 
