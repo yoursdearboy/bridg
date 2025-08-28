@@ -9,13 +9,15 @@ import type { PersonOutput } from "api-ts";
 import { Route as editRoute } from "./$personId/edit";
 import { useTranslation } from "react-i18next";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
+import i18next from "@/i18n";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
   loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
   beforeLoad: () => ({
     breadcrumb: ({ loaderData: person }: { loaderData: PersonOutput }) =>
-      person.primaryName?.label || "Anonymous person",
+      person.primaryName?.label ||
+      i18next.t("PersonShowPage.breadcrumbDefault"),
   }),
 });
 

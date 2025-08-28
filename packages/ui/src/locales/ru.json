@@ -30,10 +30,14 @@
       "suffix": "Суффикс"
     },
     "SubjectIndexPage": {
+      "breadcrumb": "Пациенты",
       "info": "Информация",
       "patients": "Пациенты",
       "newPatient": "Новый пациент",
       "actions": "Действия"
+    },
+    "SubjectNewPage": {
+      "breadcrumb": "Новый пациент"
     },
     "SubjectInfoCard": {
       "title": "Информация об объект наблюдения",
@@ -42,20 +46,26 @@
       "personDetails": "Данные человека",
       "organizationDetails": "Данные организации"
     },
+    "PersonIndexPage": {
+      "breadcrumb": "Люди"
+    },
     "SubjectShowPage": {
       "title": "Данные пациента",
       "back": "Назад к списку",
-      "toPerson": "На страницу человека"
+      "toPerson": "На страницу человека",
+      "breadcrumbDefault": "Неизвестный пациент"
     },
     "PersonShowPage": {
       "title": "Данные человека",
-      "edit": "Редактировать"
+      "edit": "Редактировать",
+      "breadcrumbDefault": "Неизвестный человек"
     },
     "PersonEditPage": {
       "title": "Редактирование:",
       "personalInfo": "Личная информация",
       "primaryNamePlaceholder": "Иван Иванов",
-      "deceased": "Умерший"
+      "deceased": "Умерший",
+      "breadcrumb": "Редактирование"
     },
     "PersonCard": {
       "deceased": "Умерший",

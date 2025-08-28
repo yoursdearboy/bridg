@@ -30,3 +30,5 @@ i18next
 i18next.services.formatter!.add("dayjsDuration", (value: Duration, lng) => {
   return value.locale(lng!).humanize();
 });
+
+export default i18next;

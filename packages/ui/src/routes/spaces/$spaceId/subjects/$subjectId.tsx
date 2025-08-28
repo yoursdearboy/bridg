@@ -6,6 +6,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type { StudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
 import { Route as personRoute } from "@/routes/persons/$personId";
+import i18next from "@/i18n";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
   component: SubjectShowPage,
@@ -14,7 +15,7 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
   beforeLoad: () => ({
     breadcrumb: ({ loaderData: subject }: { loaderData: StudySubject }) =>
       subject.performingBiologicEntity?.primaryName?.label ||
-      "Anonymous subject",
+      i18next.t("SubjectShowPage.breadcrumbDefault"),
   }),
 });
 
