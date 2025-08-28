@@ -36,7 +36,7 @@
       "newPatient": "New patient",
       "actions": "Actions"
     },
-    "SubjectNewPage" : {
+    "SubjectNewPage": {
       "breadcrumb": "New Patient"
     },
     "SubjectInfoCard": {
@@ -52,18 +52,21 @@
     "SubjectShowPage": {
       "title": "Patient information",
       "back": "Back to list",
-      "toPerson": "Go to person page"
+      "toPerson": "Go to person page",
+      "breadcrumbDefault": "Anonymous subject"
     },
     "PersonShowPage": {
       "title": "Person information",
-      "edit": "Edit person"
+      "edit": "Edit person",
+      "breadcrumbDefault": "Anonymous person"
     },
     "PersonEditPage": {
       "title": "Editing:",
       "cancel": "Cancel",
       "personalInfo": "Personal information",
       "primaryNamePlaceholder": "John Doe",
-      "deceased": "Deceased"
+      "deceased": "Deceased",
+      "breadcrumb": "Editing"
     },
     "PersonCard": {
       "deceased": "Deceased",

@@ -36,7 +36,7 @@
       "newPatient": "Новый пациент",
       "actions": "Действия"
     },
-    "SubjectNewPage" : {
+    "SubjectNewPage": {
       "breadcrumb": "Новый пациент"
     },
     "SubjectInfoCard": {
@@ -46,26 +46,26 @@
       "personDetails": "Данные человека",
       "organizationDetails": "Данные организации"
     },
+    "PersonIndexPage": {
+      "breadcrumb": "Люди"
+    },
     "SubjectShowPage": {
       "title": "Данные пациента",
       "back": "Назад к списку",
       "toPerson": "На страницу человека",
       "breadcrumbDefault": "Неизвестный пациент"
     },
-    "PersonIndexPage": {
-      "breadcrumb": "Люди"
-    },
     "PersonShowPage": {
       "title": "Данные человека",
       "edit": "Редактировать",
-      "bredcrumbDefault": "Неизвестный человек"
+      "breadcrumbDefault": "Неизвестный человек"
     },
     "PersonEditPage": {
       "title": "Редактирование:",
       "personalInfo": "Личная информация",
       "primaryNamePlaceholder": "Иван Иванов",
       "deceased": "Умерший",
-      "bredcrumb": "Редактирование"
+      "breadcrumb": "Редактирование"
     },
     "PersonCard": {
       "deceased": "Умерший",

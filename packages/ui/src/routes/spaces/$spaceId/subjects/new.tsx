@@ -28,7 +28,7 @@ import {
 } from "api-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
-import i18next from "../../../../i18n";
+import i18next from "@/i18n";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
   loader: async ({ params }) => ({
