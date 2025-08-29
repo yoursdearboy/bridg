@@ -62,6 +62,14 @@
       "breadcrumbDefault": "Неизвестный человек",
       "rename": "Переименовать"
     },
+    "Address": {
+      "street": "Улица",
+      "building": "Здание",
+      "country": "Страна",
+      "municipality": "Муниципалитет",
+      "state": "Штат",
+      "zip": "Индекс"
+    },
     "PersonEditPage": {
       "title": "Редактирование:",
       "personalInfo": "Личная информация",
