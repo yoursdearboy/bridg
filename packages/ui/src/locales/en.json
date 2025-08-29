@@ -58,7 +58,7 @@
     "PersonShowPage": {
       "title": "Person information",
       "edit": "Edit person",
-      "actions":"Actions",
+      "actions": "Actions",
       "breadcrumbDefault": "Anonymous person",
       "rename": "Rename"
     },

@@ -1,12 +1,19 @@
 import api from "@/api";
-import ButtonLink from "@/components/ButtonLink";
 import { AddressesCard } from "@/components/person/address/AddressCard";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
-import { Button, Grid, Group, Menu, Modal, Space, Stack, Title } from "@mantine/core";
+import {
+  Button,
+  Grid,
+  Group,
+  Menu,
+  Modal,
+  Space,
+  Stack,
+  Title,
+} from "@mantine/core";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import type { PersonOutput } from "api-ts";
-import { Route as editRoute } from "./$personId/edit";
 import { useTranslation } from "react-i18next";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 import i18next from "@/i18n";
@@ -38,7 +45,7 @@ function PersonShowPage() {
           <Title fw={500} order={2}>
             {person.primaryName?.label}
           </Title>
-       <Group gap="xs" align="flex-end">
+          <Group gap="xs" align="flex-end">
             <Menu shadow="md" width={200} position="bottom-end">
               <Menu.Target>
                 <Button
