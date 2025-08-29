@@ -1,5 +1,4 @@
 import api from "@/api";
-import { AddressesCard } from "@/components/person/address/AddressCard";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
 import {
@@ -20,6 +19,7 @@ import i18next from "@/i18n";
 import { useDisclosure } from "@mantine/hooks";
 import { EditNameForm } from "@/components/person/name/EditNameForm";
 import { IconChevronDown, IconPencil } from "@tabler/icons-react";
+import { AddressCardWrapper } from "@/components/person/address/AddressCard";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
@@ -74,7 +74,7 @@ function PersonShowPage() {
             <Space h="md" />
             <NamesCardWrapper personId={personId} />
             <Space h="md" />
-            <AddressesCard personId={personId} />
+            <AddressCardWrapper personId={personId} />
             <Space h="md" />
             <TelecommunicationAddressesTable personId={personId} />
           </Grid.Col>
