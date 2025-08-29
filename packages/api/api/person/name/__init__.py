@@ -15,7 +15,8 @@ class EntityNameRepository(Repository[bridg.EntityName]):
     _sa = bridg.EntityName
 
 
-EntityNameRepositoryDep = Annotated[EntityNameRepository, Depends(get_repository(EntityNameRepository))]
+EntityNameRepositoryDep = Annotated[EntityNameRepository, Depends(
+    get_repository(EntityNameRepository))]
 
 
 @router.get("")

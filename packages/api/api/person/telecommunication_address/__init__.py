@@ -23,7 +23,7 @@ class TelecommunicationAddressRepository(Repository[bridg.common.person.Telecomm
     _sa = bridg.common.person.TelecommunicationAddress
 
 
-TelecommunicationAddressRepository = Annotated[TelecommunicationAddressRepository,
+TelecommunicationAddressRepositoryDep = Annotated[TelecommunicationAddressRepository,
                                                Depends(get_repository(TelecommunicationAddressRepository))]
 
 
@@ -35,7 +35,7 @@ def index(person_id: UUID, repo: TelecommunicationAddressRepository) -> List[Tel
 
 
 @router.post("")
-def create(person_id: UUID, data: TelecommunicationAddress, repo: TelecommunicationAddressRepository) -> TelecommunicationAddress:
+def create(person_id: UUID, data: TelecommunicationAddress, repo: TelecommunicationAddressRepositoryDep) -> TelecommunicationAddress:
     obj = data.model_dump_sa()
     obj.person_id = person_id
     obj = repo.create(obj)
@@ -43,7 +43,7 @@ def create(person_id: UUID, data: TelecommunicationAddress, repo: Telecommunicat
 
 
 @router.patch("/{address_id:uuid}")
-def update(person_id: UUID, address_id: UUID, data: TelecommunicationAddress, repo: TelecommunicationAddressRepository) -> TelecommunicationAddress:
+def update(person_id: UUID, address_id: UUID, data: TelecommunicationAddress, repo: TelecommunicationAddressRepositoryDep) -> TelecommunicationAddress:
     obj = repo.one(address_id)
     data.model_update_sa(obj)
     obj = repo.update(obj)
@@ -51,5 +51,5 @@ def update(person_id: UUID, address_id: UUID, data: TelecommunicationAddress, re
 
 
 @router.delete("/{address_id:uuid}")
-def delete(person_id: UUID, address_id: UUID, repo: TelecommunicationAddressRepository):
+def delete(person_id: UUID, address_id: UUID, repo: TelecommunicationAddressRepositoryDep):
     repo.delete(address_id)
