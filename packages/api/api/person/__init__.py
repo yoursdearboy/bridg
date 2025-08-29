@@ -5,10 +5,9 @@ from uuid import UUID
 import bridg
 from bridg import Repository
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
 
 from api.base_model import BaseModel
-from api.db import get_db, get_repository
+from api.db import get_repository
 from api.model import EntityName
 
 from . import name, postal_address, telecommunication_address
@@ -16,7 +15,7 @@ from . import name, postal_address, telecommunication_address
 router = APIRouter(prefix="/persons", tags=["persons"])
 
 
-class Person(BaseModel):
+class Person(BaseModel[bridg.Person]):
     id: UUID
     administrative_gender_code: Optional[bridg.AdministrativeGender]
     birth_date: Optional[date]
@@ -30,12 +29,12 @@ class PersonRepository(Repository[bridg.Person]):
     _sa = bridg.Person
 
 
-PersonRepository = Annotated[PersonRepository,
-                             Depends(get_repository(PersonRepository))]
+PersonRepositoryDep = Annotated[PersonRepository,
+                                Depends(get_repository(PersonRepository))]
 
 
 @router.get("/{person_id:uuid}")
-def show(person_id: UUID, repo: PersonRepository) -> Optional[Person]:
+def show(person_id: UUID, repo: PersonRepositoryDep) -> Optional[Person]:
     if obj := repo.one_or_none(person_id):
         return Person.model_validate(obj)
     raise HTTPException(status_code=404)
