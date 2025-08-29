@@ -1,74 +1,107 @@
-import { Box, Table } from "@mantine/core";
 import api from "@/api";
+import { Box, Group, Modal, Table } from "@mantine/core";
+import { useDisclosure, useHover } from "@mantine/hooks";
+import { IconPencil, IconX } from "@tabler/icons-react";
+import { useMutation } from "@tanstack/react-query";
 import type { PostalAddress } from "api-ts";
-import { useHover } from "@mantine/hooks";
-import { IconX } from "@tabler/icons-react";
-import { useTranslation } from "react-i18next";
+import { t } from "i18next";
+import { EditAddressForm } from "./EditAddressForm";
 
-interface AddressesTableRowProps {
-  address: PostalAddress;
+interface AddressTableRowWrapperProps {
   personId: string;
-  onDeleteSuccess: () => void;
+  address: PostalAddress;
 }
 
-const AddressesTableRow = ({
-  address,
+const AddressTableRowWrapper = ({
   personId,
-  onDeleteSuccess,
-}: AddressesTableRowProps) => {
-  const { hovered, ref } = useHover();
-  const { t } = useTranslation();
-
-  const handleDelete = async () => {
-    const ok = window.confirm(t("AddressesTable.deleteConfirm"));
-    if (!ok) return;
-
-    await api.persons.deletePersonsPersonIdPostalAddressesAddressIdDelete({
-      personId,
-      addressId: address.id,
-    });
-
-    onDeleteSuccess();
-  };
+  address,
+}: AddressTableRowWrapperProps) => {
+  const mutation = useMutation({
+    mutationKey: ["person", personId, "addresses", address.id],
+    mutationFn: () =>
+      api.persons.deletePersonsPersonIdPostalAddressesAddressIdDelete({
+        personId,
+        addressId: address.id,
+      }),
+  });
 
   return (
-    <Table.Tr ref={ref}>
-      <Table.Td px={0}>{address.label}</Table.Td>
-      <Table.Td px={0} style={{ width: 40 }}>
-        {hovered && (
-          <IconX size={16} color="red" onClick={() => void handleDelete()} />
-        )}
-      </Table.Td>
-    </Table.Tr>
+    <AddressTableRow
+      address={address}
+      personId={personId}
+      onDelete={() => mutation.mutate()}
+    />
   );
 };
 
-interface AddressesTableProps {
-  addresses: PostalAddress[];
+interface AddressTableRowProps {
+  address: PostalAddress;
   personId: string;
-  onDeleteSuccess: () => void;
+  onDelete: (address: PostalAddress) => void;
 }
 
-export const AddressesTable = ({
-  addresses,
+const AddressTableRow = ({
+  address,
   personId,
-  onDeleteSuccess,
-}: AddressesTableProps) => {
+  onDelete,
+}: AddressTableRowProps) => {
+  const { hovered, ref } = useHover();
+  const [opened, { open, close }] = useDisclosure(false);
+  const handleEdit = () => {
+    open();
+  };
+  const handleDelete = () => {
+    if (window.confirm("Удалить выбранное значение?")) {
+      onDelete(address);
+    }
+  };
   return (
-    <Box pt="md">
+    <>
+      <Table.Tr ref={ref}>
+        <Table.Td>{address.label}</Table.Td>
+        <Table.Td width={60}>
+          {hovered && (
+            <Group gap={8}>
+              <IconPencil size={16} color="green" onClick={handleEdit} />
+              <IconX size={16} color="red" onClick={handleDelete} />
+            </Group>
+          )}
+        </Table.Td>
+      </Table.Tr>
+      <Modal opened={opened} onClose={close} title={t("edit")} size="lg">
+        <EditAddressForm
+          personId={personId}
+          address={address}
+          onCancel={close}
+          onSuccess={() => close()}
+        />
+      </Modal>
+    </>
+  );
+};
+
+interface AddressTableProps {
+  personId: string;
+  addresses: PostalAddress[];
+}
+
+export const AddressTable = ({ personId, addresses }: AddressTableProps) => {
+  return (
+    <Box pt="xs">
       <Table highlightOnHover>
         <Table.Tbody>
           {addresses.length === 0 ? (
             <Table.Tr>
-              <Table.Td px={0} style={{ textAlign: "center" }}></Table.Td>
+              <Table.Td px={0} style={{ textAlign: "center" }}>
+                {t("nodata")}
+              </Table.Td>
             </Table.Tr>
           ) : (
             addresses.map((address) => (
-              <AddressesTableRow
+              <AddressTableRowWrapper
                 key={address.id}
                 personId={personId}
                 address={address}
-                onDeleteSuccess={onDeleteSuccess}
               />
             ))
           )}
