@@ -57,6 +57,7 @@
     },
     "PersonShowPage": {
       "title": "Данные человека",
+      "actions":"Действия",
       "edit": "Редактировать",
       "breadcrumbDefault": "Неизвестный человек",
       "rename": "Переименовать"
