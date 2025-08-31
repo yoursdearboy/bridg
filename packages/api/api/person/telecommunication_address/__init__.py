@@ -23,19 +23,21 @@ class TelecommunicationAddressRepository(Repository[bridg.common.person.Telecomm
     _sa = bridg.common.person.TelecommunicationAddress
 
 
-TelecommunicationAddressRepositoryDep = Annotated[TelecommunicationAddressRepository,
-                                               Depends(get_repository(TelecommunicationAddressRepository))]
+TelecommunicationAddressRepositoryDep = Annotated[
+    TelecommunicationAddressRepository, Depends(get_repository(TelecommunicationAddressRepository))
+]
 
 
 @router.get("")
-def index(person_id: UUID, repo: TelecommunicationAddressRepository) -> List[TelecommunicationAddress]:
-    objs = repo.all(
-        bridg.common.person.TelecommunicationAddress.person_id == person_id)
+def index(person_id: UUID, repo: TelecommunicationAddressRepositoryDep) -> List[TelecommunicationAddress]:
+    objs = repo.all(bridg.common.person.TelecommunicationAddress.person_id == person_id)
     return [TelecommunicationAddress.model_validate(o) for o in objs]
 
 
 @router.post("")
-def create(person_id: UUID, data: TelecommunicationAddress, repo: TelecommunicationAddressRepositoryDep) -> TelecommunicationAddress:
+def create(
+    person_id: UUID, data: TelecommunicationAddress, repo: TelecommunicationAddressRepositoryDep
+) -> TelecommunicationAddress:
     obj = data.model_dump_sa()
     obj.person_id = person_id
     obj = repo.create(obj)
@@ -43,7 +45,9 @@ def create(person_id: UUID, data: TelecommunicationAddress, repo: Telecommunicat
 
 
 @router.patch("/{address_id:uuid}")
-def update(person_id: UUID, address_id: UUID, data: TelecommunicationAddress, repo: TelecommunicationAddressRepositoryDep) -> TelecommunicationAddress:
+def update(
+    person_id: UUID, address_id: UUID, data: TelecommunicationAddress, repo: TelecommunicationAddressRepositoryDep
+) -> TelecommunicationAddress:
     obj = repo.one(address_id)
     data.model_update_sa(obj)
     obj = repo.update(obj)

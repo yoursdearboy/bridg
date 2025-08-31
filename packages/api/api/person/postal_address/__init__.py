@@ -15,8 +15,7 @@ class PostalAddressRepository(Repository[bridg.common.person.PostalAddress]):
     _sa = bridg.common.person.PostalAddress
 
 
-PostalAddressRepositoryDep = Annotated[PostalAddressRepository, Depends(
-    get_repository(PostalAddressRepository))]
+PostalAddressRepositoryDep = Annotated[PostalAddressRepository, Depends(get_repository(PostalAddressRepository))]
 
 
 @router.get("")

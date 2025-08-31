@@ -5,7 +5,6 @@ import bridg
 from bridg import Repository
 from fastapi import APIRouter, Depends
 from pydantic import field_validator
-from sqlalchemy.orm import Session
 
 from api.base_model import BaseModel
 from api.db import get_repository

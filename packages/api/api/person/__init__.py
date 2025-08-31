@@ -29,8 +29,7 @@ class PersonRepository(Repository[bridg.Person]):
     _sa = bridg.Person
 
 
-PersonRepositoryDep = Annotated[PersonRepository,
-                                Depends(get_repository(PersonRepository))]
+PersonRepositoryDep = Annotated[PersonRepository, Depends(get_repository(PersonRepository))]
 
 
 @router.get("/{person_id:uuid}")
@@ -42,8 +41,6 @@ def show(person_id: UUID, repo: PersonRepositoryDep) -> Optional[Person]:
 
 router.include_router(name.router, prefix="/{person_id:uuid}")
 router.include_router(postal_address.router, prefix="/{person_id:uuid}")
-router.include_router(telecommunication_address.router,
-                      prefix="/{person_id:uuid}")
+router.include_router(telecommunication_address.router, prefix="/{person_id:uuid}")
 
-openapi_tags = [{"name": "persons", "postal_address": "persons",
-                 "telecommunication_address": "persons"}]
+openapi_tags = [{"name": "persons", "postal_address": "persons", "telecommunication_address": "persons"}]
