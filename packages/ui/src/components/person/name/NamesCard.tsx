@@ -34,33 +34,37 @@ interface NamesCardProps {
 export const NamesCard = ({ personId, query }: NamesCardProps) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { t } = useTranslation();
-
   const { isPending, isError, error, data: names } = query;
-
-  // FIXME: Must be inside Card.Section
-  if (isPending) return <LoadingOverlay visible />;
-
-  // FIXME: Must be inside Card.Section
-  if (isError) {
-    return (
-      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
-    );
-  }
 
   return (
     <>
       <Card withBorder shadow="sm" radius="md" padding="xs">
         <Card.Section withBorder inheritPadding py="xs">
-          <Group justify="space-between">
-            <Text fw={500} px="xs">
-              {t("NamesCard.title")}
+          {isPending && <LoadingOverlay visible />}
+          {isError && (
+            <Text color="red">
+              {t("errorMessage", { error: error.message })}
             </Text>
-            <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
-              {t("add")}
-            </Button>
-          </Group>
+          )}
+          {!isPending && !isError && (
+            <>
+              <Group justify="space-between">
+                <Text fw={500} px="xs">
+                  {t("NamesCard.title")}
+                </Text>
+                <Button
+                  variant="outline"
+                  size="compact-sm"
+                  onClick={open}
+                  fw={500}
+                >
+                  {t("add")}
+                </Button>
+              </Group>
+              <NamesTable personId={personId} names={names} />
+            </>
+          )}
         </Card.Section>
-        <NamesTable personId={personId} names={names} />
       </Card>
       <Modal opened={opened} onClose={close} title={t("add")} size="lg">
         <NewNameForm
