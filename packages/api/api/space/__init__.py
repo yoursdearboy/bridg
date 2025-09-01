@@ -1,14 +1,14 @@
-from typing import List
+from typing import Annotated, List
 from uuid import UUID
 
 import bridg
+from bridg import Repository
 from fastapi import APIRouter, Depends
 from pydantic import model_validator
-from sqlalchemy.orm import Session
 
 from api import site, subject
 from api.base_model import BaseModel
-from api.db import get_db
+from api.db import get_repository
 
 router = APIRouter(prefix="/spaces")
 
@@ -26,9 +26,19 @@ class StudyProtocolVersion(BaseModel):
         return obj
 
 
-@router.get("", response_model=List[StudyProtocolVersion])
-def index(db: Session = Depends(get_db)):
-    return db.query(bridg.StudyProtocolVersion).all()
+class StudyProtocolVersionRepository(Repository[bridg.StudyProtocolVersion]):
+    _sa = bridg.StudyProtocolVersion
+
+
+StudyProtocolVersionRepositoryDep = Annotated[
+    StudyProtocolVersionRepository, Depends(get_repository(StudyProtocolVersionRepository))
+]
+
+
+@router.get("")
+def index(repo: StudyProtocolVersionRepositoryDep) -> List[StudyProtocolVersion]:
+    objs = repo.all()
+    return [StudyProtocolVersion.model_validate(o) for o in objs]
 
 
 space_router = APIRouter(prefix="/{space_id:uuid}")

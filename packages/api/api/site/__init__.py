@@ -1,13 +1,13 @@
-from typing import List
+from typing import Annotated, List
 from uuid import UUID
 
 import bridg
+from bridg import Repository
 from fastapi import APIRouter, Depends
 from pydantic import field_validator
-from sqlalchemy.orm import Session
 
 from api.base_model import BaseModel
-from api.db import get_db
+from api.db import get_repository
 
 router = APIRouter(prefix="/sites", tags=["sites"])
 
@@ -22,8 +22,19 @@ class StudySiteProtocolVersionRelationship(BaseModel):
         return str(ss.performing_entity)
 
 
-@router.get("", response_model=List[StudySiteProtocolVersionRelationship])
-def index(space_id: UUID, db: Session = Depends(get_db)):
-    return db.query(bridg.StudySiteProtocolVersionRelationship).filter(
-        bridg.StudySiteProtocolVersionRelationship.executed_study_protocol_version_id == space_id
-    )
+class StudySiteProtocolVersionRelationshipRepository(Repository[bridg.StudySiteProtocolVersionRelationship]):
+    _sa = bridg.StudySiteProtocolVersionRelationship
+
+
+StudySiteProtocolVersionRelationshipRepositoryDep = Annotated[
+    StudySiteProtocolVersionRelationshipRepository,
+    Depends(get_repository(StudySiteProtocolVersionRelationshipRepository)),
+]
+
+
+@router.get("")
+def index(
+    space_id: UUID, repo: StudySiteProtocolVersionRelationshipRepositoryDep
+) -> List[StudySiteProtocolVersionRelationship]:
+    objs = repo.all(bridg.StudySiteProtocolVersionRelationship.executed_study_protocol_version_id == space_id)
+    return [StudySiteProtocolVersionRelationship.model_validate(o) for o in objs]
