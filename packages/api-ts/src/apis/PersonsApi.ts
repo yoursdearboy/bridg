@@ -15,32 +15,32 @@
 
 import * as runtime from '../runtime';
 import type {
-  EntityName,
+  ApiPersonPerson,
   EntityNameData,
+  EntityNameOutput,
   HTTPValidationError,
-  PersonOutput,
+  PersonData,
   PostalAddress,
   PostalAddressData,
   TelecommunicationAddress,
-  TelecommunicationAddressWithId,
 } from '../models/index';
 import {
-    EntityNameFromJSON,
-    EntityNameToJSON,
+    ApiPersonPersonFromJSON,
+    ApiPersonPersonToJSON,
     EntityNameDataFromJSON,
     EntityNameDataToJSON,
+    EntityNameOutputFromJSON,
+    EntityNameOutputToJSON,
     HTTPValidationErrorFromJSON,
     HTTPValidationErrorToJSON,
-    PersonOutputFromJSON,
-    PersonOutputToJSON,
+    PersonDataFromJSON,
+    PersonDataToJSON,
     PostalAddressFromJSON,
     PostalAddressToJSON,
     PostalAddressDataFromJSON,
     PostalAddressDataToJSON,
     TelecommunicationAddressFromJSON,
     TelecommunicationAddressToJSON,
-    TelecommunicationAddressWithIdFromJSON,
-    TelecommunicationAddressWithIdToJSON,
 } from '../models/index';
 
 export interface CreatePersonsPersonIdNamesPostRequest {
@@ -95,6 +95,11 @@ export interface UpdatePersonsPersonIdNamesNameIdPatchRequest {
     entityNameData: EntityNameData;
 }
 
+export interface UpdatePersonsPersonIdPatchRequest {
+    personId: string;
+    personData: PersonData;
+}
+
 export interface UpdatePersonsPersonIdPostalAddressesAddressIdPatchRequest {
     personId: string;
     addressId: string;
@@ -115,7 +120,7 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Create
      */
-    async createPersonsPersonIdNamesPostRaw(requestParameters: CreatePersonsPersonIdNamesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EntityName>> {
+    async createPersonsPersonIdNamesPostRaw(requestParameters: CreatePersonsPersonIdNamesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EntityNameOutput>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
@@ -148,13 +153,13 @@ export class PersonsApi extends runtime.BaseAPI {
             body: EntityNameDataToJSON(requestParameters['entityNameData']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => EntityNameFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => EntityNameOutputFromJSON(jsonValue));
     }
 
     /**
      * Create
      */
-    async createPersonsPersonIdNamesPost(requestParameters: CreatePersonsPersonIdNamesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EntityName> {
+    async createPersonsPersonIdNamesPost(requestParameters: CreatePersonsPersonIdNamesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EntityNameOutput> {
         const response = await this.createPersonsPersonIdNamesPostRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -403,7 +408,7 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexPersonsPersonIdNamesGetRaw(requestParameters: IndexPersonsPersonIdNamesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<EntityName>>> {
+    async indexPersonsPersonIdNamesGetRaw(requestParameters: IndexPersonsPersonIdNamesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<EntityNameOutput>>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
@@ -426,13 +431,13 @@ export class PersonsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(EntityNameFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(EntityNameOutputFromJSON));
     }
 
     /**
      * Index
      */
-    async indexPersonsPersonIdNamesGet(requestParameters: IndexPersonsPersonIdNamesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<EntityName>> {
+    async indexPersonsPersonIdNamesGet(requestParameters: IndexPersonsPersonIdNamesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<EntityNameOutput>> {
         const response = await this.indexPersonsPersonIdNamesGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -477,7 +482,7 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexPersonsPersonIdTelecommunicationAddressesGetRaw(requestParameters: IndexPersonsPersonIdTelecommunicationAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<TelecommunicationAddressWithId>>> {
+    async indexPersonsPersonIdTelecommunicationAddressesGetRaw(requestParameters: IndexPersonsPersonIdTelecommunicationAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<TelecommunicationAddress>>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
@@ -500,13 +505,13 @@ export class PersonsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TelecommunicationAddressWithIdFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TelecommunicationAddressFromJSON));
     }
 
     /**
      * Index
      */
-    async indexPersonsPersonIdTelecommunicationAddressesGet(requestParameters: IndexPersonsPersonIdTelecommunicationAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<TelecommunicationAddressWithId>> {
+    async indexPersonsPersonIdTelecommunicationAddressesGet(requestParameters: IndexPersonsPersonIdTelecommunicationAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<TelecommunicationAddress>> {
         const response = await this.indexPersonsPersonIdTelecommunicationAddressesGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -514,7 +519,7 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Show
      */
-    async showPersonsPersonIdGetRaw(requestParameters: ShowPersonsPersonIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PersonOutput>> {
+    async showPersonsPersonIdGetRaw(requestParameters: ShowPersonsPersonIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiPersonPerson>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
@@ -537,13 +542,13 @@ export class PersonsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => PersonOutputFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ApiPersonPersonFromJSON(jsonValue));
     }
 
     /**
      * Show
      */
-    async showPersonsPersonIdGet(requestParameters: ShowPersonsPersonIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PersonOutput> {
+    async showPersonsPersonIdGet(requestParameters: ShowPersonsPersonIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiPersonPerson> {
         const response = await this.showPersonsPersonIdGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -551,7 +556,7 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Update
      */
-    async updatePersonsPersonIdNamesNameIdPatchRaw(requestParameters: UpdatePersonsPersonIdNamesNameIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EntityName>> {
+    async updatePersonsPersonIdNamesNameIdPatchRaw(requestParameters: UpdatePersonsPersonIdNamesNameIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EntityNameOutput>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
@@ -592,14 +597,61 @@ export class PersonsApi extends runtime.BaseAPI {
             body: EntityNameDataToJSON(requestParameters['entityNameData']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => EntityNameFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => EntityNameOutputFromJSON(jsonValue));
     }
 
     /**
      * Update
      */
-    async updatePersonsPersonIdNamesNameIdPatch(requestParameters: UpdatePersonsPersonIdNamesNameIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EntityName> {
+    async updatePersonsPersonIdNamesNameIdPatch(requestParameters: UpdatePersonsPersonIdNamesNameIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EntityNameOutput> {
         const response = await this.updatePersonsPersonIdNamesNameIdPatchRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update
+     */
+    async updatePersonsPersonIdPatchRaw(requestParameters: UpdatePersonsPersonIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiPersonPerson>> {
+        if (requestParameters['personId'] == null) {
+            throw new runtime.RequiredError(
+                'personId',
+                'Required parameter "personId" was null or undefined when calling updatePersonsPersonIdPatch().'
+            );
+        }
+
+        if (requestParameters['personData'] == null) {
+            throw new runtime.RequiredError(
+                'personData',
+                'Required parameter "personData" was null or undefined when calling updatePersonsPersonIdPatch().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/persons/{person_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PersonDataToJSON(requestParameters['personData']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ApiPersonPersonFromJSON(jsonValue));
+    }
+
+    /**
+     * Update
+     */
+    async updatePersonsPersonIdPatch(requestParameters: UpdatePersonsPersonIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiPersonPerson> {
+        const response = await this.updatePersonsPersonIdPatchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -661,7 +713,7 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Update
      */
-    async updatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRaw(requestParameters: UpdatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+    async updatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRaw(requestParameters: UpdatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TelecommunicationAddress>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
@@ -702,17 +754,13 @@ export class PersonsApi extends runtime.BaseAPI {
             body: TelecommunicationAddressToJSON(requestParameters['telecommunicationAddress']),
         }, initOverrides);
 
-        if (this.isJsonMime(response.headers.get('content-type'))) {
-            return new runtime.JSONApiResponse<any>(response);
-        } else {
-            return new runtime.TextApiResponse(response) as any;
-        }
+        return new runtime.JSONApiResponse(response, (jsonValue) => TelecommunicationAddressFromJSON(jsonValue));
     }
 
     /**
      * Update
      */
-    async updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch(requestParameters: UpdatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+    async updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch(requestParameters: UpdatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TelecommunicationAddress> {
         const response = await this.updatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRaw(requestParameters, initOverrides);
         return await response.value();
     }

@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { EntityName } from './EntityName';
+import type { EntityNameOutput } from './EntityNameOutput';
 import {
-    EntityNameFromJSON,
-    EntityNameFromJSONTyped,
-    EntityNameToJSON,
-    EntityNameToJSONTyped,
-} from './EntityName';
+    EntityNameOutputFromJSON,
+    EntityNameOutputFromJSONTyped,
+    EntityNameOutputToJSON,
+    EntityNameOutputToJSONTyped,
+} from './EntityNameOutput';
 import type { AdministrativeGender } from './AdministrativeGender';
 import {
     AdministrativeGenderFromJSON,
@@ -31,107 +31,107 @@ import {
 /**
  * 
  * @export
- * @interface PersonOutput
+ * @interface ApiPersonPerson
  */
-export interface PersonOutput {
-    /**
-     * 
-     * @type {string}
-     * @memberof PersonOutput
-     */
-    id: string;
+export interface ApiPersonPerson {
     /**
      * 
      * @type {AdministrativeGender}
-     * @memberof PersonOutput
+     * @memberof ApiPersonPerson
      */
     administrativeGenderCode: AdministrativeGender | null;
     /**
      * 
      * @type {Date}
-     * @memberof PersonOutput
+     * @memberof ApiPersonPerson
      */
     birthDate: Date | null;
     /**
      * 
      * @type {Date}
-     * @memberof PersonOutput
+     * @memberof ApiPersonPerson
      */
     deathDate: Date | null;
     /**
      * 
      * @type {boolean}
-     * @memberof PersonOutput
+     * @memberof ApiPersonPerson
      */
     deathDateEstimatedIndicator: boolean | null;
     /**
      * 
      * @type {boolean}
-     * @memberof PersonOutput
+     * @memberof ApiPersonPerson
      */
     deathIndicator: boolean | null;
     /**
      * 
-     * @type {EntityName}
-     * @memberof PersonOutput
+     * @type {EntityNameOutput}
+     * @memberof ApiPersonPerson
      */
-    primaryName: EntityName | null;
+    primaryName: EntityNameOutput | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ApiPersonPerson
+     */
+    id: string;
 }
 
 
 
 /**
- * Check if a given object implements the PersonOutput interface.
+ * Check if a given object implements the ApiPersonPerson interface.
  */
-export function instanceOfPersonOutput(value: object): value is PersonOutput {
-    if (!('id' in value) || value['id'] === undefined) return false;
+export function instanceOfApiPersonPerson(value: object): value is ApiPersonPerson {
     if (!('administrativeGenderCode' in value) || value['administrativeGenderCode'] === undefined) return false;
     if (!('birthDate' in value) || value['birthDate'] === undefined) return false;
     if (!('deathDate' in value) || value['deathDate'] === undefined) return false;
     if (!('deathDateEstimatedIndicator' in value) || value['deathDateEstimatedIndicator'] === undefined) return false;
     if (!('deathIndicator' in value) || value['deathIndicator'] === undefined) return false;
     if (!('primaryName' in value) || value['primaryName'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
     return true;
 }
 
-export function PersonOutputFromJSON(json: any): PersonOutput {
-    return PersonOutputFromJSONTyped(json, false);
+export function ApiPersonPersonFromJSON(json: any): ApiPersonPerson {
+    return ApiPersonPersonFromJSONTyped(json, false);
 }
 
-export function PersonOutputFromJSONTyped(json: any, ignoreDiscriminator: boolean): PersonOutput {
+export function ApiPersonPersonFromJSONTyped(json: any, ignoreDiscriminator: boolean): ApiPersonPerson {
     if (json == null) {
         return json;
     }
     return {
         
-        'id': json['id'],
         'administrativeGenderCode': AdministrativeGenderFromJSON(json['administrative_gender_code']),
         'birthDate': (json['birth_date'] == null ? null : new Date(json['birth_date'])),
         'deathDate': (json['death_date'] == null ? null : new Date(json['death_date'])),
         'deathDateEstimatedIndicator': json['death_date_estimated_indicator'],
         'deathIndicator': json['death_indicator'],
-        'primaryName': EntityNameFromJSON(json['primary_name']),
+        'primaryName': EntityNameOutputFromJSON(json['primary_name']),
+        'id': json['id'],
     };
 }
 
-export function PersonOutputToJSON(json: any): PersonOutput {
-    return PersonOutputToJSONTyped(json, false);
+export function ApiPersonPersonToJSON(json: any): ApiPersonPerson {
+    return ApiPersonPersonToJSONTyped(json, false);
 }
 
-export function PersonOutputToJSONTyped(value?: PersonOutput | null, ignoreDiscriminator: boolean = false): any {
+export function ApiPersonPersonToJSONTyped(value?: ApiPersonPerson | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'id': value['id'],
         'administrative_gender_code': AdministrativeGenderToJSON(value['administrativeGenderCode']),
         'birth_date': ((value['birthDate'] as any).toISOString().substring(0,10)),
         'death_date': ((value['deathDate'] as any).toISOString().substring(0,10)),
         'death_date_estimated_indicator': value['deathDateEstimatedIndicator'],
         'death_indicator': value['deathIndicator'],
-        'primary_name': EntityNameToJSON(value['primaryName']),
+        'primary_name': EntityNameOutputToJSON(value['primaryName']),
+        'id': value['id'],
     };
 }
 

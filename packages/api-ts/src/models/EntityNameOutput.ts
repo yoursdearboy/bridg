@@ -16,79 +16,79 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface EntityName
+ * @interface EntityNameOutput
  */
-export interface EntityName {
+export interface EntityNameOutput {
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof EntityNameOutput
      */
     use?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof EntityNameOutput
      */
     family?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof EntityNameOutput
      */
     given?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof EntityNameOutput
      */
     middle?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof EntityNameOutput
      */
     patronymic?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof EntityNameOutput
      */
     prefix?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof EntityNameOutput
      */
     suffix?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof EntityNameOutput
      */
     id: string;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof EntityNameOutput
      */
     readonly label: string;
 }
 
 /**
- * Check if a given object implements the EntityName interface.
+ * Check if a given object implements the EntityNameOutput interface.
  */
-export function instanceOfEntityName(value: object): value is EntityName {
+export function instanceOfEntityNameOutput(value: object): value is EntityNameOutput {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('label' in value) || value['label'] === undefined) return false;
     return true;
 }
 
-export function EntityNameFromJSON(json: any): EntityName {
-    return EntityNameFromJSONTyped(json, false);
+export function EntityNameOutputFromJSON(json: any): EntityNameOutput {
+    return EntityNameOutputFromJSONTyped(json, false);
 }
 
-export function EntityNameFromJSONTyped(json: any, ignoreDiscriminator: boolean): EntityName {
+export function EntityNameOutputFromJSONTyped(json: any, ignoreDiscriminator: boolean): EntityNameOutput {
     if (json == null) {
         return json;
     }
@@ -106,11 +106,11 @@ export function EntityNameFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     };
 }
 
-export function EntityNameToJSON(json: any): EntityName {
-    return EntityNameToJSONTyped(json, false);
+export function EntityNameOutputToJSON(json: any): EntityNameOutput {
+    return EntityNameOutputToJSONTyped(json, false);
 }
 
-export function EntityNameToJSONTyped(value?: Omit<EntityName, 'label'> | null, ignoreDiscriminator: boolean = false): any {
+export function EntityNameOutputToJSONTyped(value?: Omit<EntityNameOutput, 'label'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

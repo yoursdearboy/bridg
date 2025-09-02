@@ -72,7 +72,7 @@ export interface PostalAddress {
      * @type {string}
      * @memberof PostalAddress
      */
-    label: string;
+    readonly label: string;
 }
 
 /**
@@ -110,7 +110,7 @@ export function PostalAddressToJSON(json: any): PostalAddress {
     return PostalAddressToJSONTyped(json, false);
 }
 
-export function PostalAddressToJSONTyped(value?: PostalAddress | null, ignoreDiscriminator: boolean = false): any {
+export function PostalAddressToJSONTyped(value?: Omit<PostalAddress, 'label'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -125,7 +125,6 @@ export function PostalAddressToJSONTyped(value?: PostalAddress | null, ignoreDis
         'state': value['state'],
         'zip': value['zip'],
         'id': value['id'],
-        'label': value['label'],
     };
 }
 
