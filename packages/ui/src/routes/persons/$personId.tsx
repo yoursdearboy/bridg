@@ -1,7 +1,7 @@
 import api from "@/api";
-import { AddressesCard } from "@/components/person/address/AddressCard";
 import { EditNameForm } from "@/components/person/name/EditNameForm";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
+import { AddressCardWrapper } from "@/components/person/address/AddressCard";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
 import i18next from "@/i18n";
@@ -79,7 +79,7 @@ function PersonShowPage() {
           <Grid.Col span={{ base: 12, md: 4 }}>
             <PersonCard person={person} />
             <Space h="md" />
-            <NamesCardWrapper personId={personId} />
+            <AddressCardWrapper personId={personId} />
             <Space h="md" />
             <AddressesCard personId={personId} />
             <Space h="md" />
