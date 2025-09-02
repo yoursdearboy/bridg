@@ -1,6 +1,6 @@
 import api from "@/api";
 import ButtonLink from "@/components/ButtonLink";
-import { AddressesCard } from "@/components/person/address/AddressCard";
+import { AddressCardWrapper } from "@/components/person/address/AddressCard";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
 import { Grid, Group, Space, Stack, Title } from "@mantine/core";
@@ -44,7 +44,7 @@ function PersonShowPage() {
           <Space h="md" />
           <NamesCardWrapper personId={personId} />
           <Space h="md" />
-          <AddressesCard personId={personId} />
+          <AddressCardWrapper personId={personId} />
           <Space h="md" />
           <TelecommunicationAddressesTable personId={personId} />
         </Grid.Col>
