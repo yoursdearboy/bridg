@@ -38,32 +38,34 @@ export const NamesCard = ({ personId, query }: NamesCardProps) => {
 
   return (
     <>
-      <Card withBorder shadow="sm" radius="md" padding="xs">
+      <Card withBorder shadow="sm" radius="md">
+        {/* Первая секция с заголовком и кнопкой */}
         <Card.Section withBorder inheritPadding py="xs">
-          {isPending && <LoadingOverlay visible />}
-          {isError && (
-            <Text color="red">
-              {t("errorMessage", { error: error.message })}
+          <Group justify="space-between">
+            <Text fw={500} px="xs">
+              {t("NamesCard.title")}
             </Text>
-          )}
-          {!isPending && !isError && (
-            <>
-              <Group justify="space-between">
-                <Text fw={500} px="xs">
-                  {t("NamesCard.title")}
-                </Text>
-                <Button
-                  variant="outline"
-                  size="compact-sm"
-                  onClick={open}
-                  fw={500}
-                >
-                  {t("add")}
-                </Button>
-              </Group>
+            <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
+              {t("add")}
+            </Button>
+          </Group>
+        </Card.Section>
+
+        {/* Вторая секция с контентом и loading */}
+        <Card.Section inheritPadding py="xs">
+          <div style={{ position: "relative", minHeight: "150px" }}>
+            <LoadingOverlay visible={isPending} />
+
+            {isError && (
+              <Text color="red">
+                {t("errorMessage", { error: error.message })}
+              </Text>
+            )}
+
+            {!isPending && !isError && (
               <NamesTable personId={personId} names={names} />
-            </>
-          )}
+            )}
+          </div>
         </Card.Section>
       </Card>
       <Modal opened={opened} onClose={close} title={t("add")} size="lg">
