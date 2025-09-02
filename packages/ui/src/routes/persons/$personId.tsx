@@ -33,9 +33,7 @@ function PersonShowPage() {
         <Title fw={500} order={2}>
           {t("PersonShowPage.title")}
         </Title>
-        <ButtonLink to={editRoute.to} params={{ personId }} variant="outline">
-          {t("PersonShowPage.edit")}
-        </ButtonLink>
+       
       </Group>
 
       <Grid>
