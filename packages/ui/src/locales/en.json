@@ -29,6 +29,14 @@
       "prefix": "Prefix",
       "suffix": "Suffix"
     },
+      "Address": {
+      "street": "Street",
+      "building": "Building",
+      "country": "Country",
+      "municipality": "Municipality",
+      "state": "State",
+      "zip": "Zip"
+    },
     "SubjectIndexPage": {
       "info": "Info",
       "breadcrumb": "Patients",
