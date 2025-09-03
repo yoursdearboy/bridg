@@ -4,8 +4,7 @@ import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
 import { Grid, Group, Space, Stack, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
-import type { PersonData } from "api-ts";
-import { useTranslation } from "react-i18next";
+import type { ApiPersonPerson } from "api-ts";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 import i18next from "@/i18n";
 
@@ -13,7 +12,7 @@ export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
   loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
   beforeLoad: () => ({
-    breadcrumb: ({ loaderData: person }: { loaderData: PersonData }) =>
+    breadcrumb: ({ loaderData: person }: { loaderData: ApiPersonPerson }) =>
       person.primaryName?.label ||
       i18next.t("PersonShowPage.breadcrumbDefault"),
   }),
@@ -22,8 +21,6 @@ export const Route = createFileRoute("/persons/$personId")({
 function PersonShowPage() {
   const { personId } = Route.useParams();
   const person = Route.useLoaderData();
-
-  const { t } = useTranslation();
 
   return (
     <Stack gap="md">

@@ -1,6 +1,10 @@
 import { useForm } from "@mantine/form";
 import { useTranslation } from "react-i18next";
-import { AdministrativeGender, type Person, type PersonData } from "api-ts";
+import {
+  AdministrativeGender,
+  type ApiPersonPerson,
+  type PersonData,
+} from "api-ts";
 import type { UseMutationResult } from "@tanstack/react-query";
 import {
   Alert,
@@ -14,9 +18,9 @@ import dayjs from "dayjs";
 import { DatePickerInput } from "@mantine/dates";
 
 interface PersonFormProps {
-  initialValues: Person;
+  initialValues: ApiPersonPerson;
   onCancel: () => void;
-  mutation: UseMutationResult<PersonData, Error, PersonData, unknown>;
+  mutation: UseMutationResult<ApiPersonPerson, Error, PersonData, unknown>;
 }
 
 export const PersonForm = ({

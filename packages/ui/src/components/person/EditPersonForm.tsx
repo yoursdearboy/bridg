@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import api from "@/api";
 import { PersonForm } from "./PersonForm";
-import { type PersonData } from "api-ts";
+import { type ApiPersonPerson, type PersonData } from "api-ts";
 
 interface Props {
   personId: string,
-  person: PersonData,
+  person: ApiPersonPerson,
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -14,7 +14,7 @@ export const EditPersonForm = ({ personId, person, onCancel, onSuccess }: Props)
   const mutation = useMutation({
     mutationKey: ["person", personId, "edit"],
     mutationFn: (data: PersonData) =>
-      api.persons.updatePersonsPersonIdPatchRaw({
+      api.persons.updatePersonsPersonIdPatch({
         personId,
         personData: data,
       }),

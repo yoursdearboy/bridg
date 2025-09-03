@@ -1,6 +1,6 @@
 import { InfoRow } from "@/components/InfoRow";
 import { Badge, Box, Button, Card, Group, Modal, Stack, Text } from "@mantine/core";
-import type { PersonData } from "api-ts";
+import type { ApiPersonPerson } from "api-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { useDisclosure } from "@mantine/hooks";
@@ -8,7 +8,7 @@ import { EditPersonForm } from "./EditPersonForm";
 
 interface PersonCardProps {
   personId: string,
-  person: PersonData;
+  person: ApiPersonPerson;
 }
 
 export const PersonCard = ({ personId, person }: PersonCardProps) => {
