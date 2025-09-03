@@ -33,7 +33,10 @@ function SubjectShowPage() {
       <Grid>
         {subject.performingBiologicEntity && (
           <Grid.Col span={{ base: 12, md: 6 }}>
-            <PersonCard person={subject.performingBiologicEntity} personId={subject.performingBiologicEntity.id}/>
+            <PersonCard
+              person={subject.performingBiologicEntity}
+              personId={subject.performingBiologicEntity.id}
+            />
             <ButtonLink
               mt="md"
               to={personRoute.to}

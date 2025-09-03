@@ -4,13 +4,18 @@ import { PersonForm } from "./PersonForm";
 import { type ApiPersonPerson, type PersonData } from "api-ts";
 
 interface Props {
-  personId: string,
-  person: ApiPersonPerson,
+  personId: string;
+  person: ApiPersonPerson;
   onCancel: () => void;
   onSuccess: () => void;
 }
 
-export const EditPersonForm = ({ personId, person, onCancel, onSuccess }: Props) => {
+export const EditPersonForm = ({
+  personId,
+  person,
+  onCancel,
+  onSuccess,
+}: Props) => {
   const mutation = useMutation({
     mutationKey: ["person", personId, "edit"],
     mutationFn: (data: PersonData) =>
@@ -22,6 +27,10 @@ export const EditPersonForm = ({ personId, person, onCancel, onSuccess }: Props)
   });
 
   return (
-    <PersonForm onCancel={onCancel} initialValues={person} mutation={mutation} />
+    <PersonForm
+      onCancel={onCancel}
+      initialValues={person}
+      mutation={mutation}
+    />
   );
 };
