@@ -12,7 +12,7 @@ import type { EntityName, EntityNameData } from "api-ts";
 import { useTranslation } from "react-i18next";
 
 interface NameFormProps {
-  initialValues: EntityName;
+  initialValues: EntityNameData;
   onCancel: () => void;
   mutation: UseMutationResult<EntityName, Error, EntityNameData, unknown>;
 }
