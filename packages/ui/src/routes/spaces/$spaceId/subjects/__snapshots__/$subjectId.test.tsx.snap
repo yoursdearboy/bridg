@@ -63,91 +63,132 @@ exports[`show page renders correctly 1`] = `
           <div
             class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
             data-with-border="true"
-            style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm); --card-padding: var(--mantine-spacing-lg);"
+            style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm); --card-padding: var(--mantine-spacing-xs);"
           >
             <div
-              class="m_6d731127 mantine-Stack-root"
-              style="--stack-gap: var(--mantine-spacing-sm); --stack-align: stretch; --stack-justify: flex-start;"
+              class="m_599a2148 mantine-Card-section"
+              data-first-section="true"
+              data-inherit-padding="true"
+              data-with-border="true"
+              style="padding-block: var(--mantine-spacing-xs);"
             >
               <div
                 class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
               >
                 <p
                   class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                  style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  style="padding-inline: var(--mantine-spacing-xs); font-weight: 500;"
                 >
-                  Primary name:
+                  Person information
                 </p>
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                <button
+                  class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+                  data-size="compact-sm"
+                  data-variant="outline"
+                  style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline); font-weight: 500;"
+                  type="button"
                 >
-                  Donald Trump Jr
-                </p>
+                  <span
+                    class="m_80f1301b mantine-Button-inner"
+                  >
+                    <span
+                      class="m_811560b9 mantine-Button-label"
+                    >
+                      Edit person
+                    </span>
+                  </span>
+                </button>
               </div>
+            </div>
+            <div
+              class=""
+              style="padding-top: var(--mantine-spacing-xs);"
+            >
               <div
-                class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
+                class="m_6d731127 mantine-Stack-root"
+                style="--stack-gap: var(--mantine-spacing-sm); --stack-align: stretch; --stack-justify: flex-start;"
               >
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                  style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
                 >
-                  Gender:
-                </p>
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  >
+                    Primary name:
+                  </p>
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  >
+                    Donald Trump Jr
+                  </p>
+                </div>
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
                 >
-                  Male
-                </p>
-              </div>
-              <div
-                class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
-              >
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                  style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  >
+                    Gender:
+                  </p>
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  >
+                    Male
+                  </p>
+                </div>
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
                 >
-                  Birth date:
-                </p>
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  >
+                    Birth date:
+                  </p>
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  >
+                    1&#x2F;1&#x2F;1991
+                  </p>
+                </div>
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
                 >
-                  1&#x2F;1&#x2F;1991
-                </p>
-              </div>
-              <div
-                class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
-              >
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                  style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  >
+                    Age:
+                  </p>
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  >
+                    34 years
+                  </p>
+                </div>
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
                 >
-                  Age:
-                </p>
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                >
-                  34 years
-                </p>
-              </div>
-              <div
-                class="m_4081bf90 mantine-Group-root"
-                style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
-              >
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                  style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
-                >
-                  Death date:
-                </p>
-                <p
-                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-                >
-                  Not deceased
-                </p>
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  >
+                    Death date:
+                  </p>
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  >
+                    Not deceased
+                  </p>
+                </div>
               </div>
             </div>
           </div>
