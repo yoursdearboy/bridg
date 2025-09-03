@@ -13,33 +13,29 @@ exports[`PersonForm > matches snapshot 1`] = `
       style="--stack-gap: var(--mantine-spacing-md); --stack-align: stretch; --stack-justify: flex-start; position: relative;"
     >
       <div
-        class="m_46b77525 mantine-InputWrapper-root mantine-DatePickerInput-root"
+        class="m_46b77525 mantine-InputWrapper-root mantine-DateInput-root"
       >
         <label
-          class="m_8fdc1311 mantine-InputWrapper-label mantine-DatePickerInput-label"
+          class="m_8fdc1311 mantine-InputWrapper-label mantine-DateInput-label"
           for="mantine-17gjn16kc"
           id="mantine-17gjn16kc-label"
         >
           Birth date
         </label>
         <div
-          class="m_6c018570 mantine-Input-wrapper mantine-DatePickerInput-wrapper"
+          class="m_6c018570 mantine-Input-wrapper mantine-DateInput-wrapper"
           data-variant="default"
         >
-          <button
-            aria-controls="mantine-4miilw5eg-dropdown"
-            aria-expanded="false"
-            aria-haspopup="dialog"
+          <input
             aria-invalid="false"
-            class="m_6fa5e2aa m_8fb7ebe7 mantine-Input-input mantine-DatePickerInput-input"
+            autocomplete="off"
+            class="m_8fb7ebe7 mantine-Input-input mantine-DateInput-input"
             data-dates-input="true"
             data-path="birthDate"
             data-variant="default"
             id="mantine-17gjn16kc"
-            type="button"
-          >
-            January 1, 1991
-          </button>
+            value="01/01/1991"
+          />
         </div>
       </div>
       <input

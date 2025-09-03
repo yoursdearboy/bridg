@@ -15,7 +15,7 @@ import {
   Stack,
 } from "@mantine/core";
 import dayjs from "dayjs";
-import { DatePickerInput } from "@mantine/dates";
+import { DateInput } from "@mantine/dates";
 
 interface PersonFormProps {
   initialValues: PersonData;
@@ -65,8 +65,9 @@ export const PersonForm = ({
           </Alert>
         )}
 
-        <DatePickerInput
+        <DateInput
           label={t("Person.birthDate")}
+          valueFormat="L"
           {...form.getInputProps("birthDate")}
         />
         <Select
