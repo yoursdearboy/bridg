@@ -4,6 +4,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import { globalIgnores } from "eslint/config";
+import importPlugin from "eslint-plugin-import";
 
 export default tseslint.config([
   globalIgnores(["dist"]),
@@ -15,6 +16,8 @@ export default tseslint.config([
       tseslint.configs.recommendedTypeChecked,
       reactHooks.configs["recommended-latest"],
       reactRefresh.configs.vite,
+      importPlugin.flatConfigs.recommended,
+      importPlugin.flatConfigs.typescript,
     ],
     languageOptions: {
       ecmaVersion: 2020,
@@ -26,32 +29,31 @@ export default tseslint.config([
     },
     rules: {
       "@typescript-eslint/no-unnecessary-condition": "error",
-      "sort-imports": [
+      "import/order": [
         "error",
         {
-          ignoreCase: true,
-          ignoreDeclarationSort: true,
-          ignoreMemberSort: false,
-          memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
-        },
-      ],
-      "padding-line-between-statements": [
-        "error",
-        { blankLine: "never", prev: "import", next: "import" },
-        {
-          blankLine: "always",
-          prev: "import",
-          next: [
-            "cjs-export",
-            "class",
-            "const",
-            "let",
-            "var",
-            "function",
-            "expression",
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            ["sibling", "parent"],
+            "index",
+            "unknown",
           ],
+          "newlines-between": "never",
+          alphabetize: {
+            order: "asc",
+            caseInsensitive: true,
+          },
         },
       ],
+      "import/no-named-as-default-member": "off",
+    },
+    settings: {
+      "import/resolver": {
+        typescript: true,
+        node: true,
+      },
     },
   },
 ]);
