@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { EntityNameOutput } from './EntityNameOutput';
+import type { EntityName } from './EntityName';
 import {
-    EntityNameOutputFromJSON,
-    EntityNameOutputFromJSONTyped,
-    EntityNameOutputToJSON,
-    EntityNameOutputToJSONTyped,
-} from './EntityNameOutput';
+    EntityNameFromJSON,
+    EntityNameFromJSONTyped,
+    EntityNameToJSON,
+    EntityNameToJSONTyped,
+} from './EntityName';
 import type { AdministrativeGender } from './AdministrativeGender';
 import {
     AdministrativeGenderFromJSON,
@@ -66,16 +66,16 @@ export interface ApiSubjectStudySubjectPerson {
     deathIndicator: boolean | null;
     /**
      * 
-     * @type {EntityNameOutput}
-     * @memberof ApiSubjectStudySubjectPerson
-     */
-    primaryName: EntityNameOutput | null;
-    /**
-     * 
      * @type {string}
      * @memberof ApiSubjectStudySubjectPerson
      */
     id: string;
+    /**
+     * 
+     * @type {EntityName}
+     * @memberof ApiSubjectStudySubjectPerson
+     */
+    primaryName: EntityName | null;
 }
 
 
@@ -89,8 +89,8 @@ export function instanceOfApiSubjectStudySubjectPerson(value: object): value is 
     if (!('deathDate' in value) || value['deathDate'] === undefined) return false;
     if (!('deathDateEstimatedIndicator' in value) || value['deathDateEstimatedIndicator'] === undefined) return false;
     if (!('deathIndicator' in value) || value['deathIndicator'] === undefined) return false;
-    if (!('primaryName' in value) || value['primaryName'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('primaryName' in value) || value['primaryName'] === undefined) return false;
     return true;
 }
 
@@ -109,8 +109,8 @@ export function ApiSubjectStudySubjectPersonFromJSONTyped(json: any, ignoreDiscr
         'deathDate': (json['death_date'] == null ? null : new Date(json['death_date'])),
         'deathDateEstimatedIndicator': json['death_date_estimated_indicator'],
         'deathIndicator': json['death_indicator'],
-        'primaryName': EntityNameOutputFromJSON(json['primary_name']),
         'id': json['id'],
+        'primaryName': EntityNameFromJSON(json['primary_name']),
     };
 }
 
@@ -130,8 +130,8 @@ export function ApiSubjectStudySubjectPersonToJSONTyped(value?: ApiSubjectStudyS
         'death_date': ((value['deathDate'] as any).toISOString().substring(0,10)),
         'death_date_estimated_indicator': value['deathDateEstimatedIndicator'],
         'death_indicator': value['deathIndicator'],
-        'primary_name': EntityNameOutputToJSON(value['primaryName']),
         'id': value['id'],
+        'primary_name': EntityNameToJSON(value['primaryName']),
     };
 }
 

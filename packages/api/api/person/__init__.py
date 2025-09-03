@@ -23,11 +23,11 @@ class PersonData(BaseModel[bridg.Person]):
     death_date: Optional[date]
     death_date_estimated_indicator: Optional[bool]
     death_indicator: Optional[bool]
-    primary_name: Optional[EntityName]
 
 
 class Person(PersonData):
     id: UUID
+    primary_name: Optional[EntityName]
 
 
 class PersonRepository(Repository[bridg.Person]):

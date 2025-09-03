@@ -10,9 +10,8 @@ models/ApiPersonPerson.ts
 models/ApiSubjectLookupStudySubjectPerson.ts
 models/ApiSubjectNewStudySubjectPerson.ts
 models/ApiSubjectStudySubjectPerson.ts
+models/EntityName.ts
 models/EntityNameData.ts
-models/EntityNameInput.ts
-models/EntityNameOutput.ts
 models/FoundStudySubject.ts
 models/HTTPValidationError.ts
 models/LookupStudySubject.ts
