@@ -1,24 +1,26 @@
 import { InfoRow } from "@/components/InfoRow";
 import { Badge, Box, Button, Card, Group, Modal, Stack, Text } from "@mantine/core";
-import type { PersonOutput } from "api-ts";
+import type { PersonData } from "api-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { useDisclosure } from "@mantine/hooks";
+import { EditPersonForm } from "./EditPersonForm";
 
 interface PersonCardProps {
-  person: PersonOutput;
+  personId: string,
+  person: PersonData;
 }
 
-export const PersonCard = ({ person }: PersonCardProps) => {
+export const PersonCard = ({ personId, person }: PersonCardProps) => {
   const { t } = useTranslation();
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <>
-      <Card withBorder shadow="sm" padding="lg" radius="md">
+      <Card withBorder shadow="sm" radius="md" padding="xs">
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
-            <Text fw={500} px="xs">123</Text>
+            <Text fw={500} px="xs">{t("PersonShowPage.title")}</Text>
             <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
               {t("PersonShowPage.edit")}
             </Button>
@@ -83,7 +85,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         </Box>
       </Card>
       <Modal opened={opened} onClose={close} title={t("add")} size="lg">
-      <></>
+        <EditPersonForm personId={personId} person={person} onCancel={close} onSuccess={() => close()}/>
       </Modal>
     </>
   );

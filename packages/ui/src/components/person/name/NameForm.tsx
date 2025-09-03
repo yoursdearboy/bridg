@@ -8,13 +8,13 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import type { UseMutationResult } from "@tanstack/react-query";
-import type { EntityName, EntityNameData } from "api-ts";
+import type { EntityNameData } from "api-ts";
 import { useTranslation } from "react-i18next";
 
 interface NameFormProps {
   initialValues: EntityNameData;
   onCancel: () => void;
-  mutation: UseMutationResult<EntityName, Error, EntityNameData, unknown>;
+  mutation: UseMutationResult<EntityNameData, Error, EntityNameData, unknown>;
 }
 
 export const NameForm = ({
