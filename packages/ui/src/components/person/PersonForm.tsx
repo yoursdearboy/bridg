@@ -18,7 +18,7 @@ import dayjs from "dayjs";
 import { DatePickerInput } from "@mantine/dates";
 
 interface PersonFormProps {
-  initialValues: ApiPersonPerson;
+  initialValues: PersonData;
   onCancel: () => void;
   mutation: UseMutationResult<ApiPersonPerson, Error, PersonData, unknown>;
 }
