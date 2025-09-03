@@ -10,18 +10,21 @@ import i18next from "@/i18n";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
-  loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
-  beforeLoad: () => ({
-    breadcrumb: ({ loaderData: person }: { loaderData: ApiPersonPerson }) =>
-      person.primaryName?.label ||
-      i18next.t("PersonShowPage.breadcrumbDefault"),
-  }),
+  loader: ({ params, context: { queryClient } }) =>
+    queryClient.fetchQuery({
+      queryKey: ["person", params.personId],
+      queryFn: () => api.persons.showPersonsPersonIdGet(params),
+    }),
+  // beforeLoad: () => ({
+  //   breadcrumb: ({ loaderData: person }: { loaderData: ApiPersonPerson }) =>
+  //     person.primaryName?.label ||
+  //     i18next.t("PersonShowPage.breadcrumbDefault"),
+  // }),
 });
 
 function PersonShowPage() {
   const { personId } = Route.useParams();
   const person = Route.useLoaderData();
-
   return (
     <Stack gap="md">
       <Group justify="space-between">

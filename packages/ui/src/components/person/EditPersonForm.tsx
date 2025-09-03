@@ -17,7 +17,7 @@ export const EditPersonForm = ({
   onSuccess,
 }: Props) => {
   const mutation = useMutation({
-    mutationKey: ["person", personId, "edit"],
+    mutationKey: ["person", personId],
     mutationFn: (data: PersonData) =>
       api.persons.updatePersonsPersonIdPatch({
         personId,
