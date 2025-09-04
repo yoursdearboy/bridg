@@ -34,22 +34,12 @@ interface NamesCardProps {
 export const NamesCard = ({ personId, query }: NamesCardProps) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { t } = useTranslation();
-
   const { isPending, isError, error, data: names } = query;
-
-  // FIXME: Must be inside Card.Section
-  if (isPending) return <LoadingOverlay visible />;
-
-  // FIXME: Must be inside Card.Section
-  if (isError) {
-    return (
-      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
-    );
-  }
 
   return (
     <>
-      <Card withBorder shadow="sm" radius="md" padding="xs">
+      <Card withBorder shadow="sm" radius="md">
+        {/* Первая секция с заголовком и кнопкой */}
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
             <Text fw={500} px="xs">
@@ -60,7 +50,23 @@ export const NamesCard = ({ personId, query }: NamesCardProps) => {
             </Button>
           </Group>
         </Card.Section>
-        <NamesTable personId={personId} names={names} />
+
+        {/* Вторая секция с контентом и loading */}
+        <Card.Section inheritPadding py="xs">
+          <div style={{ position: "relative", minHeight: "150px" }}>
+            <LoadingOverlay visible={isPending} />
+
+            {isError && (
+              <Text color="red">
+                {t("errorMessage", { error: error.message })}
+              </Text>
+            )}
+
+            {!isPending && !isError && (
+              <NamesTable personId={personId} names={names} />
+            )}
+          </div>
+        </Card.Section>
       </Card>
       <Modal opened={opened} onClose={close} title={t("add")} size="lg">
         <NewNameForm
