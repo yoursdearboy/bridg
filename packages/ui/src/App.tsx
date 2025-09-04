@@ -23,14 +23,23 @@ const queryClient = new QueryClient({
       { options: { mutationKey } }
     ) => {
       if (!mutationKey) return;
-      await Promise.all(
-        mutationKey.map((_, i) => {
-          console.log(mutationKey.slice(0, i + 1));
-          return queryClient.invalidateQueries({
-            queryKey: mutationKey.slice(0, i + 1),
-          });
-        })
+      const mutationKeys = mutationKey.map((_, i) =>
+        mutationKey.slice(0, i + 1)
       );
+      await Promise.all(
+        mutationKeys.map((mk) =>
+          queryClient.invalidateQueries({ queryKey: mk })
+        )
+      );
+      await router.invalidate({
+        filter: (route) => {
+          const ctx = route.context as {
+            loaderKey?: unknown;
+          };
+          if (!ctx.loaderKey) return false;
+          return mutationKeys.some((mk) => mk === ctx.loaderKey);
+        },
+      });
     },
   }),
 });

@@ -11,10 +11,11 @@ import i18next from "@/i18n";
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
   loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
-  beforeLoad: () => ({
+  beforeLoad: ({ params }) => ({
     breadcrumb: ({ loaderData: person }: { loaderData: ApiPersonPerson }) =>
       person.primaryName?.label ||
       i18next.t("PersonShowPage.breadcrumbDefault"),
+    loaderKey: ["person", params.personId],
   }),
 });
 
