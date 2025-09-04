@@ -16,11 +16,10 @@ import { useDisclosure } from "@mantine/hooks";
 import { EditPersonForm } from "./EditPersonForm";
 
 interface PersonCardProps {
-  personId: string;
   person: ApiPersonPerson;
 }
 
-export const PersonCard = ({ personId, person }: PersonCardProps) => {
+export const PersonCard = ({ person }: PersonCardProps) => {
   const { t } = useTranslation();
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -97,7 +96,7 @@ export const PersonCard = ({ personId, person }: PersonCardProps) => {
       </Card>
       <Modal opened={opened} onClose={close} title={t("add")} size="lg">
         <EditPersonForm
-          personId={personId}
+          personId={person.id}
           person={person}
           onCancel={close}
           onSuccess={() => close()}
