@@ -96,7 +96,6 @@ export const PersonCard = ({ person }: PersonCardProps) => {
       </Card>
       <Modal opened={opened} onClose={close} title={t("add")} size="lg">
         <EditPersonForm
-          personId={person.id}
           person={person}
           onCancel={close}
           onSuccess={() => close()}

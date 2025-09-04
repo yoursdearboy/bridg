@@ -31,15 +31,7 @@ export const PersonForm = ({
   const { t } = useTranslation();
 
   const form = useForm<PersonData>({
-    initialValues: {
-      administrativeGenderCode: initialValues.administrativeGenderCode || "U",
-      birthDate: initialValues.birthDate || new Date(),
-      deathDate: initialValues.deathDate || new Date(),
-      deathDateEstimatedIndicator:
-        initialValues.deathDateEstimatedIndicator || null,
-      deathIndicator: initialValues.deathIndicator || false,
-    },
-    validate: {},
+    initialValues,
     transformValues: (values: PersonData) => {
       if (values.birthDate) {
         values.birthDate = dayjs(values.birthDate).toDate();

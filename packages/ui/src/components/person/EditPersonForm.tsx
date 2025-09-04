@@ -4,23 +4,17 @@ import { PersonForm } from "./PersonForm";
 import { type ApiPersonPerson, type PersonData } from "api-ts";
 
 interface Props {
-  personId: string;
   person: ApiPersonPerson;
   onCancel: () => void;
   onSuccess: () => void;
 }
 
-export const EditPersonForm = ({
-  personId,
-  person,
-  onCancel,
-  onSuccess,
-}: Props) => {
+export const EditPersonForm = ({ person, onCancel, onSuccess }: Props) => {
   const mutation = useMutation({
-    mutationKey: ["person", personId],
+    mutationKey: ["person", person.id],
     mutationFn: (data: PersonData) =>
       api.persons.updatePersonsPersonIdPatch({
-        personId,
+        personId: person.id,
         personData: data,
       }),
     onSuccess,

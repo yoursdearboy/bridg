@@ -26,7 +26,6 @@ describe("NamesTable", () => {
             label: "string",
           },
         }}
-        personId="1"
       />
     );
 
