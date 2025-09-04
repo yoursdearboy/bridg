@@ -16,14 +16,20 @@ import { routeTree } from "./routeTree.gen";
 
 const queryClient = new QueryClient({
   mutationCache: new MutationCache({
-    onSuccess: async (_data, _variables, _context, mutation) => {
-      if (!mutation.options.mutationKey) return;
+    onSuccess: async (
+      _data,
+      _variables,
+      _context,
+      { options: { mutationKey } }
+    ) => {
+      if (!mutationKey) return;
       await Promise.all(
-        mutation.options.mutationKey.map((key) =>
-          queryClient.invalidateQueries({
-            queryKey: [key],
-          })
-        )
+        mutationKey.map((_, i) => {
+          console.log(mutationKey.slice(0, i + 1));
+          return queryClient.invalidateQueries({
+            queryKey: mutationKey.slice(0, i + 1),
+          });
+        })
       );
     },
   }),
