@@ -13,7 +13,7 @@ import {
   Title,
 } from "@mantine/core";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import type { PersonOutput } from "api-ts";
+import type { ApiPersonPerson } from "api-ts";
 import { useTranslation } from "react-i18next";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 import i18next from "@/i18n";
@@ -40,12 +40,13 @@ function PersonShowPage() {
   const router = useRouter();
 
   return (
-    <Stack gap="md">
-      <Group justify="space-between">
-        <Title fw={500} order={2}>
-          {person.primaryName?.label || t("PersonShowPage.breadcrumbDefault")}
-        </Title>
-        <Group gap="xs" align="flex-end">
+    <>
+      <Stack gap="md">
+        <Group justify="space-between">
+          <Title fw={500} order={2}>
+            {person.primaryName?.label || t("PersonShowPage.breadcrumbDefault")}
+          </Title>
+          <Group gap="xs" align="flex-end">
             <Menu shadow="md" width={200} position="bottom-end">
               <Menu.Target>
                 <Button
@@ -66,7 +67,7 @@ function PersonShowPage() {
               </Menu.Dropdown>
             </Menu>
           </Group>
-      </Group>
+        </Group>
 
         <Grid>
           <Grid.Col span={{ base: 12, md: 4 }}>
