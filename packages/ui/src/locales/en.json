@@ -58,7 +58,9 @@
     "PersonShowPage": {
       "title": "Person information",
       "edit": "Edit person",
-      "breadcrumbDefault": "Anonymous person"
+      "actions": "Actions",
+      "breadcrumbDefault": "Anonymous person",
+      "rename": "Rename"
     },
     "PersonEditPage": {
       "title": "Editing:",

@@ -2,12 +2,24 @@ import api from "@/api";
 import { AddressesCard } from "@/components/person/address/AddressCard";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
-import { Grid, Group, Space, Stack, Title } from "@mantine/core";
-import { createFileRoute } from "@tanstack/react-router";
-import type { ApiPersonPerson } from "api-ts";
+import {
+  Button,
+  Grid,
+  Group,
+  Menu,
+  Modal,
+  Space,
+  Stack,
+  Title,
+} from "@mantine/core";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
+import type { PersonOutput } from "api-ts";
 import { useTranslation } from "react-i18next";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 import i18next from "@/i18n";
+import { useDisclosure } from "@mantine/hooks";
+import { EditNameForm } from "@/components/person/name/EditNameForm";
+import { IconChevronDown, IconPencil } from "@tabler/icons-react";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
@@ -21,10 +33,11 @@ export const Route = createFileRoute("/persons/$personId")({
 });
 
 function PersonShowPage() {
+  const [opened, { open, close }] = useDisclosure(false);
   const { personId } = Route.useParams();
   const person = Route.useLoaderData();
-
   const { t } = useTranslation();
+  const router = useRouter();
 
   return (
     <Stack gap="md">
@@ -32,19 +45,59 @@ function PersonShowPage() {
         <Title fw={500} order={2}>
           {person.primaryName?.label || t("PersonShowPage.breadcrumbDefault")}
         </Title>
+        <Group gap="xs" align="flex-end">
+            <Menu shadow="md" width={200} position="bottom-end">
+              <Menu.Target>
+                <Button
+                  variant="outline"
+                  rightSection={<IconChevronDown size={16} />}
+                >
+                  {t("PersonShowPage.actions")}
+                </Button>
+              </Menu.Target>
+
+              <Menu.Dropdown>
+                <Menu.Item
+                  leftSection={<IconPencil size={14} />}
+                  onClick={open}
+                >
+                  {t("PersonShowPage.rename")}
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          </Group>
       </Group>
 
-      <Grid>
-        <Grid.Col span={{ base: 12, md: 4 }}>
-          <PersonCard person={person} />
-          <Space h="md" />
-          <NamesCardWrapper personId={personId} />
-          <Space h="md" />
-          <AddressesCard personId={personId} />
-          <Space h="md" />
-          <TelecommunicationAddressesTable personId={personId} />
-        </Grid.Col>
-      </Grid>
-    </Stack>
+        <Grid>
+          <Grid.Col span={{ base: 12, md: 4 }}>
+            <PersonCard person={person} />
+            <Space h="md" />
+            <NamesCardWrapper personId={personId} />
+            <Space h="md" />
+            <AddressesCard personId={personId} />
+            <Space h="md" />
+            <TelecommunicationAddressesTable personId={personId} />
+          </Grid.Col>
+        </Grid>
+      </Stack>
+      {person.primaryName && (
+        <Modal
+          opened={opened}
+          onClose={close}
+          title={t("PersonShowPage.rename")}
+          size="lg"
+        >
+          <EditNameForm
+            personId={personId}
+            name={person.primaryName}
+            onCancel={close}
+            onSuccess={() => {
+              void router.invalidate();
+              close();
+            }}
+          />
+        </Modal>
+      )}
+    </>
   );
 }
