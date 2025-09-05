@@ -66,7 +66,8 @@
       "personalInfo": "Personal information",
       "primaryNamePlaceholder": "John Doe",
       "deceased": "Deceased",
-      "breadcrumb": "Editing"
+      "breadcrumb": "Editing",
+      "editModalTitile": "Person editting"
     },
     "PersonCard": {
       "deceased": "Deceased",

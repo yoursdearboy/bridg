@@ -65,7 +65,8 @@
       "personalInfo": "Личная информация",
       "primaryNamePlaceholder": "Иван Иванов",
       "deceased": "Умерший",
-      "breadcrumb": "Редактирование"
+      "breadcrumb": "Редактирование",
+      "editModalTitile": "Редактирование данных человека"
     },
     "PersonCard": {
       "deceased": "Умерший",

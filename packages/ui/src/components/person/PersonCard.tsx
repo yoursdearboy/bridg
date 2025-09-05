@@ -94,7 +94,12 @@ export const PersonCard = ({ person }: PersonCardProps) => {
           </Stack>
         </Box>
       </Card>
-      <Modal opened={opened} onClose={close} title={t("add")} size="lg">
+      <Modal
+        opened={opened}
+        onClose={close}
+        title={t("PersonEditPage.editModalTitile")}
+        size="lg"
+      >
         <EditPersonForm
           person={person}
           onCancel={close}
