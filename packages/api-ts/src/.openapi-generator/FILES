@@ -6,8 +6,10 @@ apis/SubjectsApi.ts
 apis/index.ts
 index.ts
 models/AdministrativeGender.ts
+models/ApiPersonPerson.ts
 models/ApiSubjectLookupStudySubjectPerson.ts
 models/ApiSubjectNewStudySubjectPerson.ts
+models/ApiSubjectStudySubjectPerson.ts
 models/EntityName.ts
 models/EntityNameData.ts
 models/FoundStudySubject.ts
@@ -15,7 +17,7 @@ models/HTTPValidationError.ts
 models/LookupStudySubject.ts
 models/NewStudySubject.ts
 models/Organization.ts
-models/PersonOutput.ts
+models/PersonData.ts
 models/PostalAddress.ts
 models/PostalAddressData.ts
 models/Status.ts
@@ -23,7 +25,6 @@ models/StudyProtocolVersion.ts
 models/StudySiteProtocolVersionRelationship.ts
 models/StudySubject.ts
 models/TelecommunicationAddress.ts
-models/TelecommunicationAddressWithId.ts
 models/ValidationError.ts
 models/ValidationErrorLocInner.ts
 models/index.ts

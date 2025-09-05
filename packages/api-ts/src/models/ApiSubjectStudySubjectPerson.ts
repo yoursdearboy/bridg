@@ -31,49 +31,49 @@ import {
 /**
  * 
  * @export
- * @interface PersonOutput
+ * @interface ApiSubjectStudySubjectPerson
  */
-export interface PersonOutput {
-    /**
-     * 
-     * @type {string}
-     * @memberof PersonOutput
-     */
-    id: string;
+export interface ApiSubjectStudySubjectPerson {
     /**
      * 
      * @type {AdministrativeGender}
-     * @memberof PersonOutput
+     * @memberof ApiSubjectStudySubjectPerson
      */
     administrativeGenderCode: AdministrativeGender | null;
     /**
      * 
      * @type {Date}
-     * @memberof PersonOutput
+     * @memberof ApiSubjectStudySubjectPerson
      */
     birthDate: Date | null;
     /**
      * 
      * @type {Date}
-     * @memberof PersonOutput
+     * @memberof ApiSubjectStudySubjectPerson
      */
     deathDate: Date | null;
     /**
      * 
      * @type {boolean}
-     * @memberof PersonOutput
+     * @memberof ApiSubjectStudySubjectPerson
      */
     deathDateEstimatedIndicator: boolean | null;
     /**
      * 
      * @type {boolean}
-     * @memberof PersonOutput
+     * @memberof ApiSubjectStudySubjectPerson
      */
     deathIndicator: boolean | null;
     /**
      * 
+     * @type {string}
+     * @memberof ApiSubjectStudySubjectPerson
+     */
+    id: string;
+    /**
+     * 
      * @type {EntityName}
-     * @memberof PersonOutput
+     * @memberof ApiSubjectStudySubjectPerson
      */
     primaryName: EntityName | null;
 }
@@ -81,56 +81,56 @@ export interface PersonOutput {
 
 
 /**
- * Check if a given object implements the PersonOutput interface.
+ * Check if a given object implements the ApiSubjectStudySubjectPerson interface.
  */
-export function instanceOfPersonOutput(value: object): value is PersonOutput {
-    if (!('id' in value) || value['id'] === undefined) return false;
+export function instanceOfApiSubjectStudySubjectPerson(value: object): value is ApiSubjectStudySubjectPerson {
     if (!('administrativeGenderCode' in value) || value['administrativeGenderCode'] === undefined) return false;
     if (!('birthDate' in value) || value['birthDate'] === undefined) return false;
     if (!('deathDate' in value) || value['deathDate'] === undefined) return false;
     if (!('deathDateEstimatedIndicator' in value) || value['deathDateEstimatedIndicator'] === undefined) return false;
     if (!('deathIndicator' in value) || value['deathIndicator'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
     if (!('primaryName' in value) || value['primaryName'] === undefined) return false;
     return true;
 }
 
-export function PersonOutputFromJSON(json: any): PersonOutput {
-    return PersonOutputFromJSONTyped(json, false);
+export function ApiSubjectStudySubjectPersonFromJSON(json: any): ApiSubjectStudySubjectPerson {
+    return ApiSubjectStudySubjectPersonFromJSONTyped(json, false);
 }
 
-export function PersonOutputFromJSONTyped(json: any, ignoreDiscriminator: boolean): PersonOutput {
+export function ApiSubjectStudySubjectPersonFromJSONTyped(json: any, ignoreDiscriminator: boolean): ApiSubjectStudySubjectPerson {
     if (json == null) {
         return json;
     }
     return {
         
-        'id': json['id'],
         'administrativeGenderCode': AdministrativeGenderFromJSON(json['administrative_gender_code']),
         'birthDate': (json['birth_date'] == null ? null : new Date(json['birth_date'])),
         'deathDate': (json['death_date'] == null ? null : new Date(json['death_date'])),
         'deathDateEstimatedIndicator': json['death_date_estimated_indicator'],
         'deathIndicator': json['death_indicator'],
+        'id': json['id'],
         'primaryName': EntityNameFromJSON(json['primary_name']),
     };
 }
 
-export function PersonOutputToJSON(json: any): PersonOutput {
-    return PersonOutputToJSONTyped(json, false);
+export function ApiSubjectStudySubjectPersonToJSON(json: any): ApiSubjectStudySubjectPerson {
+    return ApiSubjectStudySubjectPersonToJSONTyped(json, false);
 }
 
-export function PersonOutputToJSONTyped(value?: PersonOutput | null, ignoreDiscriminator: boolean = false): any {
+export function ApiSubjectStudySubjectPersonToJSONTyped(value?: ApiSubjectStudySubjectPerson | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'id': value['id'],
         'administrative_gender_code': AdministrativeGenderToJSON(value['administrativeGenderCode']),
         'birth_date': ((value['birthDate'] as any).toISOString().substring(0,10)),
         'death_date': ((value['deathDate'] as any).toISOString().substring(0,10)),
         'death_date_estimated_indicator': value['deathDateEstimatedIndicator'],
         'death_indicator': value['deathIndicator'],
+        'id': value['id'],
         'primary_name': EntityNameToJSON(value['primaryName']),
     };
 }

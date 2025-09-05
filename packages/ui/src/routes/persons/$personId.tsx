@@ -13,7 +13,7 @@ import {
   Title,
 } from "@mantine/core";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import type { PersonOutput } from "api-ts";
+import type { ApiPersonPerson } from "api-ts";
 import { useTranslation } from "react-i18next";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 import i18next from "@/i18n";
@@ -24,10 +24,11 @@ import { IconChevronDown, IconPencil } from "@tabler/icons-react";
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
   loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
-  beforeLoad: () => ({
-    breadcrumb: ({ loaderData: person }: { loaderData: PersonOutput }) =>
+  beforeLoad: ({ params }) => ({
+    breadcrumb: ({ loaderData: person }: { loaderData: ApiPersonPerson }) =>
       person.primaryName?.label ||
       i18next.t("PersonShowPage.breadcrumbDefault"),
+    loaderKey: ["person", params.personId],
   }),
 });
 
@@ -43,7 +44,7 @@ function PersonShowPage() {
       <Stack gap="md">
         <Group justify="space-between">
           <Title fw={500} order={2}>
-            {person.primaryName?.label}
+            {person.primaryName?.label || t("PersonShowPage.breadcrumbDefault")}
           </Title>
           <Group gap="xs" align="flex-end">
             <Menu shadow="md" width={200} position="bottom-end">
