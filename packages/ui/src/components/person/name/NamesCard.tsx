@@ -1,5 +1,6 @@
 import api from "@/api";
 import {
+  Box,
   Button,
   Card,
   Group,
@@ -39,7 +40,6 @@ export const NamesCard = ({ personId, query }: NamesCardProps) => {
   return (
     <>
       <Card withBorder shadow="sm" radius="md">
-        {/* Первая секция с заголовком и кнопкой */}
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
             <Text fw={500} px="xs">
@@ -50,22 +50,18 @@ export const NamesCard = ({ personId, query }: NamesCardProps) => {
             </Button>
           </Group>
         </Card.Section>
-
-        {/* Вторая секция с контентом и loading */}
         <Card.Section inheritPadding py="xs">
-          <div style={{ position: "relative", minHeight: "150px" }}>
+          <Box pos="relative" style={{ minHeight: 80 }}>
             <LoadingOverlay visible={isPending} />
-
             {isError && (
               <Text color="red">
                 {t("errorMessage", { error: error.message })}
               </Text>
             )}
-
             {!isPending && !isError && (
               <NamesTable personId={personId} names={names} />
             )}
-          </div>
+          </Box>
         </Card.Section>
       </Card>
       <Modal opened={opened} onClose={close} title={t("add")} size="lg">
