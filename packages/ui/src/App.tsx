@@ -16,19 +16,30 @@ import { routeTree } from "./routeTree.gen";
 
 const queryClient = new QueryClient({
   mutationCache: new MutationCache({
-    onSuccess: async (_data, _variables, _context, mutation) => {
-      if (!mutation.options.mutationKey) return;
+    onSuccess: async (
+      _data,
+      _variables,
+      _context,
+      { options: { mutationKey } }
+    ) => {
+      if (!mutationKey) return;
+      const mutationKeys = mutationKey.map((_, i) =>
+        mutationKey.slice(0, i + 1)
+      );
       await Promise.all(
-        mutation.options.mutationKey.map((key) =>
-          queryClient.invalidateQueries({
-            queryKey: [key],
-          })
+        mutationKeys.map((mk) =>
+          queryClient.invalidateQueries({ queryKey: mk })
         )
       );
     },
   }),
 });
-const router = createRouter({ routeTree });
+const router = createRouter({
+  routeTree,
+  context: {
+    queryClient,
+  },
+});
 
 declare module "@tanstack/react-router" {
   interface Register {

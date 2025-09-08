@@ -13,13 +13,6 @@
  */
 
 import { mapValues } from '../runtime';
-import type { PersonOutput } from './PersonOutput';
-import {
-    PersonOutputFromJSON,
-    PersonOutputFromJSONTyped,
-    PersonOutputToJSON,
-    PersonOutputToJSONTyped,
-} from './PersonOutput';
 import type { Status } from './Status';
 import {
     StatusFromJSON,
@@ -34,6 +27,13 @@ import {
     OrganizationToJSON,
     OrganizationToJSONTyped,
 } from './Organization';
+import type { ApiSubjectStudySubjectPerson } from './ApiSubjectStudySubjectPerson';
+import {
+    ApiSubjectStudySubjectPersonFromJSON,
+    ApiSubjectStudySubjectPersonFromJSONTyped,
+    ApiSubjectStudySubjectPersonToJSON,
+    ApiSubjectStudySubjectPersonToJSONTyped,
+} from './ApiSubjectStudySubjectPerson';
 
 /**
  * 
@@ -61,10 +61,10 @@ export interface StudySubject {
     statusDate: Date | null;
     /**
      * 
-     * @type {PersonOutput}
+     * @type {ApiSubjectStudySubjectPerson}
      * @memberof StudySubject
      */
-    performingBiologicEntity: PersonOutput | null;
+    performingBiologicEntity: ApiSubjectStudySubjectPerson | null;
     /**
      * 
      * @type {Organization}
@@ -100,7 +100,7 @@ export function StudySubjectFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'id': json['id'],
         'status': StatusFromJSON(json['status']),
         'statusDate': (json['status_date'] == null ? null : new Date(json['status_date'])),
-        'performingBiologicEntity': PersonOutputFromJSON(json['performing_biologic_entity']),
+        'performingBiologicEntity': ApiSubjectStudySubjectPersonFromJSON(json['performing_biologic_entity']),
         'performingOrganization': OrganizationFromJSON(json['performing_organization']),
     };
 }
@@ -119,7 +119,7 @@ export function StudySubjectToJSONTyped(value?: StudySubject | null, ignoreDiscr
         'id': value['id'],
         'status': StatusToJSON(value['status']),
         'status_date': ((value['statusDate'] as any).toISOString()),
-        'performing_biologic_entity': PersonOutputToJSON(value['performingBiologicEntity']),
+        'performing_biologic_entity': ApiSubjectStudySubjectPersonToJSON(value['performingBiologicEntity']),
         'performing_organization': OrganizationToJSON(value['performingOrganization']),
     };
 }

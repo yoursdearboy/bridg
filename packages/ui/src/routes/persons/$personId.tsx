@@ -1,7 +1,10 @@
 import api from "@/api";
 import { AddressesCard } from "@/components/person/address/AddressCard";
+import { EditNameForm } from "@/components/person/name/EditNameForm";
+import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
+import i18next from "@/i18n";
 import {
   Button,
   Grid,
@@ -12,38 +15,42 @@ import {
   Stack,
   Title,
 } from "@mantine/core";
-import { createFileRoute, useRouter } from "@tanstack/react-router";
-import type { PersonOutput } from "api-ts";
-import { useTranslation } from "react-i18next";
-import { NamesCardWrapper } from "@/components/person/name/NamesCard";
-import i18next from "@/i18n";
 import { useDisclosure } from "@mantine/hooks";
-import { EditNameForm } from "@/components/person/name/EditNameForm";
 import { IconChevronDown, IconPencil } from "@tabler/icons-react";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
+import type { ApiPersonPerson } from "api-ts";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
-  loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
-  beforeLoad: () => ({
-    breadcrumb: ({ loaderData: person }: { loaderData: PersonOutput }) =>
+  beforeLoad: ({ params }) => ({
+    breadcrumb: ({ loaderData: person }: { loaderData: ApiPersonPerson }) =>
       person.primaryName?.label ||
       i18next.t("PersonShowPage.breadcrumbDefault"),
+    query: queryOptions({
+      queryKey: ["person", params.personId],
+      queryFn: () => api.persons.showPersonsPersonIdGet(params),
+    }),
   }),
+  loader: ({ context: { query, queryClient } }) =>
+    queryClient.fetchQuery(query),
 });
 
 function PersonShowPage() {
   const [opened, { open, close }] = useDisclosure(false);
   const { personId } = Route.useParams();
-  const person = Route.useLoaderData();
+  const { query } = Route.useRouteContext();
+  const { data: person } = useSuspenseQuery(query);
+
   const { t } = useTranslation();
-  const router = useRouter();
 
   return (
     <>
       <Stack gap="md">
         <Group justify="space-between">
           <Title fw={500} order={2}>
-            {person.primaryName?.label}
+            {person.primaryName?.label || t("PersonShowPage.breadcrumbDefault")}
           </Title>
           <Group gap="xs" align="flex-end">
             <Menu shadow="md" width={200} position="bottom-end">
@@ -91,10 +98,7 @@ function PersonShowPage() {
             personId={personId}
             name={person.primaryName}
             onCancel={close}
-            onSuccess={() => {
-              void router.invalidate();
-              close();
-            }}
+            onSuccess={close}
           />
         </Modal>
       )}
