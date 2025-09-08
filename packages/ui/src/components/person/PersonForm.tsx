@@ -14,7 +14,6 @@ import {
   Select,
   Stack,
 } from "@mantine/core";
-import dayjs from "dayjs";
 import { DateInput } from "@mantine/dates";
 
 interface PersonFormProps {
@@ -32,12 +31,10 @@ export const PersonForm = ({
 
   const form = useForm<PersonData>({
     initialValues,
-    transformValues: (values: PersonData) => {
-      if (values.birthDate) {
-        values.birthDate = dayjs(values.birthDate).toDate();
-      }
-      return values;
-    },
+    transformValues: (values: PersonData) => ({
+      ...values,
+      birthDate: values.birthDate && new Date(values.birthDate),
+    }),
   });
 
   const handleSubmit = (data: PersonData) => mutation.mutate(data);
@@ -60,6 +57,7 @@ export const PersonForm = ({
         <DateInput
           label={t("Person.birthDate")}
           valueFormat="L"
+          clearable
           {...form.getInputProps("birthDate")}
         />
         <Select

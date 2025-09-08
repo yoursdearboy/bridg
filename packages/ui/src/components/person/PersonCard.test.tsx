@@ -1,7 +1,6 @@
 import { renderComponent } from "@/test-utils";
 import { describe, expect, it } from "vitest";
 import { PersonCard } from "./PersonCard";
-import dayjs from "dayjs";
 
 describe("NamesTable", () => {
   it("matches snapshot", () => {
@@ -9,8 +8,8 @@ describe("NamesTable", () => {
       <PersonCard
         person={{
           administrativeGenderCode: "M",
-          birthDate: dayjs("2025-09-03").toDate(),
-          deathDate: dayjs("2025-09-03").toDate(),
+          birthDate: new Date("2025-09-03"),
+          deathDate: new Date("2025-09-03"),
           deathDateEstimatedIndicator: true,
           deathIndicator: true,
           id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",

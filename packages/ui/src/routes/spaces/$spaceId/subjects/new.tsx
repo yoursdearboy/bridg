@@ -26,7 +26,6 @@ import {
   type NewStudySubject,
   Status,
 } from "api-ts";
-import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import i18next from "@/i18n";
 
@@ -227,17 +226,16 @@ function RouteComponent() {
       assignedStudySiteProtocolVersionRelationship: [],
     },
     onValuesChange: () => doLookup(),
-    transformValues: (values: NewStudySubject) => {
-      if (values.performingBiologicEntity?.birthDate) {
-        values.performingBiologicEntity.birthDate = dayjs(
-          values.performingBiologicEntity.birthDate
-        ).toDate();
-      }
-      if (values.statusDate) {
-        values.statusDate = dayjs(values.statusDate).toDate();
-      }
-      return values;
-    },
+    transformValues: (values: NewStudySubject) => ({
+      ...values,
+      performingBiologicEntity: values.performingBiologicEntity && {
+        ...values.performingBiologicEntity,
+        birthDate:
+          values.performingBiologicEntity.birthDate &&
+          new Date(values.performingBiologicEntity.birthDate),
+      },
+      statusDate: values.statusDate && new Date(values.statusDate),
+    }),
     validate: {
       assignedStudySiteProtocolVersionRelationship: hasLength({ min: 1 }),
     },
