@@ -5,7 +5,10 @@ import api from "@/api";
 
 describe("NamesCard", () => {
   it("matches snapshot", () => {
-    vi.spyOn(api.persons, "indexPersonsPersonIdPostalAddressesGet").mockResolvedValue([
+    vi.spyOn(
+      api.persons,
+      "indexPersonsPersonIdPostalAddressesGet"
+    ).mockResolvedValue([
       {
         id: "1",
         label: "Trafalgar Square",
