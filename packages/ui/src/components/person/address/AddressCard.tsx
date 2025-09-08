@@ -53,7 +53,7 @@ export const AddressCard = ({ personId, query }: AddressCardProps) => {
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
             <Text fw={500} px="xs">
-              {t("NamesCard.title")}
+              {t("AddressCard.title")}
             </Text>
             <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
               {t("add")}

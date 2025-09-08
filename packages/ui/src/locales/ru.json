@@ -29,7 +29,7 @@
       "prefix": "Префикс",
       "suffix": "Суффикс"
     },
-      "Address": {
+    "Address": {
       "street": "Улица",
       "building": "Здание",
       "country": "Страна",
@@ -85,6 +85,9 @@
     },
     "NamesCard": {
       "title": "Имена"
+    },
+    "AddressCard": {
+      "title": "Адреса"
     },
     "TelecommunicationAddressesTable": {
       "title": "Контакты"
