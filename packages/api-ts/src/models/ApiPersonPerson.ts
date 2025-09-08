@@ -126,8 +126,8 @@ export function ApiPersonPersonToJSONTyped(value?: ApiPersonPerson | null, ignor
     return {
         
         'administrative_gender_code': AdministrativeGenderToJSON(value['administrativeGenderCode']),
-        'birth_date': ((value['birthDate'] as any).toISOString().substring(0,10)),
-        'death_date': ((value['deathDate'] as any).toISOString().substring(0,10)),
+        'birth_date': (value['birthDate'] == null ? null : (value['birthDate'] as any).toISOString().substring(0,10)),
+        'death_date': (value['deathDate'] == null ? null : (value['deathDate'] as any).toISOString().substring(0,10)),
         'death_date_estimated_indicator': value['deathDateEstimatedIndicator'],
         'death_indicator': value['deathIndicator'],
         'id': value['id'],

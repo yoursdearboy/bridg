@@ -120,8 +120,8 @@ export function ApiSubjectNewStudySubjectPersonToJSONTyped(value?: ApiSubjectNew
         
         'type': value['type'],
         'administrative_gender_code': AdministrativeGenderToJSON(value['administrativeGenderCode']),
-        'birth_date': value['birthDate'] === null ? null : ((value['birthDate'] as any)?.toISOString().substring(0,10)),
-        'death_date': value['deathDate'] === null ? null : ((value['deathDate'] as any)?.toISOString().substring(0,10)),
+        'birth_date': value['birthDate'] == null ? undefined : ((value['birthDate'] as any).toISOString().substring(0,10)),
+        'death_date': value['deathDate'] == null ? undefined : ((value['deathDate'] as any).toISOString().substring(0,10)),
         'death_date_estimated_indicator': value['deathDateEstimatedIndicator'],
         'death_indicator': value['deathIndicator'],
         'name': EntityNameDataToJSON(value['name']),
