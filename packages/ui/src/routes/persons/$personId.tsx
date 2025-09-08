@@ -18,28 +18,12 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown, IconPencil } from "@tabler/icons-react";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import {
-  createFileRoute,
-  useRouteContext,
-  useRouter,
-} from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import type { ApiPersonPerson } from "api-ts";
 import { useTranslation } from "react-i18next";
 
-const useRouteQuery = (route) => {
-  const ctx = useRouteContext({
-    from: route.id,
-  });
-  if (!ctx.query) throw new Error("No query");
-  return useSuspenseQuery(ctx.query);
-};
-
-const loadRouteQuery = ({ context: { query, queryClient } }) =>
-  queryClient.fetchQuery(query);
-
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
-  loader: loadRouteQuery,
   beforeLoad: ({ params }) => ({
     breadcrumb: ({ loaderData: person }: { loaderData: ApiPersonPerson }) =>
       person.primaryName?.label ||
@@ -49,15 +33,17 @@ export const Route = createFileRoute("/persons/$personId")({
       queryFn: () => api.persons.showPersonsPersonIdGet(params),
     }),
   }),
+  loader: ({ context: { query, queryClient } }) =>
+    queryClient.fetchQuery(query),
 });
 
 function PersonShowPage() {
   const [opened, { open, close }] = useDisclosure(false);
   const { personId } = Route.useParams();
-  const { data: person } = useRouteQuery(Route);
+  const { query } = Route.useRouteContext();
+  const { data: person } = useSuspenseQuery(query);
 
   const { t } = useTranslation();
-  const router = useRouter();
 
   return (
     <>
@@ -112,10 +98,7 @@ function PersonShowPage() {
             personId={personId}
             name={person.primaryName}
             onCancel={close}
-            onSuccess={() => {
-              void router.invalidate();
-              close();
-            }}
+            onSuccess={close}
           />
         </Modal>
       )}
