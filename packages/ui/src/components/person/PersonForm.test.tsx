@@ -3,13 +3,12 @@ import type { ApiPersonPerson, PersonData } from "api-ts";
 import { describe, expect, it, vi } from "vitest";
 import { PersonForm } from "./PersonForm";
 import { type UseMutationResult } from "@tanstack/react-query";
-import dayjs from "dayjs";
 
 describe("PersonForm", () => {
   it("matches snapshot", () => {
     const initialValues: PersonData = {
       administrativeGenderCode: "U",
-      birthDate: dayjs("01.01.1991").toDate(),
+      birthDate: new Date("1991-01-01"),
       deathDate: null,
       deathDateEstimatedIndicator: false,
       deathIndicator: false,
