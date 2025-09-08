@@ -3,7 +3,7 @@ import { DatesProvider } from "@mantine/dates";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   type AnyRoute,
-  createRootRoute,
+  createRootRouteWithContext,
   createRoute,
   createRouter,
   RouterProvider,
@@ -11,10 +11,10 @@ import {
 import { act, render } from "@testing-library/react";
 import "./i18n";
 
+const queryClient = new QueryClient();
+
 // eslint-disable-next-line react-refresh/only-export-components
 const App = ({ children }: React.PropsWithChildren) => {
-  const queryClient = new QueryClient();
-
   return (
     <QueryClientProvider client={queryClient}>
       <MantineProvider defaultColorScheme="auto">
@@ -28,7 +28,7 @@ export const renderRoute = (
   r: AnyRoute,
   { params }: { params?: object } = {}
 ) => {
-  const rootRoute = createRootRoute();
+  const rootRoute = createRootRouteWithContext()();
   const testRoute = createRoute({
     ...r.options,
     params: params,
@@ -38,6 +38,9 @@ export const renderRoute = (
   const routeTree = rootRoute.addChildren([testRoute]);
   const router = createRouter({
     routeTree,
+    context: {
+      queryClient,
+    },
   });
   return act(() =>
     render(
