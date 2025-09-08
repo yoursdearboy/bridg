@@ -17,8 +17,12 @@ import {
   useMantineColorScheme,
   useMantineTheme,
 } from "@mantine/core";
-import { useQuery } from "@tanstack/react-query";
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { QueryClient, useQuery } from "@tanstack/react-query";
+import {
+  createRootRouteWithContext,
+  Link,
+  Outlet,
+} from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 function LanguageSwitcher() {
@@ -138,6 +142,10 @@ function Layout() {
   );
 }
 
-export const Route = createRootRoute({
+interface RouteContext {
+  queryClient: QueryClient;
+}
+
+export const Route = createRootRouteWithContext<RouteContext>()({
   component: Layout,
 });

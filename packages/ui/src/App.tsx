@@ -31,19 +31,15 @@ const queryClient = new QueryClient({
           queryClient.invalidateQueries({ queryKey: mk })
         )
       );
-      await router.invalidate({
-        filter: (route) => {
-          const ctx = route.context as {
-            loaderKey?: unknown;
-          };
-          if (!ctx.loaderKey) return false;
-          return mutationKeys.some((mk) => mk === ctx.loaderKey);
-        },
-      });
     },
   }),
 });
-const router = createRouter({ routeTree });
+const router = createRouter({
+  routeTree,
+  context: {
+    queryClient,
+  },
+});
 
 declare module "@tanstack/react-router" {
   interface Register {

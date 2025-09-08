@@ -1,7 +1,10 @@
 import api from "@/api";
 import { AddressesCard } from "@/components/person/address/AddressCard";
+import { EditNameForm } from "@/components/person/name/EditNameForm";
+import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 import { PersonCard } from "@/components/person/PersonCard";
 import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
+import i18next from "@/i18n";
 import {
   Button,
   Grid,
@@ -12,30 +15,44 @@ import {
   Stack,
   Title,
 } from "@mantine/core";
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { useDisclosure } from "@mantine/hooks";
+import { IconChevronDown, IconPencil } from "@tabler/icons-react";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { createFileRoute, useMatch, useRouter } from "@tanstack/react-router";
 import type { ApiPersonPerson } from "api-ts";
 import { useTranslation } from "react-i18next";
-import { NamesCardWrapper } from "@/components/person/name/NamesCard";
-import i18next from "@/i18n";
-import { useDisclosure } from "@mantine/hooks";
-import { EditNameForm } from "@/components/person/name/EditNameForm";
-import { IconChevronDown, IconPencil } from "@tabler/icons-react";
+
+const useRouteQuery = () => {
+  const match = useMatch({
+    strict: false,
+  });
+  const ctx = match.context;
+  if (!ctx.query) throw new Error("No query");
+  return useSuspenseQuery(ctx.query);
+};
+
+const loadRouteQuery = ({ context: { query, queryClient } }) =>
+  queryClient.fetchQuery(query);
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
-  loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
+  loader: loadRouteQuery,
   beforeLoad: ({ params }) => ({
     breadcrumb: ({ loaderData: person }: { loaderData: ApiPersonPerson }) =>
       person.primaryName?.label ||
       i18next.t("PersonShowPage.breadcrumbDefault"),
-    loaderKey: ["person", params.personId],
+    query: queryOptions({
+      queryKey: ["person", params.personId],
+      queryFn: () => api.persons.showPersonsPersonIdGet(params),
+    }),
   }),
 });
 
 function PersonShowPage() {
   const [opened, { open, close }] = useDisclosure(false);
   const { personId } = Route.useParams();
-  const person = Route.useLoaderData();
+  const { data: person } = useRouteQuery();
+
   const { t } = useTranslation();
   const router = useRouter();
 
