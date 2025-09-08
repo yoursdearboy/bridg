@@ -18,15 +18,18 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown, IconPencil } from "@tabler/icons-react";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute, useMatch, useRouter } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  useRouteContext,
+  useRouter,
+} from "@tanstack/react-router";
 import type { ApiPersonPerson } from "api-ts";
 import { useTranslation } from "react-i18next";
 
-const useRouteQuery = () => {
-  const match = useMatch({
-    strict: false,
+const useRouteQuery = (route) => {
+  const ctx = useRouteContext({
+    from: route.id,
   });
-  const ctx = match.context;
   if (!ctx.query) throw new Error("No query");
   return useSuspenseQuery(ctx.query);
 };
@@ -51,7 +54,7 @@ export const Route = createFileRoute("/persons/$personId")({
 function PersonShowPage() {
   const [opened, { open, close }] = useDisclosure(false);
   const { personId } = Route.useParams();
-  const { data: person } = useRouteQuery();
+  const { data: person } = useRouteQuery(Route);
 
   const { t } = useTranslation();
   const router = useRouter();
