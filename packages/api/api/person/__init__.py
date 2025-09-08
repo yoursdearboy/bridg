@@ -1,4 +1,3 @@
-from datetime import date
 from typing import Annotated, Optional
 from uuid import UUID
 
@@ -6,28 +5,12 @@ import bridg
 from bridg import Repository
 from fastapi import APIRouter, Depends, HTTPException
 
-from api.base_model import BaseModel
 from api.db import get_repository
-from api.model import EntityName
+from api.model import Person, PersonData
 
 from . import name, postal_address, telecommunication_address
 
 router = APIRouter(prefix="/persons", tags=["persons"])
-
-
-class PersonData(BaseModel[bridg.Person]):
-    _sa = bridg.Person
-
-    administrative_gender_code: Optional[bridg.AdministrativeGender]
-    birth_date: Optional[date]
-    death_date: Optional[date]
-    death_date_estimated_indicator: Optional[bool]
-    death_indicator: Optional[bool]
-
-
-class Person(PersonData):
-    id: UUID
-    primary_name: Optional[EntityName]
 
 
 class PersonRepository(Repository[bridg.Person]):
