@@ -87,7 +87,7 @@
     "NamesCard": {
       "title": "Person names"
     },
-     "AddressCard": {
+    "AddressCard": {
       "title": "Addresses"
     },
     "TelecommunicationAddressesTable": {
