@@ -9,14 +9,14 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import type { ApiPersonPerson } from "api-ts";
+import type { Person } from "api-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { useDisclosure } from "@mantine/hooks";
 import { EditPersonForm } from "./EditPersonForm";
 
 interface PersonCardProps {
-  person: ApiPersonPerson;
+  person: Person;
 }
 
 export const PersonCard = ({ person }: PersonCardProps) => {

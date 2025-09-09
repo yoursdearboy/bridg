@@ -31,49 +31,49 @@ import {
 /**
  * 
  * @export
- * @interface ApiPersonPerson
+ * @interface Person
  */
-export interface ApiPersonPerson {
+export interface Person {
     /**
      * 
      * @type {AdministrativeGender}
-     * @memberof ApiPersonPerson
+     * @memberof Person
      */
     administrativeGenderCode: AdministrativeGender | null;
     /**
      * 
      * @type {Date}
-     * @memberof ApiPersonPerson
+     * @memberof Person
      */
     birthDate: Date | null;
     /**
      * 
      * @type {Date}
-     * @memberof ApiPersonPerson
+     * @memberof Person
      */
     deathDate: Date | null;
     /**
      * 
      * @type {boolean}
-     * @memberof ApiPersonPerson
+     * @memberof Person
      */
     deathDateEstimatedIndicator: boolean | null;
     /**
      * 
      * @type {boolean}
-     * @memberof ApiPersonPerson
+     * @memberof Person
      */
     deathIndicator: boolean | null;
     /**
      * 
      * @type {string}
-     * @memberof ApiPersonPerson
+     * @memberof Person
      */
     id: string;
     /**
      * 
      * @type {EntityName}
-     * @memberof ApiPersonPerson
+     * @memberof Person
      */
     primaryName: EntityName | null;
 }
@@ -81,9 +81,9 @@ export interface ApiPersonPerson {
 
 
 /**
- * Check if a given object implements the ApiPersonPerson interface.
+ * Check if a given object implements the Person interface.
  */
-export function instanceOfApiPersonPerson(value: object): value is ApiPersonPerson {
+export function instanceOfPerson(value: object): value is Person {
     if (!('administrativeGenderCode' in value) || value['administrativeGenderCode'] === undefined) return false;
     if (!('birthDate' in value) || value['birthDate'] === undefined) return false;
     if (!('deathDate' in value) || value['deathDate'] === undefined) return false;
@@ -94,11 +94,11 @@ export function instanceOfApiPersonPerson(value: object): value is ApiPersonPers
     return true;
 }
 
-export function ApiPersonPersonFromJSON(json: any): ApiPersonPerson {
-    return ApiPersonPersonFromJSONTyped(json, false);
+export function PersonFromJSON(json: any): Person {
+    return PersonFromJSONTyped(json, false);
 }
 
-export function ApiPersonPersonFromJSONTyped(json: any, ignoreDiscriminator: boolean): ApiPersonPerson {
+export function PersonFromJSONTyped(json: any, ignoreDiscriminator: boolean): Person {
     if (json == null) {
         return json;
     }
@@ -114,11 +114,11 @@ export function ApiPersonPersonFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function ApiPersonPersonToJSON(json: any): ApiPersonPerson {
-    return ApiPersonPersonToJSONTyped(json, false);
+export function PersonToJSON(json: any): Person {
+    return PersonToJSONTyped(json, false);
 }
 
-export function ApiPersonPersonToJSONTyped(value?: ApiPersonPerson | null, ignoreDiscriminator: boolean = false): any {
+export function PersonToJSONTyped(value?: Person | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

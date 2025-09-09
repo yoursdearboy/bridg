@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import api from "@/api";
 import { PersonForm } from "./PersonForm";
-import { type ApiPersonPerson, type PersonData } from "api-ts";
+import { type Person, type PersonData } from "api-ts";
 
 interface Props {
-  person: ApiPersonPerson;
+  person: Person;
   onCancel: () => void;
   onSuccess: () => void;
 }

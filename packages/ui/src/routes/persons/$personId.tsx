@@ -19,13 +19,13 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown, IconPencil } from "@tabler/icons-react";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import type { ApiPersonPerson } from "api-ts";
+import type { Person } from "api-ts";
 import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
   beforeLoad: ({ params }) => ({
-    breadcrumb: ({ loaderData: person }: { loaderData: ApiPersonPerson }) =>
+    breadcrumb: ({ loaderData: person }: { loaderData: Person }) =>
       person.primaryName?.label ||
       i18next.t("PersonShowPage.breadcrumbDefault"),
     query: queryOptions({

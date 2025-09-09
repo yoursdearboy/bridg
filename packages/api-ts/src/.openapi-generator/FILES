@@ -6,7 +6,6 @@ apis/SubjectsApi.ts
 apis/index.ts
 index.ts
 models/AdministrativeGender.ts
-models/ApiPersonPerson.ts
 models/ApiSubjectLookupStudySubjectPerson.ts
 models/ApiSubjectNewStudySubjectPerson.ts
 models/ApiSubjectStudySubjectPerson.ts
@@ -17,6 +16,7 @@ models/HTTPValidationError.ts
 models/LookupStudySubject.ts
 models/NewStudySubject.ts
 models/Organization.ts
+models/Person.ts
 models/PersonData.ts
 models/PostalAddress.ts
 models/PostalAddressData.ts

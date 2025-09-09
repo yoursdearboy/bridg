@@ -3,6 +3,15 @@
 Implemented in Python with support for persistence using SQLAlchemy.
 Also a web interface for electronic data capture (EDC).
 
+## OpenAPI
+
+Schemas of models in the `api/models` have same names as the models.
+The rest of schemas are named the way Pydantic will do it.
+
+---
+
+Below is the old README:
+
 ## Configuration and Profiles
 
 The web app has notion of profiles.
