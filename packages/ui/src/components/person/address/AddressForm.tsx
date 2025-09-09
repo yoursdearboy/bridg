@@ -25,15 +25,7 @@ export const AddressForm = ({
   const { t } = useTranslation();
 
   const form = useForm<PostalAddressData>({
-    initialValues: {
-      street: initialValues.street || "",
-      building: initialValues.building || "",
-      country: initialValues.country || "",
-      municipality: initialValues.municipality || "",
-      state: initialValues.state || "",
-
-      zip: initialValues.zip || "",
-    },
+    initialValues: initialValues,
     validate: {
       street: (value) =>
         value

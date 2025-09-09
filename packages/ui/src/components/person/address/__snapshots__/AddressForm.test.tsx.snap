@@ -44,7 +44,6 @@ exports[`AddressForm > matches snapshot 1`] = `
               data-path="country"
               data-variant="default"
               id="mantine-4miilw5eg"
-              value=""
             />
           </div>
         </div>
@@ -133,7 +132,6 @@ exports[`AddressForm > matches snapshot 1`] = `
                 data-path="municipality"
                 data-variant="default"
                 id="mantine-pfqyzivqd"
-                value=""
               />
             </div>
           </div>
@@ -157,7 +155,6 @@ exports[`AddressForm > matches snapshot 1`] = `
                 data-path="state"
                 data-variant="default"
                 id="mantine-7lzvq3tar"
-                value=""
               />
             </div>
           </div>
@@ -182,7 +179,6 @@ exports[`AddressForm > matches snapshot 1`] = `
               data-path="zip"
               data-variant="default"
               id="mantine-m75qc1lk3"
-              value=""
             />
           </div>
         </div>
