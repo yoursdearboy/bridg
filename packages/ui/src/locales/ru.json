@@ -29,6 +29,14 @@
       "prefix": "Префикс",
       "suffix": "Суффикс"
     },
+    "Address": {
+      "street": "Улица",
+      "building": "Здание",
+      "country": "Страна",
+      "municipality": "Муниципалитет",
+      "state": "Штат",
+      "zip": "Индекс"
+    },
     "SubjectIndexPage": {
       "breadcrumb": "Пациенты",
       "info": "Информация",
@@ -77,6 +85,9 @@
     },
     "NamesCard": {
       "title": "Имена"
+    },
+    "AddressCard": {
+      "title": "Адреса"
     },
     "TelecommunicationAddressesTable": {
       "title": "Контакты"
