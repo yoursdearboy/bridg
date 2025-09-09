@@ -1,5 +1,6 @@
 import api from "@/api";
 import {
+  Box,
   Button,
   Card,
   Group,
@@ -37,19 +38,9 @@ export const AddressCard = ({ personId, query }: AddressCardProps) => {
 
   const { isPending, isError, error, data: addresses } = query;
 
-  // FIXME: Must be inside Card.Section
-  if (isPending) return <LoadingOverlay visible />;
-
-  // FIXME: Must be inside Card.Section
-  if (isError) {
-    return (
-      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
-    );
-  }
-
   return (
     <>
-      <Card withBorder shadow="sm" radius="md" padding="xs">
+      <Card withBorder shadow="sm" radius="md">
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
             <Text fw={500} px="xs">
@@ -60,7 +51,19 @@ export const AddressCard = ({ personId, query }: AddressCardProps) => {
             </Button>
           </Group>
         </Card.Section>
-        <AddressTable personId={personId} addresses={addresses} />
+        <Card.Section inheritPadding py="xs">
+          <Box pos="relative" style={{ minHeight: 80 }}>
+            <LoadingOverlay visible={isPending} />
+            {isError && (
+              <Text color="red">
+                {t("errorMessage", { error: error.message })}
+              </Text>
+            )}
+            {!isPending && !isError && (
+              <AddressTable personId={personId} addresses={addresses} />
+            )}
+          </Box>
+        </Card.Section>
       </Card>
       <Modal opened={opened} onClose={close} title={t("add")} size="lg">
         <NewAddressForm

@@ -87,7 +87,7 @@ interface AddressTableProps {
 
 export const AddressTable = ({ personId, addresses }: AddressTableProps) => {
   return (
-    <Box pt="xs">
+    <Box>
       <Table highlightOnHover>
         <Table.Tbody>
           {addresses.length === 0 ? (

@@ -9,7 +9,6 @@ exports[`NamesTable > matches snapshot 1`] = `
   </style>
   <div
     class=""
-    style="padding-top: var(--mantine-spacing-xs);"
   >
     <table
       class="m_b23fa0ef mantine-Table-table"
