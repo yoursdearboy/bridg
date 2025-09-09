@@ -83,7 +83,7 @@ interface NamesTableProps {
 
 export const NamesTable = ({ personId, names }: NamesTableProps) => {
   return (
-    <Box pt="xs">
+    <Box>
       <Table highlightOnHover>
         <Table.Tbody>
           {names.length === 0 ? (
