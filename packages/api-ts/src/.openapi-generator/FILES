@@ -25,6 +25,7 @@ models/StudyProtocolVersion.ts
 models/StudySiteProtocolVersionRelationship.ts
 models/StudySubject.ts
 models/TelecommunicationAddress.ts
+models/TelecommunicationAddressData.ts
 models/ValidationError.ts
 models/ValidationErrorLocInner.ts
 models/index.ts

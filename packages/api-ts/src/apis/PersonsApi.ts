@@ -23,6 +23,7 @@ import type {
   PostalAddress,
   PostalAddressData,
   TelecommunicationAddress,
+  TelecommunicationAddressData,
 } from '../models/index';
 import {
     EntityNameFromJSON,
@@ -41,6 +42,8 @@ import {
     PostalAddressDataToJSON,
     TelecommunicationAddressFromJSON,
     TelecommunicationAddressToJSON,
+    TelecommunicationAddressDataFromJSON,
+    TelecommunicationAddressDataToJSON,
 } from '../models/index';
 
 export interface CreatePersonsPersonIdNamesPostRequest {
@@ -55,7 +58,7 @@ export interface CreatePersonsPersonIdPostalAddressesPostRequest {
 
 export interface CreatePersonsPersonIdTelecommunicationAddressesPostRequest {
     personId: string;
-    telecommunicationAddress: TelecommunicationAddress;
+    telecommunicationAddressData: TelecommunicationAddressData;
 }
 
 export interface DeletePersonsPersonIdNamesNameIdDeleteRequest {
@@ -109,7 +112,7 @@ export interface UpdatePersonsPersonIdPostalAddressesAddressIdPatchRequest {
 export interface UpdatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRequest {
     personId: string;
     addressId: string;
-    telecommunicationAddress: TelecommunicationAddress;
+    telecommunicationAddressData: TelecommunicationAddressData;
 }
 
 /**
@@ -214,10 +217,10 @@ export class PersonsApi extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['telecommunicationAddress'] == null) {
+        if (requestParameters['telecommunicationAddressData'] == null) {
             throw new runtime.RequiredError(
-                'telecommunicationAddress',
-                'Required parameter "telecommunicationAddress" was null or undefined when calling createPersonsPersonIdTelecommunicationAddressesPost().'
+                'telecommunicationAddressData',
+                'Required parameter "telecommunicationAddressData" was null or undefined when calling createPersonsPersonIdTelecommunicationAddressesPost().'
             );
         }
 
@@ -232,7 +235,7 @@ export class PersonsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: TelecommunicationAddressToJSON(requestParameters['telecommunicationAddress']),
+            body: TelecommunicationAddressDataToJSON(requestParameters['telecommunicationAddressData']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TelecommunicationAddressFromJSON(jsonValue));
@@ -671,10 +674,10 @@ export class PersonsApi extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['telecommunicationAddress'] == null) {
+        if (requestParameters['telecommunicationAddressData'] == null) {
             throw new runtime.RequiredError(
-                'telecommunicationAddress',
-                'Required parameter "telecommunicationAddress" was null or undefined when calling updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch().'
+                'telecommunicationAddressData',
+                'Required parameter "telecommunicationAddressData" was null or undefined when calling updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch().'
             );
         }
 
@@ -689,7 +692,7 @@ export class PersonsApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: TelecommunicationAddressToJSON(requestParameters['telecommunicationAddress']),
+            body: TelecommunicationAddressDataToJSON(requestParameters['telecommunicationAddressData']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TelecommunicationAddressFromJSON(jsonValue));

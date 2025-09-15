@@ -20,5 +20,6 @@ export * from './StudyProtocolVersion';
 export * from './StudySiteProtocolVersionRelationship';
 export * from './StudySubject';
 export * from './TelecommunicationAddress';
+export * from './TelecommunicationAddressData';
 export * from './ValidationError';
 export * from './ValidationErrorLocInner';

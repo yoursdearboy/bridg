@@ -37,12 +37,26 @@ export interface TelecommunicationAddress {
      * @memberof TelecommunicationAddress
      */
     address?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TelecommunicationAddress
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TelecommunicationAddress
+     */
+    readonly label: string;
 }
 
 /**
  * Check if a given object implements the TelecommunicationAddress interface.
  */
 export function instanceOfTelecommunicationAddress(value: object): value is TelecommunicationAddress {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('label' in value) || value['label'] === undefined) return false;
     return true;
 }
 
@@ -59,6 +73,8 @@ export function TelecommunicationAddressFromJSONTyped(json: any, ignoreDiscrimin
         'use': json['use'] == null ? undefined : json['use'],
         'scheme': json['scheme'] == null ? undefined : json['scheme'],
         'address': json['address'] == null ? undefined : json['address'],
+        'id': json['id'],
+        'label': json['label'],
     };
 }
 
@@ -66,7 +82,7 @@ export function TelecommunicationAddressToJSON(json: any): TelecommunicationAddr
     return TelecommunicationAddressToJSONTyped(json, false);
 }
 
-export function TelecommunicationAddressToJSONTyped(value?: TelecommunicationAddress | null, ignoreDiscriminator: boolean = false): any {
+export function TelecommunicationAddressToJSONTyped(value?: Omit<TelecommunicationAddress, 'label'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -76,6 +92,7 @@ export function TelecommunicationAddressToJSONTyped(value?: TelecommunicationAdd
         'use': value['use'],
         'scheme': value['scheme'],
         'address': value['address'],
+        'id': value['id'],
     };
 }
 
