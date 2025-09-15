@@ -1,22 +1,14 @@
-from typing import Annotated, List, Optional
+from typing import Annotated, List
 from uuid import UUID
 
 import bridg
 from bridg import Repository
 from fastapi import APIRouter, Depends
 
-from api.base_model import BaseModel
 from api.db import get_repository
+from api.model import TelecommunicationAddress, TelecommunicationAddressData
 
 router = APIRouter(prefix="/telecommunication_addresses")
-
-
-class TelecommunicationAddress(BaseModel[bridg.common.person.TelecommunicationAddress]):
-    _sa = bridg.common.person.TelecommunicationAddress
-
-    use: Optional[str] = None
-    scheme: Optional[str] = None
-    address: Optional[str] = None
 
 
 class TelecommunicationAddressRepository(Repository[bridg.common.person.TelecommunicationAddress]):
@@ -36,7 +28,7 @@ def index(person_id: UUID, repo: TelecommunicationAddressRepositoryDep) -> List[
 
 @router.post("")
 def create(
-    person_id: UUID, data: TelecommunicationAddress, repo: TelecommunicationAddressRepositoryDep
+    person_id: UUID, data: TelecommunicationAddressData, repo: TelecommunicationAddressRepositoryDep
 ) -> TelecommunicationAddress:
     obj = data.model_dump_sa()
     obj.person_id = person_id
@@ -46,7 +38,7 @@ def create(
 
 @router.patch("/{address_id:uuid}")
 def update(
-    person_id: UUID, address_id: UUID, data: TelecommunicationAddress, repo: TelecommunicationAddressRepositoryDep
+    person_id: UUID, address_id: UUID, data: TelecommunicationAddressData, repo: TelecommunicationAddressRepositoryDep
 ) -> TelecommunicationAddress:
     obj = repo.one(address_id)
     data.model_update_sa(obj)
