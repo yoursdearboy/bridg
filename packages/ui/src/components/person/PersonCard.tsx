@@ -1,4 +1,3 @@
-import { InfoRow } from "@/components/InfoRow";
 import {
   Badge,
   Box,
@@ -9,10 +8,11 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import type { Person } from "api-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
-import { useDisclosure } from "@mantine/hooks";
+import { InfoRow } from "@/components/InfoRow";
 import { EditPersonForm } from "./EditPersonForm";
 
 interface PersonCardProps {

@@ -1,4 +1,3 @@
-import api from "@/api";
 import {
   Box,
   Button,
@@ -10,10 +9,11 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
 import type { PostalAddress } from "api-ts";
-import { NewAddressForm } from "./NewAddressForm";
+import { useTranslation } from "react-i18next";
+import api from "@/api";
 import { AddressTable } from "./AddressTable";
+import { NewAddressForm } from "./NewAddressForm";
 
 export const AddressCardWrapper = ({ personId }: { personId: string }) => {
   const query = useQuery({
