@@ -1,8 +1,8 @@
-import { renderComponent } from "@/test-utils";
+import { type UseMutationResult } from "@tanstack/react-query";
 import type { PostalAddress, PostalAddressData } from "api-ts";
 import { describe, expect, it, vi } from "vitest";
+import { renderComponent } from "@/test-utils";
 import { AddressForm } from "./AddressForm";
-import { type UseMutationResult } from "@tanstack/react-query";
 
 describe("AddressForm", () => {
   it("matches snapshot", () => {

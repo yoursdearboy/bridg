@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
+import api from "@/api";
 import { renderComponent } from "@/test-utils";
 import { AddressCardWrapper } from "./AddressCard";
-import api from "@/api";
 
 describe("NamesCard", () => {
   it("matches snapshot", () => {

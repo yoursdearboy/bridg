@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import api from "@/api";
 import type { PostalAddress, PostalAddressData } from "api-ts";
+import api from "@/api";
 import { AddressForm } from "./AddressForm";
 
 interface Props {

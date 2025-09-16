@@ -1,8 +1,3 @@
-import api from "@/api";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
-import MenuItemLink from "@/components/MenuItemLink";
-import { languages } from "@/i18n";
-import logo from "@/logo.png";
 import {
   AppShell,
   Box,
@@ -24,6 +19,11 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+import api from "@/api";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import MenuItemLink from "@/components/MenuItemLink";
+import { languages } from "@/i18n";
+import logo from "@/logo.png";
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation();

@@ -1,10 +1,10 @@
-import api from "@/api";
-import ButtonLink from "@/components/ButtonLink";
 import { Group, Stack, Table, Text } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
+import api from "@/api";
+import ButtonLink from "@/components/ButtonLink";
 import { Route as infoRoute } from "./$subjectId";
 import { Route as newRoute } from "./new";
-import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/")({
   loader: ({ params }) => api.subjects.indexSpacesSpaceIdSubjectsGet(params),

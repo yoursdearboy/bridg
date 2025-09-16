@@ -1,4 +1,3 @@
-import api from "@/api";
 import {
   Alert,
   Button,
@@ -27,6 +26,7 @@ import {
   Status,
 } from "api-ts";
 import { useTranslation } from "react-i18next";
+import api from "@/api";
 import i18next from "@/i18n";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
