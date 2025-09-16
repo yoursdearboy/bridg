@@ -3,7 +3,7 @@ import { EditNameForm } from "@/components/person/name/EditNameForm";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 import { AddressCardWrapper } from "@/components/person/address/AddressCard";
 import { PersonCard } from "@/components/person/PersonCard";
-import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
+
 import i18next from "@/i18n";
 import {
   Button,
@@ -21,6 +21,7 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import type { Person } from "api-ts";
 import { useTranslation } from "react-i18next";
+import { TelecomCardWrapper } from "@/components/person/telecom/TelecomCard";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
@@ -83,7 +84,7 @@ function PersonShowPage() {
             <Space h="md" />
             <AddressCardWrapper personId={personId} />
             <Space h="md" />
-            <TelecommunicationAddressesTable personId={personId} />
+            <TelecomCardWrapper personId={personId} />
           </Grid.Col>
         </Grid>
       </Stack>
