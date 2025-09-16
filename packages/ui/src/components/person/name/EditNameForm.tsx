@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
+import type { EntityName, EntityNameData } from "api-ts";
 import api from "@/api";
 import { NameForm } from "./NameForm";
-import type { EntityName, EntityNameData } from "api-ts";
 
 interface Props {
   personId: string;

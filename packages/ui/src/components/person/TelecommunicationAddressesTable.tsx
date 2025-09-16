@@ -1,4 +1,3 @@
-import api from "@/api";
 import { Button, Card, Group, Table, Text } from "@mantine/core";
 import {
   QueryClient,
@@ -6,6 +5,7 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import api from "@/api";
 
 const queryClient = new QueryClient();
 

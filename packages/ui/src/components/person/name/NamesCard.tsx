@@ -1,4 +1,3 @@
-import api from "@/api";
 import {
   Box,
   Button,
@@ -10,10 +9,11 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
+import type { EntityName } from "api-ts";
 import { useTranslation } from "react-i18next";
+import api from "@/api";
 import { NamesTable } from "./NamesTable";
 import { NewNameForm } from "./NewNameForm";
-import type { EntityName } from "api-ts";
 
 export const NamesCardWrapper = ({ personId }: { personId: string }) => {
   const query = useQuery({

@@ -1,5 +1,3 @@
-import api from "@/api";
-import ButtonLink from "@/components/ButtonLink";
 import {
   Badge,
   Button,
@@ -15,8 +13,10 @@ import { useForm } from "@mantine/form";
 import { createFileRoute } from "@tanstack/react-router";
 import { AdministrativeGender } from "api-ts";
 import { useTranslation } from "react-i18next";
-import { Route as indexRoute } from "../$personId";
+import api from "@/api";
+import ButtonLink from "@/components/ButtonLink";
 import i18next from "@/i18n";
+import { Route as indexRoute } from "../$personId";
 
 export const Route = createFileRoute("/persons/$personId/edit")({
   component: PersonEditPage,

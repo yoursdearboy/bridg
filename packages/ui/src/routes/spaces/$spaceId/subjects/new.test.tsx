@@ -1,6 +1,6 @@
+import { expect, it, vi } from "vitest";
 import api from "@/api";
 import { renderRoute } from "@/test-utils";
-import { expect, it, vi } from "vitest";
 import { Route } from "./new";
 
 it("new page renders correctly", async () => {

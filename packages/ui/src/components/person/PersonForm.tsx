@@ -1,7 +1,3 @@
-import { useForm } from "@mantine/form";
-import { useTranslation } from "react-i18next";
-import { AdministrativeGender, type Person, type PersonData } from "api-ts";
-import type { UseMutationResult } from "@tanstack/react-query";
 import {
   Alert,
   Button,
@@ -11,6 +7,10 @@ import {
   Stack,
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
+import { useForm } from "@mantine/form";
+import type { UseMutationResult } from "@tanstack/react-query";
+import { AdministrativeGender, type Person, type PersonData } from "api-ts";
+import { useTranslation } from "react-i18next";
 
 interface PersonFormProps {
   initialValues: PersonData;

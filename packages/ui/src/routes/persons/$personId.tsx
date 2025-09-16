@@ -1,10 +1,3 @@
-import api from "@/api";
-import { EditNameForm } from "@/components/person/name/EditNameForm";
-import { NamesCardWrapper } from "@/components/person/name/NamesCard";
-import { AddressCardWrapper } from "@/components/person/address/AddressCard";
-import { PersonCard } from "@/components/person/PersonCard";
-import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
-import i18next from "@/i18n";
 import {
   Button,
   Grid,
@@ -21,6 +14,13 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import type { Person } from "api-ts";
 import { useTranslation } from "react-i18next";
+import api from "@/api";
+import { AddressCardWrapper } from "@/components/person/address/AddressCard";
+import { EditNameForm } from "@/components/person/name/EditNameForm";
+import { NamesCardWrapper } from "@/components/person/name/NamesCard";
+import { PersonCard } from "@/components/person/PersonCard";
+import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
+import i18next from "@/i18n";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,

@@ -1,8 +1,8 @@
-import { renderComponent } from "@/test-utils";
+import { type UseMutationResult } from "@tanstack/react-query";
 import type { EntityName, EntityNameData } from "api-ts";
 import { describe, expect, it, vi } from "vitest";
+import { renderComponent } from "@/test-utils";
 import { NameForm } from "./NameForm";
-import { type UseMutationResult } from "@tanstack/react-query";
 
 describe("NameForm", () => {
   it("matches snapshot", () => {

@@ -1,10 +1,10 @@
-import api from "@/api";
 import { Box, Group, Modal, Table } from "@mantine/core";
 import { useDisclosure, useHover } from "@mantine/hooks";
 import { IconPencil, IconX } from "@tabler/icons-react";
 import { useMutation } from "@tanstack/react-query";
 import type { PostalAddress } from "api-ts";
 import { t } from "i18next";
+import api from "@/api";
 import { EditAddressForm } from "./EditAddressForm";
 
 interface AddressTableRowWrapperProps {
