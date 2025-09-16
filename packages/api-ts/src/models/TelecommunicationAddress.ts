@@ -13,6 +13,21 @@
  */
 
 import { mapValues } from '../runtime';
+import type { TelecommunicationAddressUse } from './TelecommunicationAddressUse';
+import {
+    TelecommunicationAddressUseFromJSON,
+    TelecommunicationAddressUseFromJSONTyped,
+    TelecommunicationAddressUseToJSON,
+    TelecommunicationAddressUseToJSONTyped,
+} from './TelecommunicationAddressUse';
+import type { URLScheme } from './URLScheme';
+import {
+    URLSchemeFromJSON,
+    URLSchemeFromJSONTyped,
+    URLSchemeToJSON,
+    URLSchemeToJSONTyped,
+} from './URLScheme';
+
 /**
  * 
  * @export
@@ -21,16 +36,16 @@ import { mapValues } from '../runtime';
 export interface TelecommunicationAddress {
     /**
      * 
-     * @type {string}
+     * @type {TelecommunicationAddressUse}
      * @memberof TelecommunicationAddress
      */
-    use?: string | null;
+    use?: TelecommunicationAddressUse | null;
     /**
      * 
-     * @type {string}
+     * @type {URLScheme}
      * @memberof TelecommunicationAddress
      */
-    scheme?: string | null;
+    scheme?: URLScheme | null;
     /**
      * 
      * @type {string}
@@ -51,6 +66,8 @@ export interface TelecommunicationAddress {
     readonly label: string;
 }
 
+
+
 /**
  * Check if a given object implements the TelecommunicationAddress interface.
  */
@@ -70,8 +87,8 @@ export function TelecommunicationAddressFromJSONTyped(json: any, ignoreDiscrimin
     }
     return {
         
-        'use': json['use'] == null ? undefined : json['use'],
-        'scheme': json['scheme'] == null ? undefined : json['scheme'],
+        'use': json['use'] == null ? undefined : TelecommunicationAddressUseFromJSON(json['use']),
+        'scheme': json['scheme'] == null ? undefined : URLSchemeFromJSON(json['scheme']),
         'address': json['address'] == null ? undefined : json['address'],
         'id': json['id'],
         'label': json['label'],
@@ -89,8 +106,8 @@ export function TelecommunicationAddressToJSONTyped(value?: Omit<Telecommunicati
 
     return {
         
-        'use': value['use'],
-        'scheme': value['scheme'],
+        'use': TelecommunicationAddressUseToJSON(value['use']),
+        'scheme': URLSchemeToJSON(value['scheme']),
         'address': value['address'],
         'id': value['id'],
     };

@@ -21,5 +21,7 @@ export * from './StudySiteProtocolVersionRelationship';
 export * from './StudySubject';
 export * from './TelecommunicationAddress';
 export * from './TelecommunicationAddressData';
+export * from './TelecommunicationAddressUse';
+export * from './URLScheme';
 export * from './ValidationError';
 export * from './ValidationErrorLocInner';

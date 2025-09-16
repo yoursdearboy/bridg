@@ -13,6 +13,21 @@
  */
 
 import { mapValues } from '../runtime';
+import type { TelecommunicationAddressUse } from './TelecommunicationAddressUse';
+import {
+    TelecommunicationAddressUseFromJSON,
+    TelecommunicationAddressUseFromJSONTyped,
+    TelecommunicationAddressUseToJSON,
+    TelecommunicationAddressUseToJSONTyped,
+} from './TelecommunicationAddressUse';
+import type { URLScheme } from './URLScheme';
+import {
+    URLSchemeFromJSON,
+    URLSchemeFromJSONTyped,
+    URLSchemeToJSON,
+    URLSchemeToJSONTyped,
+} from './URLScheme';
+
 /**
  * 
  * @export
@@ -21,16 +36,16 @@ import { mapValues } from '../runtime';
 export interface TelecommunicationAddressData {
     /**
      * 
-     * @type {string}
+     * @type {TelecommunicationAddressUse}
      * @memberof TelecommunicationAddressData
      */
-    use?: string | null;
+    use?: TelecommunicationAddressUse | null;
     /**
      * 
-     * @type {string}
+     * @type {URLScheme}
      * @memberof TelecommunicationAddressData
      */
-    scheme?: string | null;
+    scheme?: URLScheme | null;
     /**
      * 
      * @type {string}
@@ -38,6 +53,8 @@ export interface TelecommunicationAddressData {
      */
     address?: string | null;
 }
+
+
 
 /**
  * Check if a given object implements the TelecommunicationAddressData interface.
@@ -56,8 +73,8 @@ export function TelecommunicationAddressDataFromJSONTyped(json: any, ignoreDiscr
     }
     return {
         
-        'use': json['use'] == null ? undefined : json['use'],
-        'scheme': json['scheme'] == null ? undefined : json['scheme'],
+        'use': json['use'] == null ? undefined : TelecommunicationAddressUseFromJSON(json['use']),
+        'scheme': json['scheme'] == null ? undefined : URLSchemeFromJSON(json['scheme']),
         'address': json['address'] == null ? undefined : json['address'],
     };
 }
@@ -73,8 +90,8 @@ export function TelecommunicationAddressDataToJSONTyped(value?: Telecommunicatio
 
     return {
         
-        'use': value['use'],
-        'scheme': value['scheme'],
+        'use': TelecommunicationAddressUseToJSON(value['use']),
+        'scheme': URLSchemeToJSON(value['scheme']),
         'address': value['address'],
     };
 }
