@@ -1,4 +1,3 @@
-import api from "@/api";
 import {
   Box,
   Button,
@@ -10,11 +9,11 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
-
 import type { TelecommunicationAddress } from "api-ts";
-import { TelecomTable } from "./TelecomTable";
+import { useTranslation } from "react-i18next";
+import api from "@/api";
 import { NewTelecomForm } from "./NewTelecomForm";
+import { TelecomTable } from "./TelecomTable";
 
 export const TelecomCardWrapper = ({ personId }: { personId: string }) => {
   const query = useQuery({
@@ -49,7 +48,7 @@ export const TelecomCard = ({ personId, query }: TelecomCardProps) => {
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
             <Text fw={500} px="xs">
-              {t("Telecom.title")}
+              {t("TelecommunicationAddressesTable.title")}
             </Text>
             <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
               {t("add")}

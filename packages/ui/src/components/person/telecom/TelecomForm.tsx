@@ -36,17 +36,21 @@ export const TelecomForm = ({
   const form = useForm<TelecommunicationAddressData>({
     initialValues: {
       ...initialValues,
-      use: TelecommunicationAddressUse.H || "",
+      use: TelecommunicationAddressUse.H,
     },
     validate: {
       scheme: (value) =>
         value
           ? null
-          : t("fieldRequiredMessage", { fieldName: t("Telecom.scheme") }),
+          : t("fieldRequiredMessage", {
+              fieldName: t("TelecommunicationAddress.scheme"),
+            }),
       address: (value) =>
         value
           ? null
-          : t("fieldRequiredMessage", { fieldName: t("Telecom.address") }),
+          : t("fieldRequiredMessage", {
+              fieldName: t("TelecommunicationAddress.address"),
+            }),
     },
   });
 
@@ -64,13 +68,13 @@ export const TelecomForm = ({
         )}
         <Group grow>
           <TextInput
-            label={t("Telecom.scheme")}
+            label={t("TelecommunicationAddress.scheme")}
             withAsterisk
             {...form.getInputProps("scheme")}
           />
 
           <TextInput
-            label={t("Telecom.address")}
+            label={t("TelecommunicationAddress.address")}
             withAsterisk
             {...form.getInputProps("address")}
           />

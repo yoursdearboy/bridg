@@ -1,4 +1,3 @@
-
 import {
   Button,
   Grid,
@@ -20,9 +19,8 @@ import { AddressCardWrapper } from "@/components/person/address/AddressCard";
 import { EditNameForm } from "@/components/person/name/EditNameForm";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 import { PersonCard } from "@/components/person/PersonCard";
-import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
-import i18next from "@/i18n";
 import { TelecomCardWrapper } from "@/components/person/telecom/TelecomCard";
+import i18next from "@/i18n";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,

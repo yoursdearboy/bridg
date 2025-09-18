@@ -1,10 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import api from "@/api";
-
 import type {
   TelecommunicationAddress,
   TelecommunicationAddressData,
 } from "api-ts";
+import api from "@/api";
 import { TelecomForm } from "./TelecomForm";
 
 interface Props {
