@@ -15,7 +15,6 @@ export const NewTelecomForm = ({ personId, onCancel, onSuccess }: Props) => {
     mutationFn: (data: TelecommunicationAddressData) =>
       api.persons.createPersonsPersonIdTelecommunicationAddressesPost({
         personId,
-
         telecommunicationAddressData: data,
       }),
 

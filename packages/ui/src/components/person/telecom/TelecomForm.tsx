@@ -3,6 +3,7 @@ import {
   Button,
   Group,
   LoadingOverlay,
+  Select,
   Stack,
   TextInput,
 } from "@mantine/core";
@@ -10,6 +11,7 @@ import { useForm } from "@mantine/form";
 import type { UseMutationResult } from "@tanstack/react-query";
 import {
   TelecommunicationAddressUse,
+  URLScheme,
   type TelecommunicationAddress,
   type TelecommunicationAddressData,
 } from "api-ts";
@@ -56,7 +58,10 @@ export const TelecomForm = ({
 
   const handleSubmit = (data: TelecommunicationAddressData) =>
     mutation.mutate(data);
-
+  const schemes = Object.values(URLScheme).map((value) => ({
+    label: value,
+    value,
+  }));
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="md" pos="relative">
@@ -67,9 +72,9 @@ export const TelecomForm = ({
           </Alert>
         )}
         <Group grow>
-          <TextInput
+          <Select
             label={t("TelecommunicationAddress.scheme")}
-            withAsterisk
+            data={schemes}
             {...form.getInputProps("scheme")}
           />
 

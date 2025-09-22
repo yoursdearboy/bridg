@@ -22,7 +22,6 @@ const TelecomTableRowWrapper = ({
       api.persons.deletePersonsPersonIdTelecommunicationAddressesAddressIdDelete(
         {
           personId,
-
           addressId: telecom_address.id,
         }
       ),
@@ -40,7 +39,7 @@ const TelecomTableRowWrapper = ({
 interface TelecomTableRowProps {
   telecom_address: TelecommunicationAddress;
   personId: string;
-  onDelete: (name: EntityName) => void;
+  onDelete: (name: TelecommunicationAddress) => void;
 }
 
 const TelecomTableRow = ({
