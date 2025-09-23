@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { type TelecommunicationAddressData } from "api-ts";
 import api from "@/api";
-import { TelecomForm } from "./TelecomForm";
+import { TelecomForm } from "./TelecommunicationAddressForm";
 
 interface Props {
   personId: string;

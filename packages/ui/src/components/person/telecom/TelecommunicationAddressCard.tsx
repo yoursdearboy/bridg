@@ -12,8 +12,8 @@ import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import type { TelecommunicationAddress } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
-import { NewTelecomForm } from "./NewTelecomForm";
-import { TelecomTable } from "./TelecomTable";
+import { NewTelecomForm } from "./NewTelecommunicationAddressForm";
+import { TelecomTable } from "./TelecommunicationAddressTable";
 
 export const TelecomCardWrapper = ({ personId }: { personId: string }) => {
   const query = useQuery({

@@ -5,31 +5,36 @@ import { useMutation } from "@tanstack/react-query";
 import type { TelecommunicationAddress } from "api-ts";
 import { t } from "i18next";
 import api from "@/api";
-import { EditTelecomForm } from "./EditTelecomForm";
+import { EditTelecomForm } from "./EditTelecommunicationAddressForm";
 
 interface TelecomTableRowWrapperProps {
   personId: string;
-  telecom_address: TelecommunicationAddress;
+  telecommunication_address: TelecommunicationAddress;
 }
 
 const TelecomTableRowWrapper = ({
   personId,
-  telecom_address,
+  telecommunication_address,
 }: TelecomTableRowWrapperProps) => {
   const mutation = useMutation({
-    mutationKey: ["person", personId, "telecom_addresses", telecom_address.id],
+    mutationKey: [
+      "person",
+      personId,
+      "telecommunication_address",
+      telecommunication_address.id,
+    ],
     mutationFn: () =>
       api.persons.deletePersonsPersonIdTelecommunicationAddressesAddressIdDelete(
         {
           personId,
-          addressId: telecom_address.id,
+          addressId: telecommunication_address.id,
         }
       ),
   });
 
   return (
     <TelecomTableRow
-      telecom_address={telecom_address}
+      telecommunication_address={telecommunication_address}
       personId={personId}
       onDelete={() => mutation.mutate()}
     />
@@ -37,13 +42,13 @@ const TelecomTableRowWrapper = ({
 };
 
 interface TelecomTableRowProps {
-  telecom_address: TelecommunicationAddress;
+  telecommunication_address: TelecommunicationAddress;
   personId: string;
   onDelete: (name: TelecommunicationAddress) => void;
 }
 
 const TelecomTableRow = ({
-  telecom_address,
+  telecommunication_address,
   personId,
   onDelete,
 }: TelecomTableRowProps) => {
@@ -54,13 +59,14 @@ const TelecomTableRow = ({
   };
   const handleDelete = () => {
     if (window.confirm("Удалить выбранное значение?")) {
-      onDelete(telecom_address);
+      onDelete(telecommunication_address);
     }
   };
   return (
     <>
       <Table.Tr ref={ref}>
-        <Table.Td>{telecom_address.label}</Table.Td>
+        <Table.Td>{telecommunication_address.scheme}</Table.Td>
+        <Table.Td>{telecommunication_address.address}</Table.Td>
         <Table.Td width={60}>
           {hovered && (
             <Group gap={8}>
@@ -73,7 +79,7 @@ const TelecomTableRow = ({
       <Modal opened={opened} onClose={close} title={t("edit")} size="lg">
         <EditTelecomForm
           personId={personId}
-          telecom_address={telecom_address}
+          telecommunication_address={telecommunication_address}
           onCancel={close}
           onSuccess={() => close()}
         />
@@ -106,7 +112,7 @@ export const TelecomTable = ({
               <TelecomTableRowWrapper
                 key={name.id}
                 personId={personId}
-                telecom_address={name}
+                telecommunication_address={name}
               />
             ))
           )}
