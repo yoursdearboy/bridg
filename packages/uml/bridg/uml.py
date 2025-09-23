@@ -1,28 +1,10 @@
-import argparse
 import logging
-import sys
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from functools import reduce
+from io import BufferedReader
 from itertools import groupby
 from typing import Dict, List
-
-argparser = argparse.ArgumentParser()
-argparser.add_argument("xmi", type=argparse.FileType(mode="rb"))
-
-args = argparser.parse_args()
-
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-
-args.xmi.seek(0)
-namespaces = {}
-for event, elem in ET.iterparse(args.xmi, events=("start-ns",)):
-    prefix, uri = elem
-    namespaces[prefix] = uri
-
-args.xmi.seek(0)
-tree = ET.parse(args.xmi)
-root = tree.getroot()
 
 ID = str
 Name = str
@@ -77,17 +59,25 @@ class DB:
 class Parser:
     """Parse and index UML file."""
 
-    def __init__(self):
+    def __init__(self, source: BufferedReader):
+        self.source = source
+        self.namespaces = {}
         self.classes: Dict[ID | Name, Class] = {}
         self.generalizations: List[Generalization] = []
         self.supertypes: Dict[Class, Class] = {}
         self.associations: List[Association] = []
 
+    def _parse_namespaces(self):
+        for event, elem in ET.iterparse(self.source, events=("start-ns",)):
+            prefix, uri = elem
+            self.namespaces[prefix] = uri
+        self.source.seek(0)
+
     def _parse_attribute(self, node: ET.Element):
         return Attribute(name=node.attrib["name"])
 
     def _parse_attributes(self, node: ET.Element):
-        nodes = node.findall(".//UML:Attribute", namespaces)
+        nodes = node.findall(".//UML:Attribute", self.namespaces)
         attributes = [self._parse_attribute(n) for n in nodes]
         map = {a.name: a for a in attributes}
         return map
@@ -118,7 +108,7 @@ class Parser:
             yield node
 
     def _parse_classes(self, node: ET.Element):
-        nodes = self._filter_classes(node.findall(".//UML:Class", namespaces))
+        nodes = self._filter_classes(node.findall(".//UML:Class", self.namespaces))
         classes = [self._parse_class(n) for n in nodes]
         map = {
             **{c.id_: c for c in classes},
@@ -127,7 +117,7 @@ class Parser:
         return map
 
     def _parse_generalizations(self, node: ET.Element):
-        nodes = node.findall(".//UML:Generalization", namespaces)
+        nodes = node.findall(".//UML:Generalization", self.namespaces)
         generalizations = [self._parse_generalization(n) for n in nodes]
         return generalizations
 
@@ -140,8 +130,8 @@ class Parser:
         return map
 
     def _parse_association(self, node: ET.Element):
-        source = node.find(".//UML:TaggedValue[@tag='ea_end'][@value='source']/....", namespaces)
-        target = node.find(".//UML:TaggedValue[@tag='ea_end'][@value='target']/....", namespaces)
+        source = node.find(".//UML:TaggedValue[@tag='ea_end'][@value='source']/....", self.namespaces)
+        target = node.find(".//UML:TaggedValue[@tag='ea_end'][@value='target']/....", self.namespaces)
         assert source
         assert target
         return Association(
@@ -157,7 +147,7 @@ class Parser:
         )
 
     def _parse_associations(self, node: ET.Element):
-        nodes = node.findall(".//UML:Association", namespaces)
+        nodes = node.findall(".//UML:Association", self.namespaces)
         associations = [self._parse_association(n) for n in nodes]
         return associations
 
@@ -171,10 +161,16 @@ class Parser:
         self.supertypes = self._parse_supertypes()
         self.targets = self._parse_targets()
 
-    def parse(self, node: ET.Element):
-        self._parse_db(node)
+    def parse(self):
+        self._parse_namespaces()
+        tree = ET.parse(self.source)
+        root = tree.getroot()
+        self._parse_db(root)
         return DB(
-            classes=self.classes, generalizations=self.generalizations, supertypes=self.supertypes, targets=self.targets
+            classes=self.classes,
+            generalizations=self.generalizations,
+            supertypes=self.supertypes,
+            targets=self.targets,
         )
 
 
@@ -196,7 +192,3 @@ def find_targets(db, class_):
 def find_targets_recursively(db, class_):
     types = [class_] + list(find_supertypes(db, class_))
     return reduce(lambda a, b: [*a, *find_targets(db, b)], types, [])
-
-
-parser = Parser()
-db = parser.parse(root)
