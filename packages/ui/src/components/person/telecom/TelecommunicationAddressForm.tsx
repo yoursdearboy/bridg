@@ -17,7 +17,7 @@ import {
 } from "api-ts";
 import { useTranslation } from "react-i18next";
 
-interface TelecomFormProps {
+interface TelecommunicationAddressFormProps {
   initialValues: TelecommunicationAddressData;
   onCancel: () => void;
   mutation: UseMutationResult<
@@ -28,11 +28,11 @@ interface TelecomFormProps {
   >;
 }
 
-export const TelecomForm = ({
+export const TelecommunicationAddressForm = ({
   initialValues,
   onCancel,
   mutation,
-}: TelecomFormProps) => {
+}: TelecommunicationAddressFormProps) => {
   const { t } = useTranslation();
 
   const form = useForm<TelecommunicationAddressData>({

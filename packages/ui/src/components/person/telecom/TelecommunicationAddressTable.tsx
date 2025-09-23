@@ -5,17 +5,17 @@ import { useMutation } from "@tanstack/react-query";
 import type { TelecommunicationAddress } from "api-ts";
 import { t } from "i18next";
 import api from "@/api";
-import { EditTelecomForm } from "./EditTelecommunicationAddressForm";
+import { EditTelecommunicationAddressForm } from "./EditTelecommunicationAddressForm";
 
-interface TelecomTableRowWrapperProps {
+interface TelecommunicationAddressTableRowWrapperProps {
   personId: string;
   telecommunication_address: TelecommunicationAddress;
 }
 
-const TelecomTableRowWrapper = ({
+const TelecommunicationAddressTableRowWrapper = ({
   personId,
   telecommunication_address,
-}: TelecomTableRowWrapperProps) => {
+}: TelecommunicationAddressTableRowWrapperProps) => {
   const mutation = useMutation({
     mutationKey: [
       "person",
@@ -33,7 +33,7 @@ const TelecomTableRowWrapper = ({
   });
 
   return (
-    <TelecomTableRow
+    <TelecommunicationAddressTableRow
       telecommunication_address={telecommunication_address}
       personId={personId}
       onDelete={() => mutation.mutate()}
@@ -41,17 +41,17 @@ const TelecomTableRowWrapper = ({
   );
 };
 
-interface TelecomTableRowProps {
+interface TelecommunicationAddressTableRowProps {
   telecommunication_address: TelecommunicationAddress;
   personId: string;
   onDelete: (name: TelecommunicationAddress) => void;
 }
 
-const TelecomTableRow = ({
+const TelecommunicationAddressTableRow = ({
   telecommunication_address,
   personId,
   onDelete,
-}: TelecomTableRowProps) => {
+}: TelecommunicationAddressTableRowProps) => {
   const { hovered, ref } = useHover();
   const [opened, { open, close }] = useDisclosure(false);
   const handleEdit = () => {
@@ -77,7 +77,7 @@ const TelecomTableRow = ({
         </Table.Td>
       </Table.Tr>
       <Modal opened={opened} onClose={close} title={t("edit")} size="lg">
-        <EditTelecomForm
+        <EditTelecommunicationAddressForm
           personId={personId}
           telecommunication_address={telecommunication_address}
           onCancel={close}
@@ -88,15 +88,15 @@ const TelecomTableRow = ({
   );
 };
 
-interface TelecomTableProps {
+interface TelecommunicationAddressTableProps {
   personId: string;
   telecom_addresses: TelecommunicationAddress[];
 }
 
-export const TelecomTable = ({
+export const TelecommunicationAddressTable = ({
   personId,
   telecom_addresses,
-}: TelecomTableProps) => {
+}: TelecommunicationAddressTableProps) => {
   return (
     <Box>
       <Table highlightOnHover>
@@ -109,7 +109,7 @@ export const TelecomTable = ({
             </Table.Tr>
           ) : (
             telecom_addresses.map((name) => (
-              <TelecomTableRowWrapper
+              <TelecommunicationAddressTableRowWrapper
                 key={name.id}
                 personId={personId}
                 telecommunication_address={name}

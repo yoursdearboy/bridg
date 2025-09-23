@@ -4,7 +4,7 @@ import type {
   TelecommunicationAddressData,
 } from "api-ts";
 import api from "@/api";
-import { TelecomForm } from "./TelecommunicationAddressForm";
+import { TelecommunicationAddressForm } from "./TelecommunicationAddressForm";
 
 interface Props {
   personId: string;
@@ -13,7 +13,7 @@ interface Props {
   onSuccess: () => void;
 }
 
-export const EditTelecomForm = ({
+export const EditTelecommunicationAddressForm = ({
   personId,
   telecommunication_address,
   onCancel,
@@ -30,7 +30,6 @@ export const EditTelecomForm = ({
       api.persons.updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch(
         {
           personId,
-
           addressId: telecommunication_address.id,
           telecommunicationAddressData: data,
         }
@@ -39,7 +38,7 @@ export const EditTelecomForm = ({
   });
 
   return (
-    <TelecomForm
+    <TelecommunicationAddressForm
       mutation={mutation}
       initialValues={telecommunication_address}
       onCancel={onCancel}

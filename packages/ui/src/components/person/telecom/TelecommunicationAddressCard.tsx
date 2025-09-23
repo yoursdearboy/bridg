@@ -12,10 +12,14 @@ import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import type { TelecommunicationAddress } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
-import { NewTelecomForm } from "./NewTelecommunicationAddressForm";
-import { TelecomTable } from "./TelecommunicationAddressTable";
+import { NewTelecommunicationAddressForm } from "./NewTelecommunicationAddressForm";
+import { TelecommunicationAddressTable } from "./TelecommunicationAddressTable";
 
-export const TelecomCardWrapper = ({ personId }: { personId: string }) => {
+export const TelecommunicationAddressCardWrapper = ({
+  personId,
+}: {
+  personId: string;
+}) => {
   const query = useQuery({
     queryKey: ["person", personId, "telecommunication_addresses"],
     queryFn: () =>
@@ -24,15 +28,18 @@ export const TelecomCardWrapper = ({ personId }: { personId: string }) => {
       }),
   });
 
-  return <TelecomCard personId={personId} query={query} />;
+  return <TelecommunicationAddressCard personId={personId} query={query} />;
 };
 
-interface TelecomCardProps {
+interface TelecommunicationAddressCardProps {
   personId: string;
   query: UseQueryResult<TelecommunicationAddress[], Error>;
 }
 
-export const TelecomCard = ({ personId, query }: TelecomCardProps) => {
+export const TelecommunicationAddressCard = ({
+  personId,
+  query,
+}: TelecommunicationAddressCardProps) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { t } = useTranslation();
   const {
@@ -64,7 +71,7 @@ export const TelecomCard = ({ personId, query }: TelecomCardProps) => {
               </Text>
             )}
             {!isPending && !isError && (
-              <TelecomTable
+              <TelecommunicationAddressTable
                 personId={personId}
                 telecom_addresses={telecommunication_addresses}
               />
@@ -73,7 +80,7 @@ export const TelecomCard = ({ personId, query }: TelecomCardProps) => {
         </Card.Section>
       </Card>
       <Modal opened={opened} onClose={close} title={t("add")} size="lg">
-        <NewTelecomForm
+        <NewTelecommunicationAddressForm
           personId={personId}
           onCancel={close}
           onSuccess={() => close()}
