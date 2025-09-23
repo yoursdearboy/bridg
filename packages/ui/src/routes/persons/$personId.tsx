@@ -19,7 +19,7 @@ import { AddressCardWrapper } from "@/components/person/address/AddressCard";
 import { EditNameForm } from "@/components/person/name/EditNameForm";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 import { PersonCard } from "@/components/person/PersonCard";
-import { TelecommunicationAddressesTable } from "@/components/person/TelecommunicationAddressesTable";
+import { TelecommunicationAddressCardWrapper } from "@/components/person/telecom/TelecommunicationAddressCard";
 import i18next from "@/i18n";
 
 export const Route = createFileRoute("/persons/$personId")({
@@ -83,7 +83,7 @@ function PersonShowPage() {
             <Space h="md" />
             <AddressCardWrapper personId={personId} />
             <Space h="md" />
-            <TelecommunicationAddressesTable personId={personId} />
+            <TelecommunicationAddressCardWrapper personId={personId} />
           </Grid.Col>
         </Grid>
       </Stack>

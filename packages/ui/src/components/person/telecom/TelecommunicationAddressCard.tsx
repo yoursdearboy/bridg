@@ -1,0 +1,91 @@
+import {
+  Box,
+  Button,
+  Card,
+  Group,
+  LoadingOverlay,
+  Modal,
+  Text,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { useQuery, type UseQueryResult } from "@tanstack/react-query";
+import type { TelecommunicationAddress } from "api-ts";
+import { useTranslation } from "react-i18next";
+import api from "@/api";
+import { NewTelecommunicationAddressForm } from "./NewTelecommunicationAddressForm";
+import { TelecommunicationAddressTable } from "./TelecommunicationAddressTable";
+
+export const TelecommunicationAddressCardWrapper = ({
+  personId,
+}: {
+  personId: string;
+}) => {
+  const query = useQuery({
+    queryKey: ["person", personId, "telecommunication_addresses"],
+    queryFn: () =>
+      api.persons.indexPersonsPersonIdTelecommunicationAddressesGet({
+        personId,
+      }),
+  });
+
+  return <TelecommunicationAddressCard personId={personId} query={query} />;
+};
+
+interface TelecommunicationAddressCardProps {
+  personId: string;
+  query: UseQueryResult<TelecommunicationAddress[], Error>;
+}
+
+export const TelecommunicationAddressCard = ({
+  personId,
+  query,
+}: TelecommunicationAddressCardProps) => {
+  const [opened, { open, close }] = useDisclosure(false);
+  const { t } = useTranslation();
+  const {
+    isPending,
+    isError,
+    error,
+    data: telecommunication_addresses,
+  } = query;
+
+  return (
+    <>
+      <Card withBorder shadow="sm" radius="md">
+        <Card.Section withBorder inheritPadding py="xs">
+          <Group justify="space-between">
+            <Text fw={500} px="xs">
+              {t("TelecommunicationAddressesTable.title")}
+            </Text>
+            <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
+              {t("add")}
+            </Button>
+          </Group>
+        </Card.Section>
+        <Card.Section inheritPadding py="xs">
+          <Box pos="relative" style={{ minHeight: 80 }}>
+            <LoadingOverlay visible={isPending} />
+            {isError && (
+              <Text color="red">
+                {t("errorMessage", { error: error.message })}
+              </Text>
+            )}
+            {!isPending && !isError && (
+              <TelecommunicationAddressTable
+                personId={personId}
+                telecom_addresses={telecommunication_addresses}
+              />
+            )}
+          </Box>
+        </Card.Section>
+      </Card>
+      <Modal opened={opened} onClose={close} title={t("add")} size="lg">
+        <NewTelecommunicationAddressForm
+          personId={personId}
+          onCancel={close}
+          onSuccess={() => close()}
+        />
+      </Modal>
+    </>
+  );
+};
