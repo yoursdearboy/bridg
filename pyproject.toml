@@ -39,6 +39,5 @@ extend-select = ["I", "TID"]
 members = [
     "packages/api",
     "packages/bridg",
-    "packages/common",
-    "packages/uml"
+    "packages/common"
 ]

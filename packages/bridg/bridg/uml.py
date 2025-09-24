@@ -1,3 +1,7 @@
+"""
+FIXME: Split bridg into persistence and this
+"""
+
 import logging
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
