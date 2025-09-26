@@ -19,6 +19,7 @@ import { useTranslation } from "react-i18next";
 
 interface TelecommunicationAddressFormProps {
   initialValues: TelecommunicationAddressData;
+  initialScheme: URLScheme | null;
   onCancel: () => void;
   mutation: UseMutationResult<
     TelecommunicationAddress,
@@ -30,6 +31,7 @@ interface TelecommunicationAddressFormProps {
 
 export const TelecommunicationAddressForm = ({
   initialValues,
+  initialScheme,
   onCancel,
   mutation,
 }: TelecommunicationAddressFormProps) => {
@@ -39,14 +41,9 @@ export const TelecommunicationAddressForm = ({
     initialValues: {
       ...initialValues,
       use: TelecommunicationAddressUse.H,
+      scheme: initialScheme,
     },
     validate: {
-      scheme: (value) =>
-        value
-          ? null
-          : t("fieldRequiredMessage", {
-              fieldName: t("TelecommunicationAddress.scheme"),
-            }),
       address: (value) =>
         value
           ? null
@@ -75,7 +72,14 @@ export const TelecommunicationAddressForm = ({
           <Select
             label={t("TelecommunicationAddress.scheme")}
             data={schemes}
-            {...form.getInputProps("scheme")}
+            value={initialScheme}
+            onChange={(value) => {
+              if (value) {
+                form.setFieldValue("scheme", value as URLScheme);
+              }
+            }}
+            disabled={true}
+            readOnly={true}
           />
 
           <TextInput
@@ -84,7 +88,6 @@ export const TelecommunicationAddressForm = ({
             {...form.getInputProps("address")}
           />
         </Group>
-
         <Group justify="flex-end" mt="md">
           <Button
             variant="outline"

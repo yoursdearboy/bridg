@@ -2,7 +2,7 @@ import { Box, Group, Modal, Table } from "@mantine/core";
 import { useDisclosure, useHover } from "@mantine/hooks";
 import { IconPencil, IconX } from "@tabler/icons-react";
 import { useMutation } from "@tanstack/react-query";
-import type { TelecommunicationAddress } from "api-ts";
+import type { TelecommunicationAddress, URLScheme } from "api-ts";
 import { t } from "i18next";
 import api from "@/api";
 import { EditTelecommunicationAddressForm } from "./EditTelecommunicationAddressForm";
@@ -82,6 +82,7 @@ const TelecommunicationAddressTableRow = ({
           telecommunication_address={telecommunication_address}
           onCancel={close}
           onSuccess={() => close()}
+          initialScheme={telecommunication_address.scheme as URLScheme}
         />
       </Modal>
     </>
