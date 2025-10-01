@@ -9,6 +9,9 @@ dependencies = [
 ]
 
 [dependency-groups]
+dev = [
+    "networkx[default]>=3.5",
+]
 test = [
     "pytest<9.0.0,>=8.3.3"
 ]
