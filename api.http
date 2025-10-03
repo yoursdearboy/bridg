@@ -30,7 +30,7 @@ GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects
 
 ### Show a subject in the space
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/f0519f08-d22f-40ff-8800-cee82c4e925b
+GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/1944C046-95B3-4CB4-82E2-C789950E29FC
 
 ### Create a subject in the space
 
@@ -63,7 +63,7 @@ Content-Type: application/json
 {
   "performing_biologic_entity": {
     "name": {
-      "use": "official", "family": "Test", "given": "Dude"
+      "use": "official", "family": "Tr", "given": "Do"
     }
   }
 }
@@ -72,11 +72,11 @@ Content-Type: application/json
 
 #### List subject observations
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/556c2b59-edc8-41db-961a-f08ea0d3b4ac/observation
+GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/1944C046-95B3-4CB4-82E2-C789950E29FC/observation
 
 #### Show subject observation results
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/556c2b59-edc8-41db-961a-f08ea0d3b4ac/observation/e5450cdd-0f79-472f-928b-153b9e96d30f/result
+GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/1944C046-95B3-4CB4-82E2-C789950E29FC/observation/8ac78da9-3c23-4770-94e9-ebaee8432b4b/result
 
 ## Persons
 

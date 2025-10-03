@@ -154,7 +154,8 @@ study:
               quantity_range: 3
 
 study_subject:
-  - performing_biologic_entity:
+  - id: 1944C046-95B3-4CB4-82E2-C789950E29FC
+    performing_biologic_entity:
       type: person
       name: [{ use: official, family: Trump, given: Donald, suffix: Jr }]
       administrative_gender_code: M
@@ -173,7 +174,8 @@ study_subject:
         context_for_study_site: *dgoi-ss
         status_code: complete
         status_date: 2024-11-06T09:00:00
-      - type: observation
+      - id: 8ac78da9-3c23-4770-94e9-ebaee8432b4b
+        type: observation
         containing_epoch: *aml-mrd-2018-screening
         executing_study_protocol_version: *aml-mrd-2018
         instantiated_defined_activity: *cbc
