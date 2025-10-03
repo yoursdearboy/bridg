@@ -4,180 +4,102 @@ FIXME: Split bridg into persistence and this
 
 import logging
 import xml.etree.ElementTree as ET
+from dataclasses import dataclass
 
 import networkx as nx
 
-MODEL_FILE = "tmp/BRIDG 5.3.1 Comprehensive Domain Information Model.xmi"
+
+@dataclass
+class Class:
+    id_: str
+    name: str
+    attr: dict
 
 
-# def handle_class(event, elem):
-#     if "xmi.id" not in elem.attrib or "name" not in elem.attrib:
-#         logging.info("No id or name for %s", elem)
-#         return
-#     id_ = elem.attrib["xmi.id"]
-#     name = elem.attrib["name"]
-#     C[name] = id_
-#     C[id_] = name
-#     G.add_node(id_, **elem.attrib)
-#     A.add_node(id_, **elem.attrib)
+def handle_class(_, elem):
+    if "xmi.id" not in elem.attrib or "name" not in elem.attrib:
+        logging.info("No id or name for %s", elem)
+        return
+    id_ = elem.attrib["xmi.id"]
+    name = elem.attrib["name"]
+    return Class(id_, name, elem.attrib)
+
+
+@dataclass
+class Generalization:
+    subtype: str
+    supertype: str
+    attr: dict
 
 
 def handle_generalization(_, elem):
-    u = elem.attrib["subtype"]
-    v = elem.attrib["supertype"]
-    return (v, u, elem.attrib)
+    return Generalization(
+        elem.attrib["subtype"],
+        elem.attrib["supertype"],
+        elem.attrib,
+    )
 
 
-def load_generalizations(f):
-    for event, elem in ET.iterparse(f, ("end",)):
-        if elem.tag.endswith("Generalization"):
-            yield handle_generalization(event, elem)
-
-
-def load_generalizations_graph(f):
-    G = nx.DiGraph()
-    for u, v, attr in load_generalizations(f):
-        G.add_edge(u, v, **attr)
-    return G
+@dataclass
+class Association:
+    source: str
+    target: str
+    attr: dict
 
 
 def handle_association(_, elem):
     source = elem.find(".//*[@tag='ea_end'][@value='source']/....")
     target = elem.find(".//*[@tag='ea_end'][@value='target']/....")
-    u = source.attrib["type"]
-    v = target.attrib["type"]
-    attr = {**elem.attrib, "source": source.attrib, "target": target.attrib}
-    return (u, v, attr)
+    return Association(
+        source.attrib["type"],
+        target.attrib["type"],
+        {**elem.attrib, "source": source.attrib, "target": target.attrib},
+    )
 
 
-def load_associations(f):
+def handle_file(f):
     for event, elem in ET.iterparse(f, ("end",)):
+        if elem.tag.endswith("Class"):
+            yield handle_class(event, elem)
+        if elem.tag.endswith("Generalization"):
+            yield handle_generalization(event, elem)
         if elem.tag.endswith("Association"):
             yield handle_association(event, elem)
 
 
+def load_class_labels(f):
+    labels = {}
+    for obj in handle_file(f):
+        match obj:
+            case Class(id_, name, _):
+                labels[id_] = name
+                labels[name] = id_
+    return labels
+
+
+def load_generalizations_graph(f):
+    G = nx.DiGraph()
+    for obj in handle_file(f):
+        match obj:
+            case Class(id_, _, _):
+                G.add_node(id_)
+            case Generalization(subtype, supertype, attr):
+                G.add_edge(supertype, subtype, **attr)
+    return G
+
+
 def load_associations_graph(f, G=None):
     A = nx.MultiGraph()
-    for u, v, attr in load_associations(f):
-        if G is None:
-            A.add_edge(u, v, **attr)
-        else:
-            for u in nx.dfs_tree(G, u):
-                for v in nx.dfs_tree(G, v):
-                    A.add_edge(u, v, **attr)
+    for obj in handle_file(f):
+        match obj:
+            case Class(id_, _, _):
+                A.add_node(id_)
+            case Association(s, t, attr):
+                if G is None:
+                    A.add_edge(s, t, **attr)
+                else:
+                    for s in nx.dfs_tree(G, s):
+                        for t in nx.dfs_tree(G, t):
+                            A.add_edge(s, t, **attr)
+                A.add_edge(s, t, **attr)
     return A
-
-
-with open(MODEL_FILE, "rb") as f:
-    f.seek(0)
-    G = load_generalizations_graph(f)
-    f.seek(0)
-    A = load_associations_graph(f, G)
-#     f.seek(0)
-
-
-# SKIP_CLASSES = [
-#     r"Adverse*",
-#     r"Defined*",
-#     r"Molecular*",
-#     r"Performed(Exclusion|Inclusion)Criterion",
-#     r"PerformedHistopathology*",
-#     r"PerformedLesion*",
-#     r"PerformedMaterial*",
-#     r"PerformedSpecimen*",
-#     r"Planned*",
-#     r"Scheduled*",
-#     "AnatomicPathologySectionVersion",
-#     "Biologic",
-#     "Biomarker",
-#     "CausalAssessment",
-#     "CellCulture",
-#     "CellLine",
-#     "Container",
-#     "Cosmetic",
-#     "Device",
-#     "DocumentVersion",
-#     "Drug",
-#     "Epoch",
-#     "EvaluatedActivityRelationship",
-#     "EvaluatedResultRelationship",
-#     "ExperimentalActivityItem",
-#     "ExperimentalUnit",
-#     "FoodProduct",
-#     "InterventionalStudyProtocolVersion",
-#     "MicrobiologicalCulture",
-#     "PerformedDiagnosis",
-#     "PerformedEligibilityCriterion",
-#     "PerformedExperimentalUnitAllocation",
-#     "PerformedGenetic*",
-#     "PerformedImagingStudy",
-#     "PerformedNotification",
-#     "PerformedProductInvestigation",
-#     "PerformedProductInvestigationResult",
-#     "PerformedProductProblemDiscovery",
-#     "PerformedProgressCount",
-#     "PerformedProtocolDeviation",
-#     "PerformedReportGeneration",
-#     "PerformedStudySubjectMilestone",
-#     "PerformedSubjectMilestone",
-#     "Performer",
-#     "Place",
-#     "PointOfContact",
-#     "Product",
-#     "Radiopharmaceutical",
-#     "ReportVersion",
-#     "ResultClassification",
-#     "SafetyReportVersion",
-#     "Software",
-#     "StandardOfCareDataCollection",
-#     "StorageEquipment",
-#     "StudyCountry",
-#     "StudySite",
-#     "TargetAnatomicSite",
-# ]
-
-# # This is action
-# SKIP_CLASSES += [
-#     "ObservationResultActionTakenRelationship",
-# ]
-
-# # This is action cause
-# SKIP_EDGES = [
-#     (None, "triggeringPerformedObservationResult"),
-# ]
-
-
-# def _skip_class(id_):
-#     name = C[id_]
-#     for p in SKIP_CLASSES:
-#         if re.match(p, name):
-#             return True
-
-
-# def _skip_edge(edge):
-#     u, v, k = edge
-#     uname = C[u]
-#     vname = C[v]
-#     target = A[u][v][k]["target"]
-#     source = A[u][v][k]["source"]
-#     tname = target["name"]
-#     sname = source["name"]
-#     if (uname, tname) in SKIP_EDGES:
-#         return True
-#     if (None, tname) in SKIP_EDGES:
-#         return True
-#     if (sname, vname) in SKIP_EDGES:
-#         return True
-#     if (sname, None) in SKIP_EDGES:
-#         return True
-#     if (uname, tname, sname, vname) in SKIP_EDGES:
-#         return True
-#     return False
-
-
-# def _filter_path(path):
-#     if any(_skip_class(edge[1]) for edge in path):
-#         return False
-#     if any(_skip_edge(edge) for edge in path):
-#         return False
-#     return True
