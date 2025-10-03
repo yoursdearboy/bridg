@@ -1,7 +1,8 @@
 import { type UseMutationResult } from "@tanstack/react-query";
-import type {
-  TelecommunicationAddress,
-  TelecommunicationAddressData,
+import {
+  URLScheme,
+  type TelecommunicationAddress,
+  type TelecommunicationAddressData,
 } from "api-ts";
 import { describe, expect, it, vi } from "vitest";
 import { renderComponent } from "@/test-utils";
@@ -14,6 +15,7 @@ describe("TelecommunicationAddressForm", () => {
       scheme: "ftp",
       use: "H",
     };
+    const scheme: URLScheme = URLScheme.Ftp;
     const result = {
       id: "1",
       label: "ftp Pizza",
@@ -48,6 +50,7 @@ describe("TelecommunicationAddressForm", () => {
         mutation={mockMutation}
         initialValues={initialValues}
         onCancel={() => {}}
+        initialScheme={scheme as URLScheme}
       />
     );
 
