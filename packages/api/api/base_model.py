@@ -1,5 +1,6 @@
 import typing
-from typing import Generic, TypeVar
+from typing import Generic, Optional, TypeVar
+from uuid import UUID
 
 from pydantic import BaseModel as PydanticBaseModel
 from pydantic import ConfigDict, PrivateAttr
@@ -43,3 +44,9 @@ class BaseModel(PydanticBaseModel, Generic[T]):
                 continue
             setattr(obj, k, v)
         return obj
+
+
+class Code(BaseModel):
+    id: UUID
+    code: Optional[str]
+    display_name: Optional[str]

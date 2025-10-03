@@ -8,9 +8,19 @@ GET {{base}}/spaces
 
 ## Sites
 
-### Index sites in the space
+### Index space sites
 
 GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/sites
+
+## Activities
+
+### List space activities
+
+GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/activity
+
+### Show space activitiy result
+
+GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/activity/f83ddbf8-dd6d-4737-98e3-a5795995bbd8/result
 
 ## Subjects
 
@@ -20,7 +30,7 @@ GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects
 
 ### Show a subject in the space
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/f0519f08-d22f-40ff-8800-cee82c4e925b
+GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/1944C046-95B3-4CB4-82E2-C789950E29FC
 
 ### Create a subject in the space
 
@@ -53,10 +63,20 @@ Content-Type: application/json
 {
   "performing_biologic_entity": {
     "name": {
-      "use": "official", "family": "Test", "given": "Dude"
+      "use": "official", "family": "Tr", "given": "Do"
     }
   }
 }
+
+### Subject observations
+
+#### List subject observations
+
+GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/1944C046-95B3-4CB4-82E2-C789950E29FC/observation
+
+#### Show subject observation results
+
+GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/1944C046-95B3-4CB4-82E2-C789950E29FC/observation/8ac78da9-3c23-4770-94e9-ebaee8432b4b/result
 
 ## Persons
 
