@@ -69,11 +69,6 @@ defined_observation:
     category_code: lab
     context_for_study_site: *dgoi-ss
 
-defined_procedure:
-  - &surgery
-    name_code: { code: surg, display_name: Surgery }
-    category_code: surg
-
 performed_activity.status_code:
   - code: incomplete
     display_name: Incomplete
