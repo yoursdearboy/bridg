@@ -29,6 +29,7 @@ exports[`TelecommunicationAddressForm > matches snapshot 1`] = `
           </label>
           <div
             class="m_6c018570 mantine-Input-wrapper mantine-Select-wrapper"
+            data-disabled="true"
             data-pointer="true"
             data-variant="default"
             data-with-right-section="true"
@@ -39,8 +40,9 @@ exports[`TelecommunicationAddressForm > matches snapshot 1`] = `
               aria-invalid="false"
               autocomplete="off"
               class="m_8fb7ebe7 mantine-Input-input mantine-Select-input"
-              data-path="scheme"
+              data-disabled="true"
               data-variant="default"
+              disabled=""
               id="mantine-2pbrvloro"
               readonly=""
               value="ftp"
@@ -67,6 +69,7 @@ exports[`TelecommunicationAddressForm > matches snapshot 1`] = `
           </div>
         </div>
         <input
+          disabled=""
           type="hidden"
           value="ftp"
         />

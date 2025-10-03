@@ -4,12 +4,14 @@ import {
   Card,
   Group,
   LoadingOverlay,
+  Menu,
   Modal,
   Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
-import type { TelecommunicationAddress } from "api-ts";
+import { URLScheme, type TelecommunicationAddress } from "api-ts";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { NewTelecommunicationAddressForm } from "./NewTelecommunicationAddressForm";
@@ -40,7 +42,10 @@ export const TelecommunicationAddressCard = ({
   personId,
   query,
 }: TelecommunicationAddressCardProps) => {
-  const [opened, { open, close }] = useDisclosure(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [formOpened, { open: openForm, close: closeForm }] =
+    useDisclosure(false);
+  const [selectedScheme, setSelectedScheme] = useState<URLScheme | null>(null);
   const { t } = useTranslation();
   const {
     isPending,
@@ -49,6 +54,21 @@ export const TelecommunicationAddressCard = ({
     data: telecommunication_addresses,
   } = query;
 
+  const handleSchemeSelect = (scheme: URLScheme) => {
+    setSelectedScheme(scheme);
+    setIsOpen(false);
+    openForm();
+  };
+
+  const getSchemeLabel = (scheme: URLScheme): string => {
+    const labels = {
+      [URLScheme.Tel]: "URLScheme.tel",
+      [URLScheme.Mailto]: "URLScheme.mailto",
+      [URLScheme.Http]: "URLScheme.http",
+      [URLScheme.Ftp]: "URLScheme.ftp",
+    };
+    return labels[scheme];
+  };
   return (
     <>
       <Card withBorder shadow="sm" radius="md">
@@ -57,9 +77,29 @@ export const TelecommunicationAddressCard = ({
             <Text fw={500} px="xs">
               {t("TelecommunicationAddressesTable.title")}
             </Text>
-            <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
-              {t("add")}
-            </Button>
+            <Menu
+              opened={isOpen}
+              onOpen={() => setIsOpen(true)}
+              onClose={() => setIsOpen(false)}
+              position="bottom-start"
+            >
+              <Menu.Target>
+                <Button variant="outline" size="compact-sm">
+                  {t("add")}
+                </Button>
+              </Menu.Target>
+
+              <Menu.Dropdown>
+                {Object.values(URLScheme).map((scheme) => (
+                  <Menu.Item
+                    key={scheme}
+                    onClick={() => handleSchemeSelect(scheme)}
+                  >
+                    {getSchemeLabel(scheme)}
+                  </Menu.Item>
+                ))}
+              </Menu.Dropdown>
+            </Menu>
           </Group>
         </Card.Section>
         <Card.Section inheritPadding py="xs">
@@ -79,11 +119,17 @@ export const TelecommunicationAddressCard = ({
           </Box>
         </Card.Section>
       </Card>
-      <Modal opened={opened} onClose={close} title={t("add")} size="lg">
+      <Modal
+        opened={formOpened}
+        onClose={closeForm}
+        title={`${t("add")} ${selectedScheme}`}
+        size="lg"
+      >
         <NewTelecommunicationAddressForm
           personId={personId}
-          onCancel={close}
-          onSuccess={() => close()}
+          onCancel={closeForm}
+          onSuccess={closeForm}
+          initialScheme={selectedScheme as URLScheme}
         />
       </Modal>
     </>
