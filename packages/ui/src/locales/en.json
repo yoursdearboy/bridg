@@ -117,8 +117,8 @@
       "address": "Address"
     },
     "TelecommunicationAddressScheme": {
-      "ftp": "FTP",
-      "http": "HTTP",
+      "ftp": "Website (FTP)",
+      "http": "Website (HTTP)",
       "mailto": "Email",
       "tel": "Telephone"
     },
