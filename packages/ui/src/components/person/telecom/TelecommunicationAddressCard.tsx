@@ -101,7 +101,7 @@ export const TelecommunicationAddressCard = ({
       <Modal
         opened={selectedScheme != null}
         onClose={closeForm}
-        title={`${t("add")} ${selectedScheme}`}
+        title={`${t("add")} ${t(`TelecommunicationAddressScheme.${selectedScheme}`)}`}
         size="lg"
       >
         <NewTelecommunicationAddressForm

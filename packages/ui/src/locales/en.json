@@ -117,10 +117,10 @@
       "address": "Address"
     },
     "TelecommunicationAddressScheme": {
-      "ftp": "ftp",
-      "http": "http",
-      "mailto": "mailto",
-      "tel": "tel"
+      "ftp": "FTP",
+      "http": "HTTP",
+      "mailto": "Email",
+      "tel": "Telephone"
     },
     "PostalAddress": {
       "use": "Use",

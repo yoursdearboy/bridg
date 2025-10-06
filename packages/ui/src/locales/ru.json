@@ -97,10 +97,10 @@
       "deleteConfirm": "Вы действительно хотите удалить адрес?"
     },
     "TelecommunicationAddressScheme": {
-      "ftp": "ftp",
-      "http": "http",
-      "mailto": "mailto",
-      "tel": "tel"
+      "ftp": "Веб сайт (FTP)",
+      "http": "Веб сайт (HTTP)",
+      "mailto": "Email",
+      "tel": "Телефон"
     },
     "Person": {
       "id": "ID",
