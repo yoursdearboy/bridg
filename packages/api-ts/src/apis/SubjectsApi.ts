@@ -19,6 +19,8 @@ import type {
   HTTPValidationError,
   LookupStudySubject,
   NewStudySubject,
+  PerformedObservation,
+  PerformedObservationResult,
   StudySubject,
 } from '../models/index';
 import {
@@ -30,6 +32,10 @@ import {
     LookupStudySubjectToJSON,
     NewStudySubjectFromJSON,
     NewStudySubjectToJSON,
+    PerformedObservationFromJSON,
+    PerformedObservationToJSON,
+    PerformedObservationResultFromJSON,
+    PerformedObservationResultToJSON,
     StudySubjectFromJSON,
     StudySubjectToJSON,
 } from '../models/index';
@@ -41,6 +47,17 @@ export interface CreateSpacesSpaceIdSubjectsPostRequest {
 
 export interface IndexSpacesSpaceIdSubjectsGetRequest {
     spaceId: string;
+}
+
+export interface IndexSpacesSpaceIdSubjectsSubjectIdObservationGetRequest {
+    spaceId: string;
+    subjectId: string;
+}
+
+export interface IndexSpacesSpaceIdSubjectsSubjectIdObservationObsIdResultGetRequest {
+    spaceId: string;
+    subjectId: string;
+    obsId: string;
 }
 
 export interface LookupSpacesSpaceIdSubjectsLookupPostRequest {
@@ -131,6 +148,93 @@ export class SubjectsApi extends runtime.BaseAPI {
      */
     async indexSpacesSpaceIdSubjectsGet(requestParameters: IndexSpacesSpaceIdSubjectsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StudySubject>> {
         const response = await this.indexSpacesSpaceIdSubjectsGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Index
+     */
+    async indexSpacesSpaceIdSubjectsSubjectIdObservationGetRaw(requestParameters: IndexSpacesSpaceIdSubjectsSubjectIdObservationGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PerformedObservation>>> {
+        if (requestParameters['spaceId'] == null) {
+            throw new runtime.RequiredError(
+                'spaceId',
+                'Required parameter "spaceId" was null or undefined when calling indexSpacesSpaceIdSubjectsSubjectIdObservationGet().'
+            );
+        }
+
+        if (requestParameters['subjectId'] == null) {
+            throw new runtime.RequiredError(
+                'subjectId',
+                'Required parameter "subjectId" was null or undefined when calling indexSpacesSpaceIdSubjectsSubjectIdObservationGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/spaces/{space_id}/subjects/{subject_id}/observation`.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId']))).replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PerformedObservationFromJSON));
+    }
+
+    /**
+     * Index
+     */
+    async indexSpacesSpaceIdSubjectsSubjectIdObservationGet(requestParameters: IndexSpacesSpaceIdSubjectsSubjectIdObservationGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PerformedObservation>> {
+        const response = await this.indexSpacesSpaceIdSubjectsSubjectIdObservationGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Index
+     */
+    async indexSpacesSpaceIdSubjectsSubjectIdObservationObsIdResultGetRaw(requestParameters: IndexSpacesSpaceIdSubjectsSubjectIdObservationObsIdResultGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PerformedObservationResult>>> {
+        if (requestParameters['spaceId'] == null) {
+            throw new runtime.RequiredError(
+                'spaceId',
+                'Required parameter "spaceId" was null or undefined when calling indexSpacesSpaceIdSubjectsSubjectIdObservationObsIdResultGet().'
+            );
+        }
+
+        if (requestParameters['subjectId'] == null) {
+            throw new runtime.RequiredError(
+                'subjectId',
+                'Required parameter "subjectId" was null or undefined when calling indexSpacesSpaceIdSubjectsSubjectIdObservationObsIdResultGet().'
+            );
+        }
+
+        if (requestParameters['obsId'] == null) {
+            throw new runtime.RequiredError(
+                'obsId',
+                'Required parameter "obsId" was null or undefined when calling indexSpacesSpaceIdSubjectsSubjectIdObservationObsIdResultGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/spaces/{space_id}/subjects/{subject_id}/observation/{obs_id}/result`.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId']))).replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId']))).replace(`{${"obs_id"}}`, encodeURIComponent(String(requestParameters['obsId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PerformedObservationResultFromJSON));
+    }
+
+    /**
+     * Index
+     */
+    async indexSpacesSpaceIdSubjectsSubjectIdObservationObsIdResultGet(requestParameters: IndexSpacesSpaceIdSubjectsSubjectIdObservationObsIdResultGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PerformedObservationResult>> {
+        const response = await this.indexSpacesSpaceIdSubjectsSubjectIdObservationObsIdResultGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
