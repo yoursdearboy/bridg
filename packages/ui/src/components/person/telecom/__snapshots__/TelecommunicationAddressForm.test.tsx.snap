@@ -43,7 +43,7 @@ exports[`TelecommunicationAddressForm > matches snapshot 1`] = `
               data-variant="default"
               id="mantine-2pbrvloro"
               readonly=""
-              value="TelecommunicationAddress.ftp"
+              value="ftp"
             />
             <div
               class="m_82577fc2 mantine-Input-section mantine-Select-section"
