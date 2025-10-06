@@ -41,8 +41,6 @@ export const TelecommunicationAddressCard = ({
   personId,
   query,
 }: TelecommunicationAddressCardProps) => {
-  // const [formOpened, { open: openForm, close: closeForm }] =
-  //   useDisclosure(false);
   const [selectedScheme, setSelectedScheme] = useState<URLScheme | null>(null);
   const { t } = useTranslation();
   const {
@@ -51,13 +49,6 @@ export const TelecommunicationAddressCard = ({
     error,
     data: telecommunication_addresses,
   } = query;
-
-  const handleSchemeSelect = (scheme: URLScheme) => {
-    setSelectedScheme(scheme);
-  };
-  const getSchemeLabel = (scheme: URLScheme): string => {
-    return `TelecommunicationAddress.${scheme}`;
-  };
 
   const closeForm = () => {
     setSelectedScheme(null);
@@ -81,9 +72,9 @@ export const TelecommunicationAddressCard = ({
                 {Object.values(URLScheme).map((scheme) => (
                   <Menu.Item
                     key={scheme}
-                    onClick={() => handleSchemeSelect(scheme)}
+                    onClick={() => setSelectedScheme(scheme)}
                   >
-                    {getSchemeLabel(scheme)}
+                    {t(`TelecommunicationAddressScheme.${scheme}`)}
                   </Menu.Item>
                 ))}
               </Menu.Dropdown>

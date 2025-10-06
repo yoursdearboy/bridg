@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import type { TelecommunicationAddressData } from "api-ts";
+import { type TelecommunicationAddressData } from "api-ts";
 import api from "@/api";
 import { TelecommunicationAddressForm } from "./TelecommunicationAddressForm";
 
@@ -23,6 +23,7 @@ export const NewTelecommunicationAddressForm = ({
         personId,
         telecommunicationAddressData: data,
       }),
+
     onSuccess,
   });
 

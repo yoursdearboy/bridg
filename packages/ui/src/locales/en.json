@@ -116,6 +116,12 @@
       "scheme": "Scheme",
       "address": "Address"
     },
+    "TelecommunicationAddressScheme": {
+      "ftp": "ftp",
+      "http": "http",
+      "mailto": "mailto",
+      "tel": "tel"
+    },
     "PostalAddress": {
       "use": "Use",
       "street": "Street",

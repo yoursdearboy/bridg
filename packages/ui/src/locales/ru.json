@@ -96,6 +96,12 @@
       "title": "Адреса",
       "deleteConfirm": "Вы действительно хотите удалить адрес?"
     },
+    "TelecommunicationAddressScheme": {
+      "ftp": "ftp",
+      "http": "http",
+      "mailto": "mailto",
+      "tel": "tel"
+    },
     "Person": {
       "id": "ID",
       "administrativeGenderCode": "Пол",

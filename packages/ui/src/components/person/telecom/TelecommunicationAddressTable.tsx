@@ -79,8 +79,8 @@ const TelecommunicationAddressTableRow = ({
       <Modal opened={opened} onClose={close} title={t("edit")} size="lg">
         <EditTelecommunicationAddressForm
           personId={personId}
-          onCancel={close}
           telecommunication_address={telecommunication_address}
+          onCancel={close}
           onSuccess={() => close()}
         />
       </Modal>

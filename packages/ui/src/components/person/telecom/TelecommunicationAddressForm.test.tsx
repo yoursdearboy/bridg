@@ -1,7 +1,7 @@
 import { type UseMutationResult } from "@tanstack/react-query";
-import {
-  type TelecommunicationAddress,
-  type TelecommunicationAddressData,
+import type {
+  TelecommunicationAddress,
+  TelecommunicationAddressData,
 } from "api-ts";
 import { describe, expect, it, vi } from "vitest";
 import { renderComponent } from "@/test-utils";

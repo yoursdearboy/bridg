@@ -49,7 +49,7 @@ export const TelecommunicationAddressForm = ({
     },
   });
   const schemes = Object.values(URLScheme).map((value) => ({
-    label: `TelecommunicationAddress.${value}`,
+    label: t(`TelecommunicationAddressScheme.${value}`),
     value,
   }));
   const handleSubmit = (data: TelecommunicationAddressData) => {
