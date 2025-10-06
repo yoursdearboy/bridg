@@ -12,10 +12,12 @@ describe("TelecommunicationAddressesCard", () => {
       {
         id: "1",
         label: "ftp Pizza",
+        scheme: "ftp",
       },
       {
         id: "2",
         label: "http Pineapple",
+        scheme: "http",
       },
     ]);
 

@@ -34,19 +34,12 @@ export const TelecommunicationAddressForm = ({
   mutation,
 }: TelecommunicationAddressFormProps) => {
   const { t } = useTranslation();
-
   const form = useForm<TelecommunicationAddressData>({
     initialValues: {
       ...initialValues,
       use: TelecommunicationAddressUse.H,
     },
     validate: {
-      scheme: (value) =>
-        value
-          ? null
-          : t("fieldRequiredMessage", {
-              fieldName: t("TelecommunicationAddress.scheme"),
-            }),
       address: (value) =>
         value
           ? null
@@ -55,13 +48,14 @@ export const TelecommunicationAddressForm = ({
             }),
     },
   });
-
-  const handleSubmit = (data: TelecommunicationAddressData) =>
-    mutation.mutate(data);
   const schemes = Object.values(URLScheme).map((value) => ({
-    label: value,
+    label: t(`TelecommunicationAddressScheme.${value}`),
     value,
   }));
+  const handleSubmit = (data: TelecommunicationAddressData) => {
+    mutation.mutate(data);
+  };
+
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="md" pos="relative">
@@ -76,6 +70,7 @@ export const TelecommunicationAddressForm = ({
             label={t("TelecommunicationAddress.scheme")}
             data={schemes}
             {...form.getInputProps("scheme")}
+            readOnly={true}
           />
 
           <TextInput
@@ -84,7 +79,6 @@ export const TelecommunicationAddressForm = ({
             {...form.getInputProps("address")}
           />
         </Group>
-
         <Group justify="flex-end" mt="md">
           <Button
             variant="outline"

@@ -5,6 +5,7 @@ import { TelecommunicationAddressForm } from "./TelecommunicationAddressForm";
 
 interface Props {
   personId: string;
+  initialValues: TelecommunicationAddressData;
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -12,6 +13,7 @@ interface Props {
 export const NewTelecommunicationAddressForm = ({
   personId,
   onCancel,
+  initialValues,
   onSuccess,
 }: Props) => {
   const mutation = useMutation({
@@ -28,7 +30,7 @@ export const NewTelecommunicationAddressForm = ({
   return (
     <TelecommunicationAddressForm
       onCancel={onCancel}
-      initialValues={{}}
+      initialValues={initialValues}
       mutation={mutation}
     />
   );
