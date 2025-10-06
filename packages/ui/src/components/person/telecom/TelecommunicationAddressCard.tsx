@@ -8,7 +8,6 @@ import {
   Modal,
   Text,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import { URLScheme, type TelecommunicationAddress } from "api-ts";
 import { useState } from "react";
@@ -42,9 +41,8 @@ export const TelecommunicationAddressCard = ({
   personId,
   query,
 }: TelecommunicationAddressCardProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [formOpened, { open: openForm, close: closeForm }] =
-    useDisclosure(false);
+  // const [formOpened, { open: openForm, close: closeForm }] =
+  //   useDisclosure(false);
   const [selectedScheme, setSelectedScheme] = useState<URLScheme | null>(null);
   const { t } = useTranslation();
   const {
@@ -56,18 +54,13 @@ export const TelecommunicationAddressCard = ({
 
   const handleSchemeSelect = (scheme: URLScheme) => {
     setSelectedScheme(scheme);
-    setIsOpen(false);
-    openForm();
+  };
+  const getSchemeLabel = (scheme: URLScheme): string => {
+    return `TelecommunicationAddress.${scheme}`;
   };
 
-  const getSchemeLabel = (scheme: URLScheme): string => {
-    const labels = {
-      [URLScheme.Tel]: "URLScheme.tel",
-      [URLScheme.Mailto]: "URLScheme.mailto",
-      [URLScheme.Http]: "URLScheme.http",
-      [URLScheme.Ftp]: "URLScheme.ftp",
-    };
-    return labels[scheme];
+  const closeForm = () => {
+    setSelectedScheme(null);
   };
   return (
     <>
@@ -77,12 +70,7 @@ export const TelecommunicationAddressCard = ({
             <Text fw={500} px="xs">
               {t("TelecommunicationAddressesTable.title")}
             </Text>
-            <Menu
-              opened={isOpen}
-              onOpen={() => setIsOpen(true)}
-              onClose={() => setIsOpen(false)}
-              position="bottom-start"
-            >
+            <Menu>
               <Menu.Target>
                 <Button variant="outline" size="compact-sm">
                   {t("add")}
@@ -120,7 +108,7 @@ export const TelecommunicationAddressCard = ({
         </Card.Section>
       </Card>
       <Modal
-        opened={formOpened}
+        opened={selectedScheme != null}
         onClose={closeForm}
         title={`${t("add")} ${selectedScheme}`}
         size="lg"
@@ -129,7 +117,7 @@ export const TelecommunicationAddressCard = ({
           personId={personId}
           onCancel={closeForm}
           onSuccess={closeForm}
-          initialScheme={selectedScheme as URLScheme}
+          initialValues={{ scheme: selectedScheme }}
         />
       </Modal>
     </>

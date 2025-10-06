@@ -19,7 +19,6 @@ import { useTranslation } from "react-i18next";
 
 interface TelecommunicationAddressFormProps {
   initialValues: TelecommunicationAddressData;
-  initialScheme: URLScheme | null;
   onCancel: () => void;
   mutation: UseMutationResult<
     TelecommunicationAddress,
@@ -31,17 +30,14 @@ interface TelecommunicationAddressFormProps {
 
 export const TelecommunicationAddressForm = ({
   initialValues,
-  initialScheme,
   onCancel,
   mutation,
 }: TelecommunicationAddressFormProps) => {
   const { t } = useTranslation();
-
   const form = useForm<TelecommunicationAddressData>({
     initialValues: {
       ...initialValues,
       use: TelecommunicationAddressUse.H,
-      scheme: initialScheme,
     },
     validate: {
       address: (value) =>
@@ -52,13 +48,14 @@ export const TelecommunicationAddressForm = ({
             }),
     },
   });
-
-  const handleSubmit = (data: TelecommunicationAddressData) =>
-    mutation.mutate(data);
   const schemes = Object.values(URLScheme).map((value) => ({
-    label: value,
+    label: `TelecommunicationAddress.${value}`,
     value,
   }));
+  const handleSubmit = (data: TelecommunicationAddressData) => {
+    mutation.mutate(data);
+  };
+
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="md" pos="relative">
@@ -72,13 +69,7 @@ export const TelecommunicationAddressForm = ({
           <Select
             label={t("TelecommunicationAddress.scheme")}
             data={schemes}
-            value={initialScheme}
-            onChange={(value) => {
-              if (value) {
-                form.setFieldValue("scheme", value as URLScheme);
-              }
-            }}
-            disabled={true}
+            {...form.getInputProps("scheme")}
             readOnly={true}
           />
 

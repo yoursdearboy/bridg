@@ -1,20 +1,20 @@
 import { useMutation } from "@tanstack/react-query";
-import { URLScheme, type TelecommunicationAddressData } from "api-ts";
+import type { TelecommunicationAddressData } from "api-ts";
 import api from "@/api";
 import { TelecommunicationAddressForm } from "./TelecommunicationAddressForm";
 
 interface Props {
   personId: string;
+  initialValues: TelecommunicationAddressData;
   onCancel: () => void;
   onSuccess: () => void;
-  initialScheme: URLScheme;
 }
 
 export const NewTelecommunicationAddressForm = ({
   personId,
   onCancel,
+  initialValues,
   onSuccess,
-  initialScheme,
 }: Props) => {
   const mutation = useMutation({
     mutationKey: ["person", personId, "telecommunication_addresses"],
@@ -29,9 +29,8 @@ export const NewTelecommunicationAddressForm = ({
   return (
     <TelecommunicationAddressForm
       onCancel={onCancel}
-      initialValues={{}}
+      initialValues={initialValues}
       mutation={mutation}
-      initialScheme={initialScheme}
     />
   );
 };
