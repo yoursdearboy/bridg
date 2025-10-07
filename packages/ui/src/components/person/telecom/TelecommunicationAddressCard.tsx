@@ -8,6 +8,7 @@ import {
   Modal,
   Text,
 } from "@mantine/core";
+import { IconPhone, IconMail, IconWorldWww } from "@tabler/icons-react";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import { URLScheme, type TelecommunicationAddress } from "api-ts";
 import { useState } from "react";
@@ -53,6 +54,40 @@ export const TelecommunicationAddressCard = ({
   const closeForm = () => {
     setSelectedScheme(null);
   };
+  const schemeIcons = {
+    tel: (
+      <IconPhone
+        style={{ marginRight: "6px", marginBottom: "-3px" }}
+        size={16}
+        strokeWidth={2}
+        color={"white"}
+      />
+    ),
+    mailto: (
+      <IconMail
+        size={16}
+        style={{ marginRight: "6px", marginBottom: "-3px" }}
+        strokeWidth={2}
+        color={"white"}
+      />
+    ),
+    ftp: (
+      <IconWorldWww
+        size={16}
+        style={{ marginRight: "6px", marginBottom: "-3px" }}
+        strokeWidth={2}
+        color={"white"}
+      />
+    ),
+    http: (
+      <IconWorldWww
+        size={16}
+        style={{ marginRight: "6px", marginBottom: "-3px" }}
+        strokeWidth={2}
+        color={"white"}
+      />
+    ),
+  };
   return (
     <>
       <Card withBorder shadow="sm" radius="md">
@@ -74,7 +109,10 @@ export const TelecommunicationAddressCard = ({
                     key={scheme}
                     onClick={() => setSelectedScheme(scheme)}
                   >
-                    {t(`TelecommunicationAddressScheme.${scheme}`)}
+                    <div>
+                      {schemeIcons[scheme]}
+                      {t(`TelecommunicationAddressScheme.${scheme}`)}
+                    </div>
                   </Menu.Item>
                 ))}
               </Menu.Dropdown>

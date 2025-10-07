@@ -1,6 +1,12 @@
 import { Box, Group, Modal, Table } from "@mantine/core";
 import { useDisclosure, useHover } from "@mantine/hooks";
-import { IconPencil, IconX } from "@tabler/icons-react";
+import {
+  IconPencil,
+  IconX,
+  IconPhone,
+  IconMail,
+  IconWorldWww,
+} from "@tabler/icons-react";
 import { useMutation } from "@tanstack/react-query";
 import type { TelecommunicationAddress } from "api-ts";
 import { t } from "i18next";
@@ -62,10 +68,19 @@ const TelecommunicationAddressTableRow = ({
       onDelete(telecommunication_address);
     }
   };
+  const schemeIcons = {
+    tel: <IconPhone size={16} strokeWidth={2} color={"white"} />,
+    mailto: <IconMail size={16} strokeWidth={2} color={"white"} />,
+    ftp: <IconWorldWww size={16} strokeWidth={2} color={"white"} />,
+    http: <IconWorldWww size={16} strokeWidth={2} color={"white"} />,
+  };
   return (
     <>
       <Table.Tr ref={ref}>
-        <Table.Td>{telecommunication_address.scheme}</Table.Td>
+        <Table.Td width={30}>
+          {telecommunication_address.scheme != null &&
+            schemeIcons[telecommunication_address.scheme]}
+        </Table.Td>
         <Table.Td>{telecommunication_address.address}</Table.Td>
         <Table.Td width={60}>
           {hovered && (
