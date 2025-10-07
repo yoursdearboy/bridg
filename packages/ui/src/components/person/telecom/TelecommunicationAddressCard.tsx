@@ -55,38 +55,10 @@ export const TelecommunicationAddressCard = ({
     setSelectedScheme(null);
   };
   const schemeIcons = {
-    tel: (
-      <IconPhone
-        style={{ marginRight: "6px", marginBottom: "-3px" }}
-        size={16}
-        strokeWidth={2}
-        color={"white"}
-      />
-    ),
-    mailto: (
-      <IconMail
-        size={16}
-        style={{ marginRight: "6px", marginBottom: "-3px" }}
-        strokeWidth={2}
-        color={"white"}
-      />
-    ),
-    ftp: (
-      <IconWorldWww
-        size={16}
-        style={{ marginRight: "6px", marginBottom: "-3px" }}
-        strokeWidth={2}
-        color={"white"}
-      />
-    ),
-    http: (
-      <IconWorldWww
-        size={16}
-        style={{ marginRight: "6px", marginBottom: "-3px" }}
-        strokeWidth={2}
-        color={"white"}
-      />
-    ),
+    tel: IconPhone,
+    mailto: IconMail,
+    ftp: IconWorldWww,
+    http: IconWorldWww,
   };
   return (
     <>
@@ -104,17 +76,21 @@ export const TelecommunicationAddressCard = ({
               </Menu.Target>
 
               <Menu.Dropdown>
-                {Object.values(URLScheme).map((scheme) => (
-                  <Menu.Item
-                    key={scheme}
-                    onClick={() => setSelectedScheme(scheme)}
-                  >
-                    <div>
-                      {schemeIcons[scheme]}
+                {Object.values(URLScheme).map((scheme) => {
+                  const Icon = schemeIcons[scheme];
+
+                  return (
+                    <Menu.Item
+                      key={scheme}
+                      onClick={() => setSelectedScheme(scheme)}
+                      leftSection={
+                        <Icon size={16} strokeWidth={2} color={"white"} />
+                      }
+                    >
                       {t(`TelecommunicationAddressScheme.${scheme}`)}
-                    </div>
-                  </Menu.Item>
-                ))}
+                    </Menu.Item>
+                  );
+                })}
               </Menu.Dropdown>
             </Menu>
           </Group>

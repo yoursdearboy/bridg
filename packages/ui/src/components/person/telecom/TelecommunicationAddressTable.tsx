@@ -69,17 +69,20 @@ const TelecommunicationAddressTableRow = ({
     }
   };
   const schemeIcons = {
-    tel: <IconPhone size={16} strokeWidth={2} color={"white"} />,
-    mailto: <IconMail size={16} strokeWidth={2} color={"white"} />,
-    ftp: <IconWorldWww size={16} strokeWidth={2} color={"white"} />,
-    http: <IconWorldWww size={16} strokeWidth={2} color={"white"} />,
+    tel: IconPhone,
+    mailto: IconMail,
+    ftp: IconWorldWww,
+    http: IconWorldWww,
   };
   return (
     <>
       <Table.Tr ref={ref}>
         <Table.Td width={30}>
           {telecommunication_address.scheme != null &&
-            schemeIcons[telecommunication_address.scheme]}
+            (() => {
+              const Icon = schemeIcons[telecommunication_address.scheme];
+              return <Icon size={16} strokeWidth={2} color={"white"} />;
+            })()}
         </Table.Td>
         <Table.Td>{telecommunication_address.address}</Table.Td>
         <Table.Td width={60}>
