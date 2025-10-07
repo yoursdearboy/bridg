@@ -73,14 +73,11 @@ export const TelecommunicationAddressCard = ({
               <Menu.Dropdown>
                 {Object.values(URLScheme).map((scheme) => {
                   const Icon = icons[scheme];
-
                   return (
                     <Menu.Item
                       key={scheme}
                       onClick={() => setSelectedScheme(scheme)}
-                      leftSection={
-                        <Icon size={16} strokeWidth={2} color={"white"} />
-                      }
+                      leftSection={<Icon size={16} strokeWidth={2} />}
                     >
                       {t(`TelecommunicationAddressScheme.${scheme}`)}
                     </Menu.Item>

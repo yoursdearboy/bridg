@@ -64,15 +64,14 @@ const TelecommunicationAddressTableRow = ({
     }
   };
 
-  const Icon =
-    telecommunication_address.scheme != null
-      ? icons[telecommunication_address.scheme]
-      : () => <div></div>;
+  const Icon = telecommunication_address.scheme
+    ? icons[telecommunication_address.scheme]
+    : () => <div></div>;
   return (
     <>
       <Table.Tr ref={ref}>
-        <Table.Td width={30}>
-          <Icon size={16} strokeWidth={2} color={"white"} />
+        <Table.Td width={30} valign="middle">
+          <Icon size={16} strokeWidth={2} display="block" />
         </Table.Td>
         <Table.Td>{telecommunication_address.address}</Table.Td>
         <Table.Td width={60}>
