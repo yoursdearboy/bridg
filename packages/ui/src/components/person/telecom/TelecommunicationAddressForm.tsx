@@ -65,20 +65,19 @@ export const TelecommunicationAddressForm = ({
             {mutation.error.message}
           </Alert>
         )}
-        <Group grow>
+        <Stack>
+          <TextInput
+            label={t("TelecommunicationAddress.address")}
+            withAsterisk
+            {...form.getInputProps("address")}
+          />
           <Select
             label={t("TelecommunicationAddress.scheme")}
             data={schemes}
             {...form.getInputProps("scheme")}
             readOnly={true}
           />
-
-          <TextInput
-            label={t("TelecommunicationAddress.address")}
-            withAsterisk
-            {...form.getInputProps("address")}
-          />
-        </Group>
+        </Stack>
         <Group justify="flex-end" mt="md">
           <Button
             variant="outline"
