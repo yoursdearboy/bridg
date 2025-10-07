@@ -1,6 +1,6 @@
 import { IconMail, IconPhone, IconWorldWww } from "@tabler/icons-react";
 
-export const schemeIcons = {
+export default {
   tel: IconPhone,
   mailto: IconMail,
   ftp: IconWorldWww,

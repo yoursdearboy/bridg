@@ -13,8 +13,8 @@ import { URLScheme, type TelecommunicationAddress } from "api-ts";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+import icons from "./icons";
 import { NewTelecommunicationAddressForm } from "./NewTelecommunicationAddressForm";
-import { schemeIcons } from "./schemeIcons";
 import { TelecommunicationAddressTable } from "./TelecommunicationAddressTable";
 
 export const TelecommunicationAddressCardWrapper = ({
@@ -72,7 +72,7 @@ export const TelecommunicationAddressCard = ({
 
               <Menu.Dropdown>
                 {Object.values(URLScheme).map((scheme) => {
-                  const Icon = schemeIcons[scheme];
+                  const Icon = icons[scheme];
 
                   return (
                     <Menu.Item

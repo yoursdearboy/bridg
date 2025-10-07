@@ -6,7 +6,7 @@ import type { TelecommunicationAddress } from "api-ts";
 import { t } from "i18next";
 import api from "@/api";
 import { EditTelecommunicationAddressForm } from "./EditTelecommunicationAddressForm";
-import { schemeIcons } from "./schemeIcons";
+import icons from "./icons";
 
 interface TelecommunicationAddressTableRowWrapperProps {
   personId: string;
@@ -66,7 +66,7 @@ const TelecommunicationAddressTableRow = ({
 
   const Icon =
     telecommunication_address.scheme != null
-      ? schemeIcons[telecommunication_address.scheme]
+      ? icons[telecommunication_address.scheme]
       : () => <div></div>;
   return (
     <>
