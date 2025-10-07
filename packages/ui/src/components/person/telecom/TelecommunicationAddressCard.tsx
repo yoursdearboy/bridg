@@ -13,6 +13,7 @@ import { URLScheme, type TelecommunicationAddress } from "api-ts";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+import icons from "./icons";
 import { NewTelecommunicationAddressForm } from "./NewTelecommunicationAddressForm";
 import { TelecommunicationAddressTable } from "./TelecommunicationAddressTable";
 
@@ -53,6 +54,7 @@ export const TelecommunicationAddressCard = ({
   const closeForm = () => {
     setSelectedScheme(null);
   };
+
   return (
     <>
       <Card withBorder shadow="sm" radius="md">
@@ -69,14 +71,18 @@ export const TelecommunicationAddressCard = ({
               </Menu.Target>
 
               <Menu.Dropdown>
-                {Object.values(URLScheme).map((scheme) => (
-                  <Menu.Item
-                    key={scheme}
-                    onClick={() => setSelectedScheme(scheme)}
-                  >
-                    {t(`TelecommunicationAddressScheme.${scheme}`)}
-                  </Menu.Item>
-                ))}
+                {Object.values(URLScheme).map((scheme) => {
+                  const Icon = icons[scheme];
+                  return (
+                    <Menu.Item
+                      key={scheme}
+                      onClick={() => setSelectedScheme(scheme)}
+                      leftSection={<Icon size={16} strokeWidth={2} />}
+                    >
+                      {t(`TelecommunicationAddressScheme.${scheme}`)}
+                    </Menu.Item>
+                  );
+                })}
               </Menu.Dropdown>
             </Menu>
           </Group>
