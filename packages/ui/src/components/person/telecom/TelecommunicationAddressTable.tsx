@@ -1,17 +1,12 @@
 import { Box, Group, Modal, Table } from "@mantine/core";
 import { useDisclosure, useHover } from "@mantine/hooks";
-import {
-  IconPencil,
-  IconX,
-  IconPhone,
-  IconMail,
-  IconWorldWww,
-} from "@tabler/icons-react";
+import { IconPencil, IconX } from "@tabler/icons-react";
 import { useMutation } from "@tanstack/react-query";
 import type { TelecommunicationAddress } from "api-ts";
 import { t } from "i18next";
 import api from "@/api";
 import { EditTelecommunicationAddressForm } from "./EditTelecommunicationAddressForm";
+import { schemeIcons } from "./schemeIcons";
 
 interface TelecommunicationAddressTableRowWrapperProps {
   personId: string;
@@ -68,21 +63,16 @@ const TelecommunicationAddressTableRow = ({
       onDelete(telecommunication_address);
     }
   };
-  const schemeIcons = {
-    tel: IconPhone,
-    mailto: IconMail,
-    ftp: IconWorldWww,
-    http: IconWorldWww,
-  };
+
+  const Icon =
+    telecommunication_address.scheme != null
+      ? schemeIcons[telecommunication_address.scheme]
+      : () => <div></div>;
   return (
     <>
       <Table.Tr ref={ref}>
         <Table.Td width={30}>
-          {telecommunication_address.scheme != null &&
-            (() => {
-              const Icon = schemeIcons[telecommunication_address.scheme];
-              return <Icon size={16} strokeWidth={2} color={"white"} />;
-            })()}
+          <Icon size={16} strokeWidth={2} color={"white"} />
         </Table.Td>
         <Table.Td>{telecommunication_address.address}</Table.Td>
         <Table.Td width={60}>

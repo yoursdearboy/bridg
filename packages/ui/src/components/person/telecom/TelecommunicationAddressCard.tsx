@@ -8,13 +8,13 @@ import {
   Modal,
   Text,
 } from "@mantine/core";
-import { IconPhone, IconMail, IconWorldWww } from "@tabler/icons-react";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import { URLScheme, type TelecommunicationAddress } from "api-ts";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { NewTelecommunicationAddressForm } from "./NewTelecommunicationAddressForm";
+import { schemeIcons } from "./schemeIcons";
 import { TelecommunicationAddressTable } from "./TelecommunicationAddressTable";
 
 export const TelecommunicationAddressCardWrapper = ({
@@ -54,12 +54,7 @@ export const TelecommunicationAddressCard = ({
   const closeForm = () => {
     setSelectedScheme(null);
   };
-  const schemeIcons = {
-    tel: IconPhone,
-    mailto: IconMail,
-    ftp: IconWorldWww,
-    http: IconWorldWww,
-  };
+
   return (
     <>
       <Card withBorder shadow="sm" radius="md">
