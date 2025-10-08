@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`NamesTable > matches snapshot 1`] = `
+exports[`PersonCard > matches snapshot 1`] = `
 <DocumentFragment>
   <style
     data-mantine-styles="classes"
@@ -70,18 +70,17 @@ exports[`NamesTable > matches snapshot 1`] = `
             class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
           >
             string
-          </p>
-          <div
-            class="m_347db0ec mantine-Badge-root"
-            style="--badge-bg: var(--mantine-color-red-filled); --badge-color: var(--mantine-color-white); --badge-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; margin-left: var(--mantine-spacing-sm);"
-          >
             <span
-              class="m_5add502a mantine-Badge-label"
+              class="m_347db0ec mantine-Badge-root"
+              style="--badge-bg: var(--mantine-color-red-filled); --badge-color: var(--mantine-color-white); --badge-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; margin-left: var(--mantine-spacing-sm);"
             >
-              Deceased
+              <span
+                class="m_5add502a mantine-Badge-label"
+              >
+                Deceased
+              </span>
             </span>
-          </div>
-          <p />
+          </p>
         </div>
         <div
           class="m_4081bf90 mantine-Group-root"

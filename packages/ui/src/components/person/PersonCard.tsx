@@ -43,7 +43,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
               value={person.primaryName?.label}
             >
               {person.deathIndicator && (
-                <Badge color="red" ml="sm">
+                <Badge component="span" color="red" ml="sm">
                   {t("PersonCard.deceased")}
                 </Badge>
               )}
