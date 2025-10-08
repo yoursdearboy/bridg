@@ -113,81 +113,81 @@ exports[`show page renders correctly 1`] = `
                   class="m_4081bf90 mantine-Group-root"
                   style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
                 >
-                  <p
-                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  <div
+                    class=""
                     style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
                   >
                     Primary name:
-                  </p>
-                  <p
-                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  </div>
+                  <div
+                    class=""
                   >
                     Donald Trump Jr
-                  </p>
+                  </div>
                 </div>
                 <div
                   class="m_4081bf90 mantine-Group-root"
                   style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
                 >
-                  <p
-                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  <div
+                    class=""
                     style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
                   >
                     Gender:
-                  </p>
-                  <p
-                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  </div>
+                  <div
+                    class=""
                   >
                     Male
-                  </p>
+                  </div>
                 </div>
                 <div
                   class="m_4081bf90 mantine-Group-root"
                   style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
                 >
-                  <p
-                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  <div
+                    class=""
                     style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
                   >
                     Birth date:
-                  </p>
-                  <p
-                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  </div>
+                  <div
+                    class=""
                   >
                     1&#x2F;1&#x2F;1991
-                  </p>
+                  </div>
                 </div>
                 <div
                   class="m_4081bf90 mantine-Group-root"
                   style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
                 >
-                  <p
-                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  <div
+                    class=""
                     style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
                   >
                     Age:
-                  </p>
-                  <p
-                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  </div>
+                  <div
+                    class=""
                   >
                     34 years
-                  </p>
+                  </div>
                 </div>
                 <div
                   class="m_4081bf90 mantine-Group-root"
                   style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
                 >
-                  <p
-                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  <div
+                    class=""
                     style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
                   >
                     Death date:
-                  </p>
-                  <p
-                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  </div>
+                  <div
+                    class=""
                   >
                     Not deceased
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>

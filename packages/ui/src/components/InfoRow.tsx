@@ -1,4 +1,4 @@
-import { Group, Text } from "@mantine/core";
+import { Box, Group } from "@mantine/core";
 
 interface InfoRowProps {
   label: string;
@@ -9,13 +9,13 @@ interface InfoRowProps {
 export const InfoRow = ({ label, value, children }: InfoRowProps) => {
   return (
     <Group align="flex-start">
-      <Text fw={600} w={150} c="dimmed">
+      <Box fw={600} w={150} c="dimmed">
         {label}:
-      </Text>
-      <Text>
+      </Box>
+      <Box>
         {value || "-"}
         {children}
-      </Text>
+      </Box>
     </Group>
   );
 };
