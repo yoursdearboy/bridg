@@ -60,17 +60,17 @@ exports[`PersonCard > matches snapshot 1`] = `
           class="m_4081bf90 mantine-Group-root"
           style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
         >
-          <p
-            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          <div
+            class=""
             style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
           >
             Primary name:
-          </p>
-          <p
-            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          </div>
+          <div
+            class=""
           >
             string
-            <span
+            <div
               class="m_347db0ec mantine-Badge-root"
               style="--badge-bg: var(--mantine-color-red-filled); --badge-color: var(--mantine-color-white); --badge-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; margin-left: var(--mantine-spacing-sm);"
             >
@@ -79,72 +79,72 @@ exports[`PersonCard > matches snapshot 1`] = `
               >
                 Deceased
               </span>
-            </span>
-          </p>
+            </div>
+          </div>
         </div>
         <div
           class="m_4081bf90 mantine-Group-root"
           style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
         >
-          <p
-            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          <div
+            class=""
             style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
           >
             Gender:
-          </p>
-          <p
-            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          </div>
+          <div
+            class=""
           >
             Male
-          </p>
+          </div>
         </div>
         <div
           class="m_4081bf90 mantine-Group-root"
           style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
         >
-          <p
-            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          <div
+            class=""
             style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
           >
             Birth date:
-          </p>
-          <p
-            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          </div>
+          <div
+            class=""
           >
             9&#x2F;3&#x2F;2025
-          </p>
+          </div>
         </div>
         <div
           class="m_4081bf90 mantine-Group-root"
           style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
         >
-          <p
-            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          <div
+            class=""
             style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
           >
             Age:
-          </p>
-          <p
-            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          </div>
+          <div
+            class=""
           >
             a few seconds
-          </p>
+          </div>
         </div>
         <div
           class="m_4081bf90 mantine-Group-root"
           style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
         >
-          <p
-            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          <div
+            class=""
             style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
           >
             Death date:
-          </p>
-          <p
-            class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          </div>
+          <div
+            class=""
           >
             9&#x2F;3&#x2F;2025
-          </p>
+          </div>
         </div>
       </div>
     </div>
