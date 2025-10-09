@@ -1,50 +1,100 @@
 import { Box, Button, Card, Group, Menu, Text } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
-import type { StudyActivity } from "api-ts";
-import { defaultTo, groupBy, map, pipe, toPairs } from "ramda";
+import type { Code, StudyActivity } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+
+interface Node {
+  key: string;
+  label: string;
+  children: Node[];
+}
+
+const codeToNode = (code: Code): Node => ({
+  key: code.code || "",
+  label: code.displayName || "Unnamed",
+  children: [],
+});
+
+const addActivityToNode = (root: Node, sa: StudyActivity) => {
+  const { nameCode, categoryCode, subcategoryCode } = sa.usedDefinedActivity;
+
+  let pointer = root;
+  let node: Node | undefined;
+
+  if (categoryCode) {
+    const categoryNode = codeToNode(categoryCode);
+    node = pointer.children.find((e) => e.key == categoryNode.key);
+    if (!node) {
+      node = categoryNode;
+      pointer.children.push(node);
+    }
+    pointer = node;
+  }
+
+  if (subcategoryCode) {
+    const subcategoryNode = codeToNode(subcategoryCode);
+    node = pointer.children.find((e) => e.key == subcategoryNode.key);
+    if (!node) {
+      node = subcategoryNode;
+      pointer.children.push(node);
+    }
+    pointer = subcategoryNode;
+  }
+
+  const activityNode = codeToNode(nameCode);
+  pointer.children.push(activityNode);
+};
+
+const activitiesToNode = (sas: StudyActivity[]) => {
+  const root: Node = {
+    key: "root",
+    label: "root",
+    children: [],
+  };
+
+  sas.forEach((a) => addActivityToNode(root, a));
+
+  return root;
+};
+
+const StudyActivitySubMenu = ({ node }: { node: Node }) =>
+  node.children.map((child) =>
+    child.children.length ? (
+      <Menu.Sub>
+        <Menu.Sub.Target>
+          <Menu.Sub.Item>{child.label}</Menu.Sub.Item>
+        </Menu.Sub.Target>
+        <Menu.Sub.Dropdown>
+          <StudyActivitySubMenu node={child} />
+        </Menu.Sub.Dropdown>
+      </Menu.Sub>
+    ) : (
+      <Menu.Item>{child.label}</Menu.Item>
+    )
+  );
+
+const MenuError = ({ error }: { error: Error }) => {
+  const { t } = useTranslation();
+  return (
+    <Menu.Item
+      onClick={() => alert(t("errorMessage", { error: error.message }))}
+    >
+      <Text c="red">{t("error")}</Text>
+    </Menu.Item>
+  );
+};
 
 interface StudyActivityMenuProps {
   spaceId: string;
 }
 
-// const groupBy = <T, K extends PropertyKey>(arr: T[], key: (i: T) => K) =>
-//   arr.reduce(
-//     (groups, item) => {
-//       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-//       (groups[key(item)] ||= []).push(item);
-//       return groups;
-//     },
-//     {} as Record<K, T[]>
-//   );
-
-const groupByCategory = pipe(
-  groupBy(
-    (sa: StudyActivity) =>
-      sa.usedDefinedActivity.categoryCode?.displayName || ""
-  ),
-  toPairs
-) as (list: readonly StudyActivity[]) => [string, StudyActivity[]][];
-
-const groupBySubcategory = pipe(
-  groupBy(
-    (sa: StudyActivity) =>
-      sa.usedDefinedActivity.subcategoryCode?.displayName || ""
-  ),
-  toPairs
-) as (list: readonly StudyActivity[]) => [string, StudyActivity[]][];
-
-const groupActivities = pipe(groupByCategory, map(groupBySubcategory));
-
 const StudyActivityMenu = ({ spaceId }: StudyActivityMenuProps) => {
   const { t } = useTranslation();
-  const { data, isError, error } = useQuery({
+  const { data, isSuccess, isError, error } = useQuery({
     queryKey: [spaceId, "activity"],
     queryFn: () => api.spaceActivity.indexSpacesSpaceIdActivityGet({ spaceId }),
   });
-  const tree = groupActivities(data || []);
-
   return (
     <Menu>
       <Menu.Target>
@@ -53,36 +103,8 @@ const StudyActivityMenu = ({ spaceId }: StudyActivityMenuProps) => {
         </Button>
       </Menu.Target>
       <Menu.Dropdown>
-        {isError && (
-          <Menu.Item
-            onClick={() => alert(t("errorMessage", { error: error.message }))}
-          >
-            <Text c="red">{t("error")}</Text>
-          </Menu.Item>
-        )}
-        {tree.map(([key1, level1]) => (
-          <Menu.Sub>
-            <Menu.Sub.Target>
-              <Menu.Sub.Item>{key1}</Menu.Sub.Item>
-            </Menu.Sub.Target>
-            <Menu.Sub.Dropdown>
-              {level1.map(([key2, level2]) => (
-                <Menu.Sub>
-                  <Menu.Sub.Target>
-                    <Menu.Sub.Item>{key2}</Menu.Sub.Item>
-                  </Menu.Sub.Target>
-                  <Menu.Sub.Dropdown>
-                    {level2.map((level3) => (
-                      <Menu.Item>
-                        {level3.usedDefinedActivity.nameCode.displayName}
-                      </Menu.Item>
-                    ))}
-                  </Menu.Sub.Dropdown>
-                </Menu.Sub>
-              ))}
-            </Menu.Sub.Dropdown>
-          </Menu.Sub>
-        ))}
+        {isError && <MenuError error={error} />}
+        {isSuccess && <StudyActivitySubMenu node={activitiesToNode(data)} />}
       </Menu.Dropdown>
     </Menu>
   );
