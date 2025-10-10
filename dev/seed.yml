@@ -156,6 +156,7 @@ study:
 study_subject:
   - id: 1944C046-95B3-4CB4-82E2-C789950E29FC
     performing_biologic_entity:
+      id: 99132ae7-25dd-43ba-808e-cdb3b29af285
       type: person
       name: [{ use: official, family: Trump, given: Donald, suffix: Jr }]
       administrative_gender_code: M

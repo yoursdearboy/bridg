@@ -1,4 +1,7 @@
 @base=http://127.0.0.1:8000
+@space_id=ce946229-9746-46cd-8dd3-b27a2fbfd48a
+@subject_id=1944C046-95B3-4CB4-82E2-C789950E29FC
+@person_id=99132ae7-25dd-43ba-808e-cdb3b29af285
 
 # Spaces
 
@@ -10,31 +13,31 @@ GET {{base}}/spaces
 
 ### Index space sites
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/sites
+GET {{base}}/spaces/{{space_id}}/sites
 
 ## Activities
 
 ### List space activities
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/activity
+GET {{base}}/spaces/{{space_id}}/activity
 
 ### Show space activitiy result
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/activity/f83ddbf8-dd6d-4737-98e3-a5795995bbd8/result
+GET {{base}}/spaces/{{space_id}}/activity/f83ddbf8-dd6d-4737-98e3-a5795995bbd8/result
 
 ## Subjects
 
 ### Index subjects in the space
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects
+GET {{base}}/spaces/{{space_id}}/subjects
 
 ### Show a subject in the space
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/1944C046-95B3-4CB4-82E2-C789950E29FC
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}
 
 ### Create a subject in the space
 
-POST {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects
+POST {{base}}/spaces/{{space_id}}/subjects
 Content-Type: application/json
 
 {
@@ -57,7 +60,7 @@ Content-Type: application/json
 
 ### Lookup a subject
 
-POST {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/lookup
+POST {{base}}/spaces/{{space_id}}/subjects/lookup
 Content-Type: application/json
 
 {
@@ -72,27 +75,27 @@ Content-Type: application/json
 
 #### List subject observations
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/1944C046-95B3-4CB4-82E2-C789950E29FC/observation
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/observation
 
 #### Show subject observation results
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/1944C046-95B3-4CB4-82E2-C789950E29FC/observation/8ac78da9-3c23-4770-94e9-ebaee8432b4b/result
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/observation/8ac78da9-3c23-4770-94e9-ebaee8432b4b/result
 
 ## Persons
 
 ### Show a person
 
-GET {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285
+GET {{base}}/persons/{{person_id}}
 
 ### Names
 
 #### Show a person names
 
-GET {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names
+GET {{base}}/persons/{{person_id}}/names
 
 #### Create a person name
 
-POST {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names
+POST {{base}}/persons/{{person_id}}/names
 Content-Type: application/json
 
 {
@@ -104,7 +107,7 @@ Content-Type: application/json
 
 #### Update a person name
 
-PATCH {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names/aea59ce0-7630-442d-ba45-8ef490e891c6
+PATCH {{base}}/persons/{{person_id}}/names/aea59ce0-7630-442d-ba45-8ef490e891c6
 Content-Type: application/json
 
 {
@@ -116,17 +119,17 @@ Content-Type: application/json
 
 #### Delete a person name
 
-DELETE {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names/b0f79211-0160-42c4-9f75-74b38ba156ca
+DELETE {{base}}/persons/{{person_id}}/names/b0f79211-0160-42c4-9f75-74b38ba156ca
 
 ### Postal addresses
 
 #### Show a person postal addresses
 
-GET {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/postal_addresses
+GET {{base}}/persons/{{person_id}}/postal_addresses
 
 #### Create a person postal address
 
-POST {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/postal_addresses
+POST {{base}}/persons/{{person_id}}/postal_addresses
 Content-Type: application/json
 
 {
@@ -136,22 +139,22 @@ Content-Type: application/json
   "country": "Lukomorje",
   "municipality": "Great tree",
   "state": "",
-  "zip": "111111",
+  "zip": "111111"
 }
 
 ### Telecommunication addresses
 
 #### Show a person telecommunication addresses
 
-GET {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/telecommunication_addresses
+GET {{base}}/persons/{{person_id}}/telecommunication_addresses
 
 #### Create a person telecommunication address
 
-POST {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/telecommunication_addresses
+POST {{base}}/persons/{{person_id}}/telecommunication_addresses
 Content-Type: application/json
 
 {
-  "use": "h",
+  "use": "H",
   "shema": "tel",
   "address": "8(800)5553535"
 }
