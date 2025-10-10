@@ -4,6 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type { StudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+import { ActivityCard } from "@/components/activity/ActivityCard";
 import ButtonLink from "@/components/ButtonLink";
 import { PersonCard } from "@/components/person/PersonCard";
 import i18next from "@/i18n";
@@ -27,6 +28,7 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
 function SubjectShowPage() {
   const { query } = Route.useRouteContext();
   const { data: subject } = useSuspenseQuery(query);
+  const { spaceId } = Route.useParams();
   const { t } = useTranslation();
 
   return (
@@ -37,19 +39,24 @@ function SubjectShowPage() {
       </Group>
 
       <Grid>
-        {subject.performingBiologicEntity && (
-          <Grid.Col span={{ base: 12, md: 6 }}>
-            <PersonCard person={subject.performingBiologicEntity} />
-            <ButtonLink
-              mt="md"
-              to={personRoute.to}
-              params={{ personId: subject.performingBiologicEntity.id }}
-              variant="light"
-            >
-              {t("SubjectShowPage.toPerson")}
-            </ButtonLink>
-          </Grid.Col>
-        )}
+        <Grid.Col span={{ base: 12, md: 6 }}>
+          {subject.performingBiologicEntity && (
+            <>
+              <PersonCard person={subject.performingBiologicEntity} />
+              <ButtonLink
+                mt="md"
+                to={personRoute.to}
+                params={{ personId: subject.performingBiologicEntity.id }}
+                variant="light"
+              >
+                {t("SubjectShowPage.toPerson")}
+              </ButtonLink>
+            </>
+          )}
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, md: 6 }}>
+          <ActivityCard spaceId={spaceId}></ActivityCard>
+        </Grid.Col>
       </Grid>
     </Stack>
   );

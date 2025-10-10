@@ -8,6 +8,7 @@
     "add": "Add",
     "select": "Select",
     "enter": "enter",
+    "error": "Error",
     "errorMessage": "An error has occured: {{error}}",
     "intlDate": "{{val}}",
     "intlDateTime": "{{val, datetime}}",
