@@ -37,6 +37,11 @@ export interface IndexSpacesSpaceIdActivityObsIdResultGetRequest {
     obsId: string;
 }
 
+export interface ShowSpacesSpaceIdActivityObsIdGetRequest {
+    spaceId: string;
+    obsId: string;
+}
+
 /**
  * 
  */
@@ -112,6 +117,46 @@ export class SpaceActivityApi extends runtime.BaseAPI {
      */
     async indexSpacesSpaceIdActivityObsIdResultGet(requestParameters: IndexSpacesSpaceIdActivityObsIdResultGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<DefinedObservationResult>> {
         const response = await this.indexSpacesSpaceIdActivityObsIdResultGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Show
+     */
+    async showSpacesSpaceIdActivityObsIdGetRaw(requestParameters: ShowSpacesSpaceIdActivityObsIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StudyActivity>> {
+        if (requestParameters['spaceId'] == null) {
+            throw new runtime.RequiredError(
+                'spaceId',
+                'Required parameter "spaceId" was null or undefined when calling showSpacesSpaceIdActivityObsIdGet().'
+            );
+        }
+
+        if (requestParameters['obsId'] == null) {
+            throw new runtime.RequiredError(
+                'obsId',
+                'Required parameter "obsId" was null or undefined when calling showSpacesSpaceIdActivityObsIdGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/spaces/{space_id}/activity/{obs_id}`.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId']))).replace(`{${"obs_id"}}`, encodeURIComponent(String(requestParameters['obsId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => StudyActivityFromJSON(jsonValue));
+    }
+
+    /**
+     * Show
+     */
+    async showSpacesSpaceIdActivityObsIdGet(requestParameters: ShowSpacesSpaceIdActivityObsIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StudyActivity> {
+        const response = await this.showSpacesSpaceIdActivityObsIdGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
