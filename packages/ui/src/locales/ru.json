@@ -133,6 +133,9 @@
       "type": "Тип",
       "assignedStudySiteProtocolVersionRelationship": "Область изучения"
     },
+    "ShowActivityRoute": {
+      "breadcrumbDefault": "Неизвестная процедура"
+    },
     "Status": {
       "candidate": "Кандидат",
       "eligible": "Пригодные",

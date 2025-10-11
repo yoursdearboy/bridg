@@ -28,7 +28,7 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
 function SubjectShowPage() {
   const { query } = Route.useRouteContext();
   const { data: subject } = useSuspenseQuery(query);
-  const { spaceId } = Route.useParams();
+  const { spaceId, subjectId } = Route.useParams();
   const { t } = useTranslation();
 
   return (
@@ -55,7 +55,7 @@ function SubjectShowPage() {
           )}
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 6 }}>
-          <ActivityCard spaceId={spaceId}></ActivityCard>
+          <ActivityCard spaceId={spaceId} subjectId={subjectId}></ActivityCard>
         </Grid.Col>
       </Grid>
     </Stack>

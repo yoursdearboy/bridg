@@ -2,10 +2,11 @@ import { Box, Card, Group, Text } from "@mantine/core";
 import { ActivityMenu } from "./ActivityMenu";
 
 interface ActivityCardProps {
-  spaceId: string;
+  spaceId: string,
+  subjectId: string
 }
 
-export const ActivityCard = ({ spaceId }: ActivityCardProps) => {
+export const ActivityCard = ({ spaceId, subjectId }: ActivityCardProps) => {
   return (
     <>
       <Card withBorder shadow="sm" radius="md">
@@ -14,7 +15,7 @@ export const ActivityCard = ({ spaceId }: ActivityCardProps) => {
             <Text fw={500} px="xs">
               Activity
             </Text>
-            <ActivityMenu spaceId={spaceId} />
+            <ActivityMenu spaceId={spaceId} subjectId={subjectId}/>
           </Group>
         </Card.Section>
         <Card.Section inheritPadding py="xs">

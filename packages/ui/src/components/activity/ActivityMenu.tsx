@@ -3,6 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import type { Code, StudyActivity } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+import { Route as newActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/activities/new";
+import ButtonLink from "../ButtonLink";
+import { Route as subjectRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId";
 
 interface Node {
   key: string;
@@ -56,7 +59,15 @@ const activitiesToNode = (sas: StudyActivity[]) => {
   return root;
 };
 
-const ActivityMenuNode = ({ node }: { node: Node }) =>
+const ActivityMenuNode = ({
+  node,
+  spaceId,
+  subjectId,
+}: {
+  node: Node;
+  spaceId: string;
+  subjectId: string;
+}) =>
   node.children.map((child) =>
     child.children.length ? (
       <Menu.Sub>
@@ -64,11 +75,24 @@ const ActivityMenuNode = ({ node }: { node: Node }) =>
           <Menu.Sub.Item>{child.label}</Menu.Sub.Item>
         </Menu.Sub.Target>
         <Menu.Sub.Dropdown>
-          <ActivityMenuNode node={child} />
+          <ActivityMenuNode
+            node={child}
+            subjectId={subjectId}
+            spaceId={spaceId}
+          />
         </Menu.Sub.Dropdown>
       </Menu.Sub>
     ) : (
-      <Menu.Item>{child.label}</Menu.Item>
+      <Menu.Item >
+        <ButtonLink
+          from={subjectRoute.to}
+          to={newActivityRoute.to}
+          params={{ spaceId, subjectId }}
+          search={{ obsId: 'aca8ce00-4f96-4331-93a7-42e87fa48ce1'}}
+        >
+        {child.label}
+        </ButtonLink>
+      </Menu.Item>
     )
   );
 
@@ -84,10 +108,11 @@ const ActivityMenuError = ({ error }: { error: Error }) => {
 };
 
 interface ActivityMenuProps {
-  spaceId: string;
+  spaceId: string,
+  subjectId: string
 }
 
-export const ActivityMenu = ({ spaceId }: ActivityMenuProps) => {
+export const ActivityMenu = ({ spaceId, subjectId }: ActivityMenuProps) => {
   const { t } = useTranslation();
   const { data, isSuccess, isError, error } = useQuery({
     queryKey: [spaceId, "activity"],
@@ -102,7 +127,7 @@ export const ActivityMenu = ({ spaceId }: ActivityMenuProps) => {
       </Menu.Target>
       <Menu.Dropdown>
         {isError && <ActivityMenuError error={error} />}
-        {isSuccess && <ActivityMenuNode node={activitiesToNode(data)} />}
+        {isSuccess && <ActivityMenuNode node={activitiesToNode(data)} spaceId={spaceId} subjectId={subjectId}/>}
       </Menu.Dropdown>
     </Menu>
   );
