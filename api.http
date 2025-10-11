@@ -21,6 +21,10 @@ GET {{base}}/spaces/{{space_id}}/sites
 
 GET {{base}}/spaces/{{space_id}}/activity
 
+### Show space activity
+
+GET {{base}}/spaces/{{space_id}}/activity/5928f486-28c3-42d6-bf7f-4a5fc80d7a76
+
 ### Show space activitiy result
 
 GET {{base}}/spaces/{{space_id}}/activity/f83ddbf8-dd6d-4737-98e3-a5795995bbd8/result
