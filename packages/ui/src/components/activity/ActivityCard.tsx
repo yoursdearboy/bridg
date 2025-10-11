@@ -26,7 +26,7 @@ export const ActivityCard = ({ spaceId, subjectId }: ActivityCardProps) => {
             <Text fw={500} px="xs">
               Activity
             </Text>
-            <ActivityMenu spaceId={spaceId} />
+            <ActivityMenu spaceId={spaceId} subjectId={subjectId}/>
           </Group>
         </Card.Section>
         <Card.Section inheritPadding py="xs">
