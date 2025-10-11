@@ -1,4 +1,3 @@
-from datetime import datetime
 from typing import Annotated, List, Optional
 from uuid import UUID
 
@@ -24,6 +23,12 @@ router = APIRouter(prefix="/result", tags=["defined_observation_result"])
 class DefinedObservationResultRepository(Repository[bridg.DefinedObservationResult]):
     _sa = bridg.DefinedObservationResult
 
+    def _query(self):
+        q = super()._query()
+        q = q.join(bridg.DefinedObservationResult.producing_defined_observation)
+        q = q.join(bridg.DefinedObservation.using_study_activity)
+        return q
+
 
 ObservationRepositoryDep = Annotated[
     DefinedObservationResultRepository, Depends(get_repository(DefinedObservationResultRepository))
@@ -32,7 +37,7 @@ ObservationRepositoryDep = Annotated[
 
 @router.get("")
 def index(space_id: UUID, obs_id: UUID, repo: ObservationRepositoryDep) -> List[DefinedObservationResult]:
-    objs = repo.all(bridg.DefinedObservationResult.producing_defined_observation_id == obs_id)
+    objs = repo.all(bridg.StudyActivity.id == obs_id)
     return [DefinedObservationResult.model_validate(obj) for obj in objs]
 
 
