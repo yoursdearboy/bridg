@@ -73,7 +73,7 @@ const ActivityMenuNode = ({
 }) =>
   node.children.map((child) => {
     return child.children.length ? (
-      <Menu.Sub>
+      <Menu.Sub key={child.key}>
         <Menu.Sub.Target>
           <Menu.Sub.Item>{child.label}</Menu.Sub.Item>
         </Menu.Sub.Target>
