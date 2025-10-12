@@ -1,9 +1,10 @@
-import { Stack } from "@mantine/core";
+import { Card, Group, Stack, Title } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import type { StudyActivity } from "api-ts";
 import api from "@/api";
 import i18next from "@/i18n";
+import {  ActivityFormWrapper } from "@/components/activity/ActivityForm";
 
 type SearchParams = {
   obsId: string;
@@ -42,9 +43,16 @@ function ShowActivityRoute() {
   console.log(activity);
   return (
     <Stack gap="md">
+      <Group justify="space-between">
+        <Title order={2}>{activity.usedDefinedActivity.nameCode.displayName}</Title>
+      </Group>
+
       <div>
         Hello "/spaces/{spaceId}/subjects/{subjectId}/activities/new"!
       </div>
+      <Card>
+        <ActivityFormWrapper activity={activity} spaceId={spaceId} subjectId={subjectId}/>
+      </Card>
     </Stack>
   );
 }
