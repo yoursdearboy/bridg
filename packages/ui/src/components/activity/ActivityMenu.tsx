@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import type { Code, StudyActivity } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+import MenuItemLink from "@/components/MenuItemLink";
 import { Route as newActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId_/activities/new";
-import MenuItemLink from "../MenuItemLink";
 
 interface Node {
   key: string;
