@@ -3,9 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import type { Code, StudyActivity } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
-import { Route as newActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/activities/new";
-import ButtonLink from "../ButtonLink";
 import { Route as subjectRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId";
+import { Route as newActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId_/activities/new";
+import ButtonLink from "../ButtonLink";
 
 interface Node {
   key: string;
@@ -83,14 +83,14 @@ const ActivityMenuNode = ({
         </Menu.Sub.Dropdown>
       </Menu.Sub>
     ) : (
-      <Menu.Item >
+      <Menu.Item>
         <ButtonLink
           from={subjectRoute.to}
           to={newActivityRoute.to}
           params={{ spaceId, subjectId }}
-          search={{ obsId: 'aca8ce00-4f96-4331-93a7-42e87fa48ce1'}}
+          search={{ obsId: "aca8ce00-4f96-4331-93a7-42e87fa48ce1" }}
         >
-        {child.label}
+          {child.label}
         </ButtonLink>
       </Menu.Item>
     )
@@ -108,8 +108,8 @@ const ActivityMenuError = ({ error }: { error: Error }) => {
 };
 
 interface ActivityMenuProps {
-  spaceId: string,
-  subjectId: string
+  spaceId: string;
+  subjectId: string;
 }
 
 export const ActivityMenu = ({ spaceId, subjectId }: ActivityMenuProps) => {
@@ -127,7 +127,13 @@ export const ActivityMenu = ({ spaceId, subjectId }: ActivityMenuProps) => {
       </Menu.Target>
       <Menu.Dropdown>
         {isError && <ActivityMenuError error={error} />}
-        {isSuccess && <ActivityMenuNode node={activitiesToNode(data)} spaceId={spaceId} subjectId={subjectId}/>}
+        {isSuccess && (
+          <ActivityMenuNode
+            node={activitiesToNode(data)}
+            spaceId={spaceId}
+            subjectId={subjectId}
+          />
+        )}
       </Menu.Dropdown>
     </Menu>
   );

@@ -1,16 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Stack } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
 import type { StudyActivity } from "api-ts";
 import api from "@/api";
 import i18next from "@/i18n";
-import { Stack } from "@mantine/core";
 
 type SearchParams = {
   obsId: string;
 };
 
 export const Route = createFileRoute(
-  "/spaces/$spaceId/subjects/$subjectId/activities/new"
+  "/spaces/$spaceId/subjects/$subjectId_/activities/new"
 )({
   component: ShowActivityRoute,
   validateSearch: (search: SearchParams) => {
@@ -20,7 +20,7 @@ export const Route = createFileRoute(
   },
   beforeLoad: ({ params, search }) => ({
     breadcrumb: ({ loaderData: activity }: { loaderData: StudyActivity }) =>
-      activity.usedDefinedActivity?.nameCode?.displayName ||
+      activity.usedDefinedActivity.nameCode.displayName ||
       i18next.t("ShowActivityRoute.breadcrumbDefault"),
     query: queryOptions({
       queryKey: ["subject", params.subjectId, "activity", "new"],
