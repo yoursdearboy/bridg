@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { Route as subjectRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId";
 import { Route as newActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId_/activities/new";
-import ButtonLink from "../ButtonLink";
+import MenuItemLink from "../MenuItemLink";
 
 interface Node {
   key: string;
@@ -84,14 +84,14 @@ const ActivityMenuNode = ({
       </Menu.Sub>
     ) : (
       <Menu.Item>
-        <ButtonLink
+        <MenuItemLink
           from={subjectRoute.to}
           to={newActivityRoute.to}
           params={{ spaceId, subjectId }}
           search={{ obsId: "aca8ce00-4f96-4331-93a7-42e87fa48ce1" }}
         >
           {child.label}
-        </ButtonLink>
+        </MenuItemLink>
       </Menu.Item>
     )
   );
