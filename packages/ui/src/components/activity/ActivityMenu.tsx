@@ -87,10 +87,10 @@ const ActivityMenuNode = ({
       </Menu.Sub>
     ) : (
       <MenuItemLink
-        key={node.key}
+        key={child.key}
         to={newActivityRoute.to}
         params={{ spaceId, subjectId }}
-        search={{ obsId: node.activity!.id }}
+        search={{ obsId: child.activity!.id }}
       >
         {child.label}
       </MenuItemLink>
