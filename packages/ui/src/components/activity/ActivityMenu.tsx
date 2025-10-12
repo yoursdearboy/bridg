@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import type { Code, StudyActivity } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
-import { Route as subjectRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId";
 import { Route as newActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId_/activities/new";
 import MenuItemLink from "../MenuItemLink";
 
@@ -11,6 +10,7 @@ interface Node {
   key: string;
   label: string;
   children: Node[];
+  activity?: StudyActivity;
 }
 
 const codeToNode = (code: Code): Node => ({
@@ -52,7 +52,10 @@ const activitiesToNode = (sas: StudyActivity[]) => {
       pointer = subcategoryNode;
     }
 
-    const activityNode = codeToNode(nameCode);
+    const activityNode = {
+      ...codeToNode(nameCode),
+      activity: sa,
+    };
     pointer.children.push(activityNode);
   });
 
@@ -68,8 +71,8 @@ const ActivityMenuNode = ({
   spaceId: string;
   subjectId: string;
 }) =>
-  node.children.map((child) =>
-    child.children.length ? (
+  node.children.map((child) => {
+    return child.children.length ? (
       <Menu.Sub>
         <Menu.Sub.Target>
           <Menu.Sub.Item>{child.label}</Menu.Sub.Item>
@@ -83,18 +86,16 @@ const ActivityMenuNode = ({
         </Menu.Sub.Dropdown>
       </Menu.Sub>
     ) : (
-      <Menu.Item>
-        <MenuItemLink
-          from={subjectRoute.to}
-          to={newActivityRoute.to}
-          params={{ spaceId, subjectId }}
-          search={{ obsId: "aca8ce00-4f96-4331-93a7-42e87fa48ce1" }}
-        >
-          {child.label}
-        </MenuItemLink>
-      </Menu.Item>
-    )
-  );
+      <MenuItemLink
+        key={node.key}
+        to={newActivityRoute.to}
+        params={{ spaceId, subjectId }}
+        search={{ obsId: node.activity!.id }}
+      >
+        {child.label}
+      </MenuItemLink>
+    );
+  });
 
 const ActivityMenuError = ({ error }: { error: Error }) => {
   const { t } = useTranslation();
