@@ -80,8 +80,8 @@ const ActivityMenuNode = ({
         <Menu.Sub.Dropdown>
           <ActivityMenuNode
             node={child}
-            subjectId={subjectId}
             spaceId={spaceId}
+            subjectId={subjectId}
           />
         </Menu.Sub.Dropdown>
       </Menu.Sub>
