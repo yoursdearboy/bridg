@@ -56,6 +56,12 @@ def _cache_key(data: dict, class_: type[T]) -> str | None:
     return class_.__tablename__ + "-" + key
 
 
+def get_property_annotation(class_, key):
+    if prop := getattr(class_, key):
+        if getter := getattr(prop, "fget"):
+            return getter.__annotations__.get("return")
+
+
 def make_model_hook():
     cache = Cache()
 
@@ -91,12 +97,18 @@ def make_model_hook():
                     type = attr.entity.class_
                     if attr.uselist:
                         type = List[type]
+                # FIXME: dont' repeat yourself (see below)
+                elif ann := annotations.get(key):
+                    type = ann.__args__[0]
                 else:
                     type = attr.class_attribute.type.python_type
             elif ann := annotations.get(key):
                 type = ann.__args__[0]
+            elif ann := get_property_annotation(class_, key):
+                type = ann
             else:
-                continue
+                # TODO: add logging
+                raise RuntimeError(f"Can't structure {key} of {class_}")
 
             value = converter.structure(value, type)
             setattr(obj, key, value)

@@ -2,6 +2,7 @@
 @space_id=ce946229-9746-46cd-8dd3-b27a2fbfd48a
 @subject_id=1944C046-95B3-4CB4-82E2-C789950E29FC
 @person_id=99132ae7-25dd-43ba-808e-cdb3b29af285
+@space_cbc_id=66da8ea1-5e69-40f2-a720-9937430d582d
 
 # Spaces
 
@@ -23,11 +24,11 @@ GET {{base}}/spaces/{{space_id}}/activity
 
 ### Show space activity
 
-GET {{base}}/spaces/{{space_id}}/activity/5928f486-28c3-42d6-bf7f-4a5fc80d7a76
+GET {{base}}/spaces/{{space_id}}/activity/{{space_cbc_id}}
 
 ### Show space activitiy result
 
-GET {{base}}/spaces/{{space_id}}/activity/f83ddbf8-dd6d-4737-98e3-a5795995bbd8/result
+GET {{base}}/spaces/{{space_id}}/activity/{{space_cbc_id}}/result
 
 ## Subjects
 

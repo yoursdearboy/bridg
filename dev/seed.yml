@@ -114,7 +114,8 @@ study:
             - { name: "Follow-Up", type_code: "follow-up" }
           used_study_activity:
             - used_defined_activity: *ipt
-            - used_defined_activity: *cbc
+            - id: 66da8ea1-5e69-40f2-a720-9937430d582d
+              used_defined_activity: *cbc
             - used_defined_activity: &aml-mrd-2018-ame
                 id: a20d96db-afc3-4e0d-a010-32662388c633
                 type: substance_administration
