@@ -3,7 +3,7 @@ import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import type { DefinedObservationResult, StudyActivity } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
-import { DefinedActivityResultWrapper } from "./definedActivityResult/definedActivityResultWrapper";
+import { ActivityResultWrapper } from "./activityResult/activityResultWrapper";
 
 interface ActivityFormWrapperProps {
   activity: StudyActivity;
@@ -47,7 +47,7 @@ const ActivityForm = ({ query }: ActivityFormProps) => {
       {!isPending && !isError && (
         <Stack>
           {results.map((result) => (
-            <DefinedActivityResultWrapper result={result} />
+            <ActivityResultWrapper result={result} />
           ))}
         </Stack>
       )}
