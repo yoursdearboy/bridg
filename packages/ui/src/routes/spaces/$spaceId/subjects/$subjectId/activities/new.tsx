@@ -11,7 +11,7 @@ type SearchParams = {
 };
 
 export const Route = createFileRoute(
-  "/spaces/$spaceId/subjects/$subjectId_/activities/new"
+  "/spaces/$spaceId/subjects/$subjectId/activities/new"
 )({
   component: ShowActivityRoute,
   validateSearch: (search: SearchParams) => {

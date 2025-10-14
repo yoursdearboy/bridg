@@ -10,14 +10,14 @@ import { PersonCard } from "@/components/person/PersonCard";
 import i18next from "@/i18n";
 import { Route as personRoute } from "@/routes/persons/$personId";
 
-export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
+export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId/")({
   component: SubjectShowPage,
   beforeLoad: ({ params }) => ({
     breadcrumb: ({ loaderData: subject }: { loaderData: StudySubject }) =>
       subject.performingBiologicEntity?.primaryName?.label ||
       i18next.t("SubjectShowPage.breadcrumbDefault"),
     query: queryOptions({
-      queryKey: ["subject", params.subjectId],
+      queryKey: ["subject", params.subjectId] as const,
       queryFn: () => api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet(params),
     }),
   }),
