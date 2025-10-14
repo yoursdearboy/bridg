@@ -1,28 +1,17 @@
 import { Grid, Group, Stack, Title } from "@mantine/core";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import type { StudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
-import api from "@/api";
 import { ActivityCard } from "@/components/activity/ActivityCard";
 import ButtonLink from "@/components/ButtonLink";
 import { PersonCard } from "@/components/person/PersonCard";
-import i18next from "@/i18n";
 import { Route as personRoute } from "@/routes/persons/$personId";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId/")({
   component: SubjectShowPage,
-  beforeLoad: ({ params }) => ({
-    breadcrumb: ({ loaderData: subject }: { loaderData: StudySubject }) =>
-      subject.performingBiologicEntity?.primaryName?.label ||
-      i18next.t("SubjectShowPage.breadcrumbDefault"),
-    query: queryOptions({
-      queryKey: ["subject", params.subjectId] as const,
-      queryFn: () => api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet(params),
-    }),
+  beforeLoad: () => ({
+    breadcrumb: null,
   }),
-  loader: ({ context: { query, queryClient } }) =>
-    queryClient.fetchQuery(query),
 });
 
 function SubjectShowPage() {

@@ -4,7 +4,7 @@ import type { Code, StudyActivity } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import MenuItemLink from "@/components/MenuItemLink";
-import { Route as newActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId_/activities/new";
+import { Route as newActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/activities/new";
 
 interface Node {
   key: string;
