@@ -11,7 +11,7 @@ from api.db import get_repository
 
 class DefinedObservationResult(BaseModel):
     id: UUID
-    value: Optional[Any]
+    value: Optional[str]
     value_type: str
     value_negation_indicator: Optional[bool]
     type_code: Optional[Code]
