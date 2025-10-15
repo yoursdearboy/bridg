@@ -10,6 +10,7 @@ from sqlalchemy.orm.collections import InstrumentedList
 from toolz import dissoc
 
 import bridg
+import bridg.datatypes
 
 from .db import Base
 
@@ -158,3 +159,9 @@ def uuid_hook(x: str, _) -> UUID:
     if isinstance(x, UUID):
         return x
     return UUID(x)
+
+
+@converter.register_structure_hook
+def datavalue_hook(x: bridg.datatypes.SYMBOL, _) -> bridg.datatypes.DataValue:
+    cls = bridg.datatypes.SYMBOL_TO_CLASS[x]
+    return cls()
