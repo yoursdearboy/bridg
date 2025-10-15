@@ -11,7 +11,7 @@ export const ActivityResultWrapper = ({
 }: ActivityResultWrapperProps) => {
   return (
     <Input
-      label={result.typeCode?.displayName || "unamed field"}
+      label={result.typeCode?.displayName || "unnamed field"}
       kind={result.valueType}
     />
   );
