@@ -1,12 +1,28 @@
 import { TextInput } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
+import type { DefinedObservationResult } from "api-ts";
+
+interface ActivityResultWrapperProps {
+  result: DefinedObservationResult;
+}
+
+export const ActivityResultWrapper = ({
+  result,
+}: ActivityResultWrapperProps) => {
+  return (
+    <Input
+      label={result.typeCode?.displayName || "unamed field"}
+      kind={result.valueType}
+    />
+  );
+};
 
 interface InputProps {
   label: string | null | undefined;
   kind: string | null | undefined | Error;
 }
 
-export const Input = ({ label, kind }: InputProps) => {
+const Input = ({ label, kind }: InputProps) => {
   switch (kind) {
     case "str":
       return <InputText label={label} />;

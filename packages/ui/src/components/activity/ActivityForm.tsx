@@ -3,7 +3,7 @@ import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import type { DefinedObservationResult, StudyActivity } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
-import { ActivityResultWrapper } from "./activityResult/activityResultWrapper";
+import { ActivityResultWrapper } from "./ActivityResultWrapper";
 
 interface ActivityFormWrapperProps {
   activity: StudyActivity;
