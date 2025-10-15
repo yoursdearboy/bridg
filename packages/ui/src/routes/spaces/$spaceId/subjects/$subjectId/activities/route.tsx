@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
   "/spaces/$spaceId/subjects/$subjectId/activities"
@@ -10,5 +10,5 @@ export const Route = createFileRoute(
 });
 
 function RouteComponent() {
-  return <div>Hello "/spaces/$spaceId/subjects/$subjectId/activities/"!</div>;
+  return <Outlet/>;
 }
