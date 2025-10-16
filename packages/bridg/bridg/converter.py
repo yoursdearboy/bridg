@@ -162,6 +162,7 @@ def uuid_hook(x: str, _) -> UUID:
 
 
 @converter.register_structure_hook
-def datavalue_hook(x: bridg.datatypes.SYMBOL, _) -> bridg.datatypes.DataValue:
-    cls = bridg.datatypes.SYMBOL_TO_CLASS[x]
-    return cls()
+def datavalue_hook(x: dict, _) -> bridg.datatypes.DataValue:
+    dataType = x.pop("dataType")
+    cls = bridg.datatypes.DATATYPE_TO_CLASS[dataType]
+    return cls(**x)

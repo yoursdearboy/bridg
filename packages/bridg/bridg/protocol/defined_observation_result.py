@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from typing import Any, Optional, Type
+from typing import Any, Optional
 from uuid import UUID, uuid4
 
 import sqlalchemy.types as types
@@ -7,22 +7,27 @@ from sqlalchemy import JSON, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..core import Code, code_column
-from ..datatypes import SYMBOL, SYMBOL_TO_CLASS, Boolean, CharacterString, DataValue, Date, DateTime, IntegerNumber
+from ..datatypes import DATATYPE_TO_CLASS, DataValue
 from ..db import Base
 from .defined_observation import DefinedObservation
 
 
-class DataValueTypeDecorator(types.TypeDecorator[DataValue]):
-    impl = types.Unicode
+class DataValueDecorator(types.TypeDecorator[DataValue]):
+    impl = types.JSON
 
     cache_ok = True
 
     def process_bind_param(self, value: DataValue, dialect):
-        return value.SYMBOL
+        if value is None:
+            return None
+        obj = value.__dict__
+        obj["dataType"] = value.dataType.shortName
+        return obj
 
-    def process_result_value(self, value: SYMBOL, dialect):
-        cls = SYMBOL_TO_CLASS[value]
-        return cls()
+    def process_result_value(self, value: dict, dialect):
+        dataType = value.pop("dataType")
+        cls = DATATYPE_TO_CLASS[dataType]
+        return cls(**value)
 
 
 class DefinedObservationResult(Base):
@@ -34,45 +39,8 @@ class DefinedObservationResult(Base):
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     type: Mapped[str]
 
-    _value: Mapped[Optional[Any]] = mapped_column("value", JSON)
+    value: Mapped[Optional[DataValue]] = mapped_column(DataValueDecorator())
 
-    @property
-    def value(self) -> Optional[Any]:
-        match self.value_type:
-            case DataValue():
-                return self._value
-            case Boolean():
-                return self._value
-            case CharacterString():
-                return self._value
-            case IntegerNumber():
-                return self._value
-            case Date():
-                if isinstance(self._value, str):
-                    return date.fromisoformat(self._value)
-            case DateTime():
-                if isinstance(self._value, str):
-                    return datetime.fromisoformat(self._value)
-        raise RuntimeError("Can't parse value from database")
-
-    @value.setter
-    def value(self, value):
-        match self.value_type:
-            case DataValue():
-                return self._value
-            case Boolean():
-                self._value = value
-            case CharacterString():
-                self._value = value
-            case IntegerNumber():
-                self._value = value
-            case Date():
-                self._value = date.isoformat(value)
-            case DateTime():
-                self._value = datetime.isoformat(value)
-        raise RuntimeError("Can't serialize value to database")
-
-    value_type: Mapped[DataValue] = mapped_column(DataValueTypeDecorator())
     value_negation_indicator: Mapped[Optional[bool]]
 
     type_code_id: Mapped[Optional[UUID]] = code_column(TypeCode)
