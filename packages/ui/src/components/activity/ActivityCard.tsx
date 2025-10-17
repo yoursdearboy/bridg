@@ -1,155 +1,167 @@
 import { Box, Button, Card, Group, Menu, Text } from "@mantine/core";
-// import { useQuery } from "@tanstack/react-query";
-// import api from "@/api";
+import type { StudyActivity } from "api-ts";
 
 interface StudyActivityMenuProps {
   spaceId: string;
 }
-//я правильно поняла, что прсто тестовый массив нужен?потом надо будет данные из апишки?
 
 const StudyActivityMenu = ({ spaceId }: StudyActivityMenuProps) => {
-  const activities = [
+  const data: StudyActivity[] = [
     {
       id: "1",
       usedDefinedActivity: {
         categoryCode: {
+          code: null,
+          id: "11",
           displayName: "Lab",
         },
         nameCode: {
+          code: null,
+          id: "111",
           displayName: "Cat1",
         },
         subcategoryCode: {
+          code: null,
+          id: "1111",
           displayName: "SubCat1",
         },
         description: "Smth",
+        id: "11111",
       },
     },
     {
       id: "2",
       usedDefinedActivity: {
         categoryCode: {
+          code: null,
+          id: "22",
           displayName: "Lab",
         },
         nameCode: {
+          code: null,
+          id: "222",
           displayName: "Cat2",
         },
         subcategoryCode: {
+          code: null,
+          id: "2222",
           displayName: "SubCat2",
         },
-        description: "Smth2",
+        description: "Smth",
+        id: "22222",
       },
     },
-
     {
       id: "3",
       usedDefinedActivity: {
         categoryCode: {
-          displayName: "Activity2",
+          code: null,
+          id: "33",
+          displayName: "Treatment",
         },
         nameCode: {
+          code: null,
+          id: "333",
           displayName: "Cat3",
         },
         subcategoryCode: {
+          code: null,
+          id: "3333",
           displayName: "SubCat3",
         },
-        description: "Smth3",
+        description: "Smth",
+        id: "33333",
       },
     },
-
     {
       id: "4",
       usedDefinedActivity: {
-        categoryCode: null,
+        categoryCode: {
+          code: null,
+          id: "44",
+          displayName: "Treatment",
+        },
         nameCode: {
+          code: null,
+          id: "444",
           displayName: "Cat4",
         },
-        subcategoryCode: null,
-        description: "Smth4",
+        subcategoryCode: {
+          code: null,
+          id: "4444",
+          displayName: "SubCat4",
+        },
+        description: "Smth",
+        id: "44444",
       },
     },
   ];
-  const data = activities;
-  const categories = [];
+
+  const activities = [];
 
   for (let i = 0; i < data.length; i++) {
-    const currentCategory =
-      data[i].usedDefinedActivity.categoryCode?.displayName || "other";
-    const currentSubCategory =
-      data[i].usedDefinedActivity.subcategoryCode?.displayName || "other";
-    let categoryExists = false;
-    for (let j = 0; j < categories.length; j++) {
-      if (categories[j].name === currentCategory) {
-        categoryExists = true;
+    const currentActivity =
+      data[i].usedDefinedActivity.categoryCode?.displayName;
+    const currentCategory = data[i].usedDefinedActivity.nameCode.displayName;
 
-        let subcategoryExists = false;
-        for (let k = 0; k < categories[j].subcategories.length; k++) {
-          if (categories[j].subcategories[k].name === currentSubCategory) {
-            subcategoryExists = true;
+    if (!currentActivity) continue;
 
-            categories[j].subcategories[k].activities.push(data[i]);
-            break;
-          }
-        }
+    let activityExists = false;
+    let activityIndex = -1;
 
-        if (!subcategoryExists) {
-          categories[j].subcategories.push({
-            name: currentSubCategory,
-            activities: [data[i]],
-          });
-        }
+    for (let j = 0; j < activities.length; j++) {
+      if (activities[j].name === currentActivity) {
+        activityExists = true;
+        activityIndex = j;
         break;
       }
     }
 
-    if (!categoryExists) {
-      categories.push({
-        name: currentCategory,
-        subcategories: [
-          {
-            name: currentSubCategory,
-            activities: [data[i]],
-          },
-        ],
+    if (!activityExists) {
+      activities.push({
+        name: currentActivity,
+        categories: [currentCategory],
       });
+    } else {
+      let categoryExists = false;
+
+      for (let k = 0; k < activities[activityIndex].categories.length; k++) {
+        if (activities[activityIndex].categories[k] === currentCategory) {
+          categoryExists = true;
+          break;
+        }
+      }
+
+      if (!categoryExists) {
+        activities[activityIndex].categories.push(currentCategory);
+      }
     }
   }
 
+  console.log(activities);
+
   return (
-    <Menu width={350} position="bottom-start">
+    <Menu width={300} position="bottom-start">
       <Menu.Target>
         <Button>Add Activity</Button>
       </Menu.Target>
 
       <Menu.Dropdown>
-        {categories.map((category) => (
-          <Menu.Sub key={category.name}>
+        {activities.map((activity) => (
+          <Menu.Sub key={activity.name}>
             <Menu.Sub.Target>
               <Menu.Sub.Item>
-                <Text fw={500}>{category.name}</Text>
+                <Text>{activity.name}</Text>
               </Menu.Sub.Item>
             </Menu.Sub.Target>
 
-            <Menu.Sub.Dropdown>
-              {category.subcategories.map((subcategory) => (
-                <Menu.Sub key={subcategory.name}>
-                  <Menu.Sub.Target>
-                    <Menu.Sub.Item>
-                      <Text>{subcategory.name}</Text>
-                    </Menu.Sub.Item>
-                  </Menu.Sub.Target>
-
-                  <Menu.Sub.Dropdown>
-                    {subcategory.activities.map((activity) => (
-                      <Menu.Item key={activity.id}>
-                        <Text>
-                          {activity.usedDefinedActivity.nameCode.displayName}
-                        </Text>
-                      </Menu.Item>
-                    ))}
-                  </Menu.Sub.Dropdown>
-                </Menu.Sub>
+            <Menu.Dropdown>
+              {activity.categories.map((category) => (
+                <Menu.Item key={category}>
+                  <Text>{category}</Text>
+                </Menu.Item>
               ))}
-            </Menu.Sub.Dropdown>
+            </Menu.Dropdown>
           </Menu.Sub>
         ))}
       </Menu.Dropdown>
