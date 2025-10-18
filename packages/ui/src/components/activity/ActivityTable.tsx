@@ -8,7 +8,7 @@ interface ActivityTableWrapperProps {
 }
 
 export const ActivityTableWrapper = ({ query }: ActivityTableWrapperProps) => {
-  const { isPending, isError, error, data: observations } = query;
+  const { isPending, isError, error, data: activities } = query;
   const { t } = useTranslation();
 
   return (
@@ -19,7 +19,7 @@ export const ActivityTableWrapper = ({ query }: ActivityTableWrapperProps) => {
           <Text color="red">{t("errorMessage", { error: error.message })}</Text>
         )}
         {!isPending && !isError && (
-          <ActivityTable activities={observations} />
+          <ActivityTable activities={activities} />
         )}
       </Box>
     </>
@@ -47,7 +47,7 @@ const ActivityTable = ({ activities }: ActivityTableProps) => {
             activities.map((activity) => (
               <ActivityTableRow
                 key={activity.id}
-                observation={activity}
+                activity={activity}
               />
             ))
           )}
@@ -57,21 +57,21 @@ const ActivityTable = ({ activities }: ActivityTableProps) => {
   );
 };
 
-interface ActivityTableRowWrapper {
-  observation: PerformedObservation;
+interface ActivityTableRowProps {
+  activity: PerformedObservation;
 }
 
-const ActivityTableRow = ({ observation }: ActivityTableRowWrapper) => {
+const ActivityTableRow = ({ activity }: ActivityTableRowProps) => {
   const { t } = useTranslation();
 
   return (
     <>
       <Table.Tr>
         <Table.Td>
-          {observation.instantiatedDefinedActivity?.nameCode.displayName}
+          {activity.instantiatedDefinedActivity?.nameCode.displayName}
         </Table.Td>
         <Table.Td>
-          {t("intlDateTime", { val: observation.statusDate })}
+          {t("intlDateTime", { val: activity.statusDate })}
         </Table.Td>
       </Table.Tr>
     </>
