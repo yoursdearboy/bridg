@@ -34,7 +34,7 @@ const ActivityTable = ({ observations }: ActivityTableProps) => {
   const { t } = useTranslation();
 
   return (
-    <Box>
+    <>
       <Table highlightOnHover>
         <Table.Tbody>
           {observations.length === 0 ? (
@@ -53,7 +53,7 @@ const ActivityTable = ({ observations }: ActivityTableProps) => {
           )}
         </Table.Tbody>
       </Table>
-    </Box>
+    </>
   );
 };
 
