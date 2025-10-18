@@ -13,7 +13,7 @@ type SearchParams = {
 export const Route = createFileRoute(
   "/spaces/$spaceId/subjects/$subjectId/activities/new"
 )({
-  component: ShowActivityRoute,
+  component: NewActivityComponent,
   validateSearch: (search: SearchParams) => {
     return {
       obsId: search.obsId,
@@ -36,11 +36,10 @@ export const Route = createFileRoute(
     await queryClient.fetchQuery(query),
 });
 
-function ShowActivityRoute() {
+function NewActivityComponent() {
   const { query } = Route.useRouteContext();
   const { data: activity } = useSuspenseQuery(query);
   const { spaceId, subjectId } = Route.useParams();
-  console.log(activity);
   return (
     <Stack gap="md">
       <Group justify="space-between">
