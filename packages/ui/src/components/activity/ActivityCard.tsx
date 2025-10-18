@@ -1,7 +1,7 @@
 import { Box, Card, Group, Text } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
-import api from "@/api";
 import { useTranslation } from "react-i18next";
+import api from "@/api";
 import { ActivityMenu } from "./ActivityMenu";
 import { ActivityTableWrapper } from "./ActivityTable";
 
