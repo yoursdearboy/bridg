@@ -1,4 +1,4 @@
-import { Box, LoadingOverlay, Table, Text } from "@mantine/core";
+import { LoadingOverlay, Table, Text } from "@mantine/core";
 import type { UseQueryResult } from "@tanstack/react-query";
 import type { PerformedObservation } from "api-ts";
 import { useTranslation } from "react-i18next";
@@ -13,15 +13,11 @@ export const ActivityTableWrapper = ({ query }: ActivityTableWrapperProps) => {
 
   return (
     <>
-      <Box pos="relative" style={{ minHeight: 80 }}>
-        <LoadingOverlay visible={isPending} />
-        {isError && (
-          <Text color="red">{t("errorMessage", { error: error.message })}</Text>
-        )}
-        {!isPending && !isError && (
-          <ActivityTable activities={activities} />
-        )}
-      </Box>
+      <LoadingOverlay visible={isPending} />
+      {isError && (
+        <Text color="red">{t("errorMessage", { error: error.message })}</Text>
+      )}
+      {!isPending && !isError && <ActivityTable activities={activities} />}
     </>
   );
 };
@@ -34,26 +30,21 @@ const ActivityTable = ({ activities }: ActivityTableProps) => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <Table highlightOnHover>
-        <Table.Tbody>
-          {activities.length === 0 ? (
-            <Table.Tr>
-              <Table.Td px={0} style={{ textAlign: "center" }}>
-                {t("nodata")}
-              </Table.Td>
-            </Table.Tr>
-          ) : (
-            activities.map((activity) => (
-              <ActivityTableRow
-                key={activity.id}
-                activity={activity}
-              />
-            ))
-          )}
-        </Table.Tbody>
-      </Table>
-    </>
+    <Table highlightOnHover>
+      <Table.Tbody>
+        {activities.length === 0 ? (
+          <Table.Tr>
+            <Table.Td px={0} style={{ textAlign: "center" }}>
+              {t("nodata")}
+            </Table.Td>
+          </Table.Tr>
+        ) : (
+          activities.map((activity) => (
+            <ActivityTableRow key={activity.id} activity={activity} />
+          ))
+        )}
+      </Table.Tbody>
+    </Table>
   );
 };
 
@@ -65,15 +56,11 @@ const ActivityTableRow = ({ activity }: ActivityTableRowProps) => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <Table.Tr>
-        <Table.Td>
-          {activity.instantiatedDefinedActivity?.nameCode.displayName}
-        </Table.Td>
-        <Table.Td>
-          {t("intlDateTime", { val: activity.statusDate })}
-        </Table.Td>
-      </Table.Tr>
-    </>
+    <Table.Tr>
+      <Table.Td>
+        {activity.instantiatedDefinedActivity?.nameCode.displayName}
+      </Table.Td>
+      <Table.Td>{t("intlDateTime", { val: activity.statusDate })}</Table.Td>
+    </Table.Tr>
   );
 };
