@@ -22,7 +22,7 @@ export const Route = createFileRoute(
   beforeLoad: ({ params, search }) => ({
     breadcrumb: ({ loaderData: activity }: { loaderData: StudyActivity }) =>
       activity.usedDefinedActivity.nameCode.displayName ||
-      i18next.t("ShowActivityRoute.breadcrumbDefault"),
+      i18next.t("NewActivityRoute.breadcrumbDefault"),
     query: queryOptions({
       queryKey: ["subject", params.subjectId, "activity", "new"],
       queryFn: () =>

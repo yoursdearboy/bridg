@@ -134,8 +134,11 @@
       "type": "Type",
       "assignedStudySiteProtocolVersionRelationship": "Study sites"
     },
-    "ShowActivityRoute": {
+    "NewActivityRoute": {
       "breadcrumbDefault": "Unkown activity"
+    },
+    "ActivityCard": {
+      "title": "Activities"
     },
     "Status": {
       "candidate": "candidate",
