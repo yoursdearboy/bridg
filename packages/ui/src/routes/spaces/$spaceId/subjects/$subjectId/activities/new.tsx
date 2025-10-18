@@ -48,9 +48,6 @@ function NewActivityComponent() {
         </Title>
       </Group>
 
-      <div>
-        Hello "/spaces/{spaceId}/subjects/{subjectId}/activities/new"!
-      </div>
       <Card>
         <ActivityFormWrapper
           activity={activity}
