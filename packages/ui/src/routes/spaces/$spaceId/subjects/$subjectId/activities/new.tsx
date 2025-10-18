@@ -7,7 +7,7 @@ import { ActivityFormWrapper } from "@/components/activity/ActivityForm";
 import i18next from "@/i18n";
 
 type SearchParams = {
-  obsId: string;
+  saId: string;
 };
 
 export const Route = createFileRoute(
@@ -16,7 +16,7 @@ export const Route = createFileRoute(
   component: NewActivityComponent,
   validateSearch: (search: SearchParams) => {
     return {
-      obsId: search.obsId,
+      saId: search.saId,
     };
   },
   beforeLoad: ({ params, search }) => ({
@@ -26,9 +26,9 @@ export const Route = createFileRoute(
     query: queryOptions({
       queryKey: ["subject", params.subjectId, "activity", "new"],
       queryFn: () =>
-        api.spaceActivity.showSpacesSpaceIdActivityObsIdGet({
+        api.spaceActivity.showSpacesSpaceIdActivitySaIdGet({
           spaceId: params.spaceId,
-          obsId: search.obsId,
+          saId: search.saId,
         }),
     }),
   }),

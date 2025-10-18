@@ -90,7 +90,7 @@ const ActivityMenuNode = ({
         key={child.key}
         to={newActivityRoute.to}
         params={{ spaceId, subjectId }}
-        search={{ obsId: child.activity!.id }}
+        search={{ saId: child.activity!.id }}
       >
         {child.label}
       </MenuItemLink>
