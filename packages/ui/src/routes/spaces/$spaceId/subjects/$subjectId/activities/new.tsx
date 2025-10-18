@@ -14,9 +14,9 @@ export const Route = createFileRoute(
   "/spaces/$spaceId/subjects/$subjectId/activities/new"
 )({
   component: NewActivityComponent,
-  validateSearch: (search: SearchParams) => {
+  validateSearch: (search: Record<string, unknown>): SearchParams => {
     return {
-      saId: search.saId,
+      saId: search.saId as string,
     };
   },
   beforeLoad: ({ params, search }) => ({
