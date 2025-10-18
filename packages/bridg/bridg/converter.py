@@ -1,6 +1,6 @@
 from dataclasses import Field, fields, is_dataclass
 from datetime import date, datetime
-from typing import List, TypeVar, get_args, get_origin, get_type_hints
+from typing import List, TypeVar, get_origin, get_type_hints
 from uuid import UUID
 
 from cattr import Converter
@@ -10,7 +10,7 @@ from sqlalchemy.orm.collections import InstrumentedList
 from toolz import dissoc
 
 import bridg
-from bridg import datatypes
+import bridg.datatypes
 
 from .db import Base
 
@@ -161,22 +161,8 @@ def uuid_hook(x: str, _) -> UUID:
     return UUID(x)
 
 
-def is_datatype(x):
-    origin = get_origin(x)
-    if origin is not type:
-        return False
-    args = get_args(x)
-    if not args:
-        return False
-    base = args[0]
-    try:
-        return issubclass(base, datatypes.DataValue)
-    except TypeError:
-        return False
-
-
-def datatype_hook(x: str, _):
-    return datatypes.DATA_TYPE_TO_TYPE[x]
-
-
-converter.register_structure_hook_func(is_datatype, datatype_hook)
+@converter.register_structure_hook
+def datavalue_hook(x: dict, _) -> bridg.datatypes.DataValue:
+    data_type = x.pop("data_type")
+    cls = bridg.datatypes.DATA_TYPE_TO_TYPE[data_type]
+    return cls(**x)

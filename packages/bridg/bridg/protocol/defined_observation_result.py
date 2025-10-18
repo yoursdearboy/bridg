@@ -1,32 +1,35 @@
-from datetime import date, datetime
-from typing import Any, Optional, Type
+from typing import Optional
 from uuid import UUID, uuid4
 
-from sqlalchemy import JSON, ForeignKey, TypeDecorator
+from sqlalchemy import ForeignKey, TypeDecorator
 from sqlalchemy import types as satypes
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from bridg import datatypes
-
 from ..core import Code, code_column
+from ..datatypes import DATA_TYPE_TO_TYPE, DataValue
 from ..db import Base
 from .defined_observation import DefinedObservation
 
 
 # TODO: Move somewhere
-class DataTypeDecorator(TypeDecorator):
-    impl = satypes.Unicode
+class DataValueDecorator(TypeDecorator):
+    impl = satypes.JSON
 
     cache_ok = True
 
-    def process_bind_param(self, value: Type[datatypes.DataValue], dialect) -> str:
+    def process_bind_param(self, value: DataValue | None, dialect) -> dict | None:
         if value is None:
             return None
-        return value.data_type
+        data = value.__dict__
+        data["data_type"] = value.data_type
+        return data
 
-    def process_result_value(self, value: str, dialect) -> Type[datatypes.DataValue]:
-        cls = datatypes.DATA_TYPE_TO_TYPE[value]
-        return cls
+    def process_result_value(self, value: dict | None, dialect) -> DataValue | None:
+        if value is None:
+            return None
+        data_type = value.pop("data_type")
+        cls = DATA_TYPE_TO_TYPE[data_type]
+        return cls(**value)
 
 
 class DefinedObservationResult(Base):
@@ -38,59 +41,8 @@ class DefinedObservationResult(Base):
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     type: Mapped[str]
 
-    _value: Mapped[Optional[Any]] = mapped_column("value", JSON)
+    value: Mapped[Optional[DataValue]] = mapped_column(DataValueDecorator())
 
-    # TODO: Refactor this
-    @property
-    def value(self) -> Optional[Any]:
-        if self._value is None:
-            return None
-        elif issubclass(self.value_type, datatypes.DateTime):
-            if isinstance(self._value, str):
-                return datetime.fromisoformat(self._value)
-        elif issubclass(self.value_type, datatypes.Date):
-            if isinstance(self._value, str):
-                return date.fromisoformat(self._value)
-        elif issubclass(self.value_type, datatypes.Quantity):
-            if isinstance(self._value, int):
-                return self._value
-            elif isinstance(self._value, float):
-                return self._value
-        if issubclass(self.value_type, datatypes.CharacterString):
-            if isinstance(self._value, str):
-                return self._value
-        raise RuntimeError("Can't parse value from database")
-
-    @value.setter
-    def value(self, value):
-        if value is None:
-            self._value = None
-        elif issubclass(self.value_type, datatypes.DateTime):
-            if isinstance(value, datetime):
-                self._value = datetime.isoformat(value)
-            else:
-                raise RuntimeError("Can't serialize value to database")
-        elif issubclass(self.value_type, datatypes.Date):
-            if isinstance(value, date):
-                self._value = date.isoformat(value)
-            else:
-                raise RuntimeError("Can't serialize value to database")
-        elif issubclass(self.value_type, datatypes.Quantity):
-            if isinstance(value, int):
-                self._value = value
-            elif isinstance(value, float):
-                self._value = value
-            else:
-                raise RuntimeError("Can't serialize value to database")
-        elif issubclass(self.value_type, datatypes.CharacterString):
-            if isinstance(value, str):
-                self._value = value
-            else:
-                raise RuntimeError("Can't serialize value to database")
-        else:
-            raise RuntimeError("Can't serialize value to database")
-
-    value_type: Mapped[Type[datatypes.DataValue]] = mapped_column(DataTypeDecorator())
     value_negation_indicator: Mapped[Optional[bool]]
 
     type_code_id: Mapped[Optional[UUID]] = code_column(TypeCode)

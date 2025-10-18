@@ -1,18 +1,19 @@
-from typing import Annotated, Any, List, Optional
+from typing import Annotated, List, Optional
 from uuid import UUID
 
 import bridg
 from bridg.repository import Repository
 from fastapi import APIRouter, Depends
+from pydantic import Field
 
 from api.base_model import BaseModel, Code
 from api.db import get_repository
+from api.model.datatypes import DataValueUnion
 
 
 class DefinedObservationResult(BaseModel):
     id: UUID
-    value: Optional[str]
-    value_type: str
+    value: Optional[DataValueUnion] = Field(discriminator="data_type")
     value_negation_indicator: Optional[bool]
     type_code: Optional[Code]
     derivation_expression: Optional[str]

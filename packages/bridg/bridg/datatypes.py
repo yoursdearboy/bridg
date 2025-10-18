@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 class DataValue:
     data_type = "ANY"
 
@@ -36,6 +39,11 @@ class RealNumber(ZeroedQuantity):
 
 class PhysicalQuantity(ZeroedQuantity):
     data_type = "PQ"
+    unit: Optional[str]
+
+    def __init__(self, unit: Optional[str] = None):
+        super().__init__()
+        self.unit = unit
 
 
 class PointInTime(Quantity):
