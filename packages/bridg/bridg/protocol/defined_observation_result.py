@@ -6,7 +6,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..core import Code, code_column
-from ..datatypes import DATATYPE_TO_CLASS, DataValue
+from ..datatypes import DATATYPE_TO_CLASS, DataType, DataValue
 from ..db import Base
 from .defined_observation import DefinedObservation
 
@@ -19,9 +19,18 @@ class DataValueDecorator(types.TypeDecorator[DataValue]):
     def process_bind_param(self, value: DataValue, dialect):
         if value is None:
             return None
-        obj = value.__dict__
-        obj["dataType"] = value.dataType.shortName
-        return obj
+
+        def _dump(o):
+            if isinstance(o, list):
+                return [_dump(x) for x in o]
+            elif isinstance(o, dict):
+                return {k: _dump(v) for k, v in o.items()}
+            elif isinstance(o, DataType):
+                return o.shortName
+            elif isinstance(o, DataValue):
+                return _dump(o.dict())
+            else:
+                return o
 
     def process_result_value(self, value: dict, dialect):
         dataType = value.pop("dataType")

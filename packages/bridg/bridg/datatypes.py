@@ -6,6 +6,9 @@ from typing import Dict, Optional, Type
 class DataValue:
     dataType: DataType
 
+    def dict(self):
+        return {"dataType": self.dataType, **self.__dict__}
+
 
 class DataType(DataValue):
     shortName: str
