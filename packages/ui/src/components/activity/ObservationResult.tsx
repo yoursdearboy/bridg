@@ -1,54 +1,80 @@
-import { TextInput } from "@mantine/core";
+import { NumberInput, TextInput } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
-import type { DefinedObservationResult } from "api-ts";
-
-interface ObservationResultProps {
-  result: DefinedObservationResult;
-}
+import type {
+  DefinedObservationResult,
+  DefinedObservationResultValue,
+  ModelDate,
+  PhysicalQuantity,
+} from "api-ts";
 
 export const ObservationResult = ({
   result,
-}: ObservationResultProps) => {
+}: {
+  result: DefinedObservationResult;
+}) => {
   return (
     <Input
       label={result.typeCode?.displayName || "unnamed field"}
-      kind={result.valueType}
+      value={result.value}
     />
   );
 };
 
 interface InputProps {
-  label: string | null | undefined;
-  kind: string | null | undefined | Error;
+  label: string | null;
+  value: DefinedObservationResultValue | null;
 }
 
-const Input = ({ label, kind }: InputProps) => {
-  switch (kind) {
-    case "str":
-      return <InputText label={label} />;
-    case "int":
-      return <InputText label={label} />;
-    case "date":
-      return <InputDate label={label} />;
-    case "datetime":
+const Input = ({ label, value }: InputProps) => {
+  switch (value?.dataType) {
+    case "ST":
+    case "ST.NT":
+    case "ST.SIMPLE":
+      return <InputText label={label} value={value} />;
+    case "PQ":
+      return <PhysicalQuantityInput label={label} value={value} />;
+    case "TS.DATE":
+      return <InputDate label={label} value={value} />;
+    case "TS.DATETIME":
       throw new Error("not implemented");
     default:
-      return <InputText label={label} />;
+      return <InputText label={label} value={value} />;
   }
 };
 
-interface InputTextProps {
-  label: string | null | undefined;
-}
-
-const InputText = ({ label }: InputTextProps) => {
+const InputText = ({
+  label,
+}: {
+  label: string | null;
+  value: DefinedObservationResultValue | null;
+}) => {
   return <TextInput label={label} />;
 };
 
-interface InputDateProps {
-  label: string | null | undefined;
-}
+const PhysicalQuantityInput = ({
+  label,
+  value,
+}: {
+  label: string | null;
+  value: PhysicalQuantity | null;
+}) => {
+  return (
+    <NumberInput
+      label={
+        <>
+          {label}, {value?.unit}
+        </>
+      }
+      hideControls
+    />
+  );
+};
 
-const InputDate = ({ label }: InputDateProps) => {
+const InputDate = ({
+  label,
+}: {
+  label: string | null;
+  value: ModelDate | null;
+}) => {
   return <DateInput label={label} valueFormat="L" clearable />;
 };
