@@ -99,8 +99,12 @@ export class SubjectsApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/spaces/{space_id}/subjects`;
+        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+
         const response = await this.request({
-            path: `/spaces/{space_id}/subjects`.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId']))),
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -133,8 +137,12 @@ export class SubjectsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/spaces/{space_id}/subjects`;
+        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+
         const response = await this.request({
-            path: `/spaces/{space_id}/subjects`.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -173,8 +181,13 @@ export class SubjectsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/spaces/{space_id}/subjects/{subject_id}/observation`;
+        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+        urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
+
         const response = await this.request({
-            path: `/spaces/{space_id}/subjects/{subject_id}/observation`.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId']))).replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -220,8 +233,14 @@ export class SubjectsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/spaces/{space_id}/subjects/{subject_id}/observation/{obs_id}/result`;
+        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+        urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
+        urlPath = urlPath.replace(`{${"obs_id"}}`, encodeURIComponent(String(requestParameters['obsId'])));
+
         const response = await this.request({
-            path: `/spaces/{space_id}/subjects/{subject_id}/observation/{obs_id}/result`.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId']))).replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId']))).replace(`{${"obs_id"}}`, encodeURIComponent(String(requestParameters['obsId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -262,8 +281,12 @@ export class SubjectsApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/spaces/{space_id}/subjects/lookup`;
+        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+
         const response = await this.request({
-            path: `/spaces/{space_id}/subjects/lookup`.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId']))),
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -303,8 +326,13 @@ export class SubjectsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/spaces/{space_id}/subjects/{subject_id}`;
+        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+        urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
+
         const response = await this.request({
-            path: `/spaces/{space_id}/subjects/{subject_id}`.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId']))).replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

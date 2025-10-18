@@ -138,8 +138,8 @@ export function PerformedObservationResultToJSONTyped(value?: PerformedObservati
         'value_null_flavor_reason': value['valueNullFlavorReason'],
         'baseline_indicator': value['baselineIndicator'],
         'derived_indicator': value['derivedIndicator'],
-        'created_date': (value['createdDate'] == null ? null : (value['createdDate'] as any).toISOString()),
-        'reported_date': (value['reportedDate'] == null ? null : (value['reportedDate'] as any).toISOString()),
+        'created_date': value['createdDate'] == null ? value['createdDate'] : value['createdDate'].toISOString(),
+        'reported_date': value['reportedDate'] == null ? value['reportedDate'] : value['reportedDate'].toISOString(),
         'comment': value['comment'],
     };
 }

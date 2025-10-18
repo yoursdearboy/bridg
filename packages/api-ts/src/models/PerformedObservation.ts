@@ -140,7 +140,7 @@ export function PerformedObservationToJSONTyped(value?: PerformedObservation | n
         'id': value['id'],
         'reason_code': CodeToJSON(value['reasonCode']),
         'status_code': CodeToJSON(value['statusCode']),
-        'status_date': (value['statusDate'] == null ? null : (value['statusDate'] as any).toISOString()),
+        'status_date': value['statusDate'] == null ? value['statusDate'] : value['statusDate'].toISOString(),
         'context_for_study_site': StudySiteToJSON(value['contextForStudySite']),
         'containing_epoch': EpochToJSON(value['containingEpoch']),
         'instantiated_defined_activity': DefinedActivityToJSON(value['instantiatedDefinedActivity']),

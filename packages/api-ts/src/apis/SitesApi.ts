@@ -49,8 +49,12 @@ export class SitesApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/spaces/{space_id}/sites`;
+        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+
         const response = await this.request({
-            path: `/spaces/{space_id}/sites`.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

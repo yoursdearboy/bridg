@@ -118,7 +118,7 @@ export function StudySubjectToJSONTyped(value?: StudySubject | null, ignoreDiscr
         
         'id': value['id'],
         'status': StatusToJSON(value['status']),
-        'status_date': (value['statusDate'] == null ? null : (value['statusDate'] as any).toISOString()),
+        'status_date': value['statusDate'] == null ? value['statusDate'] : value['statusDate'].toISOString(),
         'performing_biologic_entity': ApiSubjectStudySubjectPersonToJSON(value['performingBiologicEntity']),
         'performing_organization': OrganizationToJSON(value['performingOrganization']),
     };

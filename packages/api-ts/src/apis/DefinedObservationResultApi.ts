@@ -57,8 +57,13 @@ export class DefinedObservationResultApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/spaces/{space_id}/activity/{obs_id}/result`;
+        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+        urlPath = urlPath.replace(`{${"obs_id"}}`, encodeURIComponent(String(requestParameters['obsId'])));
+
         const response = await this.request({
-            path: `/spaces/{space_id}/activity/{obs_id}/result`.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId']))).replace(`{${"obs_id"}}`, encodeURIComponent(String(requestParameters['obsId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

@@ -106,7 +106,7 @@ export function NewStudySubjectToJSONTyped(value?: NewStudySubject | null, ignor
     return {
         
         'status': StatusToJSON(value['status']),
-        'status_date': value['statusDate'] == null ? undefined : ((value['statusDate'] as any).toISOString()),
+        'status_date': value['statusDate'] == null ? value['statusDate'] : value['statusDate'].toISOString(),
         'performing_biologic_entity': ApiSubjectNewStudySubjectPersonToJSON(value['performingBiologicEntity']),
         'performing_biologic_entity_id': value['performingBiologicEntityId'],
         'assigned_study_site_protocol_version_relationship': value['assignedStudySiteProtocolVersionRelationship'],
