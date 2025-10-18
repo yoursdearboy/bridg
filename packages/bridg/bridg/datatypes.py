@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Literal, Optional, Type
+from typing import Dict, Optional, Type
 
 
 class DataValue:

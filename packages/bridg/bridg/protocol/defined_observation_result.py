@@ -1,9 +1,8 @@
-from datetime import date, datetime
-from typing import Any, Optional
+from typing import Optional
 from uuid import UUID, uuid4
 
 import sqlalchemy.types as types
-from sqlalchemy import JSON, ForeignKey
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..core import Code, code_column
