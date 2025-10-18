@@ -1,4 +1,4 @@
-import { LoadingOverlay, Stack, Text } from "@mantine/core";
+import { Button, LoadingOverlay, Stack, Text } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import type { DefinedObservationResult, StudyActivity } from "api-ts";
 import { useTranslation } from "react-i18next";
@@ -51,6 +51,7 @@ interface ActivityFormProps {
 }
 
 const ActivityForm = ({ results }: ActivityFormProps) => {
+  const { t } = useTranslation();
   return (
     <Stack align="flex-start" gap="md">
       <Stack>
@@ -58,6 +59,7 @@ const ActivityForm = ({ results }: ActivityFormProps) => {
           <ObservationResult result={result} />
         ))}
       </Stack>
+      <Button type="submit">{t("submit")}</Button>
     </Stack>
   );
 };
