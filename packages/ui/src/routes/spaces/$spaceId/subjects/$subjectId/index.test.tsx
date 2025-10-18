@@ -1,7 +1,7 @@
 import { expect, it, vi } from "vitest";
 import api from "@/api";
 import { renderRoute } from "@/test-utils";
-import { Route } from "./route";
+import { Route } from "./index";
 
 it("show page renders correctly", async () => {
   vi.spyOn(
