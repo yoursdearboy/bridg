@@ -8,6 +8,7 @@
     "add": "Добавить",
     "select": "Выберите",
     "enter": "Введите",
+    "error": "Ошибка",
     "errorMessage": "Произошла ошибка: {{error}}",
     "intlDate": "{{val}}",
     "intlDateTime": "{{val, datetime}}",
@@ -137,6 +138,12 @@
       "performingOrganization": "Организация",
       "type": "Тип",
       "assignedStudySiteProtocolVersionRelationship": "Область изучения"
+    },
+    "NewActivityRoute": {
+      "breadcrumbDefault": "Неизвестная процедура"
+    },
+    "ActivityCard": {
+      "title": "Процедуры"
     },
     "Status": {
       "candidate": "Кандидат",
