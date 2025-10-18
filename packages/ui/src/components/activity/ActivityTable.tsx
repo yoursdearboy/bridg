@@ -19,7 +19,7 @@ export const ActivityTableWrapper = ({ query }: ActivityTableWrapperProps) => {
           <Text color="red">{t("errorMessage", { error: error.message })}</Text>
         )}
         {!isPending && !isError && (
-          <ActivityTable observations={observations} />
+          <ActivityTable activities={observations} />
         )}
       </Box>
     </>
@@ -27,27 +27,27 @@ export const ActivityTableWrapper = ({ query }: ActivityTableWrapperProps) => {
 };
 
 interface ActivityTableProps {
-  observations: PerformedObservation[];
+  activities: PerformedObservation[];
 }
 
-const ActivityTable = ({ observations }: ActivityTableProps) => {
+const ActivityTable = ({ activities }: ActivityTableProps) => {
   const { t } = useTranslation();
 
   return (
     <>
       <Table highlightOnHover>
         <Table.Tbody>
-          {observations.length === 0 ? (
+          {activities.length === 0 ? (
             <Table.Tr>
               <Table.Td px={0} style={{ textAlign: "center" }}>
                 {t("nodata")}
               </Table.Td>
             </Table.Tr>
           ) : (
-            observations.map((observation) => (
-              <ActivityTableRowWrapper
-                key={observation.id}
-                observation={observation}
+            activities.map((activity) => (
+              <ActivityTableRow
+                key={activity.id}
+                observation={activity}
               />
             ))
           )}
@@ -61,7 +61,7 @@ interface ActivityTableRowWrapper {
   observation: PerformedObservation;
 }
 
-const ActivityTableRowWrapper = ({ observation }: ActivityTableRowWrapper) => {
+const ActivityTableRow = ({ observation }: ActivityTableRowWrapper) => {
   const { t } = useTranslation();
 
   return (
