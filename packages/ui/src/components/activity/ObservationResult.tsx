@@ -2,13 +2,13 @@ import { TextInput } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import type { DefinedObservationResult } from "api-ts";
 
-interface ActivityResultWrapperProps {
+interface ObservationResultProps {
   result: DefinedObservationResult;
 }
 
-export const ActivityResultWrapper = ({
+export const ObservationResult = ({
   result,
-}: ActivityResultWrapperProps) => {
+}: ObservationResultProps) => {
   return (
     <Input
       label={result.typeCode?.displayName || "unnamed field"}
