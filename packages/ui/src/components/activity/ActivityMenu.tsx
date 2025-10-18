@@ -3,11 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import type { Code, StudyActivity } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+import MenuItemLink from "@/components/MenuItemLink";
+import { Route as newActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/activities/new";
 
 interface Node {
   key: string;
   label: string;
   children: Node[];
+  activity?: StudyActivity;
 }
 
 const codeToNode = (code: Code): Node => ({
@@ -49,28 +52,50 @@ const activitiesToNode = (sas: StudyActivity[]) => {
       pointer = subcategoryNode;
     }
 
-    const activityNode = codeToNode(nameCode);
+    const activityNode = {
+      ...codeToNode(nameCode),
+      activity: sa,
+    };
     pointer.children.push(activityNode);
   });
 
   return root;
 };
 
-const ActivityMenuNode = ({ node }: { node: Node }) =>
-  node.children.map((child) =>
-    child.children.length ? (
-      <Menu.Sub>
+const ActivityMenuNode = ({
+  node,
+  spaceId,
+  subjectId,
+}: {
+  node: Node;
+  spaceId: string;
+  subjectId: string;
+}) =>
+  node.children.map((child) => {
+    return child.children.length ? (
+      <Menu.Sub key={child.key}>
         <Menu.Sub.Target>
           <Menu.Sub.Item>{child.label}</Menu.Sub.Item>
         </Menu.Sub.Target>
         <Menu.Sub.Dropdown>
-          <ActivityMenuNode node={child} />
+          <ActivityMenuNode
+            node={child}
+            spaceId={spaceId}
+            subjectId={subjectId}
+          />
         </Menu.Sub.Dropdown>
       </Menu.Sub>
     ) : (
-      <Menu.Item>{child.label}</Menu.Item>
-    )
-  );
+      <MenuItemLink
+        key={child.key}
+        to={newActivityRoute.to}
+        params={{ spaceId, subjectId }}
+        search={{ saId: child.activity!.id }}
+      >
+        {child.label}
+      </MenuItemLink>
+    );
+  });
 
 const ActivityMenuError = ({ error }: { error: Error }) => {
   const { t } = useTranslation();
@@ -85,9 +110,10 @@ const ActivityMenuError = ({ error }: { error: Error }) => {
 
 interface ActivityMenuProps {
   spaceId: string;
+  subjectId: string;
 }
 
-export const ActivityMenu = ({ spaceId }: ActivityMenuProps) => {
+export const ActivityMenu = ({ spaceId, subjectId }: ActivityMenuProps) => {
   const { t } = useTranslation();
   const { data, isSuccess, isError, error } = useQuery({
     queryKey: [spaceId, "activity"],
@@ -102,7 +128,13 @@ export const ActivityMenu = ({ spaceId }: ActivityMenuProps) => {
       </Menu.Target>
       <Menu.Dropdown>
         {isError && <ActivityMenuError error={error} />}
-        {isSuccess && <ActivityMenuNode node={activitiesToNode(data)} />}
+        {isSuccess && (
+          <ActivityMenuNode
+            node={activitiesToNode(data)}
+            spaceId={spaceId}
+            subjectId={subjectId}
+          />
+        )}
       </Menu.Dropdown>
     </Menu>
   );

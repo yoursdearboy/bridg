@@ -41,6 +41,12 @@ export interface DefinedObservationResult {
     value: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof DefinedObservationResult
+     */
+    valueType: string;
+    /**
+     * 
      * @type {boolean}
      * @memberof DefinedObservationResult
      */
@@ -65,6 +71,7 @@ export interface DefinedObservationResult {
 export function instanceOfDefinedObservationResult(value: object): value is DefinedObservationResult {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('value' in value) || value['value'] === undefined) return false;
+    if (!('valueType' in value) || value['valueType'] === undefined) return false;
     if (!('valueNegationIndicator' in value) || value['valueNegationIndicator'] === undefined) return false;
     if (!('typeCode' in value) || value['typeCode'] === undefined) return false;
     if (!('derivationExpression' in value) || value['derivationExpression'] === undefined) return false;
@@ -83,6 +90,7 @@ export function DefinedObservationResultFromJSONTyped(json: any, ignoreDiscrimin
         
         'id': json['id'],
         'value': json['value'],
+        'valueType': json['value_type'],
         'valueNegationIndicator': json['value_negation_indicator'],
         'typeCode': CodeFromJSON(json['type_code']),
         'derivationExpression': json['derivation_expression'],
@@ -102,6 +110,7 @@ export function DefinedObservationResultToJSONTyped(value?: DefinedObservationRe
         
         'id': value['id'],
         'value': value['value'],
+        'value_type': value['valueType'],
         'value_negation_indicator': value['valueNegationIndicator'],
         'type_code': CodeToJSON(value['typeCode']),
         'derivation_expression': value['derivationExpression'],

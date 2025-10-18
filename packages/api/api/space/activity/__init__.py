@@ -39,9 +39,9 @@ def index(space_id: UUID, repo: StudyActivityRepositoryDep) -> List[StudyActivit
 
 
 
-@router.get("/{obs_id:uuid}")
-def show(space_id: UUID, obs_id: UUID, repo: StudyActivityRepositoryDep) -> Optional[StudyActivity]:
-    if obj := repo.one_or_none(obs_id):
+@router.get("/{sa_id:uuid}")
+def show(space_id: UUID, sa_id: UUID, repo: StudyActivityRepositoryDep) -> Optional[StudyActivity]:
+    if obj := repo.one_or_none(sa_id):
         return StudyActivity.model_validate(obj)
     raise HTTPException(status_code=404)
 
