@@ -34,7 +34,11 @@ export const ActivityCard = ({ spaceId, subjectId }: ActivityCardProps) => {
         </Card.Section>
         <Card.Section inheritPadding py="xs">
           <Box pos="relative" style={{ minHeight: 80 }}>
-            <ActivityTableWrapper query={query} />
+            <ActivityTableWrapper
+              query={query}
+              spaceId={spaceId}
+              subjectId={subjectId}
+            />
           </Box>
         </Card.Section>
       </Card>

@@ -139,6 +139,10 @@
     "ActivityCard": {
       "title": "Процедуры"
     },
+    "EditActivityRoute": {
+      "defaultBreadcrumb": "Редактирование неизвестной процедуры"
+    },
+    "EditActivityComponent": {},
     "Status": {
       "candidate": "Кандидат",
       "eligible": "Пригодные",

@@ -20,6 +20,7 @@ import { Route as SpacesSpaceIdSubjectsSubjectIdRouteRouteImport } from './route
 import { Route as SpacesSpaceIdSubjectsSubjectIdIndexRouteImport } from './routes/spaces/$spaceId/subjects/$subjectId/index'
 import { Route as SpacesSpaceIdSubjectsSubjectIdActivitiesRouteRouteImport } from './routes/spaces/$spaceId/subjects/$subjectId/activities/route'
 import { Route as SpacesSpaceIdSubjectsSubjectIdActivitiesNewRouteImport } from './routes/spaces/$spaceId/subjects/$subjectId/activities/new'
+import { Route as SpacesSpaceIdSubjectsSubjectIdActivitiesObsIdEditRouteImport } from './routes/spaces/$spaceId/subjects/$subjectId/activities/$obsId.edit'
 
 const PersonsRouteRoute = PersonsRouteRouteImport.update({
   id: '/persons',
@@ -83,6 +84,12 @@ const SpacesSpaceIdSubjectsSubjectIdActivitiesNewRoute =
     path: '/new',
     getParentRoute: () => SpacesSpaceIdSubjectsSubjectIdActivitiesRouteRoute,
   } as any)
+const SpacesSpaceIdSubjectsSubjectIdActivitiesObsIdEditRoute =
+  SpacesSpaceIdSubjectsSubjectIdActivitiesObsIdEditRouteImport.update({
+    id: '/$obsId/edit',
+    path: '/$obsId/edit',
+    getParentRoute: () => SpacesSpaceIdSubjectsSubjectIdActivitiesRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/spaces/$spaceId/subjects/$subjectId/activities': typeof SpacesSpaceIdSubjectsSubjectIdActivitiesRouteRouteWithChildren
   '/spaces/$spaceId/subjects/$subjectId/': typeof SpacesSpaceIdSubjectsSubjectIdIndexRoute
   '/spaces/$spaceId/subjects/$subjectId/activities/new': typeof SpacesSpaceIdSubjectsSubjectIdActivitiesNewRoute
+  '/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit': typeof SpacesSpaceIdSubjectsSubjectIdActivitiesObsIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -107,6 +115,7 @@ export interface FileRoutesByTo {
   '/spaces/$spaceId/subjects/$subjectId/activities': typeof SpacesSpaceIdSubjectsSubjectIdActivitiesRouteRouteWithChildren
   '/spaces/$spaceId/subjects/$subjectId': typeof SpacesSpaceIdSubjectsSubjectIdIndexRoute
   '/spaces/$spaceId/subjects/$subjectId/activities/new': typeof SpacesSpaceIdSubjectsSubjectIdActivitiesNewRoute
+  '/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit': typeof SpacesSpaceIdSubjectsSubjectIdActivitiesObsIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -121,6 +130,7 @@ export interface FileRoutesById {
   '/spaces/$spaceId/subjects/$subjectId/activities': typeof SpacesSpaceIdSubjectsSubjectIdActivitiesRouteRouteWithChildren
   '/spaces/$spaceId/subjects/$subjectId/': typeof SpacesSpaceIdSubjectsSubjectIdIndexRoute
   '/spaces/$spaceId/subjects/$subjectId/activities/new': typeof SpacesSpaceIdSubjectsSubjectIdActivitiesNewRoute
+  '/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit': typeof SpacesSpaceIdSubjectsSubjectIdActivitiesObsIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -136,6 +146,7 @@ export interface FileRouteTypes {
     | '/spaces/$spaceId/subjects/$subjectId/activities'
     | '/spaces/$spaceId/subjects/$subjectId/'
     | '/spaces/$spaceId/subjects/$subjectId/activities/new'
+    | '/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -147,6 +158,7 @@ export interface FileRouteTypes {
     | '/spaces/$spaceId/subjects/$subjectId/activities'
     | '/spaces/$spaceId/subjects/$subjectId'
     | '/spaces/$spaceId/subjects/$subjectId/activities/new'
+    | '/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit'
   id:
     | '__root__'
     | '/'
@@ -160,6 +172,7 @@ export interface FileRouteTypes {
     | '/spaces/$spaceId/subjects/$subjectId/activities'
     | '/spaces/$spaceId/subjects/$subjectId/'
     | '/spaces/$spaceId/subjects/$subjectId/activities/new'
+    | '/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -247,6 +260,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SpacesSpaceIdSubjectsSubjectIdActivitiesNewRouteImport
       parentRoute: typeof SpacesSpaceIdSubjectsSubjectIdActivitiesRouteRoute
     }
+    '/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit': {
+      id: '/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit'
+      path: '/$obsId/edit'
+      fullPath: '/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit'
+      preLoaderRoute: typeof SpacesSpaceIdSubjectsSubjectIdActivitiesObsIdEditRouteImport
+      parentRoute: typeof SpacesSpaceIdSubjectsSubjectIdActivitiesRouteRoute
+    }
   }
 }
 
@@ -276,12 +296,15 @@ const PersonsRouteRouteWithChildren = PersonsRouteRoute._addFileChildren(
 
 interface SpacesSpaceIdSubjectsSubjectIdActivitiesRouteRouteChildren {
   SpacesSpaceIdSubjectsSubjectIdActivitiesNewRoute: typeof SpacesSpaceIdSubjectsSubjectIdActivitiesNewRoute
+  SpacesSpaceIdSubjectsSubjectIdActivitiesObsIdEditRoute: typeof SpacesSpaceIdSubjectsSubjectIdActivitiesObsIdEditRoute
 }
 
 const SpacesSpaceIdSubjectsSubjectIdActivitiesRouteRouteChildren: SpacesSpaceIdSubjectsSubjectIdActivitiesRouteRouteChildren =
   {
     SpacesSpaceIdSubjectsSubjectIdActivitiesNewRoute:
       SpacesSpaceIdSubjectsSubjectIdActivitiesNewRoute,
+    SpacesSpaceIdSubjectsSubjectIdActivitiesObsIdEditRoute:
+      SpacesSpaceIdSubjectsSubjectIdActivitiesObsIdEditRoute,
   }
 
 const SpacesSpaceIdSubjectsSubjectIdActivitiesRouteRouteWithChildren =
