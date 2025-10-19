@@ -6,7 +6,7 @@ from bridg import Repository
 from fastapi import APIRouter, Depends, HTTPException
 
 from api.db import get_repository
-from api.model import ConceptDescriptor
+from api.model.datatypes import ConceptDescriptor
 
 router = APIRouter(prefix="/code_system", tags=["value_set"])
 

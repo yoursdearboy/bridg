@@ -19,6 +19,27 @@ import {
   CharacterStringFromJSONTyped,
   CharacterStringToJSON,
 } from "./CharacterString";
+import type { CodedSimpleValue } from "./CodedSimpleValue";
+import {
+  instanceOfCodedSimpleValue,
+  CodedSimpleValueFromJSON,
+  CodedSimpleValueFromJSONTyped,
+  CodedSimpleValueToJSON,
+} from "./CodedSimpleValue";
+import type { CodedValue } from "./CodedValue";
+import {
+  instanceOfCodedValue,
+  CodedValueFromJSON,
+  CodedValueFromJSONTyped,
+  CodedValueToJSON,
+} from "./CodedValue";
+import type { ConceptDescriptor } from "./ConceptDescriptor";
+import {
+  instanceOfConceptDescriptor,
+  ConceptDescriptorFromJSON,
+  ConceptDescriptorFromJSONTyped,
+  ConceptDescriptorToJSON,
+} from "./ConceptDescriptor";
 import type { DataValue } from "./DataValue";
 import {
   instanceOfDataValue,
@@ -109,6 +130,9 @@ import {
  */
 export type DefinedObservationResultValue =
   | ({ dataType: "ANY" } & DataValue)
+  | ({ dataType: "CD" } & ConceptDescriptor)
+  | ({ dataType: "CS" } & CodedSimpleValue)
+  | ({ dataType: "CV" } & CodedValue)
   | ({ dataType: "ED" } & EncapsulatedData)
   | ({ dataType: "INT" } & IntegerNumber)
   | ({ dataType: "PQ" } & PhysicalQuantity)
@@ -139,6 +163,18 @@ export function DefinedObservationResultValueFromJSONTyped(
     case "ANY":
       return Object.assign({}, DataValueFromJSONTyped(json, true), {
         dataType: "ANY",
+      } as const);
+    case "CD":
+      return Object.assign({}, ConceptDescriptorFromJSONTyped(json, true), {
+        dataType: "CD",
+      } as const);
+    case "CS":
+      return Object.assign({}, CodedSimpleValueFromJSONTyped(json, true), {
+        dataType: "CS",
+      } as const);
+    case "CV":
+      return Object.assign({}, CodedValueFromJSONTyped(json, true), {
+        dataType: "CV",
       } as const);
     case "ED":
       return Object.assign({}, EncapsulatedDataFromJSONTyped(json, true), {
@@ -208,6 +244,18 @@ export function DefinedObservationResultValueToJSONTyped(
     case "ANY":
       return Object.assign({}, DataValueToJSON(value), {
         dataType: "ANY",
+      } as const);
+    case "CD":
+      return Object.assign({}, ConceptDescriptorToJSON(value), {
+        dataType: "CD",
+      } as const);
+    case "CS":
+      return Object.assign({}, CodedSimpleValueToJSON(value), {
+        dataType: "CS",
+      } as const);
+    case "CV":
+      return Object.assign({}, CodedValueToJSON(value), {
+        dataType: "CV",
       } as const);
     case "ED":
       return Object.assign({}, EncapsulatedDataToJSON(value), {

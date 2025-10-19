@@ -1,4 +1,5 @@
 from typing import Optional
+from uuid import UUID
 
 
 class DataValue:
@@ -15,6 +16,11 @@ class CharacterString(EncapsulatedData):
 
 class ConceptDescriptor(DataValue):
     data_type = "CD"
+    code_system: UUID
+
+    def __init__(self, code_system: UUID) -> None:
+        super().__init__()
+        self.code_system = code_system
 
 
 class CodedValue(ConceptDescriptor):
@@ -74,6 +80,9 @@ DATA_TYPE_TO_TYPE: dict[str, type[DataValue]] = {
     "ANY": DataValue,
     "ED": EncapsulatedData,
     "ST": CharacterString,
+    "CD": ConceptDescriptor,
+    "CV": CodedValue,
+    "CS": CodedSimpleValue,
     "ST.NT": StringNoTranslations,
     "ST.SIMPLE": StringSimple,
     "QTY": Quantity,

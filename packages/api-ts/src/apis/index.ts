@@ -8,3 +8,4 @@ export * from './PersonsApi';
 export * from './SitesApi';
 export * from './SpaceActivityApi';
 export * from './SubjectsApi';
+export * from './ValueSetApi';

@@ -80,6 +80,11 @@ defined_observation:
         value:
           data_type: TS.DATE
       - type: observation_result
+        type_code: { code: "dx", display_name: "Diagnosis" }
+        value:
+          data_type: CD
+          code_system: b365b97f-ff34-464c-9097-e7daec409f4c
+      - type: observation_result
         type_code: { code: "767002", display_name: "White blood cell count" }
         value:
           data_type: PQ

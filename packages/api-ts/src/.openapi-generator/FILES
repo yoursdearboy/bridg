@@ -7,6 +7,7 @@ apis/PersonsApi.ts
 apis/SitesApi.ts
 apis/SpaceActivityApi.ts
 apis/SubjectsApi.ts
+apis/ValueSetApi.ts
 apis/index.ts
 index.ts
 models/AdministrativeGender.ts
@@ -15,6 +16,9 @@ models/ApiSubjectNewStudySubjectPerson.ts
 models/ApiSubjectStudySubjectPerson.ts
 models/CharacterString.ts
 models/Code.ts
+models/CodedSimpleValue.ts
+models/CodedValue.ts
+models/ConceptDescriptor.ts
 models/DataValue.ts
 models/DateTime.ts
 models/DefinedActivity.ts
