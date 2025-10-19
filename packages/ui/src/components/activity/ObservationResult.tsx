@@ -1,16 +1,15 @@
 import { NumberInput, TextInput } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import type {
-  DefinedObservationResult,
-  DefinedObservationResultValue,
   ModelDate,
+  PerformedObservationResult,
   PhysicalQuantity,
 } from "api-ts";
 
 export const ObservationResult = ({
   result,
 }: {
-  result: DefinedObservationResult;
+  result: PerformedObservationResult;
 }) => {
   return (
     <Input
@@ -22,7 +21,7 @@ export const ObservationResult = ({
 
 interface InputProps {
   label: string | null;
-  value: DefinedObservationResultValue | null;
+  value: string | null;
 }
 
 const Input = ({ label, value }: InputProps) => {
@@ -46,7 +45,7 @@ const InputText = ({
   label,
 }: {
   label: string | null;
-  value: DefinedObservationResultValue | null;
+  value: string | null;
 }) => {
   return <TextInput label={label} />;
 };

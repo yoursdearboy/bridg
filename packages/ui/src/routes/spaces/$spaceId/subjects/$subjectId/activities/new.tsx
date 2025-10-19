@@ -1,9 +1,15 @@
-import { Card, Group, Stack, Title } from "@mantine/core";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { Card, Group, LoadingOverlay, Stack, Text, Title } from "@mantine/core";
+import {
+  queryOptions,
+  useQuery,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import type { StudyActivity } from "api-ts";
+import type { DefinedObservationResult, StudyActivity } from "api-ts";
+import { t } from "i18next";
 import api from "@/api";
 import { ActivityFormWrapper } from "@/components/activity/ActivityForm";
+import { defined2performedResult } from "@/components/activity/helpers/defined2performedResult";
 import i18next from "@/i18n";
 
 type SearchParams = {
@@ -40,6 +46,16 @@ function NewActivityComponent() {
   const { query } = Route.useRouteContext();
   const { data: activity } = useSuspenseQuery(query);
   const { spaceId, subjectId } = Route.useParams();
+  const resultsQuery = useQuery({
+    queryKey: ["subjects", subjectId, "activities", activity.id, "result"],
+    queryFn: () =>
+      api.spaceActivity.indexSpacesSpaceIdActivityObsIdResultGet({
+        spaceId,
+        obsId: activity.id,
+      }),
+  });
+  const { isPending, isError, error, data: results } = resultsQuery;
+
   return (
     <Stack gap="md">
       <Group justify="space-between">
@@ -49,12 +65,42 @@ function NewActivityComponent() {
       </Group>
 
       <Card>
-        <ActivityFormWrapper
-          activity={activity}
-          spaceId={spaceId}
-          subjectId={subjectId}
-        />
+        <LoadingOverlay visible={isPending} />
+        {isError && (
+          <Text color="red">{t("errorMessage", { error: error.message })}</Text>
+        )}
+        {!isPending && !isError && (
+          <ActivityFormWrapperT
+            spaceId={spaceId}
+            subjectId={subjectId}
+            results={results}
+          />
+        )}
       </Card>
     </Stack>
   );
 }
+
+interface ActivityFormWrapperTProps {
+  spaceId: string;
+  subjectId: string;
+  results: DefinedObservationResult[];
+}
+
+const ActivityFormWrapperT = ({
+  spaceId,
+  subjectId,
+  results,
+}: ActivityFormWrapperTProps) => {
+  const performedResults = results.map((result) =>
+    defined2performedResult(result)
+  );
+
+  return (
+    <ActivityFormWrapper
+      spaceId={spaceId}
+      subjectId={subjectId}
+      results={performedResults}
+    />
+  );
+};
