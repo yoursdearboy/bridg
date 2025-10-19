@@ -103,6 +103,8 @@ const StudyActivityMenu = ({ spaceId }: StudyActivityMenuProps) => {
     const currentActivity =
       data[i].usedDefinedActivity.categoryCode?.displayName;
     const currentCategory = data[i].usedDefinedActivity.nameCode.displayName;
+    const currentSubcategory =
+      data[i].usedDefinedActivity.subcategoryCode?.displayName;
 
     if (!currentActivity) continue;
 
@@ -120,20 +122,55 @@ const StudyActivityMenu = ({ spaceId }: StudyActivityMenuProps) => {
     if (!activityExists) {
       activities.push({
         name: currentActivity,
-        categories: [currentCategory],
+        categories: [
+          {
+            name: currentCategory,
+            subcategories: [currentSubcategory],
+          },
+        ],
       });
     } else {
       let categoryExists = false;
+      let categoryIndex = -1;
 
       for (let k = 0; k < activities[activityIndex].categories.length; k++) {
-        if (activities[activityIndex].categories[k] === currentCategory) {
+        if (activities[activityIndex].categories[k].name === currentCategory) {
           categoryExists = true;
+          categoryIndex = k;
           break;
         }
       }
 
       if (!categoryExists) {
-        activities[activityIndex].categories.push(currentCategory);
+        activities[activityIndex].categories.push({
+          name: currentCategory,
+          subcategories: [currentSubcategory],
+        });
+      } else {
+        let subcategoryExists = false;
+
+        for (
+          let l = 0;
+          l <
+          activities[activityIndex].categories[categoryIndex].subcategories
+            .length;
+          l++
+        ) {
+          if (
+            activities[activityIndex].categories[categoryIndex].subcategories[
+              l
+            ] === currentSubcategory
+          ) {
+            subcategoryExists = true;
+            break;
+          }
+        }
+
+        if (!subcategoryExists && currentSubcategory) {
+          activities[activityIndex].categories[
+            categoryIndex
+          ].subcategories.push(currentSubcategory);
+        }
       }
     }
   }
@@ -155,13 +192,25 @@ const StudyActivityMenu = ({ spaceId }: StudyActivityMenuProps) => {
               </Menu.Sub.Item>
             </Menu.Sub.Target>
 
-            <Menu.Dropdown>
+            <Menu.Sub.Dropdown>
               {activity.categories.map((category) => (
-                <Menu.Item key={category}>
-                  <Text>{category}</Text>
-                </Menu.Item>
+                <Menu.Sub key={category.name}>
+                  <Menu.Sub.Target>
+                    <Menu.Sub.Item>
+                      <Text>{category.name}</Text>
+                    </Menu.Sub.Item>
+                  </Menu.Sub.Target>
+
+                  <Menu.Sub.Dropdown>
+                    {category.subcategories.map((subcategory) => (
+                      <Menu.Item key={subcategory}>
+                        <Text>{subcategory}</Text>
+                      </Menu.Item>
+                    ))}
+                  </Menu.Sub.Dropdown>
+                </Menu.Sub>
               ))}
-            </Menu.Dropdown>
+            </Menu.Sub.Dropdown>
           </Menu.Sub>
         ))}
       </Menu.Dropdown>
