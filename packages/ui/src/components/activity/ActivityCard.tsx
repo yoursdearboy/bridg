@@ -95,8 +95,65 @@ const StudyActivityMenu = ({ spaceId }: StudyActivityMenuProps) => {
         id: "44444",
       },
     },
+    {
+      id: "4",
+      usedDefinedActivity: {
+        categoryCode: {
+          code: null,
+          id: "44",
+          displayName: "Treatment",
+        },
+        nameCode: {
+          code: null,
+          id: "444",
+          displayName: "Cat4",
+        },
+        subcategoryCode: null, // Нет подкатегории
+        description: "Smth",
+        id: "44444",
+      },
+    },
+    {
+      id: "5",
+      usedDefinedActivity: {
+        categoryCode: {
+          code: null,
+          id: "55",
+          displayName: "Treatment",
+        },
+        nameCode: {
+          code: null,
+          id: "",
+          displayName: "", // Нет категории
+        },
+        subcategoryCode: {
+          code: null,
+          id: "5555",
+          displayName: "SubCat5",
+        },
+        description: "Smth",
+        id: "55555",
+      },
+    },
+    {
+      id: "6",
+      usedDefinedActivity: {
+        categoryCode: null,
+        nameCode: {
+          code: null,
+          id: "666",
+          displayName: "Cat6",
+        },
+        subcategoryCode: {
+          code: null,
+          id: "6666",
+          displayName: "SubCat6",
+        },
+        description: "Smth",
+        id: "66666",
+      },
+    },
   ];
-
   const activities = [];
 
   for (let i = 0; i < data.length; i++) {
@@ -106,10 +163,36 @@ const StudyActivityMenu = ({ spaceId }: StudyActivityMenuProps) => {
     const currentSubcategory =
       data[i].usedDefinedActivity.subcategoryCode?.displayName;
 
-    if (!currentActivity) continue;
+    if (!currentActivity && currentCategory) {
+      let activityExists = false;
+      let activityIndex = 0;
+
+      for (let j = 0; j < activities.length; j++) {
+        if (activities[j].name === currentCategory) {
+          activityExists = true;
+          activityIndex = j;
+          break;
+        }
+      }
+
+      if (!activityExists) {
+        activities.push({
+          name: currentCategory,
+          categories: currentSubcategory
+            ? [
+                {
+                  name: currentSubcategory,
+                  subcategories: [],
+                },
+              ]
+            : [],
+        });
+      }
+      continue;
+    }
 
     let activityExists = false;
-    let activityIndex = -1;
+    let activityIndex = 0;
 
     for (let j = 0; j < activities.length; j++) {
       if (activities[j].name === currentActivity) {
@@ -120,61 +203,94 @@ const StudyActivityMenu = ({ spaceId }: StudyActivityMenuProps) => {
     }
 
     if (!activityExists) {
-      activities.push({
-        name: currentActivity,
-        categories: [
-          {
-            name: currentCategory,
-            subcategories: [currentSubcategory],
-          },
-        ],
-      });
-    } else {
-      let categoryExists = false;
-      let categoryIndex = -1;
-
-      for (let k = 0; k < activities[activityIndex].categories.length; k++) {
-        if (activities[activityIndex].categories[k].name === currentCategory) {
-          categoryExists = true;
-          categoryIndex = k;
-          break;
-        }
-      }
-
-      if (!categoryExists) {
-        activities[activityIndex].categories.push({
-          name: currentCategory,
-          subcategories: [currentSubcategory],
+      if (!currentCategory && currentSubcategory) {
+        activities.push({
+          name: currentActivity,
+          categories: [
+            {
+              name: currentSubcategory,
+              subcategories: [],
+            },
+          ],
         });
       } else {
-        let subcategoryExists = false;
+        activities.push({
+          name: currentActivity,
+          categories: [
+            {
+              name: currentCategory,
+              subcategories: [currentSubcategory],
+            },
+          ],
+        });
+      }
+    } else {
+      if (!currentCategory && currentSubcategory) {
+        let subcategoryAsCategoryExists = false;
 
-        for (
-          let l = 0;
-          l <
-          activities[activityIndex].categories[categoryIndex].subcategories
-            .length;
-          l++
-        ) {
+        for (let k = 0; k < activities[activityIndex].categories.length; k++) {
           if (
-            activities[activityIndex].categories[categoryIndex].subcategories[
-              l
-            ] === currentSubcategory
+            activities[activityIndex].categories[k].name === currentSubcategory
           ) {
-            subcategoryExists = true;
+            subcategoryAsCategoryExists = true;
             break;
           }
         }
 
-        if (!subcategoryExists && currentSubcategory) {
-          activities[activityIndex].categories[
-            categoryIndex
-          ].subcategories.push(currentSubcategory);
+        if (!subcategoryAsCategoryExists) {
+          activities[activityIndex].categories.push({
+            name: currentSubcategory,
+            subcategories: [],
+          });
+        }
+      } else {
+        let categoryExists = false;
+        let categoryIndex = 0;
+
+        for (let k = 0; k < activities[activityIndex].categories.length; k++) {
+          if (
+            activities[activityIndex].categories[k].name === currentCategory
+          ) {
+            categoryExists = true;
+            categoryIndex = k;
+            break;
+          }
+        }
+
+        if (!categoryExists) {
+          activities[activityIndex].categories.push({
+            name: currentCategory,
+            subcategories: [currentSubcategory],
+          });
+        } else {
+          let subcategoryExists = false;
+
+          for (
+            let l = 0;
+            l <
+            activities[activityIndex].categories[categoryIndex].subcategories
+              .length;
+            l++
+          ) {
+            if (
+              activities[activityIndex].categories[categoryIndex].subcategories[
+                l
+              ] === currentSubcategory
+            ) {
+              subcategoryExists = true;
+              break;
+            }
+          }
+
+          if (!subcategoryExists && currentSubcategory) {
+            activities[activityIndex].categories[
+              categoryIndex
+            ].subcategories.push(currentSubcategory);
+          }
         }
       }
     }
   }
-
   console.log(activities);
 
   return (
