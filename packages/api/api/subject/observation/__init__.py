@@ -4,7 +4,7 @@ from uuid import UUID
 
 import bridg
 from bridg.repository import Repository
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import Field, computed_field
 
 from api.base_model import BaseModel, Code
@@ -68,6 +68,12 @@ def index(space_id: UUID, subject_id: UUID, repo: ObservationRepositoryDep) -> L
     objs = repo.all(bridg.PerformedObservation.involved_subject_id == subject_id)
     return [PerformedObservation.model_validate(obj) for obj in objs]
 
+
+@router.get("/{obs_id:uuid}")
+def show(space_id: UUID, subject_id: UUID, obs_id: UUID, repo: ObservationRepositoryDep) -> Optional[PerformedObservation]:
+    if obj := repo.one_or_none(obs_id):
+        return PerformedObservation.model_validate(obj)
+    raise HTTPException(status_code=404)
 
 router.include_router(result.router, prefix="/{obs_id:uuid}")
 
