@@ -1,3 +1,21 @@
+code_system:
+  - id: f1c13ae3-715b-47ce-8d6a-9645d313d16b
+    concept:
+      - { code: "NK", display_name: "Normal Karyotype" }
+      - { code: "tri21", display_name: "Trisomy 21" }
+      - { code: "t(8;21)", display_name: "t(8;21)" }
+  - id: b365b97f-ff34-464c-9097-e7daec409f4c
+    concept:
+      - { code: "M0", display_name: "Undifferentiated acute myeloblastic leukemia" }
+      - { code: "M1", display_name: "Acute myeloblastic leukemia with minimal maturation" }
+      - { code: "M2", display_name: "Acute myeloblastic leukemia with maturation" }
+      - { code: "M3", display_name: "Acute promyelocytic leukemia" }
+      - { code: "M4", display_name: "Acute myelomonocytic leukemia" }
+      - { code: "M4eos", display_name: "Acute myelomonocytic leukemia with eosinophilia" }
+      - { code: "M5", display_name: "Acute monocytic leukemia" }
+      - { code: "M6", display_name: "Acute erythroid leukemia" }
+      - { code: "M7", display_name: "Acute megakaryocytic leukemia" }
+
 person:
   - name:
       - { use: official, family: Doe, given: John }

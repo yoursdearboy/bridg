@@ -40,6 +40,7 @@ bridg.converter.register_structure_hook_func(lambda x: issubclass(x, bridg.Code)
 Root = TypedDict(
     "Root",
     {
+        "code_system": List[bridg.core.CodeSystem],
         "defined_activity.name_code": List[bridg.DefinedActivity.NameCode],
         "defined_activity.category_code": List[bridg.DefinedActivity.CategoryCode],
         "defined_activity.subcategory_code": List[bridg.DefinedActivity.SubcategoryCode],

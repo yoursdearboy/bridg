@@ -14,6 +14,7 @@ def camel_to_snake_case(x):
     return camel_to_snake_case_pattern.sub("_", x).lower()
 
 
+# FIXME: somehow align with datatypes.ConceptDescriptor and core.ConceptDescriptor
 class Code(Base):
     __abstract__ = True
 
