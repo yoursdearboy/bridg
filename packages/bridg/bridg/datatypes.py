@@ -13,6 +13,18 @@ class CharacterString(EncapsulatedData):
     data_type = "ST"
 
 
+class ConceptDescriptor(DataValue):
+    data_type = "CD"
+
+
+class CodedValue(ConceptDescriptor):
+    data_type = "CV"
+
+
+class CodedSimpleValue(CodedValue):
+    data_type = "CS"
+
+
 class StringNoTranslations(CharacterString):
     data_type = "ST.NT"
 
