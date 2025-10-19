@@ -3,6 +3,13 @@
 @subject_id=1944C046-95B3-4CB4-82E2-C789950E29FC
 @person_id=99132ae7-25dd-43ba-808e-cdb3b29af285
 @space_cbc_id=66da8ea1-5e69-40f2-a720-9937430d582d
+@code_system_fab_id=b365b97f-ff34-464c-9097-e7daec409f4c
+
+# Code System
+
+### Expand codesystem
+
+GET {{base}}/code_system/{{code_system_fab_id}}/$expand
 
 # Spaces
 
