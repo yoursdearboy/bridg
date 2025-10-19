@@ -1,4 +1,4 @@
-import { LoadingOverlay, Text } from "@mantine/core";
+import { Card, Group, LoadingOverlay, Stack, Text, Title } from "@mantine/core";
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import type { PerformedObservation } from "api-ts";
@@ -58,18 +58,27 @@ function EditObservationComponent() {
   });
   const { isPending, isError, error, data: results } = query;
   return (
-    <>
-      <LoadingOverlay visible={isPending} />
-      {isError && (
-        <Text color="red">{t("errorMessage", { error: error.message })}</Text>
-      )}
-      {!isPending && !isError && (
-        <ActivityFormWrapper
-          spaceId={spaceId}
-          subjectId={subjectId}
-          results={results}
-        />
-      )}
-    </>
+    <Stack gap="md">
+      <Group justify="space-between">
+        <Title order={2}>
+          {observation.instantiatedDefinedActivity?.nameCode.displayName ||
+            "unnamed observation"}
+        </Title>
+      </Group>
+
+      <Card>
+        <LoadingOverlay visible={isPending} />
+        {isError && (
+          <Text color="red">{t("errorMessage", { error: error.message })}</Text>
+        )}
+        {!isPending && !isError && (
+          <ActivityFormWrapper
+            spaceId={spaceId}
+            subjectId={subjectId}
+            results={results}
+          />
+        )}
+      </Card>
+    </Stack>
   );
 }
