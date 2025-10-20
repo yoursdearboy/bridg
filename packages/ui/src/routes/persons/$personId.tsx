@@ -15,6 +15,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type { Person } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+import { PersonActivityTimelineCard } from "@/components/person/activityTimelineCard";
 import { AddressCardWrapper } from "@/components/person/address/AddressCard";
 import { EditNameForm } from "@/components/person/name/EditNameForm";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
@@ -84,6 +85,9 @@ function PersonShowPage() {
             <AddressCardWrapper personId={personId} />
             <Space h="md" />
             <TelecommunicationAddressCardWrapper personId={personId} />
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, md: 8 }}>
+            <PersonActivityTimelineCard personId={personId} />
           </Grid.Col>
         </Grid>
       </Stack>
