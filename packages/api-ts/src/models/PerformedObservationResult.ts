@@ -20,6 +20,13 @@ import {
     CodeToJSON,
     CodeToJSONTyped,
 } from './Code';
+import type { DefinedObservationResultValue } from './DefinedObservationResultValue';
+import {
+    DefinedObservationResultValueFromJSON,
+    DefinedObservationResultValueFromJSONTyped,
+    DefinedObservationResultValueToJSON,
+    DefinedObservationResultValueToJSONTyped,
+} from './DefinedObservationResultValue';
 
 /**
  * 
@@ -41,10 +48,10 @@ export interface PerformedObservationResult {
     typeCode: Code | null;
     /**
      * 
-     * @type {string}
+     * @type {DefinedObservationResultValue}
      * @memberof PerformedObservationResult
      */
-    value: string | null;
+    value: DefinedObservationResultValue | null;
     /**
      * 
      * @type {string}
@@ -111,7 +118,7 @@ export function PerformedObservationResultFromJSONTyped(json: any, ignoreDiscrim
         
         'id': json['id'],
         'typeCode': CodeFromJSON(json['type_code']),
-        'value': json['value'],
+        'value': DefinedObservationResultValueFromJSON(json['value']),
         'valueNullFlavorReason': json['value_null_flavor_reason'],
         'baselineIndicator': json['baseline_indicator'],
         'derivedIndicator': json['derived_indicator'],
@@ -134,7 +141,7 @@ export function PerformedObservationResultToJSONTyped(value?: PerformedObservati
         
         'id': value['id'],
         'type_code': CodeToJSON(value['typeCode']),
-        'value': value['value'],
+        'value': DefinedObservationResultValueToJSON(value['value']),
         'value_null_flavor_reason': value['valueNullFlavorReason'],
         'baseline_indicator': value['baselineIndicator'],
         'derived_indicator': value['derivedIndicator'],

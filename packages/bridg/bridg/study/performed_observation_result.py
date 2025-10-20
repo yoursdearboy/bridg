@@ -6,6 +6,8 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..core import Code, code_column
+from ..data_value_decorator import DataValueDecorator
+from ..datatypes import DataValue
 from ..db import Base
 from .performed_observation import PerformedObservation
 
@@ -22,7 +24,7 @@ class PerformedObservationResult(Base):
     type_code_id: Mapped[Optional[UUID]] = code_column(TypeCode)
     type_code: Mapped[Optional[TypeCode]] = relationship()
 
-    value: Mapped[Optional[str]]
+    value: Mapped[Optional[DataValue]] = mapped_column(DataValueDecorator())
     value_null_flavor_reason: Mapped[Optional[str]]
 
     baseline_indicator: Mapped[Optional[bool]]

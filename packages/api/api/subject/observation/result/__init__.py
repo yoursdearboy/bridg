@@ -5,15 +5,17 @@ from uuid import UUID
 import bridg
 from bridg.repository import Repository
 from fastapi import APIRouter, Depends
+from pydantic import Field
 
 from api.base_model import BaseModel, Code
 from api.db import get_repository
+from api.model.datatypes import DataValueUnion
 
 
 class PerformedObservationResult(BaseModel):
     id: UUID
     type_code: Optional[Code]
-    value: Optional[str]
+    value: Optional[DataValueUnion] = Field(discriminator="data_type")
     value_null_flavor_reason: Optional[str]
     baseline_indicator: Optional[bool]
     derived_indicator: Optional[bool]
