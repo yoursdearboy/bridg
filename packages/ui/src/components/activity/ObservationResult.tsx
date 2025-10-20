@@ -86,7 +86,7 @@ const ConceptDescriptorSelect = ({
         visible={isLoading}
         loaderProps={{ size: 16, type: "dots" }}
       />
-      <Select label={label} data={options} />
+      <Select label={label} data={options} clearable />
     </Box>
   );
 };
