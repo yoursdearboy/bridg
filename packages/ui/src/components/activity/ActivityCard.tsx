@@ -263,58 +263,52 @@ const StudyActivityMenu = ({ spaceId }: StudyActivityMenuProps) => {
 
       <Menu.Dropdown>
         {activities.map((activity) => (
-          <>
-            <Menu.Sub key={activity.name}>
-              <Menu.Sub.Target>
-                {activity.name ? (
+          <div key={activity.name}>
+            {activity.categories.length > 0 &&
+            activity.categories.some((cat) => cat.name !== activity.name) ? (
+              <Menu.Sub key={activity.name}>
+                <Menu.Sub.Target>
                   <Menu.Sub.Item>
                     <Text>{activity.name}</Text>
                   </Menu.Sub.Item>
-                ) : (
-                  <Menu.Item>
-                    <Text>{activity.name}</Text>
-                  </Menu.Item>
-                )}
-              </Menu.Sub.Target>
+                </Menu.Sub.Target>
 
-              <Menu.Sub.Dropdown>
-                {activity.categories.map((category) => (
-                  <>
-                    {/* {console.log(activity.name)}
-                    {console.log(category.name)} */}
-                    {activity.name != category.name && (
-                      <Menu.Sub key={category.name}>
-                        <>
+                <Menu.Sub.Dropdown>
+                  {activity.categories.map((category) => (
+                    <div key={category.name}>
+                      {activity.name !== category.name &&
+                      category.subcategories.length > 0 ? (
+                        <Menu.Sub key={category.name}>
                           <Menu.Sub.Target>
-                            {category.subcategories.length != 0 ? (
-                              <Menu.Sub.Item>
-                                <Text>{category.name}</Text>
-                              </Menu.Sub.Item>
-                            ) : (
-                              <Menu.Item>
-                                <Text>{category.name}</Text>
-                              </Menu.Item>
-                            )}
+                            <Menu.Sub.Item>
+                              <Text>{category.name}</Text>
+                            </Menu.Sub.Item>
                           </Menu.Sub.Target>
-                        </>
-                        {category.subcategories.length > 0 && (
                           <Menu.Sub.Dropdown>
                             {category.subcategories.map((subcategory) => (
-                              <>
-                                <Menu.Item key={subcategory}>
-                                  <Text>{subcategory}</Text>
-                                </Menu.Item>
-                              </>
+                              <Menu.Item key={subcategory}>
+                                <Text>{subcategory}</Text>
+                              </Menu.Item>
                             ))}
                           </Menu.Sub.Dropdown>
-                        )}
-                      </Menu.Sub>
-                    )}
-                  </>
-                ))}
-              </Menu.Sub.Dropdown>
-            </Menu.Sub>
-          </>
+                        </Menu.Sub>
+                      ) : (
+                        activity.name !== category.name && (
+                          <Menu.Item key={category.name}>
+                            <Text>{category.name}</Text>
+                          </Menu.Item>
+                        )
+                      )}
+                    </div>
+                  ))}
+                </Menu.Sub.Dropdown>
+              </Menu.Sub>
+            ) : (
+              <Menu.Item key={activity.name}>
+                <Text>{activity.name}</Text>
+              </Menu.Item>
+            )}
+          </div>
         ))}
       </Menu.Dropdown>
     </Menu>
