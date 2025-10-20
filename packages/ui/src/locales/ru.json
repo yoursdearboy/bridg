@@ -80,8 +80,8 @@
       "editModalTitile": "Редактирование данных человека"
     },
     "PersonCard": {
-      "deceased": "Умерший",
-      "notDeceased": "Живой",
+      "deceased": "Умер",
+      "notDeceased": "Жив",
       "dateNotSpecified": "Дата не указана"
     },
     "NamesCard": {
@@ -101,10 +101,10 @@
       "id": "ID",
       "administrativeGenderCode": "Пол",
       "birthDate": "Дата рождения",
-      "deathDate": "Дата смерта",
+      "deathDate": "Дата смерти",
       "deathDateEstimatedIndicator": "Предполагаемый показатель даты смерти",
-      "deathIndicator": "Показатель смертности",
-      "primaryName": "Текущее имя",
+      "deathIndicator": "Смерть",
+      "primaryName": "ФИО",
       "age": "Возраст"
     },
     "Organization": {
