@@ -17,8 +17,7 @@ class PersonRepository(Repository[bridg.Person]):
     _sa = bridg.Person
 
 
-PersonRepositoryDep = Annotated[PersonRepository,
-                                Depends(get_repository(PersonRepository))]
+PersonRepositoryDep = Annotated[PersonRepository, Depends(get_repository(PersonRepository))]
 
 
 @router.get("/{person_id:uuid}")
@@ -38,9 +37,7 @@ def update(person_id: UUID, data: PersonData, repo: PersonRepositoryDep) -> Pers
 
 router.include_router(name.router, prefix="/{person_id:uuid}")
 router.include_router(postal_address.router, prefix="/{person_id:uuid}")
-router.include_router(telecommunication_address.router,
-                      prefix="/{person_id:uuid}")
+router.include_router(telecommunication_address.router, prefix="/{person_id:uuid}")
 router.include_router(subjects.router, prefix="/{person_id:uuid}")
 
-openapi_tags = [{"name": "persons", "postal_address": "persons",
-                 "telecommunication_address": "persons"}]
+openapi_tags = [{"name": "persons", "postal_address": "persons", "telecommunication_address": "persons"}]

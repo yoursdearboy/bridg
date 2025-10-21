@@ -7,10 +7,6 @@ from api.subject import StudySubject, StudySubjectRepositoryDep
 
 router = APIRouter(prefix="/subjects", tags=["subjects"])
 
-class PersonStudySubject(StudySubject):
-    _sa: StudySubject
-
-    performing_biologic_entity: UUID
 
 @router.get("")
 def index(person_id: UUID, repo: StudySubjectRepositoryDep) -> List[StudySubject]:
