@@ -86,7 +86,7 @@ function PersonShowPage() {
             <Space h="md" />
             <TelecommunicationAddressCardWrapper personId={personId} />
           </Grid.Col>
-          <Grid.Col span={{ base: 12, md: 8 }}>
+          <Grid.Col span={{ base: 12, md: 4 }}>
             <PersonActivityTimelineCard personId={personId} />
           </Grid.Col>
         </Grid>

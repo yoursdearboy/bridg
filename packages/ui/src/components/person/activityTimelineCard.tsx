@@ -1,4 +1,11 @@
-import { Card, LoadingOverlay, Space, Text, Timeline } from "@mantine/core";
+import {
+  Box,
+  Card,
+  LoadingOverlay,
+  Space,
+  Text,
+  Timeline,
+} from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import type { PerformedObservation, StudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
@@ -28,7 +35,9 @@ export const PersonActivityTimelineCard = ({
         <Text color="red">{t("errorMessage", { error: error.message })}</Text>
       )}
       {!isPending && !isError && (
-        <SubjectsTimelineWrapper subjects={subjects} personId={personId} />
+        <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <SubjectsTimelineWrapper subjects={subjects} personId={personId} />
+        </Card>
       )}
     </>
   );
@@ -47,25 +56,27 @@ const SubjectsTimelineWrapper = ({
 
   return (
     <>
-      {subjects.length === 0 ? (
-        t("nodata")
-      ) : (
-        <Timeline bulletSize={36} color="indigo" active={subjects.length}>
-          {subjects.map((subject) => (
-            <Timeline.Item
-              title={subject.status ? t(`Status.${subject.status}`) : t("na")}
-            >
-              <Text c="dimmed" size="md">
-                {t("intlDateTime", { val: subject.statusDate })}
-              </Text>
-              <Space h="md" />
-              <Card withBorder shadow="sm" radius="md" padding="xs">
+      {subjects.length === 0
+        ? t("nodata")
+        : subjects.map((subject) => (
+            <>
+              <Timeline bulletSize={36} active={subjects.length}>
+                <Timeline.Item
+                  title={
+                    subject.status ? t(`Status.${subject.status}`) : t("na")
+                  }
+                >
+                  <Text c="dimmed" size="md">
+                    {t("intlDateTime", { val: subject.statusDate })}
+                  </Text>
+                  <Space h="md" />
+                </Timeline.Item>
+              </Timeline>
+              <Box px={7}>
                 <SubjectTimeline subject={subject} personId={personId} />
-              </Card>
-            </Timeline.Item>
+              </Box>
+            </>
           ))}
-        </Timeline>
-      )}
     </>
   );
 };
@@ -114,7 +125,7 @@ const SubjectActivityTimelineCard = ({
   activities,
 }: SubjectActivityTimelineCardProps) => {
   return (
-    <Timeline bulletSize={24}>
+    <Timeline bulletSize={24} active={activities.length} color="yellow">
       {activities.map((activity) => (
         <TimelineBullet activity={activity} />
       ))}
@@ -129,12 +140,12 @@ interface TimelineBulletProps {
 const TimelineBullet = ({ activity }: TimelineBulletProps) => {
   const { t } = useTranslation();
   return (
-    <Timeline.Item
-      title={
-        activity.instantiatedDefinedActivity?.nameCode.displayName || "unnamed"
-      }
-    >
-      <Text c="dimmed" size="sm">
+    <Timeline.Item>
+      <Text size="md" ml={10}>
+        {activity.instantiatedDefinedActivity?.nameCode.displayName ||
+          "unnamed"}
+      </Text>
+      <Text c="dimmed" size="sm" ml={10}>
         {t("intlDateTime", { val: activity.statusDate })}
       </Text>
     </Timeline.Item>
