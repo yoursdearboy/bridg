@@ -12,6 +12,7 @@ import {
   useMantineColorScheme,
   useMantineTheme,
 } from "@mantine/core";
+import { IconChevronDown } from "@tabler/icons-react";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import {
   createRootRouteWithContext,
@@ -46,18 +47,27 @@ function LanguageSwitcher() {
 }
 
 function Nav() {
-  const query = useQuery({
+  const { spaceId }: { spaceId?: string } = Route.useParams();
+  const spaces = useQuery({
     queryKey: ["spaces"],
     queryFn: () => api.spaces.indexSpacesGet(),
   });
+  const space = spaces.data?.find((s) => s.id == spaceId);
+  const theme = useMantineTheme();
+  const spaceTitle = space?.name || "Регистр НМИЦ ДГОИ";
   return (
-    <>
-      <Menu>
+    <Group>
+      <Menu position="bottom-end" width={200}>
         <Menu.Target>
-          <Button size="compact-md">Spaces</Button>
+          <Title size={18} c={theme.primaryColor}>
+            <Group gap={0}>
+              {spaceTitle}
+              <IconChevronDown />
+            </Group>
+          </Title>
         </Menu.Target>
         <Menu.Dropdown>
-          {query.data?.map((s) => (
+          {spaces.data?.map((s) => (
             <MenuItemLink
               key={s.id}
               to="/spaces/$spaceId/subjects"
@@ -69,24 +79,12 @@ function Nav() {
           ))}
         </Menu.Dropdown>
       </Menu>
-    </>
+    </Group>
   );
 }
 
 function Logo() {
-  const theme = useMantineTheme();
-  return (
-    <Group>
-      <img
-        src={logo}
-        width={25}
-        style={{ border: "1px solid #AA230F", borderRadius: 12 }}
-      />
-      <Title ml={-8} size="h3" c={theme.primaryColor}>
-        BRIDG
-      </Title>
-    </Group>
-  );
+  return <img src={logo} width={32} />;
 }
 
 function ThemeSwitcher() {
