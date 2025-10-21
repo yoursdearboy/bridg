@@ -1,4 +1,4 @@
-import { Card, Group, Stack, Title } from "@mantine/core";
+import { Card, Grid, Group, Stack, Title } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import type { StudyActivity } from "api-ts";
@@ -48,13 +48,17 @@ function NewActivityComponent() {
         </Title>
       </Group>
 
-      <Card>
-        <ActivityFormWrapper
-          activity={activity}
-          spaceId={spaceId}
-          subjectId={subjectId}
-        />
-      </Card>
+      <Grid>
+        <Grid.Col span={{ base: 12, xs: 8, md: 4, lg: 3 }}>
+          <Card>
+            <ActivityFormWrapper
+              activity={activity}
+              spaceId={spaceId}
+              subjectId={subjectId}
+            />
+          </Card>
+        </Grid.Col>
+      </Grid>
     </Stack>
   );
 }

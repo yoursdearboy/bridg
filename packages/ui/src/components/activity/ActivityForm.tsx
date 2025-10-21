@@ -53,8 +53,8 @@ interface ActivityFormProps {
 const ActivityForm = ({ results }: ActivityFormProps) => {
   const { t } = useTranslation();
   return (
-    <Stack align="flex-start" gap="md">
-      <Stack>
+    <Stack align="flex-start" w="100%">
+      <Stack w="100%">
         {results.map((result) => (
           <ObservationResult result={result} />
         ))}
