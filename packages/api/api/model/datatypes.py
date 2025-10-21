@@ -21,6 +21,7 @@ class CharacterString(EncapsulatedData):
 
 class ConceptDescriptor(DataValue):
     data_type: Literal["CD"] = "CD"
+    # FIXME: code not optional
     code: str = None
     code_system: UUID
     display_name: Optional[str] = None
@@ -65,6 +66,7 @@ class RealNumber(ZeroedQuantity):
     data_type: Literal["REAL"]
 
 
+# FIXME: add value (not optional)
 class PhysicalQuantity(ZeroedQuantity):
     data_type: Literal["PQ"]
     unit: Optional[str]

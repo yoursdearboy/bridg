@@ -9,9 +9,9 @@ import { DateInput } from "@mantine/dates";
 import { useQuery } from "@tanstack/react-query";
 import type {
   ConceptDescriptor,
-  DefinedObservationResult,
   DefinedObservationResultValue,
   ModelDate,
+  PerformedObservationResult,
   PhysicalQuantity,
 } from "api-ts";
 import api from "@/api";
@@ -19,7 +19,7 @@ import api from "@/api";
 export const ObservationResult = ({
   result,
 }: {
-  result: DefinedObservationResult;
+  result: PerformedObservationResult;
 }) => {
   return (
     <Input
@@ -78,6 +78,7 @@ const ConceptDescriptorSelect = ({
   });
   const options = (data || []).map((cd) => ({
     label: cd.displayName || cd.code,
+    // FIXME: code must be defined
     value: cd.code,
   }));
   return (

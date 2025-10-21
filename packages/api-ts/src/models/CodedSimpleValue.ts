@@ -30,7 +30,7 @@ export interface CodedSimpleValue {
      * @type {string}
      * @memberof CodedSimpleValue
      */
-    code: string;
+    code?: string;
     /**
      * 
      * @type {string}
@@ -42,7 +42,7 @@ export interface CodedSimpleValue {
      * @type {string}
      * @memberof CodedSimpleValue
      */
-    displayName: string | null;
+    displayName?: string | null;
 }
 
 
@@ -59,9 +59,7 @@ export type CodedSimpleValueDataTypeEnum = typeof CodedSimpleValueDataTypeEnum[k
  * Check if a given object implements the CodedSimpleValue interface.
  */
 export function instanceOfCodedSimpleValue(value: object): value is CodedSimpleValue {
-    if (!('code' in value) || value['code'] === undefined) return false;
     if (!('codeSystem' in value) || value['codeSystem'] === undefined) return false;
-    if (!('displayName' in value) || value['displayName'] === undefined) return false;
     return true;
 }
 
@@ -76,9 +74,9 @@ export function CodedSimpleValueFromJSONTyped(json: any, ignoreDiscriminator: bo
     return {
         
         'dataType': json['data_type'] == null ? undefined : json['data_type'],
-        'code': json['code'],
+        'code': json['code'] == null ? undefined : json['code'],
         'codeSystem': json['code_system'],
-        'displayName': json['display_name'],
+        'displayName': json['display_name'] == null ? undefined : json['display_name'],
     };
 }
 
