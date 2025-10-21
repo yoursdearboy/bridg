@@ -45,6 +45,10 @@ export interface CreateSpacesSpaceIdSubjectsPostRequest {
     newStudySubject: NewStudySubject;
 }
 
+export interface IndexPersonsPersonIdSubjectsGetRequest {
+    personId: string;
+}
+
 export interface IndexSpacesSpaceIdSubjectsGetRequest {
     spaceId: string;
 }
@@ -125,6 +129,43 @@ export class SubjectsApi extends runtime.BaseAPI {
      */
     async createSpacesSpaceIdSubjectsPost(requestParameters: CreateSpacesSpaceIdSubjectsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StudySubject> {
         const response = await this.createSpacesSpaceIdSubjectsPostRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Index
+     */
+    async indexPersonsPersonIdSubjectsGetRaw(requestParameters: IndexPersonsPersonIdSubjectsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<StudySubject>>> {
+        if (requestParameters['personId'] == null) {
+            throw new runtime.RequiredError(
+                'personId',
+                'Required parameter "personId" was null or undefined when calling indexPersonsPersonIdSubjectsGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/persons/{person_id}/subjects`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StudySubjectFromJSON));
+    }
+
+    /**
+     * Index
+     */
+    async indexPersonsPersonIdSubjectsGet(requestParameters: IndexPersonsPersonIdSubjectsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StudySubject>> {
+        const response = await this.indexPersonsPersonIdSubjectsGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
