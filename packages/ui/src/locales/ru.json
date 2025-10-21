@@ -136,7 +136,7 @@
       "performingBiologicEntity": "Человек",
       "performingOrganization": "Организация",
       "type": "Тип",
-      "assignedStudySiteProtocolVersionRelationship": "Область изучения"
+      "assignedStudySiteProtocolVersionRelationship": "Исследовательский центр"
     },
     "Status": {
       "candidate": "Кандидат",
