@@ -221,13 +221,19 @@ study_subject:
         resulted_performed_observation_result:
           - type: observation_result
             type_code: { code: "767002", display_name: "White blood cell count" }
-            value: { data_type: "PQ", value: 8, unit: "10^9/l" }
+            value: { data_type: "PQ", unit: "10^9/l" }
+            # FIXME: add value support
+            # value: { data_type: "PQ", value: 8, unit: "10^9/l" }
           - type: observation_result
             type_code: { code: "30630007", display_name: "Neutrophil count" }
-            value: { data_type: "PQ", value: 5 }
+            value: { data_type: "PQ" }
+            # FIXME: add value support
+            # value: { data_type: "PQ", value: 5 }
           - type: observation_result
             type_code: { code: "61928009", display_name: "Platelet count" }
-            value: { data_type: "PQ", value: 200 }
+            value: { data_type: "PQ" }
+            # FIXME: add value support
+            # value: { data_type: "PQ", value: 200 }
       - type: substance_administration
         containing_epoch: *aml-mrd-2018-induction
         executing_study_protocol_version: *aml-mrd-2018
