@@ -76,14 +76,14 @@ function PersonShowPage() {
         </Group>
 
         <Grid>
-          <Grid.Col span={{ base: 12, md: 4 }}>
+          <Grid.Col span={{ base: 12, sm: 6, lg: 4 }}>
             <PersonCard person={person} />
-            <Space h="md" />
-            <NamesCardWrapper personId={personId} />
             <Space h="md" />
             <AddressCardWrapper personId={personId} />
             <Space h="md" />
             <TelecommunicationAddressCardWrapper personId={personId} />
+            <Space h="md" />
+            <NamesCardWrapper personId={personId} />
           </Grid.Col>
         </Grid>
       </Stack>
