@@ -11,11 +11,11 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import type { Person } from "api-ts";
 import dayjs from "dayjs";
+import ButtonLink from "@/components/ButtonLink";
 import { useTranslation } from "react-i18next";
 import { InfoRow } from "@/components/InfoRow";
 import { Route as personRoute } from "@/routes/persons/$personId";
-import { EditPersonForm } from "./EditPersonForm";
-import ButtonLink from "../ButtonLink";
+import { EditPersonForm } from "@/components/person/EditPersonForm";
 
 interface PersonCardProps {
   person: Person;
