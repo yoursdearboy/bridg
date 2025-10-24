@@ -3,6 +3,7 @@ import { DatesProvider } from "@mantine/dates";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   type AnyRoute,
+  createRootRoute,
   createRootRouteWithContext,
   createRoute,
   createRouter,
@@ -10,6 +11,7 @@ import {
 } from "@tanstack/react-router";
 import { act, render } from "@testing-library/react";
 import "./i18n";
+import type { PropsWithChildren } from "react";
 
 const queryClient = new QueryClient();
 
@@ -53,3 +55,22 @@ export const renderRoute = (
 
 export const renderComponent = (component: React.ReactNode) =>
   render(<App>{component}</App>);
+
+
+export const EmptyRouterProvider = (props: PropsWithChildren) => {
+  const rootRoute = createRootRoute({
+    component: () => props.children,
+  })
+
+  const router = createRouter({
+    routeTree: rootRoute.addChildren([
+      createRoute({
+        path: "*",
+        component: () => props.children,
+        getParentRoute: () => rootRoute,
+      }),
+    ]),
+  })
+
+  return <RouterProvider router={router} />
+}
