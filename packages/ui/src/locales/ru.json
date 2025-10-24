@@ -60,7 +60,7 @@
     "SubjectShowPage": {
       "title": "Данные пациента",
       "back": "Назад к списку",
-      "toPerson": "На страницу человека",
+      "toPerson": "Перейти",
       "breadcrumbDefault": "Неизвестный пациент"
     },
     "PersonShowPage": {

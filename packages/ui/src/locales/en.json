@@ -60,7 +60,7 @@
     "SubjectShowPage": {
       "title": "Patient information",
       "back": "Back to list",
-      "toPerson": "Go to person page",
+      "toPerson": "Go to",
       "breadcrumbDefault": "Anonymous subject"
     },
     "PersonShowPage": {
