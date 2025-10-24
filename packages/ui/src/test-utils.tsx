@@ -56,11 +56,10 @@ export const renderRoute = (
 export const renderComponent = (component: React.ReactNode) =>
   render(<App>{component}</App>);
 
-
 export const EmptyRouterProvider = (props: PropsWithChildren) => {
   const rootRoute = createRootRoute({
     component: () => props.children,
-  })
+  });
 
   const router = createRouter({
     routeTree: rootRoute.addChildren([
@@ -70,7 +69,11 @@ export const EmptyRouterProvider = (props: PropsWithChildren) => {
         getParentRoute: () => rootRoute,
       }),
     ]),
-  })
+  });
 
-  return <RouterProvider router={router} />
-}
+  return (
+    <App>
+      <RouterProvider router={router} />
+    </App>
+  );
+};
