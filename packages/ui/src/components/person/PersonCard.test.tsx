@@ -1,8 +1,8 @@
-import { describe, expect, it } from "vitest";
-import { EmptyRouterProvider, renderComponent } from "@/test-utils";
-import { PersonCard } from "./PersonCard";
-import { act } from "react";
 import { render } from "@testing-library/react";
+import { act } from "react";
+import { describe, expect, it } from "vitest";
+import { EmptyRouterProvider } from "@/test-utils";
+import { PersonCard } from "./PersonCard";
 
 describe("PersonCard", () => {
   it("matches snapshot", async () => {

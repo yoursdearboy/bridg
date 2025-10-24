@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { MantineProvider } from "@mantine/core";
 import { DatesProvider } from "@mantine/dates";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -15,7 +16,6 @@ import type { PropsWithChildren } from "react";
 
 const queryClient = new QueryClient();
 
-// eslint-disable-next-line react-refresh/only-export-components
 const App = ({ children }: React.PropsWithChildren) => {
   return (
     <QueryClientProvider client={queryClient}>
