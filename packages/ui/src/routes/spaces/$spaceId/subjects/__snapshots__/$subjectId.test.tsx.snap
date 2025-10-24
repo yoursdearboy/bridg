@@ -82,23 +82,48 @@ exports[`show page renders correctly 1`] = `
                 >
                   Person information
                 </p>
-                <button
-                  class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
-                  data-size="compact-sm"
-                  data-variant="outline"
-                  style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline); font-weight: 500;"
-                  type="button"
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
                 >
-                  <span
-                    class="m_80f1301b mantine-Button-inner"
+                  <button
+                    aria-current="page"
+                    class="mantine-focus-auto mantine-active active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+                    data-size="compact-sm"
+                    data-status="active"
+                    data-variant="outline"
+                    href="/"
+                    style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline);"
+                    type="button"
                   >
                     <span
-                      class="m_811560b9 mantine-Button-label"
+                      class="m_80f1301b mantine-Button-inner"
                     >
-                      Edit person
+                      <span
+                        class="m_811560b9 mantine-Button-label"
+                      >
+                        Go to
+                      </span>
                     </span>
-                  </span>
-                </button>
+                  </button>
+                  <button
+                    class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+                    data-size="compact-sm"
+                    data-variant="outline"
+                    style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline);"
+                    type="button"
+                  >
+                    <span
+                      class="m_80f1301b mantine-Button-inner"
+                    >
+                      <span
+                        class="m_811560b9 mantine-Button-label"
+                      >
+                        Edit person
+                      </span>
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
             <div
@@ -207,7 +232,7 @@ exports[`show page renders correctly 1`] = `
               <span
                 class="m_811560b9 mantine-Button-label"
               >
-                Go to person page
+                Go to
               </span>
             </span>
           </button>
