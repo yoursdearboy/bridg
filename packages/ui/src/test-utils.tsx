@@ -28,15 +28,19 @@ const App = ({ children }: React.PropsWithChildren) => {
 
 export const renderRoute = (
   r: AnyRoute,
-  { params }: { params?: object } = {}
+  { params, props }: { params?: object; props?: PropsWithChildren } = {}
 ) => {
   const rootRoute = createRootRouteWithContext()();
-  const testRoute = createRoute({
+  let routeConfig = {
     ...r.options,
     params: params,
     getParentRoute: () => rootRoute,
     path: "/",
-  });
+  };
+  if (props?.children)
+    routeConfig = { ...routeConfig, component: () => props.children };
+
+  const testRoute = createRoute(routeConfig);
   const routeTree = rootRoute.addChildren([testRoute]);
   const router = createRouter({
     routeTree,
@@ -61,19 +65,5 @@ export const EmptyRouterProvider = (props: PropsWithChildren) => {
     component: () => props.children,
   });
 
-  const router = createRouter({
-    routeTree: rootRoute.addChildren([
-      createRoute({
-        path: "*",
-        component: () => props.children,
-        getParentRoute: () => rootRoute,
-      }),
-    ]),
-  });
-
-  return (
-    <App>
-      <RouterProvider router={router} />
-    </App>
-  );
+  return renderRoute(rootRoute, { props: { children: props.children } });
 };
