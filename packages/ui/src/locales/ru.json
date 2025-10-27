@@ -17,6 +17,9 @@
     "no": "Нет",
     "extra": "Дополнительно",
     "fieldRequiredMessage": "Поле \"{{fieldName}}\" необходимо заполнить",
+    "system": {
+      "title": "BRIDG"
+    },
     "PerformingBiologicEntitySelect": {
       "text": "Выберите существующую запись:"
     },
@@ -60,7 +63,7 @@
     "SubjectShowPage": {
       "title": "Данные пациента",
       "back": "Назад к списку",
-      "toPerson": "На страницу человека",
+      "toPerson": "Перейти",
       "breadcrumbDefault": "Неизвестный пациент"
     },
     "PersonShowPage": {
@@ -136,7 +139,7 @@
       "performingBiologicEntity": "Человек",
       "performingOrganization": "Организация",
       "type": "Тип",
-      "assignedStudySiteProtocolVersionRelationship": "Область изучения"
+      "assignedStudySiteProtocolVersionRelationship": "Исследовательский центр"
     },
     "Status": {
       "candidate": "Кандидат",

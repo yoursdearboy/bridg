@@ -8,6 +8,7 @@ import {
   Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { IconCaretDownFilled, IconCaretUpFilled } from "@tabler/icons-react";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import type { EntityName } from "api-ts";
 import { useTranslation } from "react-i18next";
@@ -33,42 +34,57 @@ interface NamesCardProps {
 }
 
 export const NamesCard = ({ personId, query }: NamesCardProps) => {
-  const [opened, { open, close }] = useDisclosure(false);
+  const [modalOpened, { open: modalOpen, close: modalClose }] =
+    useDisclosure(false);
+  const [cardOpened, { toggle: cardToggle }] = useDisclosure(false);
   const { t } = useTranslation();
   const { isPending, isError, error, data: names } = query;
 
   return (
     <>
       <Card withBorder shadow="sm" radius="md">
-        <Card.Section withBorder inheritPadding py="xs">
+        <Card.Section withBorder inheritPadding py="xs" onClick={cardToggle}>
           <Group justify="space-between">
-            <Text fw={500} px="xs">
-              {t("NamesCard.title")}
-            </Text>
-            <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
+            <Group px="xs" gap="xs">
+              <Text fw={500}>{t("NamesCard.title")}</Text>
+              {cardOpened ? <IconCaretUpFilled /> : <IconCaretDownFilled />}
+            </Group>
+            <Button
+              variant="outline"
+              size="compact-sm"
+              onClick={modalOpen}
+              fw={500}
+            >
               {t("add")}
             </Button>
           </Group>
         </Card.Section>
-        <Card.Section inheritPadding py="xs">
-          <Box pos="relative" style={{ minHeight: 80 }}>
-            <LoadingOverlay visible={isPending} />
-            {isError && (
-              <Text color="red">
-                {t("errorMessage", { error: error.message })}
-              </Text>
-            )}
-            {!isPending && !isError && (
-              <NamesTable personId={personId} names={names} />
-            )}
-          </Box>
-        </Card.Section>
+        {cardOpened && (
+          <Card.Section inheritPadding py="xs">
+            <Box pos="relative" style={{ minHeight: 80 }}>
+              <LoadingOverlay visible={isPending} />
+              {isError && (
+                <Text color="red">
+                  {t("errorMessage", { error: error.message })}
+                </Text>
+              )}
+              {!isPending && !isError && (
+                <NamesTable personId={personId} names={names} />
+              )}
+            </Box>
+          </Card.Section>
+        )}
       </Card>
-      <Modal opened={opened} onClose={close} title={t("add")} size="lg">
+      <Modal
+        opened={modalOpened}
+        onClose={modalClose}
+        title={t("add")}
+        size="lg"
+      >
         <NewNameForm
           personId={personId}
-          onCancel={close}
-          onSuccess={() => close()}
+          onCancel={modalClose}
+          onSuccess={() => modalClose()}
         />
       </Modal>
     </>

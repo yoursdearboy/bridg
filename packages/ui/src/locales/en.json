@@ -17,6 +17,9 @@
     "no": "No",
     "extra": "Extra",
     "fieldRequiredMessage": "{{fieldName}} is required",
+    "system": {
+      "title": "BRIDG"
+    },
     "PerformingBiologicEntitySelect": {
       "text": "Select existing biologic entity:"
     },
@@ -60,7 +63,7 @@
     "SubjectShowPage": {
       "title": "Patient information",
       "back": "Back to list",
-      "toPerson": "Go to person page",
+      "toPerson": "Go to",
       "breadcrumbDefault": "Anonymous subject"
     },
     "PersonShowPage": {
