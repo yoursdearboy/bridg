@@ -18,7 +18,7 @@
     "extra": "Extra",
     "fieldRequiredMessage": "{{fieldName}} is required",
     "system": {
-      "title": "National Research Center Registry"
+      "title": "BRIDG"
     },
     "PerformingBiologicEntitySelect": {
       "text": "Select existing biologic entity:"
