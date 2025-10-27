@@ -17,6 +17,9 @@
     "no": "Нет",
     "extra": "Дополнительно",
     "fieldRequiredMessage": "Поле \"{{fieldName}}\" необходимо заполнить",
+    "system": {
+      "title": "Регистр НМИЦ ДГОИ"
+    },
     "PerformingBiologicEntitySelect": {
       "text": "Выберите существующую запись:"
     },

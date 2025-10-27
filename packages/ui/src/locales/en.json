@@ -17,6 +17,9 @@
     "no": "No",
     "extra": "Extra",
     "fieldRequiredMessage": "{{fieldName}} is required",
+    "system": {
+      "title": "National Research Center Registry"
+    },
     "PerformingBiologicEntitySelect": {
       "text": "Select existing biologic entity:"
     },

@@ -54,7 +54,8 @@ function Nav() {
   });
   const space = spaces.data?.find((s) => s.id == spaceId);
   const theme = useMantineTheme();
-  const spaceTitle = space?.name || "Регистр НМИЦ ДГОИ";
+  const { t } = useTranslation();
+  const spaceTitle = space?.name || t("system.title");
   return (
     <Group>
       <Menu position="bottom-end" width={200}>
