@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import { MantineProvider } from "@mantine/core";
 import { DatesProvider } from "@mantine/dates";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -15,6 +14,7 @@ import "./i18n";
 
 const queryClient = new QueryClient();
 
+// eslint-disable-next-line react-refresh/only-export-components
 const App = ({ children }: React.PropsWithChildren) => {
   return (
     <QueryClientProvider client={queryClient}>
@@ -30,14 +30,12 @@ export const renderRoute = (
   { params }: { params?: object } = {}
 ) => {
   const rootRoute = createRootRouteWithContext()();
-  const routeConfig = {
+  const testRoute = createRoute({
     ...r.options,
     params: params,
     getParentRoute: () => rootRoute,
     path: "/",
-  };
-
-  const testRoute = createRoute(routeConfig);
+  });
   const routeTree = rootRoute.addChildren([testRoute]);
   const router = createRouter({
     routeTree,
@@ -57,7 +55,7 @@ export const renderRoute = (
 export const renderComponent = (component: React.ReactNode) =>
   render(<App>{component}</App>);
 
-export const renderInRoute = (component: React.ReactNode) => {
+export const renderComponentInRoute = (component: React.ReactNode) => {
   const rootRoute = createRootRoute();
   const route = createRoute({
     path: "/",
