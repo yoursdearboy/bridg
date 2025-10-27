@@ -1,6 +1,6 @@
 import type { Person } from "api-ts";
 import { describe, expect, it } from "vitest";
-import { EmptyRouterProvider } from "@/test-utils";
+import { renderInRoute } from "@/test-utils";
 import { PersonCard } from "./PersonCard";
 
 describe("PersonCard", () => {
@@ -26,9 +26,7 @@ describe("PersonCard", () => {
     };
 
     expect(
-      (
-        await EmptyRouterProvider({ children: <PersonCard person={person} /> })
-      ).asFragment()
+      (await renderInRoute(<PersonCard person={person} />)).asFragment()
     ).toMatchSnapshot();
   });
 });

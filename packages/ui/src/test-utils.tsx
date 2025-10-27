@@ -12,7 +12,6 @@ import {
 } from "@tanstack/react-router";
 import { act, render } from "@testing-library/react";
 import "./i18n";
-import type { PropsWithChildren } from "react";
 
 const queryClient = new QueryClient();
 
@@ -28,17 +27,15 @@ const App = ({ children }: React.PropsWithChildren) => {
 
 export const renderRoute = (
   r: AnyRoute,
-  { params, props }: { params?: object; props?: PropsWithChildren } = {}
+  { params }: { params?: object } = {}
 ) => {
   const rootRoute = createRootRouteWithContext()();
-  let routeConfig = {
+  const routeConfig = {
     ...r.options,
     params: params,
     getParentRoute: () => rootRoute,
     path: "/",
   };
-  if (props?.children)
-    routeConfig = { ...routeConfig, component: () => props.children };
 
   const testRoute = createRoute(routeConfig);
   const routeTree = rootRoute.addChildren([testRoute]);
@@ -60,10 +57,12 @@ export const renderRoute = (
 export const renderComponent = (component: React.ReactNode) =>
   render(<App>{component}</App>);
 
-export const EmptyRouterProvider = (props: PropsWithChildren) => {
-  const rootRoute = createRootRoute({
-    component: () => props.children,
+export const renderInRoute = (component: React.ReactNode) => {
+  const rootRoute = createRootRoute();
+  const route = createRoute({
+    path: "/",
+    getParentRoute: () => rootRoute,
+    component: () => component,
   });
-
-  return renderRoute(rootRoute, { props: { children: props.children } });
+  return renderRoute(route);
 };
