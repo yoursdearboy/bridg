@@ -161,8 +161,15 @@ def uuid_hook(x: str, _) -> UUID:
     return UUID(x)
 
 
+def _omit(x: dict, keys: List[str]):
+    return {k: v for k, v in x.items() if k not in keys}
+
+
 @converter.register_structure_hook
-def datavalue_hook(x: dict, _) -> bridg.datatypes.DataValue:
-    data_type = x.pop("data_type")
-    cls = bridg.datatypes.DATA_TYPE_TO_TYPE[data_type]
-    return cls(**x)
+def datavalue_hook(x: dict, cls) -> bridg.datatypes.DataValue:
+    data = _omit(x, ["data_type"])
+    data_type = x.get("data_type", cls.data_type)
+    data_type_cls = bridg.datatypes.DATA_TYPE_TO_TYPE[data_type]
+    if issubclass(data_type_cls, cls):
+        cls = data_type_cls
+    return cls(**data)

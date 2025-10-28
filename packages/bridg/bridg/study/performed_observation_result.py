@@ -5,7 +5,7 @@ from uuid import UUID, uuid4
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..core import Code, code_column
+from ..core import ConceptDescriptor
 from ..data_value_decorator import DataValueDecorator
 from ..datatypes import DataValue
 from ..db import Base
@@ -19,10 +19,8 @@ class PerformedObservationResult(Base):
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     type: Mapped[str]
 
-    class TypeCode(Code): ...
-
-    type_code_id: Mapped[Optional[UUID]] = code_column(TypeCode)
-    type_code: Mapped[Optional[TypeCode]] = relationship()
+    type_code_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
+    type_code: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=type_code_id)
 
     value: Mapped[Optional[DataValue]] = mapped_column(DataValueDecorator())
     value_null_flavor_reason: Mapped[Optional[str]]

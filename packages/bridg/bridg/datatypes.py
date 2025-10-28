@@ -1,5 +1,4 @@
 from typing import Optional
-from uuid import UUID
 
 
 class DataValue:
@@ -16,11 +15,14 @@ class CharacterString(EncapsulatedData):
 
 class ConceptDescriptor(DataValue):
     data_type = "CD"
-    code_system: UUID
+    code: str
+    code_system: str
+    display_name: Optional[str]
 
-    def __init__(self, code_system: UUID) -> None:
-        super().__init__()
+    def __init__(self, code: str, code_system: str, display_name: Optional[str] = None):
+        self.code = code
         self.code_system = code_system
+        self.display_name = display_name
 
 
 class CodedValue(ConceptDescriptor):
