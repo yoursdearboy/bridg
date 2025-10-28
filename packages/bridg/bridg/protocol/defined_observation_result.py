@@ -4,9 +4,10 @@ from uuid import UUID, uuid4
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from hl7.datatypes import DataValue
+
 from ..core import ConceptDescriptor
 from ..data_value_decorator import DataValueDecorator
-from ..datatypes import DataValue
 from ..db import Base
 from .defined_observation import DefinedObservation
 

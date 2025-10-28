@@ -10,7 +10,7 @@ from sqlalchemy.orm.collections import InstrumentedList
 from toolz import dissoc
 
 import bridg
-import bridg.datatypes
+import hl7.datatypes
 
 from .db import Base
 
@@ -166,10 +166,10 @@ def _omit(x: dict, keys: List[str]):
 
 
 @converter.register_structure_hook
-def datavalue_hook(x: dict, cls) -> bridg.datatypes.DataValue:
+def datavalue_hook(x: dict, cls) -> hl7.datatypes.DataValue:
     data = _omit(x, ["data_type"])
     data_type = x.get("data_type", cls.data_type)
-    data_type_cls = bridg.datatypes.DATA_TYPE_TO_TYPE[data_type]
+    data_type_cls = hl7.datatypes.DATA_TYPE_TO_TYPE[data_type]
     if issubclass(data_type_cls, cls):
         cls = data_type_cls
     return cls(**data)

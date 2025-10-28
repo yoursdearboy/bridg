@@ -1,7 +1,7 @@
 from sqlalchemy import TypeDecorator
 from sqlalchemy import types as satypes
 
-from bridg.datatypes import DATA_TYPE_TO_TYPE, DataValue
+from hl7.datatypes import DATA_TYPE_TO_TYPE, DataValue
 
 
 class DataValueDecorator(TypeDecorator):

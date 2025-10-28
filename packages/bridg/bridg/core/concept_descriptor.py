@@ -4,7 +4,8 @@ from uuid import UUID, uuid4
 from sqlalchemy import UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
-from ..datatypes import ConceptDescriptor as ConceptDescriptorBase
+from hl7.datatypes import ConceptDescriptor as ConceptDescriptorBase
+
 from ..db import Base
 
 
