@@ -1,8 +1,4 @@
 from typing import Literal, Optional, Union
-from uuid import UUID
-
-import bridg
-from pydantic import field_validator
 
 from api.base_model import BaseModel
 
@@ -23,15 +19,8 @@ class ConceptDescriptor(DataValue):
     data_type: Literal["CD"] = "CD"
     # FIXME: code not optional
     code: str = None
-    code_system: UUID
+    code_system: str
     display_name: Optional[str] = None
-
-    @field_validator("code_system", mode="before")
-    @classmethod
-    def validate_code_system(cls, cs: bridg.CodeSystem | UUID) -> UUID:
-        if isinstance(cs, bridg.CodeSystem):
-            return cs.id
-        return cs
 
 
 class CodedValue(ConceptDescriptor):
