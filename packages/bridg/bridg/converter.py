@@ -1,6 +1,6 @@
 from dataclasses import Field, fields, is_dataclass
 from datetime import date, datetime
-from typing import List, TypeVar, get_origin, get_type_hints
+from typing import List, Optional, TypeVar, get_origin, get_type_hints
 from uuid import UUID
 
 from cattr import Converter
@@ -10,7 +10,7 @@ from sqlalchemy.orm.collections import InstrumentedList
 from toolz import dissoc
 
 import bridg
-import hl7.datatypes
+import bridg.core
 
 from .db import Base
 
@@ -140,7 +140,7 @@ def dataclass_hook(x, cls):
 
     def pair(field: Field):
         key = field.name
-        value = getattr(x, key)
+        value = x.get(key) if isinstance(x, dict) else getattr(x, key)
         ftype = field.type
         assert isinstance(ftype, type) or get_origin(ftype) is not None
         value = converter.structure(value, ftype)  # type: ignore
@@ -161,15 +161,14 @@ def uuid_hook(x: str, _) -> UUID:
     return UUID(x)
 
 
-def _omit(x: dict, keys: List[str]):
-    return {k: v for k, v in x.items() if k not in keys}
-
-
+# FIXME: that's inference is weird
 @converter.register_structure_hook
-def datavalue_hook(x: dict, cls) -> hl7.datatypes.DataValue:
-    data = _omit(x, ["data_type"])
-    data_type = x.get("data_type", cls.data_type)
-    data_type_cls = hl7.datatypes.DATA_TYPE_TO_TYPE[data_type]
-    if issubclass(data_type_cls, cls):
-        cls = data_type_cls
-    return cls(**data)
+def datavalue_hook(x, cls) -> Optional[bridg.core.DataValue]:
+    if x is None:
+        return None
+    if isinstance(x, dict):
+        if "unit" in x:
+            return bridg.core.PhysicalQuantity(**x)
+        if "code_system" in x:
+            return bridg.core.ConceptDescriptor(**x)
+    raise RuntimeError("Can't handle DataValue")

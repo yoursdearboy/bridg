@@ -5,15 +5,13 @@ from uuid import UUID, uuid4
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from hl7.datatypes import DataValue
-
 from ..core import ConceptDescriptor
-from ..data_value_decorator import DataValueDecorator
 from ..db import Base
+from ..observation_result import ObservationResult
 from .performed_observation import PerformedObservation
 
 
-class PerformedObservationResult(Base):
+class PerformedObservationResult(ObservationResult, Base):
     __tablename__ = "performed_observation_result"
     __mapper_args__ = {"polymorphic_on": "type", "polymorphic_identity": "observation_result"}
 
@@ -23,7 +21,6 @@ class PerformedObservationResult(Base):
     type_code_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
     type_code: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=type_code_id)
 
-    value: Mapped[Optional[DataValue]] = mapped_column(DataValueDecorator())
     value_null_flavor_reason: Mapped[Optional[str]]
 
     baseline_indicator: Mapped[Optional[bool]]

@@ -4,12 +4,10 @@ from uuid import UUID, uuid4
 from sqlalchemy import UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
-from hl7.datatypes import ConceptDescriptor as ConceptDescriptorBase
-
 from ..db import Base
 
 
-class ConceptDescriptor(ConceptDescriptorBase, Base):
+class ConceptDescriptor(Base):
     __tablename__ = "concept_descriptor"
     __table_args__ = (UniqueConstraint("code", "code_system"),)
 

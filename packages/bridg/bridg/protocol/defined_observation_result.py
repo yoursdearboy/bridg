@@ -4,22 +4,18 @@ from uuid import UUID, uuid4
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from hl7.datatypes import DataValue
-
 from ..core import ConceptDescriptor
-from ..data_value_decorator import DataValueDecorator
 from ..db import Base
+from ..observation_result import ObservationResult
 from .defined_observation import DefinedObservation
 
 
-class DefinedObservationResult(Base):
+class DefinedObservationResult(ObservationResult, Base):
     __tablename__ = "defined_observation_result"
     __mapper_args__ = {"polymorphic_on": "type", "polymorphic_identity": "observation_result"}
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     type: Mapped[str]
-
-    value: Mapped[Optional[DataValue]] = mapped_column(DataValueDecorator())
 
     value_negation_indicator: Mapped[Optional[bool]]
 
