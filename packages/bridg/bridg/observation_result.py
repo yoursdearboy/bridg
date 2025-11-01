@@ -1,3 +1,4 @@
+from datetime import date, datetime
 from typing import Optional
 from uuid import UUID
 
@@ -21,20 +22,37 @@ class ObservationResult:
             mapped_column("value_pq_unit", String),
         )
 
+    value_date: Mapped[Optional[date]]
+
+    value_datetime: Mapped[Optional[datetime]]
+
+    def _reset(self):
+        self.value_cd = None
+        if self.value_pq:
+            self.value_pq.value = None
+            self.value_pq.unit = None
+        self.value_date = None
+        self.value_datetime = None
+
     @property
     def value(self) -> Optional[DataValue]:
         if self.value_cd:
             return self.value_cd
         if self.value_pq and self.value_pq.unit and self.value_pq.value:
             return self.value_pq
+        if self.value_date:
+            return self.value_date
+        if self.value_datetime:
+            return self.value_datetime
 
     @value.setter
     def value(self, x: Optional[DataValue]):
-        self.value_cd = None
-        if self.value_pq:
-            self.value_pq.unit = None
-            self.value_pq.value = None
+        self._reset()
         if isinstance(x, ConceptDescriptor):
             self.value_cd = x
         if isinstance(x, PhysicalQuantity):
             self.value_pq = x
+        if isinstance(x, date):
+            self.value_date = x
+        if isinstance(x, datetime):
+            self.value_datetime = x

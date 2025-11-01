@@ -178,4 +178,6 @@ def datavalue_hook(x, cls) -> Optional[bridg.core.DataValue]:
             return bridg.core.PhysicalQuantity(**x)
         if "code_system" in x:
             return converter.structure(x, bridg.core.ConceptDescriptor)
+    if isinstance(x, date):
+        return x
     raise RuntimeError("Can't handle DataValue")
