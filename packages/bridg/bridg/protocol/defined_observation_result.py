@@ -4,25 +4,24 @@ from uuid import UUID, uuid4
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..core import Code, code_column
+from ..datatypes import ConceptDescriptor
 from ..db import Base
+from ..observation_result import ObservationResult
 from .defined_observation import DefinedObservation
 
 
-class DefinedObservationResult(Base):
+class DefinedObservationResult(ObservationResult, Base):
     __tablename__ = "defined_observation_result"
     __mapper_args__ = {"polymorphic_on": "type", "polymorphic_identity": "observation_result"}
-
-    class TypeCode(Code): ...
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     type: Mapped[str]
 
-    value: Mapped[Optional[str]]
     value_negation_indicator: Mapped[Optional[bool]]
 
-    type_code_id: Mapped[Optional[UUID]] = code_column(TypeCode)
-    type_code: Mapped[Optional[TypeCode]] = relationship()
+    type_code_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
+    type_code: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=type_code_id)
+
 
     derivation_expression: Mapped[Optional[str]]
 
