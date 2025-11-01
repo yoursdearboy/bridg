@@ -8,6 +8,7 @@
     "add": "Добавить",
     "select": "Выберите",
     "enter": "Введите",
+    "error": "Ошибка",
     "errorMessage": "Произошла ошибка: {{error}}",
     "intlDate": "{{val}}",
     "intlDateTime": "{{val, datetime}}",
@@ -82,8 +83,8 @@
       "editModalTitile": "Редактирование данных человека"
     },
     "PersonCard": {
-      "deceased": "Умерший",
-      "notDeceased": "Живой",
+      "deceased": "Умер",
+      "notDeceased": "Жив",
       "dateNotSpecified": "Дата не указана"
     },
     "NamesCard": {
@@ -109,10 +110,10 @@
       "id": "ID",
       "administrativeGenderCode": "Пол",
       "birthDate": "Дата рождения",
-      "deathDate": "Дата смерта",
+      "deathDate": "Дата смерти",
       "deathDateEstimatedIndicator": "Предполагаемый показатель даты смерти",
-      "deathIndicator": "Показатель смертности",
-      "primaryName": "Текущее имя",
+      "deathIndicator": "Смерть",
+      "primaryName": "ФИО",
       "age": "Возраст"
     },
     "Organization": {
@@ -140,6 +141,16 @@
       "performingOrganization": "Организация",
       "type": "Тип",
       "assignedStudySiteProtocolVersionRelationship": "Исследовательский центр"
+    },
+    "NewActivityRoute": {
+      "breadcrumbDefault": "Неизвестная процедура"
+    },
+    "ActivityCard": {
+      "title": "Процедуры"
+    },
+    "EditActivityRoute": {
+      "defaultBreadcrumb": "Редактирование неизвестной процедуры",
+      "unnamed": "Неизвестная процедура"
     },
     "Status": {
       "candidate": "Кандидат",

@@ -8,6 +8,7 @@
     "add": "Add",
     "select": "Select",
     "enter": "enter",
+    "error": "Error",
     "errorMessage": "An error has occured: {{error}}",
     "intlDate": "{{val}}",
     "intlDateTime": "{{val, datetime}}",
@@ -141,6 +142,16 @@
       "performingOrganization": "Organization",
       "type": "Type",
       "assignedStudySiteProtocolVersionRelationship": "Study sites"
+    },
+    "NewActivityRoute": {
+      "breadcrumbDefault": "Unkown activity"
+    },
+    "ActivityCard": {
+      "title": "Activities"
+    },
+    "EditActivityRoute": {
+      "defaultBreadcrumb": "Editing unkown activity",
+      "unnamed": "Unanmed activity"
     },
     "Status": {
       "candidate": "candidate",

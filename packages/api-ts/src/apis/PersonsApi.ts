@@ -22,6 +22,7 @@ import type {
   PersonData,
   PostalAddress,
   PostalAddressData,
+  StudySubject,
   TelecommunicationAddress,
   TelecommunicationAddressData,
 } from '../models/index';
@@ -40,6 +41,8 @@ import {
     PostalAddressToJSON,
     PostalAddressDataFromJSON,
     PostalAddressDataToJSON,
+    StudySubjectFromJSON,
+    StudySubjectToJSON,
     TelecommunicationAddressFromJSON,
     TelecommunicationAddressToJSON,
     TelecommunicationAddressDataFromJSON,
@@ -81,6 +84,10 @@ export interface IndexPersonsPersonIdNamesGetRequest {
 }
 
 export interface IndexPersonsPersonIdPostalAddressesGetRequest {
+    personId: string;
+}
+
+export interface IndexPersonsPersonIdSubjectsGetRequest {
     personId: string;
 }
 
@@ -144,8 +151,12 @@ export class PersonsApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/persons/{person_id}/names`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}/names`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))),
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -187,8 +198,12 @@ export class PersonsApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/persons/{person_id}/postal_addresses`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}/postal_addresses`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))),
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -230,8 +245,12 @@ export class PersonsApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/persons/{person_id}/telecommunication_addresses`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}/telecommunication_addresses`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))),
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -271,8 +290,13 @@ export class PersonsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/persons/{person_id}/names/{name_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+        urlPath = urlPath.replace(`{${"name_id"}}`, encodeURIComponent(String(requestParameters['nameId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}/names/{name_id}`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))).replace(`{${"name_id"}}`, encodeURIComponent(String(requestParameters['nameId']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -315,8 +339,13 @@ export class PersonsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/persons/{person_id}/postal_addresses/{address_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+        urlPath = urlPath.replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}/postal_addresses/{address_id}`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))).replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -359,8 +388,13 @@ export class PersonsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/persons/{person_id}/telecommunication_addresses/{address_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+        urlPath = urlPath.replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}/telecommunication_addresses/{address_id}`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))).replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId']))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -396,8 +430,12 @@ export class PersonsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/persons/{person_id}/names`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}/names`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -429,8 +467,12 @@ export class PersonsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/persons/{person_id}/postal_addresses`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}/postal_addresses`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -450,6 +492,43 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Index
      */
+    async indexPersonsPersonIdSubjectsGetRaw(requestParameters: IndexPersonsPersonIdSubjectsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<StudySubject>>> {
+        if (requestParameters['personId'] == null) {
+            throw new runtime.RequiredError(
+                'personId',
+                'Required parameter "personId" was null or undefined when calling indexPersonsPersonIdSubjectsGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/persons/{person_id}/subjects`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StudySubjectFromJSON));
+    }
+
+    /**
+     * Index
+     */
+    async indexPersonsPersonIdSubjectsGet(requestParameters: IndexPersonsPersonIdSubjectsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StudySubject>> {
+        const response = await this.indexPersonsPersonIdSubjectsGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Index
+     */
     async indexPersonsPersonIdTelecommunicationAddressesGetRaw(requestParameters: IndexPersonsPersonIdTelecommunicationAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<TelecommunicationAddress>>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
@@ -462,8 +541,12 @@ export class PersonsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/persons/{person_id}/telecommunication_addresses`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}/telecommunication_addresses`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -495,8 +578,12 @@ export class PersonsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/persons/{person_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -544,8 +631,13 @@ export class PersonsApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/persons/{person_id}/names/{name_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+        urlPath = urlPath.replace(`{${"name_id"}}`, encodeURIComponent(String(requestParameters['nameId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}/names/{name_id}`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))).replace(`{${"name_id"}}`, encodeURIComponent(String(requestParameters['nameId']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -587,8 +679,12 @@ export class PersonsApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/persons/{person_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -637,8 +733,13 @@ export class PersonsApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/persons/{person_id}/postal_addresses/{address_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+        urlPath = urlPath.replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}/postal_addresses/{address_id}`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))).replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -687,8 +788,13 @@ export class PersonsApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/persons/{person_id}/telecommunication_addresses/{address_id}`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+        urlPath = urlPath.replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId'])));
+
         const response = await this.request({
-            path: `/persons/{person_id}/telecommunication_addresses/{address_id}`.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId']))).replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId']))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
