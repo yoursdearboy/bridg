@@ -10,8 +10,8 @@ from api.base_model import BaseModel
 class TelecommunicationAddressData(BaseModel[bridg.common.person.TelecommunicationAddress]):
     _sa = bridg.common.person.TelecommunicationAddress
 
-    use: Optional[Optional[bridg.core.TelecommunicationAddressUse]] = None
-    scheme: Optional[Optional[bridg.core.URLScheme]] = None
+    use: Optional[Optional[bridg.datatype.TelecommunicationAddressUse]] = None
+    scheme: Optional[Optional[bridg.datatype.URLScheme]] = None
     address: Optional[str] = None
 
 
