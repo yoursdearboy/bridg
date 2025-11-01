@@ -1,3 +1,4 @@
+from contextvars import ContextVar
 from dataclasses import Field, fields, is_dataclass
 from datetime import date, datetime
 from typing import List, Optional, TypeVar, get_origin, get_type_hints
@@ -15,6 +16,7 @@ import bridg.core
 from .db import Base
 
 converter = Converter()
+cd_service: ContextVar[bridg.core.ConceptDescriptorService] = ContextVar("cd_service")
 
 
 class Cache:
@@ -161,6 +163,11 @@ def uuid_hook(x: str, _) -> UUID:
     return UUID(x)
 
 
+@converter.register_structure_hook
+def cd_hook(x, _) -> bridg.core.ConceptDescriptor:
+    return cd_service.get().get_or_create(**x)
+
+
 # FIXME: that's inference is weird
 @converter.register_structure_hook
 def datavalue_hook(x, cls) -> Optional[bridg.core.DataValue]:
@@ -170,5 +177,5 @@ def datavalue_hook(x, cls) -> Optional[bridg.core.DataValue]:
         if "unit" in x:
             return bridg.core.PhysicalQuantity(**x)
         if "code_system" in x:
-            return bridg.core.ConceptDescriptor(**x)
+            return converter.structure(x, bridg.core.ConceptDescriptor)
     raise RuntimeError("Can't handle DataValue")

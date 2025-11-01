@@ -1,34 +1,14 @@
 from typing import Any, Dict, List, TypedDict
 
 import bridg
+import bridg.converter
 import yaml
 
 from .db import SessionLocal
 
 session = SessionLocal()
 
-
-def make_code_hook():
-    def _from_dict(x: dict, cls):
-        if code := session.query(cls).filter_by(**x).one_or_none():
-            return code
-        return cls(**x)
-
-    cache = dict()
-
-    def _from_dict_with_cache(x: dict, cls):
-        key = (x["code_system"], x["code"])
-        if code := cache.get(key):
-            return code
-        code = _from_dict(x, cls)
-        cache[key] = code
-        return code
-
-    return _from_dict_with_cache
-
-
-bridg.converter.register_structure_hook(bridg.ConceptDescriptor, make_code_hook())
-
+bridg.converter.cd_service.set(bridg.core.ConceptDescriptorService(session))
 
 Root = TypedDict(
     "Root",
@@ -55,15 +35,20 @@ Root = TypedDict(
 
 
 def structure(data: Dict[str, List[Any]]):
-    root = bridg.converter.structure(data, Root)
+    root = bridg.converter.converter.structure(data, Root)
     for values in root.values():
         for value in values:
             yield value
 
 
-with open("dev/seed.yml") as f:
-    data = yaml.load(f, yaml.FullLoader)
-objects = structure(data)
-session.add_all(objects)
-session.commit()
-session.close()
+def main():
+    with open("dev/seed.yml") as f:
+        data = yaml.load(f, yaml.FullLoader)
+    objects = structure(data)
+    session.add_all(objects)
+    session.commit()
+    session.close()
+
+
+if __name__ == "__main__":
+    main()
