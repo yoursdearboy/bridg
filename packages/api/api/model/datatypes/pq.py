@@ -1,8 +1,10 @@
-from typing import Optional
+from decimal import Decimal
+from typing import Literal, Optional
 
-from pydantic import BaseModel
+from ...base_model import BaseModel
 
 
 class PhysicalQuantity(BaseModel):
-    value: str
+    tag: Literal["PQ"] = "PQ"
+    value: Decimal
     unit: Optional[str]
