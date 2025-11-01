@@ -22,6 +22,9 @@ class DefinedObservationResult(ObservationResult, Base):
     type_code_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
     type_code: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=type_code_id)
 
+    target_coding_system: Mapped[Optional[str]] = mapped_column(ForeignKey("concept_descriptor.code_system"))
+
+    target_unit: Mapped[Optional[str]]
 
     derivation_expression: Mapped[Optional[str]]
 
