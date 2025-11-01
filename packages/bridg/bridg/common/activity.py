@@ -6,7 +6,7 @@ from uuid import UUID
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, declared_attr, mapped_column, relationship
 
-from ..core import ConceptDescriptor
+from ..datatypes import ConceptDescriptor
 from ..db import Base
 
 if TYPE_CHECKING:

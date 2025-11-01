@@ -6,7 +6,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..common import Activity, StudySubject
-from ..core import ConceptDescriptor
+from ..datatypes import ConceptDescriptor
 from ..protocol import DefinedActivity, Epoch, StudyProtocolVersion
 
 
