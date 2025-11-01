@@ -4,7 +4,7 @@ from uuid import UUID, uuid4
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..datatypes import ConceptDescriptor
+from ..datatype import ConceptDescriptor
 from ..db import Base
 from ..observation_result import ObservationResult
 from .defined_observation import DefinedObservation

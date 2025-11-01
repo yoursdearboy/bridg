@@ -8,12 +8,12 @@ from .db import SessionLocal
 
 session = SessionLocal()
 
-bridg.converter.cd_service.set(bridg.datatypes.ConceptDescriptorService(session))
+bridg.converter.cd_service.set(bridg.datatype.ConceptDescriptorService(session))
 
 Root = TypedDict(
     "Root",
     {
-        "concept_descriptor": List[bridg.datatypes.ConceptDescriptor],
+        "concept_descriptor": List[bridg.datatype.ConceptDescriptor],
         "defined_activity": List[bridg.DefinedActivity],
         "defined_eligibility_criterion": List[bridg.DefinedEligibilityCriterion],
         "defined_exclusion_criterion": List[bridg.DefinedExclusionCriterion],
