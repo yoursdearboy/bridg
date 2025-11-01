@@ -73,27 +73,16 @@ defined_observation:
     produced_defined_observation_result:
       - type: observation_result
         type_code: { code: "fullmoon", code_system: "demo", display_name: "Last full moon date" }
-        value:
-          data_type: TS.DATE
       - type: observation_result
         type_code: { code: "dx", code_system: "demo", display_name: "Diagnosis" }
-        value:
-          data_type: CD
-          code: null # FIXME: can't be null
-          code_system: b365b97f-ff34-464c-9097-e7daec409f4c
+      - type: observation_result
+        type_code: { code: "dx", code_system: "demo", display_name: "Diagnosis" }
       - type: observation_result
         type_code: { code: "767002", code_system: "SNOMEDCT", display_name: "White blood cell count" }
-        value:
-          data_type: PQ
-          unit: 10^9/l
       - type: observation_result
         type_code: { code: "30630007", code_system: "SNOMEDCT", display_name: "Neutrophil count" }
-        value:
-          data_type: PQ
       - type: observation_result
         type_code: { code: "61928009", code_system: "SNOMEDCT", display_name: "Platelet count" }
-        value:
-          data_type: PQ
   - &ipt
     id: 845ffa00-a139-4d38-8ccc-e53a89a2de03
     name_code: { code: "ipt", code_system: "defined_activity.name_code", display_name: Immunophenotyping }
