@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends
 from api.db import get_repository
 from api.model import ConceptDescriptor
 
-router = APIRouter(prefix="/code_system", tags=["value_set"])
+router = APIRouter(prefix="/code_system", tags=["code_system"])
 
 
 class ConceptDescriptorRepository(Repository[bridg.ConceptDescriptor]):
