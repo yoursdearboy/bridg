@@ -1,8 +1,8 @@
 from typing import Optional
 
-from pydantic import BaseModel
+from ...base_model import BaseModel
 
 
 class PhysicalQuantity(BaseModel):
-    value: str
+    value: float
     unit: Optional[str]
