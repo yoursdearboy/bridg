@@ -4,22 +4,11 @@ from uuid import UUID
 import bridg
 from bridg import Repository
 from fastapi import APIRouter, Depends
-from pydantic import field_validator
 
-from api.base_model import BaseModel
 from api.db import get_repository
+from api.model import StudySiteProtocolVersionRelationship
 
 router = APIRouter(prefix="/sites", tags=["sites"])
-
-
-class StudySiteProtocolVersionRelationship(BaseModel):
-    id: UUID
-    executing_study_site: str
-
-    @field_validator("executing_study_site", mode="before")
-    @classmethod
-    def convert_study_site(cls, ss: bridg.StudySite):
-        return str(ss.performing_entity)
 
 
 class StudySiteProtocolVersionRelationshipRepository(Repository[bridg.StudySiteProtocolVersionRelationship]):

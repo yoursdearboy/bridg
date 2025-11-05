@@ -14,7 +14,7 @@ from bridg import (
 class StudySubjectRepository(Repository[StudySubject]):
     _sa = StudySubject
 
-    def find_by(self, space_id: Optional[UUID] = None) -> Iterable[StudySubject]:
+    def find_by(self, space_id: Optional[UUID] = None, performing_biologic_entity_id: Optional[UUID] = None) -> Iterable[StudySubject]:
         q = self.db.query(StudySubject)
         if space_id:
             q = (
@@ -22,6 +22,8 @@ class StudySubjectRepository(Repository[StudySubject]):
                 .join(StudySubjectProtocolVersionRelationship.assigning_study_site_protocol_version_relationship)
                 .filter(StudySiteProtocolVersionRelationship.executed_study_protocol_version_id == space_id)
             )
+        if performing_biologic_entity_id:
+            q = q.filter(StudySubject.performing_biologic_entity_id == performing_biologic_entity_id)
         return q
 
     def lookup(self, data: StudySubject) -> Iterable[StudySubject]:

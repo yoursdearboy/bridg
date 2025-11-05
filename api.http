@@ -145,3 +145,7 @@ Content-Type: application/json
   "shema": "tel",
   "address": "8(800)5553535"
 }
+
+### Subjects
+
+GET {{base}}/persons/{{person_id}}/subject

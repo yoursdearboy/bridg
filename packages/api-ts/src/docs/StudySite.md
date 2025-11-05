@@ -1,5 +1,5 @@
 
-# StudyProtocolVersion
+# StudySite
 
 
 ## Properties
@@ -12,13 +12,13 @@ Name | Type
 ## Example
 
 ```typescript
-import type { StudyProtocolVersion } from ''
+import type { StudySite } from ''
 
 // TODO: Update the object below with actual values
 const example = {
   "id": null,
   "label": null,
-} satisfies StudyProtocolVersion
+} satisfies StudySite
 
 console.log(example)
 
@@ -27,7 +27,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as StudyProtocolVersion
+const exampleParsed = JSON.parse(exampleJSON) as StudySite
 console.log(exampleParsed)
 ```
 

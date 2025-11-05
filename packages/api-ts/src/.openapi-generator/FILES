@@ -1,5 +1,6 @@
 .openapi-generator-ignore
 apis/DefaultApi.ts
+apis/PersonSubjectApi.ts
 apis/PersonsApi.ts
 apis/SitesApi.ts
 apis/SubjectsApi.ts
@@ -19,12 +20,15 @@ docs/NewStudySubject.md
 docs/Organization.md
 docs/Person.md
 docs/PersonData.md
+docs/PersonStudySubject.md
+docs/PersonSubjectApi.md
 docs/PersonsApi.md
 docs/PostalAddress.md
 docs/PostalAddressData.md
 docs/SitesApi.md
 docs/Status.md
 docs/StudyProtocolVersion.md
+docs/StudySite.md
 docs/StudySiteProtocolVersionRelationship.md
 docs/StudySubject.md
 docs/SubjectsApi.md
@@ -49,10 +53,12 @@ models/NewStudySubject.ts
 models/Organization.ts
 models/Person.ts
 models/PersonData.ts
+models/PersonStudySubject.ts
 models/PostalAddress.ts
 models/PostalAddressData.ts
 models/Status.ts
 models/StudyProtocolVersion.ts
+models/StudySite.ts
 models/StudySiteProtocolVersionRelationship.ts
 models/StudySubject.ts
 models/TelecommunicationAddress.ts

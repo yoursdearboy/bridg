@@ -13,6 +13,21 @@
  */
 
 import { mapValues } from '../runtime';
+import type { StudyProtocolVersion } from './StudyProtocolVersion';
+import {
+    StudyProtocolVersionFromJSON,
+    StudyProtocolVersionFromJSONTyped,
+    StudyProtocolVersionToJSON,
+    StudyProtocolVersionToJSONTyped,
+} from './StudyProtocolVersion';
+import type { StudySite } from './StudySite';
+import {
+    StudySiteFromJSON,
+    StudySiteFromJSONTyped,
+    StudySiteToJSON,
+    StudySiteToJSONTyped,
+} from './StudySite';
+
 /**
  * 
  * @export
@@ -27,10 +42,16 @@ export interface StudySiteProtocolVersionRelationship {
     id: string;
     /**
      * 
-     * @type {string}
+     * @type {StudySite}
      * @memberof StudySiteProtocolVersionRelationship
      */
-    executingStudySite: string;
+    executingStudySite: StudySite;
+    /**
+     * 
+     * @type {StudyProtocolVersion}
+     * @memberof StudySiteProtocolVersionRelationship
+     */
+    executedStudyProtocolVersion: StudyProtocolVersion;
 }
 
 /**
@@ -39,6 +60,7 @@ export interface StudySiteProtocolVersionRelationship {
 export function instanceOfStudySiteProtocolVersionRelationship(value: object): value is StudySiteProtocolVersionRelationship {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('executingStudySite' in value) || value['executingStudySite'] === undefined) return false;
+    if (!('executedStudyProtocolVersion' in value) || value['executedStudyProtocolVersion'] === undefined) return false;
     return true;
 }
 
@@ -53,7 +75,8 @@ export function StudySiteProtocolVersionRelationshipFromJSONTyped(json: any, ign
     return {
         
         'id': json['id'],
-        'executingStudySite': json['executing_study_site'],
+        'executingStudySite': StudySiteFromJSON(json['executing_study_site']),
+        'executedStudyProtocolVersion': StudyProtocolVersionFromJSON(json['executed_study_protocol_version']),
     };
 }
 
@@ -69,7 +92,8 @@ export function StudySiteProtocolVersionRelationshipToJSONTyped(value?: StudySit
     return {
         
         'id': value['id'],
-        'executing_study_site': value['executingStudySite'],
+        'executing_study_site': StudySiteToJSON(value['executingStudySite']),
+        'executed_study_protocol_version': StudyProtocolVersionToJSON(value['executedStudyProtocolVersion']),
     };
 }
 

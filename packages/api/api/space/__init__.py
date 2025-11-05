@@ -1,29 +1,14 @@
 from typing import Annotated, List
-from uuid import UUID
 
 import bridg
 from bridg import Repository
 from fastapi import APIRouter, Depends
-from pydantic import model_validator
 
 from api import site, subject
-from api.base_model import BaseModel
 from api.db import get_repository
+from api.model import StudyProtocolVersion
 
 router = APIRouter(prefix="/spaces")
-
-
-class StudyProtocolVersion(BaseModel):
-    id: UUID
-    name: str
-
-    @model_validator(mode="before")
-    @classmethod
-    def convert_name(cls, obj):
-        if isinstance(obj, bridg.StudyProtocolVersion):
-            data = obj.__dict__
-            data["name"] = str(obj)
-        return obj
 
 
 class StudyProtocolVersionRepository(Repository[bridg.StudyProtocolVersion]):

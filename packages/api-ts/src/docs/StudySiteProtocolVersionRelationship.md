@@ -6,8 +6,8 @@
 
 Name | Type
 ------------ | -------------
-`id` | string
-`executingStudySite` | string
+`executingStudySite` | [StudySite](StudySite.md)
+`executedStudyProtocolVersion` | [StudyProtocolVersion](StudyProtocolVersion.md)
 
 ## Example
 
@@ -16,8 +16,8 @@ import type { StudySiteProtocolVersionRelationship } from ''
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
   "executingStudySite": null,
+  "executedStudyProtocolVersion": null,
 } satisfies StudySiteProtocolVersionRelationship
 
 console.log(example)

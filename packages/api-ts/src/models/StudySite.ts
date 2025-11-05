@@ -16,37 +16,37 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface StudyProtocolVersion
+ * @interface StudySite
  */
-export interface StudyProtocolVersion {
+export interface StudySite {
     /**
      * 
      * @type {string}
-     * @memberof StudyProtocolVersion
+     * @memberof StudySite
      */
     id: string;
     /**
      * 
      * @type {string}
-     * @memberof StudyProtocolVersion
+     * @memberof StudySite
      */
     readonly label: string;
 }
 
 /**
- * Check if a given object implements the StudyProtocolVersion interface.
+ * Check if a given object implements the StudySite interface.
  */
-export function instanceOfStudyProtocolVersion(value: object): value is StudyProtocolVersion {
+export function instanceOfStudySite(value: object): value is StudySite {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('label' in value) || value['label'] === undefined) return false;
     return true;
 }
 
-export function StudyProtocolVersionFromJSON(json: any): StudyProtocolVersion {
-    return StudyProtocolVersionFromJSONTyped(json, false);
+export function StudySiteFromJSON(json: any): StudySite {
+    return StudySiteFromJSONTyped(json, false);
 }
 
-export function StudyProtocolVersionFromJSONTyped(json: any, ignoreDiscriminator: boolean): StudyProtocolVersion {
+export function StudySiteFromJSONTyped(json: any, ignoreDiscriminator: boolean): StudySite {
     if (json == null) {
         return json;
     }
@@ -57,11 +57,11 @@ export function StudyProtocolVersionFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function StudyProtocolVersionToJSON(json: any): StudyProtocolVersion {
-    return StudyProtocolVersionToJSONTyped(json, false);
+export function StudySiteToJSON(json: any): StudySite {
+    return StudySiteToJSONTyped(json, false);
 }
 
-export function StudyProtocolVersionToJSONTyped(value?: Omit<StudyProtocolVersion, 'label'> | null, ignoreDiscriminator: boolean = false): any {
+export function StudySiteToJSONTyped(value?: Omit<StudySite, 'label'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

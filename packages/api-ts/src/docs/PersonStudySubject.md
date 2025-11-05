@@ -1,5 +1,5 @@
 
-# StudyProtocolVersion
+# PersonStudySubject
 
 
 ## Properties
@@ -7,18 +7,22 @@
 Name | Type
 ------------ | -------------
 `id` | string
-`label` | string
+`status` | [Status](Status.md)
+`statusDate` | Date
+`assignedStudySiteProtocolVersionRelationship` | [Array&lt;StudySiteProtocolVersionRelationship&gt;](StudySiteProtocolVersionRelationship.md)
 
 ## Example
 
 ```typescript
-import type { StudyProtocolVersion } from ''
+import type { PersonStudySubject } from ''
 
 // TODO: Update the object below with actual values
 const example = {
   "id": null,
-  "label": null,
-} satisfies StudyProtocolVersion
+  "status": null,
+  "statusDate": null,
+  "assignedStudySiteProtocolVersionRelationship": null,
+} satisfies PersonStudySubject
 
 console.log(example)
 
@@ -27,7 +31,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as StudyProtocolVersion
+const exampleParsed = JSON.parse(exampleJSON) as PersonStudySubject
 console.log(exampleParsed)
 ```
 

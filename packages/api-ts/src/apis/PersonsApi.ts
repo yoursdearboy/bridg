@@ -20,6 +20,7 @@ import type {
   HTTPValidationError,
   Person,
   PersonData,
+  PersonStudySubject,
   PostalAddress,
   PostalAddressData,
   TelecommunicationAddress,
@@ -36,6 +37,8 @@ import {
     PersonToJSON,
     PersonDataFromJSON,
     PersonDataToJSON,
+    PersonStudySubjectFromJSON,
+    PersonStudySubjectToJSON,
     PostalAddressFromJSON,
     PostalAddressToJSON,
     PostalAddressDataFromJSON,
@@ -81,6 +84,10 @@ export interface IndexPersonsPersonIdNamesGetRequest {
 }
 
 export interface IndexPersonsPersonIdPostalAddressesGetRequest {
+    personId: string;
+}
+
+export interface IndexPersonsPersonIdSubjectGetRequest {
     personId: string;
 }
 
@@ -479,6 +486,43 @@ export class PersonsApi extends runtime.BaseAPI {
      */
     async indexPersonsPersonIdPostalAddressesGet(requestParameters: IndexPersonsPersonIdPostalAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PostalAddress>> {
         const response = await this.indexPersonsPersonIdPostalAddressesGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Index
+     */
+    async indexPersonsPersonIdSubjectGetRaw(requestParameters: IndexPersonsPersonIdSubjectGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PersonStudySubject>>> {
+        if (requestParameters['personId'] == null) {
+            throw new runtime.RequiredError(
+                'personId',
+                'Required parameter "personId" was null or undefined when calling indexPersonsPersonIdSubjectGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/persons/{person_id}/subject`;
+        urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PersonStudySubjectFromJSON));
+    }
+
+    /**
+     * Index
+     */
+    async indexPersonsPersonIdSubjectGet(requestParameters: IndexPersonsPersonIdSubjectGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PersonStudySubject>> {
+        const response = await this.indexPersonsPersonIdSubjectGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
