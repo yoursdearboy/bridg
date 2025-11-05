@@ -83,6 +83,16 @@ Content-Type: application/json
   }
 }
 
+### Subject activities
+
+#### List subject activities
+
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity
+
+#### Show subject activity (observation) results
+
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/8ac78da9-3c23-4770-94e9-ebaee8432b4b/result
+
 ## Persons
 
 ### Show a person
