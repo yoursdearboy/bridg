@@ -30,7 +30,7 @@ export interface StudyProtocolVersion {
      * @type {string}
      * @memberof StudyProtocolVersion
      */
-    readonly label: string;
+    readonly label: string | null;
 }
 
 /**

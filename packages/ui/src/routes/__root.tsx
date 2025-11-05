@@ -55,7 +55,7 @@ function Nav() {
   const space = spaces.data?.find((s) => s.id == spaceId);
   const theme = useMantineTheme();
   const { t } = useTranslation();
-  const spaceTitle = space?.name || t("system.title");
+  const spaceTitle = space?.label || t("system.title");
   return (
     <Group>
       <Menu position="bottom-end" width={200}>
@@ -75,7 +75,7 @@ function Nav() {
               params={{ spaceId: s.id }}
               className="[&.active]:font-bold"
             >
-              {s.name}
+              {s.label || t("StudyProtocolVersion.defaultLabel")}
             </MenuItemLink>
           ))}
         </Menu.Dropdown>

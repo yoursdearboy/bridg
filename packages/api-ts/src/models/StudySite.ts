@@ -30,7 +30,7 @@ export interface StudySite {
      * @type {string}
      * @memberof StudySite
      */
-    readonly label: string;
+    readonly label: string | null;
 }
 
 /**

@@ -180,7 +180,7 @@ const StudySubjectFields = ({ form }: NewStudySubjectFormProps) => {
             )}
             data={sites.map((s) => ({
               value: s.id,
-              label: s.executingStudySite,
+              label: s.executingStudySite.label || t("StudySite.defaultLabel"),
             }))}
             {...form.getInputProps(
               "assignedStudySiteProtocolVersionRelationship"

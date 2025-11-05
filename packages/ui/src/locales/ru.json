@@ -141,6 +141,12 @@
       "type": "Тип",
       "assignedStudySiteProtocolVersionRelationship": "Исследовательский центр"
     },
+    "StudyProtocolVersion": {
+      "defaultLabel": "Безымянное исследование"
+    },
+    "StudySite": {
+      "defaultLabel": "Безымянный центр"
+    },
     "Status": {
       "candidate": "Кандидат",
       "eligible": "Пригодные",

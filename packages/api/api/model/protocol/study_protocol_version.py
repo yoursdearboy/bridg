@@ -12,5 +12,5 @@ class StudyProtocolVersion(BaseModel):
 
     @computed_field
     @property
-    def label(self) -> str:
-        return self.acronym or "Unnamed study protocol version"
+    def label(self) -> Optional[str]:
+        return self.acronym
