@@ -1,4 +1,5 @@
 .openapi-generator-ignore
+apis/CodeSystemApi.ts
 apis/DefaultApi.ts
 apis/PersonSubjectApi.ts
 apis/PersonsApi.ts
@@ -9,6 +10,7 @@ docs/AdministrativeGender.md
 docs/ApiSubjectLookupStudySubjectPerson.md
 docs/ApiSubjectNewStudySubjectPerson.md
 docs/ApiSubjectStudySubjectPerson.md
+docs/CodeSystemApi.md
 docs/ConceptDescriptor.md
 docs/DefaultApi.md
 docs/EntityName.md
@@ -38,12 +40,12 @@ docs/TelecommunicationAddressUse.md
 docs/URLScheme.md
 docs/ValidationError.md
 docs/ValidationErrorLocInner.md
-docs/ValueSetApi.md
 index.ts
 models/AdministrativeGender.ts
 models/ApiSubjectLookupStudySubjectPerson.ts
 models/ApiSubjectNewStudySubjectPerson.ts
 models/ApiSubjectStudySubjectPerson.ts
+models/ConceptDescriptor.ts
 models/EntityName.ts
 models/EntityNameData.ts
 models/FoundStudySubject.ts

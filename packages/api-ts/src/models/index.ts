@@ -4,6 +4,7 @@ export * from './AdministrativeGender';
 export * from './ApiSubjectLookupStudySubjectPerson';
 export * from './ApiSubjectNewStudySubjectPerson';
 export * from './ApiSubjectStudySubjectPerson';
+export * from './ConceptDescriptor';
 export * from './EntityName';
 export * from './EntityNameData';
 export * from './FoundStudySubject';

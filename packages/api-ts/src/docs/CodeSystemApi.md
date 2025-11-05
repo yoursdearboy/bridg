@@ -1,10 +1,10 @@
-# ValueSetApi
+# CodeSystemApi
 
 All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**expandCodeSystemCodeSystemExpandGet**](ValueSetApi.md#expandcodesystemcodesystemexpandget) | **GET** /code_system/{code_system}/$expand | Expand |
+| [**expandCodeSystemCodeSystemExpandGet**](CodeSystemApi.md#expandcodesystemcodesystemexpandget) | **GET** /code_system/{code_system}/$expand | Expand |
 
 
 
@@ -19,13 +19,13 @@ Expand
 ```ts
 import {
   Configuration,
-  ValueSetApi,
+  CodeSystemApi,
 } from '';
 import type { ExpandCodeSystemCodeSystemExpandGetRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
-  const api = new ValueSetApi();
+  const api = new CodeSystemApi();
 
   const body = {
     // string
