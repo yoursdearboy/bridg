@@ -1,4 +1,11 @@
 @base=http://127.0.0.1:8000
+@fab_code_system=b365b97f-ff34-464c-9097-e7daec409f4c
+
+# Code System
+
+### Expand codesystem
+
+GET {{base}}/code_system/{{fab_code_system}}/$expand
 
 # Spaces
 
