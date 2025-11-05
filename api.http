@@ -2,6 +2,7 @@
 @space_id=ce946229-9746-46cd-8dd3-b27a2fbfd48a
 @subject_id=1944C046-95B3-4CB4-82E2-C789950E29FC
 @person_id=99132ae7-25dd-43ba-808e-cdb3b29af285
+@space_cbc_id=66da8ea1-5e69-40f2-a720-9937430d582d
 @fab_code_system=b365b97f-ff34-464c-9097-e7daec409f4c
 
 # Code System
@@ -18,9 +19,23 @@ GET {{base}}/spaces
 
 ## Sites
 
-### Index sites in the space
+### Index space sites
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/sites
+GET {{base}}/spaces/{{space_id}}/sites
+
+## Activities
+
+### List space activities
+
+GET {{base}}/spaces/{{space_id}}/activity
+
+### Show space activity
+
+GET {{base}}/spaces/{{space_id}}/activity/{{space_cbc_id}}
+
+### Show space activitiy result
+
+GET {{base}}/spaces/{{space_id}}/activity/{{space_cbc_id}}/result
 
 ## Subjects
 

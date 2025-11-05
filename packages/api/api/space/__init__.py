@@ -8,6 +8,8 @@ from api import site, subject
 from api.db import get_repository
 from api.model import StudyProtocolVersion
 
+from . import activity
+
 router = APIRouter(prefix="/spaces")
 
 
@@ -29,7 +31,8 @@ def index(repo: StudyProtocolVersionRepositoryDep) -> List[StudyProtocolVersion]
 space_router = APIRouter(prefix="/{space_id:uuid}")
 space_router.include_router(subject.router)
 space_router.include_router(site.router)
+space_router.include_router(activity.router)
 
 router.include_router(space_router)
 
-openapi_tags = [*subject.openapi_tag]
+openapi_tags = [*subject.openapi_tag, *activity.openapi_tags]
