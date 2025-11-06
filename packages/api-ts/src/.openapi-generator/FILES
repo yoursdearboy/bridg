@@ -16,6 +16,7 @@ docs/ApiSubjectNewStudySubjectPerson.md
 docs/ApiSubjectStudySubjectPerson.md
 docs/CodeSystemApi.md
 docs/ConceptDescriptor.md
+docs/DataTypeName.md
 docs/DefaultApi.md
 docs/DefinedActivity.md
 docs/DefinedObservationResult.md
@@ -62,6 +63,7 @@ models/ApiSubjectLookupStudySubjectPerson.ts
 models/ApiSubjectNewStudySubjectPerson.ts
 models/ApiSubjectStudySubjectPerson.ts
 models/ConceptDescriptor.ts
+models/DataTypeName.ts
 models/DefinedActivity.ts
 models/DefinedObservationResult.ts
 models/EntityName.ts

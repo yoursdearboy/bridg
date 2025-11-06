@@ -10,6 +10,9 @@ Name | Type
 `value` | [Value](Value.md)
 `valueNegationIndicator` | boolean
 `typeCode` | [ConceptDescriptor](ConceptDescriptor.md)
+`targetType` | [DataTypeName](DataTypeName.md)
+`targetCodingSystem` | string
+`targetUnit` | string
 `derivationExpression` | string
 
 ## Example
@@ -23,6 +26,9 @@ const example = {
   "value": null,
   "valueNegationIndicator": null,
   "typeCode": null,
+  "targetType": null,
+  "targetCodingSystem": null,
+  "targetUnit": null,
   "derivationExpression": null,
 } satisfies DefinedObservationResult
 
