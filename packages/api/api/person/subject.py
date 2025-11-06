@@ -5,9 +5,8 @@ from uuid import UUID
 import bridg
 from fastapi import APIRouter, Depends
 
-from api.base_model import BaseModel
 from api.db import get_repository
-from api.model import StudySiteProtocolVersionRelationship
+from api.model import BaseModel, StudySiteProtocolVersionRelationship
 from api.subject.service import StudySubjectRepository
 
 router = APIRouter(prefix="/subject", tags=["person_subject"])

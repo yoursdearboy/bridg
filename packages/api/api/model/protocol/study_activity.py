@@ -1,7 +1,6 @@
 from uuid import UUID
 
-from api.base_model import BaseModel
-
+from ..base import BaseModel
 from .defined_activity import DefinedActivity
 
 

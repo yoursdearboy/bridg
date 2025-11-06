@@ -4,7 +4,7 @@ from uuid import UUID
 import bridg
 from pydantic import computed_field
 
-from api.base_model import BaseModel
+from ..base import BaseModel
 
 
 class EntityNameData(BaseModel[bridg.EntityName]):

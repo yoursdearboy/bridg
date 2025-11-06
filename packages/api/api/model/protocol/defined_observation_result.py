@@ -3,8 +3,7 @@ from uuid import UUID
 
 from pydantic import Field
 
-from api.base_model import BaseModel
-
+from ..base import BaseModel
 from ..datatypes import ConceptDescriptor, DataValue, datavalue_json_schema_extra
 
 
