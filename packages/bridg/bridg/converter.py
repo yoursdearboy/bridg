@@ -1,6 +1,7 @@
+from contextvars import ContextVar
 from dataclasses import Field, fields, is_dataclass
 from datetime import date, datetime
-from typing import List, TypeVar, get_origin, get_type_hints
+from typing import List, Optional, TypeVar, get_origin, get_type_hints
 from uuid import UUID
 
 from cattr import Converter
@@ -10,10 +11,12 @@ from sqlalchemy.orm.collections import InstrumentedList
 from toolz import dissoc
 
 import bridg
+import bridg.datatype
 
 from .db import Base
 
 converter = Converter()
+cd_service: ContextVar[bridg.datatype.ConceptDescriptorService] = ContextVar("cd_service")
 
 
 class Cache:
@@ -56,6 +59,12 @@ def _cache_key(data: dict, class_: type[T]) -> str | None:
     return class_.__tablename__ + "-" + key
 
 
+def get_property_annotation(class_, key):
+    if prop := getattr(class_, key):
+        if getter := getattr(prop, "fget"):
+            return getter.__annotations__.get("return")
+
+
 def make_model_hook():
     cache = Cache()
 
@@ -91,12 +100,18 @@ def make_model_hook():
                     type = attr.entity.class_
                     if attr.uselist:
                         type = List[type]
+                # FIXME: dont' repeat yourself (see below)
+                elif ann := annotations.get(key):
+                    type = ann.__args__[0]
                 else:
                     type = attr.class_attribute.type.python_type
             elif ann := annotations.get(key):
                 type = ann.__args__[0]
+            elif ann := get_property_annotation(class_, key):
+                type = ann
             else:
-                continue
+                # TODO: add logging
+                raise RuntimeError(f"Can't structure {key} of {class_}")
 
             value = converter.structure(value, type)
             setattr(obj, key, value)
@@ -127,7 +142,7 @@ def dataclass_hook(x, cls):
 
     def pair(field: Field):
         key = field.name
-        value = getattr(x, key)
+        value = x.get(key) if isinstance(x, dict) else getattr(x, key)
         ftype = field.type
         assert isinstance(ftype, type) or get_origin(ftype) is not None
         value = converter.structure(value, ftype)  # type: ignore
@@ -146,3 +161,23 @@ def uuid_hook(x: str, _) -> UUID:
     if isinstance(x, UUID):
         return x
     return UUID(x)
+
+
+@converter.register_structure_hook
+def cd_hook(x, _) -> bridg.datatype.ConceptDescriptor:
+    return cd_service.get().get_or_create(**x)
+
+
+# FIXME: that's inference is weird
+@converter.register_structure_hook
+def datavalue_hook(x, cls) -> Optional[bridg.datatype.DataValue]:
+    if x is None:
+        return None
+    if isinstance(x, dict):
+        if "unit" in x:
+            return bridg.datatype.PhysicalQuantity(**x)
+        if "code_system" in x:
+            return converter.structure(x, bridg.datatype.ConceptDescriptor)
+    if isinstance(x, date):
+        return x
+    raise RuntimeError("Can't handle DataValue")

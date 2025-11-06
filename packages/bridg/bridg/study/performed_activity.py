@@ -6,15 +6,13 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..common import Activity, StudySubject
-from ..core import Code, code_column
+from ..datatype import ConceptDescriptor
 from ..protocol import DefinedActivity, Epoch, StudyProtocolVersion
 
 
 class PerformedActivity(Activity):
     __tablename__ = "performed_activity"
     __mapper_args__ = {"concrete": True, "polymorphic_abstract": True, "polymorphic_on": "type"}
-
-    class StatusCode(Code): ...
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     type: Mapped[str]
@@ -23,8 +21,8 @@ class PerformedActivity(Activity):
     name_code_modified_text: Mapped[Optional[str]]
     negation_indicator: Mapped[Optional[bool]]
 
-    status_code_id: Mapped[Optional[UUID]] = code_column(StatusCode)
-    status_code: Mapped[Optional[StatusCode]] = relationship()
+    status_code_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
+    status_code: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=status_code_id)
 
     status_date: Mapped[Optional[datetime]]
 

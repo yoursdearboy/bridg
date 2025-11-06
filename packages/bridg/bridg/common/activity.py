@@ -6,7 +6,7 @@ from uuid import UUID
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, declared_attr, mapped_column, relationship
 
-from ..core import Code, code_column
+from ..datatype import ConceptDescriptor
 from ..db import Base
 
 if TYPE_CHECKING:
@@ -17,13 +17,11 @@ if TYPE_CHECKING:
 class Activity(Base):
     __abstract__ = True
 
-    class ReasonCode(Code): ...
-
-    reason_code_id: Mapped[Optional[UUID]] = code_column(ReasonCode)
+    reason_code_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
 
     @declared_attr
-    def reason_code(cls) -> Mapped[Optional[ReasonCode]]:
-        return relationship()
+    def reason_code(cls) -> Mapped[Optional[ConceptDescriptor]]:
+        return relationship(foreign_keys=cls.reason_code_id)  # type: ignore
 
     comment: Mapped[Optional[str]]
 

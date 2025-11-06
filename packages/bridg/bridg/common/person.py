@@ -6,14 +6,14 @@ from uuid import UUID, uuid4
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from .. import core
+from .. import datatype
 from .biologic_entity import BiologicEntity
 
 if TYPE_CHECKING:
     from .healthcare_provider import HealthcareProvider
 
 
-class PostalAddress(core.PostalAddress):
+class PostalAddress(datatype.PostalAddress):
     __tablename__ = "person_postal_address"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
@@ -21,7 +21,7 @@ class PostalAddress(core.PostalAddress):
     person: Mapped[Person] = relationship(back_populates="postal_address")
 
 
-class TelecommunicationAddress(core.TelecommunicationAddress):
+class TelecommunicationAddress(datatype.TelecommunicationAddress):
     __tablename__ = "person_telecom_address"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)

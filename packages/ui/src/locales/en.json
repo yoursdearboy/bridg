@@ -142,6 +142,12 @@
       "type": "Type",
       "assignedStudySiteProtocolVersionRelationship": "Study sites"
     },
+    "StudyProtocolVersion": {
+      "defaultLabel": "Unnamed study"
+    },
+    "StudySite": {
+      "defaultLabel": "Unnamed site"
+    },
     "Status": {
       "candidate": "candidate",
       "eligible": "Eligible",

@@ -1,4 +1,15 @@
 @base=http://127.0.0.1:8000
+@space_id=ce946229-9746-46cd-8dd3-b27a2fbfd48a
+@subject_id=1944C046-95B3-4CB4-82E2-C789950E29FC
+@person_id=99132ae7-25dd-43ba-808e-cdb3b29af285
+@space_cbc_id=66da8ea1-5e69-40f2-a720-9937430d582d
+@fab_code_system=b365b97f-ff34-464c-9097-e7daec409f4c
+
+# Code System
+
+### Expand codesystem
+
+GET {{base}}/code_system/{{fab_code_system}}/$expand
 
 # Spaces
 
@@ -8,23 +19,37 @@ GET {{base}}/spaces
 
 ## Sites
 
-### Index sites in the space
+### Index space sites
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/sites
+GET {{base}}/spaces/{{space_id}}/sites
+
+## Activities
+
+### List space activities
+
+GET {{base}}/spaces/{{space_id}}/activity
+
+### Show space activity
+
+GET {{base}}/spaces/{{space_id}}/activity/{{space_cbc_id}}
+
+### Show space activitiy result
+
+GET {{base}}/spaces/{{space_id}}/activity/{{space_cbc_id}}/result
 
 ## Subjects
 
 ### Index subjects in the space
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects
+GET {{base}}/spaces/{{space_id}}/subjects
 
 ### Show a subject in the space
 
-GET {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/f0519f08-d22f-40ff-8800-cee82c4e925b
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}
 
 ### Create a subject in the space
 
-POST {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects
+POST {{base}}/spaces/{{space_id}}/subjects
 Content-Type: application/json
 
 {
@@ -47,7 +72,7 @@ Content-Type: application/json
 
 ### Lookup a subject
 
-POST {{base}}/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects/lookup
+POST {{base}}/spaces/{{space_id}}/subjects/lookup
 Content-Type: application/json
 
 {
@@ -58,21 +83,31 @@ Content-Type: application/json
   }
 }
 
+### Subject activities
+
+#### List subject activities
+
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity
+
+#### Show subject activity (observation) results
+
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/8ac78da9-3c23-4770-94e9-ebaee8432b4b/result
+
 ## Persons
 
 ### Show a person
 
-GET {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285
+GET {{base}}/persons/{{person_id}}
 
 ### Names
 
 #### Show a person names
 
-GET {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names
+GET {{base}}/persons/{{person_id}}/names
 
 #### Create a person name
 
-POST {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names
+POST {{base}}/persons/{{person_id}}/names
 Content-Type: application/json
 
 {
@@ -84,7 +119,7 @@ Content-Type: application/json
 
 #### Update a person name
 
-PATCH {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names/aea59ce0-7630-442d-ba45-8ef490e891c6
+PATCH {{base}}/persons/{{person_id}}/names/aea59ce0-7630-442d-ba45-8ef490e891c6
 Content-Type: application/json
 
 {
@@ -96,17 +131,17 @@ Content-Type: application/json
 
 #### Delete a person name
 
-DELETE {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/names/b0f79211-0160-42c4-9f75-74b38ba156ca
+DELETE {{base}}/persons/{{person_id}}/names/b0f79211-0160-42c4-9f75-74b38ba156ca
 
 ### Postal addresses
 
 #### Show a person postal addresses
 
-GET {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/postal_addresses
+GET {{base}}/persons/{{person_id}}/postal_addresses
 
 #### Create a person postal address
 
-POST {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/postal_addresses
+POST {{base}}/persons/{{person_id}}/postal_addresses
 Content-Type: application/json
 
 {
@@ -116,22 +151,26 @@ Content-Type: application/json
   "country": "Lukomorje",
   "municipality": "Great tree",
   "state": "",
-  "zip": "111111",
+  "zip": "111111"
 }
 
 ### Telecommunication addresses
 
 #### Show a person telecommunication addresses
 
-GET {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/telecommunication_addresses
+GET {{base}}/persons/{{person_id}}/telecommunication_addresses
 
 #### Create a person telecommunication address
 
-POST {{base}}/persons/99132ae7-25dd-43ba-808e-cdb3b29af285/telecommunication_addresses
+POST {{base}}/persons/{{person_id}}/telecommunication_addresses
 Content-Type: application/json
 
 {
-  "use": "h",
+  "use": "H",
   "shema": "tel",
   "address": "8(800)5553535"
 }
+
+### Subjects
+
+GET {{base}}/persons/{{person_id}}/subject

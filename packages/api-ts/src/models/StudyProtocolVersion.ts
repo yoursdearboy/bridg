@@ -30,7 +30,7 @@ export interface StudyProtocolVersion {
      * @type {string}
      * @memberof StudyProtocolVersion
      */
-    name: string;
+    readonly label: string | null;
 }
 
 /**
@@ -38,7 +38,7 @@ export interface StudyProtocolVersion {
  */
 export function instanceOfStudyProtocolVersion(value: object): value is StudyProtocolVersion {
     if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('label' in value) || value['label'] === undefined) return false;
     return true;
 }
 
@@ -53,7 +53,7 @@ export function StudyProtocolVersionFromJSONTyped(json: any, ignoreDiscriminator
     return {
         
         'id': json['id'],
-        'name': json['name'],
+        'label': json['label'],
     };
 }
 
@@ -61,7 +61,7 @@ export function StudyProtocolVersionToJSON(json: any): StudyProtocolVersion {
     return StudyProtocolVersionToJSONTyped(json, false);
 }
 
-export function StudyProtocolVersionToJSONTyped(value?: StudyProtocolVersion | null, ignoreDiscriminator: boolean = false): any {
+export function StudyProtocolVersionToJSONTyped(value?: Omit<StudyProtocolVersion, 'label'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -69,7 +69,6 @@ export function StudyProtocolVersionToJSONTyped(value?: StudyProtocolVersion | n
     return {
         
         'id': value['id'],
-        'name': value['name'],
     };
 }
 
