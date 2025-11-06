@@ -1,4 +1,3 @@
-from enum import Enum
 from typing import Optional
 from uuid import UUID
 
@@ -6,13 +5,6 @@ from sqlalchemy import ForeignKey, Numeric, String
 from sqlalchemy.orm import Mapped, composite, declared_attr, mapped_column, relationship
 
 from .datatype import ConceptDescriptor, DataValue, PhysicalQuantity, date, datetime
-
-
-class ValueType(Enum):
-    CD = "CD"
-    PQ = "PQ"
-    TS_DATE = "TS.DATE"
-    TS_DATETIME = "TS.DATETIME"
 
 
 class ObservationResult:
