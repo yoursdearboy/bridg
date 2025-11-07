@@ -1,10 +1,10 @@
 from typing import Optional
 from uuid import UUID, uuid4
 
-from sqlalchemy import ForeignKey
+from sqlalchemy import Enum, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..datatype import ConceptDescriptor
+from ..datatype import ConceptDescriptor, DataTypeName
 from ..db import Base
 from ..observation_result import ObservationResult
 from .defined_observation import DefinedObservation
@@ -21,6 +21,10 @@ class DefinedObservationResult(ObservationResult, Base):
 
     type_code_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
     type_code: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=type_code_id)
+
+    target_type: Mapped[DataTypeName] = mapped_column(
+        Enum(DataTypeName, values_callable=lambda x: [i.value for i in x])
+    )
 
     target_coding_system: Mapped[Optional[str]] = mapped_column(ForeignKey("concept_descriptor.code_system"))
 

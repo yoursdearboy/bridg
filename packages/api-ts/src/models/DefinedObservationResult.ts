@@ -27,6 +27,13 @@ import {
     ValueToJSON,
     ValueToJSONTyped,
 } from './Value';
+import type { DataTypeName } from './DataTypeName';
+import {
+    DataTypeNameFromJSON,
+    DataTypeNameFromJSONTyped,
+    DataTypeNameToJSON,
+    DataTypeNameToJSONTyped,
+} from './DataTypeName';
 
 /**
  * 
@@ -60,11 +67,31 @@ export interface DefinedObservationResult {
     typeCode: ConceptDescriptor | null;
     /**
      * 
+     * @type {DataTypeName}
+     * @memberof DefinedObservationResult
+     */
+    targetType: DataTypeName;
+    /**
+     * 
+     * @type {string}
+     * @memberof DefinedObservationResult
+     */
+    targetCodingSystem: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DefinedObservationResult
+     */
+    targetUnit: string | null;
+    /**
+     * 
      * @type {string}
      * @memberof DefinedObservationResult
      */
     derivationExpression: string | null;
 }
+
+
 
 /**
  * Check if a given object implements the DefinedObservationResult interface.
@@ -74,6 +101,9 @@ export function instanceOfDefinedObservationResult(value: object): value is Defi
     if (!('value' in value) || value['value'] === undefined) return false;
     if (!('valueNegationIndicator' in value) || value['valueNegationIndicator'] === undefined) return false;
     if (!('typeCode' in value) || value['typeCode'] === undefined) return false;
+    if (!('targetType' in value) || value['targetType'] === undefined) return false;
+    if (!('targetCodingSystem' in value) || value['targetCodingSystem'] === undefined) return false;
+    if (!('targetUnit' in value) || value['targetUnit'] === undefined) return false;
     if (!('derivationExpression' in value) || value['derivationExpression'] === undefined) return false;
     return true;
 }
@@ -92,6 +122,9 @@ export function DefinedObservationResultFromJSONTyped(json: any, ignoreDiscrimin
         'value': ValueFromJSON(json['value']),
         'valueNegationIndicator': json['value_negation_indicator'],
         'typeCode': ConceptDescriptorFromJSON(json['type_code']),
+        'targetType': DataTypeNameFromJSON(json['target_type']),
+        'targetCodingSystem': json['target_coding_system'],
+        'targetUnit': json['target_unit'],
         'derivationExpression': json['derivation_expression'],
     };
 }
@@ -111,6 +144,9 @@ export function DefinedObservationResultToJSONTyped(value?: DefinedObservationRe
         'value': ValueToJSON(value['value']),
         'value_negation_indicator': value['valueNegationIndicator'],
         'type_code': ConceptDescriptorToJSON(value['typeCode']),
+        'target_type': DataTypeNameToJSON(value['targetType']),
+        'target_coding_system': value['targetCodingSystem'],
+        'target_unit': value['targetUnit'],
         'derivation_expression': value['derivationExpression'],
     };
 }

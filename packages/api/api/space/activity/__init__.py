@@ -8,8 +8,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from api.db import get_repository
 from api.model import StudyActivity
 
-from . import result
-
 router = APIRouter(prefix="/activity", tags=["space_activity"])
 
 
@@ -33,6 +31,4 @@ def show(space_id: UUID, sa_id: UUID, repo: StudyActivityRepositoryDep) -> Optio
     raise HTTPException(status_code=404)
 
 
-router.include_router(result.router, prefix="/{obs_id:uuid}")
-
-openapi_tags = [{"name": "space_activity"}, *result.openapi_tags]
+openapi_tags = [{"name": "space_activity"}]

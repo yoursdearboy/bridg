@@ -2,9 +2,8 @@
 /* eslint-disable */
 export * from './CodeSystemApi';
 export * from './DefaultApi';
-export * from './DefinedObservationResultApi';
+export * from './DefinedActivityApi';
 export * from './PerformedActivityApi';
-export * from './PerformedObservationResultApi';
 export * from './PersonSubjectApi';
 export * from './PersonsApi';
 export * from './SitesApi';

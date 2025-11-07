@@ -6,9 +6,7 @@ from bridg.repository import Repository
 from fastapi import APIRouter, Depends, HTTPException
 
 from api.db import get_repository
-from api.model import PerformedActivity
-
-from . import result
+from api.model import PerformedActivity, PerformedObservation
 
 router = APIRouter(prefix="/activity", tags=["performed_activity"])
 
@@ -28,15 +26,39 @@ def index(space_id: UUID, subject_id: UUID, repo: PerformedActivityRepositoryDep
     return [PerformedActivity.model_validate(obj) for obj in objs]
 
 
-@router.get("/{pa_id:uuid}")
+@router.get(
+    "/{a_id:uuid}",
+    responses={
+        "200": {
+            "description": "Successful Response",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "anyOf": None,
+                        "oneOf": [
+                            {"$ref": "#/components/schemas/PerformedActivity"},
+                            {"$ref": "#/components/schemas/PerformedObservation"},
+                            {"type": "null"},
+                        ],
+                        "title": "Response Show Performed Activity  A Id  Get",
+                    }
+                }
+            },
+        }
+    },
+)
 def show(
-    space_id: UUID, subject_id: UUID, pa_id: UUID, repo: PerformedActivityRepositoryDep
-) -> Optional[PerformedActivity]:
-    if obj := repo.one_or_none(pa_id):
+    space_id: UUID,
+    subject_id: UUID,
+    a_id: UUID,
+    repo: PerformedActivityRepositoryDep,
+    result: bool = False,
+) -> Optional[PerformedActivity | PerformedObservation]:
+    if obj := repo.one_or_none(a_id):
+        if result:
+            return PerformedObservation.model_validate(obj)
         return PerformedActivity.model_validate(obj)
     raise HTTPException(status_code=404)
 
 
-router.include_router(result.router, prefix="/{obs_id:uuid}")
-
-openapi_tags = [{"name": "performed_activity"}, *result.openapi_tags]
+openapi_tags = [{"name": "performed_activity"}]

@@ -3,7 +3,7 @@ from uuid import UUID
 
 from pydantic import Field, computed_field
 
-from api.base_model import BaseModel
+from ..base import BaseModel
 
 
 class StudyProtocolVersion(BaseModel):

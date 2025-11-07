@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from api import code_system, person, space
+from api import code_system, defined_activity, person, space
 from api.openapi import get_openapi
 
 openapi_tags = [*person.openapi_tags, *space.openapi_tags]
@@ -16,5 +16,6 @@ def custom_openapi():
 
 app.openapi = custom_openapi
 app.include_router(code_system.router)
+app.include_router(defined_activity.router)
 app.include_router(person.router)
 app.include_router(space.router)

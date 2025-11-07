@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { DefinedObservationResult } from './DefinedObservationResult';
+import {
+    DefinedObservationResultFromJSON,
+    DefinedObservationResultFromJSONTyped,
+    DefinedObservationResultToJSON,
+    DefinedObservationResultToJSONTyped,
+} from './DefinedObservationResult';
 import type { ConceptDescriptor } from './ConceptDescriptor';
 import {
     ConceptDescriptorFromJSON,
@@ -24,58 +31,65 @@ import {
 /**
  * 
  * @export
- * @interface DefinedActivity
+ * @interface DefinedObservation
  */
-export interface DefinedActivity {
+export interface DefinedObservation {
     /**
      * 
      * @type {string}
-     * @memberof DefinedActivity
+     * @memberof DefinedObservation
      */
     id: string;
     /**
      * 
      * @type {ConceptDescriptor}
-     * @memberof DefinedActivity
+     * @memberof DefinedObservation
      */
     nameCode: ConceptDescriptor;
     /**
      * 
      * @type {ConceptDescriptor}
-     * @memberof DefinedActivity
+     * @memberof DefinedObservation
      */
     categoryCode: ConceptDescriptor | null;
     /**
      * 
      * @type {ConceptDescriptor}
-     * @memberof DefinedActivity
+     * @memberof DefinedObservation
      */
     subcategoryCode: ConceptDescriptor | null;
     /**
      * 
      * @type {string}
-     * @memberof DefinedActivity
+     * @memberof DefinedObservation
      */
     description: string | null;
+    /**
+     * 
+     * @type {Array<DefinedObservationResult>}
+     * @memberof DefinedObservation
+     */
+    producedDefinedObservationResult: Array<DefinedObservationResult>;
 }
 
 /**
- * Check if a given object implements the DefinedActivity interface.
+ * Check if a given object implements the DefinedObservation interface.
  */
-export function instanceOfDefinedActivity(value: object): value is DefinedActivity {
+export function instanceOfDefinedObservation(value: object): value is DefinedObservation {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('name_code' in value) || value['name_code'] === undefined) return false;
     if (!('category_code' in value) || value['category_code'] === undefined) return false;
     if (!('subcategory_code' in value) || value['subcategory_code'] === undefined) return false;
     if (!('description' in value) || value['description'] === undefined) return false;
+    if (!('produced_defined_observation_result' in value) || value['produced_defined_observation_result'] === undefined) return false;
     return true;
 }
 
-export function DefinedActivityFromJSON(json: any): DefinedActivity {
-    return DefinedActivityFromJSONTyped(json, false);
+export function DefinedObservationFromJSON(json: any): DefinedObservation {
+    return DefinedObservationFromJSONTyped(json, false);
 }
 
-export function DefinedActivityFromJSONTyped(json: any, ignoreDiscriminator: boolean): DefinedActivity {
+export function DefinedObservationFromJSONTyped(json: any, ignoreDiscriminator: boolean): DefinedObservation {
     if (json == null) {
         return json;
     }
@@ -86,14 +100,15 @@ export function DefinedActivityFromJSONTyped(json: any, ignoreDiscriminator: boo
         'categoryCode': ConceptDescriptorFromJSON(json['category_code']),
         'subcategoryCode': ConceptDescriptorFromJSON(json['subcategory_code']),
         'description': json['description'],
+        'producedDefinedObservationResult': ((json['produced_defined_observation_result'] as Array<any>).map(DefinedObservationResultFromJSON)),
     };
 }
 
-export function DefinedActivityToJSON(json: any): DefinedActivity {
-    return DefinedActivityToJSONTyped(json, false);
+export function DefinedObservationToJSON(json: any): DefinedObservation {
+    return DefinedObservationToJSONTyped(json, false);
 }
 
-export function DefinedActivityToJSONTyped(value?: DefinedActivity | null, ignoreDiscriminator: boolean = false): any {
+export function DefinedObservationToJSONTyped(value?: DefinedObservation | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -105,6 +120,7 @@ export function DefinedActivityToJSONTyped(value?: DefinedActivity | null, ignor
         'category_code': ConceptDescriptorToJSON(value['categoryCode']),
         'subcategory_code': ConceptDescriptorToJSON(value['subcategoryCode']),
         'description': value['description'],
+        'produced_defined_observation_result': ((value['producedDefinedObservationResult'] as Array<any>).map(DefinedObservationResultToJSON)),
     };
 }
 

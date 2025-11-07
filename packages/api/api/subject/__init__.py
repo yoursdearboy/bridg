@@ -7,9 +7,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import field_validator
 from sqlalchemy.orm import Session
 
-from api.base_model import BaseModel
 from api.db import get_db, get_repository
-from api.model import EntityName, EntityNameData
+from api.model import BaseModel, EntityName, EntityNameData
 
 from . import performed_activity
 from .service import StudySubjectRepository
