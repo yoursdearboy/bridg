@@ -12,10 +12,8 @@ import { useDisclosure } from "@mantine/hooks";
 import type { Person } from "api-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
-import ButtonLink from "@/components/ButtonLink";
 import { InfoRow } from "@/components/InfoRow";
-import { EditPersonForm } from "@/components/person/EditPersonForm";
-import { Route as personRoute } from "@/routes/persons/$personId";
+import { EditPersonForm } from "./EditPersonForm";
 
 interface PersonCardProps {
   person: Person;
@@ -33,19 +31,9 @@ export const PersonCard = ({ person }: PersonCardProps) => {
             <Text fw={500} px="xs">
               {t("PersonShowPage.title")}
             </Text>
-            <Group>
-              <ButtonLink
-                to={personRoute.to}
-                params={{ personId: person.id }}
-                variant="outline"
-                size="compact-sm"
-              >
-                {t("SubjectShowPage.toPerson")}
-              </ButtonLink>
-              <Button variant="outline" size="compact-sm" onClick={open}>
-                {t("PersonShowPage.edit")}
-              </Button>
-            </Group>
+            <Button variant="outline" size="compact-sm" onClick={open} fw={500}>
+              {t("PersonShowPage.edit")}
+            </Button>
           </Group>
         </Card.Section>
         <Box pt="xs">

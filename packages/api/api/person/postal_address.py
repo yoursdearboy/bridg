@@ -45,3 +45,4 @@ def update(
 @router.delete("/{address_id:uuid}")
 def delete(person_id: UUID, address_id: UUID, repo: PostalAddressRepositoryDep):
     repo.delete(address_id)
+

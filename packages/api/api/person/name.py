@@ -43,3 +43,4 @@ def update(person_id: UUID, name_id: UUID, data: EntityNameData, repo: EntityNam
 @router.delete("/{name_id:uuid}")
 def delete(person_id: UUID, name_id: UUID, repo: EntityNameRepositoryDep):
     repo.delete(name_id)
+

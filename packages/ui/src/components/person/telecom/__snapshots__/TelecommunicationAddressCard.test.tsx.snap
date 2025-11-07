@@ -30,14 +30,10 @@ exports[`TelecommunicationAddressesCard > matches snapshot 1`] = `
           Person telecommunication addresses
         </p>
         <button
-          aria-controls="mantine-4miilw5eg-dropdown"
-          aria-expanded="false"
-          aria-haspopup="menu"
           class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
           data-size="compact-sm"
           data-variant="outline"
-          id="mantine-4miilw5eg-target"
-          style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline);"
+          style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline); font-weight: 500;"
           type="button"
         >
           <span

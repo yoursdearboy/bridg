@@ -43,3 +43,4 @@ class BaseModel(PydanticBaseModel, Generic[T]):
                 continue
             setattr(obj, k, v)
         return obj
+

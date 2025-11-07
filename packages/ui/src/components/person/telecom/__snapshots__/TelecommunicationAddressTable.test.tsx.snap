@@ -24,11 +24,7 @@ exports[`TelecommunicationAddressTable > matches snapshot 1`] = `
         >
           <td
             class="m_4e7aa4ef mantine-Table-td"
-            valign="middle"
-            width="30"
-          >
-            <div />
-          </td>
+          />
           <td
             class="m_4e7aa4ef mantine-Table-td"
           />
@@ -44,11 +40,7 @@ exports[`TelecommunicationAddressTable > matches snapshot 1`] = `
         >
           <td
             class="m_4e7aa4ef mantine-Table-td"
-            valign="middle"
-            width="30"
-          >
-            <div />
-          </td>
+          />
           <td
             class="m_4e7aa4ef mantine-Table-td"
           />

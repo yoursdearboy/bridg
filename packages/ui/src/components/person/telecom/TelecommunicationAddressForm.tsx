@@ -40,6 +40,12 @@ export const TelecommunicationAddressForm = ({
       use: TelecommunicationAddressUse.H,
     },
     validate: {
+      scheme: (value) =>
+        value
+          ? null
+          : t("fieldRequiredMessage", {
+              fieldName: t("TelecommunicationAddress.scheme"),
+            }),
       address: (value) =>
         value
           ? null

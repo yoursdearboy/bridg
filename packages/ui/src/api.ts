@@ -5,6 +5,7 @@ import {
   DefinedActivityApi,
   DefaultApi as SpacesApi,
   SubjectsApi,
+  SpaceActivityApi,
 } from "api-ts";
 
 const config = new Configuration({
@@ -16,6 +17,7 @@ export const sites = new SitesApi(config);
 export const spaces = new SpacesApi(config);
 export const subjects = new SubjectsApi(config);
 export const persons = new PersonsApi(config);
+export const spaceActivity = new SpaceActivityApi(config);
 
 export default {
   definedActivity,
@@ -23,4 +25,5 @@ export default {
   spaces,
   subjects,
   persons,
+  spaceActivity,
 };

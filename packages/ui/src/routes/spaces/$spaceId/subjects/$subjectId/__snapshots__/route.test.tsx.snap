@@ -212,6 +212,72 @@ exports[`show page renders correctly 1`] = `
             </span>
           </button>
         </div>
+        <style
+          data-mantine-styles="inline"
+        >
+          .__m__-«r13»{--col-flex-grow:auto;--col-flex-basis:100%;--col-max-width:100%;}@media(min-width: 62em){.__m__-«r13»{--col-flex-grow:auto;--col-flex-basis:50%;--col-max-width:50%;}}
+        </style>
+        <div
+          class="m_96bdd299 mantine-Grid-col __m__-«r13»"
+        >
+          <div
+            class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+            data-with-border="true"
+            style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm);"
+          >
+            <div
+              class="m_599a2148 mantine-Card-section"
+              data-first-section="true"
+              data-inherit-padding="true"
+              data-with-border="true"
+              style="padding-block: var(--mantine-spacing-xs);"
+            >
+              <div
+                class="m_4081bf90 mantine-Group-root"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+              >
+                <p
+                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  style="padding-inline: var(--mantine-spacing-xs); font-weight: 500;"
+                >
+                  Activity
+                </p>
+                <button
+                  aria-controls="mantine-m75qc1lk3-dropdown"
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+                  data-size="compact-sm"
+                  data-variant="outline"
+                  id="mantine-m75qc1lk3-target"
+                  style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline); font-weight: 500;"
+                  type="button"
+                >
+                  <span
+                    class="m_80f1301b mantine-Button-inner"
+                  >
+                    <span
+                      class="m_811560b9 mantine-Button-label"
+                    >
+                      Add
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div
+              class="m_599a2148 mantine-Card-section"
+              data-inherit-padding="true"
+              data-last-section="true"
+              style="padding-block: var(--mantine-spacing-xs);"
+            >
+              <div
+                class=""
+                style="min-height: 80px; position: relative;"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
