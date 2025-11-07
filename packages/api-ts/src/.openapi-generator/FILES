@@ -3,7 +3,6 @@ apis/CodeSystemApi.ts
 apis/DefaultApi.ts
 apis/DefinedActivityApi.ts
 apis/PerformedActivityApi.ts
-apis/PerformedObservationResultApi.ts
 apis/PersonSubjectApi.ts
 apis/PersonsApi.ts
 apis/SitesApi.ts
@@ -32,8 +31,8 @@ docs/NewStudySubject.md
 docs/Organization.md
 docs/PerformedActivity.md
 docs/PerformedActivityApi.md
+docs/PerformedObservation.md
 docs/PerformedObservationResult.md
-docs/PerformedObservationResultApi.md
 docs/Person.md
 docs/PersonData.md
 docs/PersonStudySubject.md
@@ -43,6 +42,7 @@ docs/PhysicalQuantity.md
 docs/PostalAddress.md
 docs/PostalAddressData.md
 docs/ResponseShowDefinedActivityAIdGet.md
+docs/ResponseShowPerformedActivityAIdGet.md
 docs/SitesApi.md
 docs/SpaceActivityApi.md
 docs/Status.md
@@ -78,6 +78,7 @@ models/LookupStudySubject.ts
 models/NewStudySubject.ts
 models/Organization.ts
 models/PerformedActivity.ts
+models/PerformedObservation.ts
 models/PerformedObservationResult.ts
 models/Person.ts
 models/PersonData.ts
@@ -86,6 +87,7 @@ models/PhysicalQuantity.ts
 models/PostalAddress.ts
 models/PostalAddressData.ts
 models/ResponseShowDefinedActivityAIdGet.ts
+models/ResponseShowPerformedActivityAIdGet.ts
 models/Status.ts
 models/StudyActivity.ts
 models/StudyProtocolVersion.ts
