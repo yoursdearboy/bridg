@@ -33,6 +33,6 @@ def show(space_id: UUID, sa_id: UUID, repo: StudyActivityRepositoryDep) -> Optio
     raise HTTPException(status_code=404)
 
 
-router.include_router(result.router, prefix="/{obs_id:uuid}")
+router.include_router(result.router, prefix="/{sa_id:uuid}")
 
 openapi_tags = [{"name": "space_activity"}, *result.openapi_tags]

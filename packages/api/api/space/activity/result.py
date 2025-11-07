@@ -27,8 +27,8 @@ ObservationRepositoryDep = Annotated[
 
 
 @router.get("")
-def index(space_id: UUID, obs_id: UUID, repo: ObservationRepositoryDep) -> List[DefinedObservationResult]:
-    objs = repo.all(bridg.StudyActivity.id == obs_id)
+def index(space_id: UUID, sa_id: UUID, repo: ObservationRepositoryDep) -> List[DefinedObservationResult]:
+    objs = repo.all(bridg.StudyActivity.id == sa_id)
     return [DefinedObservationResult.model_validate(obj) for obj in objs]
 
 
