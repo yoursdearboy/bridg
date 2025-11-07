@@ -2,7 +2,6 @@
 apis/CodeSystemApi.ts
 apis/DefaultApi.ts
 apis/DefinedActivityApi.ts
-apis/DefinedObservationResultApi.ts
 apis/PerformedActivityApi.ts
 apis/PerformedObservationResultApi.ts
 apis/PersonSubjectApi.ts
@@ -23,7 +22,6 @@ docs/DefinedActivity.md
 docs/DefinedActivityApi.md
 docs/DefinedObservation.md
 docs/DefinedObservationResult.md
-docs/DefinedObservationResultApi.md
 docs/EntityName.md
 docs/EntityNameData.md
 docs/Epoch.md
