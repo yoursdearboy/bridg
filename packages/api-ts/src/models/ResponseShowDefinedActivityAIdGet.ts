@@ -15,7 +15,6 @@
 import type { DefinedActivity } from './DefinedActivity';
 import {
     instanceOfDefinedActivity,
-    isDefinedActivityJSON,
     DefinedActivityFromJSON,
     DefinedActivityFromJSONTyped,
     DefinedActivityToJSON,
@@ -23,7 +22,6 @@ import {
 import type { DefinedObservation } from './DefinedObservation';
 import {
     instanceOfDefinedObservation,
-    isDefinedObservationJSON,
     DefinedObservationFromJSON,
     DefinedObservationFromJSONTyped,
     DefinedObservationToJSON,
@@ -47,11 +45,11 @@ export function ResponseShowDefinedActivityAIdGetFromJSONTyped(json: any, ignore
     if (typeof json !== 'object') {
         return json;
     }
-    if (isDefinedObservationJSON(json)) {
-        return DefinedObservationFromJSONTyped(json, true);
-    }
-    if (isDefinedActivityJSON(json)) {
+    if (instanceOfDefinedActivity(json)) {
         return DefinedActivityFromJSONTyped(json, true);
+    }
+    if (instanceOfDefinedObservation(json)) {
+        return DefinedObservationFromJSONTyped(json, true);
     }
     return {} as any;
 }
