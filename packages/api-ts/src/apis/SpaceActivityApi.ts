@@ -15,13 +15,10 @@
 
 import * as runtime from '../runtime';
 import type {
-  DefinedObservationResult,
   HTTPValidationError,
   StudyActivity,
 } from '../models/index';
 import {
-    DefinedObservationResultFromJSON,
-    DefinedObservationResultToJSON,
     HTTPValidationErrorFromJSON,
     HTTPValidationErrorToJSON,
     StudyActivityFromJSON,
@@ -30,11 +27,6 @@ import {
 
 export interface IndexSpacesSpaceIdActivityGetRequest {
     spaceId: string;
-}
-
-export interface IndexSpacesSpaceIdActivitySaIdResultGetRequest {
-    spaceId: string;
-    saId: string;
 }
 
 export interface ShowSpacesSpaceIdActivitySaIdGetRequest {
@@ -81,51 +73,6 @@ export class SpaceActivityApi extends runtime.BaseAPI {
      */
     async indexSpacesSpaceIdActivityGet(requestParameters: IndexSpacesSpaceIdActivityGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StudyActivity>> {
         const response = await this.indexSpacesSpaceIdActivityGetRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Index
-     */
-    async indexSpacesSpaceIdActivitySaIdResultGetRaw(requestParameters: IndexSpacesSpaceIdActivitySaIdResultGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<DefinedObservationResult>>> {
-        if (requestParameters['spaceId'] == null) {
-            throw new runtime.RequiredError(
-                'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling indexSpacesSpaceIdActivitySaIdResultGet().'
-            );
-        }
-
-        if (requestParameters['saId'] == null) {
-            throw new runtime.RequiredError(
-                'saId',
-                'Required parameter "saId" was null or undefined when calling indexSpacesSpaceIdActivitySaIdResultGet().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-
-        let urlPath = `/spaces/{space_id}/activity/{sa_id}/result`;
-        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
-        urlPath = urlPath.replace(`{${"sa_id"}}`, encodeURIComponent(String(requestParameters['saId'])));
-
-        const response = await this.request({
-            path: urlPath,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DefinedObservationResultFromJSON));
-    }
-
-    /**
-     * Index
-     */
-    async indexSpacesSpaceIdActivitySaIdResultGet(requestParameters: IndexSpacesSpaceIdActivitySaIdResultGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<DefinedObservationResult>> {
-        const response = await this.indexSpacesSpaceIdActivitySaIdResultGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
