@@ -44,10 +44,6 @@ GET {{base}}/spaces/{{space_id}}/activity
 
 GET {{base}}/spaces/{{space_id}}/activity/{{space_cbc_id}}
 
-### Show space activitiy result
-
-GET {{base}}/spaces/{{space_id}}/activity/{{space_cbc_id}}/result
-
 ## Subjects
 
 ### Index subjects in the space

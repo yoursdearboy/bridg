@@ -3,7 +3,6 @@
 export * from './CodeSystemApi';
 export * from './DefaultApi';
 export * from './DefinedActivityApi';
-export * from './DefinedObservationResultApi';
 export * from './PerformedActivityApi';
 export * from './PerformedObservationResultApi';
 export * from './PersonSubjectApi';
