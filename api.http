@@ -2,6 +2,7 @@
 @space_id=ce946229-9746-46cd-8dd3-b27a2fbfd48a
 @subject_id=1944C046-95B3-4CB4-82E2-C789950E29FC
 @person_id=99132ae7-25dd-43ba-808e-cdb3b29af285
+@cbc_id=f83ddbf8-dd6d-4737-98e3-a5795995bbd8
 @space_cbc_id=66da8ea1-5e69-40f2-a720-9937430d582d
 @fab_code_system=b365b97f-ff34-464c-9097-e7daec409f4c
 
@@ -10,6 +11,16 @@
 ### Expand codesystem
 
 GET {{base}}/code_system/{{fab_code_system}}/$expand
+
+# Defined activity
+
+### Show defined activity
+
+GET {{base}}/defined_activity/{{cbc_id}}
+
+### Show defined activity with results
+
+GET {{base}}/defined_activity/{{cbc_id}}?result=True
 
 # Spaces
 
