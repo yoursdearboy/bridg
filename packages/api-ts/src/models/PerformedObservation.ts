@@ -41,61 +41,74 @@ import {
     EpochToJSON,
     EpochToJSONTyped,
 } from './Epoch';
+import type { PerformedObservationResult } from './PerformedObservationResult';
+import {
+    PerformedObservationResultFromJSON,
+    PerformedObservationResultFromJSONTyped,
+    PerformedObservationResultToJSON,
+    PerformedObservationResultToJSONTyped,
+} from './PerformedObservationResult';
 
 /**
  * 
  * @export
- * @interface PerformedActivity
+ * @interface PerformedObservation
  */
-export interface PerformedActivity {
+export interface PerformedObservation {
     /**
      * 
      * @type {string}
-     * @memberof PerformedActivity
+     * @memberof PerformedObservation
      */
     id: string;
     /**
      * 
      * @type {ConceptDescriptor}
-     * @memberof PerformedActivity
+     * @memberof PerformedObservation
      */
     reasonCode: ConceptDescriptor | null;
     /**
      * 
      * @type {ConceptDescriptor}
-     * @memberof PerformedActivity
+     * @memberof PerformedObservation
      */
     statusCode: ConceptDescriptor | null;
     /**
      * 
      * @type {Date}
-     * @memberof PerformedActivity
+     * @memberof PerformedObservation
      */
     statusDate: Date | null;
     /**
      * 
      * @type {StudySite}
-     * @memberof PerformedActivity
+     * @memberof PerformedObservation
      */
     contextForStudySite: StudySite | null;
     /**
      * 
      * @type {Epoch}
-     * @memberof PerformedActivity
+     * @memberof PerformedObservation
      */
     containingEpoch: Epoch | null;
     /**
      * 
      * @type {DefinedActivity}
-     * @memberof PerformedActivity
+     * @memberof PerformedObservation
      */
     instantiatedDefinedActivity: DefinedActivity | null;
+    /**
+     * 
+     * @type {Array<PerformedObservationResult>}
+     * @memberof PerformedObservation
+     */
+    resultedPerformedObservationResult: Array<PerformedObservationResult>;
 }
 
 /**
- * Check if a given object implements the PerformedActivity interface.
+ * Check if a given object implements the PerformedObservation interface.
  */
-export function instanceOfPerformedActivity(value: object): value is PerformedActivity {
+export function instanceOfPerformedObservation(value: object): value is PerformedObservation {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('reason_code' in value) || value['reason_code'] === undefined) return false;
     if (!('status_code' in value) || value['status_code'] === undefined) return false;
@@ -103,14 +116,15 @@ export function instanceOfPerformedActivity(value: object): value is PerformedAc
     if (!('context_for_study_site' in value) || value['context_for_study_site'] === undefined) return false;
     if (!('containing_epoch' in value) || value['containing_epoch'] === undefined) return false;
     if (!('instantiated_defined_activity' in value) || value['instantiated_defined_activity'] === undefined) return false;
+    if (!('resulted_performed_observation_result' in value) || value['resulted_performed_observation_result'] === undefined) return false;
     return true;
 }
 
-export function PerformedActivityFromJSON(json: any): PerformedActivity {
-    return PerformedActivityFromJSONTyped(json, false);
+export function PerformedObservationFromJSON(json: any): PerformedObservation {
+    return PerformedObservationFromJSONTyped(json, false);
 }
 
-export function PerformedActivityFromJSONTyped(json: any, ignoreDiscriminator: boolean): PerformedActivity {
+export function PerformedObservationFromJSONTyped(json: any, ignoreDiscriminator: boolean): PerformedObservation {
     if (json == null) {
         return json;
     }
@@ -123,14 +137,15 @@ export function PerformedActivityFromJSONTyped(json: any, ignoreDiscriminator: b
         'contextForStudySite': StudySiteFromJSON(json['context_for_study_site']),
         'containingEpoch': EpochFromJSON(json['containing_epoch']),
         'instantiatedDefinedActivity': DefinedActivityFromJSON(json['instantiated_defined_activity']),
+        'resultedPerformedObservationResult': ((json['resulted_performed_observation_result'] as Array<any>).map(PerformedObservationResultFromJSON)),
     };
 }
 
-export function PerformedActivityToJSON(json: any): PerformedActivity {
-    return PerformedActivityToJSONTyped(json, false);
+export function PerformedObservationToJSON(json: any): PerformedObservation {
+    return PerformedObservationToJSONTyped(json, false);
 }
 
-export function PerformedActivityToJSONTyped(value?: PerformedActivity | null, ignoreDiscriminator: boolean = false): any {
+export function PerformedObservationToJSONTyped(value?: PerformedObservation | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -144,6 +159,7 @@ export function PerformedActivityToJSONTyped(value?: PerformedActivity | null, i
         'context_for_study_site': StudySiteToJSON(value['contextForStudySite']),
         'containing_epoch': EpochToJSON(value['containingEpoch']),
         'instantiated_defined_activity': DefinedActivityToJSON(value['instantiatedDefinedActivity']),
+        'resulted_performed_observation_result': ((value['resultedPerformedObservationResult'] as Array<any>).map(PerformedObservationResultToJSON)),
     };
 }
 
