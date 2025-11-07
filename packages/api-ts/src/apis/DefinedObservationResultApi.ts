@@ -25,9 +25,9 @@ import {
     HTTPValidationErrorToJSON,
 } from '../models/index';
 
-export interface IndexSpacesSpaceIdActivityObsIdResultGetRequest {
+export interface IndexSpacesSpaceIdActivitySaIdResultGetRequest {
     spaceId: string;
-    obsId: string;
+    saId: string;
 }
 
 /**
@@ -38,18 +38,18 @@ export class DefinedObservationResultApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexSpacesSpaceIdActivityObsIdResultGetRaw(requestParameters: IndexSpacesSpaceIdActivityObsIdResultGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<DefinedObservationResult>>> {
+    async indexSpacesSpaceIdActivitySaIdResultGetRaw(requestParameters: IndexSpacesSpaceIdActivitySaIdResultGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<DefinedObservationResult>>> {
         if (requestParameters['spaceId'] == null) {
             throw new runtime.RequiredError(
                 'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling indexSpacesSpaceIdActivityObsIdResultGet().'
+                'Required parameter "spaceId" was null or undefined when calling indexSpacesSpaceIdActivitySaIdResultGet().'
             );
         }
 
-        if (requestParameters['obsId'] == null) {
+        if (requestParameters['saId'] == null) {
             throw new runtime.RequiredError(
-                'obsId',
-                'Required parameter "obsId" was null or undefined when calling indexSpacesSpaceIdActivityObsIdResultGet().'
+                'saId',
+                'Required parameter "saId" was null or undefined when calling indexSpacesSpaceIdActivitySaIdResultGet().'
             );
         }
 
@@ -58,9 +58,9 @@ export class DefinedObservationResultApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/spaces/{space_id}/activity/{obs_id}/result`;
+        let urlPath = `/spaces/{space_id}/activity/{sa_id}/result`;
         urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
-        urlPath = urlPath.replace(`{${"obs_id"}}`, encodeURIComponent(String(requestParameters['obsId'])));
+        urlPath = urlPath.replace(`{${"sa_id"}}`, encodeURIComponent(String(requestParameters['saId'])));
 
         const response = await this.request({
             path: urlPath,
@@ -75,8 +75,8 @@ export class DefinedObservationResultApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexSpacesSpaceIdActivityObsIdResultGet(requestParameters: IndexSpacesSpaceIdActivityObsIdResultGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<DefinedObservationResult>> {
-        const response = await this.indexSpacesSpaceIdActivityObsIdResultGetRaw(requestParameters, initOverrides);
+    async indexSpacesSpaceIdActivitySaIdResultGet(requestParameters: IndexSpacesSpaceIdActivitySaIdResultGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<DefinedObservationResult>> {
+        const response = await this.indexSpacesSpaceIdActivitySaIdResultGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

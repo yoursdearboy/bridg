@@ -1,41 +1,41 @@
-# DefinedObservationResultApi
+# DefinedActivityApi
 
 All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**indexSpacesSpaceIdActivitySaIdResultGet**](DefinedObservationResultApi.md#indexspacesspaceidactivitysaidresultget) | **GET** /spaces/{space_id}/activity/{sa_id}/result | Index |
+| [**showDefinedActivityAIdGet**](DefinedActivityApi.md#showdefinedactivityaidget) | **GET** /defined_activity/{a_id} | Show |
 
 
 
-## indexSpacesSpaceIdActivitySaIdResultGet
+## showDefinedActivityAIdGet
 
-> Array&lt;DefinedObservationResult&gt; indexSpacesSpaceIdActivitySaIdResultGet(spaceId, saId)
+> ResponseShowDefinedActivityAIdGet showDefinedActivityAIdGet(aId, result)
 
-Index
+Show
 
 ### Example
 
 ```ts
 import {
   Configuration,
-  DefinedObservationResultApi,
+  DefinedActivityApi,
 } from '';
-import type { IndexSpacesSpaceIdActivitySaIdResultGetRequest } from '';
+import type { ShowDefinedActivityAIdGetRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
-  const api = new DefinedObservationResultApi();
+  const api = new DefinedActivityApi();
 
   const body = {
     // string
-    spaceId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string
-    saId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-  } satisfies IndexSpacesSpaceIdActivitySaIdResultGetRequest;
+    aId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // boolean (optional)
+    result: true,
+  } satisfies ShowDefinedActivityAIdGetRequest;
 
   try {
-    const data = await api.indexSpacesSpaceIdActivitySaIdResultGet(body);
+    const data = await api.showDefinedActivityAIdGet(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -51,12 +51,12 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **spaceId** | `string` |  | [Defaults to `undefined`] |
-| **saId** | `string` |  | [Defaults to `undefined`] |
+| **aId** | `string` |  | [Defaults to `undefined`] |
+| **result** | `boolean` |  | [Optional] [Defaults to `false`] |
 
 ### Return type
 
-[**Array&lt;DefinedObservationResult&gt;**](DefinedObservationResult.md)
+[**ResponseShowDefinedActivityAIdGet**](ResponseShowDefinedActivityAIdGet.md)
 
 ### Authorization
 

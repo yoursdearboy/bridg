@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**indexSpacesSpaceIdActivityGet**](SpaceActivityApi.md#indexspacesspaceidactivityget) | **GET** /spaces/{space_id}/activity | Index |
-| [**indexSpacesSpaceIdActivityObsIdResultGet**](SpaceActivityApi.md#indexspacesspaceidactivityobsidresultget) | **GET** /spaces/{space_id}/activity/{obs_id}/result | Index |
+| [**indexSpacesSpaceIdActivitySaIdResultGet**](SpaceActivityApi.md#indexspacesspaceidactivitysaidresultget) | **GET** /spaces/{space_id}/activity/{sa_id}/result | Index |
 | [**showSpacesSpaceIdActivitySaIdGet**](SpaceActivityApi.md#showspacesspaceidactivitysaidget) | **GET** /spaces/{space_id}/activity/{sa_id} | Show |
 
 
@@ -76,9 +76,9 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## indexSpacesSpaceIdActivityObsIdResultGet
+## indexSpacesSpaceIdActivitySaIdResultGet
 
-> Array&lt;DefinedObservationResult&gt; indexSpacesSpaceIdActivityObsIdResultGet(spaceId, obsId)
+> Array&lt;DefinedObservationResult&gt; indexSpacesSpaceIdActivitySaIdResultGet(spaceId, saId)
 
 Index
 
@@ -89,7 +89,7 @@ import {
   Configuration,
   SpaceActivityApi,
 } from '';
-import type { IndexSpacesSpaceIdActivityObsIdResultGetRequest } from '';
+import type { IndexSpacesSpaceIdActivitySaIdResultGetRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -99,11 +99,11 @@ async function example() {
     // string
     spaceId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string
-    obsId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-  } satisfies IndexSpacesSpaceIdActivityObsIdResultGetRequest;
+    saId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies IndexSpacesSpaceIdActivitySaIdResultGetRequest;
 
   try {
-    const data = await api.indexSpacesSpaceIdActivityObsIdResultGet(body);
+    const data = await api.indexSpacesSpaceIdActivitySaIdResultGet(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -120,7 +120,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **spaceId** | `string` |  | [Defaults to `undefined`] |
-| **obsId** | `string` |  | [Defaults to `undefined`] |
+| **saId** | `string` |  | [Defaults to `undefined`] |
 
 ### Return type
 
