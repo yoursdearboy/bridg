@@ -5,6 +5,7 @@ export * from './ApiSubjectLookupStudySubjectPerson';
 export * from './ApiSubjectNewStudySubjectPerson';
 export * from './ApiSubjectStudySubjectPerson';
 export * from './ConceptDescriptor';
+export * from './DataTypeName';
 export * from './DefinedActivity';
 export * from './DefinedObservationResult';
 export * from './EntityName';
