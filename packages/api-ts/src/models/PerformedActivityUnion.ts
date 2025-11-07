@@ -15,7 +15,6 @@
 import type { PerformedActivity } from './PerformedActivity';
 import {
     instanceOfPerformedActivity,
-    isPerformedActivityJSON,
     PerformedActivityFromJSON,
     PerformedActivityFromJSONTyped,
     PerformedActivityToJSON,
@@ -23,7 +22,6 @@ import {
 import type { PerformedObservation } from './PerformedObservation';
 import {
     instanceOfPerformedObservation,
-    isPerformedObservationJSON,
     PerformedObservationFromJSON,
     PerformedObservationFromJSONTyped,
     PerformedObservationToJSON,
@@ -47,10 +45,10 @@ export function PerformedActivityUnionFromJSONTyped(json: any, ignoreDiscriminat
     if (typeof json !== 'object') {
         return json;
     }
-    if (isPerformedObservationJSON(json)) {
+    if (instanceOfPerformedObservation(json)) {
         return PerformedObservationFromJSONTyped(json, true);
     }
-    if (isPerformedActivityJSON(json)) {
+    if (instanceOfPerformedActivity(json)) {
         return PerformedActivityFromJSONTyped(json, true);
     }
     return {} as any;
