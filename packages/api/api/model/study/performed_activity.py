@@ -2,8 +2,7 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID
 
-from api.base_model import BaseModel
-
+from ..base import BaseModel
 from ..datatypes import ConceptDescriptor
 from ..protocol import DefinedActivity, Epoch
 from .study_site import StudySite

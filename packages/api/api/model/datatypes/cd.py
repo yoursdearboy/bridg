@@ -1,6 +1,6 @@
 from typing import Optional
 
-from ...base_model import BaseModel
+from ..base import BaseModel
 
 
 class ConceptDescriptor(BaseModel):

@@ -4,9 +4,8 @@ from uuid import UUID
 
 import bridg
 
-from api.base_model import BaseModel
-
-from . import EntityName
+from ..base import BaseModel
+from .entity_name import EntityName
 
 
 class PersonData(BaseModel[bridg.Person]):

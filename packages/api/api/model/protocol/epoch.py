@@ -1,7 +1,7 @@
 from typing import Optional
 from uuid import UUID
 
-from api.base_model import BaseModel
+from ..base import BaseModel
 
 
 class Epoch(BaseModel):
