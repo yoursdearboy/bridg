@@ -45,11 +45,11 @@ export function ResponseShowDefinedActivityAIdGetFromJSONTyped(json: any, ignore
     if (typeof json !== 'object') {
         return json;
     }
-    if (instanceOfDefinedActivity(json)) {
-        return DefinedActivityFromJSONTyped(json, true);
-    }
     if (instanceOfDefinedObservation(json)) {
         return DefinedObservationFromJSONTyped(json, true);
+    }
+    if (instanceOfDefinedActivity(json)) {
+        return DefinedActivityFromJSONTyped(json, true);
     }
     return {} as any;
 }
