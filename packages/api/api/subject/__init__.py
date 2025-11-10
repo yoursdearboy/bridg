@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from api.db import get_db, get_repository
-from api.model import BaseModel, PersonData, StudySubject
+from api.model import BaseModel, Person, PersonData, StudySubject
 
 from . import performed_activity
 from .service import StudySubjectRepository
@@ -57,6 +57,10 @@ class LookupStudySubject(BaseModel[bridg.StudySubject]):
         raise RuntimeError("Unknown performing entity")
 
 
+class FoundStudySubject(BaseModel[bridg.StudySubject]):
+    performing_biologic_entity: Optional[Person]
+
+
 StudySubjectRepositoryDep = Annotated[StudySubjectRepository, Depends(get_repository(StudySubjectRepository))]
 
 
@@ -82,10 +86,10 @@ def create(
 
 
 @router.post("/lookup")
-def lookup(space_id: UUID, data: LookupStudySubject, repo: StudySubjectRepositoryDep) -> List[StudySubject]:
+def lookup(space_id: UUID, data: LookupStudySubject, repo: StudySubjectRepositoryDep) -> List[FoundStudySubject]:
     q = data.model_dump_sa()
     objs = repo.lookup(q)
-    return [StudySubject.model_validate(obj) for obj in objs]
+    return [FoundStudySubject.model_validate(obj) for obj in objs]
 
 
 router.include_router(performed_activity.router, prefix="/{subject_id:uuid}")
