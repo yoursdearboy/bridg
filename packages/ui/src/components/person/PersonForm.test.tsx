@@ -12,14 +12,15 @@ describe("PersonForm", () => {
       deathDate: null,
       deathDateEstimatedIndicator: false,
       deathIndicator: false,
+      primaryName: null,
     };
     const result: Person = {
+      ...initialValues,
       id: "1",
       primaryName: {
         id: "9de936fd-75b4-4021-a31f-4a243033b59f",
         label: "Donald Trump Jr",
       },
-      ...initialValues,
     };
     const mockMutation: UseMutationResult<Person, Error, PersonData, unknown> =
       {

@@ -36,7 +36,7 @@ class BaseModel(PydanticBaseModel, Generic[T]):
         return self._sa(**data)
 
     # FIXME: make it recursive
-    def model_update_sa(self, obj: T, exclude={}) -> T:
+    def model_update_sa(self, obj: T, exclude=set()) -> T:
         data = dict(self)
         for k, v in data.items():
             if k in exclude:

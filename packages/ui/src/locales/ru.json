@@ -30,7 +30,8 @@
       "middle": "Отчество",
       "patronymic": "Отчество",
       "prefix": "Префикс",
-      "suffix": "Суффикс"
+      "suffix": "Суффикс",
+      "defaultLabel": "Без имени"
     },
     "Address": {
       "street": "Улица",
