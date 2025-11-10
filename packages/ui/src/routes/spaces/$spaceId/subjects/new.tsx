@@ -100,7 +100,7 @@ const PerformingBiologicEntitySelect = ({
   value,
   onChange,
 }: {
-  data: StudySubject[];
+  data: FoundStudySubject[];
   value?: string;
   onChange: (value: string | null) => void;
 }) => {
