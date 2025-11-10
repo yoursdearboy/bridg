@@ -6,8 +6,7 @@
 
 Name | Type
 ------------ | -------------
-`performingBiologicEntity` | string
-`performingBiologicEntityId` | string
+`performingBiologicEntity` | [Person](Person.md)
 
 ## Example
 
@@ -17,7 +16,6 @@ import type { FoundStudySubject } from ''
 // TODO: Update the object below with actual values
 const example = {
   "performingBiologicEntity": null,
-  "performingBiologicEntityId": null,
 } satisfies FoundStudySubject
 
 console.log(example)

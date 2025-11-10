@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { EntityNameData } from './EntityNameData';
+import {
+    EntityNameDataFromJSON,
+    EntityNameDataFromJSONTyped,
+    EntityNameDataToJSON,
+    EntityNameDataToJSONTyped,
+} from './EntityNameData';
 import type { AdministrativeGender } from './AdministrativeGender';
 import {
     AdministrativeGenderFromJSON,
@@ -57,6 +64,12 @@ export interface PersonData {
      * @memberof PersonData
      */
     deathIndicator: boolean | null;
+    /**
+     * 
+     * @type {EntityNameData}
+     * @memberof PersonData
+     */
+    primaryName: EntityNameData | null;
 }
 
 
@@ -70,6 +83,7 @@ export function instanceOfPersonData(value: object): value is PersonData {
     if (!('deathDate' in value) || value['deathDate'] === undefined) return false;
     if (!('deathDateEstimatedIndicator' in value) || value['deathDateEstimatedIndicator'] === undefined) return false;
     if (!('deathIndicator' in value) || value['deathIndicator'] === undefined) return false;
+    if (!('primaryName' in value) || value['primaryName'] === undefined) return false;
     return true;
 }
 
@@ -88,6 +102,7 @@ export function PersonDataFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'deathDate': (json['death_date'] == null ? null : new Date(json['death_date'])),
         'deathDateEstimatedIndicator': json['death_date_estimated_indicator'],
         'deathIndicator': json['death_indicator'],
+        'primaryName': EntityNameDataFromJSON(json['primary_name']),
     };
 }
 
@@ -107,6 +122,7 @@ export function PersonDataToJSONTyped(value?: PersonData | null, ignoreDiscrimin
         'death_date': value['deathDate'] == null ? value['deathDate'] : value['deathDate'].toISOString().substring(0,10),
         'death_date_estimated_indicator': value['deathDateEstimatedIndicator'],
         'death_indicator': value['deathIndicator'],
+        'primary_name': EntityNameDataToJSON(value['primaryName']),
     };
 }
 

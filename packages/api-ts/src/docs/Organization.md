@@ -8,7 +8,7 @@ Name | Type
 ------------ | -------------
 `id` | string
 `description` | string
-`primaryName` | string
+`primaryName` | [OrganizationName](OrganizationName.md)
 
 ## Example
 

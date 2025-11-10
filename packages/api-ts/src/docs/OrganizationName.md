@@ -1,22 +1,26 @@
 
-# ApiSubjectLookupStudySubjectPerson
+# OrganizationName
 
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`name` | [EntityNameData](EntityNameData.md)
+`value` | string
+`id` | string
+`label` | string
 
 ## Example
 
 ```typescript
-import type { ApiSubjectLookupStudySubjectPerson } from ''
+import type { OrganizationName } from ''
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": null,
-} satisfies ApiSubjectLookupStudySubjectPerson
+  "value": null,
+  "id": null,
+  "label": null,
+} satisfies OrganizationName
 
 console.log(example)
 
@@ -25,7 +29,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as ApiSubjectLookupStudySubjectPerson
+const exampleParsed = JSON.parse(exampleJSON) as OrganizationName
 console.log(exampleParsed)
 ```
 

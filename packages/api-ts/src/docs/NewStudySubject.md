@@ -8,7 +8,7 @@ Name | Type
 ------------ | -------------
 `status` | [Status](Status.md)
 `statusDate` | Date
-`performingBiologicEntity` | [ApiSubjectNewStudySubjectPerson](ApiSubjectNewStudySubjectPerson.md)
+`performingBiologicEntity` | [PersonData](PersonData.md)
 `performingBiologicEntityId` | string
 `assignedStudySiteProtocolVersionRelationship` | Array&lt;string&gt;
 

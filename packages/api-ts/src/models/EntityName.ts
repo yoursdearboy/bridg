@@ -72,7 +72,7 @@ export interface EntityName {
      * @type {string}
      * @memberof EntityName
      */
-    readonly label: string;
+    readonly label: string | null;
 }
 
 /**

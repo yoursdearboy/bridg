@@ -13,6 +13,14 @@
  */
 
 import { mapValues } from '../runtime';
+import type { Person } from './Person';
+import {
+    PersonFromJSON,
+    PersonFromJSONTyped,
+    PersonToJSON,
+    PersonToJSONTyped,
+} from './Person';
+
 /**
  * 
  * @export
@@ -21,22 +29,17 @@ import { mapValues } from '../runtime';
 export interface FoundStudySubject {
     /**
      * 
-     * @type {string}
+     * @type {Person}
      * @memberof FoundStudySubject
      */
-    performingBiologicEntity?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FoundStudySubject
-     */
-    performingBiologicEntityId?: string | null;
+    performingBiologicEntity: Person | null;
 }
 
 /**
  * Check if a given object implements the FoundStudySubject interface.
  */
 export function instanceOfFoundStudySubject(value: object): value is FoundStudySubject {
+    if (!('performingBiologicEntity' in value) || value['performingBiologicEntity'] === undefined) return false;
     return true;
 }
 
@@ -50,8 +53,7 @@ export function FoundStudySubjectFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'performingBiologicEntity': json['performing_biologic_entity'] == null ? undefined : json['performing_biologic_entity'],
-        'performingBiologicEntityId': json['performing_biologic_entity_id'] == null ? undefined : json['performing_biologic_entity_id'],
+        'performingBiologicEntity': PersonFromJSON(json['performing_biologic_entity']),
     };
 }
 
@@ -66,8 +68,7 @@ export function FoundStudySubjectToJSONTyped(value?: FoundStudySubject | null, i
 
     return {
         
-        'performing_biologic_entity': value['performingBiologicEntity'],
-        'performing_biologic_entity_id': value['performingBiologicEntityId'],
+        'performing_biologic_entity': PersonToJSON(value['performingBiologicEntity']),
     };
 }
 

@@ -9,7 +9,7 @@ Name | Type
 `id` | string
 `status` | [Status](Status.md)
 `statusDate` | Date
-`performingBiologicEntity` | [ApiSubjectStudySubjectPerson](ApiSubjectStudySubjectPerson.md)
+`performingBiologicEntity` | [Person](Person.md)
 `performingOrganization` | [Organization](Organization.md)
 
 ## Example

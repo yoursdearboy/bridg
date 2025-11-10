@@ -11,6 +11,7 @@ Name | Type
 `deathDate` | Date
 `deathDateEstimatedIndicator` | boolean
 `deathIndicator` | boolean
+`primaryName` | [EntityNameData](EntityNameData.md)
 
 ## Example
 
@@ -24,6 +25,7 @@ const example = {
   "deathDate": null,
   "deathDateEstimatedIndicator": null,
   "deathIndicator": null,
+  "primaryName": null,
 } satisfies PersonData
 
 console.log(example)

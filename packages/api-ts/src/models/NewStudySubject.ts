@@ -20,13 +20,13 @@ import {
     StatusToJSON,
     StatusToJSONTyped,
 } from './Status';
-import type { ApiSubjectNewStudySubjectPerson } from './ApiSubjectNewStudySubjectPerson';
+import type { PersonData } from './PersonData';
 import {
-    ApiSubjectNewStudySubjectPersonFromJSON,
-    ApiSubjectNewStudySubjectPersonFromJSONTyped,
-    ApiSubjectNewStudySubjectPersonToJSON,
-    ApiSubjectNewStudySubjectPersonToJSONTyped,
-} from './ApiSubjectNewStudySubjectPerson';
+    PersonDataFromJSON,
+    PersonDataFromJSONTyped,
+    PersonDataToJSON,
+    PersonDataToJSONTyped,
+} from './PersonData';
 
 /**
  * 
@@ -39,25 +39,25 @@ export interface NewStudySubject {
      * @type {Status}
      * @memberof NewStudySubject
      */
-    status?: Status | null;
+    status: Status | null;
     /**
      * 
      * @type {Date}
      * @memberof NewStudySubject
      */
-    statusDate?: Date | null;
+    statusDate: Date | null;
     /**
      * 
-     * @type {ApiSubjectNewStudySubjectPerson}
+     * @type {PersonData}
      * @memberof NewStudySubject
      */
-    performingBiologicEntity?: ApiSubjectNewStudySubjectPerson | null;
+    performingBiologicEntity: PersonData | null;
     /**
      * 
      * @type {string}
      * @memberof NewStudySubject
      */
-    performingBiologicEntityId?: string | null;
+    performingBiologicEntityId: string | null;
     /**
      * 
      * @type {Array<string>}
@@ -72,6 +72,10 @@ export interface NewStudySubject {
  * Check if a given object implements the NewStudySubject interface.
  */
 export function instanceOfNewStudySubject(value: object): value is NewStudySubject {
+    if (!('status' in value) || value['status'] === undefined) return false;
+    if (!('statusDate' in value) || value['statusDate'] === undefined) return false;
+    if (!('performingBiologicEntity' in value) || value['performingBiologicEntity'] === undefined) return false;
+    if (!('performingBiologicEntityId' in value) || value['performingBiologicEntityId'] === undefined) return false;
     if (!('assignedStudySiteProtocolVersionRelationship' in value) || value['assignedStudySiteProtocolVersionRelationship'] === undefined) return false;
     return true;
 }
@@ -86,10 +90,10 @@ export function NewStudySubjectFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'status': json['status'] == null ? undefined : StatusFromJSON(json['status']),
-        'statusDate': json['status_date'] == null ? undefined : (new Date(json['status_date'])),
-        'performingBiologicEntity': json['performing_biologic_entity'] == null ? undefined : ApiSubjectNewStudySubjectPersonFromJSON(json['performing_biologic_entity']),
-        'performingBiologicEntityId': json['performing_biologic_entity_id'] == null ? undefined : json['performing_biologic_entity_id'],
+        'status': StatusFromJSON(json['status']),
+        'statusDate': (json['status_date'] == null ? null : new Date(json['status_date'])),
+        'performingBiologicEntity': PersonDataFromJSON(json['performing_biologic_entity']),
+        'performingBiologicEntityId': json['performing_biologic_entity_id'],
         'assignedStudySiteProtocolVersionRelationship': json['assigned_study_site_protocol_version_relationship'],
     };
 }
@@ -107,7 +111,7 @@ export function NewStudySubjectToJSONTyped(value?: NewStudySubject | null, ignor
         
         'status': StatusToJSON(value['status']),
         'status_date': value['statusDate'] == null ? value['statusDate'] : value['statusDate'].toISOString(),
-        'performing_biologic_entity': ApiSubjectNewStudySubjectPersonToJSON(value['performingBiologicEntity']),
+        'performing_biologic_entity': PersonDataToJSON(value['performingBiologicEntity']),
         'performing_biologic_entity_id': value['performingBiologicEntityId'],
         'assigned_study_site_protocol_version_relationship': value['assignedStudySiteProtocolVersionRelationship'],
     };

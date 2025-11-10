@@ -6,7 +6,7 @@
 
 Name | Type
 ------------ | -------------
-`performingBiologicEntity` | [ApiSubjectLookupStudySubjectPerson](ApiSubjectLookupStudySubjectPerson.md)
+`performingBiologicEntity` | [PersonData](PersonData.md)
 
 ## Example
 
