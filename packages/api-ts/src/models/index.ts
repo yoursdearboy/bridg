@@ -1,9 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './AdministrativeGender';
-export * from './ApiSubjectLookupStudySubjectPerson';
-export * from './ApiSubjectNewStudySubjectPerson';
-export * from './ApiSubjectStudySubjectPerson';
 export * from './ConceptDescriptor';
 export * from './DataTypeName';
 export * from './DefinedActivity';
@@ -17,6 +14,7 @@ export * from './HTTPValidationError';
 export * from './LookupStudySubject';
 export * from './NewStudySubject';
 export * from './Organization';
+export * from './OrganizationName';
 export * from './PerformedActivity';
 export * from './PerformedObservation';
 export * from './PerformedObservationResult';

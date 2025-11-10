@@ -87,19 +87,6 @@ export function instanceOfPersonData(value: object): value is PersonData {
     return true;
 }
 
-/**
- * Check if a given object is PersonData JSON.
- */
-export function isPersonDataJSON(value: object): boolean {
-    if (!('administrative_gender_code' in value) || value['administrative_gender_code'] === undefined) return false;
-    if (!('birth_date' in value) || value['birth_date'] === undefined) return false;
-    if (!('death_date' in value) || value['death_date'] === undefined) return false;
-    if (!('death_date_estimated_indicator' in value) || value['death_date_estimated_indicator'] === undefined) return false;
-    if (!('death_indicator' in value) || value['death_indicator'] === undefined) return false;
-    if (!('primary_name' in value) || value['primary_name'] === undefined) return false;
-    return true;
-}
-
 export function PersonDataFromJSON(json: any): PersonData {
     return PersonDataFromJSONTyped(json, false);
 }

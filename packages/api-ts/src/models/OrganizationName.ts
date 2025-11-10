@@ -48,15 +48,6 @@ export function instanceOfOrganizationName(value: object): value is Organization
     return true;
 }
 
-/**
- * Check if a given object is OrganizationName JSON.
- */
-export function isOrganizationNameJSON(value: object): boolean {
-    if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('label' in value) || value['label'] === undefined) return false;
-    return true;
-}
-
 export function OrganizationNameFromJSON(json: any): OrganizationName {
     return OrganizationNameFromJSONTyped(json, false);
 }
