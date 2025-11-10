@@ -30,8 +30,10 @@ class NewStudySubject(BaseModel[bridg.StudySubject]):
 
         if self.performing_biologic_entity_id is not None:
             ss.performing_biologic_entity_id = self.performing_biologic_entity_id
+        elif self.performing_biologic_entity:
+            ss.performing_biologic_entity = self.performing_biologic_entity.model_dump_sa()
         else:
-            ss.performing_biologic_entity = self.performing_biologic_entity
+            raise RuntimeError("No performing biologic entity")
 
         for id in self.assigned_study_site_protocol_version_relationship:
             ss.assigned_study_site_protocol_version_relationship.append(
