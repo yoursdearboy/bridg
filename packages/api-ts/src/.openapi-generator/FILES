@@ -10,9 +10,6 @@ apis/SpaceActivityApi.ts
 apis/SubjectsApi.ts
 apis/index.ts
 docs/AdministrativeGender.md
-docs/ApiSubjectLookupStudySubjectPerson.md
-docs/ApiSubjectNewStudySubjectPerson.md
-docs/ApiSubjectStudySubjectPerson.md
 docs/CodeSystemApi.md
 docs/ConceptDescriptor.md
 docs/DataTypeName.md
@@ -29,6 +26,7 @@ docs/HTTPValidationError.md
 docs/LookupStudySubject.md
 docs/NewStudySubject.md
 docs/Organization.md
+docs/OrganizationName.md
 docs/PerformedActivity.md
 docs/PerformedActivityApi.md
 docs/PerformedObservation.md
@@ -61,9 +59,6 @@ docs/ValidationErrorLocInner.md
 docs/Value.md
 index.ts
 models/AdministrativeGender.ts
-models/ApiSubjectLookupStudySubjectPerson.ts
-models/ApiSubjectNewStudySubjectPerson.ts
-models/ApiSubjectStudySubjectPerson.ts
 models/ConceptDescriptor.ts
 models/DataTypeName.ts
 models/DefinedActivity.ts
@@ -77,6 +72,7 @@ models/HTTPValidationError.ts
 models/LookupStudySubject.ts
 models/NewStudySubject.ts
 models/Organization.ts
+models/OrganizationName.ts
 models/PerformedActivity.ts
 models/PerformedObservation.ts
 models/PerformedObservationResult.ts
