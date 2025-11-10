@@ -3,7 +3,6 @@ import { DatesProvider } from "@mantine/dates";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   type AnyRoute,
-  createRootRoute,
   createRootRouteWithContext,
   createRoute,
   createRouter,
@@ -54,13 +53,3 @@ export const renderRoute = (
 
 export const renderComponent = (component: React.ReactNode) =>
   render(<App>{component}</App>);
-
-export const renderComponentInRoute = (component: React.ReactNode) => {
-  const rootRoute = createRootRoute();
-  const route = createRoute({
-    path: "/",
-    getParentRoute: () => rootRoute,
-    component: () => component,
-  });
-  return renderRoute(route);
-};
