@@ -26,24 +26,19 @@ class NewStudySubject(BaseModel[bridg.StudySubject]):
     assigned_study_site_protocol_version_relationship: List[UUID]
 
     def model_dump_sa(self, db: Session) -> bridg.StudySubject:
-        def find_or_parse_pbe(data: NewStudySubject) -> bridg.Person | None:
-            if data.performing_biologic_entity_id is not None:
-                return
-            if data.performing_biologic_entity:
-                return data.performing_biologic_entity.model_dump_sa()
+        ss = bridg.StudySubject(status=self.status, status_date=self.status_date)
 
-        def find_sspvr(id: UUID) -> bridg.StudySiteProtocolVersionRelationship:
-            return db.query(bridg.StudySiteProtocolVersionRelationship).filter_by(id=id).one()
+        if self.performing_biologic_entity_id is not None:
+            ss.performing_biologic_entity_id = self.performing_biologic_entity_id
+        else:
+            ss.performing_biologic_entity = self.performing_biologic_entity
 
-        return bridg.StudySubject(
-            status=self.status,
-            status_date=self.status_date,
-            performing_biologic_entity=find_or_parse_pbe(self),
-            performing_biologic_entity_id=self.performing_biologic_entity_id,
-            assigned_study_site_protocol_version_relationship=[
-                find_sspvr(id) for id in self.assigned_study_site_protocol_version_relationship
-            ],
-        )
+        for id in self.assigned_study_site_protocol_version_relationship:
+            ss.assigned_study_site_protocol_version_relationship.append(
+                db.query(bridg.StudySiteProtocolVersionRelationship).filter_by(id=id).one()
+            )
+
+        return ss
 
 
 class LookupStudySubject(BaseModel[bridg.StudySubject]):

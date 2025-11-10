@@ -56,15 +56,21 @@ const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
         <Flex gap="md">
           <TextInput
             label={t("Name.family")}
-            {...form.getInputProps("performingBiologicEntity.name.family")}
+            {...form.getInputProps(
+              "performingBiologicEntity.primaryName.family"
+            )}
           />
           <TextInput
             label={t("Name.given")}
-            {...form.getInputProps("performingBiologicEntity.name.given")}
+            {...form.getInputProps(
+              "performingBiologicEntity.primaryName.given"
+            )}
           />
           <TextInput
             label={t("Name.patronymic")}
-            {...form.getInputProps("performingBiologicEntity.name.patronymic")}
+            {...form.getInputProps(
+              "performingBiologicEntity.primaryName.patronymic"
+            )}
           />
         </Flex>
       </Card>
