@@ -1,6 +1,5 @@
 .gitignore
 .npmignore
-README.md
 src/apis/CodeSystemApi.ts
 src/apis/DefaultApi.ts
 src/apis/DefinedActivityApi.ts
@@ -13,9 +12,6 @@ src/apis/SubjectsApi.ts
 src/apis/index.ts
 src/index.ts
 src/models/AdministrativeGender.ts
-src/models/ApiSubjectLookupStudySubjectPerson.ts
-src/models/ApiSubjectNewStudySubjectPerson.ts
-src/models/ApiSubjectStudySubjectPerson.ts
 src/models/ConceptDescriptor.ts
 src/models/DataTypeName.ts
 src/models/DefinedActivity.ts
@@ -29,6 +25,7 @@ src/models/HTTPValidationError.ts
 src/models/LookupStudySubject.ts
 src/models/NewStudySubject.ts
 src/models/Organization.ts
+src/models/OrganizationName.ts
 src/models/PerformedActivity.ts
 src/models/PerformedObservation.ts
 src/models/PerformedObservationResult.ts
