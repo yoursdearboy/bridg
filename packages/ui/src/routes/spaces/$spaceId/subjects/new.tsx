@@ -21,7 +21,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   type NewStudySubject,
-  type StudySubject,
+  type FoundStudySubject,
   AdministrativeGender,
   Status,
 } from "api-ts";
@@ -94,7 +94,7 @@ const PerformingBiologicEntitySelect = ({
   value,
   onChange,
 }: {
-  data: StudySubject[];
+  data: FoundStudySubject[];
   value?: string;
   onChange: (value: string | null) => void;
 }) => {
@@ -141,7 +141,7 @@ const PerformingBiologicEntityCard = ({
   subject,
   form,
 }: {
-  subject: StudySubject;
+  subject: FoundStudySubject;
 } & NewStudySubjectFormProps) => {
   const { t } = useTranslation();
 

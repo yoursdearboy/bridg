@@ -32,9 +32,6 @@ it("new page renders correctly", async () => {
     .spyOn(api.subjects, "lookupSpacesSpaceIdSubjectsLookupPost")
     .mockResolvedValue([
       {
-        id: "a18257bd-a4d0-4ed0-83ef-fede1950d35d",
-        status: null,
-        statusDate: null,
         performingBiologicEntity: {
           id: "8498d20d-6c84-4f09-96c5-5af3a557b1e3",
           administrativeGenderCode: null,
@@ -47,7 +44,6 @@ it("new page renders correctly", async () => {
             label: "Donald Trump Jr",
           },
         },
-        performingOrganization: null,
       },
     ]);
 
