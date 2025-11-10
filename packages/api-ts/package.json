@@ -6,7 +6,7 @@
   "author": "Kirill Voronin <yoursdearboy@gmail.com>",
   "main": "src/index.ts",
   "scripts": {
-    "build": "rm -fr src && openapi-generator-cli generate -i http://127.0.0.1:8000/openapi.json -g typescript-fetch -c config.json"
+    "build": "rm -fr src && openapi-generator-cli generate -i http://127.0.0.1:8000/openapi.json -g typescript-fetch -c config.json -t template"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.21.3"
