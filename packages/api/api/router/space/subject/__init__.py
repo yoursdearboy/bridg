@@ -8,9 +8,9 @@ from sqlalchemy.orm import Session
 
 from api.db import get_db, get_repository
 from api.model import BaseModel, Person, PersonData, StudySubject
+from api.service.subject import StudySubjectRepository
 
 from . import performed_activity
-from .service import StudySubjectRepository
 
 router = APIRouter(prefix="/subjects", tags=["subjects"])
 

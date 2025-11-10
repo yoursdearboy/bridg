@@ -4,11 +4,10 @@ import bridg
 from bridg import Repository
 from fastapi import APIRouter, Depends
 
-from api import site, subject
 from api.db import get_repository
 from api.model import StudyProtocolVersion
 
-from . import activity
+from . import activity, site, subject
 
 router = APIRouter(prefix="/spaces")
 

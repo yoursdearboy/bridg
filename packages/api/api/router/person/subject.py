@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends
 
 from api.db import get_repository
 from api.model import BaseModel, StudySiteProtocolVersionRelationship
-from api.subject.service import StudySubjectRepository
+from api.service.subject import StudySubjectRepository
 
 router = APIRouter(prefix="/subject", tags=["person_subject"])
 
