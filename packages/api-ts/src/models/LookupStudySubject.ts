@@ -43,6 +43,14 @@ export function instanceOfLookupStudySubject(value: object): value is LookupStud
     return true;
 }
 
+/**
+ * Check if a given object is LookupStudySubject JSON.
+ */
+export function isLookupStudySubjectJSON(value: object): boolean {
+    if (!('performing_biologic_entity' in value) || value['performing_biologic_entity'] === undefined) return false;
+    return true;
+}
+
 export function LookupStudySubjectFromJSON(json: any): LookupStudySubject {
     return LookupStudySubjectFromJSONTyped(json, false);
 }

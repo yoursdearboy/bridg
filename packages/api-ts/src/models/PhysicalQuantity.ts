@@ -42,6 +42,15 @@ export function instanceOfPhysicalQuantity(value: object): value is PhysicalQuan
     return true;
 }
 
+/**
+ * Check if a given object is PhysicalQuantity JSON.
+ */
+export function isPhysicalQuantityJSON(value: object): boolean {
+    if (!('value' in value) || value['value'] === undefined) return false;
+    if (!('unit' in value) || value['unit'] === undefined) return false;
+    return true;
+}
+
 export function PhysicalQuantityFromJSON(json: any): PhysicalQuantity {
     return PhysicalQuantityFromJSONTyped(json, false);
 }

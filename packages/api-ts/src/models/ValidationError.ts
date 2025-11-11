@@ -57,6 +57,16 @@ export function instanceOfValidationError(value: object): value is ValidationErr
     return true;
 }
 
+/**
+ * Check if a given object is ValidationError JSON.
+ */
+export function isValidationErrorJSON(value: object): boolean {
+    if (!('loc' in value) || value['loc'] === undefined) return false;
+    if (!('msg' in value) || value['msg'] === undefined) return false;
+    if (!('type' in value) || value['type'] === undefined) return false;
+    return true;
+}
+
 export function ValidationErrorFromJSON(json: any): ValidationError {
     return ValidationErrorFromJSONTyped(json, false);
 }

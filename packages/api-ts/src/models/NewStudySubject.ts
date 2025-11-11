@@ -80,6 +80,18 @@ export function instanceOfNewStudySubject(value: object): value is NewStudySubje
     return true;
 }
 
+/**
+ * Check if a given object is NewStudySubject JSON.
+ */
+export function isNewStudySubjectJSON(value: object): boolean {
+    if (!('status' in value) || value['status'] === undefined) return false;
+    if (!('status_date' in value) || value['status_date'] === undefined) return false;
+    if (!('performing_biologic_entity' in value) || value['performing_biologic_entity'] === undefined) return false;
+    if (!('performing_biologic_entity_id' in value) || value['performing_biologic_entity_id'] === undefined) return false;
+    if (!('assigned_study_site_protocol_version_relationship' in value) || value['assigned_study_site_protocol_version_relationship'] === undefined) return false;
+    return true;
+}
+
 export function NewStudySubjectFromJSON(json: any): NewStudySubject {
     return NewStudySubjectFromJSONTyped(json, false);
 }

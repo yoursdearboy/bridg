@@ -42,6 +42,13 @@ export function instanceOfHTTPValidationError(value: object): value is HTTPValid
     return true;
 }
 
+/**
+ * Check if a given object is HTTPValidationError JSON.
+ */
+export function isHTTPValidationErrorJSON(value: object): boolean {
+    return true;
+}
+
 export function HTTPValidationErrorFromJSON(json: any): HTTPValidationError {
     return HTTPValidationErrorFromJSONTyped(json, false);
 }

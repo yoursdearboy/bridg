@@ -77,6 +77,19 @@ export interface DefinedObservation {
  */
 export function instanceOfDefinedObservation(value: object): value is DefinedObservation {
     if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('nameCode' in value) || value['nameCode'] === undefined) return false;
+    if (!('categoryCode' in value) || value['categoryCode'] === undefined) return false;
+    if (!('subcategoryCode' in value) || value['subcategoryCode'] === undefined) return false;
+    if (!('description' in value) || value['description'] === undefined) return false;
+    if (!('producedDefinedObservationResult' in value) || value['producedDefinedObservationResult'] === undefined) return false;
+    return true;
+}
+
+/**
+ * Check if a given object is DefinedObservation JSON.
+ */
+export function isDefinedObservationJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
     if (!('name_code' in value) || value['name_code'] === undefined) return false;
     if (!('category_code' in value) || value['category_code'] === undefined) return false;
     if (!('subcategory_code' in value) || value['subcategory_code'] === undefined) return false;

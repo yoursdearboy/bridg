@@ -57,6 +57,16 @@ export function instanceOfOrganization(value: object): value is Organization {
     return true;
 }
 
+/**
+ * Check if a given object is Organization JSON.
+ */
+export function isOrganizationJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('description' in value) || value['description'] === undefined) return false;
+    if (!('primary_name' in value) || value['primary_name'] === undefined) return false;
+    return true;
+}
+
 export function OrganizationFromJSON(json: any): Organization {
     return OrganizationFromJSONTyped(json, false);
 }

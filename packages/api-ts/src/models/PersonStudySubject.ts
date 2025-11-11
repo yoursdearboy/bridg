@@ -73,6 +73,17 @@ export function instanceOfPersonStudySubject(value: object): value is PersonStud
     return true;
 }
 
+/**
+ * Check if a given object is PersonStudySubject JSON.
+ */
+export function isPersonStudySubjectJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('status' in value) || value['status'] === undefined) return false;
+    if (!('status_date' in value) || value['status_date'] === undefined) return false;
+    if (!('assigned_study_site_protocol_version_relationship' in value) || value['assigned_study_site_protocol_version_relationship'] === undefined) return false;
+    return true;
+}
+
 export function PersonStudySubjectFromJSON(json: any): PersonStudySubject {
     return PersonStudySubjectFromJSONTyped(json, false);
 }

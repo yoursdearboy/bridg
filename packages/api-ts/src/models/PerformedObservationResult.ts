@@ -106,6 +106,22 @@ export function instanceOfPerformedObservationResult(value: object): value is Pe
     return true;
 }
 
+/**
+ * Check if a given object is PerformedObservationResult JSON.
+ */
+export function isPerformedObservationResultJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('type_code' in value) || value['type_code'] === undefined) return false;
+    if (!('value' in value) || value['value'] === undefined) return false;
+    if (!('value_null_flavor_reason' in value) || value['value_null_flavor_reason'] === undefined) return false;
+    if (!('baseline_indicator' in value) || value['baseline_indicator'] === undefined) return false;
+    if (!('derived_indicator' in value) || value['derived_indicator'] === undefined) return false;
+    if (!('created_date' in value) || value['created_date'] === undefined) return false;
+    if (!('reported_date' in value) || value['reported_date'] === undefined) return false;
+    if (!('comment' in value) || value['comment'] === undefined) return false;
+    return true;
+}
+
 export function PerformedObservationResultFromJSON(json: any): PerformedObservationResult {
     return PerformedObservationResultFromJSONTyped(json, false);
 }

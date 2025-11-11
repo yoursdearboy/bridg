@@ -70,6 +70,13 @@ export function instanceOfEntityNameData(value: object): value is EntityNameData
     return true;
 }
 
+/**
+ * Check if a given object is EntityNameData JSON.
+ */
+export function isEntityNameDataJSON(value: object): boolean {
+    return true;
+}
+
 export function EntityNameDataFromJSON(json: any): EntityNameData {
     return EntityNameDataFromJSONTyped(json, false);
 }

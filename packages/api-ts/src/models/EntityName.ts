@@ -84,6 +84,15 @@ export function instanceOfEntityName(value: object): value is EntityName {
     return true;
 }
 
+/**
+ * Check if a given object is EntityName JSON.
+ */
+export function isEntityNameJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('label' in value) || value['label'] === undefined) return false;
+    return true;
+}
+
 export function EntityNameFromJSON(json: any): EntityName {
     return EntityNameFromJSONTyped(json, false);
 }

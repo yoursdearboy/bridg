@@ -15,6 +15,7 @@
 import type { ConceptDescriptor } from './ConceptDescriptor';
 import {
     instanceOfConceptDescriptor,
+    isConceptDescriptorJSON,
     ConceptDescriptorFromJSON,
     ConceptDescriptorFromJSONTyped,
     ConceptDescriptorToJSON,
@@ -22,6 +23,7 @@ import {
 import type { PhysicalQuantity } from './PhysicalQuantity';
 import {
     instanceOfPhysicalQuantity,
+    isPhysicalQuantityJSON,
     PhysicalQuantityFromJSON,
     PhysicalQuantityFromJSONTyped,
     PhysicalQuantityToJSON,
@@ -43,10 +45,10 @@ export function ValueFromJSONTyped(json: any, ignoreDiscriminator: boolean): Val
         return json;
     }
     if (typeof json === "object") {
-        if (instanceOfConceptDescriptor(json)) {
+        if (isConceptDescriptorJSON(json)) {
             return ConceptDescriptorFromJSONTyped(json, true);
         }
-        if (instanceOfPhysicalQuantity(json)) {
+        if (isPhysicalQuantityJSON(json)) {
             return PhysicalQuantityFromJSONTyped(json, true);
         }
     } else {

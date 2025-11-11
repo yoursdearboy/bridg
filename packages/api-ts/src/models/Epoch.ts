@@ -56,6 +56,17 @@ export function instanceOfEpoch(value: object): value is Epoch {
     return true;
 }
 
+/**
+ * Check if a given object is Epoch JSON.
+ */
+export function isEpochJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('type_code' in value) || value['type_code'] === undefined) return false;
+    if (!('description' in value) || value['description'] === undefined) return false;
+    return true;
+}
+
 export function EpochFromJSON(json: any): Epoch {
     return EpochFromJSONTyped(json, false);
 }
