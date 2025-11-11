@@ -1,13 +1,17 @@
 from typing import Optional
 from uuid import UUID
 
-from sqlalchemy import ForeignKey, Numeric, String
+from sqlalchemy import Enum, ForeignKey, Numeric, String
 from sqlalchemy.orm import Mapped, composite, declared_attr, mapped_column, relationship
 
-from .datatype import ConceptDescriptor, DataValue, PhysicalQuantity, date, datetime
+from .datatype import ConceptDescriptor, DataTypeName, DataValue, PhysicalQuantity, date, datetime
 
 
 class ObservationResult:
+    value_type: Mapped[Optional[DataTypeName]] = mapped_column(
+        Enum(DataTypeName, values_callable=lambda x: [i.value for i in x]),
+    )
+
     value_st: Mapped[Optional[str]]
 
     value_cd_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
@@ -28,6 +32,7 @@ class ObservationResult:
     value_datetime: Mapped[Optional[datetime]]
 
     def _reset(self):
+        self.value_type = None
         self.value_cd = None
         if self.value_pq:
             self.value_pq.value = None
@@ -38,27 +43,33 @@ class ObservationResult:
 
     @property
     def value(self) -> Optional[DataValue]:
-        if self.value_cd:
-            return self.value_cd
-        if self.value_pq and self.value_pq.unit and self.value_pq.value:
-            return self.value_pq
-        if self.value_datetime:
-            return self.value_datetime
-        if self.value_date:
-            return self.value_date
-        if self.value_st:
-            return self.value_st
+        match self.value_type:
+            case DataTypeName.CD:
+                return self.value_cd
+            case DataTypeName.PQ:
+                return self.value_pq
+            case DataTypeName.TS_DATETIME:
+                return self.value_datetime
+            case DataTypeName.TS_DATE:
+                return self.value_date
+            case DataTypeName.ST:
+                return self.value_st
 
     @value.setter
     def value(self, x: Optional[DataValue]):
         self._reset()
         if isinstance(x, ConceptDescriptor):
+            self.value_type = DataTypeName.CD
             self.value_cd = x
         if isinstance(x, PhysicalQuantity):
+            self.value_type = DataTypeName.PQ
             self.value_pq = x
         if isinstance(x, datetime):
+            self.value_type = DataTypeName.TS_DATETIME
             self.value_datetime = x
         if isinstance(x, date):
+            self.value_type = DataTypeName.TS_DATE
             self.value_date = x
         if isinstance(x, str):
+            self.value_type = DataTypeName.ST
             self.value_st = x
