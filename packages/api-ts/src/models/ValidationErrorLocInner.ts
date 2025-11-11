@@ -28,6 +28,13 @@ export function instanceOfValidationErrorLocInner(value: object): value is Valid
     return true;
 }
 
+/**
+ * Check if a given object is ValidationErrorLocInner JSON.
+ */
+export function isValidationErrorLocInnerJSON(value: object): boolean {
+    return true;
+}
+
 export function ValidationErrorLocInnerFromJSON(json: any): ValidationErrorLocInner {
     return ValidationErrorLocInnerFromJSONTyped(json, false);
 }

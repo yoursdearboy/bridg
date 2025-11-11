@@ -70,6 +70,13 @@ export function instanceOfPostalAddressData(value: object): value is PostalAddre
     return true;
 }
 
+/**
+ * Check if a given object is PostalAddressData JSON.
+ */
+export function isPostalAddressDataJSON(value: object): boolean {
+    return true;
+}
+
 export function PostalAddressDataFromJSON(json: any): PostalAddressData {
     return PostalAddressDataFromJSONTyped(json, false);
 }

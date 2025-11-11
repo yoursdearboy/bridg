@@ -108,6 +108,21 @@ export function instanceOfDefinedObservationResult(value: object): value is Defi
     return true;
 }
 
+/**
+ * Check if a given object is DefinedObservationResult JSON.
+ */
+export function isDefinedObservationResultJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('value' in value) || value['value'] === undefined) return false;
+    if (!('value_negation_indicator' in value) || value['value_negation_indicator'] === undefined) return false;
+    if (!('type_code' in value) || value['type_code'] === undefined) return false;
+    if (!('target_type' in value) || value['target_type'] === undefined) return false;
+    if (!('target_coding_system' in value) || value['target_coding_system'] === undefined) return false;
+    if (!('target_unit' in value) || value['target_unit'] === undefined) return false;
+    if (!('derivation_expression' in value) || value['derivation_expression'] === undefined) return false;
+    return true;
+}
+
 export function DefinedObservationResultFromJSON(json: any): DefinedObservationResult {
     return DefinedObservationResultFromJSONTyped(json, false);
 }

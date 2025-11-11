@@ -84,6 +84,15 @@ export function instanceOfPostalAddress(value: object): value is PostalAddress {
     return true;
 }
 
+/**
+ * Check if a given object is PostalAddress JSON.
+ */
+export function isPostalAddressJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('label' in value) || value['label'] === undefined) return false;
+    return true;
+}
+
 export function PostalAddressFromJSON(json: any): PostalAddress {
     return PostalAddressFromJSONTyped(json, false);
 }

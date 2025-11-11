@@ -64,6 +64,16 @@ export function instanceOfStudySiteProtocolVersionRelationship(value: object): v
     return true;
 }
 
+/**
+ * Check if a given object is StudySiteProtocolVersionRelationship JSON.
+ */
+export function isStudySiteProtocolVersionRelationshipJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('executing_study_site' in value) || value['executing_study_site'] === undefined) return false;
+    if (!('executed_study_protocol_version' in value) || value['executed_study_protocol_version'] === undefined) return false;
+    return true;
+}
+
 export function StudySiteProtocolVersionRelationshipFromJSON(json: any): StudySiteProtocolVersionRelationship {
     return StudySiteProtocolVersionRelationshipFromJSONTyped(json, false);
 }

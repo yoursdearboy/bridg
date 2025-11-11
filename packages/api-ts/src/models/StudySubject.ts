@@ -87,6 +87,18 @@ export function instanceOfStudySubject(value: object): value is StudySubject {
     return true;
 }
 
+/**
+ * Check if a given object is StudySubject JSON.
+ */
+export function isStudySubjectJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('status' in value) || value['status'] === undefined) return false;
+    if (!('status_date' in value) || value['status_date'] === undefined) return false;
+    if (!('performing_biologic_entity' in value) || value['performing_biologic_entity'] === undefined) return false;
+    if (!('performing_organization' in value) || value['performing_organization'] === undefined) return false;
+    return true;
+}
+
 export function StudySubjectFromJSON(json: any): StudySubject {
     return StudySubjectFromJSONTyped(json, false);
 }

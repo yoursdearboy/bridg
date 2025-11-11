@@ -42,6 +42,15 @@ export function instanceOfStudySite(value: object): value is StudySite {
     return true;
 }
 
+/**
+ * Check if a given object is StudySite JSON.
+ */
+export function isStudySiteJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('label' in value) || value['label'] === undefined) return false;
+    return true;
+}
+
 export function StudySiteFromJSON(json: any): StudySite {
     return StudySiteFromJSONTyped(json, false);
 }

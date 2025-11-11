@@ -77,6 +77,15 @@ export function instanceOfTelecommunicationAddress(value: object): value is Tele
     return true;
 }
 
+/**
+ * Check if a given object is TelecommunicationAddress JSON.
+ */
+export function isTelecommunicationAddressJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('label' in value) || value['label'] === undefined) return false;
+    return true;
+}
+
 export function TelecommunicationAddressFromJSON(json: any): TelecommunicationAddress {
     return TelecommunicationAddressFromJSONTyped(json, false);
 }

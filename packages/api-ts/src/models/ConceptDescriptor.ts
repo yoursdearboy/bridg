@@ -44,6 +44,15 @@ export interface ConceptDescriptor {
  */
 export function instanceOfConceptDescriptor(value: object): value is ConceptDescriptor {
     if (!('code' in value) || value['code'] === undefined) return false;
+    if (!('codeSystem' in value) || value['codeSystem'] === undefined) return false;
+    return true;
+}
+
+/**
+ * Check if a given object is ConceptDescriptor JSON.
+ */
+export function isConceptDescriptorJSON(value: object): boolean {
+    if (!('code' in value) || value['code'] === undefined) return false;
     if (!('code_system' in value) || value['code_system'] === undefined) return false;
     return true;
 }

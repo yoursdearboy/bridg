@@ -50,6 +50,15 @@ export function instanceOfStudyActivity(value: object): value is StudyActivity {
     return true;
 }
 
+/**
+ * Check if a given object is StudyActivity JSON.
+ */
+export function isStudyActivityJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('used_defined_activity' in value) || value['used_defined_activity'] === undefined) return false;
+    return true;
+}
+
 export function StudyActivityFromJSON(json: any): StudyActivity {
     return StudyActivityFromJSONTyped(json, false);
 }

@@ -63,6 +63,13 @@ export function instanceOfTelecommunicationAddressData(value: object): value is 
     return true;
 }
 
+/**
+ * Check if a given object is TelecommunicationAddressData JSON.
+ */
+export function isTelecommunicationAddressDataJSON(value: object): boolean {
+    return true;
+}
+
 export function TelecommunicationAddressDataFromJSON(json: any): TelecommunicationAddressData {
     return TelecommunicationAddressDataFromJSONTyped(json, false);
 }
