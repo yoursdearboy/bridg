@@ -43,16 +43,16 @@ import {
 export interface DefinedObservationResult {
     /**
      * 
-     * @type {string}
-     * @memberof DefinedObservationResult
-     */
-    id: string;
-    /**
-     * 
      * @type {Value}
      * @memberof DefinedObservationResult
      */
     value: Value | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DefinedObservationResult
+     */
+    id: string;
     /**
      * 
      * @type {boolean}
@@ -89,6 +89,12 @@ export interface DefinedObservationResult {
      * @memberof DefinedObservationResult
      */
     derivationExpression: string | null;
+    /**
+     * 
+     * @type {DataTypeName}
+     * @memberof DefinedObservationResult
+     */
+    readonly valueType: DataTypeName | null;
 }
 
 
@@ -97,14 +103,15 @@ export interface DefinedObservationResult {
  * Check if a given object implements the DefinedObservationResult interface.
  */
 export function instanceOfDefinedObservationResult(value: object): value is DefinedObservationResult {
-    if (!('id' in value) || value['id'] === undefined) return false;
     if (!('value' in value) || value['value'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
     if (!('valueNegationIndicator' in value) || value['valueNegationIndicator'] === undefined) return false;
     if (!('typeCode' in value) || value['typeCode'] === undefined) return false;
     if (!('targetType' in value) || value['targetType'] === undefined) return false;
     if (!('targetCodingSystem' in value) || value['targetCodingSystem'] === undefined) return false;
     if (!('targetUnit' in value) || value['targetUnit'] === undefined) return false;
     if (!('derivationExpression' in value) || value['derivationExpression'] === undefined) return false;
+    if (!('valueType' in value) || value['valueType'] === undefined) return false;
     return true;
 }
 
@@ -112,14 +119,15 @@ export function instanceOfDefinedObservationResult(value: object): value is Defi
  * Check if a given object is DefinedObservationResult JSON.
  */
 export function isDefinedObservationResultJSON(value: object): boolean {
-    if (!('id' in value) || value['id'] === undefined) return false;
     if (!('value' in value) || value['value'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
     if (!('value_negation_indicator' in value) || value['value_negation_indicator'] === undefined) return false;
     if (!('type_code' in value) || value['type_code'] === undefined) return false;
     if (!('target_type' in value) || value['target_type'] === undefined) return false;
     if (!('target_coding_system' in value) || value['target_coding_system'] === undefined) return false;
     if (!('target_unit' in value) || value['target_unit'] === undefined) return false;
     if (!('derivation_expression' in value) || value['derivation_expression'] === undefined) return false;
+    if (!('value_type' in value) || value['value_type'] === undefined) return false;
     return true;
 }
 
@@ -133,14 +141,15 @@ export function DefinedObservationResultFromJSONTyped(json: any, ignoreDiscrimin
     }
     return {
         
+        'value': ValueFromJSON(json['value'], json['value_type']),
         'id': json['id'],
-        'value': ValueFromJSON(json['value']),
         'valueNegationIndicator': json['value_negation_indicator'],
         'typeCode': ConceptDescriptorFromJSON(json['type_code']),
         'targetType': DataTypeNameFromJSON(json['target_type']),
         'targetCodingSystem': json['target_coding_system'],
         'targetUnit': json['target_unit'],
         'derivationExpression': json['derivation_expression'],
+        'valueType': DataTypeNameFromJSON(json['value_type']),
     };
 }
 
@@ -148,15 +157,15 @@ export function DefinedObservationResultToJSON(json: any): DefinedObservationRes
     return DefinedObservationResultToJSONTyped(json, false);
 }
 
-export function DefinedObservationResultToJSONTyped(value?: DefinedObservationResult | null, ignoreDiscriminator: boolean = false): any {
+export function DefinedObservationResultToJSONTyped(value?: Omit<DefinedObservationResult, 'value_type'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'id': value['id'],
         'value': ValueToJSON(value['value']),
+        'id': value['id'],
         'value_negation_indicator': value['valueNegationIndicator'],
         'type_code': ConceptDescriptorToJSON(value['typeCode']),
         'target_type': DataTypeNameToJSON(value['targetType']),

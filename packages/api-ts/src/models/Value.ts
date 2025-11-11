@@ -20,6 +20,7 @@ import {
     ConceptDescriptorFromJSONTyped,
     ConceptDescriptorToJSON,
 } from './ConceptDescriptor';
+import { DataTypeName } from './DataTypeName';
 import type { PhysicalQuantity } from './PhysicalQuantity';
 import {
     instanceOfPhysicalQuantity,
@@ -34,31 +35,29 @@ import {
  * 
  * @export
  */
-export type Value = ConceptDescriptor | Date | PhysicalQuantity;
+export type Value = ConceptDescriptor | Date | PhysicalQuantity | string;
 
-export function ValueFromJSON(json: any): Value {
-    return ValueFromJSONTyped(json, false);
+export function ValueFromJSON(json: any, type: DataTypeName): Value {
+    return ValueFromJSONTyped(json, type, false);
 }
 
-export function ValueFromJSONTyped(json: any, ignoreDiscriminator: boolean): Value {
+export function ValueFromJSONTyped(json: any, type: DataTypeName, ignoreDiscriminator: boolean): Value {
     if (json == null) {
         return json;
     }
-    if (typeof json === "object") {
-        if (isConceptDescriptorJSON(json)) {
+    switch (type) {
+        case DataTypeName.Cd:
             return ConceptDescriptorFromJSONTyped(json, true);
-        }
-        if (isPhysicalQuantityJSON(json)) {
+        case DataTypeName.Pq:
             return PhysicalQuantityFromJSONTyped(json, true);
-        }
-    } else {
-        if (!(isNaN(new Date(json).getTime()))) {
+        case DataTypeName.TsDate:
+        case DataTypeName.TsDatetime:
             return new Date(json);
-        } else {
+        case DataTypeName.St:
             return json;
-        }
+        default:
+            return {} as any;
     }
-    return {} as any;
 }
 
 export function ValueToJSON(json: any): any {
@@ -77,6 +76,9 @@ export function ValueToJSONTyped(value?: Value | null, ignoreDiscriminator: bool
     }
     if (instanceOfPhysicalQuantity(value)) {
         return PhysicalQuantityToJSON(value as PhysicalQuantity);
+    }
+    if (typeof value === 'string') {
+        return value;
     }
     if (value instanceof Date) {
         return value == null ? undefined : ((value).toISOString());
