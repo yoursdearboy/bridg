@@ -1,5 +1,3 @@
-from datetime import date, datetime
-
 from .cd import ConceptDescriptor
 from .pq import PhysicalQuantity
 from .st import CharacterString
