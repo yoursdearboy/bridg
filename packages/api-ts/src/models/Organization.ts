@@ -13,6 +13,14 @@
  */
 
 import { mapValues } from '../runtime';
+import type { OrganizationName } from './OrganizationName';
+import {
+    OrganizationNameFromJSON,
+    OrganizationNameFromJSONTyped,
+    OrganizationNameToJSON,
+    OrganizationNameToJSONTyped,
+} from './OrganizationName';
+
 /**
  * 
  * @export
@@ -33,10 +41,10 @@ export interface Organization {
     description: string | null;
     /**
      * 
-     * @type {string}
+     * @type {OrganizationName}
      * @memberof Organization
      */
-    primaryName: string | null;
+    primaryName: OrganizationName | null;
 }
 
 /**
@@ -61,7 +69,7 @@ export function OrganizationFromJSONTyped(json: any, ignoreDiscriminator: boolea
         
         'id': json['id'],
         'description': json['description'],
-        'primaryName': json['primary_name'],
+        'primaryName': OrganizationNameFromJSON(json['primary_name']),
     };
 }
 
@@ -78,7 +86,7 @@ export function OrganizationToJSONTyped(value?: Organization | null, ignoreDiscr
         
         'id': value['id'],
         'description': value['description'],
-        'primary_name': value['primaryName'],
+        'primary_name': OrganizationNameToJSON(value['primaryName']),
     };
 }
 

@@ -20,9 +20,9 @@ import { useDebouncedCallback } from "@mantine/hooks";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
-  AdministrativeGender,
-  type FoundStudySubject,
   type NewStudySubject,
+  type FoundStudySubject,
+  AdministrativeGender,
   Status,
 } from "api-ts";
 import { useTranslation } from "react-i18next";
@@ -56,15 +56,21 @@ const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
         <Flex gap="md">
           <TextInput
             label={t("Name.family")}
-            {...form.getInputProps("performingBiologicEntity.name.family")}
+            {...form.getInputProps(
+              "performingBiologicEntity.primaryName.family"
+            )}
           />
           <TextInput
             label={t("Name.given")}
-            {...form.getInputProps("performingBiologicEntity.name.given")}
+            {...form.getInputProps(
+              "performingBiologicEntity.primaryName.given"
+            )}
           />
           <TextInput
             label={t("Name.patronymic")}
-            {...form.getInputProps("performingBiologicEntity.name.patronymic")}
+            {...form.getInputProps(
+              "performingBiologicEntity.primaryName.patronymic"
+            )}
           />
         </Flex>
       </Card>
@@ -119,15 +125,16 @@ const PerformingBiologicEntitySelect = ({
         <Combobox.Options>
           {data.map((subject) => (
             <Combobox.Option
-              key={subject.performingBiologicEntityId}
-              value={subject.performingBiologicEntityId!}
+              key={subject.performingBiologicEntity!.id}
+              value={subject.performingBiologicEntity!.id}
               bg={
-                subject.performingBiologicEntityId === value
+                subject.performingBiologicEntity!.id === value
                   ? "var(--mantine-color-dark-7)"
                   : ""
               }
             >
-              {subject.performingBiologicEntity}
+              {subject.performingBiologicEntity!.primaryName?.label ||
+                t("Name.defaultLabel")}
             </Combobox.Option>
           ))}
         </Combobox.Options>
@@ -141,16 +148,23 @@ const PerformingBiologicEntityCard = ({
   form,
 }: {
   subject: FoundStudySubject;
-} & NewStudySubjectFormProps) => (
-  <Card>
-    <Group gap="xs">
-      <Text fw={500}>{subject.performingBiologicEntity}</Text>
-      <CloseButton
-        onClick={() => form.resetField("performingBiologicEntityId")}
-      />
-    </Group>
-  </Card>
-);
+} & NewStudySubjectFormProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Card>
+      <Group gap="xs">
+        <Text fw={500}>
+          {subject.performingBiologicEntity?.primaryName?.label ||
+            t("Name.defaultLabel")}
+        </Text>
+        <CloseButton
+          onClick={() => form.resetField("performingBiologicEntityId")}
+        />
+      </Group>
+    </Card>
+  );
+};
 
 const StudySubjectFields = ({ form }: NewStudySubjectFormProps) => {
   const { t } = useTranslation();
@@ -214,11 +228,14 @@ function RouteComponent() {
       performingBiologicEntity: {
         administrativeGenderCode: null,
         birthDate: null,
-        name: {
+        primaryName: {
           family: "",
           given: "",
           patronymic: "",
         },
+        deathDate: null,
+        deathDateEstimatedIndicator: null,
+        deathIndicator: null,
       },
       performingBiologicEntityId: null,
       status: Status.Candidate,
@@ -245,7 +262,7 @@ function RouteComponent() {
     form.values.performingBiologicEntityId !== null &&
     lookup.data?.find(
       (item) =>
-        item.performingBiologicEntityId ===
+        item.performingBiologicEntity?.id ===
         form.values.performingBiologicEntityId
     );
 

@@ -27,13 +27,13 @@ import {
     OrganizationToJSON,
     OrganizationToJSONTyped,
 } from './Organization';
-import type { ApiSubjectStudySubjectPerson } from './ApiSubjectStudySubjectPerson';
+import type { Person } from './Person';
 import {
-    ApiSubjectStudySubjectPersonFromJSON,
-    ApiSubjectStudySubjectPersonFromJSONTyped,
-    ApiSubjectStudySubjectPersonToJSON,
-    ApiSubjectStudySubjectPersonToJSONTyped,
-} from './ApiSubjectStudySubjectPerson';
+    PersonFromJSON,
+    PersonFromJSONTyped,
+    PersonToJSON,
+    PersonToJSONTyped,
+} from './Person';
 
 /**
  * 
@@ -61,10 +61,10 @@ export interface StudySubject {
     statusDate: Date | null;
     /**
      * 
-     * @type {ApiSubjectStudySubjectPerson}
+     * @type {Person}
      * @memberof StudySubject
      */
-    performingBiologicEntity: ApiSubjectStudySubjectPerson | null;
+    performingBiologicEntity: Person | null;
     /**
      * 
      * @type {Organization}
@@ -100,7 +100,7 @@ export function StudySubjectFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'id': json['id'],
         'status': StatusFromJSON(json['status']),
         'statusDate': (json['status_date'] == null ? null : new Date(json['status_date'])),
-        'performingBiologicEntity': ApiSubjectStudySubjectPersonFromJSON(json['performing_biologic_entity']),
+        'performingBiologicEntity': PersonFromJSON(json['performing_biologic_entity']),
         'performingOrganization': OrganizationFromJSON(json['performing_organization']),
     };
 }
@@ -119,7 +119,7 @@ export function StudySubjectToJSONTyped(value?: StudySubject | null, ignoreDiscr
         'id': value['id'],
         'status': StatusToJSON(value['status']),
         'status_date': value['statusDate'] == null ? value['statusDate'] : value['statusDate'].toISOString(),
-        'performing_biologic_entity': ApiSubjectStudySubjectPersonToJSON(value['performingBiologicEntity']),
+        'performing_biologic_entity': PersonToJSON(value['performingBiologicEntity']),
         'performing_organization': OrganizationToJSON(value['performingOrganization']),
     };
 }

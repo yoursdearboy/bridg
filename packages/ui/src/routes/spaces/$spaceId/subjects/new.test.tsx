@@ -32,8 +32,18 @@ it("new page renders correctly", async () => {
     .spyOn(api.subjects, "lookupSpacesSpaceIdSubjectsLookupPost")
     .mockResolvedValue([
       {
-        performingBiologicEntity: "Donald Trump Jr",
-        performingBiologicEntityId: "8498d20d-6c84-4f09-96c5-5af3a557b1e3",
+        performingBiologicEntity: {
+          id: "8498d20d-6c84-4f09-96c5-5af3a557b1e3",
+          administrativeGenderCode: null,
+          birthDate: null,
+          deathDate: null,
+          deathDateEstimatedIndicator: null,
+          deathIndicator: null,
+          primaryName: {
+            id: "fc4e3c22-a2a8-45f2-b86c-e58bf618505d",
+            label: "Donald Trump Jr",
+          },
+        },
       },
     ]);
 

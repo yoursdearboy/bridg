@@ -24,9 +24,10 @@ class EntityName(EntityNameData):
 
     @computed_field
     @property
-    def label(self) -> str:
+    def label(self) -> Optional[str]:
         parts = [self.prefix, self.given, self.middle, self.family, self.suffix]
         parts = [p for p in parts if p]
-        s = " ".join(parts)
-        s = "Anonymous" if s == "" else s
+        s = " ".join(parts).strip()
+        if s == "":
+            return
         return s

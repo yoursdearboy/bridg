@@ -1,12 +1,10 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './AdministrativeGender';
-export * from './ApiSubjectLookupStudySubjectPerson';
-export * from './ApiSubjectNewStudySubjectPerson';
-export * from './ApiSubjectStudySubjectPerson';
 export * from './ConceptDescriptor';
 export * from './DataTypeName';
 export * from './DefinedActivity';
+export * from './DefinedObservation';
 export * from './DefinedObservationResult';
 export * from './EntityName';
 export * from './EntityNameData';
@@ -16,7 +14,9 @@ export * from './HTTPValidationError';
 export * from './LookupStudySubject';
 export * from './NewStudySubject';
 export * from './Organization';
+export * from './OrganizationName';
 export * from './PerformedActivity';
+export * from './PerformedObservation';
 export * from './PerformedObservationResult';
 export * from './Person';
 export * from './PersonData';
@@ -24,6 +24,8 @@ export * from './PersonStudySubject';
 export * from './PhysicalQuantity';
 export * from './PostalAddress';
 export * from './PostalAddressData';
+export * from './ResponseShowDefinedActivityAIdGet';
+export * from './ResponseShowPerformedActivityAIdGet';
 export * from './Status';
 export * from './StudyActivity';
 export * from './StudyProtocolVersion';

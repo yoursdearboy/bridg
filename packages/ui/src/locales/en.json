@@ -30,7 +30,8 @@
       "middle": "Middle name",
       "patronymic": "Patronymic",
       "prefix": "Prefix",
-      "suffix": "Suffix"
+      "suffix": "Suffix",
+      "defaultLabel": "Unnamed"
     },
     "Address": {
       "street": "Street",

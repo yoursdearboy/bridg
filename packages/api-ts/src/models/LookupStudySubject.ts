@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { ApiSubjectLookupStudySubjectPerson } from './ApiSubjectLookupStudySubjectPerson';
+import type { PersonData } from './PersonData';
 import {
-    ApiSubjectLookupStudySubjectPersonFromJSON,
-    ApiSubjectLookupStudySubjectPersonFromJSONTyped,
-    ApiSubjectLookupStudySubjectPersonToJSON,
-    ApiSubjectLookupStudySubjectPersonToJSONTyped,
-} from './ApiSubjectLookupStudySubjectPerson';
+    PersonDataFromJSON,
+    PersonDataFromJSONTyped,
+    PersonDataToJSON,
+    PersonDataToJSONTyped,
+} from './PersonData';
 
 /**
  * 
@@ -29,16 +29,17 @@ import {
 export interface LookupStudySubject {
     /**
      * 
-     * @type {ApiSubjectLookupStudySubjectPerson}
+     * @type {PersonData}
      * @memberof LookupStudySubject
      */
-    performingBiologicEntity?: ApiSubjectLookupStudySubjectPerson | null;
+    performingBiologicEntity: PersonData | null;
 }
 
 /**
  * Check if a given object implements the LookupStudySubject interface.
  */
 export function instanceOfLookupStudySubject(value: object): value is LookupStudySubject {
+    if (!('performingBiologicEntity' in value) || value['performingBiologicEntity'] === undefined) return false;
     return true;
 }
 
@@ -52,7 +53,7 @@ export function LookupStudySubjectFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'performingBiologicEntity': json['performing_biologic_entity'] == null ? undefined : ApiSubjectLookupStudySubjectPersonFromJSON(json['performing_biologic_entity']),
+        'performingBiologicEntity': PersonDataFromJSON(json['performing_biologic_entity']),
     };
 }
 
@@ -67,7 +68,7 @@ export function LookupStudySubjectToJSONTyped(value?: LookupStudySubject | null,
 
     return {
         
-        'performing_biologic_entity': ApiSubjectLookupStudySubjectPersonToJSON(value['performingBiologicEntity']),
+        'performing_biologic_entity': PersonDataToJSON(value['performingBiologicEntity']),
     };
 }
 
