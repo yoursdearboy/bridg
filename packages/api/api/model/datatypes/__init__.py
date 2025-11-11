@@ -8,4 +8,4 @@ def datavalue_json_schema_extra(jd):
     jd["oneOf"] = jd.pop("anyOf")
 
 
-DataValue = ConceptDescriptor | PhysicalQuantity | date | datetime
+DataValue = ConceptDescriptor | PhysicalQuantity | datetime | date | str

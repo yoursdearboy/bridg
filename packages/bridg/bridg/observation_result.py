@@ -8,6 +8,8 @@ from .datatype import ConceptDescriptor, DataValue, PhysicalQuantity, date, date
 
 
 class ObservationResult:
+    value_st: Mapped[Optional[str]]
+
     value_cd_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
 
     @declared_attr
@@ -30,8 +32,9 @@ class ObservationResult:
         if self.value_pq:
             self.value_pq.value = None
             self.value_pq.unit = None
-        self.value_date = None
         self.value_datetime = None
+        self.value_date = None
+        self.value_st = None
 
     @property
     def value(self) -> Optional[DataValue]:
@@ -39,10 +42,12 @@ class ObservationResult:
             return self.value_cd
         if self.value_pq and self.value_pq.unit and self.value_pq.value:
             return self.value_pq
-        if self.value_date:
-            return self.value_date
         if self.value_datetime:
             return self.value_datetime
+        if self.value_date:
+            return self.value_date
+        if self.value_st:
+            return self.value_st
 
     @value.setter
     def value(self, x: Optional[DataValue]):
@@ -51,7 +56,9 @@ class ObservationResult:
             self.value_cd = x
         if isinstance(x, PhysicalQuantity):
             self.value_pq = x
-        if isinstance(x, date):
-            self.value_date = x
         if isinstance(x, datetime):
             self.value_datetime = x
+        if isinstance(x, date):
+            self.value_date = x
+        if isinstance(x, str):
+            self.value_st = x

@@ -20,6 +20,7 @@
 export const DataTypeName = {
     Cd: 'CD',
     Pq: 'PQ',
+    St: 'ST',
     TsDate: 'TS.DATE',
     TsDatetime: 'TS.DATETIME'
 } as const;
