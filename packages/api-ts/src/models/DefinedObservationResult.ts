@@ -20,13 +20,13 @@ import {
     ConceptDescriptorToJSON,
     ConceptDescriptorToJSONTyped,
 } from './ConceptDescriptor';
-import type { Value } from './Value';
+import type { DataValue } from './DataValue';
 import {
-    ValueFromJSON,
-    ValueFromJSONTyped,
-    ValueToJSON,
-    ValueToJSONTyped,
-} from './Value';
+    DataValueFromJSON,
+    DataValueFromJSONTyped,
+    DataValueToJSON,
+    DataValueToJSONTyped,
+} from './DataValue';
 import type { DataTypeName } from './DataTypeName';
 import {
     DataTypeNameFromJSON,
@@ -43,16 +43,16 @@ import {
 export interface DefinedObservationResult {
     /**
      * 
+     * @type {DataValue}
+     * @memberof DefinedObservationResult
+     */
+    value: DataValue | null;
+    /**
+     * 
      * @type {string}
      * @memberof DefinedObservationResult
      */
     id: string;
-    /**
-     * 
-     * @type {Value}
-     * @memberof DefinedObservationResult
-     */
-    value: Value | null;
     /**
      * 
      * @type {boolean}
@@ -97,8 +97,8 @@ export interface DefinedObservationResult {
  * Check if a given object implements the DefinedObservationResult interface.
  */
 export function instanceOfDefinedObservationResult(value: object): value is DefinedObservationResult {
-    if (!('id' in value) || value['id'] === undefined) return false;
     if (!('value' in value) || value['value'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
     if (!('valueNegationIndicator' in value) || value['valueNegationIndicator'] === undefined) return false;
     if (!('typeCode' in value) || value['typeCode'] === undefined) return false;
     if (!('targetType' in value) || value['targetType'] === undefined) return false;
@@ -112,8 +112,8 @@ export function instanceOfDefinedObservationResult(value: object): value is Defi
  * Check if a given object is DefinedObservationResult JSON.
  */
 export function isDefinedObservationResultJSON(value: object): boolean {
-    if (!('id' in value) || value['id'] === undefined) return false;
     if (!('value' in value) || value['value'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
     if (!('value_negation_indicator' in value) || value['value_negation_indicator'] === undefined) return false;
     if (!('type_code' in value) || value['type_code'] === undefined) return false;
     if (!('target_type' in value) || value['target_type'] === undefined) return false;
@@ -133,8 +133,8 @@ export function DefinedObservationResultFromJSONTyped(json: any, ignoreDiscrimin
     }
     return {
         
+        'value': DataValueFromJSON(json['value']),
         'id': json['id'],
-        'value': ValueFromJSON(json['value']),
         'valueNegationIndicator': json['value_negation_indicator'],
         'typeCode': ConceptDescriptorFromJSON(json['type_code']),
         'targetType': DataTypeNameFromJSON(json['target_type']),
@@ -155,8 +155,8 @@ export function DefinedObservationResultToJSONTyped(value?: DefinedObservationRe
 
     return {
         
+        'value': DataValueToJSON(value['value']),
         'id': value['id'],
-        'value': ValueToJSON(value['value']),
         'value_negation_indicator': value['valueNegationIndicator'],
         'type_code': ConceptDescriptorToJSON(value['typeCode']),
         'target_type': DataTypeNameToJSON(value['targetType']),

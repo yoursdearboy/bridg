@@ -24,6 +24,12 @@ export interface ConceptDescriptor {
      * @type {string}
      * @memberof ConceptDescriptor
      */
+    dataTypeName?: ConceptDescriptorDataTypeNameEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConceptDescriptor
+     */
     code: string;
     /**
      * 
@@ -38,6 +44,16 @@ export interface ConceptDescriptor {
      */
     displayName?: string | null;
 }
+
+
+/**
+ * @export
+ */
+export const ConceptDescriptorDataTypeNameEnum = {
+    Cd: 'CD'
+} as const;
+export type ConceptDescriptorDataTypeNameEnum = typeof ConceptDescriptorDataTypeNameEnum[keyof typeof ConceptDescriptorDataTypeNameEnum];
+
 
 /**
  * Check if a given object implements the ConceptDescriptor interface.
@@ -67,6 +83,7 @@ export function ConceptDescriptorFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
+        'dataTypeName': json['data_type_name'] == null ? undefined : json['data_type_name'],
         'code': json['code'],
         'codeSystem': json['code_system'],
         'displayName': json['display_name'] == null ? undefined : json['display_name'],
@@ -84,6 +101,7 @@ export function ConceptDescriptorToJSONTyped(value?: ConceptDescriptor | null, i
 
     return {
         
+        'data_type_name': value['dataTypeName'],
         'code': value['code'],
         'code_system': value['codeSystem'],
         'display_name': value['displayName'],

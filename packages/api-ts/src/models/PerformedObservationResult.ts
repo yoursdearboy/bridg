@@ -20,13 +20,13 @@ import {
     ConceptDescriptorToJSON,
     ConceptDescriptorToJSONTyped,
 } from './ConceptDescriptor';
-import type { Value } from './Value';
+import type { DataValue } from './DataValue';
 import {
-    ValueFromJSON,
-    ValueFromJSONTyped,
-    ValueToJSON,
-    ValueToJSONTyped,
-} from './Value';
+    DataValueFromJSON,
+    DataValueFromJSONTyped,
+    DataValueToJSON,
+    DataValueToJSONTyped,
+} from './DataValue';
 
 /**
  * 
@@ -34,6 +34,12 @@ import {
  * @interface PerformedObservationResult
  */
 export interface PerformedObservationResult {
+    /**
+     * 
+     * @type {DataValue}
+     * @memberof PerformedObservationResult
+     */
+    value: DataValue | null;
     /**
      * 
      * @type {string}
@@ -46,12 +52,6 @@ export interface PerformedObservationResult {
      * @memberof PerformedObservationResult
      */
     typeCode: ConceptDescriptor | null;
-    /**
-     * 
-     * @type {Value}
-     * @memberof PerformedObservationResult
-     */
-    value: Value | null;
     /**
      * 
      * @type {string}
@@ -94,9 +94,9 @@ export interface PerformedObservationResult {
  * Check if a given object implements the PerformedObservationResult interface.
  */
 export function instanceOfPerformedObservationResult(value: object): value is PerformedObservationResult {
+    if (!('value' in value) || value['value'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('typeCode' in value) || value['typeCode'] === undefined) return false;
-    if (!('value' in value) || value['value'] === undefined) return false;
     if (!('valueNullFlavorReason' in value) || value['valueNullFlavorReason'] === undefined) return false;
     if (!('baselineIndicator' in value) || value['baselineIndicator'] === undefined) return false;
     if (!('derivedIndicator' in value) || value['derivedIndicator'] === undefined) return false;
@@ -110,9 +110,9 @@ export function instanceOfPerformedObservationResult(value: object): value is Pe
  * Check if a given object is PerformedObservationResult JSON.
  */
 export function isPerformedObservationResultJSON(value: object): boolean {
+    if (!('value' in value) || value['value'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('type_code' in value) || value['type_code'] === undefined) return false;
-    if (!('value' in value) || value['value'] === undefined) return false;
     if (!('value_null_flavor_reason' in value) || value['value_null_flavor_reason'] === undefined) return false;
     if (!('baseline_indicator' in value) || value['baseline_indicator'] === undefined) return false;
     if (!('derived_indicator' in value) || value['derived_indicator'] === undefined) return false;
@@ -132,9 +132,9 @@ export function PerformedObservationResultFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
+        'value': DataValueFromJSON(json['value']),
         'id': json['id'],
         'typeCode': ConceptDescriptorFromJSON(json['type_code']),
-        'value': ValueFromJSON(json['value']),
         'valueNullFlavorReason': json['value_null_flavor_reason'],
         'baselineIndicator': json['baseline_indicator'],
         'derivedIndicator': json['derived_indicator'],
@@ -155,9 +155,9 @@ export function PerformedObservationResultToJSONTyped(value?: PerformedObservati
 
     return {
         
+        'value': DataValueToJSON(value['value']),
         'id': value['id'],
         'type_code': ConceptDescriptorToJSON(value['typeCode']),
-        'value': ValueToJSON(value['value']),
         'value_null_flavor_reason': value['valueNullFlavorReason'],
         'baseline_indicator': value['baselineIndicator'],
         'derived_indicator': value['derivedIndicator'],

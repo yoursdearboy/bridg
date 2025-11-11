@@ -9,6 +9,11 @@
         "inputSpec": "http://127.0.0.1:8000/openapi.json",
         "output": ".",
         "templateDir": "template",
+        "modelNameMappings": {
+          "Date": "DateValue",
+          "DateTime": "DateTime",
+          "DefinedObservationResult_value": "DataValue"
+        },
         "additionalProperties": {
             "npmName": "api-ts",
             "npmVersion": "0.0.1"

@@ -1,8 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './AdministrativeGender';
+export * from './CharacterString';
 export * from './ConceptDescriptor';
 export * from './DataTypeName';
+export * from './DataValue';
+export * from './DateTime';
+export * from './DateValue';
 export * from './DefinedActivity';
 export * from './DefinedObservation';
 export * from './DefinedObservationResult';
@@ -38,4 +42,3 @@ export * from './TelecommunicationAddressUse';
 export * from './URLScheme';
 export * from './ValidationError';
 export * from './ValidationErrorLocInner';
-export * from './Value';
