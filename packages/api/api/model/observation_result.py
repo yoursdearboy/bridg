@@ -1,9 +1,13 @@
-from typing import Optional
+from typing import Annotated, Optional
 
-from pydantic import Field
+from pydantic import BeforeValidator, Field
 
-from .datatypes import DataValue
+from .datatypes import DataValue, model_validate
 
 
 class ObservationResult:
-    value: Optional[DataValue] = Field(discriminator="data_type_name")
+    value: Annotated[
+        Optional[DataValue],
+        BeforeValidator(model_validate),
+        Field(discriminator="data_type_name"),
+    ]
