@@ -1,10 +1,8 @@
-from typing import Final
-
-import bridg
+from typing import Literal
 
 from ..base import BaseModel
 
 
 class CharacterString(BaseModel):
-    data_type_name: Final[bridg.DataTypeName] = bridg.DataTypeName.ST
+    data_type_name: Literal["ST"] = "ST"
     value: str

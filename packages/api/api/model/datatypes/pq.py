@@ -1,11 +1,9 @@
-from typing import Final, Optional
-
-import bridg
+from typing import Literal, Optional
 
 from ..base import BaseModel
 
 
 class PhysicalQuantity(BaseModel):
-    data_type_name: Final[bridg.DataTypeName] = bridg.DataTypeName.PQ
+    data_type_name: Literal["PQ"] = "PQ"
     value: float
     unit: Optional[str]

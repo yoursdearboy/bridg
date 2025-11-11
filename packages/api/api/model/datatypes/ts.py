@@ -1,16 +1,14 @@
 from datetime import date, datetime
-from typing import Final
-
-import bridg
+from typing import Literal
 
 from ..base import BaseModel
 
 
 class Date(BaseModel):
-    data_type_name: Final[bridg.DataTypeName] = bridg.DataTypeName.TS_DATE
+    data_type_name: Literal["TS.DATE"] = "TS.DATE"
     value: date
 
 
 class DateTime(BaseModel):
-    data_type_name: Final[bridg.DataTypeName] = bridg.DataTypeName.TS_DATETIME
+    data_type_name: Literal["TS.DATETIME"] = "TS.DATETIME"
     value: datetime
