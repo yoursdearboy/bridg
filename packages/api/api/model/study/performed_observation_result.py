@@ -2,16 +2,14 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID
 
-from pydantic import Field
-
 from ..base import BaseModel
-from ..datatypes import ConceptDescriptor, DataValue, datavalue_json_schema_extra
+from ..datatypes import ConceptDescriptor
+from ..observation_result import ObservationResult
 
 
-class PerformedObservationResult(BaseModel):
+class PerformedObservationResult(ObservationResult, BaseModel):
     id: UUID
     type_code: Optional[ConceptDescriptor]
-    value: Optional[DataValue] = Field(json_schema_extra=datavalue_json_schema_extra)
     value_null_flavor_reason: Optional[str]
     baseline_indicator: Optional[bool]
     derived_indicator: Optional[bool]
