@@ -21,6 +21,12 @@ import { mapValues } from '../runtime';
 export interface PhysicalQuantity {
     /**
      * 
+     * @type {string}
+     * @memberof PhysicalQuantity
+     */
+    dataTypeName?: PhysicalQuantityDataTypeNameEnum;
+    /**
+     * 
      * @type {number}
      * @memberof PhysicalQuantity
      */
@@ -32,6 +38,16 @@ export interface PhysicalQuantity {
      */
     unit: string | null;
 }
+
+
+/**
+ * @export
+ */
+export const PhysicalQuantityDataTypeNameEnum = {
+    Pq: 'PQ'
+} as const;
+export type PhysicalQuantityDataTypeNameEnum = typeof PhysicalQuantityDataTypeNameEnum[keyof typeof PhysicalQuantityDataTypeNameEnum];
+
 
 /**
  * Check if a given object implements the PhysicalQuantity interface.
@@ -61,6 +77,7 @@ export function PhysicalQuantityFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
+        'dataTypeName': json['data_type_name'] == null ? undefined : json['data_type_name'],
         'value': json['value'],
         'unit': json['unit'],
     };
@@ -77,6 +94,7 @@ export function PhysicalQuantityToJSONTyped(value?: PhysicalQuantity | null, ign
 
     return {
         
+        'data_type_name': value['dataTypeName'],
         'value': value['value'],
         'unit': value['unit'],
     };

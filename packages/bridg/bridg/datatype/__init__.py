@@ -7,11 +7,12 @@ from .pq import PhysicalQuantity
 from .tel import TelecommunicationAddress, TelecommunicationAddressUse
 from .url import URL, URLScheme
 
-DataValue = ConceptDescriptor | PhysicalQuantity | date | datetime
+DataValue = ConceptDescriptor | PhysicalQuantity | datetime | date | str
 
 
 class DataTypeName(Enum):
     CD = "CD"
     PQ = "PQ"
+    ST = "ST"
     TS_DATE = "TS.DATE"
     TS_DATETIME = "TS.DATETIME"

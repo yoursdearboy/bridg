@@ -12,8 +12,12 @@ src/apis/SubjectsApi.ts
 src/apis/index.ts
 src/index.ts
 src/models/AdministrativeGender.ts
+src/models/CharacterString.ts
 src/models/ConceptDescriptor.ts
 src/models/DataTypeName.ts
+src/models/DataValue.ts
+src/models/DateTime.ts
+src/models/DateValue.ts
 src/models/DefinedActivity.ts
 src/models/DefinedObservation.ts
 src/models/DefinedObservationResult.ts
@@ -49,7 +53,6 @@ src/models/TelecommunicationAddressUse.ts
 src/models/URLScheme.ts
 src/models/ValidationError.ts
 src/models/ValidationErrorLocInner.ts
-src/models/Value.ts
 src/models/index.ts
 src/runtime.ts
 tsconfig.json
