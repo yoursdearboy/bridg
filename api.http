@@ -5,6 +5,8 @@
 @cbc_id=f83ddbf8-dd6d-4737-98e3-a5795995bbd8
 @space_cbc_id=66da8ea1-5e69-40f2-a720-9937430d582d
 @fab_code_system=b365b97f-ff34-464c-9097-e7daec409f4c
+@ss_cbc_id=8ac78da9-3c23-4770-94e9-ebaee8432b4b
+@ss_ipt_id=ce3dd821-3a1b-41dd-a366-292c8c163a58
 
 # Code System
 
@@ -96,9 +98,14 @@ Content-Type: application/json
 
 GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity
 
-#### Show subject activity (observation) results
+#### Show subject activity (ipt)
 
-GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/8ac78da9-3c23-4770-94e9-ebaee8432b4b?result=1
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/{{ss_ipt_id}}
+
+#### Show subject activity (observation) with results (cbc)
+
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/{{ss_cbc_id}}?result=1
+
 
 ## Persons
 
