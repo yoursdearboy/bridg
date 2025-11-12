@@ -1,18 +1,14 @@
 from datetime import datetime
-from typing import Optional, TypeVar
+from typing import Optional
 from uuid import UUID
-
-import bridg
 
 from ..base import BaseModel
 from ..datatypes import ConceptDescriptor
 from ..protocol import DefinedActivity, Epoch
 from .study_site import StudySite
 
-T = TypeVar("T", bound=bridg.PerformedActivity)
 
-
-class PerformedActivity(BaseModel[T]):
+class PerformedActivity(BaseModel):
     id: UUID
     reason_code: Optional[ConceptDescriptor]
     status_code: Optional[ConceptDescriptor]
