@@ -1,5 +1,4 @@
 from datetime import date, datetime
-from typing import Any, Optional
 
 import bridg
 
@@ -11,7 +10,7 @@ from .ts import Date, DateTime
 DataValue = ConceptDescriptor | PhysicalQuantity | Date | DateTime | CharacterString
 
 
-def model_validate(x: Optional[Any]) -> Optional[DataValue]:
+def model_validate(x):
     match x:
         case bridg.ConceptDescriptor():
             return ConceptDescriptor.model_validate(x)
@@ -23,3 +22,5 @@ def model_validate(x: Optional[Any]) -> Optional[DataValue]:
             return DateTime(value=x)
         case str():
             return CharacterString(value=x)
+        case dict():
+            return x

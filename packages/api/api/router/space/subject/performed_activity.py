@@ -61,4 +61,16 @@ def show(
     raise HTTPException(status_code=404)
 
 
+@router.patch("/{a_id:uuid}")
+def update(
+    space_id: UUID, subject_id: UUID, a_id: UUID, data: PerformedObservation, repo: PerformedActivityRepositoryDep
+):
+    obj = data.model_dump_sa()
+    for r in obj.resulted_performed_observation_result:
+        print(repr(r.value), type(r.value))
+    # for r in data.resulted_performed_observation_result:
+    #     print(r.value, type(r.value))
+    # return data
+
+
 openapi_tags = [{"name": "performed_activity"}]

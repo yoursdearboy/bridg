@@ -205,8 +205,10 @@ study_subject:
         resulted_performed_observation_result:
           - type: observation_result
             type_code: { code: "fullmoon", code_system: "demo" }
-            value: null
             value: 1991-01-01
+          - type: observation_result
+            type_code: { code: "somestr", code_system: "demo" }
+            value: "some 1991-01-01"
           - type: observation_result
             type_code: { code: "dx", code_system: "demo" }
             value: { code: "M2", code_system: "b365b97f-ff34-464c-9097-e7daec409f4c" }

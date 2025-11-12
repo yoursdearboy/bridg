@@ -20,7 +20,7 @@ GET {{base}}/defined_activity/{{cbc_id}}
 
 ### Show defined activity with results
 
-GET {{base}}/defined_activity/{{cbc_id}}?result=True
+GET {{base}}/defined_activity/{{cbc_id}}?result=1
 
 # Spaces
 
@@ -98,7 +98,139 @@ GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity
 
 #### Show subject activity (observation) results
 
-GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/8ac78da9-3c23-4770-94e9-ebaee8432b4b/result
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/8ac78da9-3c23-4770-94e9-ebaee8432b4b?result=1
+
+#### Update subject activity (observation) results
+
+PATCH {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/8ac78da9-3c23-4770-94e9-ebaee8432b4b
+
+{
+  "id": "8ac78da9-3c23-4770-94e9-ebaee8432b4b",
+  "reason_code": null,
+  "status_code": {
+    "data_type_name": "CD",
+    "code": "complete",
+    "code_system": "performed_activity.status_code",
+    "display_name": "Complete"
+  },
+  "status_date": "2024-11-04T12:00:00",
+  "context_for_study_site": null,
+  "containing_epoch": null,
+  "instantiated_defined_activity": null,
+  "resulted_performed_observation_result": [
+    {
+      "value": {
+        "data_type_name": "TS.DATE",
+        "value": "1991-01-01"
+      },
+      "id": "3611b2c6-92f0-4590-923c-d4d7e863cd25",
+      "type_code": {
+        "data_type_name": "CD",
+        "code": "fullmoon",
+        "code_system": "demo",
+        "display_name": "Last full moon date"
+      },
+      "value_null_flavor_reason": null,
+      "baseline_indicator": null,
+      "derived_indicator": null,
+      "created_date": null,
+      "reported_date": null,
+      "comment": null
+    },
+    {
+      "value": {
+        "data_type_name": "ST",
+        "value": "some 1991-01-01"
+      },
+      "id": "c81e6b57-0226-4c81-96cf-8267246928ca",
+      "type_code": {
+        "data_type_name": "CD",
+        "code": "somestr",
+        "code_system": "demo",
+        "display_name": null
+      },
+      "value_null_flavor_reason": null,
+      "baseline_indicator": null,
+      "derived_indicator": null,
+      "created_date": null,
+      "reported_date": null,
+      "comment": null
+    },
+    {
+      "value": {
+        "data_type_name": "CD",
+        "code": "M2",
+        "code_system": "b365b97f-ff34-464c-9097-e7daec409f4c",
+        "display_name": "Acute myeloblastic leukemia with maturation"
+      },
+      "id": "38d7a5d4-2f29-457b-a8ce-2192fc1c50ec",
+      "type_code": {
+        "data_type_name": "CD",
+        "code": "dx",
+        "code_system": "demo",
+        "display_name": "Diagnosis"
+      },
+      "value_null_flavor_reason": null,
+      "baseline_indicator": null,
+      "derived_indicator": null,
+      "created_date": null,
+      "reported_date": null,
+      "comment": null
+    },
+    {
+      "value": {
+        "data_type_name": "PQ",
+        "value": 8.0,
+        "unit": "10^9/l"
+      },
+      "id": "9e912b4b-dff6-409c-a6a1-cd6b7c08d4de",
+      "type_code": {
+        "data_type_name": "CD",
+        "code": "767002",
+        "code_system": "SNOMEDCT",
+        "display_name": "White blood cell count"
+      },
+      "value_null_flavor_reason": null,
+      "baseline_indicator": null,
+      "derived_indicator": null,
+      "created_date": null,
+      "reported_date": null,
+      "comment": null
+    },
+    {
+      "value": null,
+      "id": "a40b6719-7806-4537-8faa-91688ec23f24",
+      "type_code": {
+        "data_type_name": "CD",
+        "code": "30630007",
+        "code_system": "SNOMEDCT",
+        "display_name": "Neutrophil count"
+      },
+      "value_null_flavor_reason": null,
+      "baseline_indicator": null,
+      "derived_indicator": null,
+      "created_date": null,
+      "reported_date": null,
+      "comment": null
+    },
+    {
+      "value": null,
+      "id": "36693907-686a-4d28-ae2c-b9f73508ec2a",
+      "type_code": {
+        "data_type_name": "CD",
+        "code": "61928009",
+        "code_system": "SNOMEDCT",
+        "display_name": "Platelet count"
+      },
+      "value_null_flavor_reason": null,
+      "baseline_indicator": null,
+      "derived_indicator": null,
+      "created_date": null,
+      "reported_date": null,
+      "comment": null
+    }
+  ]
+}
 
 ## Persons
 
