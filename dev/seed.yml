@@ -187,7 +187,8 @@ study_subject:
       - id: 9866feeb-8c7c-4e79-9627-ff6e2c845e58 # FIXME: for sqlite
         assigning_study_site_protocol_version_relationship: *dgoi-aml-mrd-2018
     involving_performed_activity:
-      - type: observation
+      - id: ce3dd821-3a1b-41dd-a366-292c8c163a58
+        type: observation
         containing_epoch: *aml-mrd-2018-screening
         executing_study_protocol_version: *aml-mrd-2018
         instantiated_defined_activity: *ipt

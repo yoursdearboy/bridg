@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Annotated, List, Optional
 from uuid import UUID
 
@@ -5,8 +6,9 @@ import bridg
 from bridg.repository import Repository
 from fastapi import APIRouter, Depends, HTTPException
 
+from api.context import Context, get_context
 from api.db import get_repository
-from api.model import PerformedActivity, PerformedObservation
+from api.model import BaseModel, ConceptDescriptor, PerformedActivity, PerformedObservation, PerformedObservationResult
 
 router = APIRouter(prefix="/activity", tags=["performed_activity"])
 
@@ -58,6 +60,58 @@ def show(
         if result:
             return PerformedObservation.model_validate(obj)
         return PerformedActivity.model_validate(obj)
+    raise HTTPException(status_code=404)
+
+
+class PerformedActivityAttributes:
+    reason_code: Optional[ConceptDescriptor]
+    status_code: Optional[ConceptDescriptor]
+    status_date: Optional[datetime]
+    context_for_study_site_id: Optional[UUID]
+    containing_epoch_id: Optional[UUID]
+    instantiated_defined_activity_id: Optional[UUID]
+
+
+class PerformedActivityData(PerformedActivityAttributes, BaseModel[bridg.PerformedActivity]):
+    _sa = bridg.PerformedActivity
+
+
+class PerformedObservationData(PerformedActivityAttributes, BaseModel[bridg.PerformedObservation]):
+    _sa = bridg.PerformedObservation
+
+    resulted_performed_observation_result: List[PerformedObservationResult]
+
+
+@router.post("")
+def create(
+    space_id: UUID,
+    subject_id: UUID,
+    data: PerformedActivityData | PerformedObservationData,
+    repo: PerformedActivityRepositoryDep,
+    context: Annotated[Context, Depends(get_context)],
+) -> str:
+    obj = data.model_dump_sa(context=context)
+    obj.involved_subject_id = subject_id
+    obj = repo.create(obj)
+    return str(obj.id)
+
+
+@router.patch("/{a_id:uuid}")
+def update(
+    space_id: UUID,
+    subject_id: UUID,
+    a_id: UUID,
+    data: PerformedActivityData | PerformedObservationData,
+    repo: PerformedActivityRepositoryDep,
+    context: Annotated[Context, Depends(get_context)],
+) -> None:
+    if obj := repo.one_or_none(a_id):
+        obj = data.model_update_sa(obj, exclude={"resulted_performed_observation_result"}, context=context)  # type: ignore
+        obj.resulted_performed_observation_result = []
+        for r in data.resulted_performed_observation_result:
+            obj.resulted_performed_observation_result.append(r.model_dump_sa(context=context))
+        obj = repo.update(obj)
+        return
     raise HTTPException(status_code=404)
 
 
