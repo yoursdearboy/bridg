@@ -55,7 +55,7 @@ exports[`new page renders correctly 1`] = `
                     <input
                       aria-invalid="false"
                       class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
-                      data-path="performingBiologicEntity.name.family"
+                      data-path="performingBiologicEntity.primaryName.family"
                       data-variant="default"
                       id="mantine-7lzvq3tar"
                       value=""
@@ -79,7 +79,7 @@ exports[`new page renders correctly 1`] = `
                     <input
                       aria-invalid="false"
                       class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
-                      data-path="performingBiologicEntity.name.given"
+                      data-path="performingBiologicEntity.primaryName.given"
                       data-variant="default"
                       id="mantine-m75qc1lk3"
                       value=""
@@ -103,7 +103,7 @@ exports[`new page renders correctly 1`] = `
                     <input
                       aria-invalid="false"
                       class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
-                      data-path="performingBiologicEntity.name.patronymic"
+                      data-path="performingBiologicEntity.primaryName.patronymic"
                       data-variant="default"
                       id="mantine-0imsgk2bo"
                       value=""
