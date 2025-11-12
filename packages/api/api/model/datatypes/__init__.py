@@ -23,4 +23,6 @@ def model_validate(x):
         case str():
             return CharacterString(value=x)
         case dict():
+            if "data_type_name" not in x:
+                raise RuntimeError("Dictionary data doesn't match DataValue type")
             return x
