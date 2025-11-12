@@ -58,7 +58,7 @@ import {
  * 
  * @export
  */
-export type DataValue = { dataTypeName: 'CD' } & ConceptDescriptor | { dataTypeName: 'PQ' } & PhysicalQuantity | string | Date;
+export type DataValue = { dataTypeName: 'CD' } & ConceptDescriptor | { dataTypeName: 'PQ' } & PhysicalQuantity | { dataTypeName: 'ST' } & CharacterString | { dataTypeName: 'TS.DATE' } & DateValue | { dataTypeName: 'TS.DATETIME' } & DateTime;
 
 export function DataValueFromJSON(json: any): DataValue {
     return DataValueFromJSONTyped(json, false);
@@ -74,11 +74,11 @@ export function DataValueFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         case 'PQ':
             return Object.assign({}, PhysicalQuantityFromJSONTyped(json, true), { dataTypeName: 'PQ' } as const);
         case 'ST':
-            return CharacterStringFromJSONTyped(json, true)["value"];
+            return Object.assign({}, CharacterStringFromJSONTyped(json, true), { dataTypeName: 'ST' } as const);
         case 'TS.DATE':
-            return DateValueFromJSONTyped(json, true)["value"];
+            return Object.assign({}, DateValueFromJSONTyped(json, true), { dataTypeName: 'TS.DATE' } as const);
         case 'TS.DATETIME':
-            return DateTimeFromJSONTyped(json, true)["value"];
+            return Object.assign({}, DateTimeFromJSONTyped(json, true), { dataTypeName: 'TS.DATETIME' } as const);
         default:
             return json;
     }
@@ -92,19 +92,19 @@ export function DataValueToJSONTyped(value?: DataValue | null, ignoreDiscriminat
     if (value == null) {
         return value;
     }
-    if (typeof value === 'object') {
-        if (value['dataTypeName'] == 'CD') {
-            return ConceptDescriptorToJSON(Object.assign({}, value, { dataTypeName: 'CD' } as const));
-        }
-        if (value['dataTypeName'] == 'PQ') {
-            return PhysicalQuantityToJSON(Object.assign({}, value, { dataTypeName: 'PQ' } as const));
-        }
-        if (value instanceof Date) {
-            return DateValueToJSON(Object.assign({}, { value: value }, { dataTypeName: 'TS.DATE' } as const));
-            // return DateTimeToJSON(Object.assign({}, { value: value }, { dataTypeName: 'TS.DATETIME' } as const));
-        }
-    } else {
-        return CharacterStringToJSON(Object.assign({}, { value: value }, { dataTypeName: 'ST' } as const));
+    switch (value['dataTypeName']) {
+        case 'CD':
+            return Object.assign({}, ConceptDescriptorToJSON(value), { dataTypeName: 'CD' } as const);
+        case 'PQ':
+            return Object.assign({}, PhysicalQuantityToJSON(value), { dataTypeName: 'PQ' } as const);
+        case 'ST':
+            return Object.assign({}, CharacterStringToJSON(value), { dataTypeName: 'ST' } as const);
+        case 'TS.DATE':
+            return Object.assign({}, DateValueToJSON(value), { dataTypeName: 'TS.DATE' } as const);
+        case 'TS.DATETIME':
+            return Object.assign({}, DateTimeToJSON(value), { dataTypeName: 'TS.DATETIME' } as const);
+        default:
+            return value;
     }
 }
 
