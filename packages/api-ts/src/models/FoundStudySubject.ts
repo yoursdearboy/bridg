@@ -43,6 +43,14 @@ export function instanceOfFoundStudySubject(value: object): value is FoundStudyS
     return true;
 }
 
+/**
+ * Check if a given object is FoundStudySubject JSON.
+ */
+export function isFoundStudySubjectJSON(value: object): boolean {
+    if (!('performing_biologic_entity' in value) || value['performing_biologic_entity'] === undefined) return false;
+    return true;
+}
+
 export function FoundStudySubjectFromJSON(json: any): FoundStudySubject {
     return FoundStudySubjectFromJSONTyped(json, false);
 }

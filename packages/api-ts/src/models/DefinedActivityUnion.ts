@@ -15,6 +15,7 @@
 import type { DefinedActivity } from './DefinedActivity';
 import {
     instanceOfDefinedActivity,
+    isDefinedActivityJSON,
     DefinedActivityFromJSON,
     DefinedActivityFromJSONTyped,
     DefinedActivityToJSON,
@@ -22,6 +23,7 @@ import {
 import type { DefinedObservation } from './DefinedObservation';
 import {
     instanceOfDefinedObservation,
+    isDefinedObservationJSON,
     DefinedObservationFromJSON,
     DefinedObservationFromJSONTyped,
     DefinedObservationToJSON,
@@ -45,10 +47,10 @@ export function DefinedActivityUnionFromJSONTyped(json: any, ignoreDiscriminator
     if (typeof json !== 'object') {
         return json;
     }
-    if (instanceOfDefinedObservation(json)) {
+    if (isDefinedObservationJSON(json)) {
         return DefinedObservationFromJSONTyped(json, true);
     }
-    if (instanceOfDefinedActivity(json)) {
+    if (isDefinedActivityJSON(json)) {
         return DefinedActivityFromJSONTyped(json, true);
     }
     return {} as any;

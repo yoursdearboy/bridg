@@ -97,12 +97,12 @@ export interface PerformedActivity {
  */
 export function instanceOfPerformedActivity(value: object): value is PerformedActivity {
     if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('reason_code' in value) || value['reason_code'] === undefined) return false;
-    if (!('status_code' in value) || value['status_code'] === undefined) return false;
-    if (!('status_date' in value) || value['status_date'] === undefined) return false;
-    if (!('context_for_study_site' in value) || value['context_for_study_site'] === undefined) return false;
-    if (!('containing_epoch' in value) || value['containing_epoch'] === undefined) return false;
-    if (!('instantiated_defined_activity' in value) || value['instantiated_defined_activity'] === undefined) return false;
+    if (!('reasonCode' in value) || value['reasonCode'] === undefined) return false;
+    if (!('statusCode' in value) || value['statusCode'] === undefined) return false;
+    if (!('statusDate' in value) || value['statusDate'] === undefined) return false;
+    if (!('contextForStudySite' in value) || value['contextForStudySite'] === undefined) return false;
+    if (!('containingEpoch' in value) || value['containingEpoch'] === undefined) return false;
+    if (!('instantiatedDefinedActivity' in value) || value['instantiatedDefinedActivity'] === undefined) return false;
     return true;
 }
 
