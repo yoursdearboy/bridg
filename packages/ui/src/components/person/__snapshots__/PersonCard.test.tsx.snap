@@ -49,7 +49,7 @@ exports[`PersonCard > matches snapshot 1`] = `
               <span
                 class="m_811560b9 mantine-Button-label"
               >
-                Go to
+                Go to person page
               </span>
             </span>
           </button>

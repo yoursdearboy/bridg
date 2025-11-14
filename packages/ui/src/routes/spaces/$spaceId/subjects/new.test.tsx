@@ -7,25 +7,11 @@ it("new page renders correctly", async () => {
   vi.spyOn(api.sites, "indexSpacesSpaceIdSitesGet").mockResolvedValue([
     {
       id: "6a8e6e2b-9537-408f-bd92-a5b83ad2e750",
-      executedStudyProtocolVersion: {
-        id: "",
-        label: null,
-      },
-      executingStudySite: {
-        id: "",
-        label: "DGOI",
-      },
+      executingStudySite: "DGOI",
     },
     {
       id: "3a819069-2aa2-49df-a979-e4237f77cf6e",
-      executedStudyProtocolVersion: {
-        id: "",
-        label: null,
-      },
-      executingStudySite: {
-        id: "",
-        label: null,
-      },
+      executingStudySite: "EKB",
     },
   ]);
   const lookupSpy = vi
