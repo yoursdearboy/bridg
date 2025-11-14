@@ -13,7 +13,12 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { type DefinedActivity, type PerformedObservation } from "api-ts";
+import {
+  instanceOfDefinedObservation,
+  instanceOfPerformedObservation,
+  type DefinedActivity,
+  type PerformedObservation,
+} from "api-ts";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
@@ -54,14 +59,19 @@ function EditObservationComponent() {
       )}
       {!isError && (
         <>
-          {/* TODO: replace with function */}
-          {activity.resultedPerformedObservationResult ? (
-            <EditObservationWrapper
-              spaceId={spaceId}
-              subjectId={subjectId}
-              activity={activity}
-            />
-          ) : null}
+          {instanceOfPerformedObservation(activity) ? (
+            <>
+              <p>here</p>
+              <EditObservationWrapper
+                spaceId={spaceId}
+                subjectId={subjectId}
+                activity={activity as PerformedObservation}
+                definedActivity={activity.instantiatedDefinedActivity!}
+              />
+            </>
+          ) : (
+            ""
+          )}
         </>
       )}
     </>
@@ -113,10 +123,9 @@ const EditObservationWrapper = ({
                   {t("errorMessage", { error: error.message })}
                 </Text>
               )}
-              {!isError && (
+              {!isPending && !isError && (
                 <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  {/* TODO: replace with function */}
-                  {definedActivityRecord?.producedDefinedObservationResult ? (
+                  {instanceOfDefinedObservation(definedActivityRecord) ? (
                     <ActivityFormWrapper
                       spaceId={spaceId}
                       subjectId={subjectId}

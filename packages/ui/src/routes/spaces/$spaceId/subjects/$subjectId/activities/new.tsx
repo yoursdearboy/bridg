@@ -10,6 +10,7 @@ import {
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import {
+  instanceOfDefinedObservation,
   type DefinedObservation,
   type DefinedObservationResult,
   type PerformedObservationResult,
@@ -58,8 +59,7 @@ function NewActivityComponent() {
       )}
       {!isError && (
         <>
-          {/* TODO: replace with function */}
-          {activity.producedDefinedObservationResult ? (
+          {instanceOfDefinedObservation(activity) ? (
             <NewActivityWrapper
               spaceId={spaceId}
               subjectId={subjectId}

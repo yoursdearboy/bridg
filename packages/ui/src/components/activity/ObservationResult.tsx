@@ -12,7 +12,8 @@ import {
   type DefinedObservationResult,
   type PerformedObservationResult,
   type PhysicalQuantity,
-  type Value,
+  type DataValue,
+  type DateValue,
 } from "api-ts";
 import api from "@/api";
 
@@ -34,7 +35,7 @@ export const ObservationResult = ({
 
 interface InputProps {
   label: string | null;
-  value: Value | null;
+  value: DataValue | null;
   config: DefinedObservationResult;
 }
 
@@ -57,7 +58,7 @@ const Input = ({ label, value, config }: InputProps) => {
         />
       );
     case "TS.DATE":
-      return <InputDate label={label} value={value as Date} />;
+      return <InputDate label={label} value={value as DateValue} />;
     case "TS.DATETIME":
       throw new Error("not implemented");
     default:
@@ -69,7 +70,7 @@ const InputText = ({
   label,
 }: {
   label: string | null;
-  value: Value | null;
+  value: DataValue | null;
 }) => {
   return <TextInput label={label} />;
 };
@@ -92,7 +93,6 @@ const ConceptDescriptorSelect = ({
   });
   const options = (data || []).map((cd) => ({
     label: cd.displayName || cd.code,
-    // FIXME: code must be defined
     value: cd.code,
   }));
   return (
@@ -138,7 +138,9 @@ const InputDate = ({
   value,
 }: {
   label: string | null;
-  value: Date | null;
+  value: DateValue | null;
 }) => {
-  return <DateInput label={label} valueFormat="L" clearable value={value} />;
+  return (
+    <DateInput label={label} valueFormat="L" clearable value={value?.value} />
+  );
 };
