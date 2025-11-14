@@ -58,6 +58,7 @@ exports[`new page renders correctly 1`] = `
                       data-path="performingBiologicEntity.primaryName.family"
                       data-variant="default"
                       id="mantine-7lzvq3tar"
+                      value=""
                     />
                   </div>
                 </div>
@@ -81,6 +82,7 @@ exports[`new page renders correctly 1`] = `
                       data-path="performingBiologicEntity.primaryName.given"
                       data-variant="default"
                       id="mantine-m75qc1lk3"
+                      value=""
                     />
                   </div>
                 </div>
@@ -104,6 +106,7 @@ exports[`new page renders correctly 1`] = `
                       data-path="performingBiologicEntity.primaryName.patronymic"
                       data-variant="default"
                       id="mantine-0imsgk2bo"
+                      value=""
                     />
                   </div>
                 </div>
