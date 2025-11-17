@@ -43,4 +43,6 @@ class ConceptDescriptorService:
         cd = ConceptDescriptor(code=code, code_system=code_system, display_name=display_name)
         key = self._key(code, code_system)
         self._cache[key] = cd
+        # TODO: If I commit something with this code, it would be saved, right?
+        self._session.add(cd)
         return cd
