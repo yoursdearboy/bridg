@@ -40,13 +40,13 @@ class ObservationResult:
     def value(self) -> Optional[DataValue]:
         if self.value_cd:
             return self.value_cd
-        if self.value_pq and self.value_pq.unit and self.value_pq.value:
+        elif self.value_pq and self.value_pq.unit and self.value_pq.value:
             return self.value_pq
-        if self.value_datetime:
+        elif self.value_datetime:
             return self.value_datetime
-        if self.value_date:
+        elif self.value_date:
             return self.value_date
-        if self.value_st:
+        elif self.value_st:
             return self.value_st
 
     @value.setter
@@ -54,11 +54,11 @@ class ObservationResult:
         self._reset()
         if isinstance(x, ConceptDescriptor):
             self.value_cd = x
-        if isinstance(x, PhysicalQuantity):
+        elif isinstance(x, PhysicalQuantity):
             self.value_pq = x
-        if isinstance(x, datetime):
+        elif isinstance(x, datetime):
             self.value_datetime = x
-        if isinstance(x, date):
+        elif isinstance(x, date):
             self.value_date = x
-        if isinstance(x, str):
+        elif isinstance(x, str):
             self.value_st = x
