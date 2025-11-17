@@ -1,1 +1,4 @@
+from .performed_activity import PerformedActivityFactory
+from .performed_observation import PerformedObservationFactory
+from .performed_observation_result import PerformedObservationResultFactory
 from .study_site import StudySiteFactory
