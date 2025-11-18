@@ -8,7 +8,7 @@ from .db import SessionLocal
 
 session = SessionLocal()
 
-bridg.converter.cd_service.set(bridg.datatype.ConceptDescriptorService(session))
+bridg.converter.terminology.set(bridg.TerminologyService(session))
 
 Root = TypedDict(
     "Root",
