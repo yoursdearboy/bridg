@@ -62,16 +62,32 @@ def test_performed_activity_create():
     )
     assert response.status_code == 200
     assert omit_id(response.json()) == omit_id(performed_activity_dict(act))
-    response = client.post(
-        f"/spaces/{space.id}/subjects/{ss.id}/activity",
+
+
+def test_performed_activity_update():
+    space = StudyProtocolVersionFactory.create_sync()
+    sspvr = space.executing_study_site_protocol_version_relationship[0]
+    ss = StudySubjectFactory.create_sync(
+        performing_biologic_entity=PersonFactory.build(),
+        performing_organization=None,
+        assigned_study_site_protocol_version_relationship=[sspvr],
+    )
+    act = PerformedActivityFactory.create_sync(
+        executing_study_protocol_version=space,
+        involved_subject=ss,
+    )
+    patch = PerformedActivityFactory.build()
+    response = client.patch(
+        f"/spaces/{space.id}/subjects/{ss.id}/activity/{act.id}",
         json={
-            "reason_code": _or(cd_dict, a.reason_code),
-            "status_code": _or(cd_dict, a.status_code),
-            "status_date": _or(date_str, a.status_date),
-            "context_for_study_site_id": a.context_for_study_site_id,
-            "containing_epoch_id": a.containing_epoch_id,
-            "instantiated_defined_activity_id": a.instantiated_defined_activity_id,
+            "reason_code": _or(cd_dict, patch.reason_code),
+            "status_code": _or(cd_dict, patch.status_code),
+            "status_date": _or(date_str, patch.status_date),
+            "context_for_study_site_id": patch.context_for_study_site_id,
+            "containing_epoch_id": patch.containing_epoch_id,
+            "instantiated_defined_activity_id": patch.instantiated_defined_activity_id,
         },
     )
     assert response.status_code == 200
-    assert omit_id(response.json()) == omit_id(performed_activity_dict(a))
+    assert response.json()["id"] == str(act.id)
+    assert omit_id(response.json()) == omit_id(performed_activity_dict(patch))
