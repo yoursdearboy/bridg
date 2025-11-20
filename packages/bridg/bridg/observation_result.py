@@ -29,9 +29,7 @@ class ObservationResult:
 
     def _reset(self):
         self.value_cd = None
-        if self.value_pq:
-            self.value_pq.value = None
-            self.value_pq.unit = None
+        self.value_pq = None
         self.value_datetime = None
         self.value_date = None
         self.value_st = None

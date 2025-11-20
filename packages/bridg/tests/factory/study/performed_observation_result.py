@@ -1,6 +1,6 @@
 import builtins
 import datetime
-from typing import Any, get_args
+from typing import Any, Type, get_args
 
 from polyfactory import Ignore, Use
 
@@ -9,6 +9,8 @@ from bridg import PerformedObservationResult
 
 from ..base import BaseFactory
 from ..datatype import ConceptDescriptorFactory, PhysicalQuantityFactory
+
+NOT_SET = object()
 
 
 class PerformedObservationResultFactory(BaseFactory[PerformedObservationResult]):
@@ -39,12 +41,16 @@ class PerformedObservationResultFactory(BaseFactory[PerformedObservationResult])
     value_st = Ignore()
 
     @classmethod
-    def build(cls, *_: Any, **kwargs: Any) -> PerformedObservationResult:
+    def build(cls, *_: Any, data_type: Type | NOT_SET = NOT_SET, **kwargs: Any) -> PerformedObservationResult:
         obj = super().build(**kwargs)
-        if cls.__random__.random() < 0.1:
-            return obj
-        data_type = cls.__random__.choice(get_args(bridg.DataValue))
+        if data_type == NOT_SET:
+            if cls.__random__.random() > 0.1:
+                data_type = cls.__random__.choice(get_args(bridg.DataValue))
+            else:
+                data_type = None
         match data_type:
+            case None:
+                obj.value = None
             case bridg.ConceptDescriptor:
                 obj.value = ConceptDescriptorFactory.build()
             case bridg.PhysicalQuantity:
@@ -55,4 +61,6 @@ class PerformedObservationResultFactory(BaseFactory[PerformedObservationResult])
                 obj.value = cls.__faker__.date_this_century()
             case builtins.str:
                 obj.value = cls.__faker__.sentence(3, variable_nb_words=True)
+            case _:
+                raise RuntimeError("Unknown data type")
         return obj
