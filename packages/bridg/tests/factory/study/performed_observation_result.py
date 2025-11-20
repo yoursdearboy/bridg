@@ -10,7 +10,9 @@ from bridg import PerformedObservationResult
 from ..base import BaseFactory
 from ..datatype import ConceptDescriptorFactory, PhysicalQuantityFactory
 
-NOT_SET = object()
+
+class NOT_SET:
+    pass
 
 
 class PerformedObservationResultFactory(BaseFactory[PerformedObservationResult]):
@@ -41,7 +43,7 @@ class PerformedObservationResultFactory(BaseFactory[PerformedObservationResult])
     value_st = Ignore()
 
     @classmethod
-    def build(cls, *_: Any, data_type: Type | NOT_SET = NOT_SET, **kwargs: Any) -> PerformedObservationResult:
+    def build(cls, *_: Any, data_type: None | Type | NOT_SET = NOT_SET, **kwargs: Any) -> PerformedObservationResult:
         obj = super().build(**kwargs)
         if data_type == NOT_SET:
             if cls.__random__.random() > 0.1:
