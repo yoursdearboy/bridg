@@ -3,12 +3,8 @@ from typing import Any, Dict, List, TypedDict
 import bridg
 import bridg.converter
 import yaml
-
-from .db import SessionLocal
-
-session = SessionLocal()
-
-bridg.converter.terminology.set(bridg.TerminologyService(session))
+from common.db import SessionLocal
+from common.env import load_env
 
 Root = TypedDict(
     "Root",
@@ -42,6 +38,9 @@ def structure(data: Dict[str, List[Any]]):
 
 
 def main():
+    load_env()
+    session = SessionLocal()
+    bridg.converter.terminology.set(bridg.TerminologyService(session))
     with open("dev/seed.yml") as f:
         data = yaml.load(f, yaml.FullLoader)
     objects = structure(data)
