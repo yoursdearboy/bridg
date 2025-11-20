@@ -109,15 +109,23 @@ def test_performed_observation_update():
         resulted_performed_observation_result=PerformedObservationResultFactory.batch(20)
     )
     patch = PerformedObservationFactory.build()
-    for i, old in enumerate(list(pobs.resulted_performed_observation_result)):
-        new = PerformedObservationResultFactory.build()
+    for old in pobs.resulted_performed_observation_result:
         x = random()
         if x < 0.25:
             patch.resulted_performed_observation_result.append(old)
         elif x < 0.50:
-            patch.resulted_performed_observation_result.append(old)
-            old.value = new.value
+            new = PerformedObservationResultFactory.build(
+                type_code=old.type_code,
+                value_null_flavor_reason=old.value_null_flavor_reason,
+                baseline_indicator=old.baseline_indicator,
+                derived_indicator=old.derived_indicator,
+                created_date=old.created_date,
+                reported_date=old.reported_date,
+                comment=old.comment,
+            )
+            patch.resulted_performed_observation_result.append(new)
         elif x < 0.75:
+            new = PerformedObservationResultFactory.build()
             patch.resulted_performed_observation_result.append(new)
         else:
             pass
