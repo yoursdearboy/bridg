@@ -2,16 +2,16 @@ from typing import Annotated, List, Optional
 from uuid import UUID
 
 import bridg
-from bridg.repository import Repository
 from fastapi import APIRouter, Depends, HTTPException
 
+from api.context import Context, get_context
 from api.db import get_repository
-from api.model import PerformedActivity, PerformedObservation
+from api.model import PerformedActivity, PerformedActivityData, PerformedObservation, PerformedObservationData
 
 router = APIRouter(prefix="/activity", tags=["performed_activity"])
 
 
-class PerformedActivityRepository(Repository[bridg.PerformedActivity]):
+class PerformedActivityRepository(bridg.Repository[bridg.PerformedActivity]):
     _sa = bridg.PerformedActivity
 
 
@@ -26,27 +26,7 @@ def index(space_id: UUID, subject_id: UUID, repo: PerformedActivityRepositoryDep
     return [PerformedActivity.model_validate(obj) for obj in objs]
 
 
-@router.get(
-    "/{a_id:uuid}",
-    responses={
-        "200": {
-            "description": "Successful Response",
-            "content": {
-                "application/json": {
-                    "schema": {
-                        "anyOf": None,
-                        "oneOf": [
-                            {"$ref": "#/components/schemas/PerformedActivity"},
-                            {"$ref": "#/components/schemas/PerformedObservation"},
-                            {"type": "null"},
-                        ],
-                        "title": "Response Show Performed Activity  A Id  Get",
-                    }
-                }
-            },
-        }
-    },
-)
+@router.get("/{a_id:uuid}")
 def show(
     space_id: UUID,
     subject_id: UUID,
@@ -58,6 +38,44 @@ def show(
         if result:
             return PerformedObservation.model_validate(obj)
         return PerformedActivity.model_validate(obj)
+    raise HTTPException(status_code=404)
+
+
+@router.post("")
+def create(
+    space_id: UUID,
+    subject_id: UUID,
+    data: PerformedObservationData | PerformedActivityData,
+    repo: PerformedActivityRepositoryDep,
+    context: Annotated[Context, Depends(get_context)],
+) -> PerformedActivity | PerformedObservation:
+    obj = data.model_dump_sa(context=context)
+    obj.involved_subject_id = subject_id
+    obj = repo.create(obj)
+    match data:
+        case PerformedActivityData():
+            return PerformedActivity.model_validate(obj)
+        case PerformedObservationData():
+            return PerformedObservation.model_validate(obj)
+
+
+@router.patch("/{a_id:uuid}")
+def update(
+    space_id: UUID,
+    subject_id: UUID,
+    a_id: UUID,
+    data: PerformedObservationData | PerformedActivityData,
+    repo: PerformedActivityRepositoryDep,
+    context: Annotated[Context, Depends(get_context)],
+) -> PerformedActivity | PerformedObservation:
+    if obj := repo.one_or_none(a_id):
+        obj = data.model_update_sa(obj, context=context)  # type: ignore
+        obj = repo.update(obj)
+        match data:
+            case PerformedActivityData():
+                return PerformedActivity.model_validate(obj)
+            case PerformedObservationData():
+                return PerformedObservation.model_validate(obj)
     raise HTTPException(status_code=404)
 
 
