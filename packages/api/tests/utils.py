@@ -2,10 +2,17 @@ from datetime import date, datetime
 from enum import Enum
 from typing import Any, Callable, Optional, TypeVar, overload
 
-from bridg import ConceptDescriptor
-from bridg.datatype import DataValue, PhysicalQuantity
-from bridg.protocol import Epoch
-from bridg.study import PerformedObservationResult, StudySite
+from bridg import (
+    ConceptDescriptor,
+    DataValue,
+    EntityName,
+    Epoch,
+    PerformedObservationResult,
+    Person,
+    PhysicalQuantity,
+    StudySite,
+    StudySubject,
+)
 
 T = TypeVar("T")
 R = TypeVar("R")
@@ -90,6 +97,42 @@ def datavalue_dict(x: DataValue):
             return {"data_type_name": "TS.DATE", "value": x.isoformat()}
         case str():
             return {"data_type_name": "ST", "value": x}
+
+
+def entity_name_dict(x: EntityName):
+    return {
+        "id": str(x.id),
+        "use": x.use,
+        "family": x.family,
+        "given": x.given,
+        "middle": x.middle,
+        "patronymic": x.patronymic,
+        "prefix": x.prefix,
+        "suffix": x.suffix,
+        "label": f"{x.given} {x.family}",
+    }
+
+
+def person_dict(x: Person):
+    return {
+        "id": str(x.id),
+        "administrative_gender_code": _or(enum_str, x.administrative_gender_code),
+        "birth_date": _or(date_str, x.birth_date),
+        "death_date": _or(date_str, x.death_date),
+        "death_date_estimated_indicator": x.death_date_estimated_indicator,
+        "death_indicator": x.death_indicator,
+        "primary_name": _or(entity_name_dict, x.primary_name),
+    }
+
+
+def study_subject_dict(x: StudySubject):
+    return {
+        "id": _or(str, x.id),
+        "status": _or(enum_str, x.status),
+        "status_date": _or(date_str, x.status_date),
+        "performing_biologic_entity": _or(person_dict, x.performing_biologic_entity),
+        "performing_organization": None,
+    }
 
 
 def studysite_dict(x: StudySite):

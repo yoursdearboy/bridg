@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from api.main import app
 from tests.factory import EntityNameFactory, PersonFactory
+from tests.utils import entity_name_dict, omit
 
 client = TestClient(app)
 
@@ -12,20 +13,7 @@ def test_person_name_index():
     person = PersonFactory.create_sync(name=name)
     response = client.get(f"/persons/{person.id}/names")
     assert response.status_code == 200
-    assert response.json() == [
-        {
-            "id": str(en.id),
-            "label": str(en),
-            "use": None,
-            "family": en.family,
-            "given": en.given,
-            "middle": en.middle,
-            "patronymic": en.patronymic,
-            "prefix": en.prefix,
-            "suffix": en.suffix,
-        }
-        for en in name
-    ]
+    assert response.json() == [entity_name_dict(en) for en in name]
 
 
 def test_person_name_create():
@@ -44,12 +32,7 @@ def test_person_name_create():
     assert response.status_code == 200
     assert len(person.name) == 1
     obj = person.name[0]
-    assert data.items() <= obj.__dict__.items()
-    assert response.json() == {
-        "id": str(obj.id),
-        "label": str(obj),
-        **data,
-    }
+    assert response.json() == entity_name_dict(obj)
 
 
 def test_person_name_update(session: Session):
@@ -66,16 +49,12 @@ def test_person_name_update(session: Session):
         "suffix": en2.suffix,
     }
     response = client.patch(f"/persons/{person.id}/names/{en.id}", json=patch)
-    session.expire_all()
     assert response.status_code == 200
     assert len(person.name) == 1
     obj = person.name[0]
-    assert patch.items() <= obj.__dict__.items()
-    assert response.json() == {
-        "id": str(obj.id),
-        "label": str(obj),
-        **patch,
-    }
+    session.refresh(obj)
+    assert patch == omit(["id", "label"], entity_name_dict(obj))
+    assert response.json() == entity_name_dict(obj)
 
 
 def test_person_name_delete(session: Session):
