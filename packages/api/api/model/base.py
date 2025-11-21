@@ -1,5 +1,4 @@
-import typing
-from typing import Generic, TypeVar
+from typing import Any, Generic, Set, TypeVar
 
 from pydantic import BaseModel as PydanticBaseModel
 from pydantic import ConfigDict, PrivateAttr
@@ -7,39 +6,34 @@ from pydantic import ConfigDict, PrivateAttr
 T = TypeVar("T")
 
 
-# FIXME: Rewrite properly
+def omit(keys, x: dict) -> dict:
+    return {k: v for k, v in x.items() if k not in keys}
+
+
+def dump(x: Any, context: Any = None) -> Any:
+    match x:
+        case dict():
+            return {k: dump(v, context=context) for k, v in x.items()}
+        case list():
+            return [dump(v, context=context) for v in x]
+        case BaseModel():
+            return x.model_dump_sa(context=context)
+        case _:
+            return x
+
+
 class BaseModel(PydanticBaseModel, Generic[T]):
     model_config = ConfigDict(from_attributes=True, arbitrary_types_allowed=True)
     _sa: type[T] = PrivateAttr()
 
-    def model_dump_sa(self, exclude={}) -> T:
-        def dump(k, v):
-            if v is None:
-                return (k, v)
-            annotation = self.model_fields[k].annotation
-            # FIXME: Use types of SA model
-            origin = typing.get_origin(annotation)
-            args = typing.get_args(annotation)
-            if isinstance(v, list):
-                if len(v) == 0:
-                    return (k, v)
-                elif isinstance(v[0], BaseModel):
-                    return (k, [x.model_dump_sa() for x in v])
-                else:
-                    return (k, v)
-            if origin is typing.Union and type(None) in args and issubclass(args[0], BaseModel):
-                return (k, v.model_dump_sa())
-            return (k, v)
-
-        data = dict(self)
-        data = dict(dump(k, v) for k, v in data.items() if k not in exclude)
+    def model_dump_sa(self, exclude: Set = set(), context: Any = None) -> T:
+        data = dump(dict(self), context=context)
+        data = omit(exclude, data)
         return self._sa(**data)
 
-    # FIXME: make it recursive
-    def model_update_sa(self, obj: T, exclude=set()) -> T:
-        data = dict(self)
-        for k, v in data.items():
-            if k in exclude:
-                continue
-            setattr(obj, k, v)
+    def model_update_sa(self, obj: T, exclude=set(), context: Any | None = None) -> T:
+        data = dump(dict(self), context=context)
+        data = omit(exclude, data)
+        for key, value in data.items():
+            setattr(obj, key, value)
         return obj
