@@ -11,12 +11,11 @@ from sqlalchemy.orm.collections import InstrumentedList
 from toolz import dissoc
 
 import bridg
-import bridg.datatype
 
 from .db import Base
 
 converter = Converter()
-cd_service: ContextVar[bridg.datatype.ConceptDescriptorService] = ContextVar("cd_service")
+terminology: ContextVar[bridg.TerminologyService] = ContextVar("terminology")
 
 
 class Cache:
@@ -164,20 +163,20 @@ def uuid_hook(x: str, _) -> UUID:
 
 
 @converter.register_structure_hook
-def cd_hook(x, _) -> bridg.datatype.ConceptDescriptor:
-    return cd_service.get().get_or_create(**x)
+def cd_hook(x, _) -> bridg.ConceptDescriptor:
+    return terminology.get().get_or_create(**x)
 
 
 # FIXME: that's inference is weird
 @converter.register_structure_hook
-def datavalue_hook(x, cls) -> Optional[bridg.datatype.DataValue]:
+def datavalue_hook(x, cls) -> Optional[bridg.DataValue]:
     if x is None:
         return None
     if isinstance(x, dict):
         if "unit" in x:
-            return bridg.datatype.PhysicalQuantity(**x)
+            return bridg.PhysicalQuantity(**x)
         if "code_system" in x:
-            return converter.structure(x, bridg.datatype.ConceptDescriptor)
+            return converter.structure(x, bridg.ConceptDescriptor)
     if isinstance(x, datetime):
         return x
     if isinstance(x, date):

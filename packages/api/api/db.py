@@ -1,17 +1,9 @@
-import os
-
+from common.db import SessionLocal
 from common.env import load_env
 from fastapi import Depends
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm import Session
 
-load_env(prefix="BRIDG")
-
-DATABASE_URI = os.environ["BRIDG_SQLALCHEMY_DATABASE_URI"]
-
-engine = create_engine(DATABASE_URI)
-
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+load_env()
 
 
 def get_db():

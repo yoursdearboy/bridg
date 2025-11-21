@@ -12,7 +12,7 @@ from ..protocol import DefinedActivity, Epoch, StudyProtocolVersion
 
 class PerformedActivity(Activity):
     __tablename__ = "performed_activity"
-    __mapper_args__ = {"concrete": True, "polymorphic_abstract": True, "polymorphic_on": "type"}
+    __mapper_args__ = {"concrete": True, "polymorphic_identity": "activity", "polymorphic_on": "type"}
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     type: Mapped[str]

@@ -14,7 +14,8 @@ class DefinedObservation(DefinedActivity):
     __mapper_args__ = {"polymorphic_identity": "observation"}
 
     produced_defined_observation_result: Mapped[List[DefinedObservationResult]] = relationship(
-        back_populates="producing_defined_observation"
+        back_populates="producing_defined_observation",
+        cascade="all, delete-orphan",
     )
     """
     Each DefinedObservationResult always is a result of one DefinedObservation.
