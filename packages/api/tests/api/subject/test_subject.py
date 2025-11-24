@@ -81,6 +81,35 @@ def test_subject_create(session: Session):
     assert response.json() == study_subject_dict(obj)
 
 
+def test_subject_update():
+    space = StudyProtocolVersionFactory.create_sync()
+    sspvr = space.executing_study_site_protocol_version_relationship[0]
+    s = StudySubjectFactory.create_sync(
+        performing_biologic_entity=PersonFactory.build(),
+        performing_organization=None,
+        assigned_study_site_protocol_version_relationship=[sspvr],
+    )
+    patch = StudySubjectFactory.build(
+        performing_biologic_entity=None,
+        performing_organization=None,
+    )
+    response = client.patch(
+        f"/spaces/{space.id}/subjects/{s.id}",
+        json={
+            "status": _or(enum_str, patch.status),
+            "status_date": _or(date_str, patch.status_date),
+        },
+    )
+    assert response.status_code == 200
+    assert len(sspvr.assigned_study_subject) == 1
+    obj = sspvr.assigned_study_subject[0]
+    assert response.json() == {
+        **study_subject_dict(obj),
+        "status": _or(enum_str, patch.status),
+        "status_date": _or(date_str, patch.status_date),
+    }
+
+
 def test_lookup(session: Session):
     session.query(StudySubject).delete()
     session.query(BiologicEntity).delete()

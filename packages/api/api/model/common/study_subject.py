@@ -15,3 +15,10 @@ class StudySubject(BaseModel):
     status_date: Optional[datetime]
     performing_biologic_entity: Optional[Person]
     performing_organization: Optional[Organization]
+
+
+class StudySubjectData(BaseModel[bridg.StudySubject]):
+    _sa = bridg.StudySubject
+
+    status: Optional[bridg.Status]
+    status_date: Optional[datetime]
