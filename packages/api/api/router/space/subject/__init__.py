@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from api.db import get_db, get_repository
-from api.model import BaseModel, Person, PersonData, StudySubject
+from api.model import BaseModel, Person, PersonData, StudySubject, StudySubjectData
 from api.service.subject import StudySubjectRepository
 
 from . import performed_activity
@@ -68,7 +68,7 @@ def index(space_id: UUID, repo: StudySubjectRepositoryDep) -> List[StudySubject]
 
 
 @router.get("/{subject_id:uuid}")
-def show(space_id: UUID, subject_id: UUID, repo: StudySubjectRepositoryDep) -> Optional[StudySubject]:
+def show(space_id: UUID, subject_id: UUID, repo: StudySubjectRepositoryDep) -> StudySubject:
     if obj := repo.one_or_none(subject_id):
         return StudySubject.model_validate(obj)
     raise HTTPException(status_code=404)
@@ -80,6 +80,15 @@ def create(
 ) -> StudySubject:
     obj = repo.create(data.model_dump_sa(db))
     return StudySubject.model_validate(obj)
+
+
+@router.patch("/{subject_id:uuid}")
+def update(space_id: UUID, subject_id: UUID, data: StudySubjectData, repo: StudySubjectRepositoryDep) -> StudySubject:
+    if obj := repo.one_or_none(subject_id):
+        obj = data.model_update_sa(obj)
+        obj = repo.update(obj)
+        return StudySubject.model_validate(obj)
+    raise HTTPException(status_code=404)
 
 
 @router.post("/lookup")
