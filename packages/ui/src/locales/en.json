@@ -57,6 +57,7 @@
       "deathDate": "Death date",
       "deathDateEstimatedIndicator": "Death date estimated indicator",
       "deathIndicator": "Death indicator",
+      "defaultLabel": "Unnamed person",
       "id": "ID",
       "primaryName": "Primary name"
     },
@@ -82,7 +83,7 @@
     },
     "PersonShowPage": {
       "actions": "Actions",
-      "breadcrumbDefault": "Anonymous person",
+      "breadcrumb": "Person info",
       "rename": "Rename"
     },
     "PostalAddress": {
@@ -153,7 +154,7 @@
     },
     "SubjectShowPage": {
       "back": "Back to list",
-      "breadcrumbDefault": "Anonymous subject",
+      "breadcrumb": "Subject info",
       "redirect": "Redirect",
       "redirectModalTitle": "Copy subject to another study"
     },
