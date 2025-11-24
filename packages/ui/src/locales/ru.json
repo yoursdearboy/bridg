@@ -86,7 +86,6 @@
     "PersonCard": {
       "deceased": "Умерший",
       "notDeceased": "Живой",
-      "notDeceased": "Жив",
       "dateNotSpecified": "Дата не указана"
     },
     "NamesCard": {
