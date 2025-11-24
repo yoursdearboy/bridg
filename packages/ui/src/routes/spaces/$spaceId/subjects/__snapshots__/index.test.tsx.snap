@@ -128,12 +128,13 @@ exports[`index pages renders correctly 1`] = `
                 >
                   <td
                     class="m_4e7aa4ef mantine-Table-td"
+                    style="max-width: 100px; white-space: nowrap; overflow: hidden;"
                   >
-                    <p
-                      class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    <span
+                      title="8498d20d-6c84-4f09-96c5-5af3a557b1e3"
                     >
-                      8498d20d-6c84-4f09-96c5-5af3a557b1e3
-                    </p>
+                      8498d20d…
+                    </span>
                   </td>
                   <td
                     class="m_4e7aa4ef mantine-Table-td"
@@ -174,7 +175,7 @@ exports[`index pages renders correctly 1`] = `
                     <p
                       class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                     >
-                      eligible
+                      Eligible
                     </p>
                   </td>
                   <td
@@ -232,12 +233,13 @@ exports[`index pages renders correctly 1`] = `
                 >
                   <td
                     class="m_4e7aa4ef mantine-Table-td"
+                    style="max-width: 100px; white-space: nowrap; overflow: hidden;"
                   >
-                    <p
-                      class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    <span
+                      title="ba6107f6-0891-44c5-8d84-01352f32ace2"
                     >
-                      ba6107f6-0891-44c5-8d84-01352f32ace2
-                    </p>
+                      ba6107f6…
+                    </span>
                   </td>
                   <td
                     class="m_4e7aa4ef mantine-Table-td"
@@ -278,7 +280,7 @@ exports[`index pages renders correctly 1`] = `
                     <p
                       class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
                     >
-                      candidate
+                      Candidate
                     </p>
                   </td>
                   <td
