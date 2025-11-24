@@ -8,7 +8,7 @@ import { ActivityCard } from "@/components/activity/ActivityCard";
 import ButtonLink from "@/components/ButtonLink";
 import { PersonCard } from "@/components/person/PersonCard";
 import { SpaceRedirectForm } from "@/components/subject/SpaceRedirectForm";
-import { StatusCard } from "@/components/subject/StatusCard";
+import { StatusButton } from "@/components/subject/StatusForm";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId/")({
   component: SubjectShowPage,
@@ -32,7 +32,7 @@ function SubjectShowPage() {
             {subject.performingBiologicEntity?.primaryName?.label ||
               t("StudySubject.defaultLabel")}
           </Title>
-          <StatusCard
+          <StatusButton
             spaceId={spaceId}
             subjectId={subjectId}
             subject={subject}

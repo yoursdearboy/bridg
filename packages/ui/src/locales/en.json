@@ -117,8 +117,9 @@
       "screening": "Screening",
       "withdrawn": "Withdrawn"
     },
-    "StatusCard": {
-      "editModalTitle": "Changing status"
+    "StatusButton": {
+      "editModalTitle": "Changing status",
+      "newStatus": "New status"
     },
     "StudyProtocolVersion": {
       "defaultLabel": "Unnamed study"

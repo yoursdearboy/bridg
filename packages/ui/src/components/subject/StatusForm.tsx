@@ -9,13 +9,17 @@ import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { Route as SubjectRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/index";
 
-interface SubjectCardProps {
+interface StatusButtonProps {
   spaceId: string;
   subjectId: string;
   subject: StudySubject;
 }
 
-export function StatusCard({ spaceId, subjectId, subject }: SubjectCardProps) {
+export function StatusButton({
+  spaceId,
+  subjectId,
+  subject,
+}: StatusButtonProps) {
   const { t } = useTranslation();
   const [opened, { open, close }] = useDisclosure(false);
   return (
@@ -23,7 +27,7 @@ export function StatusCard({ spaceId, subjectId, subject }: SubjectCardProps) {
       <Button
         size="xs"
         color={statusColor(subject.status)}
-        onClick={() => subject.status != Status.Ineligible && open()}
+        onClick={() => transitionFrom(subject.status).length && open()}
         variant="light"
       >
         {subject.status ? t(`Status.${subject.status}`) : t("no")}
@@ -31,13 +35,12 @@ export function StatusCard({ spaceId, subjectId, subject }: SubjectCardProps) {
       <Modal
         opened={opened}
         onClose={close}
-        title={t("StatusCard.editModalTitle")}
+        title={t("StatusButton.editModalTitle")}
         size="lg"
       >
-        <NewStatusForm
+        <StatusForm
           spaceId={spaceId}
           subjectId={subjectId}
-          subject={subject}
           status={subject.status}
           onCancel={close}
           onSuccess={close}
@@ -47,29 +50,27 @@ export function StatusCard({ spaceId, subjectId, subject }: SubjectCardProps) {
   );
 }
 
-interface NewStatusFormProps {
+interface StatusFormProps {
   spaceId: string;
   subjectId: string;
-  subject: StudySubject;
   status: Status | null;
   onCancel: () => void;
   onSuccess: () => void;
 }
 
-const NewStatusForm = ({
+const StatusForm = ({
   spaceId,
   subjectId,
-  subject,
   status,
   onCancel,
   onSuccess,
-}: NewStatusFormProps) => {
+}: StatusFormProps) => {
   const statusesTo = transitionFrom(status);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const form = useForm<StudySubjectData>({
     initialValues: {
-      status: subject.status,
+      status: status,
       statusDate: new Date(),
     },
     transformValues: (values: StudySubjectData) => ({
@@ -95,7 +96,7 @@ const NewStatusForm = ({
       {mutation.isError && <Alert color="red">{mutation.error.message}</Alert>}
       {!mutation.isPending && (
         <form onSubmit={form.onSubmit(handleSubmit)}>
-          <Stack gap={"md"} pos="relative">
+          <Stack gap="md">
             <DateInput
               label={t("StudySubject.statusDate")}
               valueFormat="L"
@@ -103,18 +104,19 @@ const NewStatusForm = ({
             />
             <Radio.Group
               name="status"
-              label="Выберите новый статус"
+              label={t("StatusButton.newStatus")}
               {...form.getInputProps("status")}
             >
-              {statusesTo.map((status) => (
-                <Radio
-                  mt="xs"
-                  fw={500}
-                  c={statusColor(status)}
-                  value={status}
-                  label={t(`Status.${status}`)}
-                />
-              ))}
+              <Stack mt="xs">
+                {statusesTo.map((status) => (
+                  <Radio
+                    fw={500}
+                    c={statusColor(status)}
+                    value={status}
+                    label={t(`Status.${status}`)}
+                  />
+                ))}
+              </Stack>
             </Radio.Group>
             <Group justify="flex-end" mt="md">
               <Button variant="outline" onClick={onCancel}>

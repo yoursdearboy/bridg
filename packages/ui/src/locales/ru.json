@@ -117,8 +117,9 @@
       "screening": "Скрининг",
       "withdrawn": "Выбыл"
     },
-    "StatusCard": {
-      "editModalTitle": "Изменение статуса"
+    "StatusButton": {
+      "editModalTitle": "Изменение статуса",
+      "newStatus": "Новый статус"
     },
     "StudyProtocolVersion": {
       "defaultLabel": "Безымянное исследование"
