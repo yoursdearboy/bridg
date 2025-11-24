@@ -4,7 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import ButtonLink from "@/components/ButtonLink";
-import { Route as infoRoute } from "./$subjectId/index";
+import { Route as infoRoute } from "./$subjectId";
 import { Route as newRoute } from "./new";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/")({
