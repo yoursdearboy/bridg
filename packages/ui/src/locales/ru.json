@@ -94,6 +94,10 @@
       "use": "Тип",
       "zip": "Индекс"
     },
+    "SpaceRedirection": {
+      "changeSpace": "Изменить протокол",
+      "editModalTitle": "Изменение протокола"
+    },
     "Status": {
       "candidate": "Кандидат",
       "eligible": "Подходит по критериям",
@@ -108,6 +112,9 @@
       "potential-candidate": "Потенциальный кандидат",
       "screening": "Скрининг",
       "withdrawn": "Выбыл"
+    },
+    "StatusCard": {
+      "editModalTitle": "Изменение статуса"
     },
     "StudyProtocolVersion": {
       "defaultLabel": "Безымянное исследование"
