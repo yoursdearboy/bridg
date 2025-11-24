@@ -30,17 +30,17 @@ import {
 } from './PerformedObservation';
 
 /**
- * @type ResponseShowPerformedActivityAIdGet
+ * @type PerformedActivityUnion
  * 
  * @export
  */
-export type ResponseShowPerformedActivityAIdGet = PerformedActivity | PerformedObservation;
+export type PerformedActivityUnion = PerformedActivity | PerformedObservation;
 
-export function ResponseShowPerformedActivityAIdGetFromJSON(json: any): ResponseShowPerformedActivityAIdGet {
-    return ResponseShowPerformedActivityAIdGetFromJSONTyped(json, false);
+export function PerformedActivityUnionFromJSON(json: any): PerformedActivityUnion {
+    return PerformedActivityUnionFromJSONTyped(json, false);
 }
 
-export function ResponseShowPerformedActivityAIdGetFromJSONTyped(json: any, ignoreDiscriminator: boolean): ResponseShowPerformedActivityAIdGet {
+export function PerformedActivityUnionFromJSONTyped(json: any, ignoreDiscriminator: boolean): PerformedActivityUnion {
     if (json == null) {
         return json;
     }
@@ -56,22 +56,22 @@ export function ResponseShowPerformedActivityAIdGetFromJSONTyped(json: any, igno
     return {} as any;
 }
 
-export function ResponseShowPerformedActivityAIdGetToJSON(json: any): any {
-    return ResponseShowPerformedActivityAIdGetToJSONTyped(json, false);
+export function PerformedActivityUnionToJSON(json: any): any {
+    return PerformedActivityUnionToJSONTyped(json, false);
 }
 
-export function ResponseShowPerformedActivityAIdGetToJSONTyped(value?: ResponseShowPerformedActivityAIdGet | null, ignoreDiscriminator: boolean = false): any {
+export function PerformedActivityUnionToJSONTyped(value?: PerformedActivityUnion | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
     if (typeof value !== 'object') {
         return value;
     }
-    if (instanceOfPerformedActivity(value)) {
-        return PerformedActivityToJSON(value as PerformedActivity);
-    }
     if (instanceOfPerformedObservation(value)) {
         return PerformedObservationToJSON(value as PerformedObservation);
+    }
+    if (instanceOfPerformedActivity(value)) {
+        return PerformedActivityToJSON(value as PerformedActivity);
     }
     return {};
 }
