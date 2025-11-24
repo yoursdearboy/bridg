@@ -1,7 +1,11 @@
 {
   "translation": {
     "Activity": {
-      "defaultLabel": "Unnamed activity"
+      "containingEpoch": "Epoch",
+      "contextForStudySite": "Site",
+      "defaultLabel": "Unnamed activity",
+      "statusCode": "Status",
+      "statusDate": "Date"
     },
     "ActivityCard": {
       "title": "Activities"

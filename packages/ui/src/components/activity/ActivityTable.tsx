@@ -53,6 +53,13 @@ const ActivityTable = ({
 
   return (
     <Table highlightOnHover>
+      <Table.Thead>
+        <Table.Th></Table.Th>
+        <Table.Th>{t("Activity.containingEpoch")}</Table.Th>
+        <Table.Th>{t("Activity.statusDate")}</Table.Th>
+        <Table.Th>{t("Activity.statusCode")}</Table.Th>
+        <Table.Th></Table.Th>
+      </Table.Thead>
       <Table.Tbody>
         {activities.length === 0 ? (
           <Table.Tr>
@@ -100,7 +107,9 @@ const ActivityTableRow = ({
         {activity.instantiatedDefinedActivity?.nameCode.displayName ||
           t("Activity.defaultLabel")}
       </Table.Td>
+      <Table.Td>{activity.containingEpoch?.name}</Table.Td>
       <Table.Td>{t("intlDateTime", { val: activity.statusDate })}</Table.Td>
+      <Table.Td>{activity.statusCode?.displayName}</Table.Td>
       <Table.Td width={60}>
         {hovered && (
           <Link to={EditActivityRoute.to} params={linkParams}>

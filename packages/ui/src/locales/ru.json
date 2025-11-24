@@ -1,7 +1,11 @@
 {
   "translation": {
     "Activity": {
-      "defaultLabel": "Безымянная активность"
+      "containingEpoch": "Точка",
+      "contextForStudySite": "Центр",
+      "defaultLabel": "Неизвестная процедура",
+      "statusCode": "Статус",
+      "statusDate": "Дата"
     },
     "ActivityCard": {
       "title": "Процедуры"
