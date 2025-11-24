@@ -59,7 +59,10 @@
     "PersonCard": {
       "dateNotSpecified": "Date not specified",
       "deceased": "Deceased",
-      "notDeceased": "Not deceased"
+      "edit": "Edit",
+      "link": "Go to",
+      "notDeceased": "Not deceased",
+      "title": "Person information"
     },
     "PersonEditPage": {
       "breadcrumb": "Editing",
@@ -76,9 +79,7 @@
     "PersonShowPage": {
       "actions": "Actions",
       "breadcrumbDefault": "Anonymous person",
-      "edit": "Edit person",
-      "rename": "Rename",
-      "title": "Person information"
+      "rename": "Rename"
     },
     "PostalAddress": {
       "building": "Building",
@@ -112,6 +113,7 @@
     },
     "StudySubject": {
       "assignedStudySiteProtocolVersionRelationship": "Study sites",
+      "defaultLabel": "Unnamed subject",
       "performingBiologicEntity": "Person",
       "performingOrganization": "Organization",
       "status": "Status",
@@ -137,9 +139,7 @@
     },
     "SubjectShowPage": {
       "back": "Back to list",
-      "breadcrumbDefault": "Anonymous subject",
-      "title": "Patient information",
-      "toPerson": "Go to person page"
+      "breadcrumbDefault": "Anonymous subject"
     },
     "TelecommunicationAddress": {
       "address": "Address",

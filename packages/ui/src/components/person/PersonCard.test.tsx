@@ -27,7 +27,9 @@ describe("PersonCard", () => {
 
     expect(
       (
-        await renderComponentInRoute(<PersonCard person={person} />)
+        await renderComponentInRoute(
+          <PersonCard person={person} showLink={true} />
+        )
       ).asFragment()
     ).toMatchSnapshot();
   });

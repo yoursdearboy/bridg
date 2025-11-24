@@ -19,9 +19,10 @@ import { Route as personRoute } from "@/routes/persons/$personId";
 
 interface PersonCardProps {
   person: Person;
+  showLink: boolean;
 }
 
-export const PersonCard = ({ person }: PersonCardProps) => {
+export const PersonCard = ({ person, showLink }: PersonCardProps) => {
   const { t } = useTranslation();
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -31,20 +32,24 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         <Card.Section withBorder inheritPadding py="xs">
           <Group justify="space-between">
             <Text fw={500} px="xs">
-              {t("PersonShowPage.title")}
+              {t("PersonCard.title")}
             </Text>
             <Group>
-              <ButtonLink
-                to={personRoute.to}
-                params={{ personId: person.id }}
-                variant="outline"
-                size="compact-sm"
-              >
-                {t("SubjectShowPage.toPerson")}
-              </ButtonLink>
-              <Button variant="outline" size="compact-sm" onClick={open}>
-                {t("PersonShowPage.edit")}
-              </Button>
+              <Button.Group>
+                {showLink ? (
+                  <ButtonLink
+                    to={personRoute.to}
+                    params={{ personId: person.id }}
+                    variant="outline"
+                    size="compact-sm"
+                  >
+                    {t("PersonCard.link")}
+                  </ButtonLink>
+                ) : null}
+                <Button variant="outline" size="compact-sm" onClick={open}>
+                  {t("PersonCard.edit")}
+                </Button>
+              </Button.Group>
             </Group>
           </Group>
         </Card.Section>

@@ -77,7 +77,7 @@ function PersonShowPage() {
 
         <Grid>
           <Grid.Col span={{ base: 12, lg: 6, xl: 4 }}>
-            <PersonCard person={person} />
+            <PersonCard person={person} showLink={false} />
             <Space h="md" />
             <AddressCardWrapper personId={personId} />
             <Space h="md" />

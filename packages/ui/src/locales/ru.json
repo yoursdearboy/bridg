@@ -59,10 +59,14 @@
     "PersonCard": {
       "dateNotSpecified": "Дата не указана",
       "deceased": "Умер",
-      "notDeceased": "Жив"
+      "edit": "Редактировать",
+      "link": "Перейти",
+      "notDeceased": "Жив",
+      "title": "Данные человека"
     },
     "PersonEditPage": {
       "breadcrumb": "Редактирование",
+      "cancel": "Отмена",
       "deceased": "Умерший",
       "editModalTitile": "Редактирование данных человека",
       "personalInfo": "Личная информация",
@@ -75,9 +79,7 @@
     "PersonShowPage": {
       "actions": "Действия",
       "breadcrumbDefault": "Неизвестный человек",
-      "edit": "Редактировать",
-      "rename": "Переименовать",
-      "title": "Данные человека"
+      "rename": "Переименовать"
     },
     "PostalAddress": {
       "building": "Здание",
@@ -111,6 +113,7 @@
     },
     "StudySubject": {
       "assignedStudySiteProtocolVersionRelationship": "Исследовательский центр",
+      "defaultLabel": "Безыменный пациент",
       "performingBiologicEntity": "Человек",
       "performingOrganization": "Организация",
       "status": "Статус",
@@ -136,9 +139,7 @@
     },
     "SubjectShowPage": {
       "back": "Назад к списку",
-      "breadcrumbDefault": "Неизвестный пациент",
-      "title": "Данные пациента",
-      "toPerson": "На страницу человека"
+      "breadcrumbDefault": "Неизвестный пациент"
     },
     "TelecommunicationAddress": {
       "address": "Адрес",
