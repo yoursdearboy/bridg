@@ -22,8 +22,8 @@
       "title": "Адреса"
     },
     "Gender": {
-      "F": "Женщина",
-      "M": "Мужчина",
+      "F": "Женский",
+      "M": "Мужской",
       "U": "Не известно"
     },
     "Name": {
@@ -41,7 +41,7 @@
     },
     "Organization": {
       "description": "Описание",
-      "primaryName": "Текущее название"
+      "primaryName": "Название"
     },
     "PerformingBiologicEntitySelect": {
       "text": "Выберите существующую запись:"
@@ -50,16 +50,16 @@
       "administrativeGenderCode": "Пол",
       "age": "Возраст",
       "birthDate": "Дата рождения",
-      "deathDate": "Дата смерта",
-      "deathDateEstimatedIndicator": "Предполагаемый показатель даты смерти",
-      "deathIndicator": "Показатель смертности",
+      "deathDate": "Дата смерти",
+      "deathDateEstimatedIndicator": "Дата смерти приближенная",
+      "deathIndicator": "Умер",
       "id": "ID",
-      "primaryName": "Текущее имя"
+      "primaryName": "ФИО"
     },
     "PersonCard": {
       "dateNotSpecified": "Дата не указана",
-      "deceased": "Умерший",
-      "notDeceased": "Живой"
+      "deceased": "Умер",
+      "notDeceased": "Жив"
     },
     "PersonEditPage": {
       "breadcrumb": "Редактирование",
@@ -90,18 +90,18 @@
     },
     "Status": {
       "candidate": "Кандидат",
-      "eligible": "Пригодные",
-      "follow-up": "Отслеживается",
-      "ineligible": "Непригодные",
+      "eligible": "Подходит по критериям",
+      "follow-up": "Наблюдение",
+      "ineligible": "Не подходит по критериям",
       "not-registered": "Не зарегистрирован",
-      "off-study": "Вне исследования",
-      "on-study": "Исследуется",
-      "on-study-intervention": "OnStudyIntervention",
-      "on-study-observation": "OnStudyObservation",
-      "pending-on-study": "Ожидает исследование",
+      "off-study": "Завершил",
+      "on-study": "Участвует",
+      "on-study-intervention": "Участвует (интервенция)",
+      "on-study-observation": "Участвует (наблюдение)",
+      "pending-on-study": "Ожидание включения",
       "potential-candidate": "Потенциальный кандидат",
-      "screening": "Обследуется",
-      "withdrawn": "Отклонен"
+      "screening": "Скрининг",
+      "withdrawn": "Выбыл"
     },
     "StudyProtocolVersion": {
       "defaultLabel": "Безымянное исследование"
