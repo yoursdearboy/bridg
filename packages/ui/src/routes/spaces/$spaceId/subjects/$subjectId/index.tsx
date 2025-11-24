@@ -1,15 +1,15 @@
 import { Grid, Group, Stack, Title } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute, useParams } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { type StudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
-import { ActivityCard } from "@/components/activity/ActivityCard";
 import api from "@/api";
+import { ActivityCard } from "@/components/activity/ActivityCard";
 import ButtonLink from "@/components/ButtonLink";
 import { PersonCard } from "@/components/person/PersonCard";
+import { SpaceRedirection } from "@/components/subject/SpaceRedirection";
 import { StatusCard } from "@/components/subject/StatusCard";
 import i18next from "@/i18n";
-import { SpaceRedirection } from "@/components/subject/SpaceRedirection";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId/")({
   component: SubjectShowPage,

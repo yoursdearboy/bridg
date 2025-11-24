@@ -1,25 +1,15 @@
-import {
-  Alert,
-  Button,
-  Group,
-  LoadingOverlay,
-  Menu,
-  Modal,
-  Radio,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Alert, Button, Group, Modal, Radio, Stack } from "@mantine/core";
+import { DateInput } from "@mantine/dates";
+import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { IconPencil } from "@tabler/icons-react";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
 import { Status, type StudySubject, type StudySubjectData } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
-import { statusColor } from "./StatusColor";
-import { IconPencil } from "@tabler/icons-react";
-import { useNavigate } from "@tanstack/react-router";
 import { Route as SubjectRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/index";
-import { useForm } from "@mantine/form";
-import { DateInput } from "@mantine/dates";
+import { statusColor } from "./StatusColor";
 
 interface SubjectCardProps {
   spaceId: string;
@@ -33,13 +23,13 @@ export function StatusCard({ spaceId, subjectId, subject }: SubjectCardProps) {
   return (
     <>
       {subject.status == Status.Ineligible ? (
-        <Button radius={"lg"} color={statusColor(subject.status!)}>
-          {t(`Status.${subject.status!}`)}
+        <Button radius={"lg"} color={statusColor(subject.status)}>
+          {t(`Status.${subject.status}`)}
         </Button>
       ) : (
         <Button
           radius={"lg"}
-          color={statusColor(subject.status!)}
+          color={statusColor(subject.status)}
           onClick={open}
           leftSection={<IconPencil />}
         >
@@ -104,7 +94,7 @@ const NewStatusForm = ({
       }),
     onSuccess: () => {
       onSuccess();
-      return navigate({ to: SubjectRoute.to, params: { spaceId, subjectId } })
+      return navigate({ to: SubjectRoute.to, params: { spaceId, subjectId } });
     },
   });
   const handleSubmit = (data: StudySubjectData) => {

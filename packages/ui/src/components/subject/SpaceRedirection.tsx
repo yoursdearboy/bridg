@@ -1,4 +1,3 @@
-import api from "@/api";
 import {
   Alert,
   Button,
@@ -18,6 +17,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Status, type NewStudySubject, type StudySubject } from "api-ts";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import api from "@/api";
 import { Route as SpaceRoute } from "@/routes/spaces/$spaceId/subjects/index";
 
 interface Props {
@@ -83,13 +83,6 @@ const ToNewStudyForm = ({ subject, onCancel }: ToNewStudyFormProps) => {
     queryKey: ["spaces"],
     queryFn: () => api.spaces.indexSpacesGet(),
   });
-
-  if (isPending) return <LoadingOverlay />;
-  if (isError)
-    return (
-      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
-    );
-
   const form = useForm<NewStudySubject>({
     initialValues: {
       performingBiologicEntity: subject.performingBiologicEntity,
@@ -102,7 +95,6 @@ const ToNewStudyForm = ({ subject, onCancel }: ToNewStudyFormProps) => {
       ...values,
     }),
   });
-
   const [spaceId, setSpaceId] = useState(String);
   const navigate = useNavigate();
   const mutation = useMutation({
@@ -119,6 +111,12 @@ const ToNewStudyForm = ({ subject, onCancel }: ToNewStudyFormProps) => {
       }),
     onSuccess: () => navigate({ to: SpaceRoute.to, params: { spaceId } }),
   });
+
+  if (isPending) return <LoadingOverlay />;
+  if (isError)
+    return (
+      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
+    );
 
   const handleSubmit = (data: NewStudySubject) => {
     return mutation.mutate({ newStudySubject: data, spaceId });
@@ -164,7 +162,6 @@ interface StudySiteSelectorProps {
 
 const StudySiteSelector = ({ spaceId, form }: StudySiteSelectorProps) => {
   const {
-    isPending,
     isError,
     error,
     data: sites,
@@ -175,7 +172,6 @@ const StudySiteSelector = ({ spaceId, form }: StudySiteSelectorProps) => {
   });
   const { t } = useTranslation();
 
-  if (isPending) return <LoadingOverlay />;
   if (isError)
     return (
       <Text color="red">{t("errorMessage", { error: error.message })}</Text>
