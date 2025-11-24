@@ -31,8 +31,13 @@ src/models/NewStudySubject.ts
 src/models/Organization.ts
 src/models/OrganizationName.ts
 src/models/PerformedActivity.ts
+src/models/PerformedActivityData.ts
+src/models/PerformedActivityUnion.ts
+src/models/PerformedActivityUnionData.ts
 src/models/PerformedObservation.ts
+src/models/PerformedObservationData.ts
 src/models/PerformedObservationResult.ts
+src/models/PerformedObservationResultData.ts
 src/models/Person.ts
 src/models/PersonData.ts
 src/models/PersonStudySubject.ts
@@ -40,7 +45,6 @@ src/models/PhysicalQuantity.ts
 src/models/PostalAddress.ts
 src/models/PostalAddressData.ts
 src/models/ResponseShowDefinedActivityAIdGet.ts
-src/models/ResponseShowPerformedActivityAIdGet.ts
 src/models/Status.ts
 src/models/StudyActivity.ts
 src/models/StudyProtocolVersion.ts

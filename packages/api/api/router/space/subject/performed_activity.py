@@ -1,4 +1,4 @@
-from typing import Annotated, List, Optional
+from typing import Annotated, Any, List, Optional
 from uuid import UUID
 
 import bridg
@@ -20,20 +20,58 @@ PerformedActivityRepositoryDep = Annotated[
 ]
 
 
+RESPONSES: dict[int | str, dict[str, Any]] = {
+    "200": {
+        "description": "Successful Response",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "anyOf": None,
+                    "oneOf": [
+                        {"$ref": "#/components/schemas/PerformedActivity"},
+                        {"$ref": "#/components/schemas/PerformedObservation"},
+                        {"type": "null"},
+                    ],
+                    "title": "PerformedActivityUnion",
+                }
+            }
+        },
+    }
+}
+
+OPENAPI_EXTRA = {
+    "requestBody": {
+        "required": True,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "anyOf": None,
+                    "oneOf": [
+                        {"$ref": "#/components/schemas/PerformedObservationData"},
+                        {"$ref": "#/components/schemas/PerformedActivityData"},
+                    ],
+                    "title": "PerformedActivityUnionData",
+                }
+            }
+        },
+    }
+}
+
+
 @router.get("")
 def index(space_id: UUID, subject_id: UUID, repo: PerformedActivityRepositoryDep) -> List[PerformedActivity]:
     objs = repo.all(bridg.PerformedActivity.involved_subject_id == subject_id)
     return [PerformedActivity.model_validate(obj) for obj in objs]
 
 
-@router.get("/{a_id:uuid}")
+@router.get("/{a_id:uuid}", responses=RESPONSES)
 def show(
     space_id: UUID,
     subject_id: UUID,
     a_id: UUID,
     repo: PerformedActivityRepositoryDep,
     result: bool = False,
-) -> Optional[PerformedActivity | PerformedObservation]:
+) -> PerformedActivity | PerformedObservation:
     if obj := repo.one_or_none(a_id):
         if result:
             return PerformedObservation.model_validate(obj)
@@ -41,7 +79,7 @@ def show(
     raise HTTPException(status_code=404)
 
 
-@router.post("")
+@router.post("", responses=RESPONSES, openapi_extra=OPENAPI_EXTRA)
 def create(
     space_id: UUID,
     subject_id: UUID,
@@ -59,7 +97,7 @@ def create(
             return PerformedObservation.model_validate(obj)
 
 
-@router.patch("/{a_id:uuid}")
+@router.patch("/{a_id:uuid}", responses=RESPONSES, openapi_extra=OPENAPI_EXTRA)
 def update(
     space_id: UUID,
     subject_id: UUID,
