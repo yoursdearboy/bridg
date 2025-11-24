@@ -32,7 +32,7 @@ function SubjectIndexPage() {
         <CopyButton value={subject.performingBiologicEntity?.id || ""}>
           {({ copy }) => (
             <span onClick={copy} title={subject.performingBiologicEntity?.id}>
-              {subject.performingBiologicEntity?.id.slice(0, 8)}…
+              {subject.id.slice(0, 8)}…
             </span>
           )}
         </CopyButton>
