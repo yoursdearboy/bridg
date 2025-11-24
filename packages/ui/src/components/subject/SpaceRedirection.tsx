@@ -60,11 +60,7 @@ interface RedirectionFormProps {
 }
 
 const RedirectionForm = ({ subject, onCancel }: RedirectionFormProps) => {
-  return (
-    <>
-      <ToNewStudyForm subject={subject} onCancel={onCancel} />
-    </>
-  );
+  return <ToNewStudyForm subject={subject} onCancel={onCancel} />;
 };
 
 interface ToNewStudyFormProps {
@@ -178,15 +174,13 @@ const StudySiteSelector = ({ spaceId, form }: StudySiteSelectorProps) => {
     );
 
   return (
-    <>
-      <MultiSelect
-        label={t("StudySubject.assignedStudySiteProtocolVersionRelationship")}
-        data={sites.map((s) => ({
-          value: s.id,
-          label: s.executingStudySite.label || t("StudySite.defaultLabel"),
-        }))}
-        {...form.getInputProps("assignedStudySiteProtocolVersionRelationship")}
-      />
-    </>
+    <MultiSelect
+      label={t("StudySubject.assignedStudySiteProtocolVersionRelationship")}
+      data={sites.map((s) => ({
+        value: s.id,
+        label: s.executingStudySite.label || t("StudySite.defaultLabel"),
+      }))}
+      {...form.getInputProps("assignedStudySiteProtocolVersionRelationship")}
+    />
   );
 };
