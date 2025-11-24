@@ -1,14 +1,5 @@
-import {
-  Alert,
-  Button,
-  Group,
-  Modal,
-  Select,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Alert, Button, Group, Select, Stack, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { type UseDisclosureReturnValue } from "@mantine/hooks";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { Status, type StudySubject } from "api-ts";
@@ -20,47 +11,28 @@ interface InputProps {
   onChange: (value: string | null) => void;
 }
 
-interface SpaceRedirectionModalProps {
-  subject: StudySubject;
-  disclosure: UseDisclosureReturnValue;
-}
-
-export function SpaceRedirectionModal({
-  subject,
-  disclosure,
-}: SpaceRedirectionModalProps) {
-  const { t } = useTranslation();
-  const [opened, { close }] = disclosure;
-
-  return (
-    <Modal
-      opened={opened}
-      onClose={close}
-      title={t("SpaceRedirection.editModalTitle")}
-      size="lg"
-    >
-      <ToNewStudyForm subject={subject} onCancel={close} />
-    </Modal>
-  );
-}
-
-interface ToNewStudyFormProps {
+interface SpaceRedirectFormProps {
   subject: StudySubject;
   onCancel: () => void;
+  onSuccess: () => void;
 }
 
-interface ToNewStudyFormData {
+interface SpaceRedirectFormData {
   spaceId: string;
   studySiteId: string;
 }
 
-const ToNewStudyForm = ({ subject, onCancel }: ToNewStudyFormProps) => {
+export const SpaceRedirectForm = ({
+  subject,
+  onCancel,
+  onSuccess,
+}: SpaceRedirectFormProps) => {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
 
   const mutation = useMutation({
-    mutationFn: ({ spaceId, studySiteId }: ToNewStudyFormData) =>
+    mutationFn: ({ spaceId, studySiteId }: SpaceRedirectFormData) =>
       api.subjects.createSpacesSpaceIdSubjectsPost({
         spaceId,
         newStudySubject: {
@@ -71,14 +43,16 @@ const ToNewStudyForm = ({ subject, onCancel }: ToNewStudyFormProps) => {
           performingBiologicEntityId: subject.performingBiologicEntity!.id,
         },
       }),
-    onSuccess: ({ id: subjectId }, { spaceId }) =>
-      navigate({
+    onSuccess: ({ id: subjectId }, { spaceId }) => {
+      onSuccess();
+      return navigate({
         to: SpacesSpaceidSubjectsSubjectIdRoute.to,
         params: { spaceId, subjectId },
-      }),
+      });
+    },
   });
 
-  const form = useForm<ToNewStudyFormData>({
+  const form = useForm<SpaceRedirectFormData>({
     initialValues: {
       spaceId: "",
       studySiteId: "",
@@ -123,7 +97,11 @@ const SpaceSelect = ({ onChange }: InputProps) => {
 
   return (
     <Select
-      data={(data || []).map((s) => ({ value: s.id, label: s.label || "" }))}
+      label={t("SpaceRedirecForm.space")}
+      data={(data || []).map((s) => ({
+        value: s.id,
+        label: s.label || t("StudySite.defaultLabel"),
+      }))}
       onChange={onChange}
       required
     />
@@ -145,7 +123,7 @@ const StudySiteSelect = ({
 
   return (
     <Select
-      label={t("StudySubject.assignedStudySiteProtocolVersionRelationship")}
+      label={t("SpaceRedirecForm.studySite")}
       data={(data || []).map((s) => ({
         value: s.id,
         label: s.executingStudySite.label || t("StudySite.defaultLabel"),

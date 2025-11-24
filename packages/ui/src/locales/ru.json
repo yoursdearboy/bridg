@@ -94,9 +94,12 @@
       "use": "Тип",
       "zip": "Индекс"
     },
-    "SpaceRedirection": {
-      "changeSpace": "Изменить протокол",
-      "editModalTitle": "Изменение протокола"
+    "Space": {
+      "defaultLabel": "Безымянное исследование"
+    },
+    "SpaceRedirecForm": {
+      "space": "Исследование",
+      "studySite": "Исследовательский центр"
     },
     "Status": {
       "candidate": "Кандидат",
@@ -151,7 +154,9 @@
     },
     "SubjectShowPage": {
       "back": "Назад к списку",
-      "breadcrumbDefault": "Неизвестный пациент"
+      "breadcrumbDefault": "Неизвестный пациент",
+      "redirect": "Перенаправить",
+      "redirectModalTitle": "Скопировать пациента в другое исследование"
     },
     "TelecommunicationAddress": {
       "address": "Адрес",

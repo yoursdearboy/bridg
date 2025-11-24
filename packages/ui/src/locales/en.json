@@ -94,9 +94,12 @@
       "use": "Use",
       "zip": "Zip"
     },
-    "SpaceRedirection": {
-      "changeSpace": "Change space",
-      "editModalTitle": "Changing space"
+    "Space": {
+      "defaultLabel": "Unnamed space"
+    },
+    "SpaceRedirecForm": {
+      "space": "Study",
+      "studySite": "Study site"
     },
     "Status": {
       "candidate": "Candidate",
@@ -151,7 +154,9 @@
     },
     "SubjectShowPage": {
       "back": "Back to list",
-      "breadcrumbDefault": "Anonymous subject"
+      "breadcrumbDefault": "Anonymous subject",
+      "redirect": "Redirect",
+      "redirectModalTitle": "Copy subject to another study"
     },
     "TelecommunicationAddress": {
       "address": "Address",

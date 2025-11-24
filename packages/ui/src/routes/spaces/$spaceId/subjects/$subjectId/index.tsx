@@ -1,11 +1,13 @@
-import { Grid, Group, Stack, Title } from "@mantine/core";
+import { Button, Grid, Group, Menu, Modal, Stack, Title } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { IconArrowRight, IconCaretDown } from "@tabler/icons-react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { ActivityCard } from "@/components/activity/ActivityCard";
 import ButtonLink from "@/components/ButtonLink";
 import { PersonCard } from "@/components/person/PersonCard";
-import { SpaceRedirection } from "@/components/subject/SpaceRedirection";
+import { SpaceRedirectForm } from "@/components/subject/SpaceRedirectForm";
 import { StatusCard } from "@/components/subject/StatusCard";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId/")({
@@ -20,6 +22,7 @@ function SubjectShowPage() {
   const { data: subject } = useSuspenseQuery(query);
   const { spaceId, subjectId } = Route.useParams();
   const { t } = useTranslation();
+  const [redirectModalOpened, redirectModalHandlers] = useDisclosure(false);
 
   return (
     <Stack gap="md">
@@ -34,9 +37,28 @@ function SubjectShowPage() {
             subjectId={subjectId}
             subject={subject}
           />
-          <SpaceRedirection subject={subject} status={subject.status!} />
         </Group>
-        <ButtonLink to="..">{t("SubjectShowPage.back")}</ButtonLink>
+
+        <Button.Group>
+          <ButtonLink to=".." size="sm">
+            {t("SubjectShowPage.back")}
+          </ButtonLink>
+          <Menu shadow="md" width={200}>
+            <Menu.Target>
+              <Button size="sm" p="xs">
+                <IconCaretDown />
+              </Button>
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Item
+                onClick={redirectModalHandlers.open}
+                leftSection={<IconArrowRight />}
+              >
+                {t("SubjectShowPage.redirect")}
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
+        </Button.Group>
       </Group>
 
       <Grid>
@@ -52,6 +74,19 @@ function SubjectShowPage() {
           <ActivityCard spaceId={spaceId} subjectId={subjectId} />
         </Grid.Col>
       </Grid>
+
+      <Modal
+        opened={redirectModalOpened}
+        onClose={redirectModalHandlers.close}
+        title={t("SubjectShowPage.redirectModalTitle")}
+        size="lg"
+      >
+        <SpaceRedirectForm
+          subject={subject}
+          onCancel={redirectModalHandlers.close}
+          onSuccess={redirectModalHandlers.close}
+        />
+      </Modal>
     </Stack>
   );
 }
