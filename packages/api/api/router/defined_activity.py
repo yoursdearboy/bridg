@@ -32,7 +32,7 @@ DefinedActivityRepositoryDep = Annotated[DefinedActivityRepository, Depends(get_
                             {"$ref": "#/components/schemas/DefinedObservation"},
                             {"type": "null"},
                         ],
-                        "title": "Response Show Defined Activity  A Id  Get",
+                        "title": "DefinedActivityUnion",
                     }
                 }
             },
@@ -43,7 +43,7 @@ def show(
     a_id: UUID,
     repo: DefinedActivityRepositoryDep,
     result: bool = False,
-) -> Optional[DefinedActivity | DefinedObservation]:
+) -> DefinedActivity | DefinedObservation:
     if obj := repo.one_or_none(a_id):
         if result:
             return DefinedObservation.model_validate(obj)

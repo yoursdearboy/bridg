@@ -19,6 +19,7 @@ src/models/DataValue.ts
 src/models/DateTime.ts
 src/models/DateValue.ts
 src/models/DefinedActivity.ts
+src/models/DefinedActivityUnion.ts
 src/models/DefinedObservation.ts
 src/models/DefinedObservationResult.ts
 src/models/EntityName.ts
@@ -44,7 +45,6 @@ src/models/PersonStudySubject.ts
 src/models/PhysicalQuantity.ts
 src/models/PostalAddress.ts
 src/models/PostalAddressData.ts
-src/models/ResponseShowDefinedActivityAIdGet.ts
 src/models/Status.ts
 src/models/StudyActivity.ts
 src/models/StudyProtocolVersion.ts

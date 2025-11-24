@@ -30,17 +30,17 @@ import {
 } from './DefinedObservation';
 
 /**
- * @type ResponseShowDefinedActivityAIdGet
+ * @type DefinedActivityUnion
  * 
  * @export
  */
-export type ResponseShowDefinedActivityAIdGet = DefinedActivity | DefinedObservation;
+export type DefinedActivityUnion = DefinedActivity | DefinedObservation;
 
-export function ResponseShowDefinedActivityAIdGetFromJSON(json: any): ResponseShowDefinedActivityAIdGet {
-    return ResponseShowDefinedActivityAIdGetFromJSONTyped(json, false);
+export function DefinedActivityUnionFromJSON(json: any): DefinedActivityUnion {
+    return DefinedActivityUnionFromJSONTyped(json, false);
 }
 
-export function ResponseShowDefinedActivityAIdGetFromJSONTyped(json: any, ignoreDiscriminator: boolean): ResponseShowDefinedActivityAIdGet {
+export function DefinedActivityUnionFromJSONTyped(json: any, ignoreDiscriminator: boolean): DefinedActivityUnion {
     if (json == null) {
         return json;
     }
@@ -56,22 +56,22 @@ export function ResponseShowDefinedActivityAIdGetFromJSONTyped(json: any, ignore
     return {} as any;
 }
 
-export function ResponseShowDefinedActivityAIdGetToJSON(json: any): any {
-    return ResponseShowDefinedActivityAIdGetToJSONTyped(json, false);
+export function DefinedActivityUnionToJSON(json: any): any {
+    return DefinedActivityUnionToJSONTyped(json, false);
 }
 
-export function ResponseShowDefinedActivityAIdGetToJSONTyped(value?: ResponseShowDefinedActivityAIdGet | null, ignoreDiscriminator: boolean = false): any {
+export function DefinedActivityUnionToJSONTyped(value?: DefinedActivityUnion | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
     if (typeof value !== 'object') {
         return value;
     }
-    if (instanceOfDefinedActivity(value)) {
-        return DefinedActivityToJSON(value as DefinedActivity);
-    }
     if (instanceOfDefinedObservation(value)) {
         return DefinedObservationToJSON(value as DefinedObservation);
+    }
+    if (instanceOfDefinedActivity(value)) {
+        return DefinedActivityToJSON(value as DefinedActivity);
     }
     return {};
 }
