@@ -106,7 +106,13 @@ const NewStatusForm = ({
               {...form.getInputProps("status")}
             >
               {statusesTo.map((status) => (
-                <Radio mt="xs" value={status} label={t(`Status.${status}`)} />
+                <Radio
+                  mt="xs"
+                  fw={500}
+                  c={statusColor(status)}
+                  value={status}
+                  label={t(`Status.${status}`)}
+                />
               ))}
             </Radio.Group>
             <Group justify="flex-end" mt="md">
@@ -133,10 +139,18 @@ const transitionFrom = (status: Status | null) => {
     case Status.Screening:
       return [Status.Eligible, Status.Ineligible, Status.Withdrawn];
     case Status.Eligible:
-      return [Status.PendingOnStudy, Status.Candidate, Status.Withdrawn];
+      return [
+        Status.PendingOnStudy,
+        Status.OnStudyIntervention,
+        Status.OnStudyObservation,
+        Status.Withdrawn,
+      ];
     case Status.PendingOnStudy:
-      return [Status.OnStudy, Status.NotRegistered, Status.Ineligible];
-    case Status.OnStudy:
+      return [
+        Status.OnStudyIntervention,
+        Status.OnStudyObservation,
+        Status.NotRegistered,
+      ];
     case Status.OnStudyIntervention:
     case Status.OnStudyObservation:
       return [
@@ -162,6 +176,8 @@ const statusColor = (status: Status | null): string => {
     case Status.OnStudyIntervention:
     case Status.OnStudyObservation:
       return "green";
+    case Status.OffStudy:
+      return "grey";
     default:
       return "blue";
   }
