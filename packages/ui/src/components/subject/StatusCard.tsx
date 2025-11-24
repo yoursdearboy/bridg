@@ -22,20 +22,14 @@ export function StatusCard({ spaceId, subjectId, subject }: SubjectCardProps) {
   const [opened, { open, close }] = useDisclosure(false);
   return (
     <>
-      {subject.status == Status.Ineligible ? (
-        <Button radius={"lg"} color={statusColor(subject.status)}>
-          {t(`Status.${subject.status}`)}
-        </Button>
-      ) : (
-        <Button
-          radius={"lg"}
-          color={statusColor(subject.status)}
-          onClick={open}
-          leftSection={<IconPencil />}
-        >
-          {t(`Status.${subject.status!}`)}
-        </Button>
-      )}
+      <Button
+        size="xs"
+        color={statusColor(subject.status)}
+        onClick={() => subject.status != Status.Ineligible && open()}
+        rightSection={<IconPencil size={16} />}
+      >
+        {subject.status ? t(`Status.${subject.status}`) : t("Status.null")}
+      </Button>
       <Modal
         opened={opened}
         onClose={close}
@@ -46,9 +40,9 @@ export function StatusCard({ spaceId, subjectId, subject }: SubjectCardProps) {
           spaceId={spaceId}
           subjectId={subjectId}
           subject={subject}
-          status={subject.status!}
+          status={subject.status}
           onCancel={close}
-          onSuccess={() => close()}
+          onSuccess={close}
         />
       </Modal>
     </>
@@ -59,7 +53,7 @@ interface NewStatusFormProps {
   spaceId: string;
   subjectId: string;
   subject: StudySubject;
-  status: Status;
+  status: Status | null;
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -97,9 +91,7 @@ const NewStatusForm = ({
       return navigate({ to: SubjectRoute.to, params: { spaceId, subjectId } });
     },
   });
-  const handleSubmit = (data: StudySubjectData) => {
-    return mutation.mutate(data);
-  };
+  const handleSubmit = (data: StudySubjectData) => mutation.mutate(data);
   return (
     <>
       {mutation.isError && <Alert color="red">{mutation.error.message}</Alert>}
@@ -117,11 +109,7 @@ const NewStatusForm = ({
               {...form.getInputProps("status")}
             >
               {statusesTo.map((status) => (
-                <Radio
-                  mt={"xs"}
-                  value={status}
-                  label={t(`Status.${status}`)}
-                ></Radio>
+                <Radio mt="xs" value={status} label={t(`Status.${status}`)} />
               ))}
             </Radio.Group>
             <Group justify="flex-end" mt="md">
@@ -137,8 +125,10 @@ const NewStatusForm = ({
   );
 };
 
-const transitionFrom = (status: Status) => {
+const transitionFrom = (status: Status | null) => {
   switch (status) {
+    case null:
+      return [Status.PotentialCandidate, Status.Candidate];
     case Status.PotentialCandidate:
       return [Status.Candidate];
     case Status.Candidate:
@@ -154,6 +144,15 @@ const transitionFrom = (status: Status) => {
       return [Status.Withdrawn, Status.Eligible, Status.Ineligible];
     case Status.PendingOnStudy:
       return [Status.OnStudy, Status.NotRegistered, Status.Ineligible];
+    case Status.OnStudy:
+    case Status.OnStudyIntervention:
+    case Status.OnStudyObservation:
+      return [
+        Status.OnStudyIntervention,
+        Status.OnStudyObservation,
+        Status.FollowUp,
+        Status.OffStudy,
+      ];
     case Status.FollowUp:
       return [Status.OffStudy];
     default:
