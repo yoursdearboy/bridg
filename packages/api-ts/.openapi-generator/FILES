@@ -51,6 +51,7 @@ src/models/StudyProtocolVersion.ts
 src/models/StudySite.ts
 src/models/StudySiteProtocolVersionRelationship.ts
 src/models/StudySubject.ts
+src/models/StudySubjectData.ts
 src/models/TelecommunicationAddress.ts
 src/models/TelecommunicationAddressData.ts
 src/models/TelecommunicationAddressUse.ts

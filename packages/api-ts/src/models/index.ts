@@ -40,6 +40,7 @@ export * from './StudyProtocolVersion';
 export * from './StudySite';
 export * from './StudySiteProtocolVersionRelationship';
 export * from './StudySubject';
+export * from './StudySubjectData';
 export * from './TelecommunicationAddress';
 export * from './TelecommunicationAddressData';
 export * from './TelecommunicationAddressUse';
