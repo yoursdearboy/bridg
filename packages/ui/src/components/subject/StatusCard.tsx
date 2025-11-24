@@ -102,7 +102,10 @@ const NewStatusForm = ({
         subjectId,
         studySubjectData,
       }),
-    onSuccess,
+    onSuccess: () => {
+      onSuccess();
+      return navigate({ to: SubjectRoute.to, params: { spaceId, subjectId } })
+    },
   });
   const handleSubmit = (data: StudySubjectData) => {
     return mutation.mutate(data);
