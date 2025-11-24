@@ -17,6 +17,7 @@ Root = TypedDict(
         "defined_observation": List[bridg.DefinedObservation],
         "defined_procedure": List[bridg.DefinedProcedure],
         "defined_substance_administration": List[bridg.DefinedSubstanceAdministration],
+        "organization": List[bridg.Organization],
         "performed_activity": List[bridg.PerformedActivity],
         "person": List[bridg.Person],
         "healthcare_facility": List[bridg.HealthcareFacility],
