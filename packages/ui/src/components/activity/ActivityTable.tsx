@@ -54,16 +54,18 @@ const ActivityTable = ({
   return (
     <Table highlightOnHover>
       <Table.Thead>
-        <Table.Th></Table.Th>
-        <Table.Th>{t("Activity.containingEpoch")}</Table.Th>
-        <Table.Th>{t("Activity.statusDate")}</Table.Th>
-        <Table.Th>{t("Activity.statusCode")}</Table.Th>
-        <Table.Th></Table.Th>
+        <Table.Tr>
+          <Table.Th></Table.Th>
+          <Table.Th>{t("Activity.containingEpoch")}</Table.Th>
+          <Table.Th>{t("Activity.statusDate")}</Table.Th>
+          <Table.Th>{t("Activity.statusCode")}</Table.Th>
+          <Table.Th></Table.Th>
+        </Table.Tr>
       </Table.Thead>
       <Table.Tbody>
         {activities.length === 0 ? (
           <Table.Tr>
-            <Table.Td px={0} style={{ textAlign: "center" }}>
+            <Table.Td colSpan={5} px={0} style={{ textAlign: "center" }}>
               {t("nodata")}
             </Table.Td>
           </Table.Tr>

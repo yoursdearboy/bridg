@@ -57,6 +57,7 @@
       "deathDate": "Дата смерти",
       "deathDateEstimatedIndicator": "Дата смерти приближенная",
       "deathIndicator": "Умер",
+      "defaultLabel": "Безымянный человек",
       "id": "ID",
       "primaryName": "ФИО"
     },
@@ -82,7 +83,7 @@
     },
     "PersonShowPage": {
       "actions": "Действия",
-      "breadcrumbDefault": "Неизвестный человек",
+      "breadcrumb": "Информация о человеке",
       "rename": "Переименовать"
     },
     "PostalAddress": {
@@ -94,20 +95,31 @@
       "use": "Тип",
       "zip": "Индекс"
     },
+    "Space": {
+      "defaultLabel": "Безымянное исследование"
+    },
+    "SpaceRedirecForm": {
+      "space": "Исследование",
+      "studySite": "Исследовательский центр"
+    },
     "Status": {
       "candidate": "Кандидат",
       "eligible": "Подходит по критериям",
       "follow-up": "Наблюдение",
       "ineligible": "Не подходит по критериям",
-      "not-registered": "Не зарегистрирован",
+      "not-registered": "Не включен",
       "off-study": "Завершил",
       "on-study": "Участвует",
       "on-study-intervention": "Участвует (интервенция)",
       "on-study-observation": "Участвует (наблюдение)",
-      "pending-on-study": "Ожидание включения",
+      "pending-on-study": "Ожидает участия",
       "potential-candidate": "Потенциальный кандидат",
       "screening": "Скрининг",
       "withdrawn": "Выбыл"
+    },
+    "StatusButton": {
+      "editModalTitle": "Изменение статуса",
+      "newStatus": "Новый статус"
     },
     "StudyProtocolVersion": {
       "defaultLabel": "Безымянное исследование"
@@ -117,7 +129,7 @@
     },
     "StudySubject": {
       "assignedStudySiteProtocolVersionRelationship": "Исследовательский центр",
-      "defaultLabel": "Безыменный пациент",
+      "defaultLabel": "Безымянный пациент",
       "performingBiologicEntity": "Человек",
       "performingOrganization": "Организация",
       "status": "Статус",
@@ -143,7 +155,9 @@
     },
     "SubjectShowPage": {
       "back": "Назад к списку",
-      "breadcrumbDefault": "Неизвестный пациент"
+      "breadcrumb": "Информация о пациенте",
+      "redirect": "Перенаправить",
+      "redirectModalTitle": "Скопировать пациента в другое исследование"
     },
     "TelecommunicationAddress": {
       "address": "Адрес",

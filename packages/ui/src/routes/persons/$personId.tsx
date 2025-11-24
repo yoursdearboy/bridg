@@ -12,7 +12,6 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown, IconPencil } from "@tabler/icons-react";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import type { Person } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { AddressCardWrapper } from "@/components/person/address/AddressCard";
@@ -25,9 +24,7 @@ import i18next from "@/i18n";
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
   beforeLoad: ({ params }) => ({
-    breadcrumb: ({ loaderData: person }: { loaderData: Person }) =>
-      person.primaryName?.label ||
-      i18next.t("PersonShowPage.breadcrumbDefault"),
+    breadcrumb: () => i18next.t("PersonShowPage.breadcrumb"),
     query: queryOptions({
       queryKey: ["person", params.personId],
       queryFn: () => api.persons.showPersonsPersonIdGet(params),
@@ -50,7 +47,7 @@ function PersonShowPage() {
       <Stack gap="md">
         <Group justify="space-between">
           <Title fw={500} order={2}>
-            {person.primaryName?.label || t("PersonShowPage.breadcrumbDefault")}
+            {person.primaryName?.label || t("Person.defaultLabel")}
           </Title>
           <Group gap="xs" align="flex-end">
             <Menu shadow="md" width={200} position="bottom-end">

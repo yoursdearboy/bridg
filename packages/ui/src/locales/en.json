@@ -57,6 +57,7 @@
       "deathDate": "Death date",
       "deathDateEstimatedIndicator": "Death date estimated indicator",
       "deathIndicator": "Death indicator",
+      "defaultLabel": "Unnamed person",
       "id": "ID",
       "primaryName": "Primary name"
     },
@@ -82,7 +83,7 @@
     },
     "PersonShowPage": {
       "actions": "Actions",
-      "breadcrumbDefault": "Anonymous person",
+      "breadcrumb": "Person info",
       "rename": "Rename"
     },
     "PostalAddress": {
@@ -94,6 +95,13 @@
       "use": "Use",
       "zip": "Zip"
     },
+    "Space": {
+      "defaultLabel": "Unnamed space"
+    },
+    "SpaceRedirecForm": {
+      "space": "Study",
+      "studySite": "Study site"
+    },
     "Status": {
       "candidate": "Candidate",
       "eligible": "Eligible",
@@ -104,10 +112,14 @@
       "on-study": "On study",
       "on-study-intervention": "On study (intervention)",
       "on-study-observation": "On study (observation)",
-      "pending-on-study": "On study (pending)",
+      "pending-on-study": "Pending on study",
       "potential-candidate": "Potential candidate",
       "screening": "Screening",
       "withdrawn": "Withdrawn"
+    },
+    "StatusButton": {
+      "editModalTitle": "Changing status",
+      "newStatus": "New status"
     },
     "StudyProtocolVersion": {
       "defaultLabel": "Unnamed study"
@@ -143,7 +155,9 @@
     },
     "SubjectShowPage": {
       "back": "Back to list",
-      "breadcrumbDefault": "Anonymous subject"
+      "breadcrumb": "Subject info",
+      "redirect": "Redirect",
+      "redirectModalTitle": "Copy subject to another study"
     },
     "TelecommunicationAddress": {
       "address": "Address",

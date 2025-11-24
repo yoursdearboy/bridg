@@ -237,7 +237,7 @@ exports[`new page renders correctly 1`] = `
                       data-variant="default"
                       id="mantine-uze695zgg"
                       readonly=""
-                      value="candidate"
+                      value="Candidate"
                     />
                     <div
                       class="m_82577fc2 mantine-Input-section mantine-Select-section"

@@ -32,7 +32,7 @@ function SubjectIndexPage() {
         <CopyButton value={subject.performingBiologicEntity?.id || ""}>
           {({ copy }) => (
             <span onClick={copy} title={subject.performingBiologicEntity?.id}>
-              {subject.performingBiologicEntity?.id.slice(0, 8)}…
+              {subject.id.slice(0, 8)}…
             </span>
           )}
         </CopyButton>
@@ -68,7 +68,7 @@ function SubjectIndexPage() {
           : t("na")}
       </Table.Td>
       <Table.Td>
-        <Text>{t(`Status.${subject.status!}`)}</Text>
+        <Text>{subject.status ? t(`Status.${subject.status}`) : t("no")}</Text>
       </Table.Td>
       <Table.Td>
         {subject.statusDate
