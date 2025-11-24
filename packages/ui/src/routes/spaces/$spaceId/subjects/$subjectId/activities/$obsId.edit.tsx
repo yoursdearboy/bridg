@@ -65,7 +65,7 @@ function EditObservationComponent() {
               <EditObservationWrapper
                 spaceId={spaceId}
                 subjectId={subjectId}
-                activity={activity as PerformedObservation}
+                activity={activity}
                 definedActivity={activity.instantiatedDefinedActivity!}
               />
             </>
