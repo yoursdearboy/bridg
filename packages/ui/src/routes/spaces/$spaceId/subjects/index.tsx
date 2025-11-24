@@ -1,4 +1,4 @@
-import { Group, Stack, Table, Text } from "@mantine/core";
+import { CopyButton, Group, Stack, Table, Text } from "@mantine/core";
 import { IconEye } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
@@ -22,8 +22,20 @@ function SubjectIndexPage() {
 
   const rows = subjects.map((subject) => (
     <Table.Tr key={subject.id}>
-      <Table.Td>
-        <Text>{subject.performingBiologicEntity?.id}</Text>
+      <Table.Td
+        style={{
+          maxWidth: 100,
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+        }}
+      >
+        <CopyButton value={subject.performingBiologicEntity?.id || ""}>
+          {({ copy }) => (
+            <span onClick={copy} title={subject.performingBiologicEntity?.id}>
+              {subject.performingBiologicEntity?.id.slice(0, 8)}…
+            </span>
+          )}
+        </CopyButton>
       </Table.Td>
       <Table.Td>
         <Text>{subject.performingBiologicEntity?.primaryName?.label}</Text>
@@ -56,7 +68,7 @@ function SubjectIndexPage() {
           : t("na")}
       </Table.Td>
       <Table.Td>
-        <Text>{subject.status?.trim()}</Text>
+        <Text>{t(`Status.${subject.status!}`)}</Text>
       </Table.Td>
       <Table.Td>
         {subject.statusDate
