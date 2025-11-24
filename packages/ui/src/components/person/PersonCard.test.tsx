@@ -28,7 +28,7 @@ describe("PersonCard", () => {
     expect(
       (
         await renderComponentInRoute(
-          <PersonCard person={person} showLink={true} />
+          <PersonCard person={person} link="forward" />
         )
       ).asFragment()
     ).toMatchSnapshot();

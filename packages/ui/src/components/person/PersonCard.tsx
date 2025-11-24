@@ -16,13 +16,14 @@ import ButtonLink from "@/components/ButtonLink";
 import { InfoRow } from "@/components/InfoRow";
 import { EditPersonForm } from "@/components/person/EditPersonForm";
 import { Route as personRoute } from "@/routes/persons/$personId";
+import BackButton from "../BackButton";
 
 interface PersonCardProps {
   person: Person;
-  showLink: boolean;
+  link: "forward" | "backward";
 }
 
-export const PersonCard = ({ person, showLink }: PersonCardProps) => {
+export const PersonCard = ({ person, link }: PersonCardProps) => {
   const { t } = useTranslation();
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -36,7 +37,7 @@ export const PersonCard = ({ person, showLink }: PersonCardProps) => {
             </Text>
             <Group>
               <Button.Group>
-                {showLink ? (
+                {link == "forward" ? (
                   <ButtonLink
                     to={personRoute.to}
                     params={{ personId: person.id }}
@@ -45,7 +46,11 @@ export const PersonCard = ({ person, showLink }: PersonCardProps) => {
                   >
                     {t("PersonCard.link")}
                   </ButtonLink>
-                ) : null}
+                ) : (
+                  <BackButton variant="outline" size="compact-sm">
+                    {t("back")}
+                  </BackButton>
+                )}
                 <Button variant="outline" size="compact-sm" onClick={open}>
                   {t("PersonCard.edit")}
                 </Button>

@@ -34,7 +34,7 @@ function SubjectShowPage() {
           {subject.performingBiologicEntity && (
             <PersonCard
               person={subject.performingBiologicEntity}
-              showLink={true}
+              link="forward"
             />
           )}
         </Grid.Col>

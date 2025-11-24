@@ -156,6 +156,7 @@
       "title": "Person telecommunication addresses"
     },
     "add": "Add",
+    "back": "Back",
     "branding": "BRIDG",
     "cancel": "Cancel",
     "dayjsDuration": "{{val, dayjsDuration}}",

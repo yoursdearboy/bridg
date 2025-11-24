@@ -156,6 +156,7 @@
       "title": "Контакты"
     },
     "add": "Добавить",
+    "back": "Назад",
     "branding": "BRIDG",
     "cancel": "Отменить",
     "dayjsDuration": "{{val, dayjsDuration}}",
