@@ -150,15 +150,8 @@
     "StudySite": {
       "defaultLabel": "Unnamed site"
     },
-    "NewActivityRoute": {
-      "breadcrumbDefault": "Unkown activity"
-    },
     "ActivityCard": {
       "title": "Activities"
-    },
-    "EditActivityRoute": {
-      "defaultBreadcrumb": "Editing unkown activity",
-      "unnamed": "Unanmed activity"
     },
     "Status": {
       "candidate": "candidate",
@@ -179,6 +172,9 @@
       "F": "Female",
       "M": "Male",
       "U": "Unknown"
+    },
+    "Activity": {
+      "defaultLabel": "Unnamed activity"
     }
   }
 }

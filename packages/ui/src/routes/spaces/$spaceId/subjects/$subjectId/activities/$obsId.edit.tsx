@@ -1,6 +1,7 @@
 import { Grid, Group, Stack, Text, Title } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import type { DefinedActivityUnion } from "api-ts";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
@@ -11,7 +12,13 @@ export const Route = createFileRoute(
 )({
   component: EditActivityComponent,
   beforeLoad: ({ params }) => ({
-    breadcrumb: () => i18next.t("EditActivityRoute.defaultBreadcrumb"),
+    breadcrumb: ({
+      loaderData,
+    }: {
+      loaderData: { definedActivity: DefinedActivityUnion };
+    }) =>
+      loaderData.definedActivity.nameCode.displayName ||
+      i18next.t("Activity.defaultLabel"),
     query: queryOptions({
       queryKey: ["subject", params.subjectId, "activity", params.obsId],
       queryFn: async () => {
@@ -53,8 +60,7 @@ function EditActivityComponent() {
     <Stack gap="md">
       <Group justify="space-between">
         <Title order={2}>
-          {definedActivity.nameCode.displayName ||
-            t("EditActivityRoute.unnamed")}
+          {definedActivity.nameCode.displayName || t("Activity.defaultLabel")}
         </Title>
       </Group>
 

@@ -97,7 +97,8 @@ const ActivityTableRow = ({
   return (
     <Table.Tr ref={ref}>
       <Table.Td>
-        {activity.instantiatedDefinedActivity?.nameCode.displayName}
+        {activity.instantiatedDefinedActivity?.nameCode.displayName ||
+          t("Activity.defaultLabel")}
       </Table.Td>
       <Table.Td>{t("intlDateTime", { val: activity.statusDate })}</Table.Td>
       <Table.Td width={60}>

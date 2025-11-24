@@ -149,15 +149,8 @@
     "StudySite": {
       "defaultLabel": "Безымянный центр"
     },
-    "NewActivityRoute": {
-      "breadcrumbDefault": "Неизвестная процедура"
-    },
     "ActivityCard": {
       "title": "Процедуры"
-    },
-    "EditActivityRoute": {
-      "defaultBreadcrumb": "Редактирование неизвестной процедуры",
-      "unnamed": "Неизвестная процедура"
     },
     "Status": {
       "candidate": "Кандидат",
@@ -178,6 +171,9 @@
       "F": "Женщина",
       "M": "Мужчина",
       "U": "Не известно"
+    },
+    "Activity": {
+      "defaultLabel": "Безымянная активность"
     }
   }
 }
