@@ -1,157 +1,93 @@
 {
   "translation": {
-    "submit": "Submit",
-    "cancel": "Cancel",
-    "nodata": "No data",
-    "edit": "Edit",
-    "loading": "Loading...",
-    "add": "Add",
-    "select": "Select",
-    "enter": "enter",
-    "error": "Error",
-    "errorMessage": "An error has occured: {{error}}",
-    "intlDate": "{{val}}",
-    "intlDateTime": "{{val, datetime}}",
-    "dayjsDuration": "{{val, dayjsDuration}}",
-    "na": "N/A",
-    "yes": "Yes",
-    "no": "No",
-    "extra": "Extra",
-    "fieldRequiredMessage": "{{fieldName}} is required",
-    "system": {
-      "title": "BRIDG"
+    "Activity": {
+      "defaultLabel": "Unnamed activity"
     },
-    "PerformingBiologicEntitySelect": {
-      "text": "Select existing biologic entity:"
+    "ActivityCard": {
+      "title": "Activities"
+    },
+    "Address": {
+      "building": "Building",
+      "country": "Country",
+      "municipality": "Municipality",
+      "state": "State",
+      "street": "Street",
+      "zip": "Zip"
+    },
+    "AddressCard": {
+      "title": "Addresses"
+    },
+    "AddressesTable": {
+      "deleteConfirm": "Do you confirm address deletion?",
+      "title": "Person addresses"
+    },
+    "Gender": {
+      "F": "Female",
+      "M": "Male",
+      "U": "Unknown"
     },
     "Name": {
-      "use": "use",
+      "defaultLabel": "Unnamed",
       "family": "Family name",
       "given": "Given name",
       "middle": "Middle name",
       "patronymic": "Patronymic",
       "prefix": "Prefix",
       "suffix": "Suffix",
-      "defaultLabel": "Unnamed"
-    },
-    "Address": {
-      "street": "Street",
-      "building": "Building",
-      "country": "Country",
-      "municipality": "Municipality",
-      "state": "State",
-      "zip": "Zip"
-    },
-    "SubjectIndexPage": {
-      "info": "Info",
-      "breadcrumb": "Patients",
-      "patients": "Patients",
-      "newPatient": "New patient",
-      "actions": "Actions"
-    },
-    "SubjectNewPage": {
-      "breadcrumb": "New Patient"
-    },
-    "SubjectInfoCard": {
-      "title": "Subject information",
-      "person": "Person",
-      "unknown": "Unkown",
-      "personDetails": "Person details",
-      "organizationDetails": "Organization details"
-    },
-    "PersonIndexPage": {
-      "breadcrumb": "Persons"
-    },
-    "SubjectShowPage": {
-      "title": "Patient information",
-      "back": "Back to list",
-      "toPerson": "Go to person page",
-      "breadcrumbDefault": "Anonymous subject"
-    },
-    "PersonShowPage": {
-      "title": "Person information",
-      "edit": "Edit person",
-      "actions": "Actions",
-      "breadcrumbDefault": "Anonymous person",
-      "rename": "Rename"
-    },
-    "PersonEditPage": {
-      "title": "Editing:",
-      "cancel": "Cancel",
-      "personalInfo": "Personal information",
-      "primaryNamePlaceholder": "John Doe",
-      "deceased": "Deceased",
-      "breadcrumb": "Editing",
-      "editModalTitile": "Person editting"
-    },
-    "PersonCard": {
-      "deceased": "Deceased",
-      "notDeceased": "Not deceased",
-      "dateNotSpecified": "Date not specified"
+      "use": "use"
     },
     "NamesCard": {
       "title": "Person names"
-    },
-    "AddressCard": {
-      "title": "Addresses"
-    },
-    "TelecommunicationAddressesTable": {
-      "title": "Person telecommunication addresses"
-    },
-    "AddressesTable": {
-      "title": "Person addresses",
-      "deleteConfirm": "Do you confirm address deletion?"
-    },
-    "Person": {
-      "id": "ID",
-      "administrativeGenderCode": "Gender",
-      "birthDate": "Birth date",
-      "deathDate": "Death date",
-      "deathDateEstimatedIndicator": "Death date estimated indicator",
-      "deathIndicator": "Death indicator",
-      "primaryName": "Primary name",
-      "age": "Age"
     },
     "Organization": {
       "description": "Description",
       "primaryName": "Primary name"
     },
-    "TelecommunicationAddress": {
-      "use": "Use",
-      "scheme": "Scheme",
-      "address": "Address"
+    "PerformingBiologicEntitySelect": {
+      "text": "Select existing biologic entity:"
     },
-    "TelecommunicationAddressScheme": {
-      "ftp": "Website (FTP)",
-      "http": "Website (HTTP)",
-      "mailto": "Email",
-      "tel": "Telephone"
+    "Person": {
+      "administrativeGenderCode": "Gender",
+      "age": "Age",
+      "birthDate": "Birth date",
+      "deathDate": "Death date",
+      "deathDateEstimatedIndicator": "Death date estimated indicator",
+      "deathIndicator": "Death indicator",
+      "id": "ID",
+      "primaryName": "Primary name"
+    },
+    "PersonCard": {
+      "dateNotSpecified": "Date not specified",
+      "deceased": "Deceased",
+      "notDeceased": "Not deceased"
+    },
+    "PersonEditPage": {
+      "breadcrumb": "Editing",
+      "cancel": "Cancel",
+      "deceased": "Deceased",
+      "editModalTitile": "Person editting",
+      "personalInfo": "Personal information",
+      "primaryNamePlaceholder": "John Doe",
+      "title": "Editing:"
+    },
+    "PersonIndexPage": {
+      "breadcrumb": "Persons"
+    },
+    "PersonShowPage": {
+      "actions": "Actions",
+      "breadcrumbDefault": "Anonymous person",
+      "edit": "Edit person",
+      "rename": "Rename",
+      "title": "Person information"
     },
     "PostalAddress": {
-      "use": "Use",
-      "street": "Street",
       "building": "Building",
       "country": "Country",
       "municipality": "Municipality",
       "state": "State",
+      "street": "Street",
+      "use": "Use",
       "zip": "Zip"
-    },
-    "StudySubject": {
-      "status": "Status",
-      "statusDate": "Status date",
-      "performingBiologicEntity": "Person",
-      "performingOrganization": "Organization",
-      "type": "Type",
-      "assignedStudySiteProtocolVersionRelationship": "Study sites"
-    },
-    "StudyProtocolVersion": {
-      "defaultLabel": "Unnamed study"
-    },
-    "StudySite": {
-      "defaultLabel": "Unnamed site"
-    },
-    "ActivityCard": {
-      "title": "Activities"
     },
     "Status": {
       "candidate": "candidate",
@@ -168,13 +104,75 @@
       "screening": "Screening",
       "withdrawn": "Withdrawn"
     },
-    "Gender": {
-      "F": "Female",
-      "M": "Male",
-      "U": "Unknown"
+    "StudyProtocolVersion": {
+      "defaultLabel": "Unnamed study"
     },
-    "Activity": {
-      "defaultLabel": "Unnamed activity"
-    }
+    "StudySite": {
+      "defaultLabel": "Unnamed site"
+    },
+    "StudySubject": {
+      "assignedStudySiteProtocolVersionRelationship": "Study sites",
+      "performingBiologicEntity": "Person",
+      "performingOrganization": "Organization",
+      "status": "Status",
+      "statusDate": "Status date",
+      "type": "Type"
+    },
+    "SubjectIndexPage": {
+      "actions": "Actions",
+      "breadcrumb": "Patients",
+      "info": "Info",
+      "newPatient": "New patient",
+      "patients": "Patients"
+    },
+    "SubjectInfoCard": {
+      "organizationDetails": "Organization details",
+      "person": "Person",
+      "personDetails": "Person details",
+      "title": "Subject information",
+      "unknown": "Unkown"
+    },
+    "SubjectNewPage": {
+      "breadcrumb": "New Patient"
+    },
+    "SubjectShowPage": {
+      "back": "Back to list",
+      "breadcrumbDefault": "Anonymous subject",
+      "title": "Patient information",
+      "toPerson": "Go to person page"
+    },
+    "TelecommunicationAddress": {
+      "address": "Address",
+      "scheme": "Scheme",
+      "use": "Use"
+    },
+    "TelecommunicationAddressScheme": {
+      "ftp": "Website (FTP)",
+      "http": "Website (HTTP)",
+      "mailto": "Email",
+      "tel": "Telephone"
+    },
+    "TelecommunicationAddressesTable": {
+      "title": "Person telecommunication addresses"
+    },
+    "add": "Add",
+    "branding": "BRIDG",
+    "cancel": "Cancel",
+    "dayjsDuration": "{{val, dayjsDuration}}",
+    "edit": "Edit",
+    "enter": "enter",
+    "error": "Error",
+    "errorMessage": "An error has occured: {{error}}",
+    "extra": "Extra",
+    "fieldRequiredMessage": "{{fieldName}} is required",
+    "intlDate": "{{val}}",
+    "intlDateTime": "{{val, datetime}}",
+    "loading": "Loading...",
+    "na": "N/A",
+    "no": "No",
+    "nodata": "No data",
+    "select": "Select",
+    "submit": "Submit",
+    "yes": "Yes"
   }
 }

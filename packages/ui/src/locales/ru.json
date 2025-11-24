@@ -1,156 +1,92 @@
 {
   "translation": {
-    "submit": "Сохранить",
-    "nodata": "Нет данных",
-    "cancel": "Отменить",
-    "edit": "Редактировать",
-    "loading": "Загрузить...",
-    "add": "Добавить",
-    "select": "Выберите",
-    "enter": "Введите",
-    "error": "Ошибка",
-    "errorMessage": "Произошла ошибка: {{error}}",
-    "intlDate": "{{val}}",
-    "intlDateTime": "{{val, datetime}}",
-    "dayjsDuration": "{{val, dayjsDuration}}",
-    "na": "N/A",
-    "yes": "Да",
-    "no": "Нет",
-    "extra": "Дополнительно",
-    "fieldRequiredMessage": "Поле \"{{fieldName}}\" необходимо заполнить",
-    "system": {
-      "title": "BRIDG"
+    "Activity": {
+      "defaultLabel": "Безымянная активность"
     },
-    "PerformingBiologicEntitySelect": {
-      "text": "Выберите существующую запись:"
+    "ActivityCard": {
+      "title": "Процедуры"
+    },
+    "Address": {
+      "building": "Здание",
+      "country": "Страна",
+      "municipality": "Муниципалитет",
+      "state": "Штат",
+      "street": "Улица",
+      "zip": "Индекс"
+    },
+    "AddressCard": {
+      "title": "Адреса"
+    },
+    "AddressesTable": {
+      "deleteConfirm": "Вы действительно хотите удалить адрес?",
+      "title": "Адреса"
+    },
+    "Gender": {
+      "F": "Женщина",
+      "M": "Мужчина",
+      "U": "Не известно"
     },
     "Name": {
-      "use": "use",
+      "defaultLabel": "Без имени",
       "family": "Фамилия",
       "given": "Имя",
       "middle": "Отчество",
       "patronymic": "Отчество",
       "prefix": "Префикс",
       "suffix": "Суффикс",
-      "defaultLabel": "Без имени"
-    },
-    "Address": {
-      "street": "Улица",
-      "building": "Здание",
-      "country": "Страна",
-      "municipality": "Муниципалитет",
-      "state": "Штат",
-      "zip": "Индекс"
-    },
-    "SubjectIndexPage": {
-      "breadcrumb": "Пациенты",
-      "info": "Информация",
-      "patients": "Пациенты",
-      "newPatient": "Новый пациент",
-      "actions": "Действия"
-    },
-    "SubjectNewPage": {
-      "breadcrumb": "Новый пациент"
-    },
-    "SubjectInfoCard": {
-      "title": "Информация об объект наблюдения",
-      "person": "Человек",
-      "unknown": "Неизвестно",
-      "personDetails": "Данные человека",
-      "organizationDetails": "Данные организации"
-    },
-    "PersonIndexPage": {
-      "breadcrumb": "Люди"
-    },
-    "SubjectShowPage": {
-      "title": "Данные пациента",
-      "back": "Назад к списку",
-      "toPerson": "На страницу человека",
-      "breadcrumbDefault": "Неизвестный пациент"
-    },
-    "PersonShowPage": {
-      "title": "Данные человека",
-      "actions": "Действия",
-      "edit": "Редактировать",
-      "breadcrumbDefault": "Неизвестный человек",
-      "rename": "Переименовать"
-    },
-    "PersonEditPage": {
-      "title": "Редактирование:",
-      "personalInfo": "Личная информация",
-      "primaryNamePlaceholder": "Иван Иванов",
-      "deceased": "Умерший",
-      "breadcrumb": "Редактирование",
-      "editModalTitile": "Редактирование данных человека"
-    },
-    "PersonCard": {
-      "deceased": "Умерший",
-      "notDeceased": "Живой",
-      "dateNotSpecified": "Дата не указана"
+      "use": "use"
     },
     "NamesCard": {
       "title": "Имена"
-    },
-    "AddressCard": {
-      "title": "Адреса"
-    },
-    "TelecommunicationAddressesTable": {
-      "title": "Контакты"
-    },
-    "AddressesTable": {
-      "title": "Адреса",
-      "deleteConfirm": "Вы действительно хотите удалить адрес?"
-    },
-    "TelecommunicationAddressScheme": {
-      "ftp": "Веб сайт (FTP)",
-      "http": "Веб сайт (HTTP)",
-      "mailto": "Email",
-      "tel": "Телефон"
-    },
-    "Person": {
-      "id": "ID",
-      "administrativeGenderCode": "Пол",
-      "birthDate": "Дата рождения",
-      "deathDate": "Дата смерта",
-      "deathDateEstimatedIndicator": "Предполагаемый показатель даты смерти",
-      "deathIndicator": "Показатель смертности",
-      "primaryName": "Текущее имя",
-      "age": "Возраст"
     },
     "Organization": {
       "description": "Описание",
       "primaryName": "Текущее название"
     },
-    "TelecommunicationAddress": {
-      "use": "Тип",
-      "scheme": "Схема",
-      "address": "Адрес"
+    "PerformingBiologicEntitySelect": {
+      "text": "Выберите существующую запись:"
+    },
+    "Person": {
+      "administrativeGenderCode": "Пол",
+      "age": "Возраст",
+      "birthDate": "Дата рождения",
+      "deathDate": "Дата смерта",
+      "deathDateEstimatedIndicator": "Предполагаемый показатель даты смерти",
+      "deathIndicator": "Показатель смертности",
+      "id": "ID",
+      "primaryName": "Текущее имя"
+    },
+    "PersonCard": {
+      "dateNotSpecified": "Дата не указана",
+      "deceased": "Умерший",
+      "notDeceased": "Живой"
+    },
+    "PersonEditPage": {
+      "breadcrumb": "Редактирование",
+      "deceased": "Умерший",
+      "editModalTitile": "Редактирование данных человека",
+      "personalInfo": "Личная информация",
+      "primaryNamePlaceholder": "Иван Иванов",
+      "title": "Редактирование:"
+    },
+    "PersonIndexPage": {
+      "breadcrumb": "Люди"
+    },
+    "PersonShowPage": {
+      "actions": "Действия",
+      "breadcrumbDefault": "Неизвестный человек",
+      "edit": "Редактировать",
+      "rename": "Переименовать",
+      "title": "Данные человека"
     },
     "PostalAddress": {
-      "use": "Тип",
-      "street": "Улица",
       "building": "Здание",
       "country": "Страна",
       "municipality": "Муниципалитет",
       "state": "Штат",
+      "street": "Улица",
+      "use": "Тип",
       "zip": "Индекс"
-    },
-    "StudySubject": {
-      "status": "Статус",
-      "statusDate": "Дата статуса",
-      "performingBiologicEntity": "Человек",
-      "performingOrganization": "Организация",
-      "type": "Тип",
-      "assignedStudySiteProtocolVersionRelationship": "Исследовательский центр"
-    },
-    "StudyProtocolVersion": {
-      "defaultLabel": "Безымянное исследование"
-    },
-    "StudySite": {
-      "defaultLabel": "Безымянный центр"
-    },
-    "ActivityCard": {
-      "title": "Процедуры"
     },
     "Status": {
       "candidate": "Кандидат",
@@ -167,13 +103,75 @@
       "screening": "Обследуется",
       "withdrawn": "Отклонен"
     },
-    "Gender": {
-      "F": "Женщина",
-      "M": "Мужчина",
-      "U": "Не известно"
+    "StudyProtocolVersion": {
+      "defaultLabel": "Безымянное исследование"
     },
-    "Activity": {
-      "defaultLabel": "Безымянная активность"
-    }
+    "StudySite": {
+      "defaultLabel": "Безымянный центр"
+    },
+    "StudySubject": {
+      "assignedStudySiteProtocolVersionRelationship": "Исследовательский центр",
+      "performingBiologicEntity": "Человек",
+      "performingOrganization": "Организация",
+      "status": "Статус",
+      "statusDate": "Дата статуса",
+      "type": "Тип"
+    },
+    "SubjectIndexPage": {
+      "actions": "Действия",
+      "breadcrumb": "Пациенты",
+      "info": "Информация",
+      "newPatient": "Новый пациент",
+      "patients": "Пациенты"
+    },
+    "SubjectInfoCard": {
+      "organizationDetails": "Данные организации",
+      "person": "Человек",
+      "personDetails": "Данные человека",
+      "title": "Информация об объект наблюдения",
+      "unknown": "Неизвестно"
+    },
+    "SubjectNewPage": {
+      "breadcrumb": "Новый пациент"
+    },
+    "SubjectShowPage": {
+      "back": "Назад к списку",
+      "breadcrumbDefault": "Неизвестный пациент",
+      "title": "Данные пациента",
+      "toPerson": "На страницу человека"
+    },
+    "TelecommunicationAddress": {
+      "address": "Адрес",
+      "scheme": "Схема",
+      "use": "Тип"
+    },
+    "TelecommunicationAddressScheme": {
+      "ftp": "Веб сайт (FTP)",
+      "http": "Веб сайт (HTTP)",
+      "mailto": "Email",
+      "tel": "Телефон"
+    },
+    "TelecommunicationAddressesTable": {
+      "title": "Контакты"
+    },
+    "add": "Добавить",
+    "branding": "BRIDG",
+    "cancel": "Отменить",
+    "dayjsDuration": "{{val, dayjsDuration}}",
+    "edit": "Редактировать",
+    "enter": "Введите",
+    "error": "Ошибка",
+    "errorMessage": "Произошла ошибка: {{error}}",
+    "extra": "Дополнительно",
+    "fieldRequiredMessage": "Поле \"{{fieldName}}\" необходимо заполнить",
+    "intlDate": "{{val}}",
+    "intlDateTime": "{{val, datetime}}",
+    "loading": "Загрузить...",
+    "na": "N/A",
+    "no": "Нет",
+    "nodata": "Нет данных",
+    "select": "Выберите",
+    "submit": "Сохранить",
+    "yes": "Да"
   }
 }
