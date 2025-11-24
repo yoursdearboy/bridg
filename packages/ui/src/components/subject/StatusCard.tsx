@@ -2,14 +2,12 @@ import { Alert, Button, Group, Modal, Radio, Stack } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
-import { IconPencil } from "@tabler/icons-react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { Status, type StudySubject, type StudySubjectData } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { Route as SubjectRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/index";
-import { statusColor } from "./StatusColor";
 
 interface SubjectCardProps {
   spaceId: string;
@@ -26,9 +24,8 @@ export function StatusCard({ spaceId, subjectId, subject }: SubjectCardProps) {
         size="xs"
         color={statusColor(subject.status)}
         onClick={() => subject.status != Status.Ineligible && open()}
-        rightSection={<IconPencil size={16} />}
       >
-        {subject.status ? t(`Status.${subject.status}`) : t("Status.null")}
+        {subject.status ? t(`Status.${subject.status}`) : t("no")}
       </Button>
       <Modal
         opened={opened}
@@ -133,15 +130,10 @@ const transitionFrom = (status: Status | null) => {
       return [Status.Candidate];
     case Status.Candidate:
       return [Status.Screening, Status.Eligible];
-    case Status.Eligible:
-      return [
-        Status.Eligible,
-        Status.Withdrawn,
-        Status.Candidate,
-        Status.PendingOnStudy,
-      ];
     case Status.Screening:
-      return [Status.Withdrawn, Status.Eligible, Status.Ineligible];
+      return [Status.Eligible, Status.Ineligible, Status.Withdrawn];
+    case Status.Eligible:
+      return [Status.PendingOnStudy, Status.Candidate, Status.Withdrawn];
     case Status.PendingOnStudy:
       return [Status.OnStudy, Status.NotRegistered, Status.Ineligible];
     case Status.OnStudy:
@@ -157,5 +149,20 @@ const transitionFrom = (status: Status | null) => {
       return [Status.OffStudy];
     default:
       return [];
+  }
+};
+
+const statusColor = (status: Status | null): string => {
+  switch (status) {
+    case Status.Withdrawn:
+    case Status.NotRegistered:
+    case Status.Ineligible:
+      return "red";
+    case Status.OnStudy:
+    case Status.OnStudyIntervention:
+    case Status.OnStudyObservation:
+      return "green";
+    default:
+      return "blue";
   }
 };

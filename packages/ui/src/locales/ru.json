@@ -107,12 +107,11 @@
       "follow-up": "Наблюдение",
       "ineligible": "Не подходит по критериям",
       "not-registered": "Не зарегистрирован",
-      "null": "Нет",
       "off-study": "Завершил",
       "on-study": "Участвует",
       "on-study-intervention": "Участвует (интервенция)",
       "on-study-observation": "Участвует (наблюдение)",
-      "pending-on-study": "Ожидание включения",
+      "pending-on-study": "Ожидает участия",
       "potential-candidate": "Потенциальный кандидат",
       "screening": "Скрининг",
       "withdrawn": "Выбыл"

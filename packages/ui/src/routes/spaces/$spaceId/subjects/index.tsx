@@ -68,7 +68,7 @@ function SubjectIndexPage() {
           : t("na")}
       </Table.Td>
       <Table.Td>
-        <Text>{t(`Status.${subject.status!}`)}</Text>
+        <Text>{subject.status ? t(`Status.${subject.status}`) : t("no")}</Text>
       </Table.Td>
       <Table.Td>
         {subject.statusDate

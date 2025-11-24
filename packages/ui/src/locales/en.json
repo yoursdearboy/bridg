@@ -107,12 +107,11 @@
       "follow-up": "Follow up",
       "ineligible": "Ineligible",
       "not-registered": "Not registered",
-      "null": "No",
       "off-study": "Off study",
       "on-study": "On study",
       "on-study-intervention": "On study (intervention)",
       "on-study-observation": "On study (observation)",
-      "pending-on-study": "On study (pending)",
+      "pending-on-study": "Pending on study",
       "potential-candidate": "Potential candidate",
       "screening": "Screening",
       "withdrawn": "Withdrawn"
