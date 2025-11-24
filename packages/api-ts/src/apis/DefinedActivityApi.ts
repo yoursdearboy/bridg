@@ -15,14 +15,14 @@
 
 import * as runtime from '../runtime';
 import type {
+  DefinedActivityUnion,
   HTTPValidationError,
-  ResponseShowDefinedActivityAIdGet,
 } from '../models/index';
 import {
+    DefinedActivityUnionFromJSON,
+    DefinedActivityUnionToJSON,
     HTTPValidationErrorFromJSON,
     HTTPValidationErrorToJSON,
-    ResponseShowDefinedActivityAIdGetFromJSON,
-    ResponseShowDefinedActivityAIdGetToJSON,
 } from '../models/index';
 
 export interface ShowDefinedActivityAIdGetRequest {
@@ -38,7 +38,7 @@ export class DefinedActivityApi extends runtime.BaseAPI {
     /**
      * Show
      */
-    async showDefinedActivityAIdGetRaw(requestParameters: ShowDefinedActivityAIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ResponseShowDefinedActivityAIdGet>> {
+    async showDefinedActivityAIdGetRaw(requestParameters: ShowDefinedActivityAIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DefinedActivityUnion>> {
         if (requestParameters['aId'] == null) {
             throw new runtime.RequiredError(
                 'aId',
@@ -65,13 +65,13 @@ export class DefinedActivityApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ResponseShowDefinedActivityAIdGetFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => DefinedActivityUnionFromJSON(jsonValue));
     }
 
     /**
      * Show
      */
-    async showDefinedActivityAIdGet(requestParameters: ShowDefinedActivityAIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ResponseShowDefinedActivityAIdGet> {
+    async showDefinedActivityAIdGet(requestParameters: ShowDefinedActivityAIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DefinedActivityUnion> {
         const response = await this.showDefinedActivityAIdGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
