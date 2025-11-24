@@ -8,6 +8,7 @@
     "add": "Add",
     "select": "Select",
     "enter": "enter",
+    "error": "Error",
     "errorMessage": "An error has occured: {{error}}",
     "intlDate": "{{val}}",
     "intlDateTime": "{{val, datetime}}",
@@ -64,7 +65,7 @@
     "SubjectShowPage": {
       "title": "Patient information",
       "back": "Back to list",
-      "toPerson": "Go to",
+      "toPerson": "Go to person page",
       "breadcrumbDefault": "Anonymous subject"
     },
     "PersonShowPage": {
@@ -149,6 +150,9 @@
     "StudySite": {
       "defaultLabel": "Unnamed site"
     },
+    "ActivityCard": {
+      "title": "Activities"
+    },
     "Status": {
       "candidate": "candidate",
       "eligible": "Eligible",
@@ -168,6 +172,9 @@
       "F": "Female",
       "M": "Male",
       "U": "Unknown"
+    },
+    "Activity": {
+      "defaultLabel": "Unnamed activity"
     }
   }
 }

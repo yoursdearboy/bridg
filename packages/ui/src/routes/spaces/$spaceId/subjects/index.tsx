@@ -1,4 +1,5 @@
 import { Group, Stack, Table, Text } from "@mantine/core";
+import { IconEye } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
@@ -64,10 +65,12 @@ function SubjectIndexPage() {
       </Table.Td>
       <Table.Td>
         <ButtonLink
+          px="xs"
+          size="compact-lg"
           to={infoRoute.to}
           params={{ spaceId, subjectId: subject.id }}
         >
-          {t("SubjectIndexPage.info")}
+          <IconEye size={16} />
         </ButtonLink>
       </Table.Td>
     </Table.Tr>
