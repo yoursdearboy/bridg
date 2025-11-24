@@ -7,7 +7,7 @@ import {
   type PerformedObservation,
 } from "api-ts";
 import { matchObservationResult } from "@/util";
-import { Input } from "./ObservationResult";
+import { ObservatonResultForm } from "./ObservationResultForm";
 
 interface ActivityFormProps {
   definedActivity: DefinedActivityUnion;
@@ -57,7 +57,7 @@ const ObservationForm = ({
         definedActivity.producedDefinedObservationResult,
         performedActivity?.resultedPerformedObservationResult || []
       ).map(({ definedObservationResult, performedObservationResult }) => (
-        <Input
+        <ObservatonResultForm
           definedObservationResult={definedObservationResult}
           performedObservationResult={performedObservationResult}
         />
