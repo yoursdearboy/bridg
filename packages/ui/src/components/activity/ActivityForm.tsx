@@ -1,4 +1,4 @@
-import { Card, Stack } from "@mantine/core";
+import { Card, Stack, Text } from "@mantine/core";
 import {
   instanceOfDefinedObservation,
   type DefinedActivityUnion,
@@ -6,6 +6,7 @@ import {
   type PerformedActivityUnion,
   type PerformedObservation,
 } from "api-ts";
+import { useTranslation } from "react-i18next";
 import { matchObservationResult } from "@/util";
 import { ObservatonResultForm } from "./ObservationResultForm";
 
@@ -18,12 +19,20 @@ export const ActivityForm = ({
   definedActivity,
   performedActivity,
 }: ActivityFormProps) => {
+  const { t } = useTranslation();
   return (
     <Card withBorder shadow="sm" radius="md">
-      <ActivityFormSwitch
-        definedActivity={definedActivity}
-        performedActivity={performedActivity}
-      />
+      <Card.Section withBorder inheritPadding py="xs">
+        <Text fw={500}>
+          {definedActivity.nameCode.displayName || t("Activity.defaultLabel")}
+        </Text>
+      </Card.Section>
+      <Card.Section inheritPadding py="xs">
+        <ActivityFormSwitch
+          definedActivity={definedActivity}
+          performedActivity={performedActivity}
+        />
+      </Card.Section>
     </Card>
   );
 };

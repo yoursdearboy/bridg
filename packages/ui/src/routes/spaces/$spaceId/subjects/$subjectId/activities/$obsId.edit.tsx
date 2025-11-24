@@ -65,7 +65,7 @@ function EditActivityComponent() {
       </Group>
 
       <Grid>
-        <Grid.Col span={{ base: 12, xs: 8, md: 4, lg: 3 }}>
+        <Grid.Col span={{ base: 12, xs: 6, md: 6, lg: 6 }}>
           <ActivityForm
             definedActivity={definedActivity}
             performedActivity={performedActivity}

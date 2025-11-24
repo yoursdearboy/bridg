@@ -69,6 +69,7 @@ const PhysicalQuantityInput = ({
         {label}, {unit}
       </>
     }
+    styles={{ input: { width: 200 } }}
     hideControls
   />
 );
