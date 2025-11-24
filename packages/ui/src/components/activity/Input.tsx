@@ -63,7 +63,7 @@ const PhysicalQuantityInput = ({
   unit: string;
 }) => (
   <NumberInput
-    value={value?.value || ""}
+    value={value !== null ? value.value : ""}
     label={
       <>
         {label}, {unit}
