@@ -7,12 +7,12 @@ import {
   Menu,
   MenuItem,
   Switch,
+  Text,
   Title,
   useComputedColorScheme,
   useMantineColorScheme,
-  useMantineTheme,
 } from "@mantine/core";
-import { IconChevronDown } from "@tabler/icons-react";
+import { IconCaretDownFilled } from "@tabler/icons-react";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import {
   createRootRouteWithContext,
@@ -53,34 +53,38 @@ function Nav() {
     queryFn: () => api.spaces.indexSpacesGet(),
   });
   const space = spaces.data?.find((s) => s.id == spaceId);
-  const theme = useMantineTheme();
   const { t } = useTranslation();
   const spaceTitle = space?.label || t("branding");
   return (
-    <Group>
-      <Menu position="bottom-end" width={200}>
-        <Menu.Target>
-          <Title size={18} c={theme.primaryColor}>
-            <Group gap={0}>
-              {spaceTitle}
-              <IconChevronDown />
-            </Group>
-          </Title>
-        </Menu.Target>
-        <Menu.Dropdown>
-          {spaces.data?.map((s) => (
-            <MenuItemLink
-              key={s.id}
-              to="/spaces/$spaceId/subjects"
-              params={{ spaceId: s.id }}
-              className="[&.active]:font-bold"
-            >
+    <Menu
+      shadow="sm"
+      offset={-8}
+      radius={0}
+      position="bottom-start"
+      width={200}
+    >
+      <Menu.Target>
+        <Button variant="transparent" px={0} size="xl">
+          <Group gap={0}>
+            {spaceTitle}
+            <IconCaretDownFilled />
+          </Group>
+        </Button>
+      </Menu.Target>
+      <Menu.Dropdown>
+        {spaces.data?.map((s) => (
+          <MenuItemLink
+            key={s.id}
+            to="/spaces/$spaceId/subjects"
+            params={{ spaceId: s.id }}
+          >
+            <Text size="sm" fw={500}>
               {s.label || t("StudyProtocolVersion.defaultLabel")}
-            </MenuItemLink>
-          ))}
-        </Menu.Dropdown>
-      </Menu>
-    </Group>
+            </Text>
+          </MenuItemLink>
+        ))}
+      </Menu.Dropdown>
+    </Menu>
   );
 }
 
