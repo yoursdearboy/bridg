@@ -24,6 +24,7 @@ export function StatusCard({ spaceId, subjectId, subject }: SubjectCardProps) {
         size="xs"
         color={statusColor(subject.status)}
         onClick={() => subject.status != Status.Ineligible && open()}
+        variant="light"
       >
         {subject.status ? t(`Status.${subject.status}`) : t("no")}
       </Button>
