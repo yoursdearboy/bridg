@@ -23,6 +23,7 @@ import type {
   PerformedActivityUnion,
   PerformedActivityUnionData,
   StudySubject,
+  StudySubjectData,
 } from '../models/index';
 import {
     FoundStudySubjectFromJSON,
@@ -41,6 +42,8 @@ import {
     PerformedActivityUnionDataToJSON,
     StudySubjectFromJSON,
     StudySubjectToJSON,
+    StudySubjectDataFromJSON,
+    StudySubjectDataToJSON,
 } from '../models/index';
 
 export interface CreateSpacesSpaceIdSubjectsPostRequest {
@@ -85,6 +88,12 @@ export interface UpdateSpacesSpaceIdSubjectsSubjectIdActivityAIdPatchRequest {
     subjectId: string;
     aId: string;
     performedActivityUnionData: PerformedActivityUnionData;
+}
+
+export interface UpdateSpacesSpaceIdSubjectsSubjectIdPatchRequest {
+    spaceId: string;
+    subjectId: string;
+    studySubjectData: StudySubjectData;
 }
 
 /**
@@ -485,6 +494,61 @@ export class SubjectsApi extends runtime.BaseAPI {
      */
     async updateSpacesSpaceIdSubjectsSubjectIdActivityAIdPatch(requestParameters: UpdateSpacesSpaceIdSubjectsSubjectIdActivityAIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PerformedActivityUnion> {
         const response = await this.updateSpacesSpaceIdSubjectsSubjectIdActivityAIdPatchRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update
+     */
+    async updateSpacesSpaceIdSubjectsSubjectIdPatchRaw(requestParameters: UpdateSpacesSpaceIdSubjectsSubjectIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StudySubject>> {
+        if (requestParameters['spaceId'] == null) {
+            throw new runtime.RequiredError(
+                'spaceId',
+                'Required parameter "spaceId" was null or undefined when calling updateSpacesSpaceIdSubjectsSubjectIdPatch().'
+            );
+        }
+
+        if (requestParameters['subjectId'] == null) {
+            throw new runtime.RequiredError(
+                'subjectId',
+                'Required parameter "subjectId" was null or undefined when calling updateSpacesSpaceIdSubjectsSubjectIdPatch().'
+            );
+        }
+
+        if (requestParameters['studySubjectData'] == null) {
+            throw new runtime.RequiredError(
+                'studySubjectData',
+                'Required parameter "studySubjectData" was null or undefined when calling updateSpacesSpaceIdSubjectsSubjectIdPatch().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/spaces/{space_id}/subjects/{subject_id}`;
+        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+        urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: StudySubjectDataToJSON(requestParameters['studySubjectData']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => StudySubjectFromJSON(jsonValue));
+    }
+
+    /**
+     * Update
+     */
+    async updateSpacesSpaceIdSubjectsSubjectIdPatch(requestParameters: UpdateSpacesSpaceIdSubjectsSubjectIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StudySubject> {
+        const response = await this.updateSpacesSpaceIdSubjectsSubjectIdPatchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
