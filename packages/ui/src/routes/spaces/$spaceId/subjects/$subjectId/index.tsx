@@ -1,15 +1,14 @@
-import { Button, Grid, Group, Stack, Title } from "@mantine/core";
+import { Grid, Group, Stack, Title } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, useParams } from "@tanstack/react-router";
-import { Status, type StudySubject } from "api-ts";
+import { type StudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
+import { ActivityCard } from "@/components/activity/ActivityCard";
 import api from "@/api";
 import ButtonLink from "@/components/ButtonLink";
 import { PersonCard } from "@/components/person/PersonCard";
 import { StatusCard } from "@/components/subject/StatusCard";
 import i18next from "@/i18n";
-import { Route as personRoute } from "@/routes/persons/$personId";
-import { IconPencil } from "@tabler/icons-react";
 import { SpaceRedirection } from "@/components/subject/SpaceRedirection";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId/")({
@@ -36,11 +35,11 @@ function SubjectShowPage() {
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Title order={2} fw={500}>
-          {subject.performingBiologicEntity?.primaryName?.label ||
-            t("StudySubject.defaultLabel")}
-        </Title>
         <Group>
+          <Title order={2} fw={500}>
+            {subject.performingBiologicEntity?.primaryName?.label ||
+              t("StudySubject.defaultLabel")}
+          </Title>
           <StatusCard
             spaceId={spaceId}
             subjectId={subjectId}
