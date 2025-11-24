@@ -1,148 +1,71 @@
-import {
-  Card,
-  Grid,
-  Group,
-  LoadingOverlay,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
-import {
-  queryOptions,
-  useQuery,
-  useSuspenseQuery,
-} from "@tanstack/react-query";
+import { Grid, Group, Stack, Text, Title } from "@mantine/core";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  instanceOfDefinedObservation,
-  instanceOfPerformedObservation,
-  type DefinedActivity,
-  type PerformedObservation,
-} from "api-ts";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
-import { ActivityFormWrapper } from "@/components/activity/ActivityForm";
+import { ActivityForm } from "@/components/activity/ActivityForm";
 
 export const Route = createFileRoute(
   "/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit"
 )({
-  component: EditObservationComponent,
+  component: EditActivityComponent,
   beforeLoad: ({ params }) => ({
     breadcrumb: () => i18next.t("EditActivityRoute.defaultBreadcrumb"),
     query: queryOptions({
-      queryKey: ["subjects", params.subjectId, "activity", params.obsId],
-      queryFn: async () =>
-        await api.subjects.showSpacesSpaceIdSubjectsSubjectIdActivityAIdGet({
-          spaceId: params.spaceId,
-          subjectId: params.subjectId,
-          aId: params.obsId,
-          result: true,
-        }),
+      queryKey: ["subject", params.subjectId, "activity", params.obsId],
+      queryFn: async () => {
+        const performedActivity =
+          await api.subjects.showSpacesSpaceIdSubjectsSubjectIdActivityAIdGet({
+            spaceId: params.spaceId,
+            subjectId: params.subjectId,
+            aId: params.obsId,
+            result: true,
+          });
+        const definedActivity =
+          await api.definedActivity.showDefinedActivityAIdGet({
+            aId: performedActivity.instantiatedDefinedActivity!.id,
+            result: true,
+          });
+        return { performedActivity, definedActivity };
+      },
     }),
   }),
   loader: async ({ context: { query, queryClient } }) =>
     await queryClient.fetchQuery(query),
 });
 
-function EditObservationComponent() {
+function EditActivityComponent() {
   const { query } = Route.useRouteContext();
-  const { isPending, isError, error, data: activity } = useSuspenseQuery(query);
-  const { spaceId, subjectId } = Route.useParams();
-  const { t } = useTranslation();
-
-  return (
-    <>
-      <LoadingOverlay visible={isPending} />
-      {isError && (
-        <Text color="red">{t("errorMessage", { error: error.message })}</Text>
-      )}
-      {!isError && (
-        <>
-          {instanceOfPerformedObservation(activity) ? (
-            <>
-              <p>here</p>
-              <EditObservationWrapper
-                spaceId={spaceId}
-                subjectId={subjectId}
-                activity={activity}
-                definedActivity={activity.instantiatedDefinedActivity!}
-              />
-            </>
-          ) : (
-            ""
-          )}
-        </>
-      )}
-    </>
-  );
-}
-
-interface EditObservationWrapperProps {
-  spaceId: string;
-  subjectId: string;
-  activity: PerformedObservation;
-  definedActivity: DefinedActivity;
-}
-
-const EditObservationWrapper = ({
-  spaceId,
-  subjectId,
-  activity,
-}: EditObservationWrapperProps) => {
-  const { t } = useTranslation();
   const {
-    data: definedActivityRecord,
-    isPending,
     isError,
     error,
-  } = useQuery({
-    queryKey: ["subject", subjectId, "activity"],
-    queryFn: () =>
-      api.definedActivity.showDefinedActivityAIdGet({
-        aId: activity.instantiatedDefinedActivity!.id,
-        result: true,
-      }),
-  });
+    data: { definedActivity, performedActivity },
+  } = useSuspenseQuery(query);
+  const { t } = useTranslation();
+
+  if (isError)
+    return (
+      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
+    );
+
   return (
     <Stack gap="md">
       <Group justify="space-between">
         <Title order={2}>
-          {activity.instantiatedDefinedActivity?.nameCode.displayName ||
+          {definedActivity.nameCode.displayName ||
             t("EditActivityRoute.unnamed")}
         </Title>
       </Group>
 
       <Grid>
         <Grid.Col span={{ base: 12, xs: 8, md: 4, lg: 3 }}>
-          <Card>
-            <>
-              <LoadingOverlay visible={isPending} />
-              {isError && (
-                <Text color="red">
-                  {t("errorMessage", { error: error.message })}
-                </Text>
-              )}
-              {!isPending && !isError && (
-                <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  {instanceOfDefinedObservation(definedActivityRecord) ? (
-                    <ActivityFormWrapper
-                      spaceId={spaceId}
-                      subjectId={subjectId}
-                      performedResults={
-                        activity.resultedPerformedObservationResult
-                      }
-                      definedResults={
-                        definedActivityRecord.producedDefinedObservationResult
-                      }
-                    />
-                  ) : null}
-                </Card>
-              )}
-            </>
-          </Card>
+          <ActivityForm
+            definedActivity={definedActivity}
+            performedActivity={performedActivity}
+          />
         </Grid.Col>
       </Grid>
     </Stack>
   );
-};
+}

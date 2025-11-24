@@ -10,43 +10,33 @@ import { useQuery } from "@tanstack/react-query";
 import {
   type ConceptDescriptor,
   type DefinedObservationResult,
-  type PerformedObservationResult,
   type PhysicalQuantity,
   type DataValue,
   type DateValue,
+  type PerformedObservationResult,
 } from "api-ts";
 import api from "@/api";
 
-export const ObservationResult = ({
-  result,
-  definedResult,
-}: {
-  result: PerformedObservationResult;
-  definedResult: DefinedObservationResult;
-}) => {
-  return (
-    <Input
-      label={result.typeCode?.displayName || "unnamed field"}
-      value={result.value}
-      config={definedResult}
-    />
-  );
-};
-
 interface InputProps {
-  label: string | null;
-  value: DataValue | null;
-  config: DefinedObservationResult;
+  performedObservationResult: PerformedObservationResult;
+  definedObservationResult: DefinedObservationResult;
 }
 
-const Input = ({ label, value, config }: InputProps) => {
-  switch (config.targetType) {
+// FIXME: translate default label
+export const Input = ({
+  definedObservationResult,
+  performedObservationResult,
+}: InputProps) => {
+  const value = performedObservationResult.value;
+  const label =
+    definedObservationResult.typeCode?.displayName || "unnamed field";
+  switch (definedObservationResult.targetType) {
     case "CD":
       return (
         <ConceptDescriptorSelect
           label={label}
           value={value as ConceptDescriptor}
-          config={config}
+          defObsres={definedObservationResult}
         />
       );
     case "PQ":
@@ -54,7 +44,7 @@ const Input = ({ label, value, config }: InputProps) => {
         <PhysicalQuantityInput
           label={label}
           value={value as PhysicalQuantity}
-          config={config}
+          defObsres={definedObservationResult}
         />
       );
     case "TS.DATE":
@@ -75,21 +65,21 @@ const InputText = ({
   return <TextInput label={label} />;
 };
 
-const ConceptDescriptorSelect = ({
+export const ConceptDescriptorSelect = ({
   label,
   value,
-  config,
+  defObsres,
 }: {
   label: string | null;
   value: ConceptDescriptor | null;
-  config: DefinedObservationResult;
+  defObsres: DefinedObservationResult;
 }) => {
   const { data, isLoading } = useQuery({
     queryFn: () =>
       api.codeSystem.expandCodeSystemCodeSystemExpandGet({
-        codeSystem: config.targetCodingSystem!,
+        codeSystem: defObsres.targetCodingSystem!,
       }),
-    queryKey: ["codeSystem", config.targetCodingSystem],
+    queryKey: ["codeSystem", defObsres.targetCodingSystem],
   });
   const options = (data || []).map((cd) => ({
     label: cd.displayName || cd.code,
@@ -114,18 +104,18 @@ const ConceptDescriptorSelect = ({
 const PhysicalQuantityInput = ({
   label,
   value,
-  config,
+  defObsres,
 }: {
   label: string | null;
   value: PhysicalQuantity | null;
-  config: DefinedObservationResult;
+  defObsres: DefinedObservationResult;
 }) => {
   return (
     <NumberInput
       value={value?.value || ""}
       label={
         <>
-          {label}, {value?.unit || config.targetUnit}
+          {label}, {value?.unit || defObsres.targetUnit}
         </>
       }
       hideControls
