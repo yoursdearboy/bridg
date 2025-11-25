@@ -18,6 +18,7 @@ import { AddressCardWrapper } from "@/components/person/address/AddressCard";
 import { EditNameForm } from "@/components/person/name/EditNameForm";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
 import { PersonCard } from "@/components/person/PersonCard";
+import { PersonTimelineCard } from "@/components/person/PersonTimeline";
 import { TelecommunicationAddressCardWrapper } from "@/components/person/telecom/TelecommunicationAddressCard";
 import i18next from "@/i18n";
 
@@ -81,6 +82,9 @@ function PersonShowPage() {
             <TelecommunicationAddressCardWrapper personId={personId} />
             <Space h="md" />
             <NamesCardWrapper personId={personId} />
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, lg: 6, xl: 4 }}>
+            <PersonTimelineCard personId={personId} />
           </Grid.Col>
         </Grid>
       </Stack>
