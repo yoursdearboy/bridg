@@ -27,7 +27,7 @@ export function StatusButton({
       <Button
         size="xs"
         color={statusColor(subject.status)}
-        onClick={() => transitionFrom(subject.status).length && open()}
+        onClick={() => open()}
         variant="light"
       >
         {subject.status ? t(`Status.${subject.status}`) : t("no")}
@@ -65,7 +65,7 @@ const StatusForm = ({
   onCancel,
   onSuccess,
 }: StatusFormProps) => {
-  const statusesTo = transitionFrom(status);
+  const statuses: Status[] = Object.values(Status);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const form = useForm<StudySubjectData>({
@@ -108,7 +108,7 @@ const StatusForm = ({
               {...form.getInputProps("status")}
             >
               <Stack mt="xs">
-                {statusesTo.map((status) => (
+                {statuses.map((status) => (
                   <Radio
                     fw={500}
                     c={statusColor(status)}
@@ -129,44 +129,6 @@ const StatusForm = ({
       )}
     </>
   );
-};
-
-const transitionFrom = (status: Status | null) => {
-  switch (status) {
-    case null:
-      return [Status.PotentialCandidate, Status.Candidate];
-    case Status.PotentialCandidate:
-      return [Status.Candidate];
-    case Status.Candidate:
-      return [Status.Screening, Status.Eligible];
-    case Status.Screening:
-      return [Status.Eligible, Status.Ineligible, Status.Withdrawn];
-    case Status.Eligible:
-      return [
-        Status.PendingOnStudy,
-        Status.OnStudyIntervention,
-        Status.OnStudyObservation,
-        Status.Withdrawn,
-      ];
-    case Status.PendingOnStudy:
-      return [
-        Status.OnStudyIntervention,
-        Status.OnStudyObservation,
-        Status.NotRegistered,
-      ];
-    case Status.OnStudyIntervention:
-    case Status.OnStudyObservation:
-      return [
-        Status.OnStudyIntervention,
-        Status.OnStudyObservation,
-        Status.FollowUp,
-        Status.OffStudy,
-      ];
-    case Status.FollowUp:
-      return [Status.OffStudy];
-    default:
-      return [];
-  }
 };
 
 const statusColor = (status: Status | null): string => {
