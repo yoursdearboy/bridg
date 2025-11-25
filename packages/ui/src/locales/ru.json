@@ -122,7 +122,7 @@
       "newStatus": "Новый статус"
     },
     "StatusForm": {
-      "allStatuses": "Все статусы"
+      "otherStatuses": "Другие статусы"
     },
     "StudyProtocolVersion": {
       "defaultLabel": "Безымянное исследование"

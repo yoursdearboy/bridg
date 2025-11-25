@@ -122,7 +122,7 @@ const StatusForm = ({
               </Stack>
             </Radio.Group>
             <details>
-              <summary>{t("StatusForm.allStatuses")}</summary>
+              <summary>{t("StatusForm.otherStatuses")}</summary>
               <Group grow>
                 <Radio.Group name="status" {...form.getInputProps("status")}>
                   <Stack mt="xs">

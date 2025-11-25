@@ -122,7 +122,7 @@
       "newStatus": "New status"
     },
     "StatusForm": {
-      "allStatuses": "All statuses"
+      "otherStatuses": "Other statuses"
     },
     "StudyProtocolVersion": {
       "defaultLabel": "Unnamed study"
