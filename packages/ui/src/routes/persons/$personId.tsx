@@ -21,6 +21,7 @@ import { PersonCard } from "@/components/person/PersonCard";
 import { PersonTimelineCard } from "@/components/person/PersonTimeline";
 import { TelecommunicationAddressCardWrapper } from "@/components/person/telecom/TelecommunicationAddressCard";
 import i18next from "@/i18n";
+import { ActivityCard } from "@/components/person/activity/ActivityCard";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
@@ -85,6 +86,9 @@ function PersonShowPage() {
           </Grid.Col>
           <Grid.Col span={{ base: 12, lg: 6, xl: 4 }}>
             <PersonTimelineCard personId={personId} />
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, lg: 6, xl: 4 }}>
+            <ActivityCard personId={personId} />
           </Grid.Col>
         </Grid>
       </Stack>
