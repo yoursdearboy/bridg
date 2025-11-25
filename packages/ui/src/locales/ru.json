@@ -118,7 +118,9 @@
       "withdrawn": "Отказ"
     },
     "StatusButton": {
+      "collapse": "Развернуть",
       "editModalTitle": "Изменение статуса",
+      "expand": "Свернуть",
       "newStatus": "Новый статус"
     },
     "StudyProtocolVersion": {

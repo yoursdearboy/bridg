@@ -5,6 +5,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { Status, type StudySubject, type StudySubjectData } from "api-ts";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { Route as SubjectRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/index";
@@ -65,7 +66,9 @@ const StatusForm = ({
   onCancel,
   onSuccess,
 }: StatusFormProps) => {
-  const statusesTo = transitionFrom(status);
+  const [checked, toggleChecked] = useState(false);
+  const allStatuses: Status[] = Object.values(Status);
+  const statusesTo: Status[] = transitionFrom(status);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const form = useForm<StudySubjectData>({
@@ -108,7 +111,7 @@ const StatusForm = ({
               {...form.getInputProps("status")}
             >
               <Stack mt="xs">
-                {statusesTo.map((status) => (
+                {(checked ? allStatuses : statusesTo).map((status) => (
                   <Radio
                     fw={500}
                     c={statusColor(status)}
@@ -118,6 +121,14 @@ const StatusForm = ({
                 ))}
               </Stack>
             </Radio.Group>
+            <Button
+              size="xs"
+              variant="subtle"
+              color="grey"
+              onClick={() => toggleChecked(!checked)}
+            >
+              {checked ? t("StatusButton.expand") : t("StatusButton.collapse")}
+            </Button>
             <Group justify="flex-end" mt="md">
               <Button variant="outline" onClick={onCancel}>
                 {t("cancel")}

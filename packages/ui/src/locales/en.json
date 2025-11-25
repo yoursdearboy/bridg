@@ -118,7 +118,9 @@
       "withdrawn": "Withdrawn"
     },
     "StatusButton": {
+      "collapse": "Collapse",
       "editModalTitle": "Changing status",
+      "expand": "Expand",
       "newStatus": "New status"
     },
     "StudyProtocolVersion": {
