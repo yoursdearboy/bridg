@@ -14,6 +14,7 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+import { ActivityCard } from "@/components/person/activity/ActivityCard";
 import { AddressCardWrapper } from "@/components/person/address/AddressCard";
 import { EditNameForm } from "@/components/person/name/EditNameForm";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
@@ -21,7 +22,6 @@ import { PersonCard } from "@/components/person/PersonCard";
 import { PersonTimelineCard } from "@/components/person/PersonTimeline";
 import { TelecommunicationAddressCardWrapper } from "@/components/person/telecom/TelecommunicationAddressCard";
 import i18next from "@/i18n";
-import { ActivityCard } from "@/components/person/activity/ActivityCard";
 
 export const Route = createFileRoute("/persons/$personId")({
   component: PersonShowPage,
