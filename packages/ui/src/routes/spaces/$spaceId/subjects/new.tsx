@@ -52,7 +52,7 @@ const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
 
   return (
     <>
-      <Card>
+      <Card withBorder>
         <Flex gap="md">
           <TextInput
             label={t("Name.family")}
@@ -75,7 +75,7 @@ const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
         </Flex>
       </Card>
 
-      <Card>
+      <Card withBorder>
         <Stack align="flex-start" gap="md">
           <Select
             label={t("Person.administrativeGenderCode")}
@@ -111,7 +111,7 @@ const PerformingBiologicEntitySelect = ({
   const { t } = useTranslation();
 
   return (
-    <Card style={{ width: 300 }}>
+    <Card withBorder>
       <Text fw={500} mb="sm">
         {t("PerformingBiologicEntitySelect.text")}
       </Text>
@@ -152,7 +152,7 @@ const PerformingBiologicEntityCard = ({
   const { t } = useTranslation();
 
   return (
-    <Card>
+    <Card withBorder>
       <Group gap="xs">
         <Text fw={500}>
           {subject.performingBiologicEntity?.primaryName?.label ||
@@ -176,7 +176,7 @@ const StudySubjectFields = ({ form }: NewStudySubjectFormProps) => {
 
   return (
     <>
-      <Card>
+      <Card withBorder>
         <Stack align="flex-start" gap="md">
           <Select
             label={t("StudySubject.status")}
