@@ -115,7 +115,7 @@
       "pending-on-study": "Ожидает участия",
       "potential-candidate": "Потенциальный кандидат",
       "screening": "Скрининг",
-      "withdrawn": "Выбыл"
+      "withdrawn": "Отказ"
     },
     "StatusButton": {
       "editModalTitle": "Изменение статуса",
