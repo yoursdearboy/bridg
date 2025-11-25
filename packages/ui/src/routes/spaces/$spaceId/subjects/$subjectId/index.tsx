@@ -1,6 +1,6 @@
 import { Button, Grid, Group, Menu, Modal, Stack, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconArrowRight, IconCaretDown } from "@tabler/icons-react";
+import { IconArrowRight, IconCaretDownFilled } from "@tabler/icons-react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
@@ -46,7 +46,7 @@ function SubjectShowPage() {
           <Menu shadow="md" width={200}>
             <Menu.Target>
               <Button size="sm" p="xs">
-                <IconCaretDown />
+                <IconCaretDownFilled />
               </Button>
             </Menu.Target>
             <Menu.Dropdown>

@@ -31,7 +31,7 @@ function LanguageSwitcher() {
   return (
     <Menu>
       <Menu.Target>
-        <Button size="compact-sm">
+        <Button size="compact-sm" variant="transparent">
           {i18n.resolvedLanguage?.toUpperCase()}
         </Button>
       </Menu.Target>
