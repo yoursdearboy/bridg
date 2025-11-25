@@ -11,7 +11,7 @@ export function ActivityCard({ personId }: { personId: string }) {
   const query = useQuery({
     queryKey: ["person", personId, "subjects"],
     queryFn: () =>
-      api.persons.indexPersonsPersonIdSubjectGetRaw({
+      api.persons.indexPersonsPersonIdSubjectGet({
         personId,
       }),
   });
