@@ -1,248 +1,533 @@
 concept_descriptor:
-  - { code: "lab", code_system: "defined_activity.category_code", display_name: "Laboratory" }
-  - { code: "treatment", code_system: "defined_activity.category_code", display_name: "Treatment" }
-  - { code: "incomplete", code_system: "performed_activity.status_code", display_name: "Incomplete" }
-  - { code: "unverified", code_system: "performed_activity.status_code", display_name: "Unverified" }
-  - { code: "complete", code_system: "performed_activity.status_code", display_name: "Complete" }
-  - { code: "NK", code_system: "f1c13ae3-715b-47ce-8d6a-9645d313d16b", display_name: "Normal Karyotype" }
-  - { code: "tri21", code_system: "f1c13ae3-715b-47ce-8d6a-9645d313d16b", display_name: "Trisomy 21" }
-  - { code: "t(8;21)", code_system: "f1c13ae3-715b-47ce-8d6a-9645d313d16b", display_name: "t(8;21)" }
-  - { code: "M0", code_system: "b365b97f-ff34-464c-9097-e7daec409f4c", display_name: "Undifferentiated acute myeloblastic leukemia" }
-  - { code: "M1", code_system: "b365b97f-ff34-464c-9097-e7daec409f4c", display_name: "Acute myeloblastic leukemia with minimal maturation" }
-  - { code: "M2", code_system: "b365b97f-ff34-464c-9097-e7daec409f4c", display_name: "Acute myeloblastic leukemia with maturation" }
-  - { code: "M3", code_system: "b365b97f-ff34-464c-9097-e7daec409f4c", display_name: "Acute promyelocytic leukemia" }
-  - { code: "M4", code_system: "b365b97f-ff34-464c-9097-e7daec409f4c", display_name: "Acute myelomonocytic leukemia" }
-  - { code: "M4eos", code_system: "b365b97f-ff34-464c-9097-e7daec409f4c", display_name: "Acute myelomonocytic leukemia with eosinophilia" }
-  - { code: "M5", code_system: "b365b97f-ff34-464c-9097-e7daec409f4c", display_name: "Acute monocytic leukemia" }
-  - { code: "M6", code_system: "b365b97f-ff34-464c-9097-e7daec409f4c", display_name: "Acute erythroid leukemia" }
-  - { code: "M7", code_system: "b365b97f-ff34-464c-9097-e7daec409f4c", display_name: "Acute megakaryocytic leukemia" }
+  - &cd-lab { code: "lab", code_system: "defined_activity.category_code", display_name: "Лаборатория" }
+  - &cd-complete { code: "complete", code_system: "performed_activity.status_code", display_name: "Заполнено" }
+  - { code: "pos", code_system: "2ed3d63a-0e88-43ec-8f03-4e03a5b936d2", display_name: "Положительный" }
+  - { code: "neg", code_system: "2ed3d63a-0e88-43ec-8f03-4e03a5b936d2", display_name: "Отрицательный" }
 
-person:
-  - name:
-      - { use: official, family: Doe, given: John }
-      - { use: unofficial, family: Doe, given: Johny }
-    birth_date: 1980-01-01
-    death_date: 2000-01-01
-    death_date_estimated_indicator: true
-    death_indicator: true
-  - name: [{ use: official, family: Morgendorffer, given: Daria }]
-    birth_date: 1991-01-01
-    postal_address: [{ street: "Howard Drive", building: "111", country: "USA", municipality: "Lawndale", state: "Texas" }]
-    telecom_address:
-      - { scheme: "tel", address: "+1-214-559-6993" }
-      - { scheme: "mailto", address: "daria@yahoo.com" }
+organization:
+  - &dgoi-org
+    id: 549bf476-9534-4446-aa99-d6c3ed109b1b
+    name: [{ value: "НМИЦ ДГОИ" }]
 
 healthcare_facility:
   - &dgoi-hf
     id: 5ff0365b-62df-4f4d-98b8-87bceb005017
-    performing_organization: &dgoi-org
-      id: 549bf476-9534-4446-aa99-d6c3ed109b1b
-      name: [{ value: DGOI }]
-  - &ekb-hf
-    id: 07991d84-78f7-4e08-9939-3d78233a59d6
-    performing_organization:
-      name: [{ value: EKB }]
-
-healthcare_provider:
-  - performing_person:
-      name: [{ use: official, family: Bur, given: Bir }]
-    staffed_healthcare_facility: *dgoi-hf
-    employing_organization: *dgoi-org
-
-healthcare_provider_group:
-  - performing_organization: &4d-org
-      id: 52f4b187-c0aa-4831-a1d1-6330b60cdf4b
-      name: [{ value: 4D }]
-    using_healthcare_facility: *dgoi-hf
+    performing_organization: *dgoi-org
 
 study_site:
   - &dgoi-ss
     id: 7cbc3369-7d06-4742-b6f1-b83f62d72f1e
     lead: true
     performing_healthcare_facility: *dgoi-hf
-  - &ekb-ss
-    id: c2b94f17-7877-46b1-b1e3-2d09addec278
-    lead: false
-    performing_healthcare_facility: *ekb-hf
 
 defined_observation:
-  - &cbc
+  - &cbc-screening
     id: f83ddbf8-dd6d-4737-98e3-a5795995bbd8
-    name_code: { code: "26604007", code_system: "defined_activity.name_code", display_name: Complete blood count }
-    category_code: { code: "lab", code_system: "defined_activity.category_code" }
+    name_code: { code: "cbc-screening", code_system: "defined_activity.name_code", display_name: "Общий анализ крови (скрининг)" }
+    category_code: *cd-lab
     produced_defined_observation_result:
       - type: observation_result
-        type_code: { code: "fullmoon", code_system: "demo", display_name: "Last full moon date" }
-        target_type: TS.DATE
+        type_code: { code: "wbc", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Лейкоциты (WBC)" }
+        target_type: PQ
+        target_unit: 10^9/л
       - type: observation_result
-        type_code: { code: "dx", code_system: "demo", display_name: "Diagnosis" }
+        type_code: { code: "rbc", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Эритроциты (RBC)" }
+        target_type: PQ
+        target_unit: 10^12/л
+      - type: observation_result
+        type_code: { code: "hb", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Гемоглобин (Hb)" }
+        target_type: PQ
+        target_unit: г/л
+      - type: observation_result
+        type_code: { code: "plt", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Тромбоциты (PLT)" }
+        target_type: PQ
+        target_unit: 10^9/л
+      - type: observation_result
+        type_code: { code: "neu", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Нейтрофилы (NEU)" }
+        target_type: PQ
+        target_unit: 10^9/л
+      - type: observation_result
+        type_code: { code: "lym", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Лимфоциты (LYM)" }
+        target_type: PQ
+        target_unit: 10^9/л
+      - type: observation_result
+        type_code: { code: "mon", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Моноциты (MON)" }
+        target_type: PQ
+        target_unit: "%"
+      - type: observation_result
+        type_code: { code: "eos", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Эозинофилы (EOS)" }
+        target_type: PQ
+        target_unit: "%"
+      - type: observation_result
+        type_code: { code: "bas", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Базофилы (BAS)" }
+        target_type: PQ
+        target_unit: "%"
+      - type: observation_result
+        type_code: { code: "ret", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Ретикулоциты (RET)" }
+        target_type: PQ
+        target_unit: 10^9/л
+  - &cbc-fu
+    id: 4a1224ff-5e6f-4b2d-9a9c-f2078c8c2cc8
+    name_code: { code: "cbc-fu", code_system: "defined_activity.name_code", display_name: "Общий анализ крови (динамика)" }
+    category_code: *cd-lab
+    produced_defined_observation_result:
+      - type: observation_result
+        type_code: { code: "wbc", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Лейкоциты (WBC)" }
+        target_type: PQ
+        target_unit: 10^9/л
+      - type: observation_result
+        type_code: { code: "rbc", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Эритроциты (RBC)" }
+        target_type: PQ
+        target_unit: 10^12/л
+      - type: observation_result
+        type_code: { code: "hb", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Гемоглобин (Hb)" }
+        target_type: PQ
+        target_unit: г/л
+      - type: observation_result
+        type_code: { code: "plt", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Тромбоциты (PLT)" }
+        target_type: PQ
+        target_unit: 10^9/л
+      - type: observation_result
+        type_code: { code: "neu", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Нейтрофилы (NEU)" }
+        target_type: PQ
+        target_unit: 10^9/л
+      - type: observation_result
+        type_code: { code: "lym", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Лимфоциты (LYM)" }
+        target_type: PQ
+        target_unit: 10^9/л
+      - type: observation_result
+        type_code: { code: "ret", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Ретикулоциты (RET)" }
+        target_type: PQ
+        target_unit: 10^9/л
+  - &bchem
+    id: 9929c1aa-07fe-4bd8-97a2-da73cab6031c
+    name_code: { code: "bchem", code_system: "defined_activity.name_code", display_name: "Биохимический анализ крови" }
+    category_code: *cd-lab
+    produced_defined_observation_result:
+      - type: observation_result
+        type_code: { code: "prot", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Общий белок" }
+        target_type: PQ
+        target_unit: г/л
+      - type: observation_result
+        type_code: { code: "alb", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Альбумин" }
+        target_type: PQ
+        target_unit: г/л
+      - type: observation_result
+        type_code: { code: "urea", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Мочевина" }
+        target_type: PQ
+        target_unit: ммоль/л
+      - type: observation_result
+        type_code: { code: "crea", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Креатинин" }
+        target_type: PQ
+        target_unit: ммоль/л
+      - type: observation_result
+        type_code: { code: "tbil", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Общий билирубин" }
+        target_type: PQ
+        target_unit: мкмоль/л
+      - type: observation_result
+        type_code: { code: "dbil", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Прямой билирубин" }
+        target_type: PQ
+        target_unit: мкмоль/л
+      - type: observation_result
+        type_code: { code: "alt", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "АЛТ" }
+        target_type: PQ
+        target_unit: ед/л
+      - type: observation_result
+        type_code: { code: "ast", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "АСТ" }
+        target_type: PQ
+        target_unit: ед/л
+      - type: observation_result
+        type_code: { code: "ldh", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "ЛДГ" }
+        target_type: PQ
+        target_unit: ед/л
+      - type: observation_result
+        type_code: { code: "alp", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "ЩФ" }
+        target_type: PQ
+        target_unit: ед/л
+  - &deb
+    id: 4ace4fd2-f8de-46f1-b999-854158323ec2
+    name_code: { code: "deb", code_system: "defined_activity.name_code", display_name: "ДЭБ тест" }
+    category_code: *cd-lab
+    produced_defined_observation_result:
+      - type: observation_result
+        type_code: { code: "result", code_system: "1dade202-6905-4c3a-80ac-03cf901be0f1", display_name: "Результат" }
         target_type: CD
-        target_coding_system: b365b97f-ff34-464c-9097-e7daec409f4c
+        target_coding_system: 2ed3d63a-0e88-43ec-8f03-4e03a5b936d2
       - type: observation_result
-        type_code: { code: "767002", code_system: "SNOMEDCT", display_name: "White blood cell count" }
-        target_type: PQ
-        target_unit: 10^9/l
-      - type: observation_result
-        type_code: { code: "30630007", code_system: "SNOMEDCT", display_name: "Neutrophil count" }
-        target_type: PQ
-        target_unit: 10^9/l
-      - type: observation_result
-        type_code: { code: "61928009", code_system: "SNOMEDCT", display_name: "Platelet count" }
-        target_type: PQ
-  - &ipt
-    id: 845ffa00-a139-4d38-8ccc-e53a89a2de03
-    name_code: { code: "ipt", code_system: "defined_activity.name_code", display_name: Immunophenotyping }
-    category_code: { code: "lab", code_system: "defined_activity.category_code" }
-    context_for_study_site: *dgoi-ss
+        type_code: { code: "epicrisis", code_system: "1dade202-6905-4c3a-80ac-03cf901be0f1", display_name: "Заключение" }
+        target_type: ST
 
 study:
-  - name: AML
-    description: Acute Myeloid Leucemia research,
-                 since 2014.
+  - name: ПАА
+    description: Приобретенные Апластические Анемии
     planning_study_protocol:
       versioning_study_protocol_version:
-        - &aml-mrd-2018
-          id: ce946229-9746-46cd-8dd3-b27a2fbfd48a
-          acronym: AML-MRD-2018
+        - &aaa
+          id: c94dba19-9523-449e-9428-4a20cef0fffe
+          acronym: ПАА
           executing_study_site_protocol_version_relationship:
-            - &dgoi-aml-mrd-2018
-              id: 6a8e6e2b-9537-408f-bd92-a5b83ad2e750 # FIXME: for sqlite
+            - &dgoi-aaa
+              id: 6a8e6e2b-9537-408f-bd92-a5b83ad2e750
               executing_study_site: *dgoi-ss
-              executed_study_protocol_version: *aml-mrd-2018
-            - &ekb-aml-mrd-2018
-              id: 3a819069-2aa2-49df-a979-e4237f77cf6e # FIXME: for sqlite
-              executing_study_site: *ekb-ss
-              executed_study_protocol_version: *aml-mrd-2018
+              executed_study_protocol_version: *aaa
           intended_planned_study_subject:
             - performing_biologic_entity:
                 type: person
-                administrative_gender_code: M
-              quantity_range: 10
-            - performing_biologic_entity:
-                type: person
-                administrative_gender_code: F
-              quantity_range: 10
           subdividing_epoch:
-            - &aml-mrd-2018-screening
-              { id: 4c0e30ba-8ef8-450f-b3c0-d489fa053c35, name: "Screening", type_code: "screening" }
-            - &aml-mrd-2018-induction
-              { id: 07205390-86e4-4955-a17b-0684fb70b1ef, name: "Induction", type_code: "treatment" }
-            - { name: "Consolidation I", type_code: "treatment" }
-            - { name: "Consolidation II", type_code: "treatment" }
-            - { name: "Follow-Up", type_code: "follow-up" }
+            - &aaa-screening
+              { id: 4c0e30ba-8ef8-450f-b3c0-d489fa053c35, name: "Скрининг", type_code: "screening" }
+            - &aaa-d1
+              { id: 85183a0f-382e-441b-a8df-1ac99d8b2540, name: "День 1", type_code: "treatment" }
+            - &aaa-w1
+              { id: 6a42b8f7-d8b7-4f84-8f97-ccba4e23c5ce, name: "Неделя 1", type_code: "w1" }
+            - &aaa-w2
+              { id: 992b1e63-52e1-4ab3-b73c-c1f781e3a51d, name: "Неделя 2", type_code: "w2" }
+            - &aaa-w3
+              { id: 0f352707-6141-4907-8668-7fdb8c3b8d53, name: "Неделя 3", type_code: "w3" }
+            - &aaa-w4
+              { id: 1e2c0c40-0662-4bc8-b89f-0312414639f1, name: "Неделя 4", type_code: "w4" }
+            - &aaa-w5
+              { id: 2b321bad-4b64-4668-82f6-568e0a49617f, name: "Неделя 5", type_code: "w5" }
+            - &aaa-w6
+              { id: 9faf6872-fc5a-4cfe-93ac-5c0b0944f6a6, name: "Неделя 6", type_code: "w6" }
+            - &aaa-w7
+              { id: 7974ce60-a4a7-4f0c-a28b-38142064a921, name: "Неделя 7", type_code: "w7" }
+            - &aaa-w8
+              { id: b212d33f-08c1-4a82-9ac0-3fcea23601d7, name: "Неделя 8", type_code: "w8" }
+            - &aaa-w9
+              { id: 401e85fe-ee04-48e3-b4ac-354089d93969, name: "Неделя 9", type_code: "w9" }
+            - &aaa-w10
+              { id: 4c74fff3-27f1-41f8-bd18-cadaef81ec97, name: "Неделя 10", type_code: "w10" }
+            - &aaa-w11
+              { id: ed4b98a2-5aa4-40dd-9054-7f469d8468be, name: "Неделя 11", type_code: "w11" }
+            - &aaa-w12
+              { id: 9c701330-7b9d-4d1a-93d9-0bc142b58952, name: "Неделя 12", type_code: "w12" }
+            - &aaa-w13
+              { id: aa2b5289-d8a8-43ad-9e4a-83e922dac1ba, name: "Неделя 13", type_code: "w13" }
+            - &aaa-w14
+              { id: 74078ede-6ac0-4f14-8a7c-ebce073a54bc, name: "Неделя 14", type_code: "w14" }
+            - &aaa-w15
+              { id: d6b854a5-42ff-4893-9b5c-32074ace031a, name: "Неделя 15", type_code: "w15" }
+            - &aaa-w16
+              { id: 121cce3d-59f6-4f7f-bbff-0fcb5d6a6b80, name: "Неделя 16", type_code: "w16" }
+            - &aaa-w17
+              { id: 13509e48-c02e-47b8-acae-74969cc25363, name: "Неделя 17", type_code: "w17" }
+            - &aaa-d120
+              { id: 8b6b4d50-18f1-4f77-98c1-427da6bf672b, name: "День 120", type_code: "d120" }
+            - &aaa-y1
+              { id: 5d49db01-1172-4f9f-84cf-484000fdd6f1, name: "1-й год", type_code: "y1" }
+            - &aaa-fu
+              { id: f73adbd7-6b2f-4cdd-b39a-049623a844c9, name: "Последующее наблюдение", type_code: "fu" }
           used_study_activity:
-            - used_defined_activity: *ipt
-            - id: 66da8ea1-5e69-40f2-a720-9937430d582d
-              used_defined_activity: *cbc
-            - used_defined_activity: &aml-mrd-2018-ame
-                id: a20d96db-afc3-4e0d-a010-32662388c633
-                type: substance_administration
-                name_code: { code: "ame", code_system: "defined_activity.name_code", display_name: "AME" }
-                category_code: { code: "treatment", code_system: "defined_activity.category_code" }
-            - used_defined_activity: &aml-mrd-2018-ham
-                id: ef556a4b-2665-4319-948a-2c5fd9baad3f
-                type: substance_administration
-                name_code: { code: "ham", code_system: "defined_activity.name_code", display_name: "HAM" }
-                category_code: { code: "treatment", code_system: "defined_activity.category_code" }
-        - &aml-mrd-2024
-          id: 6a4c5ef3-874c-43bb-814e-55203d4a4727
-          acronym: AML-MRD-2024
+            - id: 1af6f5ee-93dc-435a-8641-6179586094de
+              used_defined_activity: *cbc-screening
+            - id: 5c1dc4f7-7fff-4e6e-a2bc-4a4c7cdeb54d
+              used_defined_activity: *cbc-fu
+            - id: b3a5256f-bca7-4e2e-9beb-8d81803d6918
+              used_defined_activity: *bchem
+            - id: a5d1f52c-34fa-4cd4-bba4-4721e0717f2c
+              used_defined_activity: *deb
+  - name: ВАА
+    description: Врожденные Апластические Анемии
+    planning_study_protocol:
+      versioning_study_protocol_version:
+        - &caa
+          id: a7ddecc4-632d-4140-a634-0f4c99f8929e
+          acronym: ВАА
           executing_study_site_protocol_version_relationship:
-            - id: 55c54b18-da1f-41ae-885d-b140ccb0e239 # FIXME: for sqlite
+            - &dgoi-caa
+              id: 579afafc-6567-469e-a200-24acfc07d334
               executing_study_site: *dgoi-ss
-              executed_study_protocol_version: *aml-mrd-2024
+              executed_study_protocol_version: *caa
           intended_planned_study_subject:
             - performing_biologic_entity:
                 type: person
-              quantity_range: 20
-
-  - name: Audit
-    description: Audit of organizations.
+          subdividing_epoch:
+            - &caa-screening
+              { id: 3a570151-9b85-4597-963a-225c55fc0c93, name: "Скрининг", type_code: "screening" }
+            - &caa-fu
+              { id: 5c6fda01-c193-4bf8-9991-49f30de1a54e, name: "Наблюдение", type_code: "fu" }
+          used_study_activity:
+            - id: b9ef8034-648d-423b-b85d-62d18ff2c792
+              used_defined_activity: *cbc-screening
+            - id: 9c26491e-2e1b-4a8d-9ded-cd9c03d20b65
+              used_defined_activity: *cbc-fu
+            - id: 12e9476d-6117-4b3f-8d71-b3c1516065ac
+              used_defined_activity: *bchem
+            - id: 4aa07cce-7a95-4ba2-a88e-104c1d1e2308
+              used_defined_activity: *deb
+  - name: МДС
+    description: Миелодиспластический Синдром
     planning_study_protocol:
       versioning_study_protocol_version:
-        - &a-2024
-          id: fdfbef08-e7ce-470d-8cef-73eef2bc7c8a
-          acronym: A-2024
+        - &mds
+          id: c83fca3c-7bb0-4bf1-ad10-ce2c756060da
+          acronym: МДС
           executing_study_site_protocol_version_relationship:
-            - &dgoi-a-2024
-              id: f53e341a-2897-4e9e-be42-57144ff53c5a # FIXME: for sqlite
+            - &dgoi-mds
+              id: 02862cc6-4f3f-4fa9-8a2a-5bc575f913d8
               executing_study_site: *dgoi-ss
-              executed_study_protocol_version: *a-2024
+              executed_study_protocol_version: *mds
           intended_planned_study_subject:
-            - performing_organization: {}
-              quantity_range: 3
+            - performing_biologic_entity:
+                type: person
+          subdividing_epoch:
+            - &mds-screening
+              { id: 76d31739-7633-43f5-b172-05d8e3870e31, name: "Скрининг", type_code: "screening" }
+          used_study_activity:
+            - id: 72ed17cd-37ca-43cf-a044-88483f6dbe82
+              used_defined_activity: *cbc-screening
+            - id: 82d04346-b313-49ed-acc1-a6a5453881bb
+              used_defined_activity: *cbc-fu
+            - id: cd99592a-e16a-4c79-84bc-06da5754423e
+              used_defined_activity: *bchem
 
 study_subject:
-  - id: 1944C046-95B3-4CB4-82E2-C789950E29FC
+  - id: 2471fc39-5cd2-4d27-800a-5504030d5fdf
     performing_biologic_entity:
-      id: 99132ae7-25dd-43ba-808e-cdb3b29af285
+      id: d89f94e6-145e-40be-8259-2496e11da90e
       type: person
-      name: [{ use: official, family: Trump, given: Donald, suffix: Jr }]
+      name: [{ use: official, family: Игнатов, given: Дмитрий, middle: Демидович }]
       administrative_gender_code: M
-      birth_date: 1991-01-01
+      birth_date: 2009-02-19
+      death_date: null
+      death_date_estimated_indicator: null
       death_indicator: false
-    status: eligible
-    status_date: 2024-11-06T12:00:00
+    status: on-study-intervention
+    status_date: 2025-06-05T14:00:00
     assigned_study_subject_protocol_version_relationship:
-      - id: 9866feeb-8c7c-4e79-9627-ff6e2c845e58 # FIXME: for sqlite
-        assigning_study_site_protocol_version_relationship: *dgoi-aml-mrd-2018
+      - assigning_study_site_protocol_version_relationship: *dgoi-aaa
     involving_performed_activity:
-      - id: ce3dd821-3a1b-41dd-a366-292c8c163a58
+      - id: 6102e034-5ea5-4785-9007-bfdc5dd298d9
         type: observation
-        containing_epoch: *aml-mrd-2018-screening
-        executing_study_protocol_version: *aml-mrd-2018
-        instantiated_defined_activity: *ipt
+        containing_epoch: *aaa-screening
+        executing_study_protocol_version: *aaa
+        instantiated_defined_activity: *cbc-screening
         context_for_study_site: *dgoi-ss
-        status_code: { code: "complete", code_system: "performed_activity.status_code" }
-        status_date: 2024-11-06T09:00:00
-      - id: 8ac78da9-3c23-4770-94e9-ebaee8432b4b
-        type: observation
-        containing_epoch: *aml-mrd-2018-screening
-        executing_study_protocol_version: *aml-mrd-2018
-        instantiated_defined_activity: *cbc
-        context_for_study_site: *dgoi-ss
-        status_code: { code: "complete", code_system: "performed_activity.status_code" }
-        status_date: 2024-11-04T12:00:00
+        status_code: *cd-complete
+        status_date: 2016-11-18T12:00:00
         resulted_performed_observation_result:
           - type: observation_result
-            type_code: { code: "fullmoon", code_system: "demo" }
-            value: 1991-01-01
+            type_code: { code: "wbc", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Лейкоциты (WBC)" }
+            value: { value: 0.16, unit: 10^9/л }
           - type: observation_result
-            type_code: { code: "somestr", code_system: "demo" }
-            value: "some 1991-01-01"
+            type_code: { code: "rbc", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Эритроциты (RBC)" }
           - type: observation_result
-            type_code: { code: "dx", code_system: "demo" }
-            value: { code: "M2", code_system: "b365b97f-ff34-464c-9097-e7daec409f4c" }
+            type_code: { code: "hb", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Гемоглобин (Hb)" }
+            value: { value: 81, unit: г/л }
           - type: observation_result
-            type_code: { code: "767002", code_system: "SNOMEDCT" }
-            value: { value: 8, unit: "10^9/l" }
+            type_code: { code: "plt", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Тромбоциты (PLT)" }
+            value: { value: 11, unit: 10^9/л }
           - type: observation_result
-            type_code: { code: "30630007", code_system: "SNOMEDCT" }
-            value: { value: 5, unit: null }
+            type_code: { code: "neu", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Нейтрофилы (NEU)" }
+            value: { value: 0, unit: 10^9/л }
           - type: observation_result
-            type_code: { code: "61928009", code_system: "SNOMEDCT" }
-            value: { value: 200, unit: null }
-      - type: substance_administration
-        containing_epoch: *aml-mrd-2018-induction
-        executing_study_protocol_version: *aml-mrd-2018
-        instantiated_defined_activity: *aml-mrd-2018-ame
+            type_code: { code: "lym", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Лимфоциты (LYM)" }
+            value: { value: 0.16, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "mon", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Моноциты (MON)" }
+            value: { value: 0, unit: "%" }
+          - type: observation_result
+            type_code: { code: "eos", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Эозинофилы (EOS)" }
+            value: { value: 0, unit: "%" }
+          - type: observation_result
+            type_code: { code: "bas", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Базофилы (BAS)" }
+            value: { value: 0, unit: "%" }
+          - type: observation_result
+            type_code: { code: "ret", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Ретикулоциты (RET)" }
+            value: { value: 0, unit: 10^9/л }
+      - id: 9789c14d-9190-4975-bc89-e3ffda624b84
+        type: observation
+        containing_epoch: *aaa-d1
+        executing_study_protocol_version: *aaa
+        instantiated_defined_activity: *cbc-fu
         context_for_study_site: *dgoi-ss
-        status_code: { code: "unverified", code_system: "performed_activity.status_code" }
-        status_date: 2024-11-06T12:00:00
-  - performing_biologic_entity:
+        status_code: *cd-complete
+        status_date: 2016-12-06T12:00:00
+        resulted_performed_observation_result:
+          - type: observation_result
+            type_code: { code: "wbc", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Лейкоциты (WBC)" }
+            value: { value: 0.04, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "rbc", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Эритроциты (RBC)" }
+          - type: observation_result
+            type_code: { code: "hb", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Гемоглобин (Hb)" }
+            value: { value: 70, unit: г/л }
+          - type: observation_result
+            type_code: { code: "plt", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Тромбоциты (PLT)" }
+            value: { value: 41, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "neu", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Нейтрофилы (NEU)" }
+            value: { value: 0, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "lym", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Лимфоциты (LYM)" }
+            value: { value: 0.04, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "ret", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Ретикулоциты (RET)" }
+      - id: 76f5b56f-0028-47e5-9495-fdf2d484d07d
+        type: observation
+        containing_epoch: *aaa-w1
+        executing_study_protocol_version: *aaa
+        instantiated_defined_activity: *cbc-fu
+        context_for_study_site: *dgoi-ss
+        status_code: *cd-complete
+        status_date: 2016-12-06T12:00:00
+        resulted_performed_observation_result:
+          - type: observation_result
+            type_code: { code: "wbc", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Лейкоциты (WBC)" }
+            value: { value: 0.21, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "rbc", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Эритроциты (RBC)" }
+          - type: observation_result
+            type_code: { code: "hb", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Гемоглобин (Hb)" }
+            value: { value: 91, unit: г/л }
+          - type: observation_result
+            type_code: { code: "plt", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Тромбоциты (PLT)" }
+            value: { value: 2, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "neu", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Нейтрофилы (NEU)" }
+            value: { value: 0, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "lym", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Лимфоциты (LYM)" }
+            value: { value: 0.21, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "ret", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Ретикулоциты (RET)" }
+      - id: 5dfb6659-e328-4568-b467-859d951e14c4
+        type: observation
+        containing_epoch: *aaa-screening
+        executing_study_protocol_version: *aaa
+        instantiated_defined_activity: *bchem
+        context_for_study_site: *dgoi-ss
+        status_code: *cd-complete
+        status_date: 2016-12-17T12:00:00
+        resulted_performed_observation_result:
+          - type: observation_result
+            type_code: { code: "prot", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Общий белок" }
+            value: { value: 78, unit: г/л }
+          - type: observation_result
+            type_code: { code: "alb", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Альбумин" }
+            value: { value: 42, unit: г/л }
+          - type: observation_result
+            type_code: { code: "urea", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Мочевина" }
+            value: { value: 5.5, unit: ммоль/л }
+          - type: observation_result
+            type_code: { code: "crea", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Креатинин" }
+            value: { value: 53.1, unit: ммоль/л }
+          - type: observation_result
+            type_code: { code: "tbil", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Общий билирубин" }
+          - type: observation_result
+            type_code: { code: "dbil", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Прямой билирубин" }
+          - type: observation_result
+            type_code: { code: "alt", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "АЛТ" }
+            value: { value: 34, unit: ед/л }
+          - type: observation_result
+            type_code: { code: "ast", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "АСТ" }
+            value: { value: 31, unit: ед/л }
+          - type: observation_result
+            type_code: { code: "ldh", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "ЛДГ" }
+          - type: observation_result
+            type_code: { code: "alp", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "ЩФ" }
+            value: { value: 103, unit: ед/л }
+  - id: e823bfee-d762-4047-9a54-dddd9af7f4ff
+    performing_biologic_entity:
+      id: dbc5e632-f59a-460f-adc1-1ec552629057
       type: person
-      name: [{ use: official, family: Harris, given: Kamala }]
-      administrative_gender_code: F
-      birth_date: 2001-01-01
+      name: [{ use: official, family: Царев, given: Семен, middle: Савельевич }]
+      administrative_gender_code: M
+      birth_date: 2013-01-03
+      death_date: null
+      death_date_estimated_indicator: null
       death_indicator: false
-    status: eligible
-    status_date: 2024-11-06T12:00:00
+    status: screening
+    status_date: 2021-09-12T12:00:00
     assigned_study_subject_protocol_version_relationship:
-      - id: 33564e87-ad36-4d25-94a5-89449eb6bc08 # FIXME: for sqlite
-        assigning_study_site_protocol_version_relationship: *ekb-aml-mrd-2018
-  - performing_organization: *4d-org
-    status: eligible
-    status_date: 2024-11-11T12:00:00
-    assigned_study_subject_protocol_version_relationship:
-      - id: fa50d86a-f5b6-45e2-9576-eb3f89a2b6f7 # FIXME: for sqlite
-        assigning_study_site_protocol_version_relationship: *dgoi-a-2024
+      - assigning_study_site_protocol_version_relationship: *dgoi-aaa
+    involving_performed_activity:
+      - id: 188392d6-c8c2-4e92-abce-a18cee6253c6
+        type: observation
+        containing_epoch: *aaa-screening
+        executing_study_protocol_version: *aaa
+        instantiated_defined_activity: *cbc-screening
+        context_for_study_site: *dgoi-ss
+        status_code: *cd-complete
+        status_date: 2021-07-26T12:00:00
+        resulted_performed_observation_result:
+          - type: observation_result
+            type_code: { code: "wbc", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Лейкоциты (WBC)" }
+            value: { value: 4.6, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "rbc", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Эритроциты (RBC)" }
+            value: { value: 2.96, unit: "10^12/л" }
+          - type: observation_result
+            type_code: { code: "hb", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Гемоглобин (Hb)" }
+            value: { value: 105, unit: г/л }
+          - type: observation_result
+            type_code: { code: "plt", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Тромбоциты (PLT)" }
+            value: { value: 88, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "neu", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Нейтрофилы (NEU)" }
+            value: { value: 0.828, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "lym", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Лимфоциты (LYM)" }
+            value: { value: 3.174, unit: 10^9/л }
+          - type: observation_result
+            type_code: { code: "mon", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Моноциты (MON)" }
+          - type: observation_result
+            type_code: { code: "eos", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Эозинофилы (EOS)" }
+          - type: observation_result
+            type_code: { code: "bas", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Базофилы (BAS)" }
+          - type: observation_result
+            type_code: { code: "ret", code_system: "0c7b7b4c-ecb8-4df0-9d88-95fc40f641cc", display_name: "Ретикулоциты (RET)" }
+      - id: f34c7373-6f37-4b59-90e4-226ec4beb830
+        type: observation
+        containing_epoch: *aaa-screening
+        executing_study_protocol_version: *aaa
+        instantiated_defined_activity: *bchem
+        context_for_study_site: *dgoi-ss
+        status_code: *cd-complete
+        status_date: 2021-08-04T12:00:00
+        resulted_performed_observation_result:
+          - type: observation_result
+            type_code: { code: "prot", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Общий белок" }
+            value: { value: 71, unit: г/л }
+          - type: observation_result
+            type_code: { code: "alb", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Альбумин" }
+            value: { value: 45, unit: г/л }
+          - type: observation_result
+            type_code: { code: "urea", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Мочевина" }
+            value: { value: 4.3, unit: ммоль/л }
+          - type: observation_result
+            type_code: { code: "crea", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Креатинин" }
+            value: { value: 40, unit: ммоль/л }
+          - type: observation_result
+            type_code: { code: "tbil", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Общий билирубин" }
+            value: { value: 4.1, unit: "мкмоль/л" }
+          - type: observation_result
+            type_code: { code: "dbil", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "Прямой билирубин" }
+          - type: observation_result
+            value: { value: 1.8, unit: "мкмоль/л" }
+            type_code: { code: "alt", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "АЛТ" }
+            value: { value: 6.6, unit: ед/л }
+          - type: observation_result
+            type_code: { code: "ast", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "АСТ" }
+            value: { value: 29.6, unit: ед/л }
+          - type: observation_result
+            type_code: { code: "ldh", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "ЛДГ" }
+            value: { value: 26.1, unit: ед/л }
+          - type: observation_result
+            type_code: { code: "alp", code_system: "680476d6-bf56-44a1-911a-38d0d38579de", display_name: "ЩФ" }
+      - id: 56e55fa7-bf65-4d5b-a5f4-784311cb6b62
+        type: observation
+        containing_epoch: *aaa-screening
+        executing_study_protocol_version: *aaa
+        instantiated_defined_activity: *deb
+        context_for_study_site: *dgoi-ss
+        status_code: *cd-complete
+        status_date: 2021-08-04T12:00:00
+        resulted_performed_observation_result:
+          - type: observation_result
+            type_code: { code: "result", code_system: "1dade202-6905-4c3a-80ac-03cf901be0f1" }
+            value: { code: "neg", code_system: "2ed3d63a-0e88-43ec-8f03-4e03a5b936d2" }
+          - type: observation_result
+            type_code: { code: "epicrisis", code_system: "1dade202-6905-4c3a-80ac-03cf901be0f1" }
+            value: "ДЭБ-тест: исследовано 100 метафаз, выявлено 28 аберраций. Результат: ДЭБ-тест отрицательный. Однако уровень аберраций  повышен, встречаются аберрации обменного типа, что может свидетельствовать о мозаицизме.  Рекомендовано дополнительное молекулярно-генетическое исследование. 42.7"
