@@ -65,7 +65,10 @@ const StatusForm = ({
   onCancel,
   onSuccess,
 }: StatusFormProps) => {
-  const statusesTo = transitionFrom(status);
+  const statusesTo: Status[] = transitionFrom(status);
+  const otherStatuses: Status[] = Object.values(Status).filter(
+    (status) => !statusesTo.includes(status)
+  );
   const { t } = useTranslation();
   const navigate = useNavigate();
   const form = useForm<StudySubjectData>({
@@ -118,6 +121,23 @@ const StatusForm = ({
                 ))}
               </Stack>
             </Radio.Group>
+            <details>
+              <summary>{t("StatusForm.allStatuses")}</summary>
+              <Group grow>
+                <Radio.Group name="status" {...form.getInputProps("status")}>
+                  <Stack mt="xs">
+                    {otherStatuses.map((status) => (
+                      <Radio
+                        fw={500}
+                        c={statusColor(status)}
+                        value={status}
+                        label={t(`Status.${status}`)}
+                      />
+                    ))}
+                  </Stack>
+                </Radio.Group>
+              </Group>
+            </details>
             <Group justify="flex-end" mt="md">
               <Button variant="outline" onClick={onCancel}>
                 {t("cancel")}

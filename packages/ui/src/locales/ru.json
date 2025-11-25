@@ -121,6 +121,9 @@
       "editModalTitle": "Изменение статуса",
       "newStatus": "Новый статус"
     },
+    "StatusForm": {
+      "allStatuses": "Все статусы"
+    },
     "StudyProtocolVersion": {
       "defaultLabel": "Безымянное исследование"
     },

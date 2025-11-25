@@ -121,6 +121,9 @@
       "editModalTitle": "Changing status",
       "newStatus": "New status"
     },
+    "StatusForm": {
+      "allStatuses": "All statuses"
+    },
     "StudyProtocolVersion": {
       "defaultLabel": "Unnamed study"
     },
