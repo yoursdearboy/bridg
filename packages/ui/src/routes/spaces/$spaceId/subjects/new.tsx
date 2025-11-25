@@ -129,7 +129,7 @@ const PerformingBiologicEntitySelect = ({
               value={subject.performingBiologicEntity!.id}
               bg={
                 subject.performingBiologicEntity!.id === value
-                  ? "var(--mantine-color-dark-7)"
+                  ? "var(--mantine-primary-color-light)"
                   : ""
               }
             >
