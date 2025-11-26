@@ -1,7 +1,6 @@
 import { Grid, Group, Stack, Text, Title } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import type { DefinedActivityUnion } from "api-ts";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
@@ -14,13 +13,12 @@ type SearchParams = {
 export const Route = createFileRoute(
   "/spaces/$spaceId/subjects/$subjectId/activities/new"
 )({
-  component: NewActivityComponent,
+  component: ActivityNewRoute,
   validateSearch: (search: Record<string, unknown>): SearchParams => ({
     aId: search.aId as string,
   }),
   beforeLoad: ({ params, search }) => ({
-    breadcrumb: ({ loaderData }: { loaderData: DefinedActivityUnion }) =>
-      loaderData.nameCode.displayName || i18next.t("Activity.defaultLabel"),
+    breadcrumb: () => i18next.t("ActivityNewPage.breadcrumb"),
     query: queryOptions({
       queryKey: ["subject", params.subjectId, "activity"],
       queryFn: async () =>
@@ -34,7 +32,7 @@ export const Route = createFileRoute(
     await queryClient.fetchQuery(query),
 });
 
-function NewActivityComponent() {
+function ActivityNewRoute() {
   const { query } = Route.useRouteContext();
   const { isError, error, data: activity } = useSuspenseQuery(query);
   const { t } = useTranslation();

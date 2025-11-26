@@ -10,6 +10,12 @@
     "ActivityCard": {
       "title": "Activities"
     },
+    "ActivityEditPage": {
+      "breadcrumb": "Edit activity"
+    },
+    "ActivityNewPage": {
+      "breadcrumb": "New activity"
+    },
     "Address": {
       "building": "Building",
       "country": "Country",
