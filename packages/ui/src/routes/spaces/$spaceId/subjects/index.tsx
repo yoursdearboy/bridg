@@ -29,9 +29,9 @@ function SubjectIndexPage() {
           overflow: "hidden",
         }}
       >
-        <CopyButton value={subject.performingBiologicEntity?.id || ""}>
+        <CopyButton value={subject.id}>
           {({ copy }) => (
-            <span onClick={copy} title={subject.performingBiologicEntity?.id}>
+            <span onClick={copy} title={subject.id}>
               {subject.id.slice(0, 8)}…
             </span>
           )}
