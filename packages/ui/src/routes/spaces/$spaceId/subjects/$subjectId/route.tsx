@@ -9,6 +9,10 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
       queryKey: ["subject", params.subjectId],
       queryFn: () => api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet(params),
     }),
+    subjectQuery: queryOptions({
+      queryKey: ["subject", params.subjectId],
+      queryFn: () => api.subjects.showSpacesSpaceIdSubjectsSubjectIdGet(params),
+    }),
     breadcrumb: () => i18next.t("SubjectShowPage.breadcrumb"),
   }),
   loader: ({ context: { query, queryClient } }) =>

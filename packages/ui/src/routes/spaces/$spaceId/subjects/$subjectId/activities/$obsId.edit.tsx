@@ -1,10 +1,11 @@
-import { Grid, Group, Stack, Text, Title } from "@mantine/core";
+import { Box, Grid, Group, Stack, Text, Title } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { ActivityForm } from "@/components/activity/ActivityForm";
+import { Route as SpacesSpaceIdSubjectsSubjectIdRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/route";
 
 export const Route = createFileRoute(
   "/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit"
@@ -36,24 +37,39 @@ export const Route = createFileRoute(
 });
 
 function ActivityEditRoute() {
+  const { query: subjectQuery } =
+    SpacesSpaceIdSubjectsSubjectIdRoute.useRouteContext();
   const { query } = Route.useRouteContext();
   const {
     isError,
     error,
     data: { definedActivity, performedActivity },
   } = useSuspenseQuery(query);
+  const {
+    isError: isSubjectError,
+    error: subjectError,
+    data: subject,
+  } = useSuspenseQuery(subjectQuery);
   const { t } = useTranslation();
 
-  if (isError)
+  if (isError || isSubjectError)
     return (
-      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
+      <Text color="red">
+        {t("errorMessage", { error: (error || subjectError).message })}
+      </Text>
     );
 
   return (
     <Stack gap="md">
       <Group justify="space-between">
         <Title order={2}>
-          {definedActivity.nameCode.displayName || t("Activity.defaultLabel")}
+          {subject.performingBiologicEntity?.primaryName?.label ||
+            t("StudySubject.defaultLabel")}
+          <Box display="inline" px="md">
+            (
+            {definedActivity.nameCode.displayName || t("Activity.defaultLabel")}
+            )
+          </Box>
         </Title>
       </Group>
 

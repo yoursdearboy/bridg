@@ -1,10 +1,11 @@
-import { Grid, Group, Stack, Text, Title } from "@mantine/core";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { Box, Grid, Group, Stack, Text, Title } from "@mantine/core";
+import { queryOptions } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { ActivityForm } from "@/components/activity/ActivityForm";
+import { useSuspenseQueriesCombo } from "@/useSuspenseQueriesCombo";
 
 type SearchParams = {
   aId: string;
@@ -19,7 +20,7 @@ export const Route = createFileRoute(
   }),
   beforeLoad: ({ params, search }) => ({
     breadcrumb: () => i18next.t("ActivityNewPage.breadcrumb"),
-    query: queryOptions({
+    activityQuery: queryOptions({
       queryKey: ["subject", params.subjectId, "activity"],
       queryFn: async () =>
         await api.definedActivity.showDefinedActivityAIdGet({
@@ -28,16 +29,22 @@ export const Route = createFileRoute(
         }),
     }),
   }),
-  loader: async ({ context: { query, queryClient } }) =>
-    await queryClient.fetchQuery(query),
+  loader: async ({ context: { activityQuery, queryClient } }) =>
+    await queryClient.fetchQuery(activityQuery),
 });
 
 function ActivityNewRoute() {
-  const { query } = Route.useRouteContext();
-  const { isError, error, data: activity } = useSuspenseQuery(query);
+  const { subjectQuery, activityQuery } = Route.useRouteContext();
+  const {
+    error,
+    data: { subject, activity },
+  } = useSuspenseQueriesCombo({
+    subject: subjectQuery,
+    activity: activityQuery,
+  });
   const { t } = useTranslation();
 
-  if (isError)
+  if (error)
     return (
       <Text color="red">{t("errorMessage", { error: error.message })}</Text>
     );
@@ -46,7 +53,11 @@ function ActivityNewRoute() {
     <Stack gap="md">
       <Group justify="space-between">
         <Title order={2}>
-          {activity.nameCode.displayName || t("Activity.defaultLabel")}
+          {subject.performingBiologicEntity?.primaryName?.label ||
+            t("StudySubject.defaultLabel")}
+          <Box display="inline" px="md">
+            ({activity.nameCode.displayName || t("Activity.defaultLabel")})
+          </Box>
         </Title>
       </Group>
       <Grid>
