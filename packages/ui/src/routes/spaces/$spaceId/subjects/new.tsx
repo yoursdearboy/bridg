@@ -28,6 +28,7 @@ import {
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import i18next from "@/i18n";
+import { STATUSES } from "@/model";
 import { Route as SubjectIdRoute } from "./$subjectId";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
@@ -170,7 +171,7 @@ const PerformingBiologicEntityCard = ({
 const StudySubjectFields = ({ form }: NewStudySubjectFormProps) => {
   const { t } = useTranslation();
   const { sites } = Route.useLoaderData();
-  const statuses = Object.values(Status).map((value) => ({
+  const statuses = STATUSES.map((value) => ({
     label: t(`Status.${value}`),
     value,
   }));
