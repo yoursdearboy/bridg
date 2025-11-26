@@ -10,6 +10,12 @@
     "ActivityCard": {
       "title": "Процедуры"
     },
+    "ActivityEditPage": {
+      "breadcrumb": "Редактирование процедуры"
+    },
+    "ActivityNewPage": {
+      "breadcrumb": "Новая процедура"
+    },
     "Address": {
       "building": "Здание",
       "country": "Страна",

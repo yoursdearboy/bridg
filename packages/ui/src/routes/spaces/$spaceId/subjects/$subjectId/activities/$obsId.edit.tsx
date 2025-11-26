@@ -1,7 +1,6 @@
 import { Grid, Group, Stack, Text, Title } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import type { DefinedActivityUnion } from "api-ts";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
@@ -10,15 +9,9 @@ import { ActivityForm } from "@/components/activity/ActivityForm";
 export const Route = createFileRoute(
   "/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit"
 )({
-  component: EditActivityComponent,
+  component: ActivityEditRoute,
   beforeLoad: ({ params }) => ({
-    breadcrumb: ({
-      loaderData,
-    }: {
-      loaderData: { definedActivity: DefinedActivityUnion };
-    }) =>
-      loaderData.definedActivity.nameCode.displayName ||
-      i18next.t("Activity.defaultLabel"),
+    breadcrumb: () => i18next.t("ActivityEditPage.breadcrumb"),
     query: queryOptions({
       queryKey: ["subject", params.subjectId, "activity", params.obsId],
       queryFn: async () => {
@@ -42,7 +35,7 @@ export const Route = createFileRoute(
     await queryClient.fetchQuery(query),
 });
 
-function EditActivityComponent() {
+function ActivityEditRoute() {
   const { query } = Route.useRouteContext();
   const {
     isError,
