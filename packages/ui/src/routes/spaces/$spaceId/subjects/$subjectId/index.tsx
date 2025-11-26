@@ -40,12 +40,12 @@ function SubjectShowPage() {
         </Group>
 
         <Button.Group>
-          <ButtonLink to=".." size="sm">
+          <ButtonLink to=".." size="sm" variant="outline">
             {t("SubjectShowPage.back")}
           </ButtonLink>
           <Menu shadow="md" width={200}>
             <Menu.Target>
-              <Button size="sm" p="xs">
+              <Button size="sm" p="xs" variant="outline">
                 <IconCaretDownFilled />
               </Button>
             </Menu.Target>

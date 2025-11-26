@@ -120,7 +120,7 @@ export const ActivityMenu = ({ spaceId, subjectId }: ActivityMenuProps) => {
     queryFn: () => api.spaceActivity.indexSpacesSpaceIdActivityGet({ spaceId }),
   });
   return (
-    <Menu>
+    <Menu shadow="md">
       <Menu.Target>
         <Button variant="outline" size="compact-sm" fw={500}>
           {t("add")}

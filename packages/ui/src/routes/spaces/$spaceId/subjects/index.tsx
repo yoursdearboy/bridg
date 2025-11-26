@@ -77,12 +77,12 @@ function SubjectIndexPage() {
       </Table.Td>
       <Table.Td>
         <ButtonLink
-          px="xs"
-          size="compact-lg"
+          size="compact-md"
+          variant="subtle"
           to={infoRoute.to}
           params={{ spaceId, subjectId: subject.id }}
         >
-          <IconEye size={16} />
+          <IconEye size={20} />
         </ButtonLink>
       </Table.Td>
     </Table.Tr>
