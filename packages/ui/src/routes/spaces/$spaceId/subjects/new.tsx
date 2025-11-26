@@ -28,6 +28,7 @@ import {
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import i18next from "@/i18n";
+import { Route as SubjectIdRoute } from "./$subjectId";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
   loader: async ({ params }) => ({
@@ -272,7 +273,11 @@ function RouteComponent() {
         spaceId,
         newStudySubject,
       }),
-    onSuccess: () => navigate({ to: ".." }),
+    onSuccess: (subj) =>
+      navigate({
+        to: SubjectIdRoute.to,
+        params: { spaceId, subjectId: subj.id },
+      }),
   });
 
   return (
