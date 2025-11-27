@@ -1,11 +1,10 @@
-import { Box, Grid, Group, Stack, Text, Title } from "@mantine/core";
-import { queryOptions } from "@tanstack/react-query";
+import { Box, Grid, Group, Stack, Title } from "@mantine/core";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { ActivityForm } from "@/components/activity/ActivityForm";
-import { useSuspenseQueriesCombo } from "@/useSuspenseQueriesCombo";
 
 type SearchParams = {
   aId: string;
@@ -35,19 +34,9 @@ export const Route = createFileRoute(
 
 function ActivityNewRoute() {
   const { subjectQuery, activityQuery } = Route.useRouteContext();
-  const {
-    error,
-    data: { subject, activity },
-  } = useSuspenseQueriesCombo({
-    subject: subjectQuery,
-    activity: activityQuery,
-  });
+  const { data: activity } = useSuspenseQuery(activityQuery);
+  const { data: subject } = useSuspenseQuery(subjectQuery);
   const { t } = useTranslation();
-
-  if (error)
-    return (
-      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
-    );
 
   return (
     <Stack gap="md">
