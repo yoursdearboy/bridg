@@ -25,7 +25,7 @@ export const PersonTimelineCard = ({ personId }: PersonTimelineCardProps) => {
         personId,
       }),
   });
-  const { isPending, isError, error, data: subjects } = query;
+  const { isPending, isError, error, data: sites } = query;
 
   return (
     <>
@@ -35,7 +35,7 @@ export const PersonTimelineCard = ({ personId }: PersonTimelineCardProps) => {
       )}
       {!isPending && !isError && (
         <Card shadow="sm" padding="lg" radius="md" withBorder>
-          <SubjectsTimelineWrapper subjects={subjects} personId={personId} />
+          <SubjectsTimelineWrapper sites={sites} personId={personId} />
         </Card>
       )}
     </>
@@ -43,40 +43,47 @@ export const PersonTimelineCard = ({ personId }: PersonTimelineCardProps) => {
 };
 
 interface SubjectsTimelineWrapperProps {
-  subjects: PersonStudySubject[];
+  sites: PersonStudySubject[];
   personId: string;
 }
 
 const SubjectsTimelineWrapper = ({
-  subjects,
+  sites,
   personId,
 }: SubjectsTimelineWrapperProps) => {
   const { t } = useTranslation();
 
   return (
     <>
-      {subjects.length === 0
+      {sites.length === 0
         ? t("nodata")
-        : subjects.map((subject) => (
+        : sites.map((site) => (
             <>
-              <Timeline bulletSize={36} active={subjects.length}>
+              <Timeline bulletSize={36} active={sites.length}>
                 <Timeline.Item
                   title={
-                    subject.assignedStudySiteProtocolVersionRelationship[0]
+                    site.assignedStudySiteProtocolVersionRelationship[0]
                       .executedStudyProtocolVersion.label +
                     " (" +
-                    (subject.status ? t(`Status.${subject.status}`) : t("na")) +
+                    (site.status ? t(`Status.${site.status}`) : t("na")) +
                     ")"
                   }
                 >
                   <Text c="dimmed" size="md">
-                    {t("intlDateTime", { val: subject.statusDate })}
+                    {t("intlDateTime", { val: site.statusDate })}
                   </Text>
                   <Space h="md" />
                 </Timeline.Item>
               </Timeline>
               <Box px={7}>
-                <SubjectTimeline subject={subject} personId={personId} />
+                <SubjectTimeline
+                  site={site}
+                  personId={personId}
+                  spaceId={
+                    site.assignedStudySiteProtocolVersionRelationship[0]
+                      .executedStudyProtocolVersion.id
+                  }
+                />
               </Box>
             </>
           ))}
@@ -85,18 +92,19 @@ const SubjectsTimelineWrapper = ({
 };
 
 interface SubjectTimelineProps {
-  subject: PersonStudySubject;
+  site: PersonStudySubject;
   personId: string;
+  spaceId: string;
 }
 
-const SubjectTimeline = ({ subject, personId }: SubjectTimelineProps) => {
+const SubjectTimeline = ({ site, personId, spaceId }: SubjectTimelineProps) => {
   const { t } = useTranslation();
   const query = useQuery({
-    queryKey: ["person", personId, "subjects", subject.id],
+    queryKey: ["person", personId, "subjects", site.id],
     queryFn: () =>
       api.subjects.indexSpacesSpaceIdSubjectsSubjectIdActivityGet({
-        spaceId: "ce946229-9746-46cd-8dd3-b27a2fbfd48a",
-        subjectId: subject.id,
+        spaceId: spaceId,
+        subjectId: site.id,
       }),
   });
   const { isPending, isError, error, data: activities } = query;
