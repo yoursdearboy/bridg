@@ -18,8 +18,8 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId/")({
 });
 
 function SubjectShowPage() {
-  const { query } = Route.useRouteContext();
-  const { data: subject } = useSuspenseQuery(query);
+  const { subjectQuery } = Route.useRouteContext();
+  const { data: subject } = useSuspenseQuery(subjectQuery);
   const { spaceId, subjectId } = Route.useParams();
   const { t } = useTranslation();
   const [redirectModalOpened, redirectModalHandlers] = useDisclosure(false);
