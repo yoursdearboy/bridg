@@ -25,6 +25,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import MenuItemLink from "@/components/MenuItemLink";
 import { languages } from "@/i18n";
 import logo from "@/logo.png";
+import { Error } from "@/components/Error";
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation();
@@ -131,7 +132,7 @@ function Header() {
   );
 }
 
-function Layout() {
+function Layout({ children }: { children: React.ReactNode }) {
   return (
     <AppShell padding="md" header={{ height: 45 }}>
       <AppShell.Header>
@@ -139,7 +140,7 @@ function Layout() {
       </AppShell.Header>
       <AppShell.Main>
         <Breadcrumbs />
-        <Outlet />
+        {children}
       </AppShell.Main>
     </AppShell>
   );
@@ -150,5 +151,14 @@ interface RouteContext {
 }
 
 export const Route = createRootRouteWithContext<RouteContext>()({
-  component: Layout,
+  component: () => (
+    <Layout>
+      <Outlet />
+    </Layout>
+  ),
+  errorComponent: (props) => (
+    <Layout>
+      <Error {...props} />
+    </Layout>
+  ),
 });
