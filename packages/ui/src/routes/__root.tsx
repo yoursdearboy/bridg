@@ -22,10 +22,10 @@ import {
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import Error from "@/components/Error";
 import MenuItemLink from "@/components/MenuItemLink";
 import { languages } from "@/i18n";
 import logo from "@/logo.png";
-import { Error } from "@/components/Error";
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation();

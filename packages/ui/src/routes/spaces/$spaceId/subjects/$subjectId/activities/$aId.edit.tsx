@@ -1,4 +1,4 @@
-import { Box, Grid, Group, Stack, Title } from "@mantine/core";
+import { Grid, Group, Stack, Title } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import i18next from "i18next";
