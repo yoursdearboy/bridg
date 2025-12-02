@@ -131,7 +131,7 @@ exports[`index pages renders correctly 1`] = `
                     style="max-width: 100px; white-space: nowrap; overflow: hidden;"
                   >
                     <span
-                      title="8498d20d-6c84-4f09-96c5-5af3a557b1e3"
+                      title="2703d0bc-7ed4-497c-91c6-30d86a8eb630"
                     >
                       2703d0bc…
                     </span>
@@ -189,10 +189,11 @@ exports[`index pages renders correctly 1`] = `
                     <button
                       aria-current="page"
                       class="mantine-focus-auto mantine-active active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
-                      data-size="compact-lg"
+                      data-size="compact-md"
                       data-status="active"
+                      data-variant="subtle"
                       href="/"
-                      style="--button-height: var(--button-height-compact-lg); --button-padding-x: var(--button-padding-x-compact-lg); --button-fz: var(--mantine-font-size-lg); --button-color: var(--mantine-color-white); padding-inline: var(--mantine-spacing-xs);"
+                      style="--button-height: var(--button-height-compact-md); --button-padding-x: var(--button-padding-x-compact-md); --button-fz: var(--mantine-font-size-md); --button-bg: transparent; --button-hover: var(--mantine-color-blue-light-hover); --button-color: var(--mantine-color-blue-light-color); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
                       type="button"
                     >
                       <span
@@ -204,13 +205,13 @@ exports[`index pages renders correctly 1`] = `
                           <svg
                             class="tabler-icon tabler-icon-eye "
                             fill="none"
-                            height="16"
+                            height="20"
                             stroke="currentColor"
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             stroke-width="2"
                             viewBox="0 0 24 24"
-                            width="16"
+                            width="20"
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <path
@@ -236,7 +237,7 @@ exports[`index pages renders correctly 1`] = `
                     style="max-width: 100px; white-space: nowrap; overflow: hidden;"
                   >
                     <span
-                      title="ba6107f6-0891-44c5-8d84-01352f32ace2"
+                      title="a698c952-143a-481d-8bd7-647758a1097c"
                     >
                       a698c952…
                     </span>
@@ -294,10 +295,11 @@ exports[`index pages renders correctly 1`] = `
                     <button
                       aria-current="page"
                       class="mantine-focus-auto mantine-active active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
-                      data-size="compact-lg"
+                      data-size="compact-md"
                       data-status="active"
+                      data-variant="subtle"
                       href="/"
-                      style="--button-height: var(--button-height-compact-lg); --button-padding-x: var(--button-padding-x-compact-lg); --button-fz: var(--mantine-font-size-lg); --button-color: var(--mantine-color-white); padding-inline: var(--mantine-spacing-xs);"
+                      style="--button-height: var(--button-height-compact-md); --button-padding-x: var(--button-padding-x-compact-md); --button-fz: var(--mantine-font-size-md); --button-bg: transparent; --button-hover: var(--mantine-color-blue-light-hover); --button-color: var(--mantine-color-blue-light-color); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
                       type="button"
                     >
                       <span
@@ -309,13 +311,13 @@ exports[`index pages renders correctly 1`] = `
                           <svg
                             class="tabler-icon tabler-icon-eye "
                             fill="none"
-                            height="16"
+                            height="20"
                             stroke="currentColor"
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             stroke-width="2"
                             viewBox="0 0 24 24"
-                            width="16"
+                            width="20"
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <path

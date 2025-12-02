@@ -1,8 +1,8 @@
 import { Card, Group, Text } from "@mantine/core";
-import type { ErrorRouteComponent } from "@tanstack/react-router";
+import type { ErrorComponentProps } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-export const Error: ErrorRouteComponent = ({ error }) => {
+export default function Error({ error }: ErrorComponentProps) {
   const { t } = useTranslation();
   return (
     <Card withBorder mih={200}>
@@ -19,4 +19,4 @@ export const Error: ErrorRouteComponent = ({ error }) => {
       </Card.Section>
     </Card>
   );
-};
+}
