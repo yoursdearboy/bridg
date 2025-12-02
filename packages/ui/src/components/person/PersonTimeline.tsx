@@ -10,6 +10,8 @@ import { useQuery } from "@tanstack/react-query";
 import type { PerformedActivity, PersonStudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+import { Route as SpacesSpaceIdSubjectsSubjectIdIndexRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/index";
+import AnchorLink from "@/components/AnchorLink";
 
 interface PersonTimelineCardProps {
   personId: string;
@@ -62,6 +64,17 @@ const SubjectsTimelineWrapper = ({
               <Timeline bulletSize={36} active={subjects.length}>
                 <Timeline.Item
                   title={
+                    <AnchorLink
+                      fw={500}
+                      to={SpacesSpaceIdSubjectsSubjectIdIndexRoute.to}
+                      params={{
+                        spaceId:
+                          subject
+                            .assignedStudySiteProtocolVersionRelationship[0]
+                            .executedStudyProtocolVersion.id,
+                        subjectId: subject.id,
+                      }}
+                    >
                       {subject.assignedStudySiteProtocolVersionRelationship[0]
                         .executedStudyProtocolVersion.label +
                         " (" +
@@ -69,7 +82,7 @@ const SubjectsTimelineWrapper = ({
                           ? t(`Status.${subject.status}`)
                           : t("na")) +
                         ")"}
-                    </Link>
+                    </AnchorLink>
                   }
                 >
                   <Text c="dimmed" size="md">
