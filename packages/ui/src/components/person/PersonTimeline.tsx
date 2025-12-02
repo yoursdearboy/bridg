@@ -10,8 +10,8 @@ import { useQuery } from "@tanstack/react-query";
 import type { PerformedActivity, PersonStudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
-import { Route as SpacesSpaceIdSubjectsSubjectIdIndexRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/index";
 import AnchorLink from "@/components/AnchorLink";
+import { Route as SpacesSpaceIdSubjectsSubjectIdIndexRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/index";
 
 interface PersonTimelineCardProps {
   personId: string;
