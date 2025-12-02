@@ -1,4 +1,4 @@
-import { Grid, Group, Stack, Text, Title } from "@mantine/core";
+import { Grid, Group, Stack, Title } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import i18next from "i18next";
@@ -19,7 +19,7 @@ export const Route = createFileRoute(
   }),
   beforeLoad: ({ params, search }) => ({
     breadcrumb: () => i18next.t("ActivityNewPage.breadcrumb"),
-    query: queryOptions({
+    activityQuery: queryOptions({
       queryKey: ["subject", params.subjectId, "activity"],
       queryFn: async () =>
         await api.definedActivity.showDefinedActivityAIdGet({
@@ -28,25 +28,22 @@ export const Route = createFileRoute(
         }),
     }),
   }),
-  loader: async ({ context: { query, queryClient } }) =>
-    await queryClient.fetchQuery(query),
+  loader: async ({ context: { activityQuery, queryClient } }) =>
+    await queryClient.fetchQuery(activityQuery),
 });
 
 function ActivityNewRoute() {
-  const { query } = Route.useRouteContext();
-  const { isError, error, data: activity } = useSuspenseQuery(query);
+  const { subjectQuery, activityQuery } = Route.useRouteContext();
+  const { data: activity } = useSuspenseQuery(activityQuery);
+  const { data: subject } = useSuspenseQuery(subjectQuery);
   const { t } = useTranslation();
-
-  if (isError)
-    return (
-      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
-    );
 
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Title order={2}>
-          {activity.nameCode.displayName || t("Activity.defaultLabel")}
+        <Title order={2} fw={500}>
+          {subject.performingBiologicEntity?.primaryName?.label ||
+            t("StudySubject.defaultLabel")}
         </Title>
       </Group>
       <Grid>
