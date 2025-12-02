@@ -62,7 +62,7 @@ function SubjectShowPage() {
       </Group>
 
       <Grid>
-        <Grid.Col span={{ base: 12, md: 6 }}>
+        <Grid.Col span={{ base: 12, md: 5 }}>
           {subject.performingBiologicEntity && (
             <PersonCard
               person={subject.performingBiologicEntity}
@@ -70,7 +70,7 @@ function SubjectShowPage() {
             />
           )}
         </Grid.Col>
-        <Grid.Col span={{ base: 12, md: 6 }}>
+        <Grid.Col span={{ base: 12, md: 7 }}>
           <ActivityCard spaceId={spaceId} subjectId={subjectId} />
         </Grid.Col>
       </Grid>

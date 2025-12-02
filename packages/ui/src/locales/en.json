@@ -148,8 +148,7 @@
       "actions": "Actions",
       "breadcrumb": "Patients",
       "info": "Info",
-      "newPatient": "New patient",
-      "patients": "Patients"
+      "newPatient": "New patient"
     },
     "SubjectInfoCard": {
       "organizationDetails": "Organization details",

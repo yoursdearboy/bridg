@@ -1,4 +1,4 @@
-import { CopyButton, Group, Stack, Table, Text } from "@mantine/core";
+import { Box, CopyButton, Group, Stack, Table, Text } from "@mantine/core";
 import { IconEye } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
@@ -91,9 +91,7 @@ function SubjectIndexPage() {
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Text size="xl" fw={700}>
-          {t("SubjectIndexPage.patients")}
-        </Text>
+        <Box />
         <ButtonLink from={Route.to} to={newRoute.to} params={{ spaceId }}>
           {t("SubjectIndexPage.newPatient")}
         </ButtonLink>
