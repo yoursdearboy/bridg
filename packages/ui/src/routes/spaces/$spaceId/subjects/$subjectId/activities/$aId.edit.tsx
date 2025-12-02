@@ -7,19 +7,19 @@ import api from "@/api";
 import { ActivityForm } from "@/components/activity/ActivityForm";
 
 export const Route = createFileRoute(
-  "/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit"
+  "/spaces/$spaceId/subjects/$subjectId/activities/$aId/edit"
 )({
   component: ActivityEditRoute,
   beforeLoad: ({ params }) => ({
     breadcrumb: () => i18next.t("ActivityEditPage.breadcrumb"),
     activityQuery: queryOptions({
-      queryKey: ["subject", params.subjectId, "activity", params.obsId],
+      queryKey: ["subject", params.subjectId, "activity", params.aId],
       queryFn: async () => {
         const performedActivity =
           await api.subjects.showSpacesSpaceIdSubjectsSubjectIdActivityAIdGet({
             spaceId: params.spaceId,
             subjectId: params.subjectId,
-            aId: params.obsId,
+            aId: params.aId,
             result: true,
           });
         const definedActivity =

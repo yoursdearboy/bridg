@@ -5,7 +5,7 @@ import type { UseQueryResult } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import type { PerformedActivity } from "api-ts";
 import { useTranslation } from "react-i18next";
-import { Route as EditActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/activities/$obsId.edit";
+import { Route as EditActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/activities/$aId.edit";
 
 interface ActivityTableWrapperProps {
   query: UseQueryResult<PerformedActivity[], Error>;
@@ -100,7 +100,7 @@ const ActivityTableRow = ({
   const linkParams = {
     spaceId,
     subjectId,
-    obsId: activity.id,
+    aId: activity.id,
   };
 
   return (
