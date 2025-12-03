@@ -1,10 +1,20 @@
-import { Grid, Group, Stack, Title } from "@mantine/core";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import { Button, Grid, Group, Stack, Title } from "@mantine/core";
+import {
+  queryOptions,
+  useMutation,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import type {
+  PerformedActivityUnion,
+  PerformedActivityUnionData,
+} from "api-ts";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
-import { ActivityForm } from "@/components/activity/ActivityForm";
+import { ActivityFormWrapper } from "@/components/activity/ActivityFormWrapper";
+import { Route as SpacesSpaceIdSubjectsSubjectIdRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId";
+import useActivityForm from "@/components/activity/useActivityForm";
 
 export const Route = createFileRoute(
   "/spaces/$spaceId/subjects/$subjectId/activities/$aId/edit"
@@ -36,11 +46,40 @@ export const Route = createFileRoute(
 });
 
 function ActivityEditRoute() {
+  const navigate = useNavigate();
   const { activityQuery, subjectQuery } = Route.useRouteContext();
   const {
     data: { definedActivity, performedActivity },
   } = useSuspenseQuery(activityQuery);
   const { data: subject } = useSuspenseQuery(subjectQuery);
+  const { spaceId, subjectId, aId } = Route.useParams();
+  const form = useActivityForm(performedActivity);
+  const mutation = useMutation({
+    mutationKey: ["subject", subjectId, "activity", aId],
+    // FIXME: replace with PerformedActivityUnionData
+    mutationFn: (data: PerformedActivityUnion) =>
+      api.subjects.updateSpacesSpaceIdSubjectsSubjectIdActivityAIdPatch({
+        spaceId,
+        subjectId,
+        aId,
+        performedActivityUnionData: {
+          ...data,
+          reasonCode: performedActivity.reasonCode,
+          statusCode: performedActivity.statusCode,
+          statusDate: performedActivity.statusDate,
+          contextForStudySiteId:
+            performedActivity.contextForStudySite?.id || null,
+          containingEpochId: performedActivity.containingEpoch?.id || null,
+          instantiatedDefinedActivityId:
+            performedActivity.instantiatedDefinedActivity?.id || null,
+        },
+      }),
+    onSuccess: () =>
+      navigate({
+        to: SpacesSpaceIdSubjectsSubjectIdRoute.to,
+        params: { spaceId, subjectId },
+      }),
+  });
   const { t } = useTranslation();
 
   return (
@@ -50,15 +89,25 @@ function ActivityEditRoute() {
           {subject.performingBiologicEntity?.primaryName?.label ||
             t("StudySubject.defaultLabel")}
         </Title>
+        <Button
+          type="submit"
+          loading={mutation.isPending}
+          onClick={form.handleSubmit(mutation.mutate)}
+        >
+          {t("submit")}
+        </Button>
       </Group>
-      <Grid>
-        <Grid.Col span={{ base: 12, xs: 6, md: 6, lg: 6 }}>
-          <ActivityForm
-            definedActivity={definedActivity}
-            performedActivity={performedActivity}
-          />
-        </Grid.Col>
-      </Grid>
+      <form onSubmit={form.handleSubmit(mutation.mutate)}>
+        <Grid>
+          <Grid.Col span={{ base: 12, xs: 6, md: 6, lg: 6 }}>
+            <ActivityFormWrapper
+              definedActivity={definedActivity}
+              performedActivity={performedActivity}
+              {...form}
+            />
+          </Grid.Col>
+        </Grid>
+      </form>
     </Stack>
   );
 }
