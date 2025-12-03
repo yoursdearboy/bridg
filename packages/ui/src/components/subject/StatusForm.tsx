@@ -27,7 +27,7 @@ export function StatusButton({
   return (
     <>
       <Button
-        size="xs"
+        size="sm"
         color={getStatusColor(subject.status)}
         onClick={open}
         variant="light"
