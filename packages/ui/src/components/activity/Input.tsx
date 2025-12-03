@@ -131,10 +131,27 @@ const DateInput = ({
 const CharacterStringInput = ({
   label,
   value,
+  onChange,
 }: {
   label: string | null;
   value: CharacterString | null;
-}) => <TextInput label={label} value={value?.value || ""} />;
+  onChange: (value: CharacterString | null) => void;
+}) => {
+  const parse = (x: string | null): CharacterString | null =>
+    x
+      ? {
+          dataTypeName: "ST",
+          value: x,
+        }
+      : null;
+  return (
+    <TextInput
+      label={label}
+      value={value?.value || ""}
+      onChange={(e) => onChange(parse(e.target.value))}
+    />
+  );
+};
 
 interface InputProps {
   label: string | null;
@@ -184,7 +201,11 @@ export const Input = ({
       return <p>Not implemented</p>;
     default:
       return (
-        <CharacterStringInput label={label} value={value as CharacterString} />
+        <CharacterStringInput
+          label={label}
+          value={value as CharacterString}
+          onChange={(value) => onChange(value as DataValue)}
+        />
       );
   }
 };
