@@ -52,7 +52,7 @@ const ActivityTable = ({
   const { t } = useTranslation();
 
   return (
-    <Table highlightOnHover>
+    <Table highlightOnHover fz="md">
       <Table.Thead>
         <Table.Tr>
           <Table.Th></Table.Th>
