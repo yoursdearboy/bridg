@@ -1,23 +1,41 @@
-import { Card, Table } from "@mantine/core";
+import { Card, LoadingOverlay, Table } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import type {
-  PersonStudySubject,
-  StudySiteProtocolVersionRelationship,
+  PerformedActivity
 } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 
-export function ActivityCard({ personId }: { personId: string }) {
+export function ActivityCard({
+  personId
+}: {
+  personId: string;
+}) {
+  const { t } = useTranslation();
   const query = useQuery({
-    queryKey: ["person", personId, "subjects"],
-    queryFn: () =>
-      api.persons.indexPersonsPersonIdSubjectGet({
+    queryKey: ["person", personId, "subjects", "activities"],
+    queryFn: async () => {
+     
+      const subjects = await api.persons.indexPersonsPersonIdSubjectGet({
         personId,
-      }),
+      });
+      const activitiesPromises = subjects.map((subject) =>
+        api.subjects.indexSpacesSpaceIdSubjectsSubjectIdActivityGet({
+          spaceId:
+            subject.assignedStudySiteProtocolVersionRelationship[0]
+              .executingStudySite.id,
+          subjectId: subject.id,
+        })
+      );
+      const activitiesArrays = await Promise.all(activitiesPromises);
+      const activities = activitiesArrays.flat();
+
+      return activities;
+    },
   });
-  const { isPending, isError, error, data: sites } = query;
+  const { isPending, isError, error, data: activities } = query;
   if (isError) return error.message;
-  if (isPending) return "123";
+  if (isPending) return <LoadingOverlay />;
 
   return (
     <>
@@ -25,11 +43,18 @@ export function ActivityCard({ personId }: { personId: string }) {
         <Card.Section withBorder inheritPadding py="xs">
           <Table highlightOnHover>
             <Table.Tbody>
-              {sites.map((site: PersonStudySubject) => (
-                <RelationRows
-                  subjectId={site.id}
-                  relations={site.assignedStudySiteProtocolVersionRelationship}
-                />
+              {activities.map((activity: PerformedActivity) => (
+                <Table.Tr color={currentSubject ? "blue" : undefined}>
+                  <Table.Td>
+                    {activity.instantiatedDefinedActivity?.nameCode
+                      .displayName || t("Activity.defaultLabel")}
+                  </Table.Td>
+                  <Table.Td>{activity.containingEpoch?.name}</Table.Td>
+                  <Table.Td>
+                    {t("intlDateTime", { val: activity.statusDate })}
+                  </Table.Td>
+                  <Table.Td>{activity.statusCode?.displayName}</Table.Td>
+                </Table.Tr>
               ))}
             </Table.Tbody>
           </Table>
@@ -38,59 +63,3 @@ export function ActivityCard({ personId }: { personId: string }) {
     </>
   );
 }
-
-const RelationRows = ({
-  subjectId,
-  relations,
-}: {
-  subjectId: string;
-  relations: StudySiteProtocolVersionRelationship[];
-}) => {
-  return (
-    <>
-      {relations.map((relation) => (
-        <TableRows
-          spaceId={relation.executedStudyProtocolVersion.id}
-          subjectId={subjectId}
-        />
-      ))}
-    </>
-  );
-};
-
-const TableRows = ({
-  spaceId,
-  subjectId,
-}: {
-  spaceId: string;
-  subjectId: string;
-}) => {
-  const { t } = useTranslation();
-  const query = useQuery({
-    queryKey: ["spaces", spaceId, "subjects", subjectId],
-    queryFn: () =>
-      api.subjects.indexSpacesSpaceIdSubjectsSubjectIdActivityGet({
-        spaceId,
-        subjectId,
-      }),
-  });
-  const { isPending, isError, error, data: activities } = query;
-  if (isError) return error.message;
-  if (isPending) return "123";
-
-  return (
-    <>
-      {activities.map((activity) => (
-        <Table.Tr>
-          <Table.Td>
-            {activity.instantiatedDefinedActivity?.nameCode.displayName ||
-              t("Activity.defaultLabel")}
-          </Table.Td>
-          <Table.Td>{activity.containingEpoch?.name}</Table.Td>
-          <Table.Td>{t("intlDateTime", { val: activity.statusDate })}</Table.Td>
-          <Table.Td>{activity.statusCode?.displayName}</Table.Td>
-        </Table.Tr>
-      ))}
-    </>
-  );
-};
