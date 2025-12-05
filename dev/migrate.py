@@ -2,5 +2,11 @@
 
 from bridg import *
 from common.db import engine
+from common.env import load_env
 
-Base.metadata.create_all(bind=engine)
+def main():
+    load_env()
+    Base.metadata.create_all(bind=engine)
+
+if __name__ == "__main__":
+    main()
