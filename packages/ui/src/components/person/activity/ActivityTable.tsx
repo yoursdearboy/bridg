@@ -34,7 +34,7 @@ export function ActivitiesTable({
       </Table.Thead>
       <Table.Tbody>
         {subjectWActivities.map(({ subject, activities }) => (
-          <SubjectActivities
+          <SubjectActivitiesRows
             subject={subject}
             activities={activities}
             showAll={showAll}
@@ -46,7 +46,7 @@ export function ActivitiesTable({
   );
 }
 
-const SubjectActivities = ({
+const SubjectActivitiesRows = ({
   subject,
   activities,
   showAll,
