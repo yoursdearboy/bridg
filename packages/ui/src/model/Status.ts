@@ -56,6 +56,7 @@ export const getStatusTransitions = (status: Status | null) => {
 export const getStatusColor = (status: Status | null): string => {
   switch (status) {
     case Status.PotentialCandidate:
+    case Status.OffStudy:
       return "grey";
     case Status.Withdrawn:
     case Status.NotRegistered:
