@@ -111,16 +111,16 @@
     "Status": {
       "candidate": "Кандидат",
       "eligible": "Подходит по критериям",
-      "follow-up": "Наблюдение",
+      "follow-up": "Катамнез",
       "ineligible": "Не подходит по критериям",
       "not-registered": "Не включен",
       "off-study": "Завершил",
-      "on-study": "Участвует",
-      "on-study-intervention": "Участвует (интервенция)",
-      "on-study-observation": "Участвует (наблюдение)",
+      "on-study": "В исследовании",
+      "on-study-intervention": "В исследовании (терапия)",
+      "on-study-observation": "В исследовании (наблюдение)",
       "pending-on-study": "Ожидает участия",
       "potential-candidate": "Потенциальный кандидат",
-      "screening": "Скрининг",
+      "screening": "Диагностика",
       "withdrawn": "Отказ"
     },
     "StatusButton": {

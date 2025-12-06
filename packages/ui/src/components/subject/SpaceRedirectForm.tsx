@@ -36,7 +36,7 @@ export const SpaceRedirectForm = ({
       api.subjects.createSpacesSpaceIdSubjectsPost({
         spaceId,
         newStudySubject: {
-          status: Status.PotentialCandidate,
+          status: Status.Candidate,
           statusDate: new Date(),
           assignedStudySiteProtocolVersionRelationship: [studySiteId],
           performingBiologicEntity: null,
