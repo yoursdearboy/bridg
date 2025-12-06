@@ -4,8 +4,8 @@ import { IconArrowRight, IconCaretDownFilled } from "@tabler/icons-react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { ActivityCard } from "@/components/person/activity/ActivityCard";
 import ButtonLink from "@/components/ButtonLink";
+import { ActivityCard } from "@/components/person/activity/ActivityCard";
 import { PersonCard } from "@/components/person/PersonCard";
 import { SpaceRedirectForm } from "@/components/subject/SpaceRedirectForm";
 import { StatusButton } from "@/components/subject/StatusForm";
@@ -71,7 +71,10 @@ function SubjectShowPage() {
           )}
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 6 }}>
-          <ActivityCard personId={subject.performingBiologicEntity!.id} spaceId={spaceId} />
+          <ActivityCard
+            personId={subject.performingBiologicEntity!.id}
+            spaceId={spaceId}
+          />
         </Grid.Col>
       </Grid>
 
