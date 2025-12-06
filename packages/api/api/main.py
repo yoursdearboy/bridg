@@ -1,3 +1,4 @@
+from common.env import load_env
 from fastapi import FastAPI
 
 from .openapi import get_openapi
@@ -10,6 +11,8 @@ def custom_openapi():
     app.openapi_schema = get_openapi(app)
     return app.openapi_schema
 
+
+load_env()
 
 app = FastAPI(openapi_tags=openapi_tags)
 app.openapi = custom_openapi

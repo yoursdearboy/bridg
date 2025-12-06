@@ -1,14 +1,17 @@
 import pytest
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
 
-from common.db import SessionLocal
+from common.settings import load_settings
 from tests.factory.base import BaseFactory
 
-__session__ = SessionLocal()
 
-
-@pytest.fixture
+@pytest.fixture(scope="session", autouse=True)
 def session():
-    return __session__
+    settings = load_settings()
+    engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
+    session = Session(engine)
 
+    BaseFactory.__session__ = session
 
-BaseFactory.__session__ = __session__
+    return session
