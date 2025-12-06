@@ -85,7 +85,10 @@ const ResponsiveTable = ({
     },
   });
   const { isPending, isError, error, data: subjectWActivities } = query;
-  if (isError) return error.message;
+  if (isError)
+    return (
+      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
+    );
   if (isPending) return <LoadingOverlay />;
 
   return (
