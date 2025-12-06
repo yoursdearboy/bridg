@@ -77,11 +77,11 @@ const SubjectsTimelineWrapper = ({
                     >
                       {subject.assignedStudySiteProtocolVersionRelationship[0]
                         .executedStudyProtocolVersion.label +
-                        " (" +
-                        (subject.status
-                          ? t(`Status.${subject.status}`)
-                          : t("na")) +
-                        ")"}
+                        ` (${
+                          subject.status
+                            ? t(`Status.${subject.status}`)
+                            : t("na")
+                        })`}
                     </AnchorLink>
                   }
                 >

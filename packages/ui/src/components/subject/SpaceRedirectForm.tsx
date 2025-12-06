@@ -64,7 +64,7 @@ export const SpaceRedirectForm = ({
       {mutation.isError && <Alert color="red">{mutation.error.message}</Alert>}
       {!mutation.isPending && (
         <form onSubmit={form.onSubmit((x) => mutation.mutate(x))}>
-          <Stack gap={"md"} pos="relative">
+          <Stack gap="md" pos="relative">
             <SpaceSelect {...form.getInputProps("spaceId")} />
             {form.values.spaceId && (
               <StudySiteSelect
