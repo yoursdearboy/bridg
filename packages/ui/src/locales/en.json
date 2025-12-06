@@ -8,6 +8,8 @@
       "statusDate": "Date"
     },
     "ActivityCard": {
+      "showAll": "Show all",
+      "showLess": "Show current",
       "title": "Activities"
     },
     "Address": {

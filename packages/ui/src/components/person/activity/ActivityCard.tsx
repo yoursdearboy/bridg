@@ -1,6 +1,17 @@
-import { Button, Card, LoadingOverlay, Table } from "@mantine/core";
+import {
+  Button,
+  Card,
+  Group,
+  LoadingOverlay,
+  Table,
+  Text,
+} from "@mantine/core";
 import { useHover } from "@mantine/hooks";
-import { IconPencil } from "@tabler/icons-react";
+import {
+  IconArrowsDiagonal2,
+  IconArrowsDiagonalMinimize,
+  IconPencil,
+} from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import type { PerformedActivity, PersonStudySubject } from "api-ts";
@@ -40,6 +51,8 @@ const ResponsiveTable = ({
   personId,
   spaceId,
 }: ResponsiveTableProps) => {
+  const { t } = useTranslation();
+
   const query = useQuery({
     queryKey: ["person", personId, "subjects", showAll, "activities"],
     queryFn: async () => {
@@ -71,36 +84,60 @@ const ResponsiveTable = ({
       return activities;
     },
   });
-  const { isPending, isError, error, data: activities } = query;
+  const { isPending, isError, error, data: subjectWActivities } = query;
   if (isError) return error.message;
   if (isPending) return <LoadingOverlay />;
 
   return (
     <>
       <Card withBorder shadow="sm" radius="md" padding="xs">
-        {spaceId ? (
-          <Button onClick={() => toggleShowAll(!showAll)}></Button>
-        ) : null}
+        <Card.Section withBorder inheritPadding py="xs">
+          <Group justify="space-between">
+            <Text fw={500} px="xs">
+              {t("ActivityCard.title")}
+            </Text>
+            {spaceId ? (
+              <Button
+                variant={"outline"}
+                onClick={() => toggleShowAll(!showAll)}
+                size="compact-sm"
+                color={"gray"}
+                leftSection={
+                  showAll ? (
+                    <IconArrowsDiagonalMinimize />
+                  ) : (
+                    <IconArrowsDiagonal2 />
+                  )
+                }
+              >
+                {showAll
+                  ? t("ActivityCard.showLess")
+                  : t("ActivityCard.showAll")}
+              </Button>
+            ) : null}
+          </Group>
+        </Card.Section>
 
         <Card.Section withBorder inheritPadding py="xs">
           <Table highlightOnHover>
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th></Table.Th>
+                <Table.Th>{t("Activity.containingEpoch")}</Table.Th>
+                <Table.Th>{t("Activity.statusDate")}</Table.Th>
+                <Table.Th>{t("Activity.statusCode")}</Table.Th>
+                <Table.Th></Table.Th>
+              </Table.Tr>
+            </Table.Thead>
             <Table.Tbody>
-              {activities.map(
-                ({
-                  subject,
-                  activities,
-                }: {
-                  subject: PersonStudySubject;
-                  activities: PerformedActivity[];
-                }) => (
-                  <SubjectActivities
-                    subject={subject}
-                    activities={activities}
-                    showAll={showAll}
-                    spaceId={spaceId}
-                  />
-                )
-              )}
+              {subjectWActivities.map(({ subject, activities }) => (
+                <SubjectActivities
+                  subject={subject}
+                  activities={activities}
+                  showAll={showAll}
+                  spaceId={spaceId}
+                />
+              ))}
             </Table.Tbody>
           </Table>
         </Card.Section>
