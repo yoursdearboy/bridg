@@ -17,7 +17,7 @@ import { NewAddressForm } from "./NewAddressForm";
 
 export const AddressCardWrapper = ({ personId }: { personId: string }) => {
   const query = useQuery({
-    queryKey: ["person", personId, "addresses"],
+    queryKey: ["person", personId, "address"],
     queryFn: () =>
       api.persons.indexPersonsPersonIdPostalAddressesGet({
         personId,

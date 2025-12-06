@@ -17,7 +17,7 @@ export const TelecommunicationAddressesTable = ({
   personId,
 }: TelecommunicationAddressesTableProps) => {
   const { isPending, error, data } = useQuery({
-    queryKey: ["persons", personId, "telecommunicationAddresses"],
+    queryKey: ["person", personId, "telecommunicationAddress"],
     queryFn: () =>
       api.persons.indexPersonsPersonIdTelecommunicationAddressesGet({
         personId,

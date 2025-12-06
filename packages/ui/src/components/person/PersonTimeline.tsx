@@ -21,7 +21,7 @@ interface PersonTimelineCardProps {
 export const PersonTimelineCard = ({ personId }: PersonTimelineCardProps) => {
   const { t } = useTranslation();
   const query = useQuery({
-    queryKey: ["person", personId, "subjects"],
+    queryKey: ["person", personId, "subject"],
     queryFn: () =>
       api.persons.indexPersonsPersonIdSubjectGet({
         personId,
@@ -111,7 +111,7 @@ const SubjectTimeline = ({ subject, personId }: SubjectTimelineProps) => {
     subject.assignedStudySiteProtocolVersionRelationship[0]
       .executedStudyProtocolVersion.id;
   const query = useQuery({
-    queryKey: ["person", personId, "subjects", subject.id],
+    queryKey: ["person", personId, "subject", subject.id],
     queryFn: () =>
       api.subjects.indexSpacesSpaceIdSubjectsSubjectIdActivityGet({
         spaceId: spaceId,

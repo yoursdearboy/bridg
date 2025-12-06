@@ -88,7 +88,7 @@ export const SpaceRedirectForm = ({
 const SpaceSelect = ({ onChange }: InputProps) => {
   const { t } = useTranslation();
   const { isError, error, data } = useQuery({
-    queryKey: ["spaces"],
+    queryKey: ["space"],
     queryFn: () => api.spaces.indexSpacesGet(),
   });
 
@@ -114,7 +114,7 @@ const StudySiteSelect = ({
 }: { spaceId: string } & InputProps) => {
   const { t } = useTranslation();
   const { isError, error, data } = useQuery({
-    queryKey: ["spaces", spaceId, "sites"],
+    queryKey: ["space", spaceId, "site"],
     queryFn: () => api.sites.indexSpacesSpaceIdSitesGet({ spaceId }),
   });
 

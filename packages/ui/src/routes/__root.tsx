@@ -50,7 +50,7 @@ function LanguageSwitcher() {
 function Nav() {
   const { spaceId }: { spaceId?: string } = Route.useParams();
   const spaces = useQuery({
-    queryKey: ["spaces"],
+    queryKey: ["space"],
     queryFn: () => api.spaces.indexSpacesGet(),
   });
   const space = spaces.data?.find((s) => s.id == spaceId);
