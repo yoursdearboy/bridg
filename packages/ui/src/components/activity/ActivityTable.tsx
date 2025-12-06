@@ -55,11 +55,11 @@ const ActivityTable = ({
     <Table highlightOnHover fz="md">
       <Table.Thead>
         <Table.Tr>
-          <Table.Th></Table.Th>
+          <Table.Th />
           <Table.Th>{t("Activity.containingEpoch")}</Table.Th>
           <Table.Th>{t("Activity.statusDate")}</Table.Th>
           <Table.Th>{t("Activity.statusCode")}</Table.Th>
-          <Table.Th></Table.Th>
+          <Table.Th />
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>
