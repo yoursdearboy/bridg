@@ -4,7 +4,7 @@ import { IconPencil } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import type { PerformedActivity, PersonStudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
-import { Route as EditActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/activities/$obsId.edit";
+import { Route as EditActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/activities/$aId.edit";
 
 interface ActivitiesTableProps {
   subjectWActivities: {
@@ -112,7 +112,7 @@ const ActivityRow = ({
         hovered={hovered}
         spaceId={spaceId}
         subjectId={subjectId}
-        obsId={activity.id}
+        aId={activity.id}
         sameSpace={sameSpace}
       />
     </Table.Tr>
@@ -123,7 +123,7 @@ interface EditColumnProps {
   hovered: boolean;
   spaceId?: string;
   subjectId: string;
-  obsId: string;
+  aId: string;
   sameSpace: boolean;
 }
 
@@ -131,7 +131,7 @@ const EditColumn = ({
   hovered,
   spaceId,
   subjectId,
-  obsId,
+  aId,
   sameSpace,
 }: EditColumnProps) => {
   if (!spaceId) {
@@ -140,7 +140,7 @@ const EditColumn = ({
   const linkParams = {
     spaceId,
     subjectId,
-    obsId,
+    aId,
   };
   return (
     <Table.Td width={60}>

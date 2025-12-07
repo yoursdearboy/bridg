@@ -8,13 +8,16 @@ import { useState, type Dispatch, type SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { ActivitiesTable } from "./ActivityTable";
+import { ActivityMenu } from "@/components/activity/ActivityMenu";
 
 export function ActivityCard({
   personId,
   spaceId,
+  subjectId,
 }: {
   personId: string;
   spaceId?: string;
+  subjectId?: string;
 }) {
   const [showAll, toggleShowAll] = useState(spaceId ? false : true);
   return (
@@ -23,6 +26,7 @@ export function ActivityCard({
       toggleShowAll={toggleShowAll}
       personId={personId}
       spaceId={spaceId}
+      subjectId={subjectId}
     />
   );
 }
@@ -32,6 +36,7 @@ interface ResponsiveTableProps {
   toggleShowAll: Dispatch<SetStateAction<boolean>>;
   personId: string;
   spaceId?: string;
+  subjectId?: string;
 }
 
 const ResponsiveTable = ({
@@ -39,6 +44,7 @@ const ResponsiveTable = ({
   toggleShowAll,
   personId,
   spaceId,
+  subjectId,
 }: ResponsiveTableProps) => {
   const { t } = useTranslation();
 
@@ -88,25 +94,28 @@ const ResponsiveTable = ({
             <Text fw={500} px="xs">
               {t("ActivityCard.title")}
             </Text>
-            {spaceId ? (
-              <Button
-                variant={"outline"}
-                onClick={() => toggleShowAll(!showAll)}
-                size="compact-sm"
-                color={"gray"}
-                leftSection={
-                  showAll ? (
-                    <IconArrowsDiagonalMinimize />
-                  ) : (
-                    <IconArrowsDiagonal2 />
-                  )
-                }
-              >
-                {showAll
-                  ? t("ActivityCard.showLess")
-                  : t("ActivityCard.showAll")}
-              </Button>
-            ) : null}
+            {spaceId && subjectId && (
+              <Group>
+                <Button
+                  variant={"outline"}
+                  onClick={() => toggleShowAll(!showAll)}
+                  size="compact-sm"
+                  color={"gray"}
+                  leftSection={
+                    showAll ? (
+                      <IconArrowsDiagonalMinimize />
+                    ) : (
+                      <IconArrowsDiagonal2 />
+                    )
+                  }
+                >
+                  {showAll
+                    ? t("ActivityCard.showLess")
+                    : t("ActivityCard.showAll")}
+                </Button>
+                <ActivityMenu spaceId={spaceId} subjectId={subjectId} />
+              </Group>
+            )}
           </Group>
         </Card.Section>
 
