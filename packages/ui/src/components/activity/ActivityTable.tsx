@@ -25,11 +25,11 @@ export function ActivitiesTable({
     <Table highlightOnHover>
       <Table.Thead>
         <Table.Tr>
-          <Table.Th></Table.Th>
+          <Table.Th />
           <Table.Th>{t("Activity.containingEpoch")}</Table.Th>
           <Table.Th>{t("Activity.statusDate")}</Table.Th>
           <Table.Th>{t("Activity.statusCode")}</Table.Th>
-          <Table.Th></Table.Th>
+          <Table.Th />
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>
@@ -57,11 +57,10 @@ const SubjectActivitiesRows = ({
   showAll: boolean;
   spaceId?: string;
 }) => {
-  const sameSpace =
-    !!spaceId &&
-    spaceId ===
-      subject.assignedStudySiteProtocolVersionRelationship[0]
-        .executedStudyProtocolVersion.id;
+  const subjectSpaceId =
+    subject.assignedStudySiteProtocolVersionRelationship[0]
+      .executedStudyProtocolVersion.id;
+  const sameSpace = !!spaceId && spaceId === subjectSpaceId;
 
   return (
     <>
@@ -135,7 +134,7 @@ const EditColumn = ({
   sameSpace,
 }: EditColumnProps) => {
   if (!spaceId) {
-    return <Table.Td></Table.Td>;
+    return <Table.Td />;
   }
   const linkParams = {
     spaceId,

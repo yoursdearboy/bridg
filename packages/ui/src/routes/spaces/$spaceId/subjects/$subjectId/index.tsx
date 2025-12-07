@@ -4,11 +4,11 @@ import { IconArrowRight, IconCaretDownFilled } from "@tabler/icons-react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+import { ActivityCard } from "@/components/activity/ActivityCard";
 import ButtonLink from "@/components/ButtonLink";
 import { PersonCard } from "@/components/person/PersonCard";
 import { SpaceRedirectForm } from "@/components/subject/SpaceRedirectForm";
 import { StatusButton } from "@/components/subject/StatusForm";
-import { ActivityCard } from "@/components/activity/ActivityCard";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId/")({
   component: SubjectShowPage,

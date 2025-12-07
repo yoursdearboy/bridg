@@ -7,8 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useState, type Dispatch, type SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
-import { ActivitiesTable } from "./ActivityTable";
 import { ActivityMenu } from "@/components/activity/ActivityMenu";
+import { ActivitiesTable } from "./ActivityTable";
 
 export function ActivityCard({
   personId,
@@ -97,10 +97,10 @@ const ResponsiveTable = ({
             {spaceId && subjectId && (
               <Group>
                 <Button
-                  variant={"outline"}
+                  variant="outline"
                   onClick={() => toggleShowAll(!showAll)}
                   size="compact-sm"
-                  color={"gray"}
+                  color="gray"
                   leftSection={
                     showAll ? (
                       <IconArrowsDiagonalMinimize />
