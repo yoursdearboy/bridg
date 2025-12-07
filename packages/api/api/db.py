@@ -1,13 +1,13 @@
-from common.db import SessionLocal
-from common.env import load_env
 from fastapi import Depends
+from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
-load_env()
+from .settings import Settings, get_settings
 
 
-def get_db():
-    db = SessionLocal()
+def get_db(settings: Settings = Depends(get_settings)):
+    engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
+    db = Session(engine)
     try:
         yield db
     finally:

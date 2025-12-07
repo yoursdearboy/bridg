@@ -33,6 +33,7 @@ exports[`new page renders correctly 1`] = `
           >
             <div
               class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+              data-with-border="true"
             >
               <div
                 class="m_8bffd616 mantine-Flex-root __m__-«r6»"
@@ -114,6 +115,7 @@ exports[`new page renders correctly 1`] = `
             </div>
             <div
               class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+              data-with-border="true"
             >
               <div
                 class="m_6d731127 mantine-Stack-root"
@@ -206,6 +208,7 @@ exports[`new page renders correctly 1`] = `
             </div>
             <div
               class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+              data-with-border="true"
             >
               <div
                 class="m_6d731127 mantine-Stack-root"
@@ -379,7 +382,7 @@ exports[`new page renders correctly 1`] = `
         >
           <div
             class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
-            style="width: 300px;"
+            data-with-border="true"
           >
             <p
               class="mantine-focus-auto m_b6d8b162 mantine-Text-root"

@@ -1,32 +1,25 @@
-import { Grid, Group, Stack, Text, Title } from "@mantine/core";
+import { Grid, Group, Stack, Title } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import type { DefinedActivityUnion } from "api-ts";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { ActivityForm } from "@/components/activity/ActivityForm";
 
 export const Route = createFileRoute(
-  "/spaces/$spaceId/subjects/$subjectId/activities/$obsId/edit"
+  "/spaces/$spaceId/subjects/$subjectId/activities/$aId/edit"
 )({
-  component: EditActivityComponent,
+  component: ActivityEditRoute,
   beforeLoad: ({ params }) => ({
-    breadcrumb: ({
-      loaderData,
-    }: {
-      loaderData: { definedActivity: DefinedActivityUnion };
-    }) =>
-      loaderData.definedActivity.nameCode.displayName ||
-      i18next.t("Activity.defaultLabel"),
-    query: queryOptions({
-      queryKey: ["subject", params.subjectId, "activity", params.obsId],
+    breadcrumb: () => i18next.t("ActivityEditPage.breadcrumb"),
+    activityQuery: queryOptions({
+      queryKey: ["subject", params.subjectId, "activity", params.aId],
       queryFn: async () => {
         const performedActivity =
           await api.subjects.showSpacesSpaceIdSubjectsSubjectIdActivityAIdGet({
             spaceId: params.spaceId,
             subjectId: params.subjectId,
-            aId: params.obsId,
+            aId: params.aId,
             result: true,
           });
         const definedActivity =
@@ -38,32 +31,26 @@ export const Route = createFileRoute(
       },
     }),
   }),
-  loader: async ({ context: { query, queryClient } }) =>
-    await queryClient.fetchQuery(query),
+  loader: async ({ context: { activityQuery, queryClient } }) =>
+    await queryClient.fetchQuery(activityQuery),
 });
 
-function EditActivityComponent() {
-  const { query } = Route.useRouteContext();
+function ActivityEditRoute() {
+  const { activityQuery, subjectQuery } = Route.useRouteContext();
   const {
-    isError,
-    error,
     data: { definedActivity, performedActivity },
-  } = useSuspenseQuery(query);
+  } = useSuspenseQuery(activityQuery);
+  const { data: subject } = useSuspenseQuery(subjectQuery);
   const { t } = useTranslation();
-
-  if (isError)
-    return (
-      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
-    );
 
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Title order={2}>
-          {definedActivity.nameCode.displayName || t("Activity.defaultLabel")}
+        <Title order={2} fw={500}>
+          {subject.performingBiologicEntity?.primaryName?.label ||
+            t("StudySubject.defaultLabel")}
         </Title>
       </Group>
-
       <Grid>
         <Grid.Col span={{ base: 12, xs: 6, md: 6, lg: 6 }}>
           <ActivityForm

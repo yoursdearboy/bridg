@@ -1,7 +1,13 @@
 import bridg
-from common.db import engine
+from common.env import load_env
+from common.settings import load_settings
+from sqlalchemy import create_engine
 from sqlalchemy.orm import class_mapper
 from sqlalchemy_schemadisplay import create_schema_graph, create_uml_graph
+
+load_env()
+settings = load_settings()
+engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
 
 model = bridg
 mappers = []

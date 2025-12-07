@@ -66,7 +66,7 @@ const TelecommunicationAddressTableRow = ({
 
   const Icon = telecommunication_address.scheme
     ? icons[telecommunication_address.scheme]
-    : () => <div></div>;
+    : () => <div />;
   return (
     <>
       <Table.Tr ref={ref}>

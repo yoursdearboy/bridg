@@ -1,4 +1,4 @@
-import { CopyButton, Group, Stack, Table, Text } from "@mantine/core";
+import { Box, CopyButton, Group, Stack, Table, Text } from "@mantine/core";
 import { IconEye } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
@@ -29,9 +29,9 @@ function SubjectIndexPage() {
           overflow: "hidden",
         }}
       >
-        <CopyButton value={subject.performingBiologicEntity?.id || ""}>
+        <CopyButton value={subject.id}>
           {({ copy }) => (
-            <span onClick={copy} title={subject.performingBiologicEntity?.id}>
+            <span onClick={copy} title={subject.id}>
               {subject.id.slice(0, 8)}…
             </span>
           )}
@@ -77,12 +77,12 @@ function SubjectIndexPage() {
       </Table.Td>
       <Table.Td>
         <ButtonLink
-          px="xs"
-          size="compact-lg"
+          size="compact-md"
+          variant="subtle"
           to={infoRoute.to}
           params={{ spaceId, subjectId: subject.id }}
         >
-          <IconEye size={16} />
+          <IconEye size={20} />
         </ButtonLink>
       </Table.Td>
     </Table.Tr>
@@ -91,9 +91,7 @@ function SubjectIndexPage() {
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Text size="xl" fw={700}>
-          {t("SubjectIndexPage.patients")}
-        </Text>
+        <Box />
         <ButtonLink from={Route.to} to={newRoute.to} params={{ spaceId }}>
           {t("SubjectIndexPage.newPatient")}
         </ButtonLink>

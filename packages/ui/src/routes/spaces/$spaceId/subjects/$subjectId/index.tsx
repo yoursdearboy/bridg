@@ -4,8 +4,8 @@ import { IconArrowRight, IconCaretDownFilled } from "@tabler/icons-react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+import { ActivityCard } from "@/components/activity/ActivityCard";
 import ButtonLink from "@/components/ButtonLink";
-import { ActivityCard } from "@/components/person/activity/ActivityCard";
 import { PersonCard } from "@/components/person/PersonCard";
 import { SpaceRedirectForm } from "@/components/subject/SpaceRedirectForm";
 import { StatusButton } from "@/components/subject/StatusForm";
@@ -18,8 +18,8 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId/")({
 });
 
 function SubjectShowPage() {
-  const { query } = Route.useRouteContext();
-  const { data: subject } = useSuspenseQuery(query);
+  const { subjectQuery } = Route.useRouteContext();
+  const { data: subject } = useSuspenseQuery(subjectQuery);
   const { spaceId, subjectId } = Route.useParams();
   const { t } = useTranslation();
   const [redirectModalOpened, redirectModalHandlers] = useDisclosure(false);
@@ -40,12 +40,12 @@ function SubjectShowPage() {
         </Group>
 
         <Button.Group>
-          <ButtonLink to=".." size="sm">
+          <ButtonLink to=".." size="sm" variant="outline">
             {t("SubjectShowPage.back")}
           </ButtonLink>
           <Menu shadow="md" width={200}>
             <Menu.Target>
-              <Button size="sm" p="xs">
+              <Button size="sm" p="xs" variant="outline">
                 <IconCaretDownFilled />
               </Button>
             </Menu.Target>
@@ -62,7 +62,7 @@ function SubjectShowPage() {
       </Group>
 
       <Grid>
-        <Grid.Col span={{ base: 12, md: 6 }}>
+        <Grid.Col span={{ base: 12, md: 5 }}>
           {subject.performingBiologicEntity && (
             <PersonCard
               person={subject.performingBiologicEntity}
@@ -70,11 +70,8 @@ function SubjectShowPage() {
             />
           )}
         </Grid.Col>
-        <Grid.Col span={{ base: 12, md: 6 }}>
-          <ActivityCard
-            personId={subject.performingBiologicEntity!.id}
-            spaceId={spaceId}
-          />
+        <Grid.Col span={{ base: 12, md: 7 }}>
+          <ActivityCard spaceId={spaceId} subjectId={subjectId} />
         </Grid.Col>
       </Grid>
 

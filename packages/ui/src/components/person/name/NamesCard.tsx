@@ -18,7 +18,7 @@ import { NewNameForm } from "./NewNameForm";
 
 export const NamesCardWrapper = ({ personId }: { personId: string }) => {
   const query = useQuery({
-    queryKey: ["person", personId, "names"],
+    queryKey: ["person", personId, "name"],
     queryFn: () =>
       api.persons.indexPersonsPersonIdNamesGet({
         personId,

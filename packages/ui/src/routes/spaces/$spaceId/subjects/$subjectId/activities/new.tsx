@@ -1,7 +1,6 @@
-import { Grid, Group, Stack, Text, Title } from "@mantine/core";
+import { Grid, Group, Stack, Title } from "@mantine/core";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import type { DefinedActivityUnion } from "api-ts";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
@@ -14,15 +13,14 @@ type SearchParams = {
 export const Route = createFileRoute(
   "/spaces/$spaceId/subjects/$subjectId/activities/new"
 )({
-  component: NewActivityComponent,
+  component: ActivityNewRoute,
   validateSearch: (search: Record<string, unknown>): SearchParams => ({
     aId: search.aId as string,
   }),
   beforeLoad: ({ params, search }) => ({
-    breadcrumb: ({ loaderData }: { loaderData: DefinedActivityUnion }) =>
-      loaderData.nameCode.displayName || i18next.t("Activity.defaultLabel"),
-    query: queryOptions({
-      queryKey: ["subject", params.subjectId, "activity"],
+    breadcrumb: () => i18next.t("ActivityNewPage.breadcrumb"),
+    activityQuery: queryOptions({
+      queryKey: ["space", params.spaceId, "activity", search.aId],
       queryFn: async () =>
         await api.definedActivity.showDefinedActivityAIdGet({
           aId: search.aId,
@@ -30,29 +28,26 @@ export const Route = createFileRoute(
         }),
     }),
   }),
-  loader: async ({ context: { query, queryClient } }) =>
-    await queryClient.fetchQuery(query),
+  loader: async ({ context: { activityQuery, queryClient } }) =>
+    await queryClient.fetchQuery(activityQuery),
 });
 
-function NewActivityComponent() {
-  const { query } = Route.useRouteContext();
-  const { isError, error, data: activity } = useSuspenseQuery(query);
+function ActivityNewRoute() {
+  const { subjectQuery, activityQuery } = Route.useRouteContext();
+  const { data: activity } = useSuspenseQuery(activityQuery);
+  const { data: subject } = useSuspenseQuery(subjectQuery);
   const { t } = useTranslation();
-
-  if (isError)
-    return (
-      <Text color="red">{t("errorMessage", { error: error.message })}</Text>
-    );
 
   return (
     <Stack gap="md">
       <Group justify="space-between">
-        <Title order={2}>
-          {activity.nameCode.displayName || t("Activity.defaultLabel")}
+        <Title order={2} fw={500}>
+          {subject.performingBiologicEntity?.primaryName?.label ||
+            t("StudySubject.defaultLabel")}
         </Title>
       </Group>
       <Grid>
-        <Grid.Col span={{ base: 12, xs: 8, md: 4, lg: 3 }}>
+        <Grid.Col span={{ base: 12, xs: 6, md: 6, lg: 6 }}>
           <ActivityForm definedActivity={activity} />
         </Grid.Col>
       </Grid>

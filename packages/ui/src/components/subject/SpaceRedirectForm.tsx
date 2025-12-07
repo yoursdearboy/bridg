@@ -64,7 +64,7 @@ export const SpaceRedirectForm = ({
       {mutation.isError && <Alert color="red">{mutation.error.message}</Alert>}
       {!mutation.isPending && (
         <form onSubmit={form.onSubmit((x) => mutation.mutate(x))}>
-          <Stack gap={"md"} pos="relative">
+          <Stack gap="md" pos="relative">
             <SpaceSelect {...form.getInputProps("spaceId")} />
             {form.values.spaceId && (
               <StudySiteSelect
@@ -88,7 +88,7 @@ export const SpaceRedirectForm = ({
 const SpaceSelect = ({ onChange }: InputProps) => {
   const { t } = useTranslation();
   const { isError, error, data } = useQuery({
-    queryKey: ["spaces"],
+    queryKey: ["space"],
     queryFn: () => api.spaces.indexSpacesGet(),
   });
 
@@ -114,7 +114,7 @@ const StudySiteSelect = ({
 }: { spaceId: string } & InputProps) => {
   const { t } = useTranslation();
   const { isError, error, data } = useQuery({
-    queryKey: ["spaces", spaceId, "sites"],
+    queryKey: ["space", spaceId, "site"],
     queryFn: () => api.sites.indexSpacesSpaceIdSitesGet({ spaceId }),
   });
 

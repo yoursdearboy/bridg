@@ -28,6 +28,8 @@ import {
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import i18next from "@/i18n";
+import { STATUSES } from "@/model";
+import { Route as SubjectIdRoute } from "./$subjectId";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
   loader: async ({ params }) => ({
@@ -52,7 +54,7 @@ const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
 
   return (
     <>
-      <Card>
+      <Card withBorder>
         <Flex gap="md">
           <TextInput
             label={t("Name.family")}
@@ -75,7 +77,7 @@ const PerformingBiologicEntityFields = ({ form }: NewStudySubjectFormProps) => {
         </Flex>
       </Card>
 
-      <Card>
+      <Card withBorder>
         <Stack align="flex-start" gap="md">
           <Select
             label={t("Person.administrativeGenderCode")}
@@ -111,7 +113,7 @@ const PerformingBiologicEntitySelect = ({
   const { t } = useTranslation();
 
   return (
-    <Card style={{ width: 300 }}>
+    <Card withBorder>
       <Text fw={500} mb="sm">
         {t("PerformingBiologicEntitySelect.text")}
       </Text>
@@ -129,7 +131,7 @@ const PerformingBiologicEntitySelect = ({
               value={subject.performingBiologicEntity!.id}
               bg={
                 subject.performingBiologicEntity!.id === value
-                  ? "var(--mantine-color-dark-7)"
+                  ? "var(--mantine-primary-color-light)"
                   : ""
               }
             >
@@ -152,7 +154,7 @@ const PerformingBiologicEntityCard = ({
   const { t } = useTranslation();
 
   return (
-    <Card>
+    <Card withBorder>
       <Group gap="xs">
         <Text fw={500}>
           {subject.performingBiologicEntity?.primaryName?.label ||
@@ -169,14 +171,14 @@ const PerformingBiologicEntityCard = ({
 const StudySubjectFields = ({ form }: NewStudySubjectFormProps) => {
   const { t } = useTranslation();
   const { sites } = Route.useLoaderData();
-  const statuses = Object.values(Status).map((value) => ({
+  const statuses = STATUSES.map((value) => ({
     label: t(`Status.${value}`),
     value,
   }));
 
   return (
     <>
-      <Card>
+      <Card withBorder>
         <Stack align="flex-start" gap="md">
           <Select
             label={t("StudySubject.status")}
@@ -272,7 +274,11 @@ function RouteComponent() {
         spaceId,
         newStudySubject,
       }),
-    onSuccess: () => navigate({ to: ".." }),
+    onSuccess: (subj) =>
+      navigate({
+        to: SubjectIdRoute.to,
+        params: { spaceId, subjectId: subj.id },
+      }),
   });
 
   return (

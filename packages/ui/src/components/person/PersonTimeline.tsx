@@ -10,6 +10,8 @@ import { useQuery } from "@tanstack/react-query";
 import type { PerformedActivity, PersonStudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+import AnchorLink from "@/components/AnchorLink";
+import { Route as SpacesSpaceIdSubjectsSubjectIdIndexRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/index";
 
 interface PersonTimelineCardProps {
   personId: string;
@@ -19,7 +21,7 @@ interface PersonTimelineCardProps {
 export const PersonTimelineCard = ({ personId }: PersonTimelineCardProps) => {
   const { t } = useTranslation();
   const query = useQuery({
-    queryKey: ["person", personId, "subjects"],
+    queryKey: ["person", personId, "subject"],
     queryFn: () =>
       api.persons.indexPersonsPersonIdSubjectGet({
         personId,
@@ -62,11 +64,25 @@ const SubjectsTimelineWrapper = ({
               <Timeline bulletSize={36} active={subjects.length}>
                 <Timeline.Item
                   title={
-                    subject.assignedStudySiteProtocolVersionRelationship[0]
-                      .executedStudyProtocolVersion.label +
-                    " (" +
-                    (subject.status ? t(`Status.${subject.status}`) : t("na")) +
-                    ")"
+                    <AnchorLink
+                      fw={500}
+                      to={SpacesSpaceIdSubjectsSubjectIdIndexRoute.to}
+                      params={{
+                        spaceId:
+                          subject
+                            .assignedStudySiteProtocolVersionRelationship[0]
+                            .executedStudyProtocolVersion.id,
+                        subjectId: subject.id,
+                      }}
+                    >
+                      {subject.assignedStudySiteProtocolVersionRelationship[0]
+                        .executedStudyProtocolVersion.label +
+                        ` (${
+                          subject.status
+                            ? t(`Status.${subject.status}`)
+                            : t("na")
+                        })`}
+                    </AnchorLink>
                   }
                 >
                   <Text c="dimmed" size="md">
@@ -91,11 +107,14 @@ interface SubjectTimelineProps {
 
 const SubjectTimeline = ({ subject, personId }: SubjectTimelineProps) => {
   const { t } = useTranslation();
+  const spaceId =
+    subject.assignedStudySiteProtocolVersionRelationship[0]
+      .executedStudyProtocolVersion.id;
   const query = useQuery({
-    queryKey: ["person", personId, "subjects", subject.id],
+    queryKey: ["person", personId, "subject", subject.id],
     queryFn: () =>
       api.subjects.indexSpacesSpaceIdSubjectsSubjectIdActivityGet({
-        spaceId: "ce946229-9746-46cd-8dd3-b27a2fbfd48a",
+        spaceId: spaceId,
         subjectId: subject.id,
       }),
   });

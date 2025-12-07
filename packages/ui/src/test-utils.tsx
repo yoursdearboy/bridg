@@ -27,7 +27,8 @@ const App = ({ children }: React.PropsWithChildren) => {
 
 export const renderRoute = (
   r: AnyRoute,
-  { params }: { params?: object } = {}
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  { params, context }: { params?: object; context?: any } = {}
 ) => {
   const rootRoute = createRootRouteWithContext()();
   const testRoute = createRoute({
@@ -35,6 +36,7 @@ export const renderRoute = (
     params: params,
     getParentRoute: () => rootRoute,
     path: "/",
+    context,
   });
   const routeTree = rootRoute.addChildren([testRoute]);
   const router = createRouter({

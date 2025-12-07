@@ -22,6 +22,7 @@ import {
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import Error from "@/components/Error";
 import MenuItemLink from "@/components/MenuItemLink";
 import { languages } from "@/i18n";
 import logo from "@/logo.png";
@@ -49,7 +50,7 @@ function LanguageSwitcher() {
 function Nav() {
   const { spaceId }: { spaceId?: string } = Route.useParams();
   const spaces = useQuery({
-    queryKey: ["spaces"],
+    queryKey: ["space"],
     queryFn: () => api.spaces.indexSpacesGet(),
   });
   const space = spaces.data?.find((s) => s.id == spaceId);
@@ -131,7 +132,7 @@ function Header() {
   );
 }
 
-function Layout() {
+function Layout({ children }: { children: React.ReactNode }) {
   return (
     <AppShell padding="md" header={{ height: 45 }}>
       <AppShell.Header>
@@ -139,7 +140,7 @@ function Layout() {
       </AppShell.Header>
       <AppShell.Main>
         <Breadcrumbs />
-        <Outlet />
+        {children}
       </AppShell.Main>
     </AppShell>
   );
@@ -150,5 +151,14 @@ interface RouteContext {
 }
 
 export const Route = createRootRouteWithContext<RouteContext>()({
-  component: Layout,
+  component: () => (
+    <Layout>
+      <Outlet />
+    </Layout>
+  ),
+  errorComponent: (props) => (
+    <Layout>
+      <Error {...props} />
+    </Layout>
+  ),
 });

@@ -5,8 +5,10 @@ import { useDisclosure } from "@mantine/hooks";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { Status, type StudySubject, type StudySubjectData } from "api-ts";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+import { getStatusColor, getStatusTransitions, STATUSES } from "@/model";
 import { Route as SubjectRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/index";
 
 interface StatusButtonProps {
@@ -25,9 +27,9 @@ export function StatusButton({
   return (
     <>
       <Button
-        size="xs"
-        color={statusColor(subject.status)}
-        onClick={() => transitionFrom(subject.status).length && open()}
+        size="sm"
+        color={getStatusColor(subject.status)}
+        onClick={open}
         variant="light"
       >
         {subject.status ? t(`Status.${subject.status}`) : t("no")}
@@ -65,9 +67,10 @@ const StatusForm = ({
   onCancel,
   onSuccess,
 }: StatusFormProps) => {
-  const statusesTo = transitionFrom(status);
+  const [checked, toggleChecked] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const statuses = checked ? STATUSES : getStatusTransitions(status);
   const form = useForm<StudySubjectData>({
     initialValues: {
       status: status,
@@ -108,16 +111,24 @@ const StatusForm = ({
               {...form.getInputProps("status")}
             >
               <Stack mt="xs">
-                {statusesTo.map((status) => (
+                {statuses.map((status) => (
                   <Radio
                     fw={500}
-                    c={statusColor(status)}
+                    c={getStatusColor(status)}
                     value={status}
                     label={t(`Status.${status}`)}
                   />
                 ))}
               </Stack>
             </Radio.Group>
+            <Button
+              size="xs"
+              variant="subtle"
+              color="grey"
+              onClick={() => toggleChecked(!checked)}
+            >
+              {checked ? t("StatusButton.expand") : t("StatusButton.collapse")}
+            </Button>
             <Group justify="flex-end" mt="md">
               <Button variant="outline" onClick={onCancel}>
                 {t("cancel")}
@@ -129,59 +140,4 @@ const StatusForm = ({
       )}
     </>
   );
-};
-
-const transitionFrom = (status: Status | null) => {
-  switch (status) {
-    case null:
-      return [Status.PotentialCandidate, Status.Candidate];
-    case Status.PotentialCandidate:
-      return [Status.Candidate];
-    case Status.Candidate:
-      return [Status.Screening, Status.Eligible];
-    case Status.Screening:
-      return [Status.Eligible, Status.Ineligible, Status.Withdrawn];
-    case Status.Eligible:
-      return [
-        Status.PendingOnStudy,
-        Status.OnStudyIntervention,
-        Status.OnStudyObservation,
-        Status.Withdrawn,
-      ];
-    case Status.PendingOnStudy:
-      return [
-        Status.OnStudyIntervention,
-        Status.OnStudyObservation,
-        Status.NotRegistered,
-      ];
-    case Status.OnStudyIntervention:
-    case Status.OnStudyObservation:
-      return [
-        Status.OnStudyIntervention,
-        Status.OnStudyObservation,
-        Status.FollowUp,
-        Status.OffStudy,
-      ];
-    case Status.FollowUp:
-      return [Status.OffStudy];
-    default:
-      return [];
-  }
-};
-
-const statusColor = (status: Status | null): string => {
-  switch (status) {
-    case Status.Withdrawn:
-    case Status.NotRegistered:
-    case Status.Ineligible:
-      return "red";
-    case Status.OnStudy:
-    case Status.OnStudyIntervention:
-    case Status.OnStudyObservation:
-      return "green";
-    case Status.OffStudy:
-      return "grey";
-    default:
-      return "blue";
-  }
 };

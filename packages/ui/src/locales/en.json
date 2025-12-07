@@ -12,6 +12,12 @@
       "showLess": "Show current",
       "title": "Activities"
     },
+    "ActivityEditPage": {
+      "breadcrumb": "Edit activity"
+    },
+    "ActivityNewPage": {
+      "breadcrumb": "New activity"
+    },
     "Address": {
       "building": "Building",
       "country": "Country",
@@ -120,7 +126,9 @@
       "withdrawn": "Withdrawn"
     },
     "StatusButton": {
+      "collapse": "Collapse",
       "editModalTitle": "Changing status",
+      "expand": "Expand",
       "newStatus": "New status"
     },
     "StudyProtocolVersion": {
@@ -142,8 +150,7 @@
       "actions": "Actions",
       "breadcrumb": "Patients",
       "info": "Info",
-      "newPatient": "New patient",
-      "patients": "Patients"
+      "newPatient": "New patient"
     },
     "SubjectInfoCard": {
       "organizationDetails": "Organization details",
@@ -183,6 +190,7 @@
     "edit": "Edit",
     "enter": "enter",
     "error": "Error",
+    "errorContact": "Contact administrators and show them next message.",
     "errorMessage": "An error has occured: {{error}}",
     "extra": "Extra",
     "fieldRequiredMessage": "{{fieldName}} is required",

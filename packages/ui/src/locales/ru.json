@@ -12,6 +12,12 @@
       "showLess": "Показать текущие",
       "title": "Процедуры"
     },
+    "ActivityEditPage": {
+      "breadcrumb": "Редактирование процедуры"
+    },
+    "ActivityNewPage": {
+      "breadcrumb": "Новая процедура"
+    },
     "Address": {
       "building": "Здание",
       "country": "Страна",
@@ -120,7 +126,9 @@
       "withdrawn": "Отказ"
     },
     "StatusButton": {
+      "collapse": "Развернуть",
       "editModalTitle": "Изменение статуса",
+      "expand": "Свернуть",
       "newStatus": "Новый статус"
     },
     "StudyProtocolVersion": {
@@ -183,6 +191,7 @@
     "edit": "Редактировать",
     "enter": "Введите",
     "error": "Ошибка",
+    "errorContact": "Свяжитесь с администратором и покажите ему следующее сообщение.",
     "errorMessage": "Произошла ошибка: {{error}}",
     "extra": "Дополнительно",
     "fieldRequiredMessage": "Поле \"{{fieldName}}\" необходимо заполнить",
