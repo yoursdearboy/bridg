@@ -49,7 +49,7 @@ const ResponsiveTable = ({
   const { t } = useTranslation();
 
   const query = useQuery({
-    queryKey: ["person", personId, "subjects", showAll, "activities"],
+    queryKey: ["person", personId, "subject", showAll, "activity"],
     queryFn: async () => {
       let subjects = await api.persons.indexPersonsPersonIdSubjectGet({
         personId,
