@@ -4,13 +4,14 @@ import {
   IconArrowsDiagonalMinimize,
 } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
+import type { PerformedActivity, PersonStudySubject } from "api-ts";
 import { useState, type Dispatch, type SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { ActivityMenu } from "@/components/activity/ActivityMenu";
 import { ActivitiesTable } from "./ActivityTable";
 
-export function ActivityCard({
+export function ActivityCardWrapper({
   personId,
   spaceId,
   subjectId,
@@ -19,34 +20,8 @@ export function ActivityCard({
   spaceId?: string;
   subjectId?: string;
 }) {
-  const [showAll, toggleShowAll] = useState(spaceId ? false : true);
-  return (
-    <ResponsiveTable
-      showAll={showAll}
-      toggleShowAll={toggleShowAll}
-      personId={personId}
-      spaceId={spaceId}
-      subjectId={subjectId}
-    />
-  );
-}
-
-interface ResponsiveTableProps {
-  showAll: boolean;
-  toggleShowAll: Dispatch<SetStateAction<boolean>>;
-  personId: string;
-  spaceId?: string;
-  subjectId?: string;
-}
-
-const ResponsiveTable = ({
-  showAll,
-  toggleShowAll,
-  personId,
-  spaceId,
-  subjectId,
-}: ResponsiveTableProps) => {
   const { t } = useTranslation();
+  const [showAll, toggleShowAll] = useState(spaceId ? false : true);
 
   const query = useQuery({
     queryKey: ["person", personId, "subject", showAll, "activity"],
@@ -85,6 +60,39 @@ const ResponsiveTable = ({
       <Text color="red">{t("errorMessage", { error: error.message })}</Text>
     );
   if (isPending) return <LoadingOverlay />;
+
+  return (
+    <ActivityCard
+      showAll={showAll}
+      toggleShowAll={toggleShowAll}
+      personId={personId}
+      spaceId={spaceId}
+      subjectId={subjectId}
+      subjectWActivities={subjectWActivities}
+    />
+  );
+}
+
+interface ActivityCardProps {
+  showAll: boolean;
+  toggleShowAll: Dispatch<SetStateAction<boolean>>;
+  personId: string;
+  spaceId?: string;
+  subjectId?: string;
+  subjectWActivities: {
+    subject: PersonStudySubject;
+    activities: PerformedActivity[];
+  }[];
+}
+
+const ActivityCard = ({
+  showAll,
+  toggleShowAll,
+  spaceId,
+  subjectId,
+  subjectWActivities,
+}: ActivityCardProps) => {
+  const { t } = useTranslation();
 
   return (
     <>
