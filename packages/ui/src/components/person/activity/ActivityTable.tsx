@@ -12,7 +12,7 @@ interface ActivitiesTableProps {
     activities: PerformedActivity[];
   }[];
   showAll: boolean;
-  spaceId: string | null;
+  spaceId?: string;
 }
 
 export function ActivitiesTable({
@@ -55,7 +55,7 @@ const SubjectActivitiesRows = ({
   subject: PersonStudySubject;
   activities: PerformedActivity[];
   showAll: boolean;
-  spaceId: string | null;
+  spaceId?: string;
 }) => {
   const sameSpace =
     !!spaceId &&
@@ -79,7 +79,7 @@ const SubjectActivitiesRows = ({
 };
 
 interface activityRowProps {
-  spaceId: string | null;
+  spaceId?: string;
   subjectId: string;
   activity: PerformedActivity;
   showAll: boolean;
@@ -121,7 +121,7 @@ const ActivityRow = ({
 
 interface EditColumnProps {
   hovered: boolean;
-  spaceId: string | null;
+  spaceId?: string;
   subjectId: string;
   obsId: string;
   sameSpace: boolean;

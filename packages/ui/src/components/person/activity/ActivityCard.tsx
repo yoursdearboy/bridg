@@ -14,7 +14,7 @@ export function ActivityCard({
   spaceId,
 }: {
   personId: string;
-  spaceId: string | null;
+  spaceId?: string;
 }) {
   const [showAll, toggleShowAll] = useState(spaceId ? false : true);
   return (
@@ -31,7 +31,7 @@ interface ResponsiveTableProps {
   showAll: boolean;
   toggleShowAll: Dispatch<SetStateAction<boolean>>;
   personId: string;
-  spaceId: string | null;
+  spaceId?: string;
 }
 
 const ResponsiveTable = ({
