@@ -36,12 +36,15 @@ export const Route = createFileRoute(
 });
 
 function ActivityEditRoute() {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const { activityQuery, subjectQuery } = Route.useRouteContext();
   const {
     data: { definedActivity, performedActivity },
   } = useSuspenseQuery(activityQuery);
   const { data: subject } = useSuspenseQuery(subjectQuery);
-  const { t } = useTranslation();
+  const { spaceId, subjectId, aId } = Route.useParams();
+  const form = useForm(performedActivity);
 
   return (
     <Stack gap="md">
@@ -50,15 +53,34 @@ function ActivityEditRoute() {
           {subject.performingBiologicEntity?.primaryName?.label ||
             t("StudySubject.defaultLabel")}
         </Title>
+        <Button
+          type="submit"
+          loading={mutation.isPending}
+          onClick={form.handleSubmit(mutation.mutate)}
+        >
+          {t("submit")}
+        </Button>
       </Group>
-      <Grid>
-        <Grid.Col span={{ base: 12, xs: 6, md: 6, lg: 6 }}>
-          <ActivityForm
-            definedActivity={definedActivity}
-            performedActivity={performedActivity}
-          />
-        </Grid.Col>
-      </Grid>
+      <Box pos="relative">
+        {mutation.isError && (
+          <Alert color="red">{mutation.error.message}</Alert>
+        )}
+        <LoadingOverlay visible={mutation.isPending} />
+        <form onSubmit={form.handleSubmit(mutation.mutate)}>
+          <Grid>
+            <Grid.Col span={{ base: 12, xs: 6, md: 6, lg: 6 }}>
+              <ActivityForm
+                definedActivity={definedActivity}
+                performedActivity={form.state}
+                onChange={form.onChange}
+              />
+            </Grid.Col>
+            <Grid.Col>
+              <Button type="submit">{t("submit")}</Button>
+            </Grid.Col>
+          </Grid>
+        </form>
+      </Box>
     </Stack>
   );
 }
