@@ -8,7 +8,7 @@ import ButtonLink from "@/components/ButtonLink";
 import { PersonCard } from "@/components/person/PersonCard";
 import { SpaceRedirectForm } from "@/components/subject/SpaceRedirectForm";
 import { StatusButton } from "@/components/subject/StatusForm";
-import { ActivityCard } from "@/components/person/activity/ActivityCard";
+import { ActivityCard } from "@/components/activity/ActivityCard";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId/")({
   component: SubjectShowPage,
