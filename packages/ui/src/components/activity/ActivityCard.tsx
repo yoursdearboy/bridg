@@ -55,11 +55,11 @@ export function ActivityCardWrapper({
     },
   });
   const { isPending, isError, error, data: subjectWActivities } = query;
+  if (isPending) return <LoadingOverlay />;
   if (isError)
     return (
       <Text color="red">{t("errorMessage", { error: error.message })}</Text>
     );
-  if (isPending) return <LoadingOverlay />;
 
   return (
     <ActivityCard
