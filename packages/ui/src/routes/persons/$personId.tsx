@@ -14,6 +14,7 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
+import { ActivityCardWrapper } from "@/components/activity/ActivityCard";
 import { AddressCardWrapper } from "@/components/person/address/AddressCard";
 import { EditNameForm } from "@/components/person/name/EditNameForm";
 import { NamesCardWrapper } from "@/components/person/name/NamesCard";
@@ -85,6 +86,9 @@ function PersonShowPage() {
           </Grid.Col>
           <Grid.Col span={{ base: 12, lg: 6, xl: 4 }}>
             <PersonTimelineCard personId={personId} />
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, lg: 6, xl: 4 }}>
+            <ActivityCardWrapper personId={personId} />
           </Grid.Col>
         </Grid>
       </Stack>

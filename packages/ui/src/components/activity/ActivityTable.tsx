@@ -1,58 +1,28 @@
-import { LoadingOverlay, Table, Text } from "@mantine/core";
+import { Table } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import { IconPencil } from "@tabler/icons-react";
-import type { UseQueryResult } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import type { PerformedActivity } from "api-ts";
+import type { PerformedActivity, PersonStudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
 import { Route as EditActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/activities/$aId.edit";
 
-interface ActivityTableWrapperProps {
-  query: UseQueryResult<PerformedActivity[], Error>;
-  spaceId: string;
-  subjectId: string;
+interface ActivitiesTableProps {
+  subjectWActivities: {
+    subject: PersonStudySubject;
+    activities: PerformedActivity[];
+  }[];
+  showAll: boolean;
+  spaceId?: string;
 }
 
-export const ActivityTableWrapper = ({
-  query,
+export function ActivitiesTable({
+  subjectWActivities,
+  showAll,
   spaceId,
-  subjectId,
-}: ActivityTableWrapperProps) => {
-  const { isPending, isError, error, data: activities } = query;
+}: ActivitiesTableProps) {
   const { t } = useTranslation();
-
   return (
-    <>
-      <LoadingOverlay visible={isPending} />
-      {isError && (
-        <Text color="red">{t("errorMessage", { error: error.message })}</Text>
-      )}
-      {!isPending && !isError && (
-        <ActivityTable
-          activities={activities}
-          spaceId={spaceId}
-          subjectId={subjectId}
-        />
-      )}
-    </>
-  );
-};
-
-interface ActivityTableProps {
-  activities: PerformedActivity[];
-  spaceId: string;
-  subjectId: string;
-}
-
-const ActivityTable = ({
-  activities,
-  spaceId,
-  subjectId,
-}: ActivityTableProps) => {
-  const { t } = useTranslation();
-
-  return (
-    <Table highlightOnHover fz="md">
+    <Table highlightOnHover>
       <Table.Thead>
         <Table.Tr>
           <Table.Th />
@@ -63,48 +33,73 @@ const ActivityTable = ({
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>
-        {activities.length === 0 ? (
-          <Table.Tr>
-            <Table.Td colSpan={5} px={0} style={{ textAlign: "center" }}>
-              {t("nodata")}
-            </Table.Td>
-          </Table.Tr>
-        ) : (
-          activities.map((activity) => (
-            <ActivityTableRow
-              key={activity.id}
-              activity={activity}
-              spaceId={spaceId}
-              subjectId={subjectId}
-            />
-          ))
-        )}
+        {subjectWActivities.map(({ subject, activities }) => (
+          <SubjectActivitiesRows
+            subject={subject}
+            activities={activities}
+            showAll={showAll}
+            spaceId={spaceId}
+          />
+        ))}
       </Table.Tbody>
     </Table>
   );
-};
-
-interface ActivityTableRowProps {
-  activity: PerformedActivity;
-  spaceId: string;
-  subjectId: string;
 }
 
-const ActivityTableRow = ({
-  activity,
+const SubjectActivitiesRows = ({
+  subject,
+  activities,
+  showAll,
   spaceId,
-  subjectId,
-}: ActivityTableRowProps) => {
-  const { t } = useTranslation();
-  const { hovered, ref } = useHover();
-  const linkParams = {
-    spaceId,
-    subjectId,
-    aId: activity.id,
-  };
+}: {
+  subject: PersonStudySubject;
+  activities: PerformedActivity[];
+  showAll: boolean;
+  spaceId?: string;
+}) => {
+  const subjectSpaceId =
+    subject.assignedStudySiteProtocolVersionRelationship[0]
+      .executedStudyProtocolVersion.id;
+  const sameSpace = !!spaceId && spaceId === subjectSpaceId;
 
   return (
-    <Table.Tr ref={ref}>
+    <>
+      {activities.map((activity) => (
+        <ActivityRow
+          spaceId={spaceId}
+          subjectId={subject.id}
+          activity={activity}
+          showAll={showAll}
+          sameSpace={sameSpace}
+        />
+      ))}
+    </>
+  );
+};
+
+interface activityRowProps {
+  spaceId?: string;
+  subjectId: string;
+  activity: PerformedActivity;
+  showAll: boolean;
+  sameSpace: boolean;
+}
+
+const ActivityRow = ({
+  spaceId,
+  subjectId,
+  activity,
+  showAll,
+  sameSpace,
+}: activityRowProps) => {
+  const { t } = useTranslation();
+  const { hovered, ref } = useHover();
+
+  return (
+    <Table.Tr
+      ref={ref}
+      bg={showAll && sameSpace ? "var(--mantine-color-blue-light)" : undefined}
+    >
       <Table.Td>
         {activity.instantiatedDefinedActivity?.nameCode.displayName ||
           t("Activity.defaultLabel")}
@@ -112,13 +107,47 @@ const ActivityTableRow = ({
       <Table.Td>{activity.containingEpoch?.name}</Table.Td>
       <Table.Td>{t("intlDateTime", { val: activity.statusDate })}</Table.Td>
       <Table.Td>{activity.statusCode?.displayName}</Table.Td>
-      <Table.Td width={60}>
-        {hovered && (
-          <Link to={EditActivityRoute.to} params={linkParams}>
-            <IconPencil size={16} color="green" />
-          </Link>
-        )}
-      </Table.Td>
+      <EditColumn
+        hovered={hovered}
+        spaceId={spaceId}
+        subjectId={subjectId}
+        aId={activity.id}
+        sameSpace={sameSpace}
+      />
     </Table.Tr>
+  );
+};
+
+interface EditColumnProps {
+  hovered: boolean;
+  spaceId?: string;
+  subjectId: string;
+  aId: string;
+  sameSpace: boolean;
+}
+
+const EditColumn = ({
+  hovered,
+  spaceId,
+  subjectId,
+  aId,
+  sameSpace,
+}: EditColumnProps) => {
+  if (!spaceId) {
+    return <Table.Td />;
+  }
+  const linkParams = {
+    spaceId,
+    subjectId,
+    aId,
+  };
+  return (
+    <Table.Td width={60}>
+      {hovered && sameSpace && (
+        <Link to={EditActivityRoute.to} params={linkParams}>
+          <IconPencil size={16} color="green" />
+        </Link>
+      )}
+    </Table.Td>
   );
 };

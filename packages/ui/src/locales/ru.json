@@ -8,6 +8,8 @@
       "statusDate": "Дата"
     },
     "ActivityCard": {
+      "showAll": "Показать все",
+      "showLess": "Показать текущие",
       "title": "Процедуры"
     },
     "ActivityEditPage": {
