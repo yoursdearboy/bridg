@@ -63,6 +63,24 @@ export interface PerformedObservation {
     id: string;
     /**
      * 
+     * @type {string}
+     * @memberof PerformedObservation
+     */
+    comment: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PerformedObservation
+     */
+    negationIndicator: boolean | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PerformedObservation
+     */
+    negationReason: string | null;
+    /**
+     * 
      * @type {ConceptDescriptor}
      * @memberof PerformedObservation
      */
@@ -110,6 +128,9 @@ export interface PerformedObservation {
  */
 export function instanceOfPerformedObservation(value: object): value is PerformedObservation {
     if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('comment' in value) || value['comment'] === undefined) return false;
+    if (!('negationIndicator' in value) || value['negationIndicator'] === undefined) return false;
+    if (!('negationReason' in value) || value['negationReason'] === undefined) return false;
     if (!('reasonCode' in value) || value['reasonCode'] === undefined) return false;
     if (!('statusCode' in value) || value['statusCode'] === undefined) return false;
     if (!('statusDate' in value) || value['statusDate'] === undefined) return false;
@@ -125,6 +146,9 @@ export function instanceOfPerformedObservation(value: object): value is Performe
  */
 export function isPerformedObservationJSON(value: object): boolean {
     if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('comment' in value) || value['comment'] === undefined) return false;
+    if (!('negation_indicator' in value) || value['negation_indicator'] === undefined) return false;
+    if (!('negation_reason' in value) || value['negation_reason'] === undefined) return false;
     if (!('reason_code' in value) || value['reason_code'] === undefined) return false;
     if (!('status_code' in value) || value['status_code'] === undefined) return false;
     if (!('status_date' in value) || value['status_date'] === undefined) return false;
@@ -146,6 +170,9 @@ export function PerformedObservationFromJSONTyped(json: any, ignoreDiscriminator
     return {
         
         'id': json['id'],
+        'comment': json['comment'],
+        'negationIndicator': json['negation_indicator'],
+        'negationReason': json['negation_reason'],
         'reasonCode': ConceptDescriptorFromJSON(json['reason_code']),
         'statusCode': ConceptDescriptorFromJSON(json['status_code']),
         'statusDate': (json['status_date'] == null ? null : new Date(json['status_date'])),
@@ -168,6 +195,9 @@ export function PerformedObservationToJSONTyped(value?: PerformedObservation | n
     return {
         
         'id': value['id'],
+        'comment': value['comment'],
+        'negation_indicator': value['negationIndicator'],
+        'negation_reason': value['negationReason'],
         'reason_code': ConceptDescriptorToJSON(value['reasonCode']),
         'status_code': ConceptDescriptorToJSON(value['statusCode']),
         'status_date': value['statusDate'] == null ? value['statusDate'] : value['statusDate'].toISOString(),
