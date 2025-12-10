@@ -1,10 +1,26 @@
-import { Grid, Group, Stack, Title } from "@mantine/core";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  Group,
+  LoadingOverlay,
+  Stack,
+  Title,
+} from "@mantine/core";
+import {
+  queryOptions,
+  useMutation,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import type { PerformedActivityUnionData } from "api-ts";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { ActivityForm } from "@/components/activity/ActivityForm";
+import useForm from "@/components/activity/useForm";
+import { Route as SpacesSpaceIdSubjectsSubjectIdRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId";
 
 type SearchParams = {
   aId: string;
@@ -39,7 +55,28 @@ function ActivityNewRoute() {
   const { data: definedActivity } = useSuspenseQuery(activityQuery);
   const { data: subject } = useSuspenseQuery(subjectQuery);
   const { spaceId, subjectId } = Route.useParams();
-  const form = useForm<PerformedActivityUnion>(performedActivity);
+  const form = useForm<PerformedActivityUnionData>({
+    reasonCode: null,
+    statusCode: null,
+    statusDate: null,
+    contextForStudySiteId: null,
+    containingEpochId: null,
+    instantiatedDefinedActivityId: definedActivity.id,
+    resultedPerformedObservationResult: [],
+  });
+  const mutation = useMutation({
+    mutationFn: (data: PerformedActivityUnionData) =>
+      api.subjects.createSpacesSpaceIdSubjectsSubjectIdActivityPost({
+        spaceId,
+        subjectId,
+        performedActivityUnionData: data,
+      }),
+    onSuccess: () =>
+      navigate({
+        to: SpacesSpaceIdSubjectsSubjectIdRoute.to,
+        params: { spaceId, subjectId },
+      }),
+  });
 
   return (
     <Stack gap="md">

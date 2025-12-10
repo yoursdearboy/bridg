@@ -1,10 +1,29 @@
-import { Grid, Group, Stack, Title } from "@mantine/core";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  Group,
+  LoadingOverlay,
+  Stack,
+  Title,
+} from "@mantine/core";
+import {
+  queryOptions,
+  useMutation,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import {
+  instanceOfPerformedObservation,
+  type PerformedActivityUnionData,
+} from "api-ts";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { ActivityForm } from "@/components/activity/ActivityForm";
+import useForm from "@/components/activity/useForm";
+import { Route as SpacesSpaceIdSubjectsSubjectIdRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId";
 
 export const Route = createFileRoute(
   "/spaces/$spaceId/subjects/$subjectId/activities/$aId/edit"
@@ -44,7 +63,34 @@ function ActivityEditRoute() {
   } = useSuspenseQuery(activityQuery);
   const { data: subject } = useSuspenseQuery(subjectQuery);
   const { spaceId, subjectId, aId } = Route.useParams();
-  const form = useForm(performedActivity);
+  const form = useForm<PerformedActivityUnionData>({
+    reasonCode: performedActivity.reasonCode,
+    statusCode: performedActivity.statusCode,
+    statusDate: performedActivity.statusDate,
+    contextForStudySiteId: performedActivity.contextForStudySite?.id || null,
+    containingEpochId: performedActivity.containingEpoch?.id || null,
+    instantiatedDefinedActivityId: definedActivity.id,
+    resultedPerformedObservationResult: instanceOfPerformedObservation(
+      performedActivity
+    )
+      ? performedActivity.resultedPerformedObservationResult
+      : [],
+  });
+  const mutation = useMutation({
+    mutationKey: ["subject", subjectId, "activity", aId],
+    mutationFn: (data: PerformedActivityUnionData) =>
+      api.subjects.updateSpacesSpaceIdSubjectsSubjectIdActivityAIdPatch({
+        spaceId,
+        subjectId,
+        aId,
+        performedActivityUnionData: data,
+      }),
+    onSuccess: () =>
+      navigate({
+        to: SpacesSpaceIdSubjectsSubjectIdRoute.to,
+        params: { spaceId, subjectId },
+      }),
+  });
 
   return (
     <Stack gap="md">

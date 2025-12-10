@@ -1,14 +1,14 @@
 import {
   type DataValue,
   type DefinedObservationResult,
-  type PerformedObservationResult,
+  type PerformedObservationResultData,
 } from "api-ts";
 import { Input } from "./Input";
 
 interface ObservatonResultFormProps {
   definedObservationResult: DefinedObservationResult;
-  performedObservationResult: PerformedObservationResult;
-  onChange: (result: PerformedObservationResult) => void;
+  performedObservationResult: PerformedObservationResultData;
+  onChange: (result: PerformedObservationResultData) => void;
 }
 
 export const ObservatonResultForm = ({

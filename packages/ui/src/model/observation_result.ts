@@ -1,23 +1,15 @@
 import type {
-  ConceptDescriptor,
   DefinedObservationResult,
-  PerformedObservationResult,
+  PerformedObservationResultData,
 } from "api-ts";
-
-export const isEqualCD = (a: ConceptDescriptor, b: ConceptDescriptor) =>
-  a.code == b.code && a.codeSystem == b.codeSystem;
-
-const doesMatchObservationResult = (
-  def: DefinedObservationResult,
-  perf: PerformedObservationResult
-) => def.typeCode && perf.typeCode && isEqualCD(def.typeCode, perf.typeCode);
+import { isEqualCD } from "./datatype";
 
 const definedToPerformedObservationResult = (
   dor: DefinedObservationResult
-): PerformedObservationResult => {
+): PerformedObservationResultData => {
   return {
-    ...dor,
-    id: self.crypto.randomUUID(),
+    typeCode: dor.typeCode,
+    value: dor.value,
     valueNullFlavorReason: null,
     baselineIndicator: null,
     derivedIndicator: null,
@@ -29,12 +21,17 @@ const definedToPerformedObservationResult = (
 
 interface ObservationResultMatch {
   definedObservationResult: DefinedObservationResult;
-  performedObservationResult: PerformedObservationResult;
+  performedObservationResult: PerformedObservationResultData;
 }
+
+export const doesMatchObservationResult = (
+  a: DefinedObservationResult,
+  b: PerformedObservationResultData
+) => a.typeCode && b.typeCode && isEqualCD(a.typeCode, b.typeCode);
 
 export const matchObservationResult = (
   ds: DefinedObservationResult[],
-  ps: PerformedObservationResult[]
+  ps: PerformedObservationResultData[]
 ): ObservationResultMatch[] =>
   ds.map((d) => ({
     definedObservationResult: d,

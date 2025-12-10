@@ -3,18 +3,18 @@ import {
   instanceOfDefinedObservation,
   type DefinedActivityUnion,
   type DefinedObservation,
-  type PerformedActivityUnion,
-  type PerformedObservation,
-  type PerformedObservationResult,
+  type PerformedActivityUnionData,
+  type PerformedObservationData,
+  type PerformedObservationResultData,
 } from "api-ts";
 import { useTranslation } from "react-i18next";
-import { matchObservationResult } from "@/util";
+import { doesMatchObservationResult, matchObservationResult } from "@/model";
 import { ObservatonResultForm } from "./ObservationResultForm";
 
 interface ActivityFormProps {
   definedActivity: DefinedActivityUnion;
-  performedActivity: PerformedActivityUnion;
-  onChange: (activity: PerformedActivityUnion) => void;
+  performedActivity: PerformedActivityUnionData;
+  onChange: (activity: PerformedActivityUnionData) => void;
 }
 
 export const ActivityForm = ({
@@ -50,7 +50,7 @@ const ActivityFormSwitch = ({
     return (
       <ObservationForm
         definedActivity={definedActivity}
-        performedActivity={performedActivity as PerformedObservation}
+        performedActivity={performedActivity as PerformedObservationData}
         onChange={onChange}
       />
     );
@@ -59,8 +59,8 @@ const ActivityFormSwitch = ({
 
 interface ObservationFormProps {
   definedActivity: DefinedObservation;
-  performedActivity: PerformedObservation;
-  onChange: (obs: PerformedObservation) => void;
+  performedActivity: PerformedObservationData;
+  onChange: (obs: PerformedObservationData) => void;
 }
 
 const ObservationForm = ({
@@ -72,11 +72,11 @@ const ObservationForm = ({
     definedActivity.producedDefinedObservationResult,
     performedActivity.resultedPerformedObservationResult
   );
-  const updateResults = (result: PerformedObservationResult) =>
-    results.map((r) =>
-      r.performedObservationResult.id == result.id
-        ? result
-        : r.performedObservationResult
+  const updateResults = (newResult: PerformedObservationResultData) =>
+    results.map(({ definedObservationResult, performedObservationResult }) =>
+      doesMatchObservationResult(definedObservationResult, newResult)
+        ? newResult
+        : performedObservationResult
     );
   return (
     <Stack>
@@ -86,10 +86,10 @@ const ObservationForm = ({
             key={definedObservationResult.id}
             definedObservationResult={definedObservationResult}
             performedObservationResult={performedObservationResult}
-            onChange={(result: PerformedObservationResult) =>
+            onChange={(newResult: PerformedObservationResultData) =>
               onChange({
                 ...performedActivity,
-                resultedPerformedObservationResult: updateResults(result),
+                resultedPerformedObservationResult: updateResults(newResult),
               })
             }
           />
