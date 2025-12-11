@@ -33,7 +33,7 @@ import { Route as SubjectIdRoute } from "./$subjectId";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
   loader: async ({ params }) => ({
-    sites: await api.sites.indexSpacesSpaceIdSitesGet(params),
+    sites: await api.spaces.indexSiteSpacesSpaceIdSiteGet(params),
   }),
   beforeLoad: () => ({
     breadcrumb: i18next.t("SubjectNewPage.breadcrumb"),

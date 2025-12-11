@@ -1,7 +1,6 @@
 import {
   Configuration,
   PersonsApi,
-  SitesApi,
   DefinedActivityApi,
   DefaultApi as SpacesApi,
   SubjectsApi,
@@ -14,7 +13,6 @@ const config = new Configuration({
 });
 
 export const definedActivity = new DefinedActivityApi(config);
-export const sites = new SitesApi(config);
 export const spaces = new SpacesApi(config);
 export const subjects = new SubjectsApi(config);
 export const persons = new PersonsApi(config);
@@ -23,7 +21,6 @@ export const codeSystem = new CodeSystem(config);
 
 export default {
   definedActivity,
-  sites,
   spaces,
   subjects,
   persons,

@@ -6,7 +6,6 @@ src/apis/DefinedActivityApi.ts
 src/apis/PerformedActivityApi.ts
 src/apis/PersonSubjectApi.ts
 src/apis/PersonsApi.ts
-src/apis/SitesApi.ts
 src/apis/SpaceActivityApi.ts
 src/apis/SubjectsApi.ts
 src/apis/index.ts
