@@ -31,6 +31,9 @@
       "deleteConfirm": "Do you confirm address deletion?",
       "title": "Person addresses"
     },
+    "Epoch": {
+      "defaultName": "Unnamed epoch"
+    },
     "Gender": {
       "F": "Female",
       "M": "Male",
@@ -52,6 +55,16 @@
     "Organization": {
       "description": "Description",
       "primaryName": "Primary name"
+    },
+    "PerformedActivity": {
+      "comment": "Comment",
+      "containingEpoch": "Epoch",
+      "contextForStudySite": "Study site",
+      "negation": "Negation and it's reason",
+      "negationIndicator": "Negation",
+      "negationReason": "Negation reason",
+      "statusCode": "Status",
+      "statusDate": "Status date"
     },
     "PerformingBiologicEntitySelect": {
       "text": "Select existing biologic entity:"

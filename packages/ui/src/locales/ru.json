@@ -31,6 +31,9 @@
       "deleteConfirm": "Вы действительно хотите удалить адрес?",
       "title": "Адреса"
     },
+    "Epoch": {
+      "defaultName": "Безымянная точка"
+    },
     "Gender": {
       "F": "Женский",
       "M": "Мужской",
@@ -52,6 +55,16 @@
     "Organization": {
       "description": "Описание",
       "primaryName": "Название"
+    },
+    "PerformedActivity": {
+      "comment": "Комментарий",
+      "containingEpoch": "Точка",
+      "contextForStudySite": "Центр",
+      "negation": "Отметьте, если не проведено и укажите причину",
+      "negationIndicator": "Не проведено",
+      "negationReason": "Причина непроведения",
+      "statusCode": "Статус",
+      "statusDate": "Дата статуса"
     },
     "PerformingBiologicEntitySelect": {
       "text": "Выберите существующую запись:"

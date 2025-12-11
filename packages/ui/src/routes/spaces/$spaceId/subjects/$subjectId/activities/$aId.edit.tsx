@@ -65,6 +65,9 @@ function ActivityEditRoute() {
   const { spaceId, subjectId, aId } = Route.useParams();
   const form = useForm<PerformedActivityUnionData>({
     reasonCode: performedActivity.reasonCode,
+    comment: performedActivity.comment,
+    negationIndicator: performedActivity.negationIndicator,
+    negationReason: performedActivity.negationReason,
     statusCode: performedActivity.statusCode,
     statusDate: performedActivity.statusDate,
     contextForStudySiteId: performedActivity.contextForStudySite?.id || null,
@@ -116,6 +119,7 @@ function ActivityEditRoute() {
           <Grid>
             <Grid.Col span={{ base: 12, xs: 6, md: 6, lg: 6 }}>
               <ActivityForm
+                spaceId={spaceId}
                 definedActivity={definedActivity}
                 performedActivity={form.state}
                 onChange={form.onChange}

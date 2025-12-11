@@ -57,6 +57,9 @@ function ActivityNewRoute() {
   const { spaceId, subjectId } = Route.useParams();
   const form = useForm<PerformedActivityUnionData>({
     reasonCode: null,
+    comment: null,
+    negationIndicator: null,
+    negationReason: null,
     statusCode: null,
     statusDate: null,
     contextForStudySiteId: null,
@@ -102,6 +105,7 @@ function ActivityNewRoute() {
           <Grid>
             <Grid.Col span={{ base: 12, xs: 6, md: 6, lg: 6 }}>
               <ActivityForm
+                spaceId={spaceId}
                 definedActivity={definedActivity}
                 performedActivity={form.state}
                 onChange={form.onChange}

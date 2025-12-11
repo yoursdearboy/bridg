@@ -1,4 +1,14 @@
-import { Card, Stack, Text } from "@mantine/core";
+import {
+  Card,
+  Checkbox,
+  Group,
+  Input,
+  Stack,
+  Text,
+  Textarea,
+  TextInput,
+} from "@mantine/core";
+import { DateInput } from "@mantine/dates";
 import {
   instanceOfDefinedObservation,
   type DefinedActivityUnion,
@@ -8,16 +18,88 @@ import {
   type PerformedObservationResultData,
 } from "api-ts";
 import { useTranslation } from "react-i18next";
+import { EpochSelect } from "@/components/input/EpochSelect";
+import { StudySiteSelect } from "@/components/input/StudySiteSelect";
 import { doesMatchObservationResult, matchObservationResult } from "@/model";
+import { ConceptDescriptorSelect } from "./Input";
 import { ObservatonResultForm } from "./ObservationResultForm";
 
 interface ActivityFormProps {
+  spaceId: string;
   definedActivity: DefinedActivityUnion;
   performedActivity: PerformedActivityUnionData;
   onChange: (activity: PerformedActivityUnionData) => void;
 }
 
+const ActivityFields = ({
+  spaceId,
+  performedActivity,
+  onChange,
+}: ActivityFormProps) => {
+  const { t } = useTranslation();
+  const handleChange = <T,>(data: { [key: string]: T }): void =>
+    onChange({ ...performedActivity, ...data });
+  return (
+    <Stack>
+      <EpochSelect
+        label={t("PerformedActivity.containingEpoch")}
+        value={performedActivity.containingEpochId}
+        onChange={(containingEpochId) => handleChange({ containingEpochId })}
+        spaceId={spaceId}
+      />
+      <StudySiteSelect
+        label={t("PerformedActivity.contextForStudySite")}
+        value={performedActivity.contextForStudySiteId}
+        onChange={(contextForStudySiteId) =>
+          handleChange({ contextForStudySiteId })
+        }
+        spaceId={spaceId}
+      />
+      <Input.Wrapper label={t("PerformedActivity.negation")}>
+        <Group>
+          <Checkbox
+            checked={performedActivity.negationIndicator || false}
+            onChange={(e) =>
+              handleChange({
+                negationIndicator: e.target.checked,
+              })
+            }
+          />
+          <TextInput
+            value={performedActivity.negationReason || ""}
+            onChange={(negationReason) => handleChange({ negationReason })}
+            disabled={!performedActivity.negationIndicator}
+            style={{ flexGrow: 1 }}
+          />
+        </Group>
+      </Input.Wrapper>
+      <Textarea
+        label={t("PerformedActivity.comment")}
+        value={performedActivity.comment || ""}
+        onChange={(e) => handleChange({ comment: e.target.value || null })}
+      />
+      <Group grow>
+        <ConceptDescriptorSelect
+          label={t("PerformedActivity.statusCode")}
+          value={performedActivity.statusCode}
+          onChange={(statusCode) => handleChange({ statusCode })}
+          codeSystem="performed_activity.status_code"
+        />
+        <DateInput
+          label={t("PerformedActivity.statusDate")}
+          value={performedActivity.statusDate}
+          onChange={(value) => {
+            handleChange({ statusDate: value ? new Date(value) : null });
+          }}
+          valueFormat="L"
+        />
+      </Group>
+    </Stack>
+  );
+};
+
 export const ActivityForm = ({
+  spaceId,
   definedActivity,
   performedActivity,
   onChange,
@@ -30,8 +112,17 @@ export const ActivityForm = ({
           {definedActivity.nameCode.displayName || t("Activity.defaultLabel")}
         </Text>
       </Card.Section>
-      <Card.Section inheritPadding py="xs">
+      <Card.Section withBorder inheritPadding py="xs">
         <ActivityFormSwitch
+          definedActivity={definedActivity}
+          performedActivity={performedActivity}
+          onChange={onChange}
+          spaceId={spaceId}
+        />
+      </Card.Section>
+      <Card.Section withBorder inheritPadding py="xs">
+        <ActivityFields
+          spaceId={spaceId}
           definedActivity={definedActivity}
           performedActivity={performedActivity}
           onChange={onChange}
