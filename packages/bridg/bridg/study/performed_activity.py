@@ -20,7 +20,8 @@ class PerformedActivity(Activity):
     repetition_number: Mapped[Optional[int]]
     name_code_modified_text: Mapped[Optional[str]]
     negation_indicator: Mapped[Optional[bool]]
-    negation_reason: Mapped[Optional[str]]
+    negation_reason_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
+    negation_reason: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=negation_reason_id)
 
     status_code_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
     status_code: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=status_code_id)

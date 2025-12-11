@@ -4,6 +4,8 @@ concept_descriptor:
   - { code: "incomplete", code_system: "performed_activity.status_code", display_name: "Incomplete" }
   - { code: "unverified", code_system: "performed_activity.status_code", display_name: "Unverified" }
   - { code: "complete", code_system: "performed_activity.status_code", display_name: "Complete" }
+  - { code: "ND", code_system: "performed_activity.negation_reason", display_name: "Not Done" }
+  - { code: "NI", code_system: "performed_activity.negation_reason", display_name: "No Information" }
   - { code: "NK", code_system: "f1c13ae3-715b-47ce-8d6a-9645d313d16b", display_name: "Normal Karyotype" }
   - { code: "tri21", code_system: "f1c13ae3-715b-47ce-8d6a-9645d313d16b", display_name: "Trisomy 21" }
   - { code: "t(8;21)", code_system: "f1c13ae3-715b-47ce-8d6a-9645d313d16b", display_name: "t(8;21)" }

@@ -75,10 +75,10 @@ export interface PerformedObservation {
     negationIndicator: boolean | null;
     /**
      * 
-     * @type {string}
+     * @type {ConceptDescriptor}
      * @memberof PerformedObservation
      */
-    negationReason: string | null;
+    negationReason: ConceptDescriptor | null;
     /**
      * 
      * @type {ConceptDescriptor}
@@ -172,7 +172,7 @@ export function PerformedObservationFromJSONTyped(json: any, ignoreDiscriminator
         'id': json['id'],
         'comment': json['comment'],
         'negationIndicator': json['negation_indicator'],
-        'negationReason': json['negation_reason'],
+        'negationReason': ConceptDescriptorFromJSON(json['negation_reason']),
         'reasonCode': ConceptDescriptorFromJSON(json['reason_code']),
         'statusCode': ConceptDescriptorFromJSON(json['status_code']),
         'statusDate': (json['status_date'] == null ? null : new Date(json['status_date'])),
@@ -197,7 +197,7 @@ export function PerformedObservationToJSONTyped(value?: PerformedObservation | n
         'id': value['id'],
         'comment': value['comment'],
         'negation_indicator': value['negationIndicator'],
-        'negation_reason': value['negationReason'],
+        'negation_reason': ConceptDescriptorToJSON(value['negationReason']),
         'reason_code': ConceptDescriptorToJSON(value['reasonCode']),
         'status_code': ConceptDescriptorToJSON(value['statusCode']),
         'status_date': value['statusDate'] == null ? value['statusDate'] : value['statusDate'].toISOString(),

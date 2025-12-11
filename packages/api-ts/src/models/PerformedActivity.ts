@@ -68,10 +68,10 @@ export interface PerformedActivity {
     negationIndicator: boolean | null;
     /**
      * 
-     * @type {string}
+     * @type {ConceptDescriptor}
      * @memberof PerformedActivity
      */
-    negationReason: string | null;
+    negationReason: ConceptDescriptor | null;
     /**
      * 
      * @type {ConceptDescriptor}
@@ -157,7 +157,7 @@ export function PerformedActivityFromJSONTyped(json: any, ignoreDiscriminator: b
         'id': json['id'],
         'comment': json['comment'],
         'negationIndicator': json['negation_indicator'],
-        'negationReason': json['negation_reason'],
+        'negationReason': ConceptDescriptorFromJSON(json['negation_reason']),
         'reasonCode': ConceptDescriptorFromJSON(json['reason_code']),
         'statusCode': ConceptDescriptorFromJSON(json['status_code']),
         'statusDate': (json['status_date'] == null ? null : new Date(json['status_date'])),
@@ -181,7 +181,7 @@ export function PerformedActivityToJSONTyped(value?: PerformedActivity | null, i
         'id': value['id'],
         'comment': value['comment'],
         'negation_indicator': value['negationIndicator'],
-        'negation_reason': value['negationReason'],
+        'negation_reason': ConceptDescriptorToJSON(value['negationReason']),
         'reason_code': ConceptDescriptorToJSON(value['reasonCode']),
         'status_code': ConceptDescriptorToJSON(value['statusCode']),
         'status_date': value['statusDate'] == null ? value['statusDate'] : value['statusDate'].toISOString(),

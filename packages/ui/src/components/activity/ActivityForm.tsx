@@ -1,16 +1,8 @@
-import {
-  Card,
-  Checkbox,
-  Group,
-  Input,
-  Stack,
-  Text,
-  Textarea,
-  TextInput,
-} from "@mantine/core";
+import { Card, Group, Stack, Text, Textarea } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import {
   instanceOfDefinedObservation,
+  type ConceptDescriptor,
   type DefinedActivityUnion,
   type DefinedObservation,
   type PerformedActivityUnionData,
@@ -55,26 +47,17 @@ const ActivityFields = ({
         }
         spaceId={spaceId}
       />
-      <Input.Wrapper label={t("PerformedActivity.negation")}>
-        <Group>
-          <Checkbox
-            checked={performedActivity.negationIndicator || false}
-            onChange={(e) =>
-              handleChange({
-                negationIndicator: e.target.checked,
-              })
-            }
-          />
-          <TextInput
-            value={performedActivity.negationReason || ""}
-            onChange={(e) =>
-              handleChange({ negationReason: e.target.value || "" })
-            }
-            disabled={!performedActivity.negationIndicator}
-            style={{ flexGrow: 1 }}
-          />
-        </Group>
-      </Input.Wrapper>
+      <ConceptDescriptorSelect
+        label={t("PerformedActivity.negationReason")}
+        value={performedActivity.negationReason}
+        codeSystem="performed_activity.negation_reason"
+        onChange={(negationReason: ConceptDescriptor | null) =>
+          handleChange({
+            negationIndicator: negationReason !== null,
+            negationReason,
+          })
+        }
+      />
       <Textarea
         label={t("PerformedActivity.comment")}
         value={performedActivity.comment || ""}

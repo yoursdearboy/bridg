@@ -41,10 +41,10 @@ export interface PerformedActivityData {
     negationIndicator: boolean | null;
     /**
      * 
-     * @type {string}
+     * @type {ConceptDescriptor}
      * @memberof PerformedActivityData
      */
-    negationReason: string | null;
+    negationReason: ConceptDescriptor | null;
     /**
      * 
      * @type {ConceptDescriptor}
@@ -127,7 +127,7 @@ export function PerformedActivityDataFromJSONTyped(json: any, ignoreDiscriminato
         
         'comment': json['comment'],
         'negationIndicator': json['negation_indicator'],
-        'negationReason': json['negation_reason'],
+        'negationReason': ConceptDescriptorFromJSON(json['negation_reason']),
         'reasonCode': ConceptDescriptorFromJSON(json['reason_code']),
         'statusCode': ConceptDescriptorFromJSON(json['status_code']),
         'statusDate': (json['status_date'] == null ? null : new Date(json['status_date'])),
@@ -150,7 +150,7 @@ export function PerformedActivityDataToJSONTyped(value?: PerformedActivityData |
         
         'comment': value['comment'],
         'negation_indicator': value['negationIndicator'],
-        'negation_reason': value['negationReason'],
+        'negation_reason': ConceptDescriptorToJSON(value['negationReason']),
         'reason_code': ConceptDescriptorToJSON(value['reasonCode']),
         'status_code': ConceptDescriptorToJSON(value['statusCode']),
         'status_date': value['statusDate'] == null ? value['statusDate'] : value['statusDate'].toISOString(),
