@@ -20,6 +20,7 @@ import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { ActivityForm } from "@/components/activity/ActivityForm";
 import useForm from "@/components/activity/useForm";
+import BackButton from "@/components/BackButton";
 import { Route as SpacesSpaceIdSubjectsSubjectIdRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId";
 
 type SearchParams = {
@@ -112,7 +113,12 @@ function ActivityNewRoute() {
               />
             </Grid.Col>
             <Grid.Col>
-              <Button type="submit">{t("submit")}</Button>
+              <Group>
+                <BackButton variant="outline" color="grey">
+                  {t("cancel")}
+                </BackButton>
+                <Button type="submit">{t("submit")}</Button>
+              </Group>
             </Grid.Col>
           </Grid>
         </form>
