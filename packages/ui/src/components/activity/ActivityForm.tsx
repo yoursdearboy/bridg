@@ -67,7 +67,9 @@ const ActivityFields = ({
           />
           <TextInput
             value={performedActivity.negationReason || ""}
-            onChange={(negationReason) => handleChange({ negationReason })}
+            onChange={(e) =>
+              handleChange({ negationReason: e.target.value || "" })
+            }
             disabled={!performedActivity.negationIndicator}
             style={{ flexGrow: 1 }}
           />
