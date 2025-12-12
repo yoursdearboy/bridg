@@ -115,7 +115,7 @@ const StudySiteSelect = ({
   const { t } = useTranslation();
   const { isError, error, data } = useQuery({
     queryKey: ["space", spaceId, "site"],
-    queryFn: () => api.sites.indexSpacesSpaceIdSitesGet({ spaceId }),
+    queryFn: () => api.spaces.indexSiteSpacesSpaceIdSiteGet({ spaceId }),
   });
 
   if (isError)
