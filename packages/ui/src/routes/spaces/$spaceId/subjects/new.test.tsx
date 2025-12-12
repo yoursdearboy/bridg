@@ -4,7 +4,7 @@ import { renderRoute } from "@/test-utils";
 import { Route } from "./new";
 
 it("new page renders correctly", async () => {
-  vi.spyOn(api.sites, "indexSpacesSpaceIdSitesGet").mockResolvedValue([
+  vi.spyOn(api.spaces, "indexSiteSpacesSpaceIdSiteGet").mockResolvedValue([
     {
       id: "6a8e6e2b-9537-408f-bd92-a5b83ad2e750",
       executedStudyProtocolVersion: {
