@@ -29,6 +29,7 @@ const ActivityFields = ({
   onChange,
 }: ActivityFormProps) => {
   const { t } = useTranslation();
+  // eslint-disable-next-line @stylistic/comma-dangle
   const handleChange = <T,>(data: { [key: string]: T }): void =>
     onChange({ ...performedActivity, ...data });
   return (
