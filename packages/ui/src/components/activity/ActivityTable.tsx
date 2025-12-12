@@ -55,13 +55,13 @@ const ActivityTable = ({
     <Table highlightOnHover fz="md">
       <Table.Thead>
         <Table.Tr>
-          <Table.Th/>
+          <Table.Th />
           <Table.Th>{t("PerformedActivity.containingEpoch")}</Table.Th>
           <Table.Th>{t("PerformedActivity.contextForStudySite")}</Table.Th>
           <Table.Th>{t("PerformedActivity.statusCode")}</Table.Th>
           <Table.Th>{t("PerformedActivity.statusDate")}</Table.Th>
-          <Table.Th/>
-          <Table.Th/>
+          <Table.Th />
+          <Table.Th />
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>
@@ -138,8 +138,12 @@ const ActivityTableRow = ({
       </Table.Td>
       <Table.Td w={60}>
         {hovered && (
-          <Link to={EditActivityRoute.to} params={linkParams}>
-            <IconPencil size={16} color="white" />
+          <Link
+            to={EditActivityRoute.to}
+            params={linkParams}
+            style={{ color: "inherit" }}
+          >
+            <IconPencil size={16} />
           </Link>
         )}
       </Table.Td>
