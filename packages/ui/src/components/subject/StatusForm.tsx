@@ -2,6 +2,7 @@ import { Alert, Button, Group, Modal, Radio, Stack } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
+import { IconStatusChange } from "@tabler/icons-react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { Status, type StudySubject, type StudySubjectData } from "api-ts";
@@ -27,10 +28,11 @@ export function StatusButton({
   return (
     <>
       <Button
-        size="sm"
+        size="xs"
         color={getStatusColor(subject.status)}
         onClick={open}
-        variant="light"
+        variant="filled"
+        leftSection={<IconStatusChange />}
       >
         {subject.status ? t(`Status.${subject.status}`) : t("no")}
       </Button>
