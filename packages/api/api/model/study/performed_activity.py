@@ -14,6 +14,9 @@ T = TypeVar("T", bound=bridg.PerformedActivity)
 
 class PerformedActivityBase(BaseModel[T]):
     id: UUID
+    comment: Optional[str]
+    negation_indicator: Optional[bool]
+    negation_reason: Optional[ConceptDescriptor]
     reason_code: Optional[ConceptDescriptor]
     status_code: Optional[ConceptDescriptor]
     status_date: Optional[datetime]
@@ -27,6 +30,9 @@ class PerformedActivity(PerformedActivityBase[bridg.PerformedActivity]):
 
 
 class PerformedActivityDataBase(BaseModel[T]):
+    comment: Optional[str]
+    negation_indicator: Optional[bool]
+    negation_reason: Optional[ConceptDescriptor]
     reason_code: Optional[ConceptDescriptor]
     status_code: Optional[ConceptDescriptor]
     status_date: Optional[datetime]

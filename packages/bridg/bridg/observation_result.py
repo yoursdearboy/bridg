@@ -38,7 +38,7 @@ class ObservationResult:
     def value(self) -> Optional[DataValue]:
         if self.value_cd:
             return self.value_cd
-        elif self.value_pq and self.value_pq.unit is not None and self.value_pq.value is not None:
+        elif self.value_pq and self.value_pq.value is not None:
             return self.value_pq
         elif self.value_datetime:
             return self.value_datetime

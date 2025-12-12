@@ -29,6 +29,24 @@ import {
 export interface PerformedActivityData {
     /**
      * 
+     * @type {string}
+     * @memberof PerformedActivityData
+     */
+    comment: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PerformedActivityData
+     */
+    negationIndicator: boolean | null;
+    /**
+     * 
+     * @type {ConceptDescriptor}
+     * @memberof PerformedActivityData
+     */
+    negationReason: ConceptDescriptor | null;
+    /**
+     * 
      * @type {ConceptDescriptor}
      * @memberof PerformedActivityData
      */
@@ -69,6 +87,9 @@ export interface PerformedActivityData {
  * Check if a given object implements the PerformedActivityData interface.
  */
 export function instanceOfPerformedActivityData(value: object): value is PerformedActivityData {
+    if (!('comment' in value) || value['comment'] === undefined) return false;
+    if (!('negationIndicator' in value) || value['negationIndicator'] === undefined) return false;
+    if (!('negationReason' in value) || value['negationReason'] === undefined) return false;
     if (!('reasonCode' in value) || value['reasonCode'] === undefined) return false;
     if (!('statusCode' in value) || value['statusCode'] === undefined) return false;
     if (!('statusDate' in value) || value['statusDate'] === undefined) return false;
@@ -82,6 +103,9 @@ export function instanceOfPerformedActivityData(value: object): value is Perform
  * Check if a given object is PerformedActivityData JSON.
  */
 export function isPerformedActivityDataJSON(value: object): boolean {
+    if (!('comment' in value) || value['comment'] === undefined) return false;
+    if (!('negation_indicator' in value) || value['negation_indicator'] === undefined) return false;
+    if (!('negation_reason' in value) || value['negation_reason'] === undefined) return false;
     if (!('reason_code' in value) || value['reason_code'] === undefined) return false;
     if (!('status_code' in value) || value['status_code'] === undefined) return false;
     if (!('status_date' in value) || value['status_date'] === undefined) return false;
@@ -101,6 +125,9 @@ export function PerformedActivityDataFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
+        'comment': json['comment'],
+        'negationIndicator': json['negation_indicator'],
+        'negationReason': ConceptDescriptorFromJSON(json['negation_reason']),
         'reasonCode': ConceptDescriptorFromJSON(json['reason_code']),
         'statusCode': ConceptDescriptorFromJSON(json['status_code']),
         'statusDate': (json['status_date'] == null ? null : new Date(json['status_date'])),
@@ -121,6 +148,9 @@ export function PerformedActivityDataToJSONTyped(value?: PerformedActivityData |
 
     return {
         
+        'comment': value['comment'],
+        'negation_indicator': value['negationIndicator'],
+        'negation_reason': ConceptDescriptorToJSON(value['negationReason']),
         'reason_code': ConceptDescriptorToJSON(value['reasonCode']),
         'status_code': ConceptDescriptorToJSON(value['statusCode']),
         'status_date': value['statusDate'] == null ? value['statusDate'] : value['statusDate'].toISOString(),

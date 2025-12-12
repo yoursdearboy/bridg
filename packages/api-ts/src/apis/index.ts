@@ -7,6 +7,5 @@ export * from './DefinedActivityApi';
 export * from './PerformedActivityApi';
 export * from './PersonSubjectApi';
 export * from './PersonsApi';
-export * from './SitesApi';
 export * from './SpaceActivityApi';
 export * from './SubjectsApi';

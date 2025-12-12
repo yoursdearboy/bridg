@@ -1,6 +1,6 @@
-import { LoadingOverlay, Table, Text } from "@mantine/core";
+import { Group, LoadingOverlay, Table, Text, Tooltip } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
-import { IconPencil } from "@tabler/icons-react";
+import { IconCancel, IconMessage, IconPencil } from "@tabler/icons-react";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import type { PerformedActivity } from "api-ts";
@@ -55,11 +55,13 @@ const ActivityTable = ({
     <Table highlightOnHover fz="md">
       <Table.Thead>
         <Table.Tr>
-          <Table.Th />
-          <Table.Th>{t("Activity.containingEpoch")}</Table.Th>
-          <Table.Th>{t("Activity.statusDate")}</Table.Th>
-          <Table.Th>{t("Activity.statusCode")}</Table.Th>
-          <Table.Th />
+          <Table.Th/>
+          <Table.Th>{t("PerformedActivity.containingEpoch")}</Table.Th>
+          <Table.Th>{t("PerformedActivity.contextForStudySite")}</Table.Th>
+          <Table.Th>{t("PerformedActivity.statusCode")}</Table.Th>
+          <Table.Th>{t("PerformedActivity.statusDate")}</Table.Th>
+          <Table.Th/>
+          <Table.Th/>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>
@@ -110,12 +112,34 @@ const ActivityTableRow = ({
           t("Activity.defaultLabel")}
       </Table.Td>
       <Table.Td>{activity.containingEpoch?.name}</Table.Td>
-      <Table.Td>{t("intlDateTime", { val: activity.statusDate })}</Table.Td>
+      <Table.Td>{activity.contextForStudySite?.label}</Table.Td>
       <Table.Td>{activity.statusCode?.displayName}</Table.Td>
-      <Table.Td width={60}>
+      <Table.Td>{t("intlDateTime", { val: activity.statusDate })}</Table.Td>
+      <Table.Td>
+        <Group>
+          {activity.comment && (
+            <Tooltip label={activity.comment}>
+              <IconMessage size={18} />
+            </Tooltip>
+          )}
+          {activity.negationReason && (
+            <Tooltip
+              label={
+                <Text>
+                  {activity.negationReason.displayName ||
+                    activity.negationReason.code}
+                </Text>
+              }
+            >
+              <IconCancel size={18} color="red" />
+            </Tooltip>
+          )}
+        </Group>
+      </Table.Td>
+      <Table.Td w={60}>
         {hovered && (
           <Link to={EditActivityRoute.to} params={linkParams}>
-            <IconPencil size={16} color="green" />
+            <IconPencil size={16} color="white" />
           </Link>
         )}
       </Table.Td>

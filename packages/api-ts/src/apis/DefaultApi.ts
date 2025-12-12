@@ -15,17 +15,108 @@
 
 import * as runtime from '../runtime';
 import type {
+  Epoch,
+  HTTPValidationError,
   StudyProtocolVersion,
+  StudySiteProtocolVersionRelationship,
 } from '../models/index';
 import {
+    EpochFromJSON,
+    EpochToJSON,
+    HTTPValidationErrorFromJSON,
+    HTTPValidationErrorToJSON,
     StudyProtocolVersionFromJSON,
     StudyProtocolVersionToJSON,
+    StudySiteProtocolVersionRelationshipFromJSON,
+    StudySiteProtocolVersionRelationshipToJSON,
 } from '../models/index';
+
+export interface IndexEpochSpacesSpaceIdEpochGetRequest {
+    spaceId: string;
+}
+
+export interface IndexSiteSpacesSpaceIdSiteGetRequest {
+    spaceId: string;
+}
 
 /**
  * 
  */
 export class DefaultApi extends runtime.BaseAPI {
+
+    /**
+     * Index Epoch
+     */
+    async indexEpochSpacesSpaceIdEpochGetRaw(requestParameters: IndexEpochSpacesSpaceIdEpochGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Epoch>>> {
+        if (requestParameters['spaceId'] == null) {
+            throw new runtime.RequiredError(
+                'spaceId',
+                'Required parameter "spaceId" was null or undefined when calling indexEpochSpacesSpaceIdEpochGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/spaces/{space_id}/epoch`;
+        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(EpochFromJSON));
+    }
+
+    /**
+     * Index Epoch
+     */
+    async indexEpochSpacesSpaceIdEpochGet(requestParameters: IndexEpochSpacesSpaceIdEpochGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Epoch>> {
+        const response = await this.indexEpochSpacesSpaceIdEpochGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Index Site
+     */
+    async indexSiteSpacesSpaceIdSiteGetRaw(requestParameters: IndexSiteSpacesSpaceIdSiteGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<StudySiteProtocolVersionRelationship>>> {
+        if (requestParameters['spaceId'] == null) {
+            throw new runtime.RequiredError(
+                'spaceId',
+                'Required parameter "spaceId" was null or undefined when calling indexSiteSpacesSpaceIdSiteGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/spaces/{space_id}/site`;
+        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StudySiteProtocolVersionRelationshipFromJSON));
+    }
+
+    /**
+     * Index Site
+     */
+    async indexSiteSpacesSpaceIdSiteGet(requestParameters: IndexSiteSpacesSpaceIdSiteGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StudySiteProtocolVersionRelationship>> {
+        const response = await this.indexSiteSpacesSpaceIdSiteGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      * Index
