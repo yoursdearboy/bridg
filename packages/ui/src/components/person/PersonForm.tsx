@@ -42,7 +42,7 @@ export const PersonForm = ({
 
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
-      <Stack gap={"md"} pos="relative">
+      <Stack gap="md" pos="relative">
         <LoadingOverlay visible={mutation.isPending} />
         {mutation.error && (
           <Alert color="red" mb="md">

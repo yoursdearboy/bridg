@@ -6,6 +6,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import { globalIgnores } from "eslint/config";
 import importPlugin from "eslint-plugin-import";
+import stylistic from "@stylistic/eslint-plugin";
 
 export default tseslint.config([
   globalIgnores(["dist"]),
@@ -19,6 +20,14 @@ export default tseslint.config([
       reactRefresh.configs.vite,
       importPlugin.flatConfigs.recommended,
       importPlugin.flatConfigs.typescript,
+      stylistic.configs.customize({
+        arrowParens: true,
+        commaDangle: "only-multiline",
+        jsx: true,
+        indent: 2,
+        quotes: "double",
+        semi: true,
+      }),
     ],
     languageOptions: {
       ecmaVersion: 2020,
@@ -28,7 +37,15 @@ export default tseslint.config([
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    plugins: {
+      "@stylistic": stylistic,
+    },
     rules: {
+      "@stylistic/jsx-one-expression-per-line": "off",
+      "@stylistic/jsx-self-closing-comp": "error",
+      "@stylistic/jsx-wrap-multilines": "off",
+      "@stylistic/multiline-ternary": "off",
+      "@stylistic/operator-linebreak": "off",
       "@typescript-eslint/no-unnecessary-condition": "error",
       "import/order": [
         "error",

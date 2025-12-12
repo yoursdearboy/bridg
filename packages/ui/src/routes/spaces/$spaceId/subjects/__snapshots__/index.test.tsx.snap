@@ -15,13 +15,9 @@ exports[`index pages renders correctly 1`] = `
       class="m_4081bf90 mantine-Group-root"
       style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
     >
-      <p
-        class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
-        data-size="xl"
-        style="--text-fz: var(--mantine-font-size-xl); --text-lh: var(--mantine-line-height-xl); font-weight: 700;"
-      >
-        Patients
-      </p>
+      <div
+        class=""
+      />
       <button
         aria-current="page"
         class="mantine-focus-auto mantine-active active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"

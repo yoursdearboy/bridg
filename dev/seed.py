@@ -3,8 +3,10 @@ from typing import Any, Dict, List, TypedDict
 import bridg
 import bridg.converter
 import yaml
-from common.db import SessionLocal
 from common.env import load_env
+from common.settings import load_settings
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
 
 Root = TypedDict(
     "Root",
@@ -40,7 +42,9 @@ def structure(data: Dict[str, List[Any]]):
 
 def main():
     load_env()
-    session = SessionLocal()
+    settings = load_settings()
+    engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
+    session = Session(engine)
     bridg.converter.terminology.set(bridg.TerminologyService(session))
     with open("dev/seed.yml") as f:
         data = yaml.load(f, yaml.FullLoader)

@@ -116,7 +116,7 @@ interface ActivityMenuProps {
 export const ActivityMenu = ({ spaceId, subjectId }: ActivityMenuProps) => {
   const { t } = useTranslation();
   const { data, isSuccess, isError, error } = useQuery({
-    queryKey: [spaceId, "activity"],
+    queryKey: ["space", spaceId, "activity"],
     queryFn: () => api.spaceActivity.indexSpacesSpaceIdActivityGet({ spaceId }),
   });
   return (

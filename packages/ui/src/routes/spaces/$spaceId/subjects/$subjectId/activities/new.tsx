@@ -37,7 +37,7 @@ export const Route = createFileRoute(
   beforeLoad: ({ params, search }) => ({
     breadcrumb: () => i18next.t("ActivityNewPage.breadcrumb"),
     activityQuery: queryOptions({
-      queryKey: ["subject", params.subjectId, "activity"],
+      queryKey: ["space", params.spaceId, "activity", search.aId],
       queryFn: async () =>
         await api.definedActivity.showDefinedActivityAIdGet({
           aId: search.aId,

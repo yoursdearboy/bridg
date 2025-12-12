@@ -23,7 +23,7 @@ export const TelecommunicationAddressCardWrapper = ({
   personId: string;
 }) => {
   const query = useQuery({
-    queryKey: ["person", personId, "telecommunication_addresses"],
+    queryKey: ["person", personId, "telecommunicationAddress"],
     queryFn: () =>
       api.persons.indexPersonsPersonIdTelecommunicationAddressesGet({
         personId,

@@ -8,6 +8,8 @@ export const STATUSES = [
   Status.Ineligible,
   Status.Withdrawn,
   Status.PendingOnStudy,
+  Status.NotRegistered,
+  Status.OnStudy,
   Status.OnStudyIntervention,
   Status.OnStudyObservation,
   Status.FollowUp,
@@ -17,7 +19,7 @@ export const STATUSES = [
 export const getStatusTransitions = (status: Status | null) => {
   switch (status) {
     case null:
-      return [Status.PotentialCandidate, Status.Candidate];
+      return [Status.PotentialCandidate];
     case Status.PotentialCandidate:
       return [Status.Candidate];
     case Status.Candidate:
@@ -25,17 +27,20 @@ export const getStatusTransitions = (status: Status | null) => {
     case Status.Screening:
       return [Status.Eligible, Status.Ineligible, Status.Withdrawn];
     case Status.Eligible:
+      return [Status.PendingOnStudy, Status.Withdrawn];
+    case Status.PendingOnStudy:
       return [
-        Status.PendingOnStudy,
+        Status.Ineligible,
+        Status.NotRegistered,
+        Status.OnStudy,
         Status.OnStudyIntervention,
         Status.OnStudyObservation,
-        Status.Withdrawn,
       ];
-    case Status.PendingOnStudy:
-      return [Status.OnStudyIntervention, Status.OnStudyObservation];
+    case Status.OnStudy:
     case Status.OnStudyIntervention:
     case Status.OnStudyObservation:
       return [
+        Status.OnStudy,
         Status.OnStudyIntervention,
         Status.OnStudyObservation,
         Status.FollowUp,
@@ -50,6 +55,9 @@ export const getStatusTransitions = (status: Status | null) => {
 
 export const getStatusColor = (status: Status | null): string => {
   switch (status) {
+    case Status.PotentialCandidate:
+    case Status.OffStudy:
+      return "grey";
     case Status.Withdrawn:
     case Status.NotRegistered:
     case Status.Ineligible:
@@ -58,8 +66,6 @@ export const getStatusColor = (status: Status | null): string => {
     case Status.OnStudyIntervention:
     case Status.OnStudyObservation:
       return "green";
-    case Status.OffStudy:
-      return "dark";
     default:
       return "blue";
   }

@@ -13,7 +13,7 @@ interface ActivityCardProps {
 export const ActivityCard = ({ spaceId, subjectId }: ActivityCardProps) => {
   const { t } = useTranslation();
   const query = useQuery({
-    queryKey: ["space", spaceId, "subject", subjectId, "observations"],
+    queryKey: ["space", spaceId, "subject", subjectId, "activity"],
     queryFn: () =>
       api.subjects.indexSpacesSpaceIdSubjectsSubjectIdActivityGet({
         spaceId,
