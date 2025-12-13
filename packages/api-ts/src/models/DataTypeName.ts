@@ -19,6 +19,7 @@
  */
 export const DataTypeName = {
     Cd: 'CD',
+    IvlTs: 'IVL[TS]',
     Pq: 'PQ',
     St: 'ST',
     TsDate: 'TS.DATE',

@@ -4,6 +4,8 @@ import {
   NumberInput,
   Select,
   TextInput,
+  Input as MantineInput,
+  Group,
 } from "@mantine/core";
 import {
   DateInput as MantineDateInput,
@@ -17,6 +19,7 @@ import {
   type DateValue,
   DataTypeName,
   type CharacterString,
+  type IntervalPointInTime,
 } from "api-ts";
 import api from "@/api";
 
@@ -64,6 +67,46 @@ export const ConceptDescriptorSelect = ({
         onChange={(x) => onChange(parse(x))}
       />
     </Box>
+  );
+};
+
+export const IntervalPointInTimeInput = ({
+  label,
+  value,
+  onChange,
+}: {
+  label: string | null;
+  value: IntervalPointInTime | null;
+  onChange: (value: IntervalPointInTime | null) => void;
+}) => {
+  const parse = (
+    x: DateStringValue | null,
+    key: "low" | "high"
+  ): IntervalPointInTime | null => {
+    const dataTypeName = "IVL[TS]";
+    const parsed = x ? new Date(x) : null;
+    const low = key === "low" ? parsed : value?.low || null;
+    const high = key === "high" ? parsed : value?.high || null;
+    return low === null && high === null ? null : { dataTypeName, low, high };
+  };
+  return (
+    <MantineInput.Wrapper label={label}>
+      <Group>
+        <MantineDateInput
+          valueFormat="L"
+          clearable
+          value={value?.low || null}
+          onChange={(x) => onChange(parse(x, "low"))}
+        />
+        —
+        <MantineDateInput
+          valueFormat="L"
+          clearable
+          value={value?.high || null}
+          onChange={(x) => onChange(parse(x, "high"))}
+        />
+      </Group>
+    </MantineInput.Wrapper>
   );
 };
 

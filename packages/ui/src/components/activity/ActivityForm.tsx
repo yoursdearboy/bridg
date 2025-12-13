@@ -5,6 +5,7 @@ import {
   type ConceptDescriptor,
   type DefinedActivityUnion,
   type DefinedObservation,
+  type IntervalPointInTime,
   type PerformedActivityUnionData,
   type PerformedObservationData,
   type PerformedObservationResultData,
@@ -13,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import { EpochSelect } from "@/components/input/EpochSelect";
 import { StudySiteSelect } from "@/components/input/StudySiteSelect";
 import { doesMatchObservationResult, matchObservationResult } from "@/model";
-import { ConceptDescriptorSelect } from "./Input";
+import { ConceptDescriptorSelect, IntervalPointInTimeInput } from "./Input";
 import { ObservatonResultForm } from "./ObservationResultForm";
 
 interface ActivityFormProps {
@@ -34,6 +35,15 @@ const ActivityFields = ({
     onChange({ ...performedActivity, ...data });
   return (
     <Stack>
+      <IntervalPointInTimeInput
+        label={t("PerformedActivity.dateRange")}
+        value={performedActivity.dateRange}
+        onChange={(dateRange: IntervalPointInTime | null) =>
+          handleChange({
+            dateRange,
+          })
+        }
+      />
       <EpochSelect
         label={t("PerformedActivity.containingEpoch")}
         value={performedActivity.containingEpochId}

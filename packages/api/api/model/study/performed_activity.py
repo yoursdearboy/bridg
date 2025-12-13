@@ -5,7 +5,7 @@ from uuid import UUID
 import bridg
 
 from ..base import BaseModel
-from ..datatypes import ConceptDescriptor
+from ..datatypes import ConceptDescriptor, IntervalPointInTime
 from ..protocol import DefinedActivity, Epoch
 from .study_site import StudySite
 
@@ -15,6 +15,7 @@ T = TypeVar("T", bound=bridg.PerformedActivity)
 class PerformedActivityBase(BaseModel[T]):
     id: UUID
     comment: Optional[str]
+    date_range: Optional[IntervalPointInTime]
     negation_indicator: Optional[bool]
     negation_reason: Optional[ConceptDescriptor]
     reason_code: Optional[ConceptDescriptor]
@@ -31,6 +32,7 @@ class PerformedActivity(PerformedActivityBase[bridg.PerformedActivity]):
 
 class PerformedActivityDataBase(BaseModel[T]):
     comment: Optional[str]
+    date_range: Optional[IntervalPointInTime]
     negation_indicator: Optional[bool]
     negation_reason: Optional[ConceptDescriptor]
     reason_code: Optional[ConceptDescriptor]

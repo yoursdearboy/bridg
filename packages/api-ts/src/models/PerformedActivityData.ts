@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { IntervalPointInTime } from './IntervalPointInTime';
+import {
+    IntervalPointInTimeFromJSON,
+    IntervalPointInTimeFromJSONTyped,
+    IntervalPointInTimeToJSON,
+    IntervalPointInTimeToJSONTyped,
+} from './IntervalPointInTime';
 import type { ConceptDescriptor } from './ConceptDescriptor';
 import {
     ConceptDescriptorFromJSON,
@@ -33,6 +40,12 @@ export interface PerformedActivityData {
      * @memberof PerformedActivityData
      */
     comment: string | null;
+    /**
+     * 
+     * @type {IntervalPointInTime}
+     * @memberof PerformedActivityData
+     */
+    dateRange: IntervalPointInTime | null;
     /**
      * 
      * @type {boolean}
@@ -88,6 +101,7 @@ export interface PerformedActivityData {
  */
 export function instanceOfPerformedActivityData(value: object): value is PerformedActivityData {
     if (!('comment' in value) || value['comment'] === undefined) return false;
+    if (!('dateRange' in value) || value['dateRange'] === undefined) return false;
     if (!('negationIndicator' in value) || value['negationIndicator'] === undefined) return false;
     if (!('negationReason' in value) || value['negationReason'] === undefined) return false;
     if (!('reasonCode' in value) || value['reasonCode'] === undefined) return false;
@@ -104,6 +118,7 @@ export function instanceOfPerformedActivityData(value: object): value is Perform
  */
 export function isPerformedActivityDataJSON(value: object): boolean {
     if (!('comment' in value) || value['comment'] === undefined) return false;
+    if (!('date_range' in value) || value['date_range'] === undefined) return false;
     if (!('negation_indicator' in value) || value['negation_indicator'] === undefined) return false;
     if (!('negation_reason' in value) || value['negation_reason'] === undefined) return false;
     if (!('reason_code' in value) || value['reason_code'] === undefined) return false;
@@ -126,6 +141,7 @@ export function PerformedActivityDataFromJSONTyped(json: any, ignoreDiscriminato
     return {
         
         'comment': json['comment'],
+        'dateRange': IntervalPointInTimeFromJSON(json['date_range']),
         'negationIndicator': json['negation_indicator'],
         'negationReason': ConceptDescriptorFromJSON(json['negation_reason']),
         'reasonCode': ConceptDescriptorFromJSON(json['reason_code']),
@@ -149,6 +165,7 @@ export function PerformedActivityDataToJSONTyped(value?: PerformedActivityData |
     return {
         
         'comment': value['comment'],
+        'date_range': IntervalPointInTimeToJSON(value['dateRange']),
         'negation_indicator': value['negationIndicator'],
         'negation_reason': ConceptDescriptorToJSON(value['negationReason']),
         'reason_code': ConceptDescriptorToJSON(value['reasonCode']),

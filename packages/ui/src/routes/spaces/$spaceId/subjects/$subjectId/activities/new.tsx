@@ -59,6 +59,7 @@ function ActivityNewRoute() {
   const form = useForm<PerformedActivityUnionData>({
     reasonCode: null,
     comment: null,
+    dateRange: null,
     negationIndicator: null,
     negationReason: null,
     statusCode: null,

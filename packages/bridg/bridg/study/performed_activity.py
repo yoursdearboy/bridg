@@ -2,11 +2,11 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID, uuid4
 
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import DateTime, ForeignKey
+from sqlalchemy.orm import Mapped, composite, mapped_column, relationship
 
 from ..common import Activity, StudySubject
-from ..datatype import ConceptDescriptor
+from ..datatype import ConceptDescriptor, IntervalPointInTime
 from ..protocol import DefinedActivity, Epoch, StudyProtocolVersion
 
 
@@ -19,6 +19,11 @@ class PerformedActivity(Activity):
 
     repetition_number: Mapped[Optional[int]]
     name_code_modified_text: Mapped[Optional[str]]
+    date_range: Mapped[IntervalPointInTime] = composite(
+        mapped_column("date_range_low", DateTime),
+        mapped_column("date_range_high", DateTime),
+    )
+
     negation_indicator: Mapped[Optional[bool]]
     negation_reason_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
     negation_reason: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=negation_reason_id)
