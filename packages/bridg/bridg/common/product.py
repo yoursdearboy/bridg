@@ -1,5 +1,13 @@
 from __future__ import annotations
 
+from datetime import date
+from typing import Optional
+from uuid import UUID
+
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from ..datatype import ConceptDescriptor
 from .material import Material
 
 
@@ -24,3 +32,9 @@ class Product(Material):
     """
 
     __mapper_args__ = {"polymorphic_identity": "product"}
+
+    type_code_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
+    type_code: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=type_code_id)
+
+    lot_number_text: Mapped[Optional[str]]
+    expiration_date: Mapped[Optional[date]]
