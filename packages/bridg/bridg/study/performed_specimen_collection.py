@@ -12,4 +12,4 @@ class PerformedSpecimenCollection(PerformedProcedure):
     __mapper_args__ = {"polymorphic_identity": "specimen_collection"}
 
     produced_specimen_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("specimen.id"))
-    produced_specimen: Mapped[Specimen] = relationship()
+    produced_specimen: Mapped[Optional[Specimen]] = relationship()
