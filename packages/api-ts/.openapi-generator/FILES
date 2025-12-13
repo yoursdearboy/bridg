@@ -11,6 +11,7 @@ src/apis/SubjectsApi.ts
 src/apis/index.ts
 src/index.ts
 src/models/AdministrativeGender.ts
+src/models/Biologic.ts
 src/models/CharacterString.ts
 src/models/ConceptDescriptor.ts
 src/models/DataTypeName.ts
@@ -28,6 +29,7 @@ src/models/FoundStudySubject.ts
 src/models/HTTPValidationError.ts
 src/models/IntervalPointInTime.ts
 src/models/LookupStudySubject.ts
+src/models/Material.ts
 src/models/NewStudySubject.ts
 src/models/Organization.ts
 src/models/OrganizationName.ts
@@ -39,12 +41,16 @@ src/models/PerformedObservation.ts
 src/models/PerformedObservationData.ts
 src/models/PerformedObservationResult.ts
 src/models/PerformedObservationResultData.ts
+src/models/PerformedSpecimenCollection.ts
+src/models/PerformingMaterial.ts
 src/models/Person.ts
 src/models/PersonData.ts
 src/models/PersonStudySubject.ts
 src/models/PhysicalQuantity.ts
 src/models/PostalAddress.ts
 src/models/PostalAddressData.ts
+src/models/Product.ts
+src/models/Specimen.ts
 src/models/Status.ts
 src/models/StudyActivity.ts
 src/models/StudyProtocolVersion.ts

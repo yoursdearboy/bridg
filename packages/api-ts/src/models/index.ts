@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './AdministrativeGender';
+export * from './Biologic';
 export * from './CharacterString';
 export * from './ConceptDescriptor';
 export * from './DataTypeName';
@@ -18,6 +19,7 @@ export * from './FoundStudySubject';
 export * from './HTTPValidationError';
 export * from './IntervalPointInTime';
 export * from './LookupStudySubject';
+export * from './Material';
 export * from './NewStudySubject';
 export * from './Organization';
 export * from './OrganizationName';
@@ -29,12 +31,16 @@ export * from './PerformedObservation';
 export * from './PerformedObservationData';
 export * from './PerformedObservationResult';
 export * from './PerformedObservationResultData';
+export * from './PerformedSpecimenCollection';
+export * from './PerformingMaterial';
 export * from './Person';
 export * from './PersonData';
 export * from './PersonStudySubject';
 export * from './PhysicalQuantity';
 export * from './PostalAddress';
 export * from './PostalAddressData';
+export * from './Product';
+export * from './Specimen';
 export * from './Status';
 export * from './StudyActivity';
 export * from './StudyProtocolVersion';

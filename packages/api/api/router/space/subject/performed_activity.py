@@ -6,7 +6,13 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from api.context import Context, get_context
 from api.db import get_repository
-from api.model import PerformedActivity, PerformedActivityData, PerformedObservation, PerformedObservationData
+from api.model import (
+    PerformedActivity,
+    PerformedActivityData,
+    PerformedObservation,
+    PerformedObservationData,
+    PerformedSpecimenCollection,
+)
 
 router = APIRouter(prefix="/activity", tags=["performed_activity"])
 
@@ -30,6 +36,7 @@ RESPONSES: dict[int | str, dict[str, Any]] = {
                     "oneOf": [
                         {"$ref": "#/components/schemas/PerformedActivity"},
                         {"$ref": "#/components/schemas/PerformedObservation"},
+                        {"$ref": "#/components/schemas/PerformedSpecimenCollection"},
                         {"type": "null"},
                     ],
                     "title": "PerformedActivityUnion",
@@ -71,7 +78,7 @@ def show(
     a_id: UUID,
     repo: PerformedActivityRepositoryDep,
     result: bool = False,
-) -> PerformedActivity | PerformedObservation:
+) -> PerformedActivity | PerformedObservation | PerformedSpecimenCollection:
     if obj := repo.one_or_none(a_id):
         if result:
             return PerformedObservation.model_validate(obj)
