@@ -164,6 +164,12 @@ def uuid_hook(x: str, _) -> UUID:
 
 @converter.register_structure_hook
 def cd_hook(x, _) -> bridg.ConceptDescriptor:
+    if isinstance(x, str):
+        try:
+            code_system, code = x.split("/", 1)
+        except ValueError:
+            raise Exception("String representation of ConceptDescriptor must be code_system/code")
+        x = dict(code_system=code_system, code=code)
     return terminology.get().get_or_create(**x)
 
 
