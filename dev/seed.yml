@@ -201,6 +201,7 @@ study_subject:
         type: observation
         containing_epoch: *aml-mrd-2018-screening
         executing_study_protocol_version: *aml-mrd-2018
+        date_range: { low: 2024-11-02T00:00:00 }
         instantiated_defined_activity: *cbc
         context_for_study_site: *dgoi-ss
         status_code: { code: "complete", code_system: "performed_activity.status_code" }

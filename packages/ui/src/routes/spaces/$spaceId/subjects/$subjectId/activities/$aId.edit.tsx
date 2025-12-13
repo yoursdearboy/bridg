@@ -67,6 +67,7 @@ function ActivityEditRoute() {
   const form = useForm<PerformedActivityUnionData>({
     reasonCode: performedActivity.reasonCode,
     comment: performedActivity.comment,
+    dateRange: performedActivity.dateRange,
     negationIndicator: performedActivity.negationIndicator,
     negationReason: performedActivity.negationReason,
     statusCode: performedActivity.statusCode,

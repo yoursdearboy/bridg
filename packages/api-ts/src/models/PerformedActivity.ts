@@ -20,6 +20,13 @@ import {
     DefinedActivityToJSON,
     DefinedActivityToJSONTyped,
 } from './DefinedActivity';
+import type { IntervalPointInTime } from './IntervalPointInTime';
+import {
+    IntervalPointInTimeFromJSON,
+    IntervalPointInTimeFromJSONTyped,
+    IntervalPointInTimeToJSON,
+    IntervalPointInTimeToJSONTyped,
+} from './IntervalPointInTime';
 import type { ConceptDescriptor } from './ConceptDescriptor';
 import {
     ConceptDescriptorFromJSON,
@@ -60,6 +67,12 @@ export interface PerformedActivity {
      * @memberof PerformedActivity
      */
     comment: string | null;
+    /**
+     * 
+     * @type {IntervalPointInTime}
+     * @memberof PerformedActivity
+     */
+    dateRange: IntervalPointInTime | null;
     /**
      * 
      * @type {boolean}
@@ -116,6 +129,7 @@ export interface PerformedActivity {
 export function instanceOfPerformedActivity(value: object): value is PerformedActivity {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('comment' in value) || value['comment'] === undefined) return false;
+    if (!('dateRange' in value) || value['dateRange'] === undefined) return false;
     if (!('negationIndicator' in value) || value['negationIndicator'] === undefined) return false;
     if (!('negationReason' in value) || value['negationReason'] === undefined) return false;
     if (!('reasonCode' in value) || value['reasonCode'] === undefined) return false;
@@ -133,6 +147,7 @@ export function instanceOfPerformedActivity(value: object): value is PerformedAc
 export function isPerformedActivityJSON(value: object): boolean {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('comment' in value) || value['comment'] === undefined) return false;
+    if (!('date_range' in value) || value['date_range'] === undefined) return false;
     if (!('negation_indicator' in value) || value['negation_indicator'] === undefined) return false;
     if (!('negation_reason' in value) || value['negation_reason'] === undefined) return false;
     if (!('reason_code' in value) || value['reason_code'] === undefined) return false;
@@ -156,6 +171,7 @@ export function PerformedActivityFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'id': json['id'],
         'comment': json['comment'],
+        'dateRange': IntervalPointInTimeFromJSON(json['date_range']),
         'negationIndicator': json['negation_indicator'],
         'negationReason': ConceptDescriptorFromJSON(json['negation_reason']),
         'reasonCode': ConceptDescriptorFromJSON(json['reason_code']),
@@ -180,6 +196,7 @@ export function PerformedActivityToJSONTyped(value?: PerformedActivity | null, i
         
         'id': value['id'],
         'comment': value['comment'],
+        'date_range': IntervalPointInTimeToJSON(value['dateRange']),
         'negation_indicator': value['negationIndicator'],
         'negation_reason': ConceptDescriptorToJSON(value['negationReason']),
         'reason_code': ConceptDescriptorToJSON(value['reasonCode']),

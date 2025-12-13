@@ -60,6 +60,7 @@
       "comment": "Comment",
       "containingEpoch": "Epoch",
       "contextForStudySite": "Study site",
+      "dateRange": "Date range",
       "negationIndicator": "Negation",
       "negationReason": "Negation reason",
       "statusCode": "Status",

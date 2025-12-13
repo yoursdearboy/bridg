@@ -44,6 +44,14 @@ import {
     DateValueFromJSONTyped,
     DateValueToJSON,
 } from './DateValue';
+import type { IntervalPointInTime } from './IntervalPointInTime';
+import {
+    instanceOfIntervalPointInTime,
+    isIntervalPointInTimeJSON,
+    IntervalPointInTimeFromJSON,
+    IntervalPointInTimeFromJSONTyped,
+    IntervalPointInTimeToJSON,
+} from './IntervalPointInTime';
 import type { PhysicalQuantity } from './PhysicalQuantity';
 import {
     instanceOfPhysicalQuantity,
@@ -58,7 +66,7 @@ import {
  * 
  * @export
  */
-export type DataValue = { dataTypeName: 'CD' } & ConceptDescriptor | { dataTypeName: 'PQ' } & PhysicalQuantity | { dataTypeName: 'ST' } & CharacterString | { dataTypeName: 'TS.DATE' } & DateValue | { dataTypeName: 'TS.DATETIME' } & DateTime;
+export type DataValue = { dataTypeName: 'CD' } & ConceptDescriptor | { dataTypeName: 'IVL[TS]' } & IntervalPointInTime | { dataTypeName: 'PQ' } & PhysicalQuantity | { dataTypeName: 'ST' } & CharacterString | { dataTypeName: 'TS.DATE' } & DateValue | { dataTypeName: 'TS.DATETIME' } & DateTime;
 
 export function DataValueFromJSON(json: any): DataValue {
     return DataValueFromJSONTyped(json, false);
@@ -71,6 +79,8 @@ export function DataValueFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     switch (json['data_type_name']) {
         case 'CD':
             return Object.assign({}, ConceptDescriptorFromJSONTyped(json, true), { dataTypeName: 'CD' } as const);
+        case 'IVL[TS]':
+            return Object.assign({}, IntervalPointInTimeFromJSONTyped(json, true), { dataTypeName: 'IVL[TS]' } as const);
         case 'PQ':
             return Object.assign({}, PhysicalQuantityFromJSONTyped(json, true), { dataTypeName: 'PQ' } as const);
         case 'ST':
@@ -95,6 +105,8 @@ export function DataValueToJSONTyped(value?: DataValue | null, ignoreDiscriminat
     switch (value['dataTypeName']) {
         case 'CD':
             return Object.assign({}, ConceptDescriptorToJSON(value), { dataTypeName: 'CD' } as const);
+        case 'IVL[TS]':
+            return Object.assign({}, IntervalPointInTimeToJSON(value), { dataTypeName: 'IVL[TS]' } as const);
         case 'PQ':
             return Object.assign({}, PhysicalQuantityToJSON(value), { dataTypeName: 'PQ' } as const);
         case 'ST':

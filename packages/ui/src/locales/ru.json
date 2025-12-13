@@ -60,6 +60,7 @@
       "comment": "Комментарий",
       "containingEpoch": "Точка",
       "contextForStudySite": "Центр",
+      "dateRange": "Дата начала — окончания",
       "negationIndicator": "Не проведено",
       "negationReason": "Причина непроведения",
       "statusCode": "Статус",

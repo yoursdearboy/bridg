@@ -26,6 +26,7 @@ src/models/EntityNameData.ts
 src/models/Epoch.ts
 src/models/FoundStudySubject.ts
 src/models/HTTPValidationError.ts
+src/models/IntervalPointInTime.ts
 src/models/LookupStudySubject.ts
 src/models/NewStudySubject.ts
 src/models/Organization.ts

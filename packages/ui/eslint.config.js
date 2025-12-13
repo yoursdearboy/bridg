@@ -41,6 +41,7 @@ export default tseslint.config([
       "@stylistic": stylistic,
     },
     rules: {
+      "@stylistic/jsx-curly-newline": "off",
       "@stylistic/jsx-one-expression-per-line": "off",
       "@stylistic/jsx-self-closing-comp": "error",
       "@stylistic/jsx-wrap-multilines": "off",

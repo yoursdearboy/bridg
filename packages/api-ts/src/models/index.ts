@@ -16,6 +16,7 @@ export * from './EntityNameData';
 export * from './Epoch';
 export * from './FoundStudySubject';
 export * from './HTTPValidationError';
+export * from './IntervalPointInTime';
 export * from './LookupStudySubject';
 export * from './NewStudySubject';
 export * from './Organization';
