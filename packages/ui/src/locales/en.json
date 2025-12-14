@@ -39,6 +39,9 @@
       "M": "Male",
       "U": "Unknown"
     },
+    "Material": {
+      "code": "Code"
+    },
     "Name": {
       "defaultLabel": "Unnamed",
       "family": "Family name",
@@ -65,6 +68,9 @@
       "negationReason": "Negation reason",
       "statusCode": "Status",
       "statusDate": "Status date"
+    },
+    "PerformedSpecimenCollection": {
+      "defaultLabel": "Specimen collection"
     },
     "PerformingBiologicEntitySelect": {
       "text": "Select existing biologic entity:"
