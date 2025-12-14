@@ -28,13 +28,21 @@ import {
     PerformedObservationDataFromJSONTyped,
     PerformedObservationDataToJSON,
 } from './PerformedObservationData';
+import type { PerformedSpecimenCollectionData } from './PerformedSpecimenCollectionData';
+import {
+    instanceOfPerformedSpecimenCollectionData,
+    isPerformedSpecimenCollectionDataJSON,
+    PerformedSpecimenCollectionDataFromJSON,
+    PerformedSpecimenCollectionDataFromJSONTyped,
+    PerformedSpecimenCollectionDataToJSON,
+} from './PerformedSpecimenCollectionData';
 
 /**
  * @type PerformedActivityUnionData
  * 
  * @export
  */
-export type PerformedActivityUnionData = PerformedActivityData | PerformedObservationData;
+export type PerformedActivityUnionData = PerformedActivityData | PerformedObservationData | PerformedSpecimenCollectionData;
 
 export function PerformedActivityUnionDataFromJSON(json: any): PerformedActivityUnionData {
     return PerformedActivityUnionDataFromJSONTyped(json, false);
@@ -49,6 +57,9 @@ export function PerformedActivityUnionDataFromJSONTyped(json: any, ignoreDiscrim
     }
     if (isPerformedObservationDataJSON(json)) {
         return PerformedObservationDataFromJSONTyped(json, true);
+    }
+    if (isPerformedSpecimenCollectionDataJSON(json)) {
+        return PerformedSpecimenCollectionDataFromJSONTyped(json, true);
     }
     if (isPerformedActivityDataJSON(json)) {
         return PerformedActivityDataFromJSONTyped(json, true);
@@ -69,6 +80,9 @@ export function PerformedActivityUnionDataToJSONTyped(value?: PerformedActivityU
     }
     if (instanceOfPerformedObservationData(value)) {
         return PerformedObservationDataToJSON(value as PerformedObservationData);
+    }
+    if (instanceOfPerformedSpecimenCollectionData(value)) {
+        return PerformedSpecimenCollectionDataToJSON(value as PerformedSpecimenCollectionData);
     }
     if (instanceOfPerformedActivityData(value)) {
         return PerformedActivityDataToJSON(value as PerformedActivityData);

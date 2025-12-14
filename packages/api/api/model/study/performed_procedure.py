@@ -2,10 +2,14 @@ from typing import TypeVar
 
 import bridg
 
-from .performed_activity import PerformedActivityBase
+from .performed_activity import PerformedActivityBase, PerformedActivityDataBase
 
 T = TypeVar("T", bound=bridg.PerformedProcedure)
 
 
 class PerformedProcedure(PerformedActivityBase[T]):
+    pass
+
+
+class PerformedProcedureData(PerformedActivityDataBase[T]):
     pass
