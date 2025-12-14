@@ -27,17 +27,25 @@ const App = ({ children }: React.PropsWithChildren) => {
 
 export const renderRoute = (
   r: AnyRoute,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  { params, context, search }: { params?: object; context?: any; search?: object } = {}
+  {
+    beforeLoad,
+    params,
+    search,
+  }: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    beforeLoad?: () => any;
+    params?: object;
+    search?: object;
+  } = {}
 ) => {
   const rootRoute = createRootRouteWithContext()();
   const testRoute = createRoute({
     ...r.options,
-    params: params,
+    beforeLoad,
+    params,
     getParentRoute: () => rootRoute,
     path: "/",
-    search: search,
-    context,
+    search,
   });
   const routeTree = rootRoute.addChildren([testRoute]);
   const router = createRouter({
