@@ -1,0 +1,246 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ActivityCard > matches snapshot 1`] = `
+<DocumentFragment>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <div
+    class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+    data-with-border="true"
+    style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm);"
+  >
+    <div
+      class="m_599a2148 mantine-Card-section"
+      data-first-section="true"
+      data-inherit-padding="true"
+      data-with-border="true"
+      style="padding-block: var(--mantine-spacing-xs);"
+    >
+      <div
+        class="m_4081bf90 mantine-Group-root"
+        style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+      >
+        <p
+          class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+          style="padding-inline: var(--mantine-spacing-xs); font-weight: 500;"
+        >
+          Activities
+        </p>
+        <button
+          aria-controls="mantine-7lzvq3tar-dropdown"
+          aria-expanded="false"
+          aria-haspopup="menu"
+          class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+          data-size="compact-sm"
+          data-variant="outline"
+          id="mantine-7lzvq3tar-target"
+          style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline); font-weight: 500;"
+          type="button"
+        >
+          <span
+            class="m_80f1301b mantine-Button-inner"
+          >
+            <span
+              class="m_811560b9 mantine-Button-label"
+            >
+              Add
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+    <div
+      class="m_599a2148 mantine-Card-section"
+      data-inherit-padding="true"
+      data-last-section="true"
+      style="padding-block: var(--mantine-spacing-xs);"
+    >
+      <div
+        class=""
+        style="min-height: 80px; position: relative;"
+      >
+        <table
+          class="m_b23fa0ef mantine-Table-table"
+          style="--table-vertical-spacing: calc(0.4375rem * var(--mantine-scale)); font-size: var(--mantine-font-size-md);"
+        >
+          <thead
+            class="m_b242d975 mantine-Table-thead"
+          >
+            <tr
+              class="m_4e7aa4fd mantine-Table-tr"
+              data-hover="true"
+              data-with-row-border="true"
+            >
+              <th
+                class="m_4e7aa4f3 mantine-Table-th"
+              />
+              <th
+                class="m_4e7aa4f3 mantine-Table-th"
+              >
+                Epoch
+              </th>
+              <th
+                class="m_4e7aa4f3 mantine-Table-th"
+              >
+                Study site
+              </th>
+              <th
+                class="m_4e7aa4f3 mantine-Table-th"
+              >
+                Status
+              </th>
+              <th
+                class="m_4e7aa4f3 mantine-Table-th"
+              >
+                Status date
+              </th>
+              <th
+                class="m_4e7aa4f3 mantine-Table-th"
+              />
+              <th
+                class="m_4e7aa4f3 mantine-Table-th"
+              />
+            </tr>
+          </thead>
+          <tbody
+            class="m_b2404537 mantine-Table-tbody"
+          >
+            <tr
+              class="m_4e7aa4fd mantine-Table-tr"
+              data-hover="true"
+              data-with-row-border="true"
+            >
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                Immunophenotyping
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                Screening
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                DGOI
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                Complete
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                11&#x2F;6&#x2F;2024
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+                />
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+                style="width: calc(3.75rem * var(--mantine-scale));"
+              />
+            </tr>
+            <tr
+              class="m_4e7aa4fd mantine-Table-tr"
+              data-hover="true"
+              data-with-row-border="true"
+            >
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                Complete blood count
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                Screening
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                DGOI
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                Complete
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                11&#x2F;4&#x2F;2024
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+                />
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+                style="width: calc(3.75rem * var(--mantine-scale));"
+              />
+            </tr>
+            <tr
+              class="m_4e7aa4fd mantine-Table-tr"
+              data-hover="true"
+              data-with-row-border="true"
+            >
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                AME
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                Induction
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                DGOI
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                Unverified
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                11&#x2F;6&#x2F;2024
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+              >
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+                />
+              </td>
+              <td
+                class="m_4e7aa4ef mantine-Table-td"
+                style="width: calc(3.75rem * var(--mantine-scale));"
+              />
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
