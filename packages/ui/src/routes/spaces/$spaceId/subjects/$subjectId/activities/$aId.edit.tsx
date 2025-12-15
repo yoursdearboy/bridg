@@ -32,7 +32,7 @@ export const Route = createFileRoute(
   component: ActivityEditRoute,
   beforeLoad: ({ params }) => ({
     breadcrumb: () => i18next.t("ActivityEditPage.breadcrumb"),
-    activityQuery: queryOptions({
+    editActivityQuery: queryOptions({
       queryKey: ["subject", params.subjectId, "activity", params.aId],
       queryFn: async () => {
         const performedActivity =
@@ -51,17 +51,17 @@ export const Route = createFileRoute(
       },
     }),
   }),
-  loader: async ({ context: { activityQuery, queryClient } }) =>
-    await queryClient.fetchQuery(activityQuery),
+  loader: async ({ context: { editActivityQuery, queryClient } }) =>
+    await queryClient.fetchQuery(editActivityQuery),
 });
 
 function ActivityEditRoute() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { activityQuery, subjectQuery } = Route.useRouteContext();
+  const { editActivityQuery, subjectQuery } = Route.useRouteContext();
   const {
     data: { definedActivity, performedActivity },
-  } = useSuspenseQuery(activityQuery);
+  } = useSuspenseQuery(editActivityQuery);
   const { data: subject } = useSuspenseQuery(subjectQuery);
   const { spaceId, subjectId, aId } = Route.useParams();
   const form = useForm<PerformedActivityUnionData>({

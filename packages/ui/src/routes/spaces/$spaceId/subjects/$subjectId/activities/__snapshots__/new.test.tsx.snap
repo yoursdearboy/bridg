@@ -7,5 +7,805 @@ exports[`new activity page renders correctly 1`] = `
   >
     @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
   </style>
+  <div
+    class="m_6d731127 mantine-Stack-root"
+    style="--stack-gap: var(--mantine-spacing-md); --stack-align: stretch; --stack-justify: flex-start;"
+  >
+    <div
+      class="m_4081bf90 mantine-Group-root"
+      style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    >
+      <h2
+        class="m_8a5d1357 mantine-Title-root"
+        data-order="2"
+        style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
+      >
+        Donald Trump Jr
+      </h2>
+      <button
+        class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+        style="--button-color: var(--mantine-color-white);"
+        type="submit"
+      >
+        <span
+          class="m_80f1301b mantine-Button-inner"
+        >
+          <span
+            class="m_811560b9 mantine-Button-label"
+          >
+            Submit
+          </span>
+        </span>
+      </button>
+    </div>
+    <div
+      class=""
+      style="position: relative;"
+    >
+      <form>
+        <style
+          data-mantine-styles="inline"
+        >
+          .__m__-«r6»{--grid-gutter:var(--mantine-spacing-md);}
+        </style>
+        <div
+          class="m_410352e9 mantine-Grid-root __m__-«r6»"
+        >
+          <div
+            class="m_dee7bd2f mantine-Grid-inner"
+          >
+            <style
+              data-mantine-styles="inline"
+            >
+              .__m__-«r8»{--col-flex-grow:auto;--col-flex-basis:100%;--col-max-width:100%;}@media(min-width: 36em){.__m__-«r8»{--col-flex-grow:auto;--col-flex-basis:50%;--col-max-width:50%;}}@media(min-width: 62em){.__m__-«r8»{--col-flex-grow:auto;--col-flex-basis:50%;--col-max-width:50%;}}@media(min-width: 75em){.__m__-«r8»{--col-flex-grow:auto;--col-flex-basis:50%;--col-max-width:50%;}}
+            </style>
+            <div
+              class="m_96bdd299 mantine-Grid-col __m__-«r8»"
+            >
+              <div
+                class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+                data-with-border="true"
+                style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm);"
+              >
+                <div
+                  class="m_599a2148 mantine-Card-section"
+                  data-first-section="true"
+                  data-inherit-padding="true"
+                  data-with-border="true"
+                  style="padding-block: var(--mantine-spacing-xs);"
+                >
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    style="font-weight: 500;"
+                  >
+                    Complete blood count
+                  </p>
+                </div>
+                <div
+                  class="m_599a2148 mantine-Card-section"
+                  data-inherit-padding="true"
+                  data-with-border="true"
+                  style="padding-block: var(--mantine-spacing-xs);"
+                >
+                  <div
+                    class="m_6d731127 mantine-Stack-root"
+                    style="--stack-gap: var(--mantine-spacing-md); --stack-align: stretch; --stack-justify: flex-start;"
+                  >
+                    <div
+                      class="m_46b77525 mantine-InputWrapper-root mantine-DateInput-root"
+                    >
+                      <label
+                        class="m_8fdc1311 mantine-InputWrapper-label mantine-DateInput-label"
+                        for="mantine-m75qc1lk3"
+                        id="mantine-m75qc1lk3-label"
+                      >
+                        Last full moon date
+                      </label>
+                      <div
+                        class="m_6c018570 mantine-Input-wrapper mantine-DateInput-wrapper"
+                        data-variant="default"
+                      >
+                        <input
+                          aria-invalid="false"
+                          autocomplete="off"
+                          class="m_8fb7ebe7 mantine-Input-input mantine-DateInput-input"
+                          data-dates-input="true"
+                          data-variant="default"
+                          id="mantine-m75qc1lk3"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                    <input
+                      type="hidden"
+                      value=""
+                    />
+                    <div
+                      class=""
+                      style="position: relative;"
+                    >
+                      <div
+                        class="m_6e45937b mantine-LoadingOverlay-root"
+                        style="--lo-z-index: 400;"
+                      >
+                        <span
+                          class="m_4e3f22d7 m_e8eb006c mantine-LoadingOverlay-loader m_5ae2e3c mantine-Loader-root"
+                          style="--loader-size: calc(1rem * var(--mantine-scale));"
+                        >
+                          <span
+                            class="m_870c4af"
+                          />
+                          <span
+                            class="m_870c4af"
+                          />
+                          <span
+                            class="m_870c4af"
+                          />
+                        </span>
+                        <div
+                          class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-dark-hidden"
+                          style="--overlay-bg: rgba(255, 255, 255, 0.75); --overlay-z-index: 200;"
+                        />
+                        <div
+                          class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-light-hidden"
+                          style="--overlay-bg: rgba(59, 59, 59, 0.75); --overlay-z-index: 200;"
+                        />
+                      </div>
+                      <div
+                        class="m_46b77525 mantine-InputWrapper-root mantine-Select-root"
+                      >
+                        <label
+                          class="m_8fdc1311 mantine-InputWrapper-label mantine-Select-label"
+                          for="mantine-kjkusene1"
+                          id="mantine-kjkusene1-label"
+                        >
+                          Diagnosis
+                        </label>
+                        <div
+                          class="m_6c018570 mantine-Input-wrapper mantine-Select-wrapper"
+                          data-pointer="true"
+                          data-variant="default"
+                          data-with-right-section="true"
+                          style="--input-right-section-pointer-events: none;"
+                        >
+                          <input
+                            aria-haspopup="listbox"
+                            aria-invalid="false"
+                            autocomplete="off"
+                            class="m_8fb7ebe7 mantine-Input-input mantine-Select-input"
+                            data-variant="default"
+                            id="mantine-kjkusene1"
+                            readonly=""
+                            value=""
+                          />
+                          <div
+                            class="m_82577fc2 mantine-Input-section mantine-Select-section"
+                            data-position="right"
+                          >
+                            <svg
+                              class="m_2943220b mantine-ComboboxChevron-chevron"
+                              data-combobox-chevron="true"
+                              fill="none"
+                              viewBox="0 0 15 15"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clip-rule="evenodd"
+                                d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
+                                fill="currentColor"
+                                fill-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <input
+                        type="hidden"
+                        value=""
+                      />
+                    </div>
+                    <div
+                      class="m_e2f5cd4e m_46b77525 mantine-InputWrapper-root mantine-NumberInput-root"
+                    >
+                      <label
+                        class="m_8fdc1311 mantine-InputWrapper-label mantine-NumberInput-label"
+                        for="mantine-jhev6j6u6"
+                        id="mantine-jhev6j6u6-label"
+                      >
+                        White blood cell count, 10^9/l
+                      </label>
+                      <div
+                        class="m_6c018570 mantine-Input-wrapper mantine-NumberInput-wrapper"
+                        data-variant="default"
+                        style="--input-right-section-width: var(--ni-right-section-width-sm);"
+                      >
+                        <input
+                          aria-invalid="false"
+                          class="m_8fb7ebe7 mantine-Input-input mantine-NumberInput-input"
+                          data-variant="default"
+                          id="mantine-jhev6j6u6"
+                          inputmode="numeric"
+                          style="width: 200px;"
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="m_e2f5cd4e m_46b77525 mantine-InputWrapper-root mantine-NumberInput-root"
+                    >
+                      <label
+                        class="m_8fdc1311 mantine-InputWrapper-label mantine-NumberInput-label"
+                        for="mantine-3yv5o7ut7"
+                        id="mantine-3yv5o7ut7-label"
+                      >
+                        Neutrophil count, 10^9/l
+                      </label>
+                      <div
+                        class="m_6c018570 mantine-Input-wrapper mantine-NumberInput-wrapper"
+                        data-variant="default"
+                        style="--input-right-section-width: var(--ni-right-section-width-sm);"
+                      >
+                        <input
+                          aria-invalid="false"
+                          class="m_8fb7ebe7 mantine-Input-input mantine-NumberInput-input"
+                          data-variant="default"
+                          id="mantine-3yv5o7ut7"
+                          inputmode="numeric"
+                          style="width: 200px;"
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="m_e2f5cd4e m_46b77525 mantine-InputWrapper-root mantine-NumberInput-root"
+                    >
+                      <label
+                        class="m_8fdc1311 mantine-InputWrapper-label mantine-NumberInput-label"
+                        for="mantine-11o0aec4h"
+                        id="mantine-11o0aec4h-label"
+                      >
+                        Platelet count, 
+                      </label>
+                      <div
+                        class="m_6c018570 mantine-Input-wrapper mantine-NumberInput-wrapper"
+                        data-variant="default"
+                        style="--input-right-section-width: var(--ni-right-section-width-sm);"
+                      >
+                        <input
+                          aria-invalid="false"
+                          class="m_8fb7ebe7 mantine-Input-input mantine-NumberInput-input"
+                          data-variant="default"
+                          id="mantine-11o0aec4h"
+                          inputmode="numeric"
+                          style="width: 200px;"
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="m_599a2148 mantine-Card-section"
+                  data-inherit-padding="true"
+                  data-last-section="true"
+                  data-with-border="true"
+                  style="padding-block: var(--mantine-spacing-xs);"
+                >
+                  <div
+                    class="m_6d731127 mantine-Stack-root"
+                    style="--stack-gap: var(--mantine-spacing-md); --stack-align: stretch; --stack-justify: flex-start;"
+                  >
+                    <div
+                      class="m_46b77525 mantine-InputWrapper-root"
+                    >
+                      <label
+                        class="m_8fdc1311 mantine-InputWrapper-label"
+                        for="mantine-30lma4f8h"
+                        id="mantine-30lma4f8h-label"
+                      >
+                        Date range
+                      </label>
+                      <div
+                        class="m_4081bf90 mantine-Group-root"
+                        style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+                      >
+                        <div
+                          class="m_46b77525 mantine-InputWrapper-root mantine-DateInput-root"
+                        >
+                          <div
+                            class="m_6c018570 mantine-Input-wrapper mantine-DateInput-wrapper"
+                            data-variant="default"
+                          >
+                            <input
+                              aria-invalid="false"
+                              autocomplete="off"
+                              class="m_8fb7ebe7 mantine-Input-input mantine-DateInput-input"
+                              data-dates-input="true"
+                              data-variant="default"
+                              id="mantine-2ucmlvacs"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                        <input
+                          type="hidden"
+                          value=""
+                        />
+                        —
+                        <div
+                          class="m_46b77525 mantine-InputWrapper-root mantine-DateInput-root"
+                        >
+                          <div
+                            class="m_6c018570 mantine-Input-wrapper mantine-DateInput-wrapper"
+                            data-variant="default"
+                          >
+                            <input
+                              aria-invalid="false"
+                              autocomplete="off"
+                              class="m_8fb7ebe7 mantine-Input-input mantine-DateInput-input"
+                              data-dates-input="true"
+                              data-variant="default"
+                              id="mantine-3thany9ms"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                        <input
+                          type="hidden"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class=""
+                      style="position: relative;"
+                    >
+                      <div
+                        class="m_6e45937b mantine-LoadingOverlay-root"
+                        style="--lo-z-index: 400;"
+                      >
+                        <span
+                          class="m_4e3f22d7 m_e8eb006c mantine-LoadingOverlay-loader m_5ae2e3c mantine-Loader-root"
+                          style="--loader-size: calc(1rem * var(--mantine-scale));"
+                        >
+                          <span
+                            class="m_870c4af"
+                          />
+                          <span
+                            class="m_870c4af"
+                          />
+                          <span
+                            class="m_870c4af"
+                          />
+                        </span>
+                        <div
+                          class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-dark-hidden"
+                          style="--overlay-bg: rgba(255, 255, 255, 0.75); --overlay-z-index: 200;"
+                        />
+                        <div
+                          class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-light-hidden"
+                          style="--overlay-bg: rgba(59, 59, 59, 0.75); --overlay-z-index: 200;"
+                        />
+                      </div>
+                      <div
+                        class="m_46b77525 mantine-InputWrapper-root mantine-Select-root"
+                      >
+                        <label
+                          class="m_8fdc1311 mantine-InputWrapper-label mantine-Select-label"
+                          for="mantine-wx7spkr4s"
+                          id="mantine-wx7spkr4s-label"
+                        >
+                          Epoch
+                        </label>
+                        <div
+                          class="m_6c018570 mantine-Input-wrapper mantine-Select-wrapper"
+                          data-pointer="true"
+                          data-variant="default"
+                          data-with-right-section="true"
+                          style="--input-right-section-pointer-events: none;"
+                        >
+                          <input
+                            aria-haspopup="listbox"
+                            aria-invalid="false"
+                            autocomplete="off"
+                            class="m_8fb7ebe7 mantine-Input-input mantine-Select-input"
+                            data-variant="default"
+                            id="mantine-wx7spkr4s"
+                            readonly=""
+                            value=""
+                          />
+                          <div
+                            class="m_82577fc2 mantine-Input-section mantine-Select-section"
+                            data-position="right"
+                          >
+                            <svg
+                              class="m_2943220b mantine-ComboboxChevron-chevron"
+                              data-combobox-chevron="true"
+                              fill="none"
+                              viewBox="0 0 15 15"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clip-rule="evenodd"
+                                d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
+                                fill="currentColor"
+                                fill-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <input
+                        type="hidden"
+                        value=""
+                      />
+                    </div>
+                    <div
+                      class=""
+                      style="position: relative;"
+                    >
+                      <div
+                        class="m_6e45937b mantine-LoadingOverlay-root"
+                        style="--lo-z-index: 400;"
+                      >
+                        <span
+                          class="m_4e3f22d7 m_e8eb006c mantine-LoadingOverlay-loader m_5ae2e3c mantine-Loader-root"
+                          style="--loader-size: calc(1rem * var(--mantine-scale));"
+                        >
+                          <span
+                            class="m_870c4af"
+                          />
+                          <span
+                            class="m_870c4af"
+                          />
+                          <span
+                            class="m_870c4af"
+                          />
+                        </span>
+                        <div
+                          class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-dark-hidden"
+                          style="--overlay-bg: rgba(255, 255, 255, 0.75); --overlay-z-index: 200;"
+                        />
+                        <div
+                          class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-light-hidden"
+                          style="--overlay-bg: rgba(59, 59, 59, 0.75); --overlay-z-index: 200;"
+                        />
+                      </div>
+                      <div
+                        class="m_46b77525 mantine-InputWrapper-root mantine-Select-root"
+                      >
+                        <label
+                          class="m_8fdc1311 mantine-InputWrapper-label mantine-Select-label"
+                          for="mantine-64v7bfid4"
+                          id="mantine-64v7bfid4-label"
+                        >
+                          Study site
+                        </label>
+                        <div
+                          class="m_6c018570 mantine-Input-wrapper mantine-Select-wrapper"
+                          data-pointer="true"
+                          data-variant="default"
+                          data-with-right-section="true"
+                          style="--input-right-section-pointer-events: none;"
+                        >
+                          <input
+                            aria-haspopup="listbox"
+                            aria-invalid="false"
+                            autocomplete="off"
+                            class="m_8fb7ebe7 mantine-Input-input mantine-Select-input"
+                            data-variant="default"
+                            id="mantine-64v7bfid4"
+                            readonly=""
+                            value=""
+                          />
+                          <div
+                            class="m_82577fc2 mantine-Input-section mantine-Select-section"
+                            data-position="right"
+                          >
+                            <svg
+                              class="m_2943220b mantine-ComboboxChevron-chevron"
+                              data-combobox-chevron="true"
+                              fill="none"
+                              viewBox="0 0 15 15"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clip-rule="evenodd"
+                                d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
+                                fill="currentColor"
+                                fill-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <input
+                        type="hidden"
+                        value=""
+                      />
+                    </div>
+                    <div
+                      class=""
+                      style="position: relative;"
+                    >
+                      <div
+                        class="m_6e45937b mantine-LoadingOverlay-root"
+                        style="--lo-z-index: 400;"
+                      >
+                        <span
+                          class="m_4e3f22d7 m_e8eb006c mantine-LoadingOverlay-loader m_5ae2e3c mantine-Loader-root"
+                          style="--loader-size: calc(1rem * var(--mantine-scale));"
+                        >
+                          <span
+                            class="m_870c4af"
+                          />
+                          <span
+                            class="m_870c4af"
+                          />
+                          <span
+                            class="m_870c4af"
+                          />
+                        </span>
+                        <div
+                          class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-dark-hidden"
+                          style="--overlay-bg: rgba(255, 255, 255, 0.75); --overlay-z-index: 200;"
+                        />
+                        <div
+                          class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-light-hidden"
+                          style="--overlay-bg: rgba(59, 59, 59, 0.75); --overlay-z-index: 200;"
+                        />
+                      </div>
+                      <div
+                        class="m_46b77525 mantine-InputWrapper-root mantine-Select-root"
+                      >
+                        <label
+                          class="m_8fdc1311 mantine-InputWrapper-label mantine-Select-label"
+                          for="mantine-diq6xa2og"
+                          id="mantine-diq6xa2og-label"
+                        >
+                          Negation reason
+                        </label>
+                        <div
+                          class="m_6c018570 mantine-Input-wrapper mantine-Select-wrapper"
+                          data-pointer="true"
+                          data-variant="default"
+                          data-with-right-section="true"
+                          style="--input-right-section-pointer-events: none;"
+                        >
+                          <input
+                            aria-haspopup="listbox"
+                            aria-invalid="false"
+                            autocomplete="off"
+                            class="m_8fb7ebe7 mantine-Input-input mantine-Select-input"
+                            data-variant="default"
+                            id="mantine-diq6xa2og"
+                            readonly=""
+                            value=""
+                          />
+                          <div
+                            class="m_82577fc2 mantine-Input-section mantine-Select-section"
+                            data-position="right"
+                          >
+                            <svg
+                              class="m_2943220b mantine-ComboboxChevron-chevron"
+                              data-combobox-chevron="true"
+                              fill="none"
+                              viewBox="0 0 15 15"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clip-rule="evenodd"
+                                d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
+                                fill="currentColor"
+                                fill-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <input
+                        type="hidden"
+                        value=""
+                      />
+                    </div>
+                    <div
+                      class="m_46b77525 mantine-InputWrapper-root mantine-Textarea-root"
+                    >
+                      <label
+                        class="m_8fdc1311 mantine-InputWrapper-label mantine-Textarea-label"
+                        for="mantine-6a7szl9lg"
+                        id="mantine-6a7szl9lg-label"
+                      >
+                        Comment
+                      </label>
+                      <div
+                        class="m_6c018570 mantine-Input-wrapper mantine-Textarea-wrapper"
+                        data-multiline="true"
+                        data-variant="default"
+                      >
+                        <textarea
+                          aria-invalid="false"
+                          class="m_8fb7ebe7 mantine-Input-input mantine-Textarea-input"
+                          data-variant="default"
+                          id="mantine-6a7szl9lg"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="m_4081bf90 mantine-Group-root"
+                      data-grow="true"
+                      style="--group-child-width: calc(50% - (var(--mantine-spacing-md) - var(--mantine-spacing-md) / 2)); --group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+                    >
+                      <div
+                        class=""
+                        style="position: relative;"
+                      >
+                        <div
+                          class="m_6e45937b mantine-LoadingOverlay-root"
+                          style="--lo-z-index: 400;"
+                        >
+                          <span
+                            class="m_4e3f22d7 m_e8eb006c mantine-LoadingOverlay-loader m_5ae2e3c mantine-Loader-root"
+                            style="--loader-size: calc(1rem * var(--mantine-scale));"
+                          >
+                            <span
+                              class="m_870c4af"
+                            />
+                            <span
+                              class="m_870c4af"
+                            />
+                            <span
+                              class="m_870c4af"
+                            />
+                          </span>
+                          <div
+                            class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-dark-hidden"
+                            style="--overlay-bg: rgba(255, 255, 255, 0.75); --overlay-z-index: 200;"
+                          />
+                          <div
+                            class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-light-hidden"
+                            style="--overlay-bg: rgba(59, 59, 59, 0.75); --overlay-z-index: 200;"
+                          />
+                        </div>
+                        <div
+                          class="m_46b77525 mantine-InputWrapper-root mantine-Select-root"
+                        >
+                          <label
+                            class="m_8fdc1311 mantine-InputWrapper-label mantine-Select-label"
+                            for="mantine-049019ew6"
+                            id="mantine-049019ew6-label"
+                          >
+                            Status
+                          </label>
+                          <div
+                            class="m_6c018570 mantine-Input-wrapper mantine-Select-wrapper"
+                            data-pointer="true"
+                            data-variant="default"
+                            data-with-right-section="true"
+                            style="--input-right-section-pointer-events: none;"
+                          >
+                            <input
+                              aria-haspopup="listbox"
+                              aria-invalid="false"
+                              autocomplete="off"
+                              class="m_8fb7ebe7 mantine-Input-input mantine-Select-input"
+                              data-variant="default"
+                              id="mantine-049019ew6"
+                              readonly=""
+                              value=""
+                            />
+                            <div
+                              class="m_82577fc2 mantine-Input-section mantine-Select-section"
+                              data-position="right"
+                            >
+                              <svg
+                                class="m_2943220b mantine-ComboboxChevron-chevron"
+                                data-combobox-chevron="true"
+                                fill="none"
+                                viewBox="0 0 15 15"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  clip-rule="evenodd"
+                                  d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
+                                  fill="currentColor"
+                                  fill-rule="evenodd"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <input
+                          type="hidden"
+                          value=""
+                        />
+                      </div>
+                      <div
+                        class="m_46b77525 mantine-InputWrapper-root mantine-DateInput-root"
+                      >
+                        <label
+                          class="m_8fdc1311 mantine-InputWrapper-label mantine-DateInput-label"
+                          for="mantine-z0yyy27n6"
+                          id="mantine-z0yyy27n6-label"
+                        >
+                          Status date
+                        </label>
+                        <div
+                          class="m_6c018570 mantine-Input-wrapper mantine-DateInput-wrapper"
+                          data-variant="default"
+                        >
+                          <input
+                            aria-invalid="false"
+                            autocomplete="off"
+                            class="m_8fb7ebe7 mantine-Input-input mantine-DateInput-input"
+                            data-dates-input="true"
+                            data-variant="default"
+                            id="mantine-z0yyy27n6"
+                            value=""
+                          />
+                        </div>
+                      </div>
+                      <input
+                        type="hidden"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <style
+              data-mantine-styles="inline"
+            >
+              .__m__-«r4f»{--col-flex-grow:auto;--col-flex-basis:100%;--col-max-width:100%;}
+            </style>
+            <div
+              class="m_96bdd299 mantine-Grid-col __m__-«r4f»"
+            >
+              <div
+                class="m_4081bf90 mantine-Group-root"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+              >
+                <button
+                  class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+                  data-variant="outline"
+                  style="--button-bg: transparent; --button-hover: rgba(0, 0, 0, 0.05); --button-color: grey; --button-bd: calc(0.0625rem * var(--mantine-scale)) solid grey;"
+                  type="button"
+                >
+                  <span
+                    class="m_80f1301b mantine-Button-inner"
+                  >
+                    <span
+                      class="m_811560b9 mantine-Button-label"
+                    >
+                      Cancel
+                    </span>
+                  </span>
+                </button>
+                <button
+                  class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+                  style="--button-color: var(--mantine-color-white);"
+                  type="submit"
+                >
+                  <span
+                    class="m_80f1301b mantine-Button-inner"
+                  >
+                    <span
+                      class="m_811560b9 mantine-Button-label"
+                    >
+                      Submit
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </DocumentFragment>
 `;

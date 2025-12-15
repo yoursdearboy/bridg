@@ -36,7 +36,7 @@ export const Route = createFileRoute(
   }),
   beforeLoad: ({ params, search }) => ({
     breadcrumb: () => i18next.t("ActivityNewPage.breadcrumb"),
-    activityQuery: queryOptions({
+    newActivityQuery: queryOptions({
       queryKey: ["space", params.spaceId, "activity", search.aId],
       queryFn: async () =>
         await api.definedActivity.showDefinedActivityAIdGet({
@@ -45,15 +45,15 @@ export const Route = createFileRoute(
         }),
     }),
   }),
-  loader: async ({ context: { activityQuery, queryClient } }) =>
-    await queryClient.fetchQuery(activityQuery),
+  loader: async ({ context: { newActivityQuery, queryClient } }) =>
+    await queryClient.fetchQuery(newActivityQuery),
 });
 
 function ActivityNewRoute() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { subjectQuery, activityQuery } = Route.useRouteContext();
-  const { data: definedActivity } = useSuspenseQuery(activityQuery);
+  const { subjectQuery, newActivityQuery } = Route.useRouteContext();
+  const { data: definedActivity } = useSuspenseQuery(newActivityQuery);
   const { data: subject } = useSuspenseQuery(subjectQuery);
   const { spaceId, subjectId } = Route.useParams();
   const form = useForm<PerformedActivityUnionData>({

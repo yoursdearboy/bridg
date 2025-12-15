@@ -1,14 +1,16 @@
 import { queryOptions } from "@tanstack/react-query";
-import { expect, it, vi } from "vitest";
-import api from "@/api";
+import { expect, it } from "vitest";
 import { renderRoute } from "@/test-utils";
 import { Route } from "./new";
 
 it("new activity page renders correctly", async () => {
-  const definedActivitySpy = vi
-    .spyOn(api.definedActivity, "showDefinedActivityAIdGet")
-    .mockResolvedValue({
-      id: "f83ddbf8-dd6d-4737-98e3-a5795995bbd8",
+  const spaceId = "ce946229-9746-46cd-8dd3-b27a2fbfd48a";
+  const subjectId = "1944c046-95b3-4cb4-82e2-c789950e29fc";
+  const dAId = "f83ddbf8-dd6d-4737-98e3-a5795995bbd8";
+  const newActivityQuery = queryOptions({
+    queryKey: ["space", spaceId, "activity", dAId],
+    queryFn: () => ({
+      id: dAId,
       nameCode: {
         dataTypeName: "CD",
         code: "26604007",
@@ -100,24 +102,41 @@ it("new activity page renders correctly", async () => {
           derivationExpression: null,
         },
       ],
-    });
+    }),
+  });
+  const subjectQuery = queryOptions({
+    queryKey: ["subject", subjectId],
+    queryFn: () => ({
+      id: subjectId,
+      status: "eligible",
+      statusDate: new Date("2024-11-06T12:00:00"),
+      performingBiologicEntity: {
+        id: "8498d20d-6c84-4f09-96c5-5af3a557b1e3",
+        administrativeGenderCode: "M",
+        birthDate: new Date("1991-01-01"),
+        deathDate: null,
+        deathDateEstimatedIndicator: null,
+        deathIndicator: false,
+        primaryName: {
+          id: "9de936fd-75b4-4021-a31f-4a243033b59f",
+          label: "Donald Trump Jr",
+        },
+      },
+      performingOrganization: null,
+    }),
+  });
 
   expect(
     (
       await renderRoute(Route, {
         params: {
-          spaceId: "xxxx",
-          subjectId: "xxxx",
+          spaceId,
+          subjectId,
         },
         search: {
-          aId: "xxxx",
+          aId: dAId,
         },
-        context: {
-          activityQuery: queryOptions({
-            queryKey: [],
-            queryFn: () => definedActivitySpy.mock,
-          }),
-        },
+        beforeLoad: () => ({ subjectQuery, newActivityQuery }),
       })
     ).asFragment()
   ).toMatchSnapshot();
