@@ -14,7 +14,9 @@ jobs:
       with:
         node-version: lts/*
     - uses: astral-sh/setup-uv@v7
-    - name: Install dependencies
+    - name: Install python dependencies
+      run: uv sync --all-packages --group test
+    - name: Install node dependencies
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps

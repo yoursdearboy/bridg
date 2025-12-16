@@ -83,7 +83,7 @@ export default defineConfig({
       command: "uv run --package api fastapi dev ../api/api/main.py",
       url: "http://localhost:8000",
       name: "Backend",
-      timeout: 5 * 1000,
+      timeout: 120 * 1000,
       reuseExistingServer: !process.env.CI,
     },
   ],
