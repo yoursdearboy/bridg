@@ -73,14 +73,19 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: [
     {
-      command: "npm run dev",
+      cwd: "../..",
+      command: "./dev/ui.sh",
       url: "http://localhost:5173",
       name: "Frontend",
       timeout: 120 * 1000,
       reuseExistingServer: !process.env.CI,
     },
     {
-      command: "uv run --package api fastapi dev ../api/api/main.py",
+      cwd: "../..",
+      command: "./dev/api.sh",
+      env: {
+        BRIDG_ENV: process.env.BRIDG_ENV!,
+      },
       url: "http://localhost:8000",
       name: "Backend",
       timeout: 120 * 1000,
