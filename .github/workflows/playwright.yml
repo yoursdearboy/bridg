@@ -25,3 +25,15 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+  e2e-telegram-notification:
+    needs: test
+    if: ${{ always() }}
+    uses: ./.github/workflows/telegram-notification.yml
+    with:
+      working_directory: "./ui"
+      status_text: ${{ needs.test.result == 'success' && 'success' || 'failure' }}
+      status_emoji: ${{ needs.test.result == 'success' && '✅' || '❌' }}
+      stage_name: "e2e"
+    secrets:
+      chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+      bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
