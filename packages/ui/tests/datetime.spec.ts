@@ -20,25 +20,15 @@ test("test", async ({ page }) => {
     .getByRole("button", { name: "1 December 2025", exact: true })
     .click();
   await page.locator("form").getByRole("button", { name: "Submit" }).click();
-  await page
-    .getByRole("row", { name: "Immunophenotyping Complete 12" })
-    .hover();
-  await page
-    .getByRole("row", { name: "Immunophenotyping Complete 12" })
-    .getByRole("link")
-    .click();
+  await page.getByRole("cell").nth(6).hover();
+  await page.getByRole("cell").nth(6).getByRole("link").click();
   await expect(page.getByRole("textbox", { name: "Status date" })).toHaveValue(
     "12/01/2025"
   );
   await page.getByRole("textbox", { name: "Status date" }).click();
   await page.locator("form").getByRole("button", { name: "Submit" }).click();
-  await page
-    .getByRole("row", { name: "Immunophenotyping Complete 11" })
-    .hover();
-  await page
-    .getByRole("row", { name: "Immunophenotyping Complete 11" })
-    .getByRole("link")
-    .click();
+  await page.getByRole("cell").nth(6).hover();
+  await page.getByRole("cell").nth(6).getByRole("link").click();
   await expect(page.getByRole("textbox", { name: "Status date" })).toHaveValue(
     "12/01/2025"
   );
