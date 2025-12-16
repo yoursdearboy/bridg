@@ -1,5 +1,9 @@
 import { test, expect } from "@playwright/test";
 
+test.use({
+  timezoneId: "Arctic/Longyearbyen",
+});
+
 test("test", async ({ page }) => {
   await page.goto("/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects");
   await page.getByRole("button", { name: "New patient" }).click();
