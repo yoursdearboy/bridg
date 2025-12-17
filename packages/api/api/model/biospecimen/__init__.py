@@ -1,1 +1,1 @@
-from .specimen import Specimen, SpecimenData
+from .specimen import Specimen
