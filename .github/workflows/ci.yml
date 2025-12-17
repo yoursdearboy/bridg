@@ -27,6 +27,13 @@ jobs:
       - name: Run tests
         run: npm run test --workspaces --if-present
   
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: coverage
+          path: packages/ui/coverage/
+          retention-days: 30
+
   ui-telegram-notification:
     needs: ui-tests
     if: ${{ always() }}
