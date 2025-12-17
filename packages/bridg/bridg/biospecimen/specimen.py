@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from typing import Optional
 from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
@@ -7,6 +8,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..common import Material
 from ..db import Base
+from ..study import PerformedSpecimenCollection
 
 
 class Specimen(Base):
@@ -36,3 +38,7 @@ class Specimen(Base):
 
     performing_material_id: Mapped[UUID] = mapped_column(ForeignKey("material.id"))
     performing_material: Mapped[Material] = relationship(back_populates="performed_specimen")
+
+    producing_performed_specimen_collection: Mapped[Optional[PerformedSpecimenCollection]] = relationship(
+        back_populates="produced_specimen"
+    )
