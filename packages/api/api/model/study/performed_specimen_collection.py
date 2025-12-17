@@ -2,8 +2,7 @@ from typing import Optional
 
 import bridg
 
-from ..biospecimen import Specimen
-from ..biospecimen.specimen import SpecimenData
+from ..biospecimen import Specimen, SpecimenData
 from .performed_procedure import PerformedProcedure, PerformedProcedureData
 
 
