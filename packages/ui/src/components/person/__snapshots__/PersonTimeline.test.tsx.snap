@@ -1,0 +1,165 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PersonTimelineCard > matches snapshot 1`] = `
+<DocumentFragment>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <div
+    class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+    data-with-border="true"
+    style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm); --card-padding: var(--mantine-spacing-lg);"
+  >
+    <div
+      class="m_43657ece mantine-Timeline-root"
+      data-align="left"
+      style="--tl-bullet-size: calc(2.25rem * var(--mantine-scale));"
+    >
+      <div
+        class="m_436178ff mantine-Timeline-item"
+        data-active="true"
+        data-line-active="true"
+      >
+        <div
+          class="m_8affcee1 mantine-Timeline-itemBullet"
+          data-active="true"
+          data-align="left"
+        />
+        <div
+          class="m_540e8f41 mantine-Timeline-itemBody"
+        >
+          <div
+            class="m_2ebe8099 mantine-Timeline-itemTitle"
+          >
+            <a
+              aria-current="page"
+              class="mantine-focus-auto m_849cf0da active m_b6d8b162 mantine-Text-root mantine-Anchor-root"
+              data-status="active"
+              data-underline="hover"
+              href="/"
+              style="font-weight: 500;"
+            >
+              AML-MRD-2018 (Eligible)
+            </a>
+          </div>
+          <div
+            class="mantine-Timeline-itemContent"
+          >
+            <p
+              class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+              data-size="md"
+              style="--text-fz: var(--mantine-font-size-md); --text-lh: var(--mantine-line-height-md); color: var(--mantine-color-dimmed);"
+            >
+              11&#x2F;6&#x2F;2024
+            </p>
+            <div
+              class=""
+              style="height: var(--mantine-spacing-md); min-height: var(--mantine-spacing-md);"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class=""
+      style="padding-inline: calc(0.4375rem * var(--mantine-scale));"
+    >
+      <div
+        class="m_43657ece mantine-Timeline-root"
+        data-align="left"
+        style="--tl-bullet-size: calc(1.5rem * var(--mantine-scale)); --tl-color: var(--mantine-color-yellow-filled);"
+      >
+        <div
+          class="m_436178ff mantine-Timeline-item"
+        >
+          <div
+            class="m_8affcee1 mantine-Timeline-itemBullet"
+          />
+          <div
+            class="m_540e8f41 mantine-Timeline-itemBody"
+          >
+            <div
+              class="mantine-Timeline-itemContent"
+            >
+              <p
+                class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                data-size="md"
+                style="--text-fz: var(--mantine-font-size-md); --text-lh: var(--mantine-line-height-md); margin-left: calc(0.625rem * var(--mantine-scale));"
+              >
+                Immunophenotyping
+              </p>
+              <p
+                class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                data-size="sm"
+                style="--text-fz: var(--mantine-font-size-sm); --text-lh: var(--mantine-line-height-sm); margin-bottom: calc(1.25rem * var(--mantine-scale)); margin-left: calc(0.625rem * var(--mantine-scale)); color: var(--mantine-color-dimmed);"
+              >
+                11&#x2F;6&#x2F;2024
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="m_436178ff mantine-Timeline-item"
+        >
+          <div
+            class="m_8affcee1 mantine-Timeline-itemBullet"
+          />
+          <div
+            class="m_540e8f41 mantine-Timeline-itemBody"
+          >
+            <div
+              class="mantine-Timeline-itemContent"
+            >
+              <p
+                class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                data-size="md"
+                style="--text-fz: var(--mantine-font-size-md); --text-lh: var(--mantine-line-height-md); margin-left: calc(0.625rem * var(--mantine-scale));"
+              >
+                Complete blood count
+              </p>
+              <p
+                class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                data-size="sm"
+                style="--text-fz: var(--mantine-font-size-sm); --text-lh: var(--mantine-line-height-sm); margin-bottom: calc(1.25rem * var(--mantine-scale)); margin-left: calc(0.625rem * var(--mantine-scale)); color: var(--mantine-color-dimmed);"
+              >
+                5&#x2F;7&#x2F;2024
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="m_436178ff mantine-Timeline-item"
+        >
+          <div
+            class="m_8affcee1 mantine-Timeline-itemBullet"
+          />
+          <div
+            class="m_540e8f41 mantine-Timeline-itemBody"
+          >
+            <div
+              class="mantine-Timeline-itemContent"
+            >
+              <p
+                class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                data-size="md"
+                style="--text-fz: var(--mantine-font-size-md); --text-lh: var(--mantine-line-height-md); margin-left: calc(0.625rem * var(--mantine-scale));"
+              >
+                AME
+              </p>
+              <p
+                class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                data-size="sm"
+                style="--text-fz: var(--mantine-font-size-sm); --text-lh: var(--mantine-line-height-sm); margin-bottom: calc(1.25rem * var(--mantine-scale)); margin-left: calc(0.625rem * var(--mantine-scale)); color: var(--mantine-color-dimmed);"
+              >
+                11&#x2F;6&#x2F;2024
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

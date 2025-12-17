@@ -1,0 +1,781 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`person page renders correctly 1`] = `
+<DocumentFragment>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <div
+    class="m_6d731127 mantine-Stack-root"
+    style="--stack-gap: var(--mantine-spacing-md); --stack-align: stretch; --stack-justify: flex-start;"
+  >
+    <div
+      class="m_4081bf90 mantine-Group-root"
+      style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    >
+      <h2
+        class="m_8a5d1357 mantine-Title-root"
+        data-order="2"
+        style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
+      >
+        Иван Иванов Мл.
+      </h2>
+      <div
+        class="m_4081bf90 mantine-Group-root"
+        style="--group-gap: var(--mantine-spacing-xs); --group-align: flex-end; --group-justify: flex-start; --group-wrap: wrap;"
+      >
+        <button
+          aria-controls="mantine-7lzvq3tar-dropdown"
+          aria-expanded="false"
+          aria-haspopup="menu"
+          class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+          data-variant="outline"
+          data-with-right-section="true"
+          id="mantine-7lzvq3tar-target"
+          style="--button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline);"
+          type="button"
+        >
+          <span
+            class="m_80f1301b mantine-Button-inner"
+          >
+            <span
+              class="m_811560b9 mantine-Button-label"
+            >
+              Actions
+            </span>
+            <span
+              class="m_a74036a mantine-Button-section"
+              data-position="right"
+            >
+              <svg
+                class="tabler-icon tabler-icon-chevron-down "
+                fill="none"
+                height="16"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 9l6 6l6 -6"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+    <style
+      data-mantine-styles="inline"
+    >
+      .__m__-«r9»{--grid-gutter:var(--mantine-spacing-md);}
+    </style>
+    <div
+      class="m_410352e9 mantine-Grid-root __m__-«r9»"
+    >
+      <div
+        class="m_dee7bd2f mantine-Grid-inner"
+      >
+        <style
+          data-mantine-styles="inline"
+        >
+          .__m__-«rb»{--col-flex-grow:auto;--col-flex-basis:100%;--col-max-width:100%;}@media(min-width: 75em){.__m__-«rb»{--col-flex-grow:auto;--col-flex-basis:50%;--col-max-width:50%;}}@media(min-width: 88em){.__m__-«rb»{--col-flex-grow:auto;--col-flex-basis:33.333333333333336%;--col-max-width:33.333333333333336%;}}
+        </style>
+        <div
+          class="m_96bdd299 mantine-Grid-col __m__-«rb»"
+        >
+          <div
+            class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+            data-with-border="true"
+            style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm); --card-padding: var(--mantine-spacing-xs);"
+          >
+            <div
+              class="m_599a2148 mantine-Card-section"
+              data-first-section="true"
+              data-inherit-padding="true"
+              data-with-border="true"
+              style="padding-block: var(--mantine-spacing-xs);"
+            >
+              <div
+                class="m_4081bf90 mantine-Group-root"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+              >
+                <p
+                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  style="padding-inline: var(--mantine-spacing-xs); font-weight: 500;"
+                >
+                  Person information
+                </p>
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+                >
+                  <div
+                    class="m_80d6d844 mantine-ButtonGroup-group"
+                    data-orientation="horizontal"
+                    role="group"
+                  >
+                    <button
+                      class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+                      data-size="compact-sm"
+                      data-variant="outline"
+                      style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline);"
+                      type="button"
+                    >
+                      <span
+                        class="m_80f1301b mantine-Button-inner"
+                      >
+                        <span
+                          class="m_811560b9 mantine-Button-label"
+                        >
+                          Back
+                        </span>
+                      </span>
+                    </button>
+                    <button
+                      class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+                      data-size="compact-sm"
+                      data-variant="outline"
+                      style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline);"
+                      type="button"
+                    >
+                      <span
+                        class="m_80f1301b mantine-Button-inner"
+                      >
+                        <span
+                          class="m_811560b9 mantine-Button-label"
+                        >
+                          Edit
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class=""
+              style="padding-top: var(--mantine-spacing-xs);"
+            >
+              <div
+                class="m_6d731127 mantine-Stack-root"
+                style="--stack-gap: var(--mantine-spacing-sm); --stack-align: stretch; --stack-justify: flex-start;"
+              >
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
+                >
+                  <div
+                    class=""
+                    style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  >
+                    Primary name:
+                  </div>
+                  <div
+                    class=""
+                  >
+                    Иван Иванов Мл.
+                  </div>
+                </div>
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
+                >
+                  <div
+                    class=""
+                    style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  >
+                    Gender:
+                  </div>
+                  <div
+                    class=""
+                  >
+                    Male
+                  </div>
+                </div>
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
+                >
+                  <div
+                    class=""
+                    style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  >
+                    Birth date:
+                  </div>
+                  <div
+                    class=""
+                  >
+                    1&#x2F;1&#x2F;1991
+                  </div>
+                </div>
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
+                >
+                  <div
+                    class=""
+                    style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  >
+                    Age:
+                  </div>
+                  <div
+                    class=""
+                  >
+                    34 years
+                  </div>
+                </div>
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-md); --group-align: flex-start; --group-justify: flex-start; --group-wrap: wrap;"
+                >
+                  <div
+                    class=""
+                    style="color: var(--mantine-color-dimmed); font-weight: 600; width: calc(9.375rem * var(--mantine-scale));"
+                  >
+                    Death date:
+                  </div>
+                  <div
+                    class=""
+                  >
+                    Not deceased
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class=""
+            style="height: var(--mantine-spacing-md); min-height: var(--mantine-spacing-md);"
+          />
+          <div
+            class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+            data-with-border="true"
+            style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm);"
+          >
+            <div
+              class="m_599a2148 mantine-Card-section"
+              data-first-section="true"
+              data-inherit-padding="true"
+              data-with-border="true"
+              style="padding-block: var(--mantine-spacing-xs);"
+            >
+              <div
+                class="m_4081bf90 mantine-Group-root"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+              >
+                <p
+                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  style="padding-inline: var(--mantine-spacing-xs); font-weight: 500;"
+                >
+                  Addresses
+                </p>
+                <button
+                  class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+                  data-size="compact-sm"
+                  data-variant="outline"
+                  style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline); font-weight: 500;"
+                  type="button"
+                >
+                  <span
+                    class="m_80f1301b mantine-Button-inner"
+                  >
+                    <span
+                      class="m_811560b9 mantine-Button-label"
+                    >
+                      Add
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div
+              class="m_599a2148 mantine-Card-section"
+              data-inherit-padding="true"
+              data-last-section="true"
+              style="padding-block: var(--mantine-spacing-xs);"
+            >
+              <div
+                class=""
+                style="min-height: 80px; position: relative;"
+              >
+                <div
+                  class=""
+                >
+                  <table
+                    class="m_b23fa0ef mantine-Table-table"
+                    style="--table-vertical-spacing: calc(0.4375rem * var(--mantine-scale));"
+                  >
+                    <tbody
+                      class="m_b2404537 mantine-Table-tbody"
+                    >
+                      <tr
+                        class="m_4e7aa4fd mantine-Table-tr"
+                        data-hover="true"
+                        data-with-row-border="true"
+                      >
+                        <td
+                          class="m_4e7aa4ef mantine-Table-td"
+                        >
+                          Trafalgar Square
+                        </td>
+                        <td
+                          class="m_4e7aa4ef mantine-Table-td"
+                          width="60"
+                        />
+                      </tr>
+                      <tr
+                        class="m_4e7aa4fd mantine-Table-tr"
+                        data-hover="true"
+                        data-with-row-border="true"
+                      >
+                        <td
+                          class="m_4e7aa4ef mantine-Table-td"
+                        >
+                          Red Square
+                        </td>
+                        <td
+                          class="m_4e7aa4ef mantine-Table-td"
+                          width="60"
+                        />
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class=""
+            style="height: var(--mantine-spacing-md); min-height: var(--mantine-spacing-md);"
+          />
+          <div
+            class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+            data-with-border="true"
+            style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm);"
+          >
+            <div
+              class="m_599a2148 mantine-Card-section"
+              data-first-section="true"
+              data-inherit-padding="true"
+              data-with-border="true"
+              style="padding-block: var(--mantine-spacing-xs);"
+            >
+              <div
+                class="m_4081bf90 mantine-Group-root"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+              >
+                <p
+                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  style="padding-inline: var(--mantine-spacing-xs); font-weight: 500;"
+                >
+                  Person telecommunication addresses
+                </p>
+                <button
+                  aria-controls="mantine-fmmfn4p4a-dropdown"
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+                  data-size="compact-sm"
+                  data-variant="outline"
+                  id="mantine-fmmfn4p4a-target"
+                  style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline);"
+                  type="button"
+                >
+                  <span
+                    class="m_80f1301b mantine-Button-inner"
+                  >
+                    <span
+                      class="m_811560b9 mantine-Button-label"
+                    >
+                      Add
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div
+              class="m_599a2148 mantine-Card-section"
+              data-inherit-padding="true"
+              data-last-section="true"
+              style="padding-block: var(--mantine-spacing-xs);"
+            >
+              <div
+                class=""
+                style="min-height: 80px; position: relative;"
+              >
+                <div
+                  class=""
+                >
+                  <table
+                    class="m_b23fa0ef mantine-Table-table"
+                    style="--table-vertical-spacing: calc(0.4375rem * var(--mantine-scale));"
+                  >
+                    <tbody
+                      class="m_b2404537 mantine-Table-tbody"
+                    >
+                      <tr
+                        class="m_4e7aa4fd mantine-Table-tr"
+                        data-hover="true"
+                        data-with-row-border="true"
+                      >
+                        <td
+                          class="m_4e7aa4ef mantine-Table-td"
+                          valign="middle"
+                          width="30"
+                        >
+                          <svg
+                            class="tabler-icon tabler-icon-world-www "
+                            display="block"
+                            fill="none"
+                            height="16"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            width="16"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M19.5 7a9 9 0 0 0 -7.5 -4a8.991 8.991 0 0 0 -7.484 4"
+                            />
+                            <path
+                              d="M11.5 3a16.989 16.989 0 0 0 -1.826 4"
+                            />
+                            <path
+                              d="M12.5 3a16.989 16.989 0 0 1 1.828 4"
+                            />
+                            <path
+                              d="M19.5 17a9 9 0 0 1 -7.5 4a8.991 8.991 0 0 1 -7.484 -4"
+                            />
+                            <path
+                              d="M11.5 21a16.989 16.989 0 0 1 -1.826 -4"
+                            />
+                            <path
+                              d="M12.5 21a16.989 16.989 0 0 0 1.828 -4"
+                            />
+                            <path
+                              d="M2 10l1 4l1.5 -4l1.5 4l1 -4"
+                            />
+                            <path
+                              d="M17 10l1 4l1.5 -4l1.5 4l1 -4"
+                            />
+                            <path
+                              d="M9.5 10l1 4l1.5 -4l1.5 4l1 -4"
+                            />
+                          </svg>
+                        </td>
+                        <td
+                          class="m_4e7aa4ef mantine-Table-td"
+                        />
+                        <td
+                          class="m_4e7aa4ef mantine-Table-td"
+                          width="60"
+                        />
+                      </tr>
+                      <tr
+                        class="m_4e7aa4fd mantine-Table-tr"
+                        data-hover="true"
+                        data-with-row-border="true"
+                      >
+                        <td
+                          class="m_4e7aa4ef mantine-Table-td"
+                          valign="middle"
+                          width="30"
+                        >
+                          <svg
+                            class="tabler-icon tabler-icon-world-www "
+                            display="block"
+                            fill="none"
+                            height="16"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            width="16"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M19.5 7a9 9 0 0 0 -7.5 -4a8.991 8.991 0 0 0 -7.484 4"
+                            />
+                            <path
+                              d="M11.5 3a16.989 16.989 0 0 0 -1.826 4"
+                            />
+                            <path
+                              d="M12.5 3a16.989 16.989 0 0 1 1.828 4"
+                            />
+                            <path
+                              d="M19.5 17a9 9 0 0 1 -7.5 4a8.991 8.991 0 0 1 -7.484 -4"
+                            />
+                            <path
+                              d="M11.5 21a16.989 16.989 0 0 1 -1.826 -4"
+                            />
+                            <path
+                              d="M12.5 21a16.989 16.989 0 0 0 1.828 -4"
+                            />
+                            <path
+                              d="M2 10l1 4l1.5 -4l1.5 4l1 -4"
+                            />
+                            <path
+                              d="M17 10l1 4l1.5 -4l1.5 4l1 -4"
+                            />
+                            <path
+                              d="M9.5 10l1 4l1.5 -4l1.5 4l1 -4"
+                            />
+                          </svg>
+                        </td>
+                        <td
+                          class="m_4e7aa4ef mantine-Table-td"
+                        />
+                        <td
+                          class="m_4e7aa4ef mantine-Table-td"
+                          width="60"
+                        />
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class=""
+            style="height: var(--mantine-spacing-md); min-height: var(--mantine-spacing-md);"
+          />
+          <div
+            class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+            data-with-border="true"
+            style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm);"
+          >
+            <div
+              class="m_599a2148 mantine-Card-section"
+              data-first-section="true"
+              data-inherit-padding="true"
+              data-last-section="true"
+              data-with-border="true"
+              style="padding-block: var(--mantine-spacing-xs);"
+            >
+              <div
+                class="m_4081bf90 mantine-Group-root"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+              >
+                <div
+                  class="m_4081bf90 mantine-Group-root"
+                  style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap; padding-inline: var(--mantine-spacing-xs);"
+                >
+                  <p
+                    class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                    style="font-weight: 500;"
+                  >
+                    Person names
+                  </p>
+                  <svg
+                    class="tabler-icon tabler-icon-caret-down-filled "
+                    fill="currentColor"
+                    height="24"
+                    stroke="none"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18 9c.852 0 1.297 .986 .783 1.623l-.076 .084l-6 6a1 1 0 0 1 -1.32 .083l-.094 -.083l-6 -6l-.083 -.094l-.054 -.077l-.054 -.096l-.017 -.036l-.027 -.067l-.032 -.108l-.01 -.053l-.01 -.06l-.004 -.057v-.118l.005 -.058l.009 -.06l.01 -.052l.032 -.108l.027 -.067l.07 -.132l.065 -.09l.073 -.081l.094 -.083l.077 -.054l.096 -.054l.036 -.017l.067 -.027l.108 -.032l.053 -.01l.06 -.01l.057 -.004l12.059 -.002z"
+                    />
+                  </svg>
+                </div>
+                <button
+                  class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+                  data-size="compact-sm"
+                  data-variant="outline"
+                  style="--button-height: var(--button-height-compact-sm); --button-padding-x: var(--button-padding-x-compact-sm); --button-fz: var(--mantine-font-size-sm); --button-bg: transparent; --button-hover: var(--mantine-color-blue-outline-hover); --button-color: var(--mantine-color-blue-outline); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid var(--mantine-color-blue-outline); font-weight: 500;"
+                  type="button"
+                >
+                  <span
+                    class="m_80f1301b mantine-Button-inner"
+                  >
+                    <span
+                      class="m_811560b9 mantine-Button-label"
+                    >
+                      Add
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <style
+          data-mantine-styles="inline"
+        >
+          .__m__-«r2i»{--col-flex-grow:auto;--col-flex-basis:100%;--col-max-width:100%;}@media(min-width: 75em){.__m__-«r2i»{--col-flex-grow:auto;--col-flex-basis:50%;--col-max-width:50%;}}@media(min-width: 88em){.__m__-«r2i»{--col-flex-grow:auto;--col-flex-basis:33.333333333333336%;--col-max-width:33.333333333333336%;}}
+        </style>
+        <div
+          class="m_96bdd299 mantine-Grid-col __m__-«r2i»"
+        >
+          <div
+            class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+            data-with-border="true"
+            style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm); --card-padding: var(--mantine-spacing-lg);"
+          >
+            <div
+              class="m_43657ece mantine-Timeline-root"
+              data-align="left"
+              style="--tl-bullet-size: calc(2.25rem * var(--mantine-scale));"
+            >
+              <div
+                class="m_436178ff mantine-Timeline-item"
+                data-active="true"
+                data-line-active="true"
+              >
+                <div
+                  class="m_8affcee1 mantine-Timeline-itemBullet"
+                  data-active="true"
+                  data-align="left"
+                />
+                <div
+                  class="m_540e8f41 mantine-Timeline-itemBody"
+                >
+                  <div
+                    class="m_2ebe8099 mantine-Timeline-itemTitle"
+                  >
+                    <a
+                      aria-current="page"
+                      class="mantine-focus-auto m_849cf0da active m_b6d8b162 mantine-Text-root mantine-Anchor-root"
+                      data-status="active"
+                      data-underline="hover"
+                      href="/"
+                      style="font-weight: 500;"
+                    >
+                      AML-MRD-2018 (Eligible)
+                    </a>
+                  </div>
+                  <div
+                    class="mantine-Timeline-itemContent"
+                  >
+                    <p
+                      class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                      data-size="md"
+                      style="--text-fz: var(--mantine-font-size-md); --text-lh: var(--mantine-line-height-md); color: var(--mantine-color-dimmed);"
+                    >
+                      11&#x2F;6&#x2F;2024
+                    </p>
+                    <div
+                      class=""
+                      style="height: var(--mantine-spacing-md); min-height: var(--mantine-spacing-md);"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class=""
+              style="padding-inline: calc(0.4375rem * var(--mantine-scale));"
+            >
+              <div
+                class="m_43657ece mantine-Timeline-root"
+                data-align="left"
+                style="--tl-bullet-size: calc(1.5rem * var(--mantine-scale)); --tl-color: var(--mantine-color-yellow-filled);"
+              >
+                <div
+                  class="m_436178ff mantine-Timeline-item"
+                >
+                  <div
+                    class="m_8affcee1 mantine-Timeline-itemBullet"
+                  />
+                  <div
+                    class="m_540e8f41 mantine-Timeline-itemBody"
+                  >
+                    <div
+                      class="mantine-Timeline-itemContent"
+                    >
+                      <p
+                        class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                        data-size="md"
+                        style="--text-fz: var(--mantine-font-size-md); --text-lh: var(--mantine-line-height-md); margin-left: calc(0.625rem * var(--mantine-scale));"
+                      >
+                        Immunophenotyping
+                      </p>
+                      <p
+                        class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                        data-size="sm"
+                        style="--text-fz: var(--mantine-font-size-sm); --text-lh: var(--mantine-line-height-sm); margin-bottom: calc(1.25rem * var(--mantine-scale)); margin-left: calc(0.625rem * var(--mantine-scale)); color: var(--mantine-color-dimmed);"
+                      >
+                        11&#x2F;6&#x2F;2024
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="m_436178ff mantine-Timeline-item"
+                >
+                  <div
+                    class="m_8affcee1 mantine-Timeline-itemBullet"
+                  />
+                  <div
+                    class="m_540e8f41 mantine-Timeline-itemBody"
+                  >
+                    <div
+                      class="mantine-Timeline-itemContent"
+                    >
+                      <p
+                        class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                        data-size="md"
+                        style="--text-fz: var(--mantine-font-size-md); --text-lh: var(--mantine-line-height-md); margin-left: calc(0.625rem * var(--mantine-scale));"
+                      >
+                        Complete blood count
+                      </p>
+                      <p
+                        class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                        data-size="sm"
+                        style="--text-fz: var(--mantine-font-size-sm); --text-lh: var(--mantine-line-height-sm); margin-bottom: calc(1.25rem * var(--mantine-scale)); margin-left: calc(0.625rem * var(--mantine-scale)); color: var(--mantine-color-dimmed);"
+                      >
+                        5&#x2F;7&#x2F;2024
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="m_436178ff mantine-Timeline-item"
+                >
+                  <div
+                    class="m_8affcee1 mantine-Timeline-itemBullet"
+                  />
+                  <div
+                    class="m_540e8f41 mantine-Timeline-itemBody"
+                  >
+                    <div
+                      class="mantine-Timeline-itemContent"
+                    >
+                      <p
+                        class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                        data-size="md"
+                        style="--text-fz: var(--mantine-font-size-md); --text-lh: var(--mantine-line-height-md); margin-left: calc(0.625rem * var(--mantine-scale));"
+                      >
+                        AME
+                      </p>
+                      <p
+                        class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                        data-size="sm"
+                        style="--text-fz: var(--mantine-font-size-sm); --text-lh: var(--mantine-line-height-sm); margin-bottom: calc(1.25rem * var(--mantine-scale)); margin-left: calc(0.625rem * var(--mantine-scale)); color: var(--mantine-color-dimmed);"
+                      >
+                        11&#x2F;6&#x2F;2024
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
