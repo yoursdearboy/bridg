@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { ProducingPerformedSpecimenCollection } from './ProducingPerformedSpecimenCollection';
+import {
+    ProducingPerformedSpecimenCollectionFromJSON,
+    ProducingPerformedSpecimenCollectionFromJSONTyped,
+    ProducingPerformedSpecimenCollectionToJSON,
+    ProducingPerformedSpecimenCollectionToJSONTyped,
+} from './ProducingPerformedSpecimenCollection';
 import type { PerformingMaterial } from './PerformingMaterial';
 import {
     PerformingMaterialFromJSON,
@@ -39,6 +46,12 @@ export interface Specimen {
      * @memberof Specimen
      */
     performingMaterial: PerformingMaterial;
+    /**
+     * 
+     * @type {ProducingPerformedSpecimenCollection}
+     * @memberof Specimen
+     */
+    producingPerformedSpecimenCollection: ProducingPerformedSpecimenCollection | null;
 }
 
 /**
@@ -47,6 +60,7 @@ export interface Specimen {
 export function instanceOfSpecimen(value: object): value is Specimen {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('performingMaterial' in value) || value['performingMaterial'] === undefined) return false;
+    if (!('producingPerformedSpecimenCollection' in value) || value['producingPerformedSpecimenCollection'] === undefined) return false;
     return true;
 }
 
@@ -56,6 +70,7 @@ export function instanceOfSpecimen(value: object): value is Specimen {
 export function isSpecimenJSON(value: object): boolean {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('performing_material' in value) || value['performing_material'] === undefined) return false;
+    if (!('producing_performed_specimen_collection' in value) || value['producing_performed_specimen_collection'] === undefined) return false;
     return true;
 }
 
@@ -71,6 +86,7 @@ export function SpecimenFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         
         'id': json['id'],
         'performingMaterial': PerformingMaterialFromJSON(json['performing_material']),
+        'producingPerformedSpecimenCollection': ProducingPerformedSpecimenCollectionFromJSON(json['producing_performed_specimen_collection']),
     };
 }
 
@@ -87,6 +103,7 @@ export function SpecimenToJSONTyped(value?: Specimen | null, ignoreDiscriminator
         
         'id': value['id'],
         'performing_material': PerformingMaterialToJSON(value['performingMaterial']),
+        'producing_performed_specimen_collection': ProducingPerformedSpecimenCollectionToJSON(value['producingPerformedSpecimenCollection']),
     };
 }
 

@@ -7,6 +7,7 @@ src/apis/PerformedActivityApi.ts
 src/apis/PersonSubjectApi.ts
 src/apis/PersonsApi.ts
 src/apis/SpaceActivityApi.ts
+src/apis/SpecimenApi.ts
 src/apis/SubjectsApi.ts
 src/apis/index.ts
 src/index.ts
@@ -53,10 +54,12 @@ src/models/PersonStudySubject.ts
 src/models/PhysicalQuantity.ts
 src/models/PostalAddress.ts
 src/models/PostalAddressData.ts
+src/models/ProducedSpecimen.ts
+src/models/ProducedSpecimenData.ts
+src/models/ProducingPerformedSpecimenCollection.ts
 src/models/Product.ts
 src/models/ProductData.ts
 src/models/Specimen.ts
-src/models/SpecimenData.ts
 src/models/Status.ts
 src/models/StudyActivity.ts
 src/models/StudyProtocolVersion.ts

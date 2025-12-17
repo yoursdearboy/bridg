@@ -24,38 +24,38 @@ import {
 /**
  * 
  * @export
- * @interface SpecimenData
+ * @interface ProducedSpecimenData
  */
-export interface SpecimenData {
+export interface ProducedSpecimenData {
     /**
      * 
      * @type {PerformingMaterialData}
-     * @memberof SpecimenData
+     * @memberof ProducedSpecimenData
      */
     performingMaterial: PerformingMaterialData;
 }
 
 /**
- * Check if a given object implements the SpecimenData interface.
+ * Check if a given object implements the ProducedSpecimenData interface.
  */
-export function instanceOfSpecimenData(value: object): value is SpecimenData {
+export function instanceOfProducedSpecimenData(value: object): value is ProducedSpecimenData {
     if (!('performingMaterial' in value) || value['performingMaterial'] === undefined) return false;
     return true;
 }
 
 /**
- * Check if a given object is SpecimenData JSON.
+ * Check if a given object is ProducedSpecimenData JSON.
  */
-export function isSpecimenDataJSON(value: object): boolean {
+export function isProducedSpecimenDataJSON(value: object): boolean {
     if (!('performing_material' in value) || value['performing_material'] === undefined) return false;
     return true;
 }
 
-export function SpecimenDataFromJSON(json: any): SpecimenData {
-    return SpecimenDataFromJSONTyped(json, false);
+export function ProducedSpecimenDataFromJSON(json: any): ProducedSpecimenData {
+    return ProducedSpecimenDataFromJSONTyped(json, false);
 }
 
-export function SpecimenDataFromJSONTyped(json: any, ignoreDiscriminator: boolean): SpecimenData {
+export function ProducedSpecimenDataFromJSONTyped(json: any, ignoreDiscriminator: boolean): ProducedSpecimenData {
     if (json == null) {
         return json;
     }
@@ -65,11 +65,11 @@ export function SpecimenDataFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function SpecimenDataToJSON(json: any): SpecimenData {
-    return SpecimenDataToJSONTyped(json, false);
+export function ProducedSpecimenDataToJSON(json: any): ProducedSpecimenData {
+    return ProducedSpecimenDataToJSONTyped(json, false);
 }
 
-export function SpecimenDataToJSONTyped(value?: SpecimenData | null, ignoreDiscriminator: boolean = false): any {
+export function ProducedSpecimenDataToJSONTyped(value?: ProducedSpecimenData | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

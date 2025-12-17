@@ -48,98 +48,85 @@ import {
     EpochToJSON,
     EpochToJSONTyped,
 } from './Epoch';
-import type { ProducedSpecimen } from './ProducedSpecimen';
-import {
-    ProducedSpecimenFromJSON,
-    ProducedSpecimenFromJSONTyped,
-    ProducedSpecimenToJSON,
-    ProducedSpecimenToJSONTyped,
-} from './ProducedSpecimen';
 
 /**
  * 
  * @export
- * @interface PerformedSpecimenCollection
+ * @interface ProducingPerformedSpecimenCollection
  */
-export interface PerformedSpecimenCollection {
+export interface ProducingPerformedSpecimenCollection {
     /**
      * 
      * @type {string}
-     * @memberof PerformedSpecimenCollection
+     * @memberof ProducingPerformedSpecimenCollection
      */
     id: string;
     /**
      * 
      * @type {string}
-     * @memberof PerformedSpecimenCollection
+     * @memberof ProducingPerformedSpecimenCollection
      */
     comment: string | null;
     /**
      * 
      * @type {IntervalPointInTime}
-     * @memberof PerformedSpecimenCollection
+     * @memberof ProducingPerformedSpecimenCollection
      */
     dateRange: IntervalPointInTime | null;
     /**
      * 
      * @type {boolean}
-     * @memberof PerformedSpecimenCollection
+     * @memberof ProducingPerformedSpecimenCollection
      */
     negationIndicator: boolean | null;
     /**
      * 
      * @type {ConceptDescriptor}
-     * @memberof PerformedSpecimenCollection
+     * @memberof ProducingPerformedSpecimenCollection
      */
     negationReason: ConceptDescriptor | null;
     /**
      * 
      * @type {ConceptDescriptor}
-     * @memberof PerformedSpecimenCollection
+     * @memberof ProducingPerformedSpecimenCollection
      */
     reasonCode: ConceptDescriptor | null;
     /**
      * 
      * @type {ConceptDescriptor}
-     * @memberof PerformedSpecimenCollection
+     * @memberof ProducingPerformedSpecimenCollection
      */
     statusCode: ConceptDescriptor | null;
     /**
      * 
      * @type {Date}
-     * @memberof PerformedSpecimenCollection
+     * @memberof ProducingPerformedSpecimenCollection
      */
     statusDate: Date | null;
     /**
      * 
      * @type {StudySite}
-     * @memberof PerformedSpecimenCollection
+     * @memberof ProducingPerformedSpecimenCollection
      */
     contextForStudySite: StudySite | null;
     /**
      * 
      * @type {Epoch}
-     * @memberof PerformedSpecimenCollection
+     * @memberof ProducingPerformedSpecimenCollection
      */
     containingEpoch: Epoch | null;
     /**
      * 
      * @type {DefinedActivity}
-     * @memberof PerformedSpecimenCollection
+     * @memberof ProducingPerformedSpecimenCollection
      */
     instantiatedDefinedActivity: DefinedActivity | null;
-    /**
-     * 
-     * @type {ProducedSpecimen}
-     * @memberof PerformedSpecimenCollection
-     */
-    producedSpecimen: ProducedSpecimen | null;
 }
 
 /**
- * Check if a given object implements the PerformedSpecimenCollection interface.
+ * Check if a given object implements the ProducingPerformedSpecimenCollection interface.
  */
-export function instanceOfPerformedSpecimenCollection(value: object): value is PerformedSpecimenCollection {
+export function instanceOfProducingPerformedSpecimenCollection(value: object): value is ProducingPerformedSpecimenCollection {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('comment' in value) || value['comment'] === undefined) return false;
     if (!('dateRange' in value) || value['dateRange'] === undefined) return false;
@@ -151,14 +138,13 @@ export function instanceOfPerformedSpecimenCollection(value: object): value is P
     if (!('contextForStudySite' in value) || value['contextForStudySite'] === undefined) return false;
     if (!('containingEpoch' in value) || value['containingEpoch'] === undefined) return false;
     if (!('instantiatedDefinedActivity' in value) || value['instantiatedDefinedActivity'] === undefined) return false;
-    if (!('producedSpecimen' in value) || value['producedSpecimen'] === undefined) return false;
     return true;
 }
 
 /**
- * Check if a given object is PerformedSpecimenCollection JSON.
+ * Check if a given object is ProducingPerformedSpecimenCollection JSON.
  */
-export function isPerformedSpecimenCollectionJSON(value: object): boolean {
+export function isProducingPerformedSpecimenCollectionJSON(value: object): boolean {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('comment' in value) || value['comment'] === undefined) return false;
     if (!('date_range' in value) || value['date_range'] === undefined) return false;
@@ -170,15 +156,14 @@ export function isPerformedSpecimenCollectionJSON(value: object): boolean {
     if (!('context_for_study_site' in value) || value['context_for_study_site'] === undefined) return false;
     if (!('containing_epoch' in value) || value['containing_epoch'] === undefined) return false;
     if (!('instantiated_defined_activity' in value) || value['instantiated_defined_activity'] === undefined) return false;
-    if (!('produced_specimen' in value) || value['produced_specimen'] === undefined) return false;
     return true;
 }
 
-export function PerformedSpecimenCollectionFromJSON(json: any): PerformedSpecimenCollection {
-    return PerformedSpecimenCollectionFromJSONTyped(json, false);
+export function ProducingPerformedSpecimenCollectionFromJSON(json: any): ProducingPerformedSpecimenCollection {
+    return ProducingPerformedSpecimenCollectionFromJSONTyped(json, false);
 }
 
-export function PerformedSpecimenCollectionFromJSONTyped(json: any, ignoreDiscriminator: boolean): PerformedSpecimenCollection {
+export function ProducingPerformedSpecimenCollectionFromJSONTyped(json: any, ignoreDiscriminator: boolean): ProducingPerformedSpecimenCollection {
     if (json == null) {
         return json;
     }
@@ -195,15 +180,14 @@ export function PerformedSpecimenCollectionFromJSONTyped(json: any, ignoreDiscri
         'contextForStudySite': StudySiteFromJSON(json['context_for_study_site']),
         'containingEpoch': EpochFromJSON(json['containing_epoch']),
         'instantiatedDefinedActivity': DefinedActivityFromJSON(json['instantiated_defined_activity']),
-        'producedSpecimen': ProducedSpecimenFromJSON(json['produced_specimen']),
     };
 }
 
-export function PerformedSpecimenCollectionToJSON(json: any): PerformedSpecimenCollection {
-    return PerformedSpecimenCollectionToJSONTyped(json, false);
+export function ProducingPerformedSpecimenCollectionToJSON(json: any): ProducingPerformedSpecimenCollection {
+    return ProducingPerformedSpecimenCollectionToJSONTyped(json, false);
 }
 
-export function PerformedSpecimenCollectionToJSONTyped(value?: PerformedSpecimenCollection | null, ignoreDiscriminator: boolean = false): any {
+export function ProducingPerformedSpecimenCollectionToJSONTyped(value?: ProducingPerformedSpecimenCollection | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -221,7 +205,6 @@ export function PerformedSpecimenCollectionToJSONTyped(value?: PerformedSpecimen
         'context_for_study_site': StudySiteToJSON(value['contextForStudySite']),
         'containing_epoch': EpochToJSON(value['containingEpoch']),
         'instantiated_defined_activity': DefinedActivityToJSON(value['instantiatedDefinedActivity']),
-        'produced_specimen': ProducedSpecimenToJSON(value['producedSpecimen']),
     };
 }
 

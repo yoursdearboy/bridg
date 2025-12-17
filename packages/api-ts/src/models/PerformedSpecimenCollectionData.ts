@@ -20,13 +20,6 @@ import {
     IntervalPointInTimeToJSON,
     IntervalPointInTimeToJSONTyped,
 } from './IntervalPointInTime';
-import type { SpecimenData } from './SpecimenData';
-import {
-    SpecimenDataFromJSON,
-    SpecimenDataFromJSONTyped,
-    SpecimenDataToJSON,
-    SpecimenDataToJSONTyped,
-} from './SpecimenData';
 import type { ConceptDescriptor } from './ConceptDescriptor';
 import {
     ConceptDescriptorFromJSON,
@@ -34,6 +27,13 @@ import {
     ConceptDescriptorToJSON,
     ConceptDescriptorToJSONTyped,
 } from './ConceptDescriptor';
+import type { ProducedSpecimenData } from './ProducedSpecimenData';
+import {
+    ProducedSpecimenDataFromJSON,
+    ProducedSpecimenDataFromJSONTyped,
+    ProducedSpecimenDataToJSON,
+    ProducedSpecimenDataToJSONTyped,
+} from './ProducedSpecimenData';
 
 /**
  * 
@@ -103,10 +103,10 @@ export interface PerformedSpecimenCollectionData {
     instantiatedDefinedActivityId: string | null;
     /**
      * 
-     * @type {SpecimenData}
+     * @type {ProducedSpecimenData}
      * @memberof PerformedSpecimenCollectionData
      */
-    producedSpecimen: SpecimenData | null;
+    producedSpecimen: ProducedSpecimenData | null;
 }
 
 /**
@@ -165,7 +165,7 @@ export function PerformedSpecimenCollectionDataFromJSONTyped(json: any, ignoreDi
         'contextForStudySiteId': json['context_for_study_site_id'],
         'containingEpochId': json['containing_epoch_id'],
         'instantiatedDefinedActivityId': json['instantiated_defined_activity_id'],
-        'producedSpecimen': SpecimenDataFromJSON(json['produced_specimen']),
+        'producedSpecimen': ProducedSpecimenDataFromJSON(json['produced_specimen']),
     };
 }
 
@@ -190,7 +190,7 @@ export function PerformedSpecimenCollectionDataToJSONTyped(value?: PerformedSpec
         'context_for_study_site_id': value['contextForStudySiteId'],
         'containing_epoch_id': value['containingEpochId'],
         'instantiated_defined_activity_id': value['instantiatedDefinedActivityId'],
-        'produced_specimen': SpecimenDataToJSON(value['producedSpecimen']),
+        'produced_specimen': ProducedSpecimenDataToJSON(value['producedSpecimen']),
     };
 }
 
