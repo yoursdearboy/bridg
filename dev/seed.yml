@@ -194,11 +194,11 @@ study_subject:
       - id: 2b0cbe27-f453-48e5-970d-3d8f42b957ef
         type: specimen_collection
         produced_specimen:
-          id: f74585f6-f5b3-4bbb-a21e-2284f14661af
-          performing_material:
-            id: 9aded66d-0b2f-4db0-984b-5e50f4ce5b00
-            type: biologic
-            code: material.code/BM
+          - id: f74585f6-f5b3-4bbb-a21e-2284f14661af
+            performing_material:
+              id: 9aded66d-0b2f-4db0-984b-5e50f4ce5b00
+              type: biologic
+              code: material.code/BM
       - id: ce3dd821-3a1b-41dd-a366-292c8c163a58
         type: observation
         containing_epoch: *aml-mrd-2018-screening
