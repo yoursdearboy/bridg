@@ -16,7 +16,11 @@ import {
 import { useTranslation } from "react-i18next";
 import { EpochSelect } from "@/components/input/EpochSelect";
 import { StudySiteSelect } from "@/components/input/StudySiteSelect";
-import { doesMatchObservationResult, matchObservationResult } from "@/model";
+import {
+  doesMatchObservationResult,
+  getClassNameOfPerformedActivityUnionData,
+  matchObservationResult,
+} from "@/model";
 import { ConceptDescriptorSelect, IntervalPointInTimeInput } from "./Input";
 import { ObservatonResultForm } from "./ObservationResultForm";
 
@@ -36,10 +40,11 @@ const ActivityFields = ({
   // eslint-disable-next-line @stylistic/comma-dangle
   const handleChange = <T,>(data: { [key: string]: T }): void =>
     onChange({ ...performedActivity, ...data });
+  const className = getClassNameOfPerformedActivityUnionData(performedActivity);
   return (
     <Stack>
       <IntervalPointInTimeInput
-        label={t("PerformedActivity.dateRange")}
+        label={t(`${className}.dateRange`)}
         value={performedActivity.dateRange}
         onChange={(dateRange: IntervalPointInTime | null) =>
           handleChange({
@@ -48,13 +53,13 @@ const ActivityFields = ({
         }
       />
       <EpochSelect
-        label={t("PerformedActivity.containingEpoch")}
+        label={t(`${className}.containingEpoch`)}
         value={performedActivity.containingEpochId}
         onChange={(containingEpochId) => handleChange({ containingEpochId })}
         spaceId={spaceId}
       />
       <StudySiteSelect
-        label={t("PerformedActivity.contextForStudySite")}
+        label={t(`${className}.contextForStudySite`)}
         value={performedActivity.contextForStudySiteId}
         onChange={(contextForStudySiteId) =>
           handleChange({ contextForStudySiteId })
@@ -62,7 +67,7 @@ const ActivityFields = ({
         spaceId={spaceId}
       />
       <ConceptDescriptorSelect
-        label={t("PerformedActivity.negationReason")}
+        label={t(`${className}.negationReason`)}
         value={performedActivity.negationReason}
         codeSystem="performed_activity.negation_reason"
         onChange={(negationReason: ConceptDescriptor | null) =>
@@ -73,19 +78,19 @@ const ActivityFields = ({
         }
       />
       <Textarea
-        label={t("PerformedActivity.comment")}
+        label={t(`${className}.comment`)}
         value={performedActivity.comment || ""}
         onChange={(e) => handleChange({ comment: e.target.value || null })}
       />
       <Group grow>
         <ConceptDescriptorSelect
-          label={t("PerformedActivity.statusCode")}
+          label={t(`${className}.statusCode`)}
           value={performedActivity.statusCode}
           onChange={(statusCode) => handleChange({ statusCode })}
           codeSystem="performed_activity.status_code"
         />
         <DateInput
-          label={t("PerformedActivity.statusDate")}
+          label={t(`${className}.statusDate`)}
           value={performedActivity.statusDate}
           onChange={(value) => {
             handleChange({ statusDate: value ? new Date(value) : null });

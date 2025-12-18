@@ -71,11 +71,30 @@
       "statusCode": "Status",
       "statusDate": "Status date"
     },
+    "PerformedObservation": {
+      "comment": "Comment",
+      "containingEpoch": "Epoch",
+      "contextForStudySite": "Study site",
+      "dateRange": "Date range",
+      "dateRange.high": "Date end",
+      "dateRange.low": "Date start",
+      "negationIndicator": "Negation",
+      "negationReason": "Negation reason",
+      "statusCode": "Status",
+      "statusDate": "Status date"
+    },
     "PerformedSpecimenCollection": {
+      "comment": "Comment",
+      "containingEpoch": "Epoch",
+      "contextForStudySite": "Study site",
       "dateRange": "Specimen collection date",
       "dateRange.high": "Specimen collection end date",
       "dateRange.low": "Specimen collection start date",
-      "defaultLabel": "Specimen collection"
+      "defaultLabel": "Specimen collection",
+      "negationIndicator": "Negation",
+      "negationReason": "Negation reason",
+      "statusCode": "Status",
+      "statusDate": "Status date"
     },
     "PerformingBiologicEntitySelect": {
       "text": "Select existing biologic entity:"

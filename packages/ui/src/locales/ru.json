@@ -71,11 +71,30 @@
       "statusCode": "Статус",
       "statusDate": "Дата статуса"
     },
+    "PerformedObservation": {
+      "comment": "Комментарий",
+      "containingEpoch": "Точка",
+      "contextForStudySite": "Центр",
+      "dateRange": "Дата начала — окончания",
+      "dateRange.high": "Дата окончания",
+      "dateRange.low": "Дата начала",
+      "negationIndicator": "Не проведено",
+      "negationReason": "Причина непроведения",
+      "statusCode": "Статус",
+      "statusDate": "Дата статуса"
+    },
     "PerformedSpecimenCollection": {
+      "comment": "Комментарий",
+      "containingEpoch": "Точка",
+      "contextForStudySite": "Центр",
       "dateRange": "Дата начала — окончания забора",
       "dateRange.high": "Дата окончания забора",
       "dateRange.low": "Дата начала забора",
-      "defaultLabel": "Забор биоматериала"
+      "defaultLabel": "Забор биоматериала",
+      "negationIndicator": "Не проведено",
+      "negationReason": "Причина непроведения",
+      "statusCode": "Статус",
+      "statusDate": "Дата статуса"
     },
     "PerformingBiologicEntitySelect": {
       "text": "Выберите существующую запись:"
