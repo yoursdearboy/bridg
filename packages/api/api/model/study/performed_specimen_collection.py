@@ -1,4 +1,4 @@
-from typing import Annotated, Optional
+from typing import Annotated, List
 from uuid import UUID
 
 import bridg
@@ -27,8 +27,8 @@ class ProducedSpecimenData(BaseModel[bridg.Specimen]):
 
 
 class PerformedSpecimenCollection(PerformedProcedure[bridg.PerformedSpecimenCollection]):
-    produced_specimen: Optional[ProducedSpecimen]
+    produced_specimen: List[ProducedSpecimen]
 
 
 class PerformedSpecimenCollectionData(PerformedProcedureData[bridg.PerformedSpecimenCollection]):
-    produced_specimen: Optional[ProducedSpecimenData]
+    produced_specimen: List[ProducedSpecimenData]

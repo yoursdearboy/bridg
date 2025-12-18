@@ -103,10 +103,10 @@ export interface PerformedSpecimenCollectionData {
     instantiatedDefinedActivityId: string | null;
     /**
      * 
-     * @type {ProducedSpecimenData}
+     * @type {Array<ProducedSpecimenData>}
      * @memberof PerformedSpecimenCollectionData
      */
-    producedSpecimen: ProducedSpecimenData | null;
+    producedSpecimen: Array<ProducedSpecimenData>;
 }
 
 /**
@@ -165,7 +165,7 @@ export function PerformedSpecimenCollectionDataFromJSONTyped(json: any, ignoreDi
         'contextForStudySiteId': json['context_for_study_site_id'],
         'containingEpochId': json['containing_epoch_id'],
         'instantiatedDefinedActivityId': json['instantiated_defined_activity_id'],
-        'producedSpecimen': ProducedSpecimenDataFromJSON(json['produced_specimen']),
+        'producedSpecimen': ((json['produced_specimen'] as Array<any>).map(ProducedSpecimenDataFromJSON)),
     };
 }
 
@@ -190,7 +190,7 @@ export function PerformedSpecimenCollectionDataToJSONTyped(value?: PerformedSpec
         'context_for_study_site_id': value['contextForStudySiteId'],
         'containing_epoch_id': value['containingEpochId'],
         'instantiated_defined_activity_id': value['instantiatedDefinedActivityId'],
-        'produced_specimen': ProducedSpecimenDataToJSON(value['producedSpecimen']),
+        'produced_specimen': ((value['producedSpecimen'] as Array<any>).map(ProducedSpecimenDataToJSON)),
     };
 }
 

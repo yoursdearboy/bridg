@@ -130,10 +130,10 @@ export interface PerformedSpecimenCollection {
     instantiatedDefinedActivity: DefinedActivity | null;
     /**
      * 
-     * @type {ProducedSpecimen}
+     * @type {Array<ProducedSpecimen>}
      * @memberof PerformedSpecimenCollection
      */
-    producedSpecimen: ProducedSpecimen | null;
+    producedSpecimen: Array<ProducedSpecimen>;
 }
 
 /**
@@ -195,7 +195,7 @@ export function PerformedSpecimenCollectionFromJSONTyped(json: any, ignoreDiscri
         'contextForStudySite': StudySiteFromJSON(json['context_for_study_site']),
         'containingEpoch': EpochFromJSON(json['containing_epoch']),
         'instantiatedDefinedActivity': DefinedActivityFromJSON(json['instantiated_defined_activity']),
-        'producedSpecimen': ProducedSpecimenFromJSON(json['produced_specimen']),
+        'producedSpecimen': ((json['produced_specimen'] as Array<any>).map(ProducedSpecimenFromJSON)),
     };
 }
 
@@ -221,7 +221,7 @@ export function PerformedSpecimenCollectionToJSONTyped(value?: PerformedSpecimen
         'context_for_study_site': StudySiteToJSON(value['contextForStudySite']),
         'containing_epoch': EpochToJSON(value['containingEpoch']),
         'instantiated_defined_activity': DefinedActivityToJSON(value['instantiatedDefinedActivity']),
-        'produced_specimen': ProducedSpecimenToJSON(value['producedSpecimen']),
+        'produced_specimen': ((value['producedSpecimen'] as Array<any>).map(ProducedSpecimenToJSON)),
     };
 }
 
