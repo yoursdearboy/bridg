@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { ActivityCard } from "@/components/activity/ActivityCard";
 import ButtonLink from "@/components/ButtonLink";
 import { PersonCard } from "@/components/person/PersonCard";
+import { SpecimenCard } from "@/components/specimen/SpecimenCard";
 import { SpaceRedirectForm } from "@/components/subject/SpaceRedirectForm";
 import { StatusButton } from "@/components/subject/StatusForm";
 
@@ -72,6 +73,9 @@ function SubjectShowPage() {
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 7 }}>
           <ActivityCard spaceId={spaceId} subjectId={subjectId} />
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, md: 7 }} offset={{ base: 0, md: 5 }}>
+          <SpecimenCard spaceId={spaceId} subjectId={subjectId} />
         </Grid.Col>
       </Grid>
 
