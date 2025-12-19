@@ -1,7 +1,8 @@
 import { Card, Group, Stack, Text, Textarea } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import {
-  instanceOfDefinedObservation,
+  instanceOfPerformedObservationData,
+  instanceOfPerformedSpecimenCollectionData,
   type ConceptDescriptor,
   type DefinedActivityUnion,
   type DefinedObservation,
@@ -9,6 +10,8 @@ import {
   type PerformedActivityUnionData,
   type PerformedObservationData,
   type PerformedObservationResultData,
+  type PerformedSpecimenCollectionData,
+  type PerformingMaterialData,
 } from "api-ts";
 import { useTranslation } from "react-i18next";
 import { EpochSelect } from "@/components/input/EpochSelect";
@@ -19,7 +22,7 @@ import { ObservatonResultForm } from "./ObservationResultForm";
 
 interface ActivityFormProps {
   spaceId: string;
-  definedActivity: DefinedActivityUnion;
+  definedActivity: DefinedActivityUnion | null;
   performedActivity: PerformedActivityUnionData;
   onChange: (activity: PerformedActivityUnionData) => void;
 }
@@ -100,12 +103,16 @@ export const ActivityForm = ({
   performedActivity,
   onChange,
 }: ActivityFormProps) => {
-  const { t } = useTranslation();
   return (
     <Card withBorder shadow="sm" radius="md">
       <Card.Section withBorder inheritPadding py="xs">
         <Text fw={500}>
-          {definedActivity.nameCode.displayName || t("Activity.defaultLabel")}
+          <ActivityFormTitle
+            definedActivity={definedActivity}
+            performedActivity={performedActivity}
+            onChange={onChange}
+            spaceId={spaceId}
+          />
         </Text>
       </Card.Section>
       <Card.Section withBorder inheritPadding py="xs">
@@ -128,20 +135,41 @@ export const ActivityForm = ({
   );
 };
 
+const ActivityFormTitle = ({
+  definedActivity,
+  performedActivity,
+}: ActivityFormProps) => {
+  const { t } = useTranslation();
+  if (instanceOfPerformedObservationData(performedActivity)) {
+    return definedActivity?.nameCode.displayName || t("Activity.defaultLabel");
+  }
+  if (instanceOfPerformedSpecimenCollectionData(performedActivity)) {
+    return t("PerformedSpecimenCollection.defaultLabel");
+  }
+  return t("Activity.defaultLabel");
+};
+
 const ActivityFormSwitch = ({
   definedActivity,
   performedActivity,
   onChange,
 }: ActivityFormProps) => {
-  if (instanceOfDefinedObservation(definedActivity)) {
+  if (instanceOfPerformedObservationData(performedActivity)) {
     return (
       <ObservationForm
-        definedActivity={definedActivity}
-        performedActivity={performedActivity as PerformedObservationData}
+        definedActivity={definedActivity as DefinedObservation}
+        performedActivity={performedActivity}
         onChange={onChange}
       />
     );
   }
+  if (instanceOfPerformedSpecimenCollectionData(performedActivity))
+    return (
+      <SpecimenCollectionForm
+        performedActivity={performedActivity}
+        onChange={onChange}
+      />
+    );
 };
 
 interface ObservationFormProps {
@@ -182,6 +210,55 @@ const ObservationForm = ({
           />
         )
       )}
+    </Stack>
+  );
+};
+
+interface SpecimenCollectionFormProps {
+  performedActivity: PerformedSpecimenCollectionData;
+  onChange: (data: PerformedSpecimenCollectionData) => void;
+}
+
+const SpecimenCollectionForm = ({
+  performedActivity,
+  onChange,
+}: SpecimenCollectionFormProps) => {
+  return (
+    performedActivity.producedSpecimen && (
+      <PerformingMaterialForm
+        data={performedActivity.producedSpecimen.performingMaterial}
+        onChange={(performingMaterial) =>
+          onChange({
+            ...performedActivity,
+            producedSpecimen: {
+              ...performedActivity.producedSpecimen,
+              performingMaterial,
+            },
+          })
+        }
+      />
+    )
+  );
+};
+
+interface PerformingMaterialFormProps {
+  data: PerformingMaterialData;
+  onChange: (data: PerformingMaterialData) => void;
+}
+
+const PerformingMaterialForm = ({
+  data,
+  onChange,
+}: PerformingMaterialFormProps) => {
+  const { t } = useTranslation();
+  return (
+    <Stack>
+      <ConceptDescriptorSelect
+        label={t("Material.code")}
+        value={data.code}
+        codeSystem="material.code"
+        onChange={(code) => onChange({ ...data, code })}
+      />
     </Stack>
   );
 };

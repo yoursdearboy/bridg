@@ -1,3 +1,4 @@
+from .biospecimen import *
 from .common import *
 from .datatype import *
 from .db import *

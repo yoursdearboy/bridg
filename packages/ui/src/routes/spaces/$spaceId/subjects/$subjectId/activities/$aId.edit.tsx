@@ -16,6 +16,7 @@ import {
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   instanceOfPerformedObservation,
+  instanceOfPerformedSpecimenCollection,
   type PerformedActivityUnionData,
 } from "api-ts";
 import i18next from "i18next";
@@ -42,11 +43,12 @@ export const Route = createFileRoute(
             aId: params.aId,
             result: true,
           });
-        const definedActivity =
-          await api.definedActivity.showDefinedActivityAIdGet({
-            aId: performedActivity.instantiatedDefinedActivity!.id,
-            result: true,
-          });
+        const definedActivity = performedActivity.instantiatedDefinedActivity
+          ? await api.definedActivity.showDefinedActivityAIdGet({
+              aId: performedActivity.instantiatedDefinedActivity.id,
+              result: true,
+            })
+          : null;
         return { performedActivity, definedActivity };
       },
     }),
@@ -74,12 +76,15 @@ function ActivityEditRoute() {
     statusDate: performedActivity.statusDate,
     contextForStudySiteId: performedActivity.contextForStudySite?.id || null,
     containingEpochId: performedActivity.containingEpoch?.id || null,
-    instantiatedDefinedActivityId: definedActivity.id,
+    instantiatedDefinedActivityId: definedActivity?.id || null,
     resultedPerformedObservationResult: instanceOfPerformedObservation(
       performedActivity
     )
       ? performedActivity.resultedPerformedObservationResult
-      : [],
+      : undefined,
+    producedSpecimen: instanceOfPerformedSpecimenCollection(performedActivity)
+      ? performedActivity.producedSpecimen
+      : undefined,
   });
   const mutation = useMutation({
     mutationKey: ["subject", subjectId, "activity", aId],

@@ -28,13 +28,21 @@ import {
     PerformedObservationFromJSONTyped,
     PerformedObservationToJSON,
 } from './PerformedObservation';
+import type { PerformedSpecimenCollection } from './PerformedSpecimenCollection';
+import {
+    instanceOfPerformedSpecimenCollection,
+    isPerformedSpecimenCollectionJSON,
+    PerformedSpecimenCollectionFromJSON,
+    PerformedSpecimenCollectionFromJSONTyped,
+    PerformedSpecimenCollectionToJSON,
+} from './PerformedSpecimenCollection';
 
 /**
  * @type PerformedActivityUnion
  * 
  * @export
  */
-export type PerformedActivityUnion = PerformedActivity | PerformedObservation;
+export type PerformedActivityUnion = PerformedActivity | PerformedObservation | PerformedSpecimenCollection;
 
 export function PerformedActivityUnionFromJSON(json: any): PerformedActivityUnion {
     return PerformedActivityUnionFromJSONTyped(json, false);
@@ -49,6 +57,9 @@ export function PerformedActivityUnionFromJSONTyped(json: any, ignoreDiscriminat
     }
     if (isPerformedObservationJSON(json)) {
         return PerformedObservationFromJSONTyped(json, true);
+    }
+    if (isPerformedSpecimenCollectionJSON(json)) {
+        return PerformedSpecimenCollectionFromJSONTyped(json, true);
     }
     if (isPerformedActivityJSON(json)) {
         return PerformedActivityFromJSONTyped(json, true);
@@ -69,6 +80,9 @@ export function PerformedActivityUnionToJSONTyped(value?: PerformedActivityUnion
     }
     if (instanceOfPerformedObservation(value)) {
         return PerformedObservationToJSON(value as PerformedObservation);
+    }
+    if (instanceOfPerformedSpecimenCollection(value)) {
+        return PerformedSpecimenCollectionToJSON(value as PerformedSpecimenCollection);
     }
     if (instanceOfPerformedActivity(value)) {
         return PerformedActivityToJSON(value as PerformedActivity);

@@ -39,6 +39,9 @@
       "M": "Мужской",
       "U": "Не известно"
     },
+    "Material": {
+      "code": "Вид"
+    },
     "Name": {
       "defaultLabel": "Без имени",
       "family": "Фамилия",
@@ -65,6 +68,9 @@
       "negationReason": "Причина непроведения",
       "statusCode": "Статус",
       "statusDate": "Дата статуса"
+    },
+    "PerformedSpecimenCollection": {
+      "defaultLabel": "Забор биоматериала"
     },
     "PerformingBiologicEntitySelect": {
       "text": "Выберите существующую запись:"
