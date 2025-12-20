@@ -39,6 +39,9 @@
       "M": "Мужской",
       "U": "Не известно"
     },
+    "Material": {
+      "code": "Вид"
+    },
     "Name": {
       "defaultLabel": "Без имени",
       "family": "Фамилия",
@@ -61,6 +64,33 @@
       "containingEpoch": "Точка",
       "contextForStudySite": "Центр",
       "dateRange": "Дата начала — окончания",
+      "dateRange.high": "Дата окончания",
+      "dateRange.low": "Дата начала",
+      "negationIndicator": "Не проведено",
+      "negationReason": "Причина непроведения",
+      "statusCode": "Статус",
+      "statusDate": "Дата статуса"
+    },
+    "PerformedObservation": {
+      "comment": "Комментарий",
+      "containingEpoch": "Точка",
+      "contextForStudySite": "Центр",
+      "dateRange": "Дата начала — окончания",
+      "dateRange.high": "Дата окончания",
+      "dateRange.low": "Дата начала",
+      "negationIndicator": "Не проведено",
+      "negationReason": "Причина непроведения",
+      "statusCode": "Статус",
+      "statusDate": "Дата статуса"
+    },
+    "PerformedSpecimenCollection": {
+      "comment": "Комментарий",
+      "containingEpoch": "Точка",
+      "contextForStudySite": "Центр",
+      "dateRange": "Дата начала — окончания забора",
+      "dateRange.high": "Дата окончания забора",
+      "dateRange.low": "Дата начала забора",
+      "defaultLabel": "Забор биоматериала",
       "negationIndicator": "Не проведено",
       "negationReason": "Причина непроведения",
       "statusCode": "Статус",
@@ -120,6 +150,12 @@
     "SpaceRedirecForm": {
       "space": "Исследование",
       "studySite": "Исследовательский центр"
+    },
+    "Specimen": {
+      "defaultLabel": "Безымянный образец"
+    },
+    "SpecimenCard": {
+      "title": "Образцы"
     },
     "Status": {
       "candidate": "Кандидат",

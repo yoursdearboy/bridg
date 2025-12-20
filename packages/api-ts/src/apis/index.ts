@@ -8,4 +8,5 @@ export * from './PerformedActivityApi';
 export * from './PersonSubjectApi';
 export * from './PersonsApi';
 export * from './SpaceActivityApi';
+export * from './SpecimenApi';
 export * from './SubjectsApi';

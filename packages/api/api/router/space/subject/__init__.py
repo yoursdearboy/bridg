@@ -10,7 +10,7 @@ from api.db import get_db, get_repository
 from api.model import BaseModel, Person, PersonData, StudySubject, StudySubjectData
 from api.service.subject import StudySubjectRepository
 
-from . import performed_activity
+from . import performed_activity, specimen
 
 router = APIRouter(prefix="/subjects", tags=["subjects"])
 
@@ -99,5 +99,6 @@ def lookup(space_id: UUID, data: LookupStudySubject, repo: StudySubjectRepositor
 
 
 router.include_router(performed_activity.router, prefix="/{subject_id:uuid}")
+router.include_router(specimen.router, prefix="/{subject_id:uuid}")
 
 openapi_tag = [{"name": "subjects"}, *performed_activity.openapi_tags]

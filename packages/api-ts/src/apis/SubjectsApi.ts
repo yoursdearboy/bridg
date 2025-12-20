@@ -22,6 +22,7 @@ import type {
   PerformedActivity,
   PerformedActivityUnion,
   PerformedActivityUnionData,
+  Specimen,
   StudySubject,
   StudySubjectData,
 } from '../models/index';
@@ -40,6 +41,8 @@ import {
     PerformedActivityUnionToJSON,
     PerformedActivityUnionDataFromJSON,
     PerformedActivityUnionDataToJSON,
+    SpecimenFromJSON,
+    SpecimenToJSON,
     StudySubjectFromJSON,
     StudySubjectToJSON,
     StudySubjectDataFromJSON,
@@ -62,6 +65,11 @@ export interface IndexSpacesSpaceIdSubjectsGetRequest {
 }
 
 export interface IndexSpacesSpaceIdSubjectsSubjectIdActivityGetRequest {
+    spaceId: string;
+    subjectId: string;
+}
+
+export interface IndexSpacesSpaceIdSubjectsSubjectIdSpecimenGetRequest {
     spaceId: string;
     subjectId: string;
 }
@@ -282,6 +290,51 @@ export class SubjectsApi extends runtime.BaseAPI {
      */
     async indexSpacesSpaceIdSubjectsSubjectIdActivityGet(requestParameters: IndexSpacesSpaceIdSubjectsSubjectIdActivityGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PerformedActivity>> {
         const response = await this.indexSpacesSpaceIdSubjectsSubjectIdActivityGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Index
+     */
+    async indexSpacesSpaceIdSubjectsSubjectIdSpecimenGetRaw(requestParameters: IndexSpacesSpaceIdSubjectsSubjectIdSpecimenGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Specimen>>> {
+        if (requestParameters['spaceId'] == null) {
+            throw new runtime.RequiredError(
+                'spaceId',
+                'Required parameter "spaceId" was null or undefined when calling indexSpacesSpaceIdSubjectsSubjectIdSpecimenGet().'
+            );
+        }
+
+        if (requestParameters['subjectId'] == null) {
+            throw new runtime.RequiredError(
+                'subjectId',
+                'Required parameter "subjectId" was null or undefined when calling indexSpacesSpaceIdSubjectsSubjectIdSpecimenGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/spaces/{space_id}/subjects/{subject_id}/specimen`;
+        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+        urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SpecimenFromJSON));
+    }
+
+    /**
+     * Index
+     */
+    async indexSpacesSpaceIdSubjectsSubjectIdSpecimenGet(requestParameters: IndexSpacesSpaceIdSubjectsSubjectIdSpecimenGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Specimen>> {
+        const response = await this.indexSpacesSpaceIdSubjectsSubjectIdSpecimenGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

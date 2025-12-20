@@ -6,6 +6,7 @@ from .performed_inclusion_criterion import PerformedInclusionCriterion
 from .performed_observation import PerformedObservation
 from .performed_observation_result import PerformedObservationResult
 from .performed_procedure import PerformedProcedure
+from .performed_specimen_collection import PerformedSpecimenCollection
 from .performed_substance_administration import PerformedSubstanceAdministration
 from .scheduled_activity import ScheduledActivity
 from .study_conduct import StudyConduct
