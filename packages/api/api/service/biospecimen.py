@@ -10,7 +10,7 @@ class BiospecimenRepository(Repository[bridg.Specimen]):
     def lookup(self, data: bridg.Person) -> List[bridg.Specimen]:
         q = self.db.query(BiologicEntity)
         subjects = []
-        if (pbe := data) and (n := next(iter(pbe.name), None)):
+        if (person := data) and (n := next(iter(person.name), None)):
             q = q.filter(bridg.BiologicEntity.name.any(
                 bridg.EntityName.family.ilike(f"%{n.family}%")))
             subjects = [bridg.StudySubject(
