@@ -15,3 +15,7 @@ def session():
     BaseFactory.__session__ = session
 
     return session
+
+@pytest.fixture
+def snapshot_json(snapshot) -> SnapshotAssertion:
+    return snapshot.with_defaults(extension_class=JSONSnapshotExtension)
