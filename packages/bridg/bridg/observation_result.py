@@ -16,6 +16,7 @@ class ObservationResult:
     def value_cd(cls) -> Mapped[Optional[ConceptDescriptor]]:
         return relationship(foreign_keys=cls.value_cd_id)  # type: ignore
 
+    # FIXME: convert to optional
     @declared_attr
     def value_pq(cls) -> Mapped[PhysicalQuantity]:
         return composite(

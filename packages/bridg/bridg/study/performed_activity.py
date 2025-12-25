@@ -20,7 +20,8 @@ class PerformedActivity(Activity):
 
     repetition_number: Mapped[Optional[int]]
     name_code_modified_text: Mapped[Optional[str]]
-    date_range: Mapped[IntervalPointInTime] = composite(
+    date_range: Mapped[Optional[IntervalPointInTime]] = composite(
+        lambda x, y: IntervalPointInTime(x, y) if x is not None or y is not None else None,
         mapped_column("date_range_low", TZDateTime),
         mapped_column("date_range_high", TZDateTime),
     )
