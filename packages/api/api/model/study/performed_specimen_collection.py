@@ -31,4 +31,6 @@ class PerformedSpecimenCollection(PerformedProcedure[bridg.PerformedSpecimenColl
 
 
 class PerformedSpecimenCollectionData(PerformedProcedureData[bridg.PerformedSpecimenCollection]):
+    _sa = bridg.PerformedSpecimenCollection
+
     produced_specimen: List[ProducedSpecimenData]
