@@ -1,4 +1,4 @@
-from typing import Annotated, List
+from typing import Annotated, List, Optional
 from uuid import UUID
 
 import bridg
@@ -20,6 +20,7 @@ class ProducedSpecimen(BaseModel[bridg.Specimen]):
 class ProducedSpecimenData(BaseModel[bridg.Specimen]):
     _sa = bridg.Specimen
 
+    id: Optional[UUID] = None
     performing_material: Annotated[
         MaterialData | ProductData | BiologicData,
         Field(discriminator="type", json_schema_extra=dict(title="Performing Material Data")),

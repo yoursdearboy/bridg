@@ -2,6 +2,11 @@ from .performed_activity import PerformedActivity, PerformedActivityData
 from .performed_observation import PerformedObservation, PerformedObservationData
 from .performed_observation_result import PerformedObservationResult, PerformedObservationResultData
 from .performed_procedure import PerformedProcedure, PerformedProcedureData
-from .performed_specimen_collection import PerformedSpecimenCollection, PerformedSpecimenCollectionData
+from .performed_specimen_collection import (
+    PerformedSpecimenCollection,
+    PerformedSpecimenCollectionData,
+    ProducedSpecimen,
+    ProducedSpecimenData,
+)
 from .study_site import StudySite
 from .study_site_protocol_version_relationship import StudySiteProtocolVersionRelationship

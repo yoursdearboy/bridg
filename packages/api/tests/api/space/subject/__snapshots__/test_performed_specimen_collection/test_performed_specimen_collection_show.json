@@ -1,0 +1,89 @@
+{
+  "comment": null,
+  "containing_epoch": null,
+  "context_for_study_site": null,
+  "date_range": {
+    "data_type_name": "IVL[TS]",
+    "high": "2085-12-18T04:23:30.704763Z",
+    "low": "2090-07-17T11:11:00.244218Z"
+  },
+  "id": "str",
+  "instantiated_defined_activity": null,
+  "negation_indicator": false,
+  "negation_reason": {
+    "code": "economy",
+    "code_system": "family",
+    "data_type_name": "CD",
+    "display_name": "Democrat car very."
+  },
+  "produced_specimen": [
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "our",
+          "code_system": "your",
+          "data_type_name": "CD",
+          "display_name": "Beat magazine."
+        },
+        "description": null,
+        "form_code": {
+          "code": "authority",
+          "code_system": "soon",
+          "data_type_name": "CD",
+          "display_name": "She campaign little."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    },
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "turn",
+          "code_system": "policy",
+          "data_type_name": "CD",
+          "display_name": "Who up sense."
+        },
+        "description": null,
+        "form_code": {
+          "code": "road",
+          "code_system": "deep",
+          "data_type_name": "CD",
+          "display_name": "Human public."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    },
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "attack",
+          "code_system": "ground",
+          "data_type_name": "CD",
+          "display_name": "Per."
+        },
+        "description": null,
+        "form_code": {
+          "code": "once",
+          "code_system": "drug",
+          "data_type_name": "CD",
+          "display_name": "Detail audience piece director."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    }
+  ],
+  "reason_code": null,
+  "status_code": {
+    "code": "own",
+    "code_system": "part",
+    "data_type_name": "CD",
+    "display_name": "Drug list imagine."
+  },
+  "status_date": "2007-02-01T01:33:10.484617Z"
+}

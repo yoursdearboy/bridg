@@ -19,6 +19,7 @@ class Material(BaseModel):
 class MaterialData(BaseModel[bridg.Material]):
     _sa = bridg.Material
 
+    id: Optional[UUID] = None
     type: Literal["material"] = "material"
 
     code: Optional[ConceptDescriptor]

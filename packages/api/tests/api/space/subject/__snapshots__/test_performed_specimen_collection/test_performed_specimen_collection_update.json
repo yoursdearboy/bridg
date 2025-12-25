@@ -1,0 +1,169 @@
+{
+  "comment": null,
+  "containing_epoch": null,
+  "context_for_study_site": null,
+  "date_range": {
+    "data_type_name": "IVL[TS]",
+    "high": "2093-04-29T07:10:14.697427Z",
+    "low": "2026-07-09T10:41:00.852726Z"
+  },
+  "id": "str",
+  "instantiated_defined_activity": null,
+  "negation_indicator": false,
+  "negation_reason": {
+    "code": "upon",
+    "code_system": "authority",
+    "data_type_name": "CD",
+    "display_name": "Hard citizen."
+  },
+  "produced_specimen": [
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "board",
+          "code_system": "health",
+          "data_type_name": "CD",
+          "display_name": "This image per."
+        },
+        "description": "Agent say forward us soon ten. Environment skin blue the teach.\nStaff least figure somebody dinner. Process huge everything.\nGo meeting quickly such former. Boy wife condition.",
+        "form_code": {
+          "code": "clear",
+          "code_system": "wish",
+          "data_type_name": "CD",
+          "display_name": "Ten wish."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    },
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "least",
+          "code_system": "ability",
+          "data_type_name": "CD",
+          "display_name": "Understand Mrs rest."
+        },
+        "description": "Finish summer rest feel finally impact I fast. Court professor here security. Past feeling nature a.\nInvolve oil pressure let kind. Memory soldier where save probably.",
+        "form_code": {
+          "code": "site",
+          "code_system": "since",
+          "data_type_name": "CD",
+          "display_name": "Hair attorney."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    },
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "join",
+          "code_system": "involve",
+          "data_type_name": "CD",
+          "display_name": "My indeed deal."
+        },
+        "description": "Wall fear hope. Mrs same son today major event. Ahead from quickly identify close level camera.",
+        "form_code": {
+          "code": "kitchen",
+          "code_system": "improve",
+          "data_type_name": "CD",
+          "display_name": "Watch affect thing offer."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    },
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "small",
+          "code_system": "former",
+          "data_type_name": "CD",
+          "display_name": "Anyone live."
+        },
+        "description": null,
+        "form_code": {
+          "code": "wide",
+          "code_system": "tonight",
+          "data_type_name": "CD",
+          "display_name": "Church whether bag."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    },
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "call",
+          "code_system": "year",
+          "data_type_name": "CD",
+          "display_name": "East organization people."
+        },
+        "description": null,
+        "form_code": {
+          "code": "kind",
+          "code_system": "really",
+          "data_type_name": "CD",
+          "display_name": "North first end prove."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    },
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "across",
+          "code_system": "region",
+          "data_type_name": "CD",
+          "display_name": "Federal professional voice."
+        },
+        "description": "Example decision garden reach table. Major town suffer begin interest everybody about.\nClaim kind relationship night born. Nation strong old challenge.",
+        "form_code": {
+          "code": "center",
+          "code_system": "everything",
+          "data_type_name": "CD",
+          "display_name": "Threat score."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    },
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "baby",
+          "code_system": "lose",
+          "data_type_name": "CD",
+          "display_name": "Though offer responsibility."
+        },
+        "description": "Despite sound receive let newspaper true. Lead soon property write.",
+        "form_code": {
+          "code": "if",
+          "code_system": "miss",
+          "data_type_name": "CD",
+          "display_name": "During prevent accept."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    }
+  ],
+  "reason_code": null,
+  "status_code": {
+    "code": "these",
+    "code_system": "of",
+    "data_type_name": "CD",
+    "display_name": "Particularly would."
+  },
+  "status_date": "2065-05-25T11:38:24.378821Z"
+}

@@ -1,0 +1,89 @@
+{
+  "comment": null,
+  "containing_epoch": null,
+  "context_for_study_site": null,
+  "date_range": {
+    "data_type_name": "IVL[TS]",
+    "high": "2093-11-22T10:02:29.192997Z",
+    "low": "2066-05-04T06:32:51.141348Z"
+  },
+  "id": "str",
+  "instantiated_defined_activity": null,
+  "negation_indicator": false,
+  "negation_reason": {
+    "code": "center",
+    "code_system": "everything",
+    "data_type_name": "CD",
+    "display_name": "Threat score."
+  },
+  "produced_specimen": [
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "theory",
+          "code_system": "surface",
+          "data_type_name": "CD",
+          "display_name": "Dream drive."
+        },
+        "description": "She campaign little near enter their institution. Up sense ready require human.",
+        "form_code": {
+          "code": "our",
+          "code_system": "your",
+          "data_type_name": "CD",
+          "display_name": "Beat magazine."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    },
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "customer",
+          "code_system": "between",
+          "data_type_name": "CD",
+          "display_name": "Probably great."
+        },
+        "description": "I fund technology eat. Movie cell contain leg themselves.\nSpace task better present music address. Unit support coach magazine.",
+        "form_code": {
+          "code": "item",
+          "code_system": "manage",
+          "data_type_name": "CD",
+          "display_name": "Report."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    },
+    {
+      "id": "str",
+      "performing_material": {
+        "code": {
+          "code": "clear",
+          "code_system": "customer",
+          "data_type_name": "CD",
+          "display_name": "Design around."
+        },
+        "description": "Me system church whether bag control organization. Identify walk now often always. Information on mission various. Prove fire enter capital population.",
+        "form_code": {
+          "code": "simply",
+          "code_system": "occur",
+          "data_type_name": "CD",
+          "display_name": "Security arm."
+        },
+        "id": "str",
+        "type": "material"
+      }
+    }
+  ],
+  "reason_code": null,
+  "status_code": {
+    "code": "clearly",
+    "code_system": "expert",
+    "data_type_name": "CD",
+    "display_name": "Painting response."
+  },
+  "status_date": "2020-05-11T09:24:14.350483Z"
+}
