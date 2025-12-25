@@ -28,8 +28,8 @@ class PerformedObservationResultFactory(BaseFactory[PerformedObservationResult])
     baseline_indicator = False
     derived_indicator = False
 
-    created_date = Use(BaseFactory.__faker__.date_time_this_month)
-    reported_date = Use(BaseFactory.__faker__.date_time_this_month)
+    created_date = Use(lambda: BaseFactory.__faker__.date_time_this_century(tzinfo=datetime.timezone.utc))
+    reported_date = Use(lambda: BaseFactory.__faker__.date_time_this_century(tzinfo=datetime.timezone.utc))
 
     comment = None
 
@@ -58,7 +58,7 @@ class PerformedObservationResultFactory(BaseFactory[PerformedObservationResult])
             case bridg.PhysicalQuantity:
                 obj.value = PhysicalQuantityFactory.build()
             case datetime.datetime:
-                obj.value = cls.__faker__.date_time_this_century()
+                obj.value = cls.__faker__.date_time_this_century(after_now=True, tzinfo=datetime.timezone.utc)
             case datetime.date:
                 obj.value = cls.__faker__.date_this_century()
             case builtins.str:
