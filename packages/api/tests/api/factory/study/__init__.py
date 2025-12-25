@@ -1,1 +1,2 @@
+from .performed_activity import PerformedActivityDataFactory
 from .performed_specimen_collection import PerformedSpecimenCollectionDataFactory, ProducedSpecimenDataFactory

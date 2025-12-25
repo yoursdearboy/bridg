@@ -1,0 +1,27 @@
+{
+  "comment": null,
+  "containing_epoch": null,
+  "context_for_study_site": null,
+  "date_range": {
+    "data_type_name": "IVL[TS]",
+    "high": "2080-09-04T10:47:37.986587Z",
+    "low": "2098-07-13T20:43:14.815725Z"
+  },
+  "id": "str",
+  "instantiated_defined_activity": null,
+  "negation_indicator": false,
+  "negation_reason": {
+    "code": "education",
+    "code_system": "article",
+    "data_type_name": "CD",
+    "display_name": "There water."
+  },
+  "reason_code": null,
+  "status_code": {
+    "code": "bed",
+    "code_system": "sign",
+    "data_type_name": "CD",
+    "display_name": "Staff within mouth."
+  },
+  "status_date": "2012-07-29T09:39:51.835748Z"
+}
