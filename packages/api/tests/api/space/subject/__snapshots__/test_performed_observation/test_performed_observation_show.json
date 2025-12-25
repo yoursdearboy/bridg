@@ -1,0 +1,217 @@
+{
+  "comment": null,
+  "containing_epoch": null,
+  "context_for_study_site": null,
+  "date_range": {
+    "data_type_name": "IVL[TS]",
+    "high": "2085-02-18T06:52:30.895165Z",
+    "low": null
+  },
+  "id": "str",
+  "instantiated_defined_activity": null,
+  "negation_indicator": false,
+  "negation_reason": {
+    "code": "author",
+    "code_system": "Republican",
+    "data_type_name": "CD",
+    "display_name": "Identify walk."
+  },
+  "reason_code": null,
+  "resulted_performed_observation_result": [
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2098-07-13T20:43:14.815725Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2080-09-04T10:47:37.986587Z",
+      "type_code": {
+        "code": "our",
+        "code_system": "your",
+        "data_type_name": "CD",
+        "display_name": "Beat magazine."
+      },
+      "value": {
+        "data_type_name": "TS.DATETIME",
+        "value": "2006-12-02T23:41:37.281786Z"
+      },
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2076-01-22T23:51:29.032161Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2076-08-01T02:27:38.629820Z",
+      "type_code": {
+        "code": "often",
+        "code_system": "company",
+        "data_type_name": "CD",
+        "display_name": "Month parent."
+      },
+      "value": {
+        "code": "development",
+        "code_system": "woman",
+        "data_type_name": "CD",
+        "display_name": "Sense ready require."
+      },
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2039-11-25T04:39:00.639887Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2067-03-03T08:47:19.748108Z",
+      "type_code": {
+        "code": "live",
+        "code_system": "camera",
+        "data_type_name": "CD",
+        "display_name": "Different full."
+      },
+      "value": {
+        "data_type_name": "ST",
+        "value": "Network open according remain."
+      },
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2005-11-20T08:44:38.557626Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2006-09-27T19:07:39.437384Z",
+      "type_code": {
+        "code": "my",
+        "code_system": "economy",
+        "data_type_name": "CD",
+        "display_name": "Protect Democrat."
+      },
+      "value": {
+        "data_type_name": "TS.DATE",
+        "value": "2003-06-09"
+      },
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2093-07-20T15:46:59.854858Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2057-02-07T08:22:32.192200Z",
+      "type_code": {
+        "code": "surface",
+        "code_system": "investment",
+        "data_type_name": "CD",
+        "display_name": "Behind probably."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2035-06-06T17:14:48.740650Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2041-02-09T12:15:18.666721Z",
+      "type_code": {
+        "code": "ready",
+        "code_system": "race",
+        "data_type_name": "CD",
+        "display_name": "Art rock."
+      },
+      "value": {
+        "data_type_name": "ST",
+        "value": "Eat couple."
+      },
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2044-11-10T14:38:09.709885Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2042-03-10T05:26:43.723819Z",
+      "type_code": {
+        "code": "wind",
+        "code_system": "bag",
+        "data_type_name": "CD",
+        "display_name": "Space task better."
+      },
+      "value": {
+        "data_type_name": "TS.DATETIME",
+        "value": "2065-03-19T14:12:50.684776Z"
+      },
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2054-01-21T23:23:11.539419Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2001-06-23T00:44:13.214714Z",
+      "type_code": {
+        "code": "economic",
+        "code_system": "compare",
+        "data_type_name": "CD",
+        "display_name": "Magazine degree husband."
+      },
+      "value": {
+        "code": "artist",
+        "code_system": "community",
+        "data_type_name": "CD",
+        "display_name": "Able hospital unit."
+      },
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2078-07-06T20:23:38.996617Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2028-07-10T17:28:26.741533Z",
+      "type_code": {
+        "code": "step",
+        "code_system": "only",
+        "data_type_name": "CD",
+        "display_name": "Choice father why."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2057-12-01T13:26:34.546309Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2054-03-21T16:18:48.688880Z",
+      "type_code": {
+        "code": "pattern",
+        "code_system": "me",
+        "data_type_name": "CD",
+        "display_name": "Try most arm."
+      },
+      "value": {
+        "data_type_name": "TS.DATETIME",
+        "value": "2050-10-13T10:27:37.671950Z"
+      },
+      "value_null_flavor_reason": null
+    }
+  ],
+  "status_code": {
+    "code": "over",
+    "code_system": "employee",
+    "data_type_name": "CD",
+    "display_name": "Organization people information on."
+  },
+  "status_date": "2001-10-12T07:37:45.819705Z"
+}

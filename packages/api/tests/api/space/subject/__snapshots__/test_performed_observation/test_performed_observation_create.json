@@ -1,0 +1,189 @@
+{
+  "comment": null,
+  "containing_epoch": null,
+  "context_for_study_site": null,
+  "date_range": {
+    "data_type_name": "IVL[TS]",
+    "high": "2018-12-28T00:28:13.608519Z",
+    "low": "2048-08-31T16:09:34.042267Z"
+  },
+  "id": "str",
+  "instantiated_defined_activity": null,
+  "negation_indicator": false,
+  "negation_reason": {
+    "code": "director",
+    "code_system": "article",
+    "data_type_name": "CD",
+    "display_name": "Save article finish anyone."
+  },
+  "reason_code": null,
+  "resulted_performed_observation_result": [
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2006-12-02T23:41:37.281786Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2076-01-22T23:51:29.032161Z",
+      "type_code": {
+        "code": "unit",
+        "code_system": "our",
+        "data_type_name": "CD",
+        "display_name": "Beat magazine."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2016-07-06T06:17:32.052193Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2052-10-07T06:50:31.383029Z",
+      "type_code": {
+        "code": "space",
+        "code_system": "car",
+        "data_type_name": "CD",
+        "display_name": "Process water."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2068-12-26T09:57:58.674701Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2071-04-18T11:04:10.463672Z",
+      "type_code": {
+        "code": "policy",
+        "code_system": "land",
+        "data_type_name": "CD",
+        "display_name": "Up sense."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2022-06-21T01:41:08.310708Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2033-10-22T13:48:13.602454Z",
+      "type_code": {
+        "code": "inside",
+        "code_system": "remain",
+        "data_type_name": "CD",
+        "display_name": "Just military building."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2005-11-20T08:44:38.557626Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2006-09-27T19:07:39.437384Z",
+      "type_code": {
+        "code": "drug",
+        "code_system": "per",
+        "data_type_name": "CD",
+        "display_name": "According remain."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2021-06-03T23:59:07.227335Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2013-03-25T16:33:59.732485Z",
+      "type_code": {
+        "code": "almost",
+        "code_system": "trade",
+        "data_type_name": "CD",
+        "display_name": "Audience draw protect."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2040-09-14T20:45:44.058859Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2009-06-07T05:59:35.537222Z",
+      "type_code": {
+        "code": "worry",
+        "code_system": "us",
+        "data_type_name": "CD",
+        "display_name": "Office drug list."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2084-11-13T14:40:50.835289Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2016-08-18T12:19:10.399408Z",
+      "type_code": {
+        "code": "billion",
+        "code_system": "apply",
+        "data_type_name": "CD",
+        "display_name": "Structure why unit."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2016-06-18T08:54:02.234082Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2000-03-19T17:24:16.786297Z",
+      "type_code": {
+        "code": "mention",
+        "code_system": "medical",
+        "data_type_name": "CD",
+        "display_name": "Ten total."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2078-05-03T06:42:57.129574Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2066-03-09T20:23:31.401684Z",
+      "type_code": {
+        "code": "in",
+        "code_system": "evidence",
+        "data_type_name": "CD",
+        "display_name": "Expect recent room."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    }
+  ],
+  "status_code": {
+    "code": "me",
+    "code_system": "morning",
+    "data_type_name": "CD",
+    "display_name": "Church whether bag."
+  },
+  "status_date": "2018-08-01T06:09:38.864527Z"
+}

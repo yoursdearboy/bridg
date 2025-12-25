@@ -5,7 +5,6 @@ from typing import Any, Type, get_args
 from polyfactory import Ignore, Use
 
 import bridg
-from bridg import PerformedObservationResult
 
 from ..base import BaseFactory
 from ..datatype import ConceptDescriptorFactory, PhysicalQuantityFactory
@@ -15,12 +14,13 @@ class NOT_SET:
     pass
 
 
-class PerformedObservationResultFactory(BaseFactory[PerformedObservationResult]):
+class PerformedObservationResultFactory(BaseFactory[bridg.PerformedObservationResult]):
     __set_as_default_factory_for_type__ = True
 
     id = Ignore()
     type = Ignore()
 
+    type_code_id = Ignore()
     type_code = ConceptDescriptorFactory
 
     value_null_flavor_reason = None
@@ -28,13 +28,18 @@ class PerformedObservationResultFactory(BaseFactory[PerformedObservationResult])
     baseline_indicator = False
     derived_indicator = False
 
-    created_date = Use(lambda: BaseFactory.__faker__.date_time_this_century(tzinfo=datetime.timezone.utc))
-    reported_date = Use(lambda: BaseFactory.__faker__.date_time_this_century(tzinfo=datetime.timezone.utc))
+    created_date = Use(
+        lambda: BaseFactory.__faker__.date_time_this_century(after_now=True, tzinfo=datetime.timezone.utc)
+    )
+    reported_date = Use(
+        lambda: BaseFactory.__faker__.date_time_this_century(after_now=True, tzinfo=datetime.timezone.utc)
+    )
 
     comment = None
 
     producing_performed_observation = Ignore()
 
+    value_cd_id = Ignore()
     value_cd = Ignore()
     value_pq_value = Ignore()
     value_pq_unit = Ignore()
@@ -43,7 +48,9 @@ class PerformedObservationResultFactory(BaseFactory[PerformedObservationResult])
     value_st = Ignore()
 
     @classmethod
-    def build(cls, *_: Any, data_type: None | Type | NOT_SET = NOT_SET, **kwargs: Any) -> PerformedObservationResult:
+    def build(
+        cls, *_: Any, data_type: None | Type | NOT_SET = NOT_SET, **kwargs: Any
+    ) -> bridg.PerformedObservationResult:
         obj = super().build(**kwargs)
         if data_type == NOT_SET:
             if cls.__random__.random() > 0.1:

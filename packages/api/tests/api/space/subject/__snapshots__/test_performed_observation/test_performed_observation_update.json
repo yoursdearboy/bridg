@@ -1,0 +1,261 @@
+{
+  "comment": null,
+  "containing_epoch": null,
+  "context_for_study_site": null,
+  "date_range": {
+    "data_type_name": "IVL[TS]",
+    "high": "2079-07-14T23:51:52.406635Z",
+    "low": "2030-07-09T02:18:51.512462Z"
+  },
+  "id": "str",
+  "instantiated_defined_activity": null,
+  "negation_indicator": false,
+  "negation_reason": {
+    "code": "drive",
+    "code_system": "dog",
+    "data_type_name": "CD",
+    "display_name": "Receive."
+  },
+  "reason_code": null,
+  "resulted_performed_observation_result": [
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2039-11-25T04:39:00.639887Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2067-03-03T08:47:19.748108Z",
+      "type_code": {
+        "code": "live",
+        "code_system": "camera",
+        "data_type_name": "CD",
+        "display_name": "Different full."
+      },
+      "value": {
+        "data_type_name": "ST",
+        "value": "Network open according remain."
+      },
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2078-07-06T20:23:38.996617Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2028-07-10T17:28:26.741533Z",
+      "type_code": {
+        "code": "step",
+        "code_system": "only",
+        "data_type_name": "CD",
+        "display_name": "Choice father why."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2015-07-18T17:38:15.751524Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2028-03-05T03:32:51.215964Z",
+      "type_code": {
+        "code": "right",
+        "code_system": "protect",
+        "data_type_name": "CD",
+        "display_name": "Measure economy."
+      },
+      "value": {
+        "code": "whatever",
+        "code_system": "throughout",
+        "data_type_name": "CD",
+        "display_name": "Best."
+      },
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2076-01-22T23:51:29.032161Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2076-08-01T02:27:38.629820Z",
+      "type_code": {
+        "code": "often",
+        "code_system": "company",
+        "data_type_name": "CD",
+        "display_name": "Month parent."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2005-11-20T08:44:38.557626Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2006-09-27T19:07:39.437384Z",
+      "type_code": {
+        "code": "my",
+        "code_system": "economy",
+        "data_type_name": "CD",
+        "display_name": "Protect Democrat."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2035-06-06T17:14:48.740650Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2041-02-09T12:15:18.666721Z",
+      "type_code": {
+        "code": "ready",
+        "code_system": "race",
+        "data_type_name": "CD",
+        "display_name": "Art rock."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2026-07-19T03:48:48.195483Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2010-11-03T09:40:22.398297Z",
+      "type_code": {
+        "code": "ahead",
+        "code_system": "business",
+        "data_type_name": "CD",
+        "display_name": "Condition while."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2089-12-13T09:50:55.931847Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2019-01-03T15:03:13.423366Z",
+      "type_code": {
+        "code": "shoulder",
+        "code_system": "stop",
+        "data_type_name": "CD",
+        "display_name": "Job worker break."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2066-06-04T06:45:16.535597Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2033-01-07T13:21:05.741784Z",
+      "type_code": {
+        "code": "serve",
+        "code_system": "yard",
+        "data_type_name": "CD",
+        "display_name": "Hair attorney."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2030-12-05T14:56:05.611579Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2040-11-02T13:13:25.304180Z",
+      "type_code": {
+        "code": "former",
+        "code_system": "record",
+        "data_type_name": "CD",
+        "display_name": "Rest feel."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2037-11-30T06:44:59.732232Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2074-10-24T14:45:19.567019Z",
+      "type_code": {
+        "code": "find",
+        "code_system": "once",
+        "data_type_name": "CD",
+        "display_name": "Court professor."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2028-09-09T12:33:51.146286Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2042-12-27T15:57:08.211921Z",
+      "type_code": {
+        "code": "contain",
+        "code_system": "power",
+        "data_type_name": "CD",
+        "display_name": "Feeling nature a."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2012-09-28T22:44:31.929802Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2030-10-29T03:16:10.375519Z",
+      "type_code": {
+        "code": "traditional",
+        "code_system": "among",
+        "data_type_name": "CD",
+        "display_name": "Decide economic bill."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    },
+    {
+      "baseline_indicator": false,
+      "comment": null,
+      "created_date": "2015-06-16T01:27:22.975238Z",
+      "derived_indicator": false,
+      "id": "str",
+      "reported_date": "2092-12-26T21:41:54.085470Z",
+      "type_code": {
+        "code": "talk",
+        "code_system": "cost",
+        "data_type_name": "CD",
+        "display_name": "Agent say forward."
+      },
+      "value": null,
+      "value_null_flavor_reason": null
+    }
+  ],
+  "status_code": {
+    "code": "data",
+    "code_system": "inside",
+    "data_type_name": "CD",
+    "display_name": "Everything attorney significant."
+  },
+  "status_date": "2035-02-11T14:41:48.314186Z"
+}
