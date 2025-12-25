@@ -6,7 +6,7 @@ from api.main import app
 from tests.factory import StudyProtocolVersionFactory, StudySubjectFactory
 from tests.factory.common.entity_name import EntityNameFactory
 from tests.factory.common.person import PersonFactory
-from tests.utils import _or, date_str, enum_str, person_dict, study_subject_dict
+from tests.utils import _or, date_str, datetime_str, enum_str, person_dict, study_subject_dict
 
 client = TestClient(app)
 
@@ -54,7 +54,7 @@ def test_subject_create(session: Session):
         f"/spaces/{space.id}/subjects/",
         json={
             "status": _or(enum_str, s.status),
-            "status_date": _or(date_str, s.status_date),
+            "status_date": _or(datetime_str, s.status_date),
             "performing_biologic_entity": {
                 "administrative_gender_code": _or(enum_str, p.administrative_gender_code),
                 "birth_date": _or(date_str, p.birth_date),
@@ -97,7 +97,7 @@ def test_subject_update():
         f"/spaces/{space.id}/subjects/{s.id}",
         json={
             "status": _or(enum_str, patch.status),
-            "status_date": _or(date_str, patch.status_date),
+            "status_date": _or(datetime_str, patch.status_date),
         },
     )
     assert response.status_code == 200
@@ -106,7 +106,7 @@ def test_subject_update():
     assert response.json() == {
         **study_subject_dict(obj),
         "status": _or(enum_str, patch.status),
-        "status_date": _or(date_str, patch.status_date),
+        "status_date": _or(datetime_str, patch.status_date),
     }
 
 

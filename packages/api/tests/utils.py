@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from enum import Enum
 from typing import Any, Callable, Optional, TypeVar, overload
 
@@ -7,6 +7,7 @@ from bridg import (
     DataValue,
     EntityName,
     Epoch,
+    IntervalPointInTime,
     PerformedObservationResult,
     Person,
     PhysicalQuantity,
@@ -71,6 +72,21 @@ def date_str(x: date) -> str:
     return x.isoformat()
 
 
+def datetime_str(x: datetime) -> str:
+    return x.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+
+
+# FIXME: drop in favour of snapshots
+
+
+def ivl_ts_dict(x: IntervalPointInTime):
+    return {
+        "data_type_name": "IVL[TS]",
+        "high": _or(datetime_str, x.high),
+        "low": _or(datetime_str, x.low),
+    }
+
+
 def cd_dict(x: ConceptDescriptor):
     return {
         "data_type_name": "CD",
@@ -92,9 +108,9 @@ def datavalue_dict(x: DataValue):
         case PhysicalQuantity():
             return {"data_type_name": "PQ", "value": float(x.value), "unit": x.unit}  # type: ignore
         case datetime():
-            return {"data_type_name": "TS.DATETIME", "value": x.isoformat()}
+            return {"data_type_name": "TS.DATETIME", "value": datetime_str(x)}
         case date():
-            return {"data_type_name": "TS.DATE", "value": x.isoformat()}
+            return {"data_type_name": "TS.DATE", "value": date_str(x)}
         case str():
             return {"data_type_name": "ST", "value": x}
 
@@ -129,7 +145,7 @@ def study_subject_dict(x: StudySubject):
     return {
         "id": _or(str, x.id),
         "status": _or(enum_str, x.status),
-        "status_date": _or(date_str, x.status_date),
+        "status_date": _or(datetime_str, x.status_date),
         "performing_biologic_entity": _or(person_dict, x.performing_biologic_entity),
         "performing_organization": None,
     }
@@ -159,7 +175,7 @@ def performed_observation_result_dict(x: PerformedObservationResult):
         "value_null_flavor_reason": x.value_null_flavor_reason,
         "baseline_indicator": x.baseline_indicator,
         "derived_indicator": x.derived_indicator,
-        "created_date": _or(date_str, x.created_date),
-        "reported_date": _or(date_str, x.reported_date),
+        "created_date": _or(datetime_str, x.created_date),
+        "reported_date": _or(datetime_str, x.reported_date),
         "comment": x.comment,
     }
