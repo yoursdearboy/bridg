@@ -8,7 +8,7 @@ from tests.api.factory import (
     PerformedObservationDataFactory,
     PerformedObservationResultDataFactory,
 )
-from tests.factory import (
+from tests.bridg.factory import (
     PerformedObservationFactory,
     PerformedObservationResultFactory,
     PersonFactory,

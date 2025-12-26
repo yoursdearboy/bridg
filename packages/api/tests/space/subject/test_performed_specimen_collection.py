@@ -9,7 +9,7 @@ from tests.api.factory import (
     PerformedSpecimenCollectionDataFactory,
     ProducedSpecimenDataFactory,
 )
-from tests.factory import (
+from tests.bridg.factory import (
     PerformedSpecimenCollectionFactory,
     PersonFactory,
     SpecimenFactory,

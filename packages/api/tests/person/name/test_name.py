@@ -2,7 +2,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 from api.main import app
-from tests.factory import EntityNameFactory, PersonFactory
+from tests.bridg.factory import EntityNameFactory, PersonFactory
 from tests.utils import entity_name_dict, omit
 
 client = TestClient(app)

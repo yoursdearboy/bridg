@@ -7,7 +7,7 @@ from syrupy.assertion import SnapshotAssertion
 from syrupy.extensions.json import JSONSnapshotExtension
 
 from common.settings import load_settings
-from tests.factory.base import BaseFactory as SQLAlchemyBaseFactory
+from tests.bridg.factory.base import BaseFactory as SQLAlchemyBaseFactory
 
 
 @pytest.fixture(scope="session", autouse=True)

@@ -3,7 +3,12 @@ from syrupy.matchers import path_type
 
 from api.main import app
 from tests.api.factory import PerformedActivityDataFactory
-from tests.factory import PerformedActivityFactory, PersonFactory, StudyProtocolVersionFactory, StudySubjectFactory
+from tests.bridg.factory import (
+    PerformedActivityFactory,
+    PersonFactory,
+    StudyProtocolVersionFactory,
+    StudySubjectFactory,
+)
 
 client = TestClient(app)
 

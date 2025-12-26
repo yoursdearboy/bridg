@@ -3,9 +3,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 from api.main import app
-from tests.factory import StudyProtocolVersionFactory, StudySubjectFactory
-from tests.factory.common.entity_name import EntityNameFactory
-from tests.factory.common.person import PersonFactory
+from tests.bridg.factory import EntityNameFactory, PersonFactory, StudyProtocolVersionFactory, StudySubjectFactory
 from tests.utils import _or, date_str, datetime_str, enum_str, person_dict, study_subject_dict
 
 client = TestClient(app)
