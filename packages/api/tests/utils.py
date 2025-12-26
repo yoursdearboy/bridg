@@ -36,19 +36,6 @@ def omit(keys: Any, x: dict) -> dict:
     return {k: v for k, v in x.items() if k not in keys}
 
 
-def omit_recursively(keys: Any, x: dict) -> dict:
-    def f(x: Any):
-        match x:
-            case dict():
-                return {k: f(v) for k, v in omit(keys, x).items()}
-            case list():
-                return [f(e) for e in x]
-            case _:
-                return x
-
-    return f(x)  # type: ignore
-
-
 def enum_str(x: Enum) -> Any:
     return x.value
 
