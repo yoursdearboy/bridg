@@ -4,17 +4,17 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2085-02-18T06:52:30.895165Z",
-    "low": null
+    "high": "2006-11-07T17:48:00.893320Z",
+    "low": "2085-02-18T06:52:30.895165Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "author",
-    "code_system": "Republican",
+    "code": "training",
+    "code_system": "easy",
     "data_type_name": "CD",
-    "display_name": "Identify walk."
+    "display_name": "Build three east."
   },
   "reason_code": null,
   "resulted_performed_observation_result": [
@@ -208,10 +208,10 @@
     }
   ],
   "status_code": {
-    "code": "over",
-    "code_system": "employee",
+    "code": "phone",
+    "code_system": "among",
     "data_type_name": "CD",
-    "display_name": "Organization people information on."
+    "display_name": "Bank price north first."
   },
-  "status_date": "2001-10-12T07:37:45.819705Z"
+  "status_date": "2006-10-18T06:29:34.206680Z"
 }
