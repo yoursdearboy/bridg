@@ -32,6 +32,12 @@ export interface BiologicData {
      * @type {string}
      * @memberof BiologicData
      */
+    id?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BiologicData
+     */
     type?: BiologicDataTypeEnum;
     /**
      * 
@@ -117,6 +123,7 @@ export function BiologicDataFromJSONTyped(json: any, ignoreDiscriminator: boolea
     }
     return {
         
+        'id': json['id'] == null ? undefined : json['id'],
         'type': json['type'] == null ? undefined : json['type'],
         'code': ConceptDescriptorFromJSON(json['code']),
         'formCode': ConceptDescriptorFromJSON(json['form_code']),
@@ -138,6 +145,7 @@ export function BiologicDataToJSONTyped(value?: BiologicData | null, ignoreDiscr
 
     return {
         
+        'id': value['id'],
         'type': value['type'],
         'code': ConceptDescriptorToJSON(value['code']),
         'form_code': ConceptDescriptorToJSON(value['formCode']),

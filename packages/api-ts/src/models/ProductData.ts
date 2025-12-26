@@ -32,6 +32,12 @@ export interface ProductData {
      * @type {string}
      * @memberof ProductData
      */
+    id?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductData
+     */
     type?: ProductDataTypeEnum;
     /**
      * 
@@ -117,6 +123,7 @@ export function ProductDataFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
+        'id': json['id'] == null ? undefined : json['id'],
         'type': json['type'] == null ? undefined : json['type'],
         'code': ConceptDescriptorFromJSON(json['code']),
         'formCode': ConceptDescriptorFromJSON(json['form_code']),
@@ -138,6 +145,7 @@ export function ProductDataToJSONTyped(value?: ProductData | null, ignoreDiscrim
 
     return {
         
+        'id': value['id'],
         'type': value['type'],
         'code': ConceptDescriptorToJSON(value['code']),
         'form_code': ConceptDescriptorToJSON(value['formCode']),

@@ -121,8 +121,9 @@ def update(
     repo: PerformedActivityRepositoryDep,
     context: Annotated[Context, Depends(get_context)],
 ) -> PerformedActivity | PerformedObservation | PerformedSpecimenCollection:
-    if obj := repo.one_or_none(a_id):
-        obj = data.model_update_sa(obj, context=context)  # type: ignore
+    if repo.exists(a_id):
+        obj = data.model_dump_sa(context=context)
+        obj.id = a_id
         obj = repo.update(obj)
         match data:
             case PerformedActivityData():

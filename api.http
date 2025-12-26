@@ -7,6 +7,7 @@
 @fab_code_system=b365b97f-ff34-464c-9097-e7daec409f4c
 @ss_cbc_id=8ac78da9-3c23-4770-94e9-ebaee8432b4b
 @ss_ipt_id=ce3dd821-3a1b-41dd-a366-292c8c163a58
+@ss_collect_id=2b0cbe27-f453-48e5-970d-3d8f42b957ef
 
 # Code System
 
@@ -106,6 +107,14 @@ GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/{{ss_ipt_id}}
 
 GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/{{ss_cbc_id}}?result=1
 
+#### Show subject activity (specimen collection)
+
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/{{ss_collect_id}}?result=1
+
+#### Subject specimens
+
+GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/specimen
+# GET {{base}}/spaces/{{space_id}}/subjects/43eb7931-102b-4661-980c-ae8e1a973d18/specimen
 
 ## Persons
 
