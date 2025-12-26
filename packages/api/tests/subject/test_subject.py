@@ -108,7 +108,7 @@ def test_subject_update():
     }
 
 
-def test_lookup(session: Session):
+def test_subject_lookup(session: Session):
     session.query(StudySubject).delete()
     session.query(BiologicEntity).delete()
     space = StudyProtocolVersionFactory.create_sync()
@@ -116,11 +116,12 @@ def test_lookup(session: Session):
     p1 = PersonFactory.create_sync(name=[EntityNameFactory.build(family="Some")])
     p2 = PersonFactory.create_sync(name=[EntityNameFactory.build(family="Person")])
     p3 = PersonFactory.create_sync(name=[EntityNameFactory.build(family="Test")])
-    ss = [
-        StudySubjectFactory.create_sync(performing_biologic_entity=p, performing_organization=None)
-        for p in [p1, p2, p3]
-    ]
-    sspvr.assigned_study_subject = ss
+    for p in [p1, p2, p3]:
+        StudySubjectFactory.create_sync(
+            performing_biologic_entity=p,
+            performing_organization=None,
+            assigned_study_site_protocol_version_relationship=[sspvr],
+        )
     query = {
         "performing_biologic_entity": {
             "administrative_gender_code": None,
