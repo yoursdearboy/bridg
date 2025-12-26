@@ -1,4 +1,4 @@
-from dirty_equals import IsList
+from dirty_equals import IsList, IsUUID
 from fastapi.testclient import TestClient
 from syrupy.matchers import path_type
 
@@ -65,12 +65,15 @@ def test_performed_observation_update(random, snapshot_json):
         resulted_performed_observation_result=PerformedObservationResultFactory.batch(20)
     )
     patch = PerformedObservationDataFactory.build()
-    for old in pobs.resulted_performed_observation_result:
-        x = random.random()
-        if x < 0.25:
+    id = []
+    type_code = []
+    for i, old in enumerate(random.sample(pobs.resulted_performed_observation_result, 20)):
+        if i < 5:
             new = PerformedObservationResultData.model_validate(old)
             patch.resulted_performed_observation_result.append(new)
-        elif x < 0.50:
+            id.append(str(old.id))
+            type_code.append(ConceptDescriptor.model_validate(old.type_code))
+        elif i < 10:
             new = PerformedObservationResultDataFactory.build(
                 type_code=old.type_code,
                 value_null_flavor_reason=old.value_null_flavor_reason,
@@ -81,20 +84,22 @@ def test_performed_observation_update(random, snapshot_json):
                 comment=old.comment,
             )
             patch.resulted_performed_observation_result.append(new)
-        elif x < 0.75:
+            id.append(IsUUID)  # FIXME: maybe nope?
+            type_code.append(ConceptDescriptor.model_validate(old.type_code))
+        elif i < 15:
             new = PerformedObservationResultDataFactory.build()
             patch.resulted_performed_observation_result.append(new)
+            id.append(IsUUID)
+            type_code.append(new.type_code)
         else:
             pass
+    random.shuffle(patch.resulted_performed_observation_result)
     response = client.patch(f"/spaces/{space.id}/subjects/{ss.id}/activity/{pobs.id}", content=patch.model_dump_json())
+    json = response.json()
     assert response.status_code == 200
-    assert response.json()["id"] == str(pobs.id)
-    assert response.json() == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
+    assert json["id"] == str(pobs.id)
+    assert json == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
     assert [
-        ConceptDescriptor.model_validate(res["type_code"])
-        for res in response.json()["resulted_performed_observation_result"]
-    ] == IsList(
-        *[res.type_code for res in patch.resulted_performed_observation_result],
-        check_order=False,
-        length=len(patch.resulted_performed_observation_result),
-    )
+        ConceptDescriptor.model_validate(res["type_code"]) for res in json["resulted_performed_observation_result"]
+    ] == IsList(*type_code, check_order=False)
+    assert [res["id"] for res in json["resulted_performed_observation_result"]] == IsList(*id, check_order=False)

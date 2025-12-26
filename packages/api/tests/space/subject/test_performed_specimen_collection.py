@@ -1,4 +1,4 @@
-from dirty_equals import IsList
+from dirty_equals import IsList, IsUUID
 from fastapi.testclient import TestClient
 from syrupy.matchers import path_type
 
@@ -79,12 +79,15 @@ def test_performed_specimen_collection_update(random, snapshot_json):
     patch = PerformedSpecimenCollectionDataFactory.build(
         produced_specimen=[],
     )
-    for old in psc.produced_specimen:
-        x = random.random()
-        if x < 0.25:
+    specimen_id = []
+    material_id = []
+    for i, old in enumerate(random.sample(psc.produced_specimen, 10)):
+        if i < 2:
             new = ProducedSpecimenData.model_validate(old)
             patch.produced_specimen.append(new)
-        elif x < 0.50:
+            specimen_id.append(str(old.id))
+            material_id.append(str(old.performing_material_id))
+        elif i < 5:
             new = ProducedSpecimenDataFactory.build(
                 id=old.id,
                 performing_material=MaterialDataFactory.build(
@@ -92,7 +95,9 @@ def test_performed_specimen_collection_update(random, snapshot_json):
                 ),
             )
             patch.produced_specimen.append(new)
-        elif x < 0.75:
+            specimen_id.append(str(old.id))
+            material_id.append(str(old.performing_material_id))
+        elif i < 8:
             new = ProducedSpecimenDataFactory.build(
                 id=None,
                 performing_material=MaterialDataFactory.build(
@@ -100,19 +105,16 @@ def test_performed_specimen_collection_update(random, snapshot_json):
                 ),
             )
             patch.produced_specimen.append(new)
+            specimen_id.append(IsUUID)
+            material_id.append(IsUUID)
         else:
             pass
     response = client.patch(f"/spaces/{space.id}/subjects/{ss.id}/activity/{psc.id}", content=patch.model_dump_json())
+    json = response.json()
     assert response.status_code == 200
-    assert response.json()["id"] == str(psc.id)
-    assert response.json() == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
-    assert [ps["id"] for ps in response.json()["produced_specimen"]] == IsList(
-        *[str(ps.id) for ps in patch.produced_specimen if ps.id],
-        check_order=False,
-        length=len(patch.produced_specimen),
-    )
-    assert [ps["performing_material"]["id"] for ps in response.json()["produced_specimen"]] == IsList(
-        *[str(ps.performing_material.id) for ps in patch.produced_specimen if ps.performing_material.id],
-        check_order=False,
-        length=len(patch.produced_specimen),
+    assert json["id"] == str(psc.id)
+    assert json == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
+    assert [ps["id"] for ps in json["produced_specimen"]] == IsList(*specimen_id, check_order=False)
+    assert [ps["performing_material"]["id"] for ps in json["produced_specimen"]] == IsList(
+        *material_id, check_order=False
     )
