@@ -42,5 +42,6 @@
     "editor.rulers": [120],
     "python.testing.pytestEnabled": true,
     "python.testing.unittestEnabled": false,
-    "terminal.integrated.defaultProfile.linux": "zsh"
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "python.analysis.includeAliasesFromUserFiles": true
 }
