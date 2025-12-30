@@ -2,8 +2,6 @@ import pytest
 from polyfactory.factories.base import BaseFactory
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from syrupy.assertion import SnapshotAssertion
-from syrupy.extensions.json import JSONSnapshotExtension
 
 from bridg.alchemy.db import Base
 from bridg.alchemy.factory.base import BaseFactory as SQLAlchemyBaseFactory
@@ -34,8 +32,3 @@ def random():
     BaseFactory.__faker__.seed_instance(42)
     BaseFactory.__faker__.unique.clear()
     return BaseFactory.__random__
-
-
-@pytest.fixture
-def snapshot_json(snapshot) -> SnapshotAssertion:
-    return snapshot.with_defaults(extension_class=JSONSnapshotExtension)
