@@ -14,7 +14,9 @@ from bridg import (
 class StudySubjectRepository(Repository[StudySubject]):
     _sa = StudySubject
 
-    def find_by(self, space_id: Optional[UUID] = None, performing_biologic_entity_id: Optional[UUID] = None) -> Iterable[StudySubject]:
+    def find_by(
+        self, space_id: Optional[UUID] = None, performing_biologic_entity_id: Optional[UUID] = None
+    ) -> Iterable[StudySubject]:
         q = self.db.query(StudySubject)
         if space_id:
             q = (
