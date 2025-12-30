@@ -5,11 +5,11 @@ description = "HTTP API for BRIDG"
 dependencies = [
     "bridg",
     "common",
-    "uvicorn[standard]<1.0.0,>=0.29.0",
-    "pydantic<3.0.0,>=2.9.2",
+    "uvicorn[standard]<1.0.0,>=0.40.0",
+    "pydantic<3.0.0,>=2.12.5",
     "cattrs<25.0.0,>=24.1.2",
     "toolz<2.0.0,>=1.0.0",
-    "fastapi[standard]>=0.116.1",
+    "fastapi[standard]>=0.128.0",
 ]
 
 [dependency-groups]
@@ -17,8 +17,6 @@ test = [
     "dirty-equals>=0.11",
     "httpx>=0.28.1",
     "polyfactory>=3.2.0",
-    "pytest<9.0.0,>=8.3.3",
-    "pytest-cov<7.0.0,>=6.0.0",
     "syrupy>=5.0.0",
 ]
 

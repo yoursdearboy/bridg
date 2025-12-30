@@ -3,7 +3,7 @@ name = "bridg"
 version = "0.1.0"
 description = "BRIDG persistence using SQLAlchemy"
 dependencies = [
-    "sqlalchemy<3.0.0,>=2.0.29",
+    "sqlalchemy<3.0.0,>=2.0.45",
     "cattrs<25.0.0,>=24.1.2",
     "toolz<2.0.0,>=1.0.0"
 ]
@@ -14,7 +14,7 @@ dev = [
     "pydot>=3.0.4",
 ]
 test = [
-    "pytest<9.0.0,>=8.3.3"
+    "polyfactory>=3.2.0",
 ]
 
 [build-system]
