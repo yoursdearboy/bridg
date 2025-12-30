@@ -84,8 +84,9 @@ def create(
 
 @router.patch("/{subject_id:uuid}")
 def update(space_id: UUID, subject_id: UUID, data: StudySubjectData, repo: StudySubjectRepositoryDep) -> StudySubject:
-    if obj := repo.one_or_none(subject_id):
-        obj = data.model_update_sa(obj)
+    if repo.exists(subject_id):
+        obj = data.model_dump_sa()
+        obj.id = subject_id
         obj = repo.update(obj)
         return StudySubject.model_validate(obj)
     raise HTTPException(status_code=404)

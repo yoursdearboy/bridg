@@ -1,1 +1,6 @@
-from .specimen import Specimen
+from .specimen import (
+    ProducingPerformedSpecimenCollection,
+    Specimen,
+)
+
+__all__ = ["ProducingPerformedSpecimenCollection", "Specimen"]

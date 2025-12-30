@@ -13,6 +13,10 @@ dependencies = [
 ]
 
 [dependency-groups]
+dev = [
+    "mkinit>=1.2.0",
+    "poethepoet>=0.39.0",
+]
 test = [
     "dirty-equals>=0.11",
     "httpx>=0.28.1",
@@ -23,6 +27,14 @@ test = [
 [build-system]
 requires = ["uv_build>=0.8.12,<0.9.0"]
 build-backend = "uv_build"
+
+[tool.poe.tasks]
+mkinit.sequence = [
+    "mkinit --recursive --relative --nomods -i api/model/",
+    "mkinit --recursive --relative --nomods -i tests/api/factory/",
+    "ruff format"
+]
+mkinit.default_item_type = "cmd"
 
 [tool.ruff]
 extend = "../../pyproject.toml"

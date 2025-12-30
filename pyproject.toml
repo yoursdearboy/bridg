@@ -20,11 +20,16 @@ dev = [
     "mkdocs<2.0.0,>=1.6.0",
     "mkdocs-material<10.0.0,>=9.5.30",
     "libsass<1.0.0,>=0.23.0",
+    "poethepoet>=0.37.0",
 ]
 test = [
     "pytest<10.0.0,>=9.0.2",
     "pytest-cov<7.0.0,>=6.0.0",
 ]
+
+[[tool.poe.include]]
+path = "packages/api/pyproject.toml"
+cwd  = "packages/api"
 
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report html"

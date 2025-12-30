@@ -6,7 +6,7 @@ from bridg import Repository
 from fastapi import APIRouter, Depends, HTTPException
 
 from api.db import get_repository
-from api.model import Person, PersonData
+from api.model import Person, PersonPatch
 
 from . import name, postal_address, subject, telecommunication_address
 
@@ -28,11 +28,13 @@ def show(person_id: UUID, repo: PersonRepositoryDep) -> Optional[Person]:
 
 
 @router.patch("/{person_id:uuid}")
-def update(person_id: UUID, data: PersonData, repo: PersonRepositoryDep) -> Person:
-    obj = repo.one(person_id)
-    data.model_update_sa(obj)
-    obj = repo.update(obj)
-    return Person.model_validate(obj)
+def update(person_id: UUID, data: PersonPatch, repo: PersonRepositoryDep) -> Person:
+    if repo.exists(person_id):
+        obj = data.model_dump_sa()
+        obj.id = person_id
+        obj = repo.update(obj)
+        return Person.model_validate(obj)
+    raise HTTPException(status_code=404)
 
 
 router.include_router(name.router, prefix="/{person_id:uuid}")

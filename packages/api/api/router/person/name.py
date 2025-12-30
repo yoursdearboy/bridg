@@ -3,7 +3,7 @@ from uuid import UUID
 
 import bridg
 from bridg import Repository
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from api.db import get_repository
 from api.model import EntityName, EntityNameData
@@ -34,10 +34,12 @@ def create(person_id: UUID, data: EntityNameData, repo: EntityNameRepositoryDep)
 
 @router.patch("/{name_id:uuid}")
 def update(person_id: UUID, name_id: UUID, data: EntityNameData, repo: EntityNameRepositoryDep) -> EntityName:
-    obj = repo.one(name_id)
-    obj = data.model_update_sa(obj)
-    obj = repo.update(obj)
-    return EntityName.model_validate(obj)
+    if repo.exists(name_id):
+        obj = data.model_dump_sa()
+        obj.id = name_id
+        obj = repo.update(obj)
+        return EntityName.model_validate(obj)
+    raise HTTPException(status_code=404)
 
 
 @router.delete("/{name_id:uuid}")

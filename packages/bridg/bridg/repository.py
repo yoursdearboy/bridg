@@ -41,7 +41,7 @@ class Repository(Generic[T]):
         return obj
 
     def update(self, obj: T, commit=True) -> T:
-        self.db.add(obj)
+        obj = self.db.merge(obj)
         if commit:
             self.db.commit()
         return obj
@@ -50,3 +50,6 @@ class Repository(Generic[T]):
         self._query_one(id).delete()
         if commit:
             self.db.commit()
+
+    def exists(self, id: UUID) -> bool:
+        return self.db.query(self._query_one(id).exists()).scalar()

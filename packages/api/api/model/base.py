@@ -1,9 +1,7 @@
-from typing import Any, Generic, Set, TypeVar
+from typing import Any, Set
 
 from pydantic import BaseModel as PydanticBaseModel
 from pydantic import ConfigDict, PrivateAttr
-
-T = TypeVar("T")
 
 
 def _omit(keys, x: dict) -> dict:
@@ -22,7 +20,7 @@ def _dump(x: Any, context: Any = None) -> Any:
             return x
 
 
-class BaseModel(PydanticBaseModel, Generic[T]):
+class BaseModel[T](PydanticBaseModel):
     model_config = ConfigDict(from_attributes=True, arbitrary_types_allowed=True)
     _sa: type[T] = PrivateAttr()
 
@@ -30,10 +28,3 @@ class BaseModel(PydanticBaseModel, Generic[T]):
         data = _dump(dict(self), context=context)
         data = _omit(exclude, data)
         return self._sa(**data)
-
-    def model_update_sa(self, obj: T, exclude=set(), context: Any | None = None) -> T:
-        data = _dump(dict(self), context=context)
-        data = _omit(exclude, data)
-        for key, value in data.items():
-            setattr(obj, key, value)
-        return obj

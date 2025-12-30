@@ -3,7 +3,7 @@ from uuid import UUID
 
 import bridg
 from bridg import Repository
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from api.db import get_repository
 from api.model import PostalAddress, PostalAddressData
@@ -36,10 +36,12 @@ def create(person_id: UUID, data: PostalAddressData, repo: PostalAddressReposito
 def update(
     person_id: UUID, address_id: UUID, data: PostalAddressData, repo: PostalAddressRepositoryDep
 ) -> PostalAddress:
-    obj = repo.one(address_id)
-    data.model_update_sa(obj)
-    obj = repo.update(obj)
-    return PostalAddress.model_validate(obj)
+    if repo.exists(address_id):
+        obj = data.model_dump_sa()
+        obj.id = address_id
+        obj = repo.update(obj)
+        return PostalAddress.model_validate(obj)
+    raise HTTPException(status_code=404)
 
 
 @router.delete("/{address_id:uuid}")

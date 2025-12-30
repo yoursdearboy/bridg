@@ -79,7 +79,7 @@ def test_subject_create(session: Session):
     assert response.json() == study_subject_dict(obj)
 
 
-def test_subject_update():
+def test_subject_update(session):
     space = StudyProtocolVersionFactory.create_sync()
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     s = StudySubjectFactory.create_sync(
@@ -100,7 +100,7 @@ def test_subject_update():
     )
     assert response.status_code == 200
     assert len(sspvr.assigned_study_subject) == 1
-    obj = sspvr.assigned_study_subject[0]
+    obj = session.get(StudySubject, s.id)
     assert response.json() == {
         **study_subject_dict(obj),
         "status": _or(enum_str, patch.status),
