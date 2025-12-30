@@ -30,8 +30,8 @@ build-backend = "uv_build"
 
 [tool.poe.tasks]
 "api:mkinit".sequence = [
-    "mkinit --recursive --relative --nomods -i api/model/",
-    "mkinit --recursive --relative --nomods -i tests/api/factory/",
+    "mkinit --recursive --relative --nomods -i api/model",
+    "mkinit --recursive --relative --nomods -i tests/factory",
     "ruff format"
 ]
 "api:mkinit".default_item_type = "cmd"
@@ -44,9 +44,6 @@ ignore = ["TID252"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401", "F403"]
-
-[tool.uv.build-backend]
-module-root = ""
 
 [tool.uv.sources]
 bridg = { workspace = true }

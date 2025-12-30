@@ -1,5 +1,6 @@
 import pytest
 from bridg.db import Base
+from bridg.factory.base import BaseFactory as SQLAlchemyBaseFactory
 from polyfactory.factories.base import BaseFactory
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
@@ -7,7 +8,6 @@ from syrupy.assertion import SnapshotAssertion
 from syrupy.extensions.json import JSONSnapshotExtension
 
 from common.settings import load_settings
-from tests.bridg.factory.base import BaseFactory as SQLAlchemyBaseFactory
 
 
 @pytest.fixture(scope="session", autouse=True)

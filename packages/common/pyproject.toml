@@ -12,6 +12,3 @@ build-backend = "uv_build"
 
 [tool.ruff]
 extend = "../../pyproject.toml"
-
-[tool.uv.build-backend]
-module-root = ""

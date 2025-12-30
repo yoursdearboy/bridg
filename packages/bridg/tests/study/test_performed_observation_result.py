@@ -3,7 +3,7 @@ from typing import get_args
 from sqlalchemy.orm import Session
 
 from bridg import DataValue
-from tests.bridg.factory import PerformedObservationResultFactory
+from bridg.factory import PerformedObservationResultFactory
 
 
 def test_performed_observation_result_value_persistence(session: Session):

@@ -1,5 +1,5 @@
 from bridg import Material
-from tests.bridg.factory import SpecimenFactory
+from bridg.factory import SpecimenFactory
 
 
 def test_specimen_material_orphans_deleted(session):

@@ -1,5 +1,5 @@
 __protected__ = []
-__private__ = ["converter", "observation_result", "uml"]
+__private__ = ["converter", "factory", "observation_result", "uml"]
 
 from .biospecimen import (
     Specimen,

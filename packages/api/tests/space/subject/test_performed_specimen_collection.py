@@ -1,20 +1,20 @@
+from bridg.factory import (
+    PerformedSpecimenCollectionFactory,
+    PersonFactory,
+    SpecimenFactory,
+    StudyProtocolVersionFactory,
+    StudySubjectFactory,
+)
 from dirty_equals import IsList, IsUUID
 from fastapi.testclient import TestClient
 from syrupy.matchers import path_type
 
 from api.main import app
 from api.model import ProducedSpecimenData
-from tests.api.factory import (
+from tests.factory import (
     MaterialDataFactory,
     PerformedSpecimenCollectionDataFactory,
     ProducedSpecimenDataFactory,
-)
-from tests.bridg.factory import (
-    PerformedSpecimenCollectionFactory,
-    PersonFactory,
-    SpecimenFactory,
-    StudyProtocolVersionFactory,
-    StudySubjectFactory,
 )
 
 client = TestClient(app)
