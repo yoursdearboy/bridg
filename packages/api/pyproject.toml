@@ -32,6 +32,7 @@ build-backend = "uv_build"
 "api:mkinit".sequence = [
     "mkinit --recursive --relative --nomods -i api/model",
     "mkinit --recursive --relative --nomods -i tests/factory",
+    "ruff check --fix",
     "ruff format"
 ]
 "api:mkinit".default_item_type = "cmd"

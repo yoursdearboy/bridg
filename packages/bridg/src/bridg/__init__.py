@@ -28,6 +28,7 @@ from .common import (
     Subject,
 )
 from .datatype import (
+    URL,
     ConceptDescriptor,
     DataTypeName,
     DataValue,
@@ -37,7 +38,6 @@ from .datatype import (
     PostalAddressUse,
     TelecommunicationAddress,
     TelecommunicationAddressUse,
-    URL,
     URLScheme,
 )
 from .db import (

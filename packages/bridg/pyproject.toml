@@ -27,6 +27,7 @@ build-backend = "uv_build"
 "bridg:mkinit".sequence = [
     "mkinit --recursive --relative --nomods -i src/bridg",
     "mkinit --recursive --relative --nomods -i src/bridg/factory",
+    "ruff check --fix",
     "ruff format"
 ]
 "bridg:mkinit".default_item_type = "cmd"
