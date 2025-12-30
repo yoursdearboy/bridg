@@ -370,6 +370,68 @@ exports[`show page renders correctly 1`] = `
             </div>
           </div>
         </div>
+        <style
+          data-mantine-styles="inline"
+        >
+          .__m__-«r1v»{--col-flex-grow:auto;--col-flex-basis:100%;--col-max-width:100%;--col-offset:0;}@media(min-width: 62em){.__m__-«r1v»{--col-flex-grow:auto;--col-flex-basis:58.333333333333336%;--col-max-width:58.333333333333336%;--col-offset:41.66666666666667%;}}
+        </style>
+        <div
+          class="m_96bdd299 mantine-Grid-col __m__-«r1v»"
+        >
+          <div
+            class="m_e615b15f mantine-Card-root m_1b7284a3 mantine-Paper-root"
+            data-with-border="true"
+            style="--paper-radius: var(--mantine-radius-md); --paper-shadow: var(--mantine-shadow-sm);"
+          >
+            <div
+              class="m_599a2148 mantine-Card-section"
+              data-first-section="true"
+              data-inherit-padding="true"
+              data-with-border="true"
+              style="padding-block: var(--mantine-spacing-xs);"
+            >
+              <div
+                class="m_4081bf90 mantine-Group-root"
+                style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+              >
+                <p
+                  class="mantine-focus-auto m_b6d8b162 mantine-Text-root"
+                  style="padding-inline: var(--mantine-spacing-xs); font-weight: 500;"
+                >
+                  Specimens
+                </p>
+              </div>
+            </div>
+            <div
+              class="m_599a2148 mantine-Card-section"
+              data-inherit-padding="true"
+              data-last-section="true"
+              style="padding-block: var(--mantine-spacing-xs);"
+            >
+              <div
+                class=""
+                style="min-height: 80px; position: relative;"
+              >
+                <div
+                  class="m_6e45937b mantine-LoadingOverlay-root"
+                  style="--lo-z-index: 400;"
+                >
+                  <span
+                    class="m_b34414df m_e8eb006c mantine-LoadingOverlay-loader m_5ae2e3c mantine-Loader-root"
+                  />
+                  <div
+                    class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-dark-hidden"
+                    style="--overlay-bg: rgba(255, 255, 255, 0.75); --overlay-z-index: 200;"
+                  />
+                  <div
+                    class="m_df587f17 mantine-LoadingOverlay-overlay m_9814e45f mantine-Overlay-root mantine-light-hidden"
+                    style="--overlay-bg: rgba(59, 59, 59, 0.75); --overlay-z-index: 200;"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

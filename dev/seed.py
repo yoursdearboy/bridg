@@ -22,8 +22,8 @@ from bridg.alchemy import (
     TerminologyService,
     converter,
 )
-from common.env import load_env
-from common.settings import load_settings
+from bridg.common.env import load_env
+from bridg.common.settings import load_settings
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
