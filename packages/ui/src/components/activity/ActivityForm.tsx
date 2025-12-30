@@ -12,6 +12,7 @@ import {
   type PerformedObservationResultData,
   type PerformedSpecimenCollectionData,
   type PerformingMaterialData,
+  type ProducedSpecimenData,
 } from "api-ts";
 import { useTranslation } from "react-i18next";
 import { EpochSelect } from "@/components/input/EpochSelect";
@@ -228,21 +229,41 @@ const SpecimenCollectionForm = ({
   performedActivity,
   onChange,
 }: SpecimenCollectionFormProps) => {
+  return performedActivity.producedSpecimen.map((producedSpecimen, i) => (
+    <ProducedSpecimenForm
+      key={i}
+      producedSpecimen={producedSpecimen}
+      onChange={(data) =>
+        onChange({
+          ...performedActivity,
+          producedSpecimen: performedActivity.producedSpecimen.map((s) =>
+            s.id && data.id && s.id == data.id ? data : s
+          ),
+        })
+      }
+    />
+  ));
+};
+
+interface ProducedSpecimenFormProps {
+  producedSpecimen: ProducedSpecimenData;
+  onChange: (data: ProducedSpecimenData) => void;
+}
+
+const ProducedSpecimenForm = ({
+  producedSpecimen,
+  onChange,
+}: ProducedSpecimenFormProps) => {
   return (
-    performedActivity.producedSpecimen && (
-      <PerformingMaterialForm
-        data={performedActivity.producedSpecimen.performingMaterial}
-        onChange={(performingMaterial) =>
-          onChange({
-            ...performedActivity,
-            producedSpecimen: {
-              ...performedActivity.producedSpecimen,
-              performingMaterial,
-            },
-          })
-        }
-      />
-    )
+    <PerformingMaterialForm
+      data={producedSpecimen.performingMaterial}
+      onChange={(performingMaterial) =>
+        onChange({
+          ...producedSpecimen,
+          performingMaterial,
+        })
+      }
+    />
   );
 };
 

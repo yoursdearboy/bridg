@@ -32,6 +32,12 @@ export interface MaterialData {
      * @type {string}
      * @memberof MaterialData
      */
+    id?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MaterialData
+     */
     type?: MaterialDataTypeEnum;
     /**
      * 
@@ -93,6 +99,7 @@ export function MaterialDataFromJSONTyped(json: any, ignoreDiscriminator: boolea
     }
     return {
         
+        'id': json['id'] == null ? undefined : json['id'],
         'type': json['type'] == null ? undefined : json['type'],
         'code': ConceptDescriptorFromJSON(json['code']),
         'formCode': ConceptDescriptorFromJSON(json['form_code']),
@@ -111,6 +118,7 @@ export function MaterialDataToJSONTyped(value?: MaterialData | null, ignoreDiscr
 
     return {
         
+        'id': value['id'],
         'type': value['type'],
         'code': ConceptDescriptorToJSON(value['code']),
         'form_code': ConceptDescriptorToJSON(value['formCode']),

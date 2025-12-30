@@ -29,6 +29,12 @@ import {
 export interface ProducedSpecimenData {
     /**
      * 
+     * @type {string}
+     * @memberof ProducedSpecimenData
+     */
+    id?: string | null;
+    /**
+     * 
      * @type {PerformingMaterialData}
      * @memberof ProducedSpecimenData
      */
@@ -61,6 +67,7 @@ export function ProducedSpecimenDataFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
+        'id': json['id'] == null ? undefined : json['id'],
         'performingMaterial': PerformingMaterialDataFromJSON(json['performing_material']),
     };
 }
@@ -76,6 +83,7 @@ export function ProducedSpecimenDataToJSONTyped(value?: ProducedSpecimenData | n
 
     return {
         
+        'id': value['id'],
         'performing_material': PerformingMaterialDataToJSON(value['performingMaterial']),
     };
 }
