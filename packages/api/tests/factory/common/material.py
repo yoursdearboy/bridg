@@ -1,6 +1,6 @@
 from polyfactory import Use
 
-from api.model.common.material import MaterialData
+from bridg.api.model.common.material import MaterialData
 
 from ..base import BaseFactory
 from ..datatype import ConceptDescriptorFactory

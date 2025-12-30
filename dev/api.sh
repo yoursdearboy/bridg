@@ -1,3 +1,3 @@
 #!/bin/sh
 
-uv run --package api fastapi dev packages/api/api/main.py
+uv run --package api fastapi dev packages/api/src/bridg/api/main.py

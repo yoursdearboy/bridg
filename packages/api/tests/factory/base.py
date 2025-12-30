@@ -1,6 +1,6 @@
 from polyfactory.factories.pydantic_factory import ModelFactory
 
-from api.model.base import BaseModel
+from bridg.api.model.base import BaseModel
 
 
 class BaseFactory[T: BaseModel](ModelFactory[T]):

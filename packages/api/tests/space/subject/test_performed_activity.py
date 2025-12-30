@@ -1,13 +1,13 @@
-from bridg.factory import (
+from fastapi.testclient import TestClient
+from syrupy.matchers import path_type
+
+from bridg.alchemy.factory import (
     PerformedActivityFactory,
     PersonFactory,
     StudyProtocolVersionFactory,
     StudySubjectFactory,
 )
-from fastapi.testclient import TestClient
-from syrupy.matchers import path_type
-
-from api.main import app
+from bridg.api.main import app
 from tests.factory import PerformedActivityDataFactory
 
 client = TestClient(app)

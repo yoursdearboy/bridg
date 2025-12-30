@@ -2,7 +2,7 @@ from datetime import timezone
 
 from polyfactory import Use
 
-from api.model import PerformedSpecimenCollectionData, ProducedSpecimenData
+from bridg.api.model import PerformedSpecimenCollectionData, ProducedSpecimenData
 
 from ..base import BaseFactory
 from ..datatype import ConceptDescriptorFactory, IntervalPointInTimeFactory

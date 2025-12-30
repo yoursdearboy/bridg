@@ -2,7 +2,7 @@ from datetime import timezone
 
 from polyfactory import Use
 
-from api.model import IntervalPointInTime
+from bridg.api.model import IntervalPointInTime
 
 from ..base import BaseFactory
 

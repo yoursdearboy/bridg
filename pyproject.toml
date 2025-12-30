@@ -28,17 +28,17 @@ test = [
 
 [tool.poe.tasks]
 mkinit = [
-    { ref = "api:mkinit", cwd = "packages/api" },
-    { ref = "bridg:mkinit", cwd = "packages/bridg" }
+    { ref = "alchemy:mkinit", cwd = "packages/alchemy" },
+    { ref = "api:mkinit", cwd = "packages/api" }
 ]
+
+[[tool.poe.include]]
+path = "packages/alchemy/pyproject.toml"
+cwd  = "packages/alchemy"
 
 [[tool.poe.include]]
 path = "packages/api/pyproject.toml"
 cwd  = "packages/api"
-
-[[tool.poe.include]]
-path = "packages/bridg/pyproject.toml"
-cwd  = "packages/bridg"
 
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report html"
@@ -51,7 +51,7 @@ extend-select = ["I", "TID"]
 
 [tool.uv.workspace]
 members = [
+    "packages/alchemy",
     "packages/api",
-    "packages/bridg",
     "packages/common"
 ]

@@ -1,4 +1,4 @@
-import bridg
+import bridg.alchemy
 from common.env import load_env
 from common.settings import load_settings
 from sqlalchemy import create_engine
@@ -9,7 +9,7 @@ load_env()
 settings = load_settings()
 engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
 
-model = bridg
+model = bridg.alchemy
 mappers = []
 
 for attr in dir(model):

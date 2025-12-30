@@ -1,16 +1,16 @@
-from bridg.factory import (
+from dirty_equals import IsList, IsUUID
+from fastapi.testclient import TestClient
+from syrupy.matchers import path_type
+
+from bridg.alchemy.factory import (
     PerformedObservationFactory,
     PerformedObservationResultFactory,
     PersonFactory,
     StudyProtocolVersionFactory,
     StudySubjectFactory,
 )
-from dirty_equals import IsList, IsUUID
-from fastapi.testclient import TestClient
-from syrupy.matchers import path_type
-
-from api.main import app
-from api.model import ConceptDescriptor, PerformedObservationResultData
+from bridg.api.main import app
+from bridg.api.model import ConceptDescriptor, PerformedObservationResultData
 from tests.factory import (
     PerformedObservationDataFactory,
     PerformedObservationResultDataFactory,

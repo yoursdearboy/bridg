@@ -2,7 +2,7 @@ from datetime import timezone
 
 from polyfactory import Ignore, Use
 
-from api.model import PerformedObservationResultData
+from bridg.api.model import PerformedObservationResultData
 
 from ..base import BaseFactory
 from ..datatype import ConceptDescriptorFactory

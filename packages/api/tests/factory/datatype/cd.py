@@ -1,6 +1,6 @@
 from polyfactory import Use
 
-from api.model import ConceptDescriptor
+from bridg.api.model import ConceptDescriptor
 
 from ..base import BaseFactory
 

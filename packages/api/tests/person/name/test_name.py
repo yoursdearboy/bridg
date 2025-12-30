@@ -1,8 +1,8 @@
-from bridg.factory import EntityNameFactory, PersonFactory
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from api.main import app
+from bridg.alchemy.factory import EntityNameFactory, PersonFactory
+from bridg.api.main import app
 from tests.utils import entity_name_dict, omit
 
 client = TestClient(app)

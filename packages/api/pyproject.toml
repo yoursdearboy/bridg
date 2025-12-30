@@ -3,7 +3,7 @@ name = "api"
 version = "0.1.0"
 description = "HTTP API for BRIDG"
 dependencies = [
-    "bridg",
+    "alchemy",
     "common",
     "uvicorn[standard]<1.0.0,>=0.40.0",
     "pydantic<3.0.0,>=2.12.5",
@@ -43,5 +43,5 @@ extend = "../../pyproject.toml"
 ignore = ["TID252"]
 
 [tool.uv.sources]
-bridg = { workspace = true }
+alchemy = { workspace = true }
 common = { workspace = true }

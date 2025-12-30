@@ -3,7 +3,9 @@ name = "common"
 version = "0.1.0"
 description = "Common utilities"
 dependencies = [
-    "python-dotenv<2.0.0,>=1.0.1"
+    "networkx[default]>=3.5",
+    "python-dotenv<2.0.0,>=1.0.1",
+    "pydot>=3.0.4"
 ]
 
 [build-system]

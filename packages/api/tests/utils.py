@@ -2,7 +2,7 @@ from datetime import date, datetime, timezone
 from enum import Enum
 from typing import Any, Callable, Optional, TypeVar, overload
 
-from bridg import EntityName, Person, StudySubject
+from bridg.alchemy import EntityName, Person, StudySubject
 
 T = TypeVar("T")
 R = TypeVar("R")

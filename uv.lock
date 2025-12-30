@@ -4,11 +4,44 @@ requires-python = ">=3.14"
 
 [manifest]
 members = [
+    "alchemy",
     "api",
-    "bridg",
     "bridg-workspace",
     "common",
 ]
+
+[[package]]
+name = "alchemy"
+version = "0.1.0"
+source = { editable = "packages/alchemy" }
+dependencies = [
+    { name = "cattrs" },
+    { name = "sqlalchemy" },
+    { name = "toolz" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "mkinit" },
+    { name = "poethepoet" },
+]
+test = [
+    { name = "polyfactory" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cattrs", specifier = ">=24.1.2,<25.0.0" },
+    { name = "sqlalchemy", specifier = ">=2.0.45,<3.0.0" },
+    { name = "toolz", specifier = ">=1.0.0,<2.0.0" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "mkinit", specifier = ">=1.2.0" },
+    { name = "poethepoet", specifier = ">=0.39.0" },
+]
+test = [{ name = "polyfactory", specifier = ">=3.2.0" }]
 
 [[package]]
 name = "annotated-doc"
@@ -46,8 +79,7 @@ name = "api"
 version = "0.1.0"
 source = { editable = "packages/api" }
 dependencies = [
-    { name = "bridg" },
-    { name = "cattrs" },
+    { name = "alchemy" },
     { name = "common" },
     { name = "fastapi", extra = ["standard"] },
     { name = "pydantic" },
@@ -69,8 +101,7 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "bridg", editable = "packages/bridg" },
-    { name = "cattrs", specifier = ">=24.1.2,<25.0.0" },
+    { name = "alchemy", editable = "packages/alchemy" },
     { name = "common", editable = "packages/common" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.128.0" },
     { name = "pydantic", specifier = ">=2.12.5,<3.0.0" },
@@ -140,49 +171,11 @@ wheels = [
 ]
 
 [[package]]
-name = "bridg"
-version = "0.1.0"
-source = { editable = "packages/bridg" }
-dependencies = [
-    { name = "cattrs" },
-    { name = "sqlalchemy" },
-    { name = "toolz" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "mkinit" },
-    { name = "networkx", extra = ["default"] },
-    { name = "poethepoet" },
-    { name = "pydot" },
-]
-test = [
-    { name = "polyfactory" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "cattrs", specifier = ">=24.1.2,<25.0.0" },
-    { name = "sqlalchemy", specifier = ">=2.0.45,<3.0.0" },
-    { name = "toolz", specifier = ">=1.0.0,<2.0.0" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "mkinit", specifier = ">=1.2.0" },
-    { name = "networkx", extras = ["default"], specifier = ">=3.5" },
-    { name = "poethepoet", specifier = ">=0.39.0" },
-    { name = "pydot", specifier = ">=3.0.4" },
-]
-test = [{ name = "polyfactory", specifier = ">=3.2.0" }]
-
-[[package]]
 name = "bridg-workspace"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "psycopg2-binary" },
-    { name = "python-dotenv" },
     { name = "pyyaml" },
 ]
 
@@ -205,7 +198,6 @@ test = [
 [package.metadata]
 requires-dist = [
     { name = "psycopg2-binary", specifier = ">=2.9.9,<3.0.0" },
-    { name = "python-dotenv", specifier = ">=1.0.1,<2.0.0" },
     { name = "pyyaml", specifier = ">=6.0.3,<7.0.0" },
 ]
 
@@ -302,11 +294,17 @@ name = "common"
 version = "0.1.0"
 source = { editable = "packages/common" }
 dependencies = [
+    { name = "networkx", extra = ["default"] },
+    { name = "pydot" },
     { name = "python-dotenv" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "python-dotenv", specifier = ">=1.0.1,<2.0.0" }]
+requires-dist = [
+    { name = "networkx", extras = ["default"], specifier = ">=3.5" },
+    { name = "pydot", specifier = ">=3.0.4" },
+    { name = "python-dotenv", specifier = ">=1.0.1,<2.0.0" },
+]
 
 [[package]]
 name = "contourpy"
