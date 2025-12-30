@@ -7,7 +7,6 @@ dependencies = [
     "common",
     "uvicorn[standard]<1.0.0,>=0.40.0",
     "pydantic<3.0.0,>=2.12.5",
-    "cattrs<25.0.0,>=24.1.2",
     "toolz<2.0.0,>=1.0.0",
     "fastapi[standard]>=0.128.0",
 ]
@@ -42,9 +41,6 @@ extend = "../../pyproject.toml"
 
 [tool.ruff.lint]
 ignore = ["TID252"]
-
-[tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401", "F403"]
 
 [tool.uv.sources]
 bridg = { workspace = true }
