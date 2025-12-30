@@ -10,7 +10,9 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "mkinit>=1.2.0",
     "networkx[default]>=3.5",
+    "poethepoet>=0.39.0",
     "pydot>=3.0.4",
 ]
 test = [
@@ -20,6 +22,14 @@ test = [
 [build-system]
 requires = ["uv_build>=0.8.12,<0.9.0"]
 build-backend = "uv_build"
+
+[tool.poe.tasks]
+"bridg:mkinit".sequence = [
+    "mkinit --recursive --relative --nomods -i bridg",
+    "mkinit --recursive --relative --nomods -i tests/bridg/factory/",
+    "ruff format"
+]
+"bridg:mkinit".default_item_type = "cmd"
 
 [tool.ruff]
 extend = "../../pyproject.toml"

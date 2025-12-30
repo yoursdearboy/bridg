@@ -1,14 +1,12 @@
-from typing import Generic, Iterable, List, Optional, TypeVar
+from typing import Iterable, Optional
 from uuid import UUID
 
 from sqlalchemy.orm import Session
 
 from . import Base
 
-T = TypeVar("T", bound=Base)
 
-
-class Repository(Generic[T]):
+class Repository[T: Base]:
     _sa: type[T]
 
     def __init__(self, db: Session) -> None:

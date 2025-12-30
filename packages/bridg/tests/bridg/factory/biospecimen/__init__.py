@@ -1,1 +1,5 @@
-from .specimen import SpecimenFactory
+from .specimen import (
+    SpecimenFactory,
+)
+
+__all__ = ["SpecimenFactory"]

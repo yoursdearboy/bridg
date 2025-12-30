@@ -1,1 +1,5 @@
-from .specimen import Specimen
+from .specimen import (
+    Specimen,
+)
+
+__all__ = ["Specimen"]

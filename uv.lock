@@ -151,7 +151,9 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "mkinit" },
     { name = "networkx", extra = ["default"] },
+    { name = "poethepoet" },
     { name = "pydot" },
 ]
 test = [
@@ -167,7 +169,9 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "mkinit", specifier = ">=1.2.0" },
     { name = "networkx", extras = ["default"], specifier = ">=3.5" },
+    { name = "poethepoet", specifier = ">=0.39.0" },
     { name = "pydot", specifier = ">=3.0.4" },
 ]
 test = [{ name = "polyfactory", specifier = ">=3.2.0" }]

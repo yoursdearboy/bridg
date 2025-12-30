@@ -1,14 +1,12 @@
 from datetime import timezone
-from typing import Any, Callable, TypeVar
+from typing import Any, Callable
 
 from polyfactory.factories.sqlalchemy_factory import SQLAlchemyFactory
 
 from bridg import Base, TZDateTime
 
-T = TypeVar("T", bound=Base)
 
-
-class BaseFactory(SQLAlchemyFactory[T]):
+class BaseFactory[T: Base](SQLAlchemyFactory[T]):
     __is_base_factory__ = True
     __set_relationships__ = True
     __set_association_proxy__ = True

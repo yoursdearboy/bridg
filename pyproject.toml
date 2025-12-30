@@ -27,9 +27,19 @@ test = [
     "pytest-cov<7.0.0,>=6.0.0",
 ]
 
+[tool.poe.tasks]
+mkinit = [
+    { ref = "api:mkinit", cwd = "packages/api" },
+    { ref = "bridg:mkinit", cwd = "packages/bridg" }
+]
+
 [[tool.poe.include]]
 path = "packages/api/pyproject.toml"
 cwd  = "packages/api"
+
+[[tool.poe.include]]
+path = "packages/bridg/pyproject.toml"
+cwd  = "packages/bridg"
 
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report html"
