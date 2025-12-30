@@ -23,8 +23,8 @@ build-backend = "uv_build"
 
 [tool.poe.tasks]
 "alchemy:mkinit".sequence = [
-    "mkinit --recursive --relative --nomods -i src/alchemy",
-    "mkinit --recursive --relative --nomods -i src/alchemy/factory",
+    "mkinit --recursive --relative --nomods -i src/bridg/alchemy",
+    "mkinit --recursive --relative --nomods -i src/bridg/alchemy/factory",
     "ruff check --fix",
     "ruff format"
 ]
@@ -35,3 +35,6 @@ extend = "../../pyproject.toml"
 
 [tool.ruff.lint]
 ignore = ["TID252"]
+
+[tool.uv.build-backend]
+module-name = "bridg.alchemy"
