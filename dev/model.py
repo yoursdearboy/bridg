@@ -1,6 +1,6 @@
 import bridg.alchemy
-from common.env import load_env
-from common.settings import load_settings
+from bridg.common.env import load_env
+from bridg.common.settings import load_settings
 from sqlalchemy import create_engine
 from sqlalchemy.orm import class_mapper
 from sqlalchemy_schemadisplay import create_schema_graph, create_uml_graph
