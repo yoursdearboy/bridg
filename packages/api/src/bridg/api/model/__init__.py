@@ -28,7 +28,7 @@ from .common import (
     TelecommunicationAddress,
     TelecommunicationAddressData,
 )
-from .datatypes import (
+from .datatype import (
     CharacterString,
     ConceptDescriptor,
     DataValue,

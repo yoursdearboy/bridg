@@ -3,7 +3,7 @@ from typing import Literal, Optional
 
 import bridg.alchemy
 
-from ..datatypes import ConceptDescriptor
+from ..datatype import ConceptDescriptor
 from .material import Material, MaterialData
 
 

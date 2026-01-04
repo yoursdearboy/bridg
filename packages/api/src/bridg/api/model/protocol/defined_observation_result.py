@@ -4,7 +4,7 @@ from uuid import UUID
 import bridg.alchemy
 
 from ..base import BaseModel
-from ..datatypes import ConceptDescriptor
+from ..datatype import ConceptDescriptor
 from ..observation_result import ObservationResult
 
 
