@@ -5,7 +5,7 @@ from uuid import UUID
 import bridg.alchemy
 
 from ..base import BaseModel
-from ..datatypes import ConceptDescriptor, IntervalPointInTime
+from ..datatype import ConceptDescriptor, IntervalPointInTime
 from ..protocol import DefinedActivity, Epoch
 from .study_site import StudySite
 
