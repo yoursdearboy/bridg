@@ -18,11 +18,13 @@ class ObservationResult:
         return relationship(foreign_keys=cls.value_cd_id)  # type: ignore
 
     # FIXME: convert to optional
+    # see https://github.com/abdulrahman305/sqlalchemy/commit/071abbb8636d81ff0c9a4ea8b8a972e63cf5ef54#diff-d54af7d55637bc92aefa7c48b51e08b36fa6cd7ae0adc5461d06638e438d08cbR331-R335
     @declared_attr
-    def value_pq(cls) -> Mapped[PhysicalQuantity]:
+    def value_pq(cls) -> Mapped[Optional[PhysicalQuantity]]:
         return composite(
-            mapped_column("value_pq_value", Numeric),
-            mapped_column("value_pq_unit", String),
+            lambda value, unit: PhysicalQuantity(value, unit) if value is not None else None,
+            mapped_column("value_pq_value", Numeric, nullable=True),
+            mapped_column("value_pq_unit", String, nullable=True),
         )
 
     value_date: Mapped[Optional[date]]
@@ -40,7 +42,7 @@ class ObservationResult:
     def value(self) -> Optional[DataValue]:
         if self.value_cd:
             return self.value_cd
-        elif self.value_pq and self.value_pq.value is not None:
+        elif self.value_pq:
             return self.value_pq
         elif self.value_datetime:
             return self.value_datetime
