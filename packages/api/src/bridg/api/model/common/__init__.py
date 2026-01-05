@@ -26,10 +26,10 @@ from .person import (
     PersonAttributes,
     PersonData,
     PersonPatch,
-)
-from .postal_address import (
-    PostalAddress,
-    PostalAddressData,
+    PersonPostalAddress,
+    PersonPostalAddressData,
+    PersonTelecommunicationAddress,
+    PersonTelecommunicationAddressData,
 )
 from .product import (
     Product,
@@ -38,10 +38,6 @@ from .product import (
 from .study_subject import (
     StudySubject,
     StudySubjectData,
-)
-from .telecommunication_address import (
-    TelecommunicationAddress,
-    TelecommunicationAddressData,
 )
 
 __all__ = [
@@ -60,12 +56,12 @@ __all__ = [
     "PersonAttributes",
     "PersonData",
     "PersonPatch",
-    "PostalAddress",
-    "PostalAddressData",
+    "PersonPostalAddress",
+    "PersonPostalAddressData",
+    "PersonTelecommunicationAddress",
+    "PersonTelecommunicationAddressData",
     "Product",
     "ProductData",
     "StudySubject",
     "StudySubjectData",
-    "TelecommunicationAddress",
-    "TelecommunicationAddressData",
 ]

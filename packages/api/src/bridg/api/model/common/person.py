@@ -7,8 +7,25 @@ from pydantic import Field, computed_field
 import bridg.alchemy
 
 from ..base import BaseModel
+from ..datatype import PostalAddress, PostalAddressData, TelecommunicationAddress, TelecommunicationAddressData
 from .biologic_entity import BiologicEntityIdentifier, BiologicEntityName, BiologicEntityNameData
 from .id import ID
+
+
+class PersonPostalAddressData(PostalAddressData[bridg.alchemy.PersonPostalAddress]):
+    _sa = bridg.alchemy.PersonPostalAddress
+
+
+class PersonPostalAddress(PostalAddress[bridg.alchemy.PersonPostalAddress]):
+    id: UUID
+
+
+class PersonTelecommunicationAddressData(TelecommunicationAddressData[bridg.alchemy.PersonTelecommunicationAddress]):
+    _sa = bridg.alchemy.PersonTelecommunicationAddress
+
+
+class PersonTelecommunicationAddress(TelecommunicationAddress[bridg.alchemy.PersonTelecommunicationAddress]):
+    id: UUID
 
 
 class PersonAttributes(BaseModel[bridg.alchemy.Person]):
