@@ -33,6 +33,3 @@ class Epoch(Base):
     Each Epoch always is a division of one StudyProtocolVersion.
     Each StudyProtocolVersion might be divided into one or more Epoch.
     """
-
-    def __str__(self):
-        return self.name

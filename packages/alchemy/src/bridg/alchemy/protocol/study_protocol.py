@@ -40,6 +40,3 @@ class StudyProtocol(Base):
     Each StudyProtocolVersion always is a version of one StudyProtocol.
     Each StudyProtocol always has as a version one or more StudyProtocolVersion.
     """
-
-    def __str__(self):
-        return str(self.planned_study)

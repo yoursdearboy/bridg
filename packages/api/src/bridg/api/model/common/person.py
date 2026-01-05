@@ -2,6 +2,8 @@ from datetime import date
 from typing import Any, List, Optional
 from uuid import UUID
 
+from pydantic import Field, computed_field
+
 import bridg.alchemy
 
 from ..base import BaseModel
@@ -40,5 +42,10 @@ class PersonPatch(PersonAttributes):
 
 class Person(PersonAttributes):
     id: UUID
-    primary_name: Optional[EntityName]
+    name: List[EntityName] = Field(exclude=True)
     identifier: List[ID]
+
+    @computed_field
+    @property
+    def primary_name(self) -> Optional[EntityName]:
+        return next(iter(self.name), None)

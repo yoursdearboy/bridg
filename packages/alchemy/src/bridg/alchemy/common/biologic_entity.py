@@ -48,16 +48,6 @@ class BiologicEntity(Base):
 
     name: Mapped[List[EntityName]] = relationship(back_populates="biologic_entity", cascade="all, delete-orphan")
 
-    # FIXME: return something more meaningfull than first entry
-    @property
-    def primary_name(self) -> Optional[EntityName]:
-        return next((n for n in self.name), None)
-
-    def __str__(self):
-        if not self.primary_name:
-            return "Anonymous"
-        return str(self.primary_name)
-
 
 class BiologicEntityIdentifier(ID):
     __tablename__ = "biologic_entity_identifier"
