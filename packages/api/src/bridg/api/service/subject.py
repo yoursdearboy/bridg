@@ -3,7 +3,7 @@ from uuid import UUID
 
 from bridg.alchemy import (
     BiologicEntity,
-    EntityName,
+    BiologicEntityName,
     Repository,
     StudySiteProtocolVersionRelationship,
     StudySubject,
@@ -31,7 +31,7 @@ class StudySubjectRepository(Repository[StudySubject]):
     def lookup(self, data: StudySubject) -> Iterable[StudySubject]:
         q = self.db.query(BiologicEntity)
         if (pbe := data.performing_biologic_entity) and (n := next(iter(pbe.name), None)):
-            q = q.filter(BiologicEntity.name.any(EntityName.family.ilike(f"%{n.family}%")))
+            q = q.filter(BiologicEntity.name.any(BiologicEntityName.family.ilike(f"%{n.family}%")))
             q = q.limit(10)
             return [StudySubject(performing_biologic_entity=be, performing_biologic_entity_id=be.id) for be in q]
         raise RuntimeError("Unknown performing entity")

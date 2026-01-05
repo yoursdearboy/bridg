@@ -7,9 +7,9 @@ from uuid import UUID, uuid4
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from ..datatype import EntityName
 from ..db import Base
 from .administrative_gender import AdministrativeGender
-from .entity_name import EntityName
 from .id import ID
 
 
@@ -46,7 +46,17 @@ class BiologicEntity(Base):
         back_populates="biologic_entity", cascade="all, delete-orphan"
     )
 
-    name: Mapped[List[EntityName]] = relationship(back_populates="biologic_entity", cascade="all, delete-orphan")
+    name: Mapped[List[BiologicEntityName]] = relationship(
+        back_populates="biologic_entity", cascade="all, delete-orphan"
+    )
+
+
+class BiologicEntityName(EntityName):
+    __tablename__ = "biologic_entity_name"
+
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    biologic_entity_id: Mapped[UUID] = mapped_column(ForeignKey("biologic_entity.id"))
+    biologic_entity: Mapped[BiologicEntity] = relationship(back_populates="name")
 
 
 class BiologicEntityIdentifier(ID):

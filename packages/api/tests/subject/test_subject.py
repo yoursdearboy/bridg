@@ -2,7 +2,12 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 from bridg.alchemy import BiologicEntity, StudySubject
-from bridg.alchemy.factory import EntityNameFactory, PersonFactory, StudyProtocolVersionFactory, StudySubjectFactory
+from bridg.alchemy.factory import (
+    BiologicEntityNameFactory,
+    PersonFactory,
+    StudyProtocolVersionFactory,
+    StudySubjectFactory,
+)
 from bridg.api.main import app
 from tests.utils import _or, date_str, datetime_str, enum_str, person_dict, study_subject_dict
 
@@ -128,9 +133,9 @@ def test_subject_lookup(session: Session):
     session.query(BiologicEntity).delete()
     space = StudyProtocolVersionFactory.create_sync()
     sspvr = space.executing_study_site_protocol_version_relationship[0]
-    p1 = PersonFactory.create_sync(name=[EntityNameFactory.build(family="Some")])
-    p2 = PersonFactory.create_sync(name=[EntityNameFactory.build(family="Person")])
-    p3 = PersonFactory.create_sync(name=[EntityNameFactory.build(family="Test")])
+    p1 = PersonFactory.create_sync(name=[BiologicEntityNameFactory.build(family="Some")])
+    p2 = PersonFactory.create_sync(name=[BiologicEntityNameFactory.build(family="Person")])
+    p3 = PersonFactory.create_sync(name=[BiologicEntityNameFactory.build(family="Test")])
     for p in [p1, p2, p3]:
         StudySubjectFactory.create_sync(
             performing_biologic_entity=p,

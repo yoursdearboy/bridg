@@ -1,13 +1,19 @@
 from polyfactory import Ignore, Use
 
-from bridg.alchemy import AdministrativeGender, BiologicEntityIdentifier, Person
+from bridg.alchemy import AdministrativeGender, BiologicEntityIdentifier, BiologicEntityName, Person
 
 from ..base import BaseFactory
-from .entity_name import EntityNameFactory
+from ..datatype import EntityNameFactory
 from .id import IDFactory
 
 
 class BiologicEntityIdentifierFactory(IDFactory[BiologicEntityIdentifier]):
+    id = Ignore()
+    biologic_entity_id = Ignore()
+    biologic_entity = Ignore()
+
+
+class BiologicEntityNameFactory(EntityNameFactory[BiologicEntityName]):
     id = Ignore()
     biologic_entity_id = Ignore()
     biologic_entity = Ignore()
@@ -24,7 +30,7 @@ class PersonFactory(BaseFactory[Person]):
     death_date_estimated_indicator = None
     death_indicator = False
 
-    name = Use(lambda: EntityNameFactory.batch(1))
+    name = Use(lambda: BiologicEntityNameFactory.batch(1))
     identifier = Use(lambda: BiologicEntityIdentifierFactory.batch(1))
     performed_healthcare_provider = Ignore()
     # postal_address
