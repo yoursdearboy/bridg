@@ -1,5 +1,4 @@
 from typing import Optional
-from uuid import UUID
 
 from pydantic import computed_field
 
@@ -8,9 +7,7 @@ import bridg.alchemy
 from ..base import BaseModel
 
 
-class PostalAddressData(BaseModel[bridg.alchemy.common.person.PostalAddress]):
-    _sa = bridg.alchemy.common.person.PostalAddress
-
+class PostalAddressData[T: bridg.alchemy.PostalAddress](BaseModel[T]):
     use: Optional[str] = None
     street: Optional[str] = None
     building: Optional[str] = None
@@ -20,9 +17,7 @@ class PostalAddressData(BaseModel[bridg.alchemy.common.person.PostalAddress]):
     zip: Optional[str] = None
 
 
-class PostalAddress(PostalAddressData):
-    id: UUID
-
+class PostalAddress[T: bridg.alchemy.PostalAddress](PostalAddressData[T]):
     @computed_field
     @property
     def label(self) -> str:

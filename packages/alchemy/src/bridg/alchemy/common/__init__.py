@@ -1,5 +1,3 @@
-__ignore__ = ["PostalAddress", "TelecommunicationAddress"]
-
 from .activity import (
     Activity,
 )
@@ -40,6 +38,8 @@ from .organization_name import (
 )
 from .person import (
     Person,
+    PersonPostalAddress,
+    PersonTelecommunicationAddress,
 )
 from .product import (
     Product,
@@ -80,6 +80,8 @@ __all__ = [
     "Organization",
     "OrganizationName",
     "Person",
+    "PersonPostalAddress",
+    "PersonTelecommunicationAddress",
     "Product",
     "Project",
     "ProjectConduct",

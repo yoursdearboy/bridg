@@ -1,3 +1,7 @@
+from .ad import (
+    PostalAddress,
+    PostalAddressData,
+)
 from .any import (
     DataValue,
     model_validate,
@@ -21,6 +25,10 @@ from .pq import (
 from .st import (
     CharacterString,
 )
+from .tel import (
+    TelecommunicationAddress,
+    TelecommunicationAddressData,
+)
 from .ts import (
     Date,
     DateTime,
@@ -37,5 +45,9 @@ __all__ = [
     "InstanceIdentifier",
     "IntervalPointInTime",
     "PhysicalQuantity",
+    "PostalAddress",
+    "PostalAddressData",
+    "TelecommunicationAddress",
+    "TelecommunicationAddressData",
     "model_validate",
 ]
