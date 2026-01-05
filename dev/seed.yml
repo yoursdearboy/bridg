@@ -29,6 +29,9 @@ person:
     death_date: 2000-01-01
     death_date_estimated_indicator: true
     death_indicator: true
+    identifier:
+      - { identifier: { root: "1efcfb6d-edaa-4218-9080-45187e702341" } }
+      - { identifier: { root: "SSN", extension: "70906649" } }
   - name: [{ use: official, family: Morgendorffer, given: Daria }]
     birth_date: 1991-01-01
     postal_address: [{ street: "Howard Drive", building: "111", country: "USA", municipality: "Lawndale", state: "Texas" }]

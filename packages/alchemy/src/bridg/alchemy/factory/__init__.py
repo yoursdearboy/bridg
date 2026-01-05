@@ -5,7 +5,9 @@ from .biospecimen import (
     SpecimenFactory,
 )
 from .common import (
+    BiologicEntityIdentifierFactory,
     EntityNameFactory,
+    IDFactory,
     MaterialFactory,
     PersonFactory,
     StudyFactory,
@@ -30,8 +32,10 @@ from .study import (
 
 __all__ = [
     "BaseFactory",
+    "BiologicEntityIdentifierFactory",
     "ConceptDescriptorFactory",
     "EntityNameFactory",
+    "IDFactory",
     "MaterialFactory",
     "NOT_SET",
     "PerformedActivityFactory",

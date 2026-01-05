@@ -5,6 +5,9 @@ from .any import (
 from .cd import (
     ConceptDescriptor,
 )
+from .ii import (
+    InstanceIdentifier,
+)
 from .ivl_ts import (
     IntervalPointInTime,
 )
@@ -25,6 +28,7 @@ __all__ = [
     "DataValue",
     "Date",
     "DateTime",
+    "InstanceIdentifier",
     "IntervalPointInTime",
     "PhysicalQuantity",
     "model_validate",

@@ -2,9 +2,15 @@ from .biologic import (
     Biologic,
     BiologicData,
 )
+from .biologic_entity import (
+    BiologicEntityIdentifier,
+)
 from .entity_name import (
     EntityName,
     EntityNameData,
+)
+from .id import (
+    ID,
 )
 from .material import (
     Material,
@@ -43,8 +49,10 @@ from .telecommunication_address import (
 __all__ = [
     "Biologic",
     "BiologicData",
+    "BiologicEntityIdentifier",
     "EntityName",
     "EntityNameData",
+    "ID",
     "Material",
     "MaterialData",
     "Organization",

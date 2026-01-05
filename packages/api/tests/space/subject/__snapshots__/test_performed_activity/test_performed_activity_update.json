@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2026-07-04T04:38:27.343881Z",
-    "low": "2054-12-24T13:49:48.207604Z"
+    "high": "2024-11-12T04:08:32.332281Z",
+    "low": "2086-03-02T14:08:43.320684Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "turn",
-    "code_system": "policy",
+    "code": "customer",
+    "code_system": "not",
     "data_type_name": "CD",
-    "display_name": "Who up sense."
+    "display_name": "Cell contain leg."
   },
   "reason_code": null,
   "status_code": {
-    "code": "road",
-    "code_system": "deep",
+    "code": "two",
+    "code_system": "wind",
     "data_type_name": "CD",
-    "display_name": "Human public."
+    "display_name": "Kitchen technology."
   },
-  "status_date": "2037-05-05T04:24:45.061844Z"
+  "status_date": "2055-01-12T15:10:08.016732Z"
 }

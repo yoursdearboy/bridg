@@ -1,12 +1,16 @@
+from __future__ import annotations
+
 from datetime import date
 from typing import List, Optional
 from uuid import UUID, uuid4
 
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
 from .administrative_gender import AdministrativeGender
 from .entity_name import EntityName
+from .id import ID
 
 
 class BiologicEntity(Base):
@@ -38,6 +42,10 @@ class BiologicEntity(Base):
     death_date_estimated_indicator: Mapped[Optional[bool]]
     death_indicator: Mapped[Optional[bool]]
 
+    identifier: Mapped[List[BiologicEntityIdentifier]] = relationship(
+        back_populates="biologic_entity", cascade="all, delete-orphan"
+    )
+
     name: Mapped[List[EntityName]] = relationship(back_populates="biologic_entity", cascade="all, delete-orphan")
 
     # FIXME: return something more meaningfull than first entry
@@ -49,3 +57,11 @@ class BiologicEntity(Base):
         if not self.primary_name:
             return "Anonymous"
         return str(self.primary_name)
+
+
+class BiologicEntityIdentifier(ID):
+    __tablename__ = "biologic_entity_identifier"
+
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    biologic_entity_id: Mapped[UUID] = mapped_column(ForeignKey("biologic_entity.id"))
+    biologic_entity: Mapped[BiologicEntity] = relationship(back_populates="identifier")
