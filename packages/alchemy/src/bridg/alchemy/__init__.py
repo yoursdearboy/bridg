@@ -38,6 +38,7 @@ from .datatype import (
     PostalAddressUse,
     TelecommunicationAddress,
     TelecommunicationAddressUse,
+    UniqueIdentifierString,
     URLScheme,
 )
 from .db import (
@@ -155,4 +156,5 @@ __all__ = [
     "TerminologyService",
     "URL",
     "URLScheme",
+    "UniqueIdentifierString",
 ]

@@ -1,12 +1,13 @@
 from contextvars import ContextVar
 from dataclasses import Field, fields, is_dataclass
 from datetime import date, datetime
-from typing import List, Optional, TypeVar, get_origin, get_type_hints
+from types import FunctionType
+from typing import List, NewType, Optional, TypeVar, get_origin, get_type_hints
 from uuid import UUID
 
 from cattr import Converter
 from sqlalchemy import inspect
-from sqlalchemy.orm import Relationship
+from sqlalchemy.orm import Composite, Relationship
 from sqlalchemy.orm.collections import InstrumentedList
 from toolz import dissoc
 
@@ -99,6 +100,10 @@ def make_model_hook():
                     type = attr.entity.class_
                     if attr.uselist:
                         type = List[type]
+                elif isinstance(attr, Composite):
+                    type = attr.composite_class
+                    if isinstance(type, FunctionType):
+                        type = type.__annotations__["return"]
                 # FIXME: dont' repeat yourself (see below)
                 elif ann := annotations.get(key):
                     type = ann.__args__[0]
@@ -143,7 +148,7 @@ def dataclass_hook(x, cls):
         key = field.name
         value = x.get(key) if isinstance(x, dict) else getattr(x, key)
         ftype = field.type
-        assert isinstance(ftype, type) or get_origin(ftype) is not None
+        assert isinstance(ftype, type) or isinstance(ftype, NewType) or get_origin(ftype) is not None
         value = converter.structure(value, ftype)  # type: ignore
         return (key, value)
 
