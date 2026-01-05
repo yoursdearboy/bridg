@@ -47,6 +47,7 @@ def test_subject_create(session: Session):
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     p = PersonFactory.build()
     s = StudySubjectFactory.build(performing_biologic_entity=p, performing_organization=None)
+    id = p.identifier[0]
     en = p.name[0]
     response = client.post(
         f"/spaces/{space.id}/subjects/",
@@ -63,6 +64,20 @@ def test_subject_create(session: Session):
                     "patronymic": en.patronymic,
                     "prefix": en.prefix,
                     "suffix": en.suffix,
+                },
+                "primary_identifier": {
+                    "identifier": {
+                        "root": id.identifier.root,
+                        "extension": id.identifier.extension,
+                    },
+                    "identifier_type_code": {
+                        "code": id.identifier_type_code.code,
+                        "code_system": id.identifier_type_code.code_system,
+                        "data_type_name": "CD",
+                        "display_name": id.identifier_type_code.display_name,
+                    }
+                    if id.identifier_type_code
+                    else None,
                 },
                 "death_date": None,
                 "death_date_estimated_indicator": None,
@@ -130,6 +145,7 @@ def test_subject_lookup(session: Session):
             "death_date_estimated_indicator": None,
             "death_indicator": None,
             "primary_name": {"family": "so"},
+            "primary_identifier": None,
         }
     }
     response = client.post(f"/spaces/{space.id}/subjects/lookup", json=query)

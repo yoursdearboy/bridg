@@ -2,7 +2,7 @@ from datetime import date, datetime, timezone
 from enum import Enum
 from typing import Any, Callable, Optional, TypeVar, overload
 
-from bridg.alchemy import EntityName, Person, StudySubject
+from bridg.alchemy import ID, EntityName, Person, StudySubject
 
 T = TypeVar("T")
 R = TypeVar("R")
@@ -62,6 +62,23 @@ def entity_name_dict(x: EntityName):
     }
 
 
+def identifier_dict(x: ID):
+    return {
+        "identifier": {
+            "root": x.identifier.root,
+            "extension": x.identifier.extension,
+        },
+        "identifier_type_code": {
+            "code": x.identifier_type_code.code,
+            "code_system": x.identifier_type_code.code_system,
+            "data_type_name": "CD",
+            "display_name": x.identifier_type_code.display_name,
+        }
+        if x.identifier_type_code
+        else None,
+    }
+
+
 def person_dict(x: Person):
     return {
         "id": str(x.id),
@@ -71,6 +88,7 @@ def person_dict(x: Person):
         "death_date_estimated_indicator": x.death_date_estimated_indicator,
         "death_indicator": x.death_indicator,
         "primary_name": _or(entity_name_dict, x.primary_name),
+        "identifier": [identifier_dict(id) for id in x.identifier],
     }
 
 

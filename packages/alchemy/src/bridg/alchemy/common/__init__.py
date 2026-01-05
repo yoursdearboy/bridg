@@ -11,6 +11,7 @@ from .biologic import (
 )
 from .biologic_entity import (
     BiologicEntity,
+    BiologicEntityIdentifier,
 )
 from .entity_name import (
     EntityName,
@@ -26,6 +27,9 @@ from .healthcare_provider_group import (
 )
 from .healthcare_provider_group_member import (
     HealthcareProviderGroupMember,
+)
+from .id import (
+    ID,
 )
 from .material import (
     Material,
@@ -67,11 +71,13 @@ __all__ = [
     "AdministrativeGender",
     "Biologic",
     "BiologicEntity",
+    "BiologicEntityIdentifier",
     "EntityName",
     "HealthcareFacility",
     "HealthcareProvider",
     "HealthcareProviderGroup",
     "HealthcareProviderGroupMember",
+    "ID",
     "Material",
     "Organization",
     "OrganizationName",

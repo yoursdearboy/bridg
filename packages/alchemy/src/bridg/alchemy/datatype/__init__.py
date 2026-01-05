@@ -9,6 +9,9 @@ from .any import (
 from .cd import (
     ConceptDescriptor,
 )
+from .ii import (
+    InstanceIdentifier,
+)
 from .ivl_ts import (
     IntervalPointInTime,
 )
@@ -31,6 +34,7 @@ __all__ = [
     "ConceptDescriptor",
     "DataTypeName",
     "DataValue",
+    "InstanceIdentifier",
     "IntervalPointInTime",
     "PhysicalQuantity",
     "PostalAddress",
