@@ -29,8 +29,3 @@ class PostalAddress(Base):
     municipality: Mapped[Optional[str]]
     state: Mapped[Optional[str]]
     zip: Mapped[Optional[str]]
-
-    def __str__(self):
-        parts = [self.street, self.building, self.country, self.municipality, self.state, self.zip]
-        parts = [p for p in parts if p]
-        return " ".join(parts)

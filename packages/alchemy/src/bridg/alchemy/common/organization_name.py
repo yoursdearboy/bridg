@@ -21,8 +21,3 @@ class OrganizationName(Base):
 
     organization_id: Mapped[UUID] = mapped_column(ForeignKey("organization.id"))
     organization: Mapped[Organization] = relationship(back_populates="name")
-
-    def __str__(self):
-        if not self.value:
-            return "Unnamed"
-        return self.value

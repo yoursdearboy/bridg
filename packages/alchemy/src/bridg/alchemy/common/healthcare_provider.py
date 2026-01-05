@@ -76,6 +76,3 @@ class HealthcareProvider(Base):
         "grouping_healthcare_provider_group",
         creator=lambda group: HealthcareProviderGroupMember(grouping_healthcare_provider_group=group),
     )
-
-    def __str__(self):
-        return str(self.performing_person)

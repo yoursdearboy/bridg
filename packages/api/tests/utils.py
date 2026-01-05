@@ -87,7 +87,7 @@ def person_dict(x: Person):
         "death_date": _or(date_str, x.death_date),
         "death_date_estimated_indicator": x.death_date_estimated_indicator,
         "death_indicator": x.death_indicator,
-        "primary_name": _or(entity_name_dict, x.primary_name),
+        "primary_name": _or(entity_name_dict, next(iter(x.name), None)),
         "identifier": [identifier_dict(id) for id in x.identifier],
     }
 

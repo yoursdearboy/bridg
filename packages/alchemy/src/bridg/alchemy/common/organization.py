@@ -68,13 +68,3 @@ class Organization(Base):
     Each HealthcareProvider might belong to a department at one Organization.
     Each Organization might be the department for one or more HealthcareProvider.
     """
-
-    # FIXME: return something more meaningfull than first entry
-    @property
-    def primary_name(self) -> Optional[OrganizationName]:
-        return next(n for n in self.name)
-
-    def __str__(self):
-        if not self.primary_name:
-            return "Unnamed"
-        return str(self.primary_name)

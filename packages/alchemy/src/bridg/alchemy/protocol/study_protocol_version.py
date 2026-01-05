@@ -87,8 +87,3 @@ class StudyProtocolVersion(Base):
     Each StudyActivity might be used by one StudyProtocolVersion.
     Each StudyProtocolVersion might use one or more StudyActivity.
     """
-
-    def __str__(self):
-        if self.acronym:
-            return self.acronym
-        return "{self.versioned_study_protocol} version"
