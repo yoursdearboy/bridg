@@ -7,8 +7,7 @@ from pydantic import Field, computed_field
 import bridg.alchemy
 
 from ..base import BaseModel
-from .biologic_entity import BiologicEntityIdentifier
-from .entity_name import EntityName, EntityNameData
+from .biologic_entity import BiologicEntityIdentifier, BiologicEntityName, BiologicEntityNameData
 from .id import ID
 
 
@@ -23,7 +22,7 @@ class PersonAttributes(BaseModel[bridg.alchemy.Person]):
 class PersonData(PersonAttributes):
     _sa = bridg.alchemy.Person
 
-    primary_name: Optional[EntityNameData]
+    primary_name: Optional[BiologicEntityNameData]
     primary_identifier: Optional[BiologicEntityIdentifier]
 
     def model_dump_sa(self, exclude=set(), context: Any = None) -> bridg.alchemy.Person:
@@ -42,10 +41,10 @@ class PersonPatch(PersonAttributes):
 
 class Person(PersonAttributes):
     id: UUID
-    name: List[EntityName] = Field(exclude=True)
+    name: List[BiologicEntityName] = Field(exclude=True)
     identifier: List[ID]
 
     @computed_field
     @property
-    def primary_name(self) -> Optional[EntityName]:
+    def primary_name(self) -> Optional[BiologicEntityName]:
         return next(iter(self.name), None)

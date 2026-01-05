@@ -5,6 +5,10 @@ from .any import (
 from .cd import (
     ConceptDescriptor,
 )
+from .en import (
+    EntityName,
+    EntityNameData,
+)
 from .ii import (
     InstanceIdentifier,
 )
@@ -28,6 +32,8 @@ __all__ = [
     "DataValue",
     "Date",
     "DateTime",
+    "EntityName",
+    "EntityNameData",
     "InstanceIdentifier",
     "IntervalPointInTime",
     "PhysicalQuantity",

@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from bridg.alchemy.factory import EntityNameFactory, PersonFactory
+from bridg.alchemy.factory import BiologicEntityNameFactory, PersonFactory
 from bridg.api.main import app
 from tests.utils import entity_name_dict, omit
 
@@ -9,7 +9,7 @@ client = TestClient(app)
 
 
 def test_person_name_index():
-    name = EntityNameFactory.batch(2)
+    name = BiologicEntityNameFactory.batch(2)
     person = PersonFactory.create_sync(name=name)
     response = client.get(f"/persons/{person.id}/names")
     assert response.status_code == 200
@@ -18,7 +18,7 @@ def test_person_name_index():
 
 def test_person_name_create():
     person = PersonFactory.create_sync(name=[])
-    en = EntityNameFactory.build()
+    en = BiologicEntityNameFactory.build()
     data = {
         "use": None,
         "family": en.family,
@@ -36,8 +36,8 @@ def test_person_name_create():
 
 
 def test_person_name_update(session: Session):
-    en = EntityNameFactory.build()
-    en2 = EntityNameFactory.build()
+    en = BiologicEntityNameFactory.build()
+    en2 = BiologicEntityNameFactory.build()
     person = PersonFactory.create_sync(name=[en])
     patch = {
         "use": None,
@@ -58,7 +58,7 @@ def test_person_name_update(session: Session):
 
 
 def test_person_name_delete(session: Session):
-    en = EntityNameFactory.build()
+    en = BiologicEntityNameFactory.build()
     person = PersonFactory.create_sync(name=[en])
     response = client.delete(f"/persons/{person.id}/names/{en.id}")
     session.expire_all()

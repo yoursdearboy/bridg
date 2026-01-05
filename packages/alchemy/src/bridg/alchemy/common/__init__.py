@@ -12,9 +12,7 @@ from .biologic import (
 from .biologic_entity import (
     BiologicEntity,
     BiologicEntityIdentifier,
-)
-from .entity_name import (
-    EntityName,
+    BiologicEntityName,
 )
 from .healthcare_facility import (
     HealthcareFacility,
@@ -72,7 +70,7 @@ __all__ = [
     "Biologic",
     "BiologicEntity",
     "BiologicEntityIdentifier",
-    "EntityName",
+    "BiologicEntityName",
     "HealthcareFacility",
     "HealthcareProvider",
     "HealthcareProviderGroup",

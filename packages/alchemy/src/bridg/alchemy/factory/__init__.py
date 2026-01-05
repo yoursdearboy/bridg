@@ -6,7 +6,7 @@ from .biospecimen import (
 )
 from .common import (
     BiologicEntityIdentifierFactory,
-    EntityNameFactory,
+    BiologicEntityNameFactory,
     IDFactory,
     MaterialFactory,
     PersonFactory,
@@ -15,6 +15,7 @@ from .common import (
 )
 from .datatype import (
     ConceptDescriptorFactory,
+    EntityNameFactory,
     PhysicalQuantityFactory,
 )
 from .protocol import (
@@ -33,6 +34,7 @@ from .study import (
 __all__ = [
     "BaseFactory",
     "BiologicEntityIdentifierFactory",
+    "BiologicEntityNameFactory",
     "ConceptDescriptorFactory",
     "EntityNameFactory",
     "IDFactory",

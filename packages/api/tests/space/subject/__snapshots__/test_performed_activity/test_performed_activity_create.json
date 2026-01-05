@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2009-06-07T05:59:35.537222Z",
-    "low": "2040-09-14T20:45:44.058859Z"
+    "high": "2039-11-25T04:39:00.639887Z",
+    "low": "2071-04-18T11:04:10.463672Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "reason",
-    "code_system": "lawyer",
+    "code": "remain",
+    "code_system": "rate",
     "data_type_name": "CD",
-    "display_name": "Interest level rock."
+    "display_name": "Just military building."
   },
   "reason_code": null,
   "status_code": {
-    "code": "report",
-    "code_system": "ready",
+    "code": "down",
+    "code_system": "attack",
     "data_type_name": "CD",
-    "display_name": "Art rock."
+    "display_name": "Again network open."
   },
-  "status_date": "2080-01-22T15:23:42.076915Z"
+  "status_date": "2000-09-19T15:29:22.035599Z"
 }

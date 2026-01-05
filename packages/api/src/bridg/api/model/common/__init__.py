@@ -4,10 +4,8 @@ from .biologic import (
 )
 from .biologic_entity import (
     BiologicEntityIdentifier,
-)
-from .entity_name import (
-    EntityName,
-    EntityNameData,
+    BiologicEntityName,
+    BiologicEntityNameData,
 )
 from .id import (
     ID,
@@ -50,8 +48,8 @@ __all__ = [
     "Biologic",
     "BiologicData",
     "BiologicEntityIdentifier",
-    "EntityName",
-    "EntityNameData",
+    "BiologicEntityName",
+    "BiologicEntityNameData",
     "ID",
     "Material",
     "MaterialData",
