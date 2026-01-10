@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2022-11-23T02:22:03.679888Z",
-    "low": "2063-02-10T00:51:08.434688Z"
+    "high": "2026-10-10T05:39:06.769083Z",
+    "low": "2031-07-18T22:08:30.942928Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "western",
-    "code_system": "almost",
+    "code": "development",
+    "code_system": "white",
     "data_type_name": "CD",
-    "display_name": "Audience draw protect."
+    "display_name": "Then fire pretty."
   },
   "reason_code": null,
   "status_code": {
-    "code": "difficult",
-    "code_system": "notice",
+    "code": "individual",
+    "code_system": "usually",
     "data_type_name": "CD",
-    "display_name": "Rich think."
+    "display_name": "Central cause seat."
   },
-  "status_date": "2057-08-15T03:07:55.723227Z"
+  "status_date": "2053-11-24T03:29:31.640449Z"
 }
