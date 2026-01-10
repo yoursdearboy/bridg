@@ -4,6 +4,7 @@ from .base import (
 from .common import (
     MaterialDataFactory,
     PersonPostalAddressDataFactory,
+    PersonTelecommunicationAddressDataFactory,
 )
 from .datatype import (
     ConceptDescriptorFactory,
@@ -27,5 +28,6 @@ __all__ = [
     "PerformedObservationResultDataFactory",
     "PerformedSpecimenCollectionDataFactory",
     "PersonPostalAddressDataFactory",
+    "PersonTelecommunicationAddressDataFactory",
     "ProducedSpecimenDataFactory",
 ]

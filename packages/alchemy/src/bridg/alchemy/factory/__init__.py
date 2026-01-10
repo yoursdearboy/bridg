@@ -11,6 +11,7 @@ from .common import (
     MaterialFactory,
     PersonFactory,
     PersonPostalAddressFactory,
+    PersonTelecommunicationAddressFactory,
     StudyFactory,
     StudySubjectFactory,
 )
@@ -19,6 +20,7 @@ from .datatype import (
     EntityNameFactory,
     PhysicalQuantityFactory,
     PostalAddressFactory,
+    TelecommunicationAddressFactory,
 )
 from .protocol import (
     StudyProtocolFactory,
@@ -48,6 +50,7 @@ __all__ = [
     "PerformedSpecimenCollectionFactory",
     "PersonFactory",
     "PersonPostalAddressFactory",
+    "PersonTelecommunicationAddressFactory",
     "PhysicalQuantityFactory",
     "PostalAddressFactory",
     "SpecimenFactory",
@@ -56,4 +59,5 @@ __all__ = [
     "StudyProtocolVersionFactory",
     "StudySiteFactory",
     "StudySubjectFactory",
+    "TelecommunicationAddressFactory",
 ]

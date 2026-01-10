@@ -1,8 +1,9 @@
 from .material import (
     MaterialDataFactory,
 )
-from .postal_address import (
+from .person import (
     PersonPostalAddressDataFactory,
+    PersonTelecommunicationAddressDataFactory,
 )
 
-__all__ = ["MaterialDataFactory", "PersonPostalAddressDataFactory"]
+__all__ = ["MaterialDataFactory", "PersonPostalAddressDataFactory", "PersonTelecommunicationAddressDataFactory"]

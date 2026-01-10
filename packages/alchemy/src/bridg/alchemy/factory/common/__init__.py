@@ -11,6 +11,7 @@ from .material import (
 from .person import (
     PersonFactory,
     PersonPostalAddressFactory,
+    PersonTelecommunicationAddressFactory,
 )
 from .study import (
     StudyFactory,
@@ -26,6 +27,7 @@ __all__ = [
     "MaterialFactory",
     "PersonFactory",
     "PersonPostalAddressFactory",
+    "PersonTelecommunicationAddressFactory",
     "StudyFactory",
     "StudySubjectFactory",
 ]
