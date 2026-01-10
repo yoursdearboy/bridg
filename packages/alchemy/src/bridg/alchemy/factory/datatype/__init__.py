@@ -10,5 +10,14 @@ from .en import (
 from .pq import (
     PhysicalQuantityFactory,
 )
+from .tel import (
+    TelecommunicationAddressFactory,
+)
 
-__all__ = ["ConceptDescriptorFactory", "EntityNameFactory", "PhysicalQuantityFactory", "PostalAddressFactory"]
+__all__ = [
+    "ConceptDescriptorFactory",
+    "EntityNameFactory",
+    "PhysicalQuantityFactory",
+    "PostalAddressFactory",
+    "TelecommunicationAddressFactory",
+]
