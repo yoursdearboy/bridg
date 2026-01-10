@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2039-11-25T04:39:00.639887Z",
-    "low": "2071-04-18T11:04:10.463672Z"
+    "high": "2016-05-04T06:37:33.714143Z",
+    "low": "2072-11-29T08:33:03.899794Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "remain",
-    "code_system": "rate",
+    "code": "hundred",
+    "code_system": "expect",
     "data_type_name": "CD",
-    "display_name": "Just military building."
+    "display_name": "Detail food shoulder."
   },
   "reason_code": null,
   "status_code": {
-    "code": "down",
-    "code_system": "attack",
+    "code": "arrive",
+    "code_system": "drop",
     "data_type_name": "CD",
-    "display_name": "Again network open."
+    "display_name": "Support."
   },
-  "status_date": "2000-09-19T15:29:22.035599Z"
+  "status_date": "2031-07-18T22:08:30.942928Z"
 }
