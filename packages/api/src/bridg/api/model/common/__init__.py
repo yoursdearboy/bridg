@@ -13,6 +13,7 @@ from .id import (
 from .material import (
     Material,
     MaterialData,
+    MaterialIdentifier,
 )
 from .organization import (
     Organization,
@@ -45,6 +46,7 @@ __all__ = [
     "ID",
     "Material",
     "MaterialData",
+    "MaterialIdentifier",
     "Organization",
     "Person",
     "PersonAttributes",

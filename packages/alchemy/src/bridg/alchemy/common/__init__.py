@@ -29,6 +29,7 @@ from .id import (
 )
 from .material import (
     Material,
+    MaterialIdentifier,
 )
 from .organization import (
     Organization,
@@ -75,6 +76,7 @@ __all__ = [
     "HealthcareProviderGroupMember",
     "ID",
     "Material",
+    "MaterialIdentifier",
     "Organization",
     "OrganizationOrganizationName",
     "Person",
