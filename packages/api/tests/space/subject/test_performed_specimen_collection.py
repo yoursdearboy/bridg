@@ -92,6 +92,7 @@ def test_performed_specimen_collection_update(random, snapshot_json):
                 id=old.id,
                 performing_material=MaterialDataFactory.build(
                     id=old.performing_material_id,
+                    identifier=old.performing_material.identifier,
                 ),
             )
             patch.produced_specimen.append(new)

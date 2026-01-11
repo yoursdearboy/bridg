@@ -59,6 +59,7 @@ class BiologicEntityName(EntityName):
     biologic_entity: Mapped[BiologicEntity] = relationship(back_populates="name")
 
 
+# FIXME: make private
 class BiologicEntityIdentifier(ID):
     __tablename__ = "biologic_entity_identifier"
 

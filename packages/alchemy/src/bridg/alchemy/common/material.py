@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, List, Optional
 from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
@@ -8,6 +8,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..datatype import ConceptDescriptor
 from ..db import Base
+from .id import ID
 
 if TYPE_CHECKING:
     from ..biospecimen import Specimen
@@ -39,6 +40,8 @@ class Material(Base):
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     type: Mapped[str]
 
+    identifier: Mapped[List[MaterialIdentifier]] = relationship(back_populates="material", cascade="all, delete-orphan")
+
     code_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
     code: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=code_id)
 
@@ -48,3 +51,12 @@ class Material(Base):
     description: Mapped[Optional[str]]
 
     performed_specimen: Mapped[Optional[Specimen]] = relationship(back_populates="performing_material")
+
+
+# FIXME: make private
+class MaterialIdentifier(ID):
+    __tablename__ = "material_identifier"
+
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    material_id: Mapped[UUID] = mapped_column(ForeignKey("material.id"))
+    material: Mapped[Material] = relationship(back_populates="identifier")

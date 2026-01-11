@@ -7,6 +7,7 @@ from .id import (
 )
 from .material import (
     MaterialFactory,
+    MaterialIdentifierFactory,
 )
 from .person import (
     PersonFactory,
@@ -25,6 +26,7 @@ __all__ = [
     "BiologicEntityNameFactory",
     "IDFactory",
     "MaterialFactory",
+    "MaterialIdentifierFactory",
     "PersonFactory",
     "PersonPostalAddressFactory",
     "PersonTelecommunicationAddressFactory",
