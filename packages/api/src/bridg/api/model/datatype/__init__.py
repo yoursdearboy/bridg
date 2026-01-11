@@ -19,6 +19,10 @@ from .ii import (
 from .ivl_ts import (
     IntervalPointInTime,
 )
+from .on import (
+    OrganizationName,
+    OrganizationNameData,
+)
 from .pq import (
     PhysicalQuantity,
 )
@@ -44,6 +48,8 @@ __all__ = [
     "EntityNameData",
     "InstanceIdentifier",
     "IntervalPointInTime",
+    "OrganizationName",
+    "OrganizationNameData",
     "PhysicalQuantity",
     "PostalAddress",
     "PostalAddressData",
