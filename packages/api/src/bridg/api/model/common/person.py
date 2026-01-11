@@ -40,15 +40,15 @@ class PersonData(PersonAttributes):
     _sa = bridg.alchemy.Person
 
     primary_name: Optional[BiologicEntityNameData]
-    primary_identifier: Optional[BiologicEntityIdentifier]
+    identifier: List[BiologicEntityIdentifier]
 
     def model_dump_sa(self, exclude=set(), context: Any = None) -> bridg.alchemy.Person:
-        obj = super().model_dump_sa(exclude | {"primary_name", "primary_identifier"}, context)
+        obj = super().model_dump_sa(exclude | {"primary_name"}, context)
+
         obj.name = []
         if self.primary_name:
             obj.name.append(self.primary_name.model_dump_sa(context=context))
-        if self.primary_identifier:
-            obj.identifier.append(self.primary_identifier.model_dump_sa(context=context))  # type: ignore
+
         return obj
 
 
