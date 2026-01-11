@@ -2,7 +2,7 @@ from typing import Optional
 from uuid import UUID
 
 from ..base import BaseModel
-from ..datatypes import ConceptDescriptor
+from ..datatype import ConceptDescriptor
 
 
 class DefinedActivity(BaseModel):

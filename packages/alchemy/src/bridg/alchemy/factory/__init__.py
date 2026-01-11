@@ -5,15 +5,23 @@ from .biospecimen import (
     SpecimenFactory,
 )
 from .common import (
-    EntityNameFactory,
+    BiologicEntityIdentifierFactory,
+    BiologicEntityNameFactory,
+    IDFactory,
     MaterialFactory,
+    MaterialIdentifierFactory,
     PersonFactory,
+    PersonPostalAddressFactory,
+    PersonTelecommunicationAddressFactory,
     StudyFactory,
     StudySubjectFactory,
 )
 from .datatype import (
     ConceptDescriptorFactory,
+    EntityNameFactory,
     PhysicalQuantityFactory,
+    PostalAddressFactory,
+    TelecommunicationAddressFactory,
 )
 from .protocol import (
     StudyProtocolFactory,
@@ -30,20 +38,28 @@ from .study import (
 
 __all__ = [
     "BaseFactory",
+    "BiologicEntityIdentifierFactory",
+    "BiologicEntityNameFactory",
     "ConceptDescriptorFactory",
     "EntityNameFactory",
+    "IDFactory",
     "MaterialFactory",
+    "MaterialIdentifierFactory",
     "NOT_SET",
     "PerformedActivityFactory",
     "PerformedObservationFactory",
     "PerformedObservationResultFactory",
     "PerformedSpecimenCollectionFactory",
     "PersonFactory",
+    "PersonPostalAddressFactory",
+    "PersonTelecommunicationAddressFactory",
     "PhysicalQuantityFactory",
+    "PostalAddressFactory",
     "SpecimenFactory",
     "StudyFactory",
     "StudyProtocolFactory",
     "StudyProtocolVersionFactory",
     "StudySiteFactory",
     "StudySubjectFactory",
+    "TelecommunicationAddressFactory",
 ]

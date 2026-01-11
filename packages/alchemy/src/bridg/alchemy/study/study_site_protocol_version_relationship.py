@@ -75,6 +75,3 @@ class StudySiteProtocolVersionRelationship(Base):
         "assigning_study_subject",
         creator=lambda ass: StudySubjectProtocolVersionRelationship(assigning_study_subject=ass),
     )
-
-    def __str__(self):
-        return f"{self.executing_study_site.performing_entity} in {self.executed_study_protocol_version}"

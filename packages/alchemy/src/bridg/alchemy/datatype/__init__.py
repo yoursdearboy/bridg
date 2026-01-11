@@ -9,8 +9,17 @@ from .any import (
 from .cd import (
     ConceptDescriptor,
 )
+from .en import (
+    EntityName,
+)
+from .ii import (
+    InstanceIdentifier,
+)
 from .ivl_ts import (
     IntervalPointInTime,
+)
+from .on import (
+    OrganizationName,
 )
 from .pq import (
     PhysicalQuantity,
@@ -18,6 +27,9 @@ from .pq import (
 from .tel import (
     TelecommunicationAddress,
     TelecommunicationAddressUse,
+)
+from .uid import (
+    UniqueIdentifierString,
 )
 from .url import (
     URL,
@@ -28,7 +40,10 @@ __all__ = [
     "ConceptDescriptor",
     "DataTypeName",
     "DataValue",
+    "EntityName",
+    "InstanceIdentifier",
     "IntervalPointInTime",
+    "OrganizationName",
     "PhysicalQuantity",
     "PostalAddress",
     "PostalAddressUse",
@@ -36,4 +51,5 @@ __all__ = [
     "TelecommunicationAddressUse",
     "URL",
     "URLScheme",
+    "UniqueIdentifierString",
 ]

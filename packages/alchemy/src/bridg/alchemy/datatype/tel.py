@@ -25,6 +25,3 @@ class TelecommunicationAddress(URL):
     __abstract__ = True
 
     use: Mapped[Optional[TelecommunicationAddressUse]]
-
-    def __str__(self):
-        return self.address

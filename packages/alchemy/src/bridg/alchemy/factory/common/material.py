@@ -1,9 +1,16 @@
-from polyfactory import Ignore
+from polyfactory import Ignore, Use
 
-from bridg.alchemy import Material
+from bridg.alchemy import Material, MaterialIdentifier
 
 from ..base import BaseFactory
 from ..datatype import ConceptDescriptorFactory
+from .id import IDFactory
+
+
+class MaterialIdentifierFactory(IDFactory[MaterialIdentifier]):
+    id = Ignore()
+    material_id = Ignore()
+    material = Ignore()
 
 
 class MaterialFactory(BaseFactory[Material]):
@@ -11,6 +18,8 @@ class MaterialFactory(BaseFactory[Material]):
 
     id = Ignore()
     type = "material"
+
+    identifier = Use(lambda: MaterialIdentifierFactory.batch(1))
 
     code_id = Ignore()
     code = ConceptDescriptorFactory

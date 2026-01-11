@@ -2,7 +2,7 @@ from typing import Annotated, Optional
 
 from pydantic import BeforeValidator, Field
 
-from .datatypes import DataValue, model_validate
+from .datatype import DataValue, model_validate
 
 
 class ObservationResult:

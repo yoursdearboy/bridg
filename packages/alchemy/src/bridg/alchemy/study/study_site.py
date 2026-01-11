@@ -85,28 +85,3 @@ class StudySite(Base):
                 "A StudySite is a function performed by one and only one of the following: HealthcareFacility or Organization (serving as a StudySite but is not a HealthcareFacility)."
             )
         return value
-
-    @property
-    def performing_entity(self):
-        if self.performing_healthcare_facility:
-            return self.performing_healthcare_facility
-        if self.performing_organization:
-            return self.performing_organization
-        raise RuntimeError("A study site must have a project")
-
-    @property
-    def executing_project(self):
-        if self.executed_study_conduct:
-            return self.executed_study_conduct.instantiating_project
-
-        project_version = self.executing_study_protocol_version
-        if len(project_version) > 0:
-            return project_version[0].versioned_study_protocol.planned_study
-
-        # FIXME: temporary fix to allow creation of study sites in admin
-        # raise RuntimeError("A study site must have a project")
-
-    def __str__(self):
-        ep = self.executing_project
-        ep = ep if ep is not None else "_____"
-        return f"{self.performing_entity} in {ep}"

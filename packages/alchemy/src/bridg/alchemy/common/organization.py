@@ -3,15 +3,16 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, List, Optional
 from uuid import UUID, uuid4
 
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from ..datatype import OrganizationName
 from ..db import Base
 
 if TYPE_CHECKING:
     from .healthcare_facility import HealthcareFacility
     from .healthcare_provider import HealthcareProvider
     from .healthcare_provider_group import HealthcareProviderGroup
-    from .organization_name import OrganizationName
 
 
 class Organization(Base):
@@ -40,7 +41,9 @@ class Organization(Base):
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
-    name: Mapped[List[OrganizationName]] = relationship(back_populates="organization", cascade="all, delete-orphan")
+    name: Mapped[List[OrganizationOrganizationName]] = relationship(
+        back_populates="organization", cascade="all, delete-orphan"
+    )
     type: Mapped[Optional[str]]
     description: Mapped[Optional[str]]
     actual: Mapped[bool] = mapped_column(default=True)
@@ -69,12 +72,10 @@ class Organization(Base):
     Each Organization might be the department for one or more HealthcareProvider.
     """
 
-    # FIXME: return something more meaningfull than first entry
-    @property
-    def primary_name(self) -> Optional[OrganizationName]:
-        return next(n for n in self.name)
 
-    def __str__(self):
-        if not self.primary_name:
-            return "Unnamed"
-        return str(self.primary_name)
+class OrganizationOrganizationName(OrganizationName):
+    __tablename__ = "organization_name"
+
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    organization_id: Mapped[UUID] = mapped_column(ForeignKey("organization.id"))
+    organization: Mapped[Organization] = relationship(back_populates="name")

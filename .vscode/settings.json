@@ -2,7 +2,8 @@
     "[python]": {
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit"
+            "source.organizeImports": "always",
+            "source.fixAll.ruff": "always"
         }
     },
     "[html]": {

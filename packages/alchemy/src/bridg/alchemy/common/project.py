@@ -45,8 +45,3 @@ class Project(Base):
     Each ProjectConduct always is the execution of one Project.
     Each Project might have as execution one ProjectConduct.
     """
-
-    def __str__(self):
-        if self.name:
-            return self.name
-        return "Unnamed"

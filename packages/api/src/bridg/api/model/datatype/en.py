@@ -1,5 +1,4 @@
 from typing import Optional
-from uuid import UUID
 
 from pydantic import computed_field
 
@@ -8,9 +7,7 @@ import bridg.alchemy
 from ..base import BaseModel
 
 
-class EntityNameData(BaseModel[bridg.alchemy.EntityName]):
-    _sa = bridg.alchemy.EntityName
-
+class EntityNameData[T: bridg.alchemy.EntityName](BaseModel[T]):
     use: Optional[str] = None
     family: Optional[str] = None
     given: Optional[str] = None
@@ -20,9 +17,7 @@ class EntityNameData(BaseModel[bridg.alchemy.EntityName]):
     suffix: Optional[str] = None
 
 
-class EntityName(EntityNameData):
-    id: UUID
-
+class EntityName[T: bridg.alchemy.EntityName](EntityNameData[T]):
     @computed_field
     @property
     def label(self) -> Optional[str]:

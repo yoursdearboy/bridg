@@ -1,0 +1,24 @@
+[
+  {
+    "building": "32181",
+    "country": "Nauru",
+    "id": "str",
+    "label": "Angel Harbor, 32181, Nevada, Nauru, 04666",
+    "municipality": null,
+    "state": "Nevada",
+    "street": "Angel Harbor",
+    "use": null,
+    "zip": "04666"
+  },
+  {
+    "building": "908",
+    "country": "Congo",
+    "id": "str",
+    "label": "Clayton Fort, 908, Virginia, Congo, 85682",
+    "municipality": null,
+    "state": "Virginia",
+    "street": "Clayton Fort",
+    "use": null,
+    "zip": "85682"
+  }
+]

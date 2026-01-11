@@ -67,7 +67,7 @@ class PerformedObservationResultFactory(BaseFactory[bridg.alchemy.PerformedObser
             case datetime.datetime:
                 obj.value = cls.__faker__.date_time_this_century(after_now=True, tzinfo=datetime.timezone.utc)
             case datetime.date:
-                obj.value = cls.__faker__.date_this_century()
+                obj.value = cls.__faker__.date_this_century(after_today=True)
             case builtins.str:
                 obj.value = cls.__faker__.sentence(3, variable_nb_words=True)
             case _:

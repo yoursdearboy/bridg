@@ -3,10 +3,10 @@ from typing import Annotated, List, Optional
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
 
 import bridg.alchemy
-from bridg.api.db import get_db, get_repository
+from bridg.api.context import Context, get_context
+from bridg.api.db import get_repository
 from bridg.api.model import BaseModel, Person, PersonData, StudySubject, StudySubjectData
 from bridg.api.service.subject import StudySubjectRepository
 
@@ -25,19 +25,22 @@ class NewStudySubject(BaseModel[bridg.alchemy.StudySubject]):
 
     assigned_study_site_protocol_version_relationship: List[UUID]
 
-    def model_dump_sa(self, db: Session) -> bridg.alchemy.StudySubject:
+    def model_dump_sa(self, context: Optional[Context] = None) -> bridg.alchemy.StudySubject:
+        if context is None:
+            raise RuntimeError("No context")
+
         ss = bridg.alchemy.StudySubject(status=self.status, status_date=self.status_date)
 
         if self.performing_biologic_entity_id is not None:
             ss.performing_biologic_entity_id = self.performing_biologic_entity_id
         elif self.performing_biologic_entity:
-            ss.performing_biologic_entity = self.performing_biologic_entity.model_dump_sa()
+            ss.performing_biologic_entity = self.performing_biologic_entity.model_dump_sa(context=context)
         else:
             raise RuntimeError("No performing biologic entity")
 
         for id in self.assigned_study_site_protocol_version_relationship:
             ss.assigned_study_site_protocol_version_relationship.append(
-                db.query(bridg.alchemy.StudySiteProtocolVersionRelationship).filter_by(id=id).one()
+                context.db.query(bridg.alchemy.StudySiteProtocolVersionRelationship).filter_by(id=id).one()
             )
 
         return ss
@@ -76,9 +79,12 @@ def show(space_id: UUID, subject_id: UUID, repo: StudySubjectRepositoryDep) -> S
 
 @router.post("")
 def create(
-    space_id: UUID, data: NewStudySubject, repo: StudySubjectRepositoryDep, db: Session = Depends(get_db)
+    space_id: UUID,
+    data: NewStudySubject,
+    repo: StudySubjectRepositoryDep,
+    context: Annotated[Context, Depends(get_context)],
 ) -> StudySubject:
-    obj = repo.create(data.model_dump_sa(db))
+    obj = repo.create(data.model_dump_sa(context=context))
     return StudySubject.model_validate(obj)
 
 

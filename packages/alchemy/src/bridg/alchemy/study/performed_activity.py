@@ -11,6 +11,11 @@ from ..protocol import DefinedActivity, Epoch, StudyProtocolVersion
 from ..tz_date_time import TZDateTime
 
 
+def _date_range(low: datetime, high: datetime) -> Optional[IntervalPointInTime]:
+    if low is not None or high is not None:
+        return IntervalPointInTime(low, high)
+
+
 class PerformedActivity(Activity):
     __tablename__ = "performed_activity"
     __mapper_args__ = {"concrete": True, "polymorphic_identity": "activity", "polymorphic_on": "type"}
@@ -20,10 +25,13 @@ class PerformedActivity(Activity):
 
     repetition_number: Mapped[Optional[int]]
     name_code_modified_text: Mapped[Optional[str]]
+
+    # FIXME: convert to optional
+    # see https://github.com/abdulrahman305/sqlalchemy/commit/071abbb8636d81ff0c9a4ea8b8a972e63cf5ef54#diff-d54af7d55637bc92aefa7c48b51e08b36fa6cd7ae0adc5461d06638e438d08cbR331-R335
     date_range: Mapped[Optional[IntervalPointInTime]] = composite(
-        lambda x, y: IntervalPointInTime(x, y) if x is not None or y is not None else None,
-        mapped_column("date_range_low", TZDateTime),
-        mapped_column("date_range_high", TZDateTime),
+        _date_range,
+        mapped_column("date_range_low", TZDateTime, nullable=True),
+        mapped_column("date_range_high", TZDateTime, nullable=True),
     )
 
     negation_indicator: Mapped[Optional[bool]]

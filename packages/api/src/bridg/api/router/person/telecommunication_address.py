@@ -6,48 +6,51 @@ from fastapi import APIRouter, Depends, HTTPException
 import bridg.alchemy
 from bridg.alchemy import Repository
 from bridg.api.db import get_repository
-from bridg.api.model import TelecommunicationAddress, TelecommunicationAddressData
+from bridg.api.model import PersonTelecommunicationAddress, PersonTelecommunicationAddressData
 
 router = APIRouter(prefix="/telecommunication_addresses")
 
 
-class TelecommunicationAddressRepository(Repository[bridg.alchemy.common.person.TelecommunicationAddress]):
-    _sa = bridg.alchemy.common.person.TelecommunicationAddress
+class PersonTelecommunicationAddressRepository(Repository[bridg.alchemy.common.person.PersonTelecommunicationAddress]):
+    _sa = bridg.alchemy.common.person.PersonTelecommunicationAddress
 
 
-TelecommunicationAddressRepositoryDep = Annotated[
-    TelecommunicationAddressRepository, Depends(get_repository(TelecommunicationAddressRepository))
+PersonTelecommunicationAddressRepositoryDep = Annotated[
+    PersonTelecommunicationAddressRepository, Depends(get_repository(PersonTelecommunicationAddressRepository))
 ]
 
 
 @router.get("")
-def index(person_id: UUID, repo: TelecommunicationAddressRepositoryDep) -> List[TelecommunicationAddress]:
-    objs = repo.all(bridg.alchemy.common.person.TelecommunicationAddress.person_id == person_id)
-    return [TelecommunicationAddress.model_validate(o) for o in objs]
+def index(person_id: UUID, repo: PersonTelecommunicationAddressRepositoryDep) -> List[PersonTelecommunicationAddress]:
+    objs = repo.all(bridg.alchemy.common.person.PersonTelecommunicationAddress.person_id == person_id)
+    return [PersonTelecommunicationAddress.model_validate(o) for o in objs]
 
 
 @router.post("")
 def create(
-    person_id: UUID, data: TelecommunicationAddressData, repo: TelecommunicationAddressRepositoryDep
-) -> TelecommunicationAddress:
+    person_id: UUID, data: PersonTelecommunicationAddressData, repo: PersonTelecommunicationAddressRepositoryDep
+) -> PersonTelecommunicationAddress:
     obj = data.model_dump_sa()
     obj.person_id = person_id
     obj = repo.create(obj)
-    return TelecommunicationAddress.model_validate(obj)
+    return PersonTelecommunicationAddress.model_validate(obj)
 
 
 @router.patch("/{address_id:uuid}")
 def update(
-    person_id: UUID, address_id: UUID, data: TelecommunicationAddressData, repo: TelecommunicationAddressRepositoryDep
-) -> TelecommunicationAddress:
+    person_id: UUID,
+    address_id: UUID,
+    data: PersonTelecommunicationAddressData,
+    repo: PersonTelecommunicationAddressRepositoryDep,
+) -> PersonTelecommunicationAddress:
     if repo.exists(address_id):
         obj = data.model_dump_sa()
         obj.id = address_id
         obj = repo.update(obj)
-        return TelecommunicationAddress.model_validate(obj)
+        return PersonTelecommunicationAddress.model_validate(obj)
     raise HTTPException(status_code=404)
 
 
 @router.delete("/{address_id:uuid}")
-def delete(person_id: UUID, address_id: UUID, repo: TelecommunicationAddressRepositoryDep):
+def delete(person_id: UUID, address_id: UUID, repo: PersonTelecommunicationAddressRepositoryDep):
     repo.delete(address_id)

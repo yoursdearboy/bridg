@@ -1,5 +1,3 @@
-__ignore__ = ["PostalAddress", "TelecommunicationAddress"]
-
 from .activity import (
     Activity,
 )
@@ -11,9 +9,8 @@ from .biologic import (
 )
 from .biologic_entity import (
     BiologicEntity,
-)
-from .entity_name import (
-    EntityName,
+    BiologicEntityIdentifier,
+    BiologicEntityName,
 )
 from .healthcare_facility import (
     HealthcareFacility,
@@ -27,17 +24,21 @@ from .healthcare_provider_group import (
 from .healthcare_provider_group_member import (
     HealthcareProviderGroupMember,
 )
+from .id import (
+    ID,
+)
 from .material import (
     Material,
+    MaterialIdentifier,
 )
 from .organization import (
     Organization,
-)
-from .organization_name import (
-    OrganizationName,
+    OrganizationOrganizationName,
 )
 from .person import (
     Person,
+    PersonPostalAddress,
+    PersonTelecommunicationAddress,
 )
 from .product import (
     Product,
@@ -67,15 +68,20 @@ __all__ = [
     "AdministrativeGender",
     "Biologic",
     "BiologicEntity",
-    "EntityName",
+    "BiologicEntityIdentifier",
+    "BiologicEntityName",
     "HealthcareFacility",
     "HealthcareProvider",
     "HealthcareProviderGroup",
     "HealthcareProviderGroupMember",
+    "ID",
     "Material",
+    "MaterialIdentifier",
     "Organization",
-    "OrganizationName",
+    "OrganizationOrganizationName",
     "Person",
+    "PersonPostalAddress",
+    "PersonTelecommunicationAddress",
     "Product",
     "Project",
     "ProjectConduct",

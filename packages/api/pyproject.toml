@@ -29,7 +29,7 @@ build-backend = "uv_build"
 
 [tool.poe.tasks]
 "api:mkinit".sequence = [
-    "mkinit --recursive --relative --nomods -i api/model",
+    "mkinit --recursive --relative --nomods -i src/bridg/api/model",
     "mkinit --recursive --relative --nomods -i tests/factory",
     "ruff check --fix",
     "ruff format"
@@ -41,6 +41,9 @@ extend = "../../pyproject.toml"
 
 [tool.ruff.lint]
 ignore = ["TID252"]
+
+[tool.uv.build-backend]
+module-name = "bridg.api"
 
 [tool.uv.sources]
 alchemy = { workspace = true }

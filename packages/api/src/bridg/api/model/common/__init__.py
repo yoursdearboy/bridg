@@ -2,30 +2,31 @@ from .biologic import (
     Biologic,
     BiologicData,
 )
-from .entity_name import (
-    EntityName,
-    EntityNameData,
+from .biologic_entity import (
+    BiologicEntityIdentifier,
+    BiologicEntityName,
+    BiologicEntityNameData,
+)
+from .id import (
+    ID,
 )
 from .material import (
     Material,
     MaterialData,
+    MaterialIdentifier,
 )
 from .organization import (
     Organization,
-)
-from .organization_name import (
-    OrganizationName,
-    OrganizationNameData,
 )
 from .person import (
     Person,
     PersonAttributes,
     PersonData,
     PersonPatch,
-)
-from .postal_address import (
-    PostalAddress,
-    PostalAddressData,
+    PersonPostalAddress,
+    PersonPostalAddressData,
+    PersonTelecommunicationAddress,
+    PersonTelecommunicationAddressData,
 )
 from .product import (
     Product,
@@ -35,31 +36,28 @@ from .study_subject import (
     StudySubject,
     StudySubjectData,
 )
-from .telecommunication_address import (
-    TelecommunicationAddress,
-    TelecommunicationAddressData,
-)
 
 __all__ = [
     "Biologic",
     "BiologicData",
-    "EntityName",
-    "EntityNameData",
+    "BiologicEntityIdentifier",
+    "BiologicEntityName",
+    "BiologicEntityNameData",
+    "ID",
     "Material",
     "MaterialData",
+    "MaterialIdentifier",
     "Organization",
-    "OrganizationName",
-    "OrganizationNameData",
     "Person",
     "PersonAttributes",
     "PersonData",
     "PersonPatch",
-    "PostalAddress",
-    "PostalAddressData",
+    "PersonPostalAddress",
+    "PersonPostalAddressData",
+    "PersonTelecommunicationAddress",
+    "PersonTelecommunicationAddressData",
     "Product",
     "ProductData",
     "StudySubject",
     "StudySubjectData",
-    "TelecommunicationAddress",
-    "TelecommunicationAddressData",
 ]

@@ -58,6 +58,3 @@ class HealthcareFacility(Base):
     Each HealthcareProviderGroup always is used to group staff for one HealthcareFacility.
     Each HealthcareFacility might group staff into one or more HealthcareProviderGroup.
     """
-
-    def __str__(self):
-        return str(self.performing_organization)
