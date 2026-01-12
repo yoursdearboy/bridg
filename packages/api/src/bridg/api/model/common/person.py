@@ -9,7 +9,6 @@ import bridg.alchemy
 from ..base import BaseModel
 from ..datatype import PostalAddress, PostalAddressData, TelecommunicationAddress, TelecommunicationAddressData
 from .biologic_entity import BiologicEntityIdentifier, BiologicEntityName, BiologicEntityNameData
-from .id import ID
 
 
 class PersonPostalAddressData(PostalAddressData[bridg.alchemy.PersonPostalAddress]):
@@ -59,7 +58,7 @@ class PersonPatch(PersonAttributes):
 class Person(PersonAttributes):
     id: UUID
     name: List[BiologicEntityName] = Field(exclude=True)
-    identifier: List[ID]
+    identifier: List[BiologicEntityIdentifier]
 
     @computed_field
     @property
