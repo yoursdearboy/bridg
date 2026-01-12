@@ -16,7 +16,7 @@ class Material(BaseModel):
     id: UUID
     type: Literal["material"] = "material"
 
-    identifier: List[ID]
+    identifier: List[MaterialIdentifier]
 
     code: Optional[ConceptDescriptor]
     form_code: Optional[ConceptDescriptor]
