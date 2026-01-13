@@ -16,88 +16,72 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface PostalAddress
+ * @interface PersonPostalAddressData
  */
-export interface PostalAddress {
+export interface PersonPostalAddressData {
     /**
      * 
      * @type {string}
-     * @memberof PostalAddress
+     * @memberof PersonPostalAddressData
      */
     use?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PostalAddress
+     * @memberof PersonPostalAddressData
      */
     street?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PostalAddress
+     * @memberof PersonPostalAddressData
      */
     building?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PostalAddress
+     * @memberof PersonPostalAddressData
      */
     country?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PostalAddress
+     * @memberof PersonPostalAddressData
      */
     municipality?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PostalAddress
+     * @memberof PersonPostalAddressData
      */
     state?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PostalAddress
+     * @memberof PersonPostalAddressData
      */
     zip?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PostalAddress
-     */
-    id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PostalAddress
-     */
-    readonly label: string;
 }
 
 /**
- * Check if a given object implements the PostalAddress interface.
+ * Check if a given object implements the PersonPostalAddressData interface.
  */
-export function instanceOfPostalAddress(value: object): value is PostalAddress {
-    if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('label' in value) || value['label'] === undefined) return false;
+export function instanceOfPersonPostalAddressData(value: object): value is PersonPostalAddressData {
     return true;
 }
 
 /**
- * Check if a given object is PostalAddress JSON.
+ * Check if a given object is PersonPostalAddressData JSON.
  */
-export function isPostalAddressJSON(value: object): boolean {
-    if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('label' in value) || value['label'] === undefined) return false;
+export function isPersonPostalAddressDataJSON(value: object): boolean {
     return true;
 }
 
-export function PostalAddressFromJSON(json: any): PostalAddress {
-    return PostalAddressFromJSONTyped(json, false);
+export function PersonPostalAddressDataFromJSON(json: any): PersonPostalAddressData {
+    return PersonPostalAddressDataFromJSONTyped(json, false);
 }
 
-export function PostalAddressFromJSONTyped(json: any, ignoreDiscriminator: boolean): PostalAddress {
+export function PersonPostalAddressDataFromJSONTyped(json: any, ignoreDiscriminator: boolean): PersonPostalAddressData {
     if (json == null) {
         return json;
     }
@@ -110,16 +94,14 @@ export function PostalAddressFromJSONTyped(json: any, ignoreDiscriminator: boole
         'municipality': json['municipality'] == null ? undefined : json['municipality'],
         'state': json['state'] == null ? undefined : json['state'],
         'zip': json['zip'] == null ? undefined : json['zip'],
-        'id': json['id'],
-        'label': json['label'],
     };
 }
 
-export function PostalAddressToJSON(json: any): PostalAddress {
-    return PostalAddressToJSONTyped(json, false);
+export function PersonPostalAddressDataToJSON(json: any): PersonPostalAddressData {
+    return PersonPostalAddressDataToJSONTyped(json, false);
 }
 
-export function PostalAddressToJSONTyped(value?: Omit<PostalAddress, 'label'> | null, ignoreDiscriminator: boolean = false): any {
+export function PersonPostalAddressDataToJSONTyped(value?: PersonPostalAddressData | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -133,7 +115,6 @@ export function PostalAddressToJSONTyped(value?: Omit<PostalAddress, 'label'> | 
         'municipality': value['municipality'],
         'state': value['state'],
         'zip': value['zip'],
-        'id': value['id'],
     };
 }
 

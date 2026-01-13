@@ -20,6 +20,13 @@ import {
     ConceptDescriptorToJSON,
     ConceptDescriptorToJSONTyped,
 } from './ConceptDescriptor';
+import type { MaterialIdentifier } from './MaterialIdentifier';
+import {
+    MaterialIdentifierFromJSON,
+    MaterialIdentifierFromJSONTyped,
+    MaterialIdentifierToJSON,
+    MaterialIdentifierToJSONTyped,
+} from './MaterialIdentifier';
 
 /**
  * 
@@ -39,6 +46,12 @@ export interface Product {
      * @memberof Product
      */
     type?: ProductTypeEnum;
+    /**
+     * 
+     * @type {Array<MaterialIdentifier>}
+     * @memberof Product
+     */
+    identifier: Array<MaterialIdentifier>;
     /**
      * 
      * @type {ConceptDescriptor}
@@ -92,6 +105,7 @@ export type ProductTypeEnum = typeof ProductTypeEnum[keyof typeof ProductTypeEnu
  */
 export function instanceOfProduct(value: object): value is Product {
     if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('identifier' in value) || value['identifier'] === undefined) return false;
     if (!('code' in value) || value['code'] === undefined) return false;
     if (!('formCode' in value) || value['formCode'] === undefined) return false;
     if (!('description' in value) || value['description'] === undefined) return false;
@@ -106,6 +120,7 @@ export function instanceOfProduct(value: object): value is Product {
  */
 export function isProductJSON(value: object): boolean {
     if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('identifier' in value) || value['identifier'] === undefined) return false;
     if (!('code' in value) || value['code'] === undefined) return false;
     if (!('form_code' in value) || value['form_code'] === undefined) return false;
     if (!('description' in value) || value['description'] === undefined) return false;
@@ -127,6 +142,7 @@ export function ProductFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         
         'id': json['id'],
         'type': json['type'] == null ? undefined : json['type'],
+        'identifier': ((json['identifier'] as Array<any>).map(MaterialIdentifierFromJSON)),
         'code': ConceptDescriptorFromJSON(json['code']),
         'formCode': ConceptDescriptorFromJSON(json['form_code']),
         'description': json['description'],
@@ -149,6 +165,7 @@ export function ProductToJSONTyped(value?: Product | null, ignoreDiscriminator: 
         
         'id': value['id'],
         'type': value['type'],
+        'identifier': ((value['identifier'] as Array<any>).map(MaterialIdentifierToJSON)),
         'code': ConceptDescriptorToJSON(value['code']),
         'form_code': ConceptDescriptorToJSON(value['formCode']),
         'description': value['description'],

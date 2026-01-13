@@ -16,52 +16,52 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface OrganizationName
+ * @interface OrganizationOrganizationName
  */
-export interface OrganizationName {
+export interface OrganizationOrganizationName {
     /**
      * 
      * @type {string}
-     * @memberof OrganizationName
+     * @memberof OrganizationOrganizationName
      */
     value?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof OrganizationName
+     * @memberof OrganizationOrganizationName
      */
     id: string;
     /**
      * 
      * @type {string}
-     * @memberof OrganizationName
+     * @memberof OrganizationOrganizationName
      */
     readonly label: string | null;
 }
 
 /**
- * Check if a given object implements the OrganizationName interface.
+ * Check if a given object implements the OrganizationOrganizationName interface.
  */
-export function instanceOfOrganizationName(value: object): value is OrganizationName {
+export function instanceOfOrganizationOrganizationName(value: object): value is OrganizationOrganizationName {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('label' in value) || value['label'] === undefined) return false;
     return true;
 }
 
 /**
- * Check if a given object is OrganizationName JSON.
+ * Check if a given object is OrganizationOrganizationName JSON.
  */
-export function isOrganizationNameJSON(value: object): boolean {
+export function isOrganizationOrganizationNameJSON(value: object): boolean {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('label' in value) || value['label'] === undefined) return false;
     return true;
 }
 
-export function OrganizationNameFromJSON(json: any): OrganizationName {
-    return OrganizationNameFromJSONTyped(json, false);
+export function OrganizationOrganizationNameFromJSON(json: any): OrganizationOrganizationName {
+    return OrganizationOrganizationNameFromJSONTyped(json, false);
 }
 
-export function OrganizationNameFromJSONTyped(json: any, ignoreDiscriminator: boolean): OrganizationName {
+export function OrganizationOrganizationNameFromJSONTyped(json: any, ignoreDiscriminator: boolean): OrganizationOrganizationName {
     if (json == null) {
         return json;
     }
@@ -73,11 +73,11 @@ export function OrganizationNameFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function OrganizationNameToJSON(json: any): OrganizationName {
-    return OrganizationNameToJSONTyped(json, false);
+export function OrganizationOrganizationNameToJSON(json: any): OrganizationOrganizationName {
+    return OrganizationOrganizationNameToJSONTyped(json, false);
 }
 
-export function OrganizationNameToJSONTyped(value?: Omit<OrganizationName, 'label'> | null, ignoreDiscriminator: boolean = false): any {
+export function OrganizationOrganizationNameToJSONTyped(value?: Omit<OrganizationOrganizationName, 'label'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

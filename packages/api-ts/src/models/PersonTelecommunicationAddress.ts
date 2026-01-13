@@ -31,50 +31,66 @@ import {
 /**
  * 
  * @export
- * @interface TelecommunicationAddressData
+ * @interface PersonTelecommunicationAddress
  */
-export interface TelecommunicationAddressData {
+export interface PersonTelecommunicationAddress {
     /**
      * 
      * @type {TelecommunicationAddressUse}
-     * @memberof TelecommunicationAddressData
+     * @memberof PersonTelecommunicationAddress
      */
     use?: TelecommunicationAddressUse | null;
     /**
      * 
      * @type {URLScheme}
-     * @memberof TelecommunicationAddressData
+     * @memberof PersonTelecommunicationAddress
      */
     scheme?: URLScheme | null;
     /**
      * 
      * @type {string}
-     * @memberof TelecommunicationAddressData
+     * @memberof PersonTelecommunicationAddress
      */
     address?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PersonTelecommunicationAddress
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PersonTelecommunicationAddress
+     */
+    readonly label: string;
 }
 
 
 
 /**
- * Check if a given object implements the TelecommunicationAddressData interface.
+ * Check if a given object implements the PersonTelecommunicationAddress interface.
  */
-export function instanceOfTelecommunicationAddressData(value: object): value is TelecommunicationAddressData {
+export function instanceOfPersonTelecommunicationAddress(value: object): value is PersonTelecommunicationAddress {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('label' in value) || value['label'] === undefined) return false;
     return true;
 }
 
 /**
- * Check if a given object is TelecommunicationAddressData JSON.
+ * Check if a given object is PersonTelecommunicationAddress JSON.
  */
-export function isTelecommunicationAddressDataJSON(value: object): boolean {
+export function isPersonTelecommunicationAddressJSON(value: object): boolean {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('label' in value) || value['label'] === undefined) return false;
     return true;
 }
 
-export function TelecommunicationAddressDataFromJSON(json: any): TelecommunicationAddressData {
-    return TelecommunicationAddressDataFromJSONTyped(json, false);
+export function PersonTelecommunicationAddressFromJSON(json: any): PersonTelecommunicationAddress {
+    return PersonTelecommunicationAddressFromJSONTyped(json, false);
 }
 
-export function TelecommunicationAddressDataFromJSONTyped(json: any, ignoreDiscriminator: boolean): TelecommunicationAddressData {
+export function PersonTelecommunicationAddressFromJSONTyped(json: any, ignoreDiscriminator: boolean): PersonTelecommunicationAddress {
     if (json == null) {
         return json;
     }
@@ -83,14 +99,16 @@ export function TelecommunicationAddressDataFromJSONTyped(json: any, ignoreDiscr
         'use': json['use'] == null ? undefined : TelecommunicationAddressUseFromJSON(json['use']),
         'scheme': json['scheme'] == null ? undefined : URLSchemeFromJSON(json['scheme']),
         'address': json['address'] == null ? undefined : json['address'],
+        'id': json['id'],
+        'label': json['label'],
     };
 }
 
-export function TelecommunicationAddressDataToJSON(json: any): TelecommunicationAddressData {
-    return TelecommunicationAddressDataToJSONTyped(json, false);
+export function PersonTelecommunicationAddressToJSON(json: any): PersonTelecommunicationAddress {
+    return PersonTelecommunicationAddressToJSONTyped(json, false);
 }
 
-export function TelecommunicationAddressDataToJSONTyped(value?: TelecommunicationAddressData | null, ignoreDiscriminator: boolean = false): any {
+export function PersonTelecommunicationAddressToJSONTyped(value?: Omit<PersonTelecommunicationAddress, 'label'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -100,6 +118,7 @@ export function TelecommunicationAddressDataToJSONTyped(value?: Telecommunicatio
         'use': TelecommunicationAddressUseToJSON(value['use']),
         'scheme': URLSchemeToJSON(value['scheme']),
         'address': value['address'],
+        'id': value['id'],
     };
 }
 

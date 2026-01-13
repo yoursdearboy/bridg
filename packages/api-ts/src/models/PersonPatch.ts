@@ -13,13 +13,6 @@
  */
 
 import { mapValues } from '../runtime';
-import type { BiologicEntityIdentifier } from './BiologicEntityIdentifier';
-import {
-    BiologicEntityIdentifierFromJSON,
-    BiologicEntityIdentifierFromJSONTyped,
-    BiologicEntityIdentifierToJSON,
-    BiologicEntityIdentifierToJSONTyped,
-} from './BiologicEntityIdentifier';
 import type { AdministrativeGender } from './AdministrativeGender';
 import {
     AdministrativeGenderFromJSON,
@@ -27,99 +20,76 @@ import {
     AdministrativeGenderToJSON,
     AdministrativeGenderToJSONTyped,
 } from './AdministrativeGender';
-import type { BiologicEntityNameData } from './BiologicEntityNameData';
-import {
-    BiologicEntityNameDataFromJSON,
-    BiologicEntityNameDataFromJSONTyped,
-    BiologicEntityNameDataToJSON,
-    BiologicEntityNameDataToJSONTyped,
-} from './BiologicEntityNameData';
 
 /**
  * 
  * @export
- * @interface PersonData
+ * @interface PersonPatch
  */
-export interface PersonData {
+export interface PersonPatch {
     /**
      * 
      * @type {AdministrativeGender}
-     * @memberof PersonData
+     * @memberof PersonPatch
      */
     administrativeGenderCode: AdministrativeGender | null;
     /**
      * 
      * @type {Date}
-     * @memberof PersonData
+     * @memberof PersonPatch
      */
     birthDate: Date | null;
     /**
      * 
      * @type {Date}
-     * @memberof PersonData
+     * @memberof PersonPatch
      */
     deathDate: Date | null;
     /**
      * 
      * @type {boolean}
-     * @memberof PersonData
+     * @memberof PersonPatch
      */
     deathDateEstimatedIndicator: boolean | null;
     /**
      * 
      * @type {boolean}
-     * @memberof PersonData
+     * @memberof PersonPatch
      */
     deathIndicator: boolean | null;
-    /**
-     * 
-     * @type {BiologicEntityNameData}
-     * @memberof PersonData
-     */
-    primaryName: BiologicEntityNameData | null;
-    /**
-     * 
-     * @type {Array<BiologicEntityIdentifier>}
-     * @memberof PersonData
-     */
-    identifier: Array<BiologicEntityIdentifier>;
 }
 
 
 
 /**
- * Check if a given object implements the PersonData interface.
+ * Check if a given object implements the PersonPatch interface.
  */
-export function instanceOfPersonData(value: object): value is PersonData {
+export function instanceOfPersonPatch(value: object): value is PersonPatch {
     if (!('administrativeGenderCode' in value) || value['administrativeGenderCode'] === undefined) return false;
     if (!('birthDate' in value) || value['birthDate'] === undefined) return false;
     if (!('deathDate' in value) || value['deathDate'] === undefined) return false;
     if (!('deathDateEstimatedIndicator' in value) || value['deathDateEstimatedIndicator'] === undefined) return false;
     if (!('deathIndicator' in value) || value['deathIndicator'] === undefined) return false;
-    if (!('primaryName' in value) || value['primaryName'] === undefined) return false;
-    if (!('identifier' in value) || value['identifier'] === undefined) return false;
     return true;
 }
 
 /**
- * Check if a given object is PersonData JSON.
+ * Check if a given object is PersonPatch JSON.
  */
-export function isPersonDataJSON(value: object): boolean {
+export function isPersonPatchJSON(value: object): boolean {
     if (!('administrative_gender_code' in value) || value['administrative_gender_code'] === undefined) return false;
     if (!('birth_date' in value) || value['birth_date'] === undefined) return false;
     if (!('death_date' in value) || value['death_date'] === undefined) return false;
     if (!('death_date_estimated_indicator' in value) || value['death_date_estimated_indicator'] === undefined) return false;
     if (!('death_indicator' in value) || value['death_indicator'] === undefined) return false;
-    if (!('primary_name' in value) || value['primary_name'] === undefined) return false;
-    if (!('identifier' in value) || value['identifier'] === undefined) return false;
     return true;
 }
 
-export function PersonDataFromJSON(json: any): PersonData {
-    return PersonDataFromJSONTyped(json, false);
+export function PersonPatchFromJSON(json: any): PersonPatch {
+    return PersonPatchFromJSONTyped(json, false);
 }
 
-export function PersonDataFromJSONTyped(json: any, ignoreDiscriminator: boolean): PersonData {
+export function PersonPatchFromJSONTyped(json: any, ignoreDiscriminator: boolean): PersonPatch {
     if (json == null) {
         return json;
     }
@@ -130,16 +100,14 @@ export function PersonDataFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'deathDate': (json['death_date'] == null ? null : new Date(json['death_date'])),
         'deathDateEstimatedIndicator': json['death_date_estimated_indicator'],
         'deathIndicator': json['death_indicator'],
-        'primaryName': BiologicEntityNameDataFromJSON(json['primary_name']),
-        'identifier': ((json['identifier'] as Array<any>).map(BiologicEntityIdentifierFromJSON)),
     };
 }
 
-export function PersonDataToJSON(json: any): PersonData {
-    return PersonDataToJSONTyped(json, false);
+export function PersonPatchToJSON(json: any): PersonPatch {
+    return PersonPatchToJSONTyped(json, false);
 }
 
-export function PersonDataToJSONTyped(value?: PersonData | null, ignoreDiscriminator: boolean = false): any {
+export function PersonPatchToJSONTyped(value?: PersonPatch | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -151,8 +119,6 @@ export function PersonDataToJSONTyped(value?: PersonData | null, ignoreDiscrimin
         'death_date': value['deathDate'] == null ? value['deathDate'] : value['deathDate'].toISOString().substring(0,10),
         'death_date_estimated_indicator': value['deathDateEstimatedIndicator'],
         'death_indicator': value['deathIndicator'],
-        'primary_name': BiologicEntityNameDataToJSON(value['primaryName']),
-        'identifier': ((value['identifier'] as Array<any>).map(BiologicEntityIdentifierToJSON)),
     };
 }
 

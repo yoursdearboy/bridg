@@ -13,13 +13,20 @@
  */
 
 import { mapValues } from '../runtime';
-import type { EntityName } from './EntityName';
+import type { BiologicEntityName } from './BiologicEntityName';
 import {
-    EntityNameFromJSON,
-    EntityNameFromJSONTyped,
-    EntityNameToJSON,
-    EntityNameToJSONTyped,
-} from './EntityName';
+    BiologicEntityNameFromJSON,
+    BiologicEntityNameFromJSONTyped,
+    BiologicEntityNameToJSON,
+    BiologicEntityNameToJSONTyped,
+} from './BiologicEntityName';
+import type { BiologicEntityIdentifier } from './BiologicEntityIdentifier';
+import {
+    BiologicEntityIdentifierFromJSON,
+    BiologicEntityIdentifierFromJSONTyped,
+    BiologicEntityIdentifierToJSON,
+    BiologicEntityIdentifierToJSONTyped,
+} from './BiologicEntityIdentifier';
 import type { AdministrativeGender } from './AdministrativeGender';
 import {
     AdministrativeGenderFromJSON,
@@ -72,10 +79,16 @@ export interface Person {
     id: string;
     /**
      * 
-     * @type {EntityName}
+     * @type {Array<BiologicEntityIdentifier>}
      * @memberof Person
      */
-    primaryName: EntityName | null;
+    identifier: Array<BiologicEntityIdentifier>;
+    /**
+     * 
+     * @type {BiologicEntityName}
+     * @memberof Person
+     */
+    readonly primaryName: BiologicEntityName | null;
 }
 
 
@@ -90,6 +103,7 @@ export function instanceOfPerson(value: object): value is Person {
     if (!('deathDateEstimatedIndicator' in value) || value['deathDateEstimatedIndicator'] === undefined) return false;
     if (!('deathIndicator' in value) || value['deathIndicator'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('identifier' in value) || value['identifier'] === undefined) return false;
     if (!('primaryName' in value) || value['primaryName'] === undefined) return false;
     return true;
 }
@@ -104,6 +118,7 @@ export function isPersonJSON(value: object): boolean {
     if (!('death_date_estimated_indicator' in value) || value['death_date_estimated_indicator'] === undefined) return false;
     if (!('death_indicator' in value) || value['death_indicator'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('identifier' in value) || value['identifier'] === undefined) return false;
     if (!('primary_name' in value) || value['primary_name'] === undefined) return false;
     return true;
 }
@@ -124,7 +139,8 @@ export function PersonFromJSONTyped(json: any, ignoreDiscriminator: boolean): Pe
         'deathDateEstimatedIndicator': json['death_date_estimated_indicator'],
         'deathIndicator': json['death_indicator'],
         'id': json['id'],
-        'primaryName': EntityNameFromJSON(json['primary_name']),
+        'identifier': ((json['identifier'] as Array<any>).map(BiologicEntityIdentifierFromJSON)),
+        'primaryName': BiologicEntityNameFromJSON(json['primary_name']),
     };
 }
 
@@ -132,7 +148,7 @@ export function PersonToJSON(json: any): Person {
     return PersonToJSONTyped(json, false);
 }
 
-export function PersonToJSONTyped(value?: Person | null, ignoreDiscriminator: boolean = false): any {
+export function PersonToJSONTyped(value?: Omit<Person, 'primary_name'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -145,7 +161,7 @@ export function PersonToJSONTyped(value?: Person | null, ignoreDiscriminator: bo
         'death_date_estimated_indicator': value['deathDateEstimatedIndicator'],
         'death_indicator': value['deathIndicator'],
         'id': value['id'],
-        'primary_name': EntityNameToJSON(value['primaryName']),
+        'identifier': ((value['identifier'] as Array<any>).map(BiologicEntityIdentifierToJSON)),
     };
 }
 
