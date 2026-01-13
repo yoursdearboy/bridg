@@ -10,7 +10,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { IconCaretDownFilled, IconCaretUpFilled } from "@tabler/icons-react";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
-import type { EntityName } from "api-ts";
+import type { BiologicEntityName } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { NamesTable } from "./NamesTable";
@@ -30,7 +30,7 @@ export const NamesCardWrapper = ({ personId }: { personId: string }) => {
 
 interface NamesCardProps {
   personId: string;
-  query: UseQueryResult<EntityName[], Error>;
+  query: UseQueryResult<BiologicEntityName[], Error>;
 }
 
 export const NamesCard = ({ personId, query }: NamesCardProps) => {

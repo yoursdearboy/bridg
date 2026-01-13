@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { type EntityNameData } from "api-ts";
+import { type BiologicEntityNameData } from "api-ts";
 import api from "@/api";
 import { NameForm } from "./NameForm";
 
@@ -12,10 +12,10 @@ interface Props {
 export const NewNameForm = ({ personId, onCancel, onSuccess }: Props) => {
   const mutation = useMutation({
     mutationKey: ["person", personId, "names"],
-    mutationFn: (data: EntityNameData) =>
+    mutationFn: (data: BiologicEntityNameData) =>
       api.persons.createPersonsPersonIdNamesPost({
         personId,
-        entityNameData: data,
+        biologicEntityNameData: data,
       }),
     onSuccess,
   });

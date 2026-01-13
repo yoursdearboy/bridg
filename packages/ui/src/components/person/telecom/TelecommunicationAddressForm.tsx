@@ -12,18 +12,18 @@ import type { UseMutationResult } from "@tanstack/react-query";
 import {
   TelecommunicationAddressUse,
   URLScheme,
-  type TelecommunicationAddress,
-  type TelecommunicationAddressData,
+  type PersonTelecommunicationAddress,
+  type PersonTelecommunicationAddressData,
 } from "api-ts";
 import { useTranslation } from "react-i18next";
 
 interface TelecommunicationAddressFormProps {
-  initialValues: TelecommunicationAddressData;
+  initialValues: PersonTelecommunicationAddressData;
   onCancel: () => void;
   mutation: UseMutationResult<
-    TelecommunicationAddress,
+    PersonTelecommunicationAddress,
     Error,
-    TelecommunicationAddressData,
+    PersonTelecommunicationAddressData,
     unknown
   >;
 }
@@ -34,7 +34,7 @@ export const TelecommunicationAddressForm = ({
   mutation,
 }: TelecommunicationAddressFormProps) => {
   const { t } = useTranslation();
-  const form = useForm<TelecommunicationAddressData>({
+  const form = useForm<PersonTelecommunicationAddressData>({
     initialValues: {
       ...initialValues,
       use: TelecommunicationAddressUse.H,
@@ -52,7 +52,7 @@ export const TelecommunicationAddressForm = ({
     label: t(`TelecommunicationAddressScheme.${value}`),
     value,
   }));
-  const handleSubmit = (data: TelecommunicationAddressData) => {
+  const handleSubmit = (data: PersonTelecommunicationAddressData) => {
     mutation.mutate(data);
   };
 

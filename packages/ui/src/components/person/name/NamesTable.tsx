@@ -2,14 +2,14 @@ import { Box, Group, Modal, Table } from "@mantine/core";
 import { useDisclosure, useHover } from "@mantine/hooks";
 import { IconPencil, IconX } from "@tabler/icons-react";
 import { useMutation } from "@tanstack/react-query";
-import type { EntityName } from "api-ts";
+import type { BiologicEntityName } from "api-ts";
 import { t } from "i18next";
 import api from "@/api";
 import { EditNameForm } from "./EditNameForm";
 
 interface NamesTableRowWrapperProps {
   personId: string;
-  name: EntityName;
+  name: BiologicEntityName;
 }
 
 const NamesTableRowWrapper = ({
@@ -35,9 +35,9 @@ const NamesTableRowWrapper = ({
 };
 
 interface NamesTableRowProps {
-  name: EntityName;
+  name: BiologicEntityName;
   personId: string;
-  onDelete: (name: EntityName) => void;
+  onDelete: (name: BiologicEntityName) => void;
 }
 
 const NamesTableRow = ({ name, personId, onDelete }: NamesTableRowProps) => {
@@ -78,7 +78,7 @@ const NamesTableRow = ({ name, personId, onDelete }: NamesTableRowProps) => {
 
 interface NamesTableProps {
   personId: string;
-  names: EntityName[];
+  names: BiologicEntityName[];
 }
 
 export const NamesTable = ({ personId, names }: NamesTableProps) => {

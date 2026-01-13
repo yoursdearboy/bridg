@@ -9,7 +9,7 @@ import {
   Text,
 } from "@mantine/core";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
-import { URLScheme, type TelecommunicationAddress } from "api-ts";
+import { URLScheme, type PersonTelecommunicationAddress } from "api-ts";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
@@ -35,7 +35,7 @@ export const TelecommunicationAddressCardWrapper = ({
 
 interface TelecommunicationAddressCardProps {
   personId: string;
-  query: UseQueryResult<TelecommunicationAddress[], Error>;
+  query: UseQueryResult<PersonTelecommunicationAddress[], Error>;
 }
 
 export const TelecommunicationAddressCard = ({

@@ -8,13 +8,18 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import type { UseMutationResult } from "@tanstack/react-query";
-import type { PostalAddress, PostalAddressData } from "api-ts";
+import type { PersonPostalAddress, PersonPostalAddressData } from "api-ts";
 import { useTranslation } from "react-i18next";
 
 interface AddressFormProps {
-  initialValues: PostalAddressData;
+  initialValues: PersonPostalAddressData;
   onCancel: () => void;
-  mutation: UseMutationResult<PostalAddress, Error, PostalAddressData, unknown>;
+  mutation: UseMutationResult<
+    PersonPostalAddress,
+    Error,
+    PersonPostalAddressData,
+    unknown
+  >;
 }
 
 export const AddressForm = ({
@@ -24,7 +29,7 @@ export const AddressForm = ({
 }: AddressFormProps) => {
   const { t } = useTranslation();
 
-  const form = useForm<PostalAddressData>({
+  const form = useForm<PersonPostalAddressData>({
     initialValues: initialValues,
     validate: {
       street: (value) =>
@@ -38,7 +43,7 @@ export const AddressForm = ({
     },
   });
 
-  const handleSubmit = (data: PostalAddressData) => mutation.mutate(data);
+  const handleSubmit = (data: PersonPostalAddressData) => mutation.mutate(data);
 
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>

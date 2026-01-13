@@ -1,14 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
 import type {
-  TelecommunicationAddress,
-  TelecommunicationAddressData,
+  PersonTelecommunicationAddress,
+  PersonTelecommunicationAddressData,
 } from "api-ts";
 import api from "@/api";
 import { TelecommunicationAddressForm } from "./TelecommunicationAddressForm";
 
 interface Props {
   personId: string;
-  telecommunication_address: TelecommunicationAddress;
+  telecommunication_address: PersonTelecommunicationAddress;
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -26,12 +26,12 @@ export const EditTelecommunicationAddressForm = ({
       "telecommunication_addresses",
       telecommunication_address.id,
     ],
-    mutationFn: (data: TelecommunicationAddressData) =>
+    mutationFn: (data: PersonTelecommunicationAddressData) =>
       api.persons.updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch(
         {
           personId,
           addressId: telecommunication_address.id,
-          telecommunicationAddressData: data,
+          personTelecommunicationAddressData: data,
         }
       ),
     onSuccess,

@@ -11,6 +11,7 @@ it("person edit page renders correctly", async () => {
     deathDateEstimatedIndicator: null,
     deathIndicator: false,
     id: "99132ae7-25dd-43ba-808e-cdb3b29af285",
+    identifier: [],
     primaryName: {
       use: "official",
       family: "Иванов",

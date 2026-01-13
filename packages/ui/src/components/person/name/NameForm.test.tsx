@@ -1,12 +1,12 @@
 import { type UseMutationResult } from "@tanstack/react-query";
-import type { EntityName, EntityNameData } from "api-ts";
+import type { BiologicEntityName, BiologicEntityNameData } from "api-ts";
 import { describe, expect, it, vi } from "vitest";
 import { renderComponent } from "@/test-utils";
 import { NameForm } from "./NameForm";
 
 describe("NameForm", () => {
   it("matches snapshot", () => {
-    const initialValues: EntityNameData = {
+    const initialValues: BiologicEntityNameData = {
       family: "Moly",
       given: "Holy",
     };
@@ -16,9 +16,9 @@ describe("NameForm", () => {
       ...initialValues,
     };
     const mockMutation: UseMutationResult<
-      EntityName,
+      BiologicEntityName,
       Error,
-      EntityNameData,
+      BiologicEntityNameData,
       unknown
     > = {
       data: result,

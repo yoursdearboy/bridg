@@ -2,7 +2,7 @@ import { Box, Group, Modal, Table } from "@mantine/core";
 import { useDisclosure, useHover } from "@mantine/hooks";
 import { IconPencil, IconX } from "@tabler/icons-react";
 import { useMutation } from "@tanstack/react-query";
-import type { TelecommunicationAddress } from "api-ts";
+import type { PersonTelecommunicationAddress } from "api-ts";
 import { t } from "i18next";
 import api from "@/api";
 import { EditTelecommunicationAddressForm } from "./EditTelecommunicationAddressForm";
@@ -10,7 +10,7 @@ import icons from "./icons";
 
 interface TelecommunicationAddressTableRowWrapperProps {
   personId: string;
-  telecommunication_address: TelecommunicationAddress;
+  telecommunication_address: PersonTelecommunicationAddress;
 }
 
 const TelecommunicationAddressTableRowWrapper = ({
@@ -43,9 +43,9 @@ const TelecommunicationAddressTableRowWrapper = ({
 };
 
 interface TelecommunicationAddressTableRowProps {
-  telecommunication_address: TelecommunicationAddress;
+  telecommunication_address: PersonTelecommunicationAddress;
   personId: string;
-  onDelete: (name: TelecommunicationAddress) => void;
+  onDelete: (name: PersonTelecommunicationAddress) => void;
 }
 
 const TelecommunicationAddressTableRow = ({
@@ -97,7 +97,7 @@ const TelecommunicationAddressTableRow = ({
 
 interface TelecommunicationAddressTableProps {
   personId: string;
-  telecom_addresses: TelecommunicationAddress[];
+  telecom_addresses: PersonTelecommunicationAddress[];
 }
 
 export const TelecommunicationAddressTable = ({
