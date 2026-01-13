@@ -5,6 +5,7 @@ test.use({
 });
 
 test("test", async ({ page }) => {
+  await page.clock.setFixedTime(new Date("2025-12-01T12:00:00"));
   await page.goto("/spaces/ce946229-9746-46cd-8dd3-b27a2fbfd48a/subjects");
   await page.getByRole("button", { name: "New patient" }).click();
   await page.getByRole("textbox", { name: "Family name" }).click();
