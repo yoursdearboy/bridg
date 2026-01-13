@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { OrganizationName } from './OrganizationName';
+import type { OrganizationOrganizationName } from './OrganizationOrganizationName';
 import {
-    OrganizationNameFromJSON,
-    OrganizationNameFromJSONTyped,
-    OrganizationNameToJSON,
-    OrganizationNameToJSONTyped,
-} from './OrganizationName';
+    OrganizationOrganizationNameFromJSON,
+    OrganizationOrganizationNameFromJSONTyped,
+    OrganizationOrganizationNameToJSON,
+    OrganizationOrganizationNameToJSONTyped,
+} from './OrganizationOrganizationName';
 
 /**
  * 
@@ -41,10 +41,10 @@ export interface Organization {
     description: string | null;
     /**
      * 
-     * @type {OrganizationName}
+     * @type {OrganizationOrganizationName}
      * @memberof Organization
      */
-    primaryName: OrganizationName | null;
+    readonly primaryName: OrganizationOrganizationName | null;
 }
 
 /**
@@ -79,7 +79,7 @@ export function OrganizationFromJSONTyped(json: any, ignoreDiscriminator: boolea
         
         'id': json['id'],
         'description': json['description'],
-        'primaryName': OrganizationNameFromJSON(json['primary_name']),
+        'primaryName': OrganizationOrganizationNameFromJSON(json['primary_name']),
     };
 }
 
@@ -87,7 +87,7 @@ export function OrganizationToJSON(json: any): Organization {
     return OrganizationToJSONTyped(json, false);
 }
 
-export function OrganizationToJSONTyped(value?: Organization | null, ignoreDiscriminator: boolean = false): any {
+export function OrganizationToJSONTyped(value?: Omit<Organization, 'primary_name'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -96,7 +96,6 @@ export function OrganizationToJSONTyped(value?: Organization | null, ignoreDiscr
         
         'id': value['id'],
         'description': value['description'],
-        'primary_name': OrganizationNameToJSON(value['primaryName']),
     };
 }
 

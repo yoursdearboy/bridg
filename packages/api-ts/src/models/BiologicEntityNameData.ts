@@ -16,88 +16,72 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface EntityName
+ * @interface BiologicEntityNameData
  */
-export interface EntityName {
+export interface BiologicEntityNameData {
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof BiologicEntityNameData
      */
     use?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof BiologicEntityNameData
      */
     family?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof BiologicEntityNameData
      */
     given?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof BiologicEntityNameData
      */
     middle?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof BiologicEntityNameData
      */
     patronymic?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof BiologicEntityNameData
      */
     prefix?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EntityName
+     * @memberof BiologicEntityNameData
      */
     suffix?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EntityName
-     */
-    id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EntityName
-     */
-    readonly label: string | null;
 }
 
 /**
- * Check if a given object implements the EntityName interface.
+ * Check if a given object implements the BiologicEntityNameData interface.
  */
-export function instanceOfEntityName(value: object): value is EntityName {
-    if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('label' in value) || value['label'] === undefined) return false;
+export function instanceOfBiologicEntityNameData(value: object): value is BiologicEntityNameData {
     return true;
 }
 
 /**
- * Check if a given object is EntityName JSON.
+ * Check if a given object is BiologicEntityNameData JSON.
  */
-export function isEntityNameJSON(value: object): boolean {
-    if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('label' in value) || value['label'] === undefined) return false;
+export function isBiologicEntityNameDataJSON(value: object): boolean {
     return true;
 }
 
-export function EntityNameFromJSON(json: any): EntityName {
-    return EntityNameFromJSONTyped(json, false);
+export function BiologicEntityNameDataFromJSON(json: any): BiologicEntityNameData {
+    return BiologicEntityNameDataFromJSONTyped(json, false);
 }
 
-export function EntityNameFromJSONTyped(json: any, ignoreDiscriminator: boolean): EntityName {
+export function BiologicEntityNameDataFromJSONTyped(json: any, ignoreDiscriminator: boolean): BiologicEntityNameData {
     if (json == null) {
         return json;
     }
@@ -110,16 +94,14 @@ export function EntityNameFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'patronymic': json['patronymic'] == null ? undefined : json['patronymic'],
         'prefix': json['prefix'] == null ? undefined : json['prefix'],
         'suffix': json['suffix'] == null ? undefined : json['suffix'],
-        'id': json['id'],
-        'label': json['label'],
     };
 }
 
-export function EntityNameToJSON(json: any): EntityName {
-    return EntityNameToJSONTyped(json, false);
+export function BiologicEntityNameDataToJSON(json: any): BiologicEntityNameData {
+    return BiologicEntityNameDataToJSONTyped(json, false);
 }
 
-export function EntityNameToJSONTyped(value?: Omit<EntityName, 'label'> | null, ignoreDiscriminator: boolean = false): any {
+export function BiologicEntityNameDataToJSONTyped(value?: BiologicEntityNameData | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -133,7 +115,6 @@ export function EntityNameToJSONTyped(value?: Omit<EntityName, 'label'> | null, 
         'patronymic': value['patronymic'],
         'prefix': value['prefix'],
         'suffix': value['suffix'],
-        'id': value['id'],
     };
 }
 

@@ -20,6 +20,13 @@ import {
     ConceptDescriptorToJSON,
     ConceptDescriptorToJSONTyped,
 } from './ConceptDescriptor';
+import type { MaterialIdentifier } from './MaterialIdentifier';
+import {
+    MaterialIdentifierFromJSON,
+    MaterialIdentifierFromJSONTyped,
+    MaterialIdentifierToJSON,
+    MaterialIdentifierToJSONTyped,
+} from './MaterialIdentifier';
 
 /**
  * 
@@ -39,6 +46,12 @@ export interface BiologicData {
      * @memberof BiologicData
      */
     type?: BiologicDataTypeEnum;
+    /**
+     * 
+     * @type {Array<MaterialIdentifier>}
+     * @memberof BiologicData
+     */
+    identifier: Array<MaterialIdentifier>;
     /**
      * 
      * @type {ConceptDescriptor}
@@ -91,6 +104,7 @@ export type BiologicDataTypeEnum = typeof BiologicDataTypeEnum[keyof typeof Biol
  * Check if a given object implements the BiologicData interface.
  */
 export function instanceOfBiologicData(value: object): value is BiologicData {
+    if (!('identifier' in value) || value['identifier'] === undefined) return false;
     if (!('code' in value) || value['code'] === undefined) return false;
     if (!('formCode' in value) || value['formCode'] === undefined) return false;
     if (!('description' in value) || value['description'] === undefined) return false;
@@ -104,6 +118,7 @@ export function instanceOfBiologicData(value: object): value is BiologicData {
  * Check if a given object is BiologicData JSON.
  */
 export function isBiologicDataJSON(value: object): boolean {
+    if (!('identifier' in value) || value['identifier'] === undefined) return false;
     if (!('code' in value) || value['code'] === undefined) return false;
     if (!('form_code' in value) || value['form_code'] === undefined) return false;
     if (!('description' in value) || value['description'] === undefined) return false;
@@ -125,6 +140,7 @@ export function BiologicDataFromJSONTyped(json: any, ignoreDiscriminator: boolea
         
         'id': json['id'] == null ? undefined : json['id'],
         'type': json['type'] == null ? undefined : json['type'],
+        'identifier': ((json['identifier'] as Array<any>).map(MaterialIdentifierFromJSON)),
         'code': ConceptDescriptorFromJSON(json['code']),
         'formCode': ConceptDescriptorFromJSON(json['form_code']),
         'description': json['description'],
@@ -147,6 +163,7 @@ export function BiologicDataToJSONTyped(value?: BiologicData | null, ignoreDiscr
         
         'id': value['id'],
         'type': value['type'],
+        'identifier': ((value['identifier'] as Array<any>).map(MaterialIdentifierToJSON)),
         'code': ConceptDescriptorToJSON(value['code']),
         'form_code': ConceptDescriptorToJSON(value['formCode']),
         'description': value['description'],
