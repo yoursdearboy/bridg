@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
-import type { PostalAddress } from "api-ts";
+import type { PersonPostalAddress } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { AddressTable } from "./AddressTable";
@@ -29,7 +29,7 @@ export const AddressCardWrapper = ({ personId }: { personId: string }) => {
 
 interface AddressCardProps {
   personId: string;
-  query: UseQueryResult<PostalAddress[], Error>;
+  query: UseQueryResult<PersonPostalAddress[], Error>;
 }
 
 export const AddressCard = ({ personId, query }: AddressCardProps) => {

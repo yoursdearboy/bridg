@@ -12,6 +12,7 @@ describe("PersonForm", () => {
       deathDate: null,
       deathDateEstimatedIndicator: false,
       deathIndicator: false,
+      identifier: [],
       primaryName: null,
     };
     const result: Person = {

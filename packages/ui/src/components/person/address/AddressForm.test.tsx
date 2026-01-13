@@ -1,12 +1,12 @@
 import { type UseMutationResult } from "@tanstack/react-query";
-import type { PostalAddress, PostalAddressData } from "api-ts";
+import type { PersonPostalAddress, PersonPostalAddressData } from "api-ts";
 import { describe, expect, it, vi } from "vitest";
 import { renderComponent } from "@/test-utils";
 import { AddressForm } from "./AddressForm";
 
 describe("AddressForm", () => {
   it("matches snapshot", () => {
-    const initialValues: PostalAddressData = {
+    const initialValues: PersonPostalAddressData = {
       street: "Red",
       building: "Square",
       use: "h",
@@ -17,9 +17,9 @@ describe("AddressForm", () => {
       ...initialValues,
     };
     const mockMutation: UseMutationResult<
-      PostalAddress,
+      PersonPostalAddress,
       Error,
-      PostalAddressData,
+      PersonPostalAddressData,
       unknown
     > = {
       data: result,

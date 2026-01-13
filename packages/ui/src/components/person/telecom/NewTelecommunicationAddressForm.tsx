@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-import { type TelecommunicationAddressData } from "api-ts";
+import { type PersonTelecommunicationAddressData } from "api-ts";
 import api from "@/api";
 import { TelecommunicationAddressForm } from "./TelecommunicationAddressForm";
 
 interface Props {
   personId: string;
-  initialValues: TelecommunicationAddressData;
+  initialValues: PersonTelecommunicationAddressData;
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -18,10 +18,10 @@ export const NewTelecommunicationAddressForm = ({
 }: Props) => {
   const mutation = useMutation({
     mutationKey: ["person", personId, "telecommunication_addresses"],
-    mutationFn: (data: TelecommunicationAddressData) =>
+    mutationFn: (data: PersonTelecommunicationAddressData) =>
       api.persons.createPersonsPersonIdTelecommunicationAddressesPost({
         personId,
-        telecommunicationAddressData: data,
+        personTelecommunicationAddressData: data,
       }),
 
     onSuccess,

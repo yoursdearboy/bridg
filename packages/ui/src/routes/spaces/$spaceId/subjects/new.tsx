@@ -230,6 +230,7 @@ function RouteComponent() {
       performingBiologicEntity: {
         administrativeGenderCode: null,
         birthDate: null,
+        identifier: [],
         primaryName: {
           family: "",
           given: "",

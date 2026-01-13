@@ -8,13 +8,18 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import type { UseMutationResult } from "@tanstack/react-query";
-import type { EntityName, EntityNameData } from "api-ts";
+import type { BiologicEntityName, BiologicEntityNameData } from "api-ts";
 import { useTranslation } from "react-i18next";
 
 interface NameFormProps {
-  initialValues: EntityNameData;
+  initialValues: BiologicEntityNameData;
   onCancel: () => void;
-  mutation: UseMutationResult<EntityName, Error, EntityNameData, unknown>;
+  mutation: UseMutationResult<
+    BiologicEntityName,
+    Error,
+    BiologicEntityNameData,
+    unknown
+  >;
 }
 
 export const NameForm = ({
@@ -24,7 +29,7 @@ export const NameForm = ({
 }: NameFormProps) => {
   const { t } = useTranslation();
 
-  const form = useForm<EntityNameData>({
+  const form = useForm<BiologicEntityNameData>({
     initialValues: {
       family: initialValues.family || "",
       given: initialValues.given || "",
@@ -45,7 +50,7 @@ export const NameForm = ({
     },
   });
 
-  const handleSubmit = (data: EntityNameData) => mutation.mutate(data);
+  const handleSubmit = (data: BiologicEntityNameData) => mutation.mutate(data);
 
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>

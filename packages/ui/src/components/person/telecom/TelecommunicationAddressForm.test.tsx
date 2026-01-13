@@ -1,7 +1,7 @@
 import { type UseMutationResult } from "@tanstack/react-query";
 import type {
-  TelecommunicationAddress,
-  TelecommunicationAddressData,
+  PersonTelecommunicationAddress,
+  PersonTelecommunicationAddressData,
 } from "api-ts";
 import { describe, expect, it, vi } from "vitest";
 import { renderComponent } from "@/test-utils";
@@ -9,7 +9,7 @@ import { TelecommunicationAddressForm } from "./TelecommunicationAddressForm";
 
 describe("TelecommunicationAddressForm", () => {
   it("matches snapshot", () => {
-    const initialValues: TelecommunicationAddressData = {
+    const initialValues: PersonTelecommunicationAddressData = {
       address: "Pizza",
       scheme: "ftp",
       use: "H",
@@ -20,9 +20,9 @@ describe("TelecommunicationAddressForm", () => {
       ...initialValues,
     };
     const mockMutation: UseMutationResult<
-      TelecommunicationAddress,
+      PersonTelecommunicationAddress,
       Error,
-      TelecommunicationAddressData,
+      PersonTelecommunicationAddressData,
       unknown
     > = {
       data: result,

@@ -39,6 +39,7 @@ it("new page renders correctly", async () => {
           deathDate: null,
           deathDateEstimatedIndicator: null,
           deathIndicator: null,
+          identifier: [],
           primaryName: {
             id: "fc4e3c22-a2a8-45f2-b86c-e58bf618505d",
             label: "Donald Trump Jr",

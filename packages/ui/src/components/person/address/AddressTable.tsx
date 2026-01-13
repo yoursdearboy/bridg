@@ -2,14 +2,14 @@ import { Box, Group, Modal, Table } from "@mantine/core";
 import { useDisclosure, useHover } from "@mantine/hooks";
 import { IconPencil, IconX } from "@tabler/icons-react";
 import { useMutation } from "@tanstack/react-query";
-import type { PostalAddress } from "api-ts";
+import type { PersonPostalAddress } from "api-ts";
 import { t } from "i18next";
 import api from "@/api";
 import { EditAddressForm } from "./EditAddressForm";
 
 interface AddressTableRowWrapperProps {
   personId: string;
-  address: PostalAddress;
+  address: PersonPostalAddress;
 }
 
 const AddressTableRowWrapper = ({
@@ -35,9 +35,9 @@ const AddressTableRowWrapper = ({
 };
 
 interface AddressTableRowProps {
-  address: PostalAddress;
+  address: PersonPostalAddress;
   personId: string;
-  onDelete: (address: PostalAddress) => void;
+  onDelete: (address: PersonPostalAddress) => void;
 }
 
 const AddressTableRow = ({
@@ -82,7 +82,7 @@ const AddressTableRow = ({
 
 interface AddressTableProps {
   personId: string;
-  addresses: PostalAddress[];
+  addresses: PersonPostalAddress[];
 }
 
 export const AddressTable = ({ personId, addresses }: AddressTableProps) => {

@@ -15,7 +15,7 @@ export const EditPersonForm = ({ person, onCancel, onSuccess }: Props) => {
     mutationFn: (data: PersonData) =>
       api.persons.updatePersonsPersonIdPatch({
         personId: person.id,
-        personData: data,
+        personPatch: data,
       }),
     onSuccess,
   });
