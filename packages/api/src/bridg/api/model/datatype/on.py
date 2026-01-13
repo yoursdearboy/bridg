@@ -7,13 +7,11 @@ import bridg.alchemy
 from ..base import BaseModel
 
 
-class OrganizationNameData(BaseModel[bridg.alchemy.OrganizationName]):
-    _sa = bridg.alchemy.OrganizationName
-
+class OrganizationNameData[T: bridg.alchemy.OrganizationName](BaseModel[T]):
     value: Optional[str] = None
 
 
-class OrganizationName(OrganizationNameData):
+class OrganizationName[T: bridg.alchemy.OrganizationName](OrganizationNameData[T]):
     @computed_field
     @property
     def label(self) -> Optional[str]:
