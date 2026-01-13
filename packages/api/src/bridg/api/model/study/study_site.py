@@ -16,7 +16,7 @@ class StudySite(BaseModel):
     @computed_field
     @property
     def label(self) -> Optional[str]:
-        if hf := self.performing_healthcare_facility:
-            return str(hf.performing_organization)
-        if org := self.performing_organization:
-            return str(org)
+        hf = self.performing_healthcare_facility
+        org = hf.performing_organization if hf else self.performing_organization
+        if org and len(org.name) > 0:
+            return org.name[0].value
