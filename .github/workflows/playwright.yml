@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BRIDG_ENV: testing
+      PYO3_USE_ABI3_FORWARD_COMPATIBILITY: 1
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
