@@ -16,6 +16,8 @@ jobs:
       with:
         node-version: lts/*
     - uses: astral-sh/setup-uv@v7
+    - name: Install python dependencies dependencies
+      run: sudo apt install -y libjpeg-dev zlib1g-dev
     - name: Install python dependencies
       run: uv sync --all-packages --group test
     - name: Install node dependencies
