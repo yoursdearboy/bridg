@@ -10,7 +10,7 @@ from bridg.api.model import Epoch, StudyProtocolVersion, StudySiteProtocolVersio
 
 from . import activity, subject
 
-router = APIRouter(prefix="/spaces")
+router = APIRouter(prefix="/space")
 
 
 class StudyProtocolVersionRepository(Repository[bridg.alchemy.StudyProtocolVersion]):

@@ -32,7 +32,7 @@ def test_performed_observation_show(snapshot_json):
         involved_subject=ss,
         resulted_performed_observation_result=PerformedObservationResultFactory.batch(10),
     )
-    response = client.get(f"/spaces/{space.id}/subjects/{ss.id}/activity/{pobs.id}?result=1")
+    response = client.get(f"/space/{space.id}/subject/{ss.id}/activity/{pobs.id}?result=1")
     assert response.status_code == 200
     assert response.json() == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
 
@@ -48,7 +48,7 @@ def test_performed_observation_create(snapshot_json):
     pobs = PerformedObservationDataFactory.build(
         resulted_performed_observation_result=PerformedObservationResultDataFactory.batch(10)
     )
-    response = client.post(f"/spaces/{space.id}/subjects/{ss.id}/activity", content=pobs.model_dump_json())
+    response = client.post(f"/space/{space.id}/subject/{ss.id}/activity", content=pobs.model_dump_json())
     assert response.status_code == 200
     assert response.json() == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
 
@@ -94,7 +94,7 @@ def test_performed_observation_update(random, snapshot_json):
         else:
             pass
     random.shuffle(patch.resulted_performed_observation_result)
-    response = client.patch(f"/spaces/{space.id}/subjects/{ss.id}/activity/{pobs.id}", content=patch.model_dump_json())
+    response = client.patch(f"/space/{space.id}/subject/{ss.id}/activity/{pobs.id}", content=patch.model_dump_json())
     json = response.json()
     assert response.status_code == 200
     assert json["id"] == str(pobs.id)

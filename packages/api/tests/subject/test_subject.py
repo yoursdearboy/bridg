@@ -22,7 +22,7 @@ def test_subject_index():
         performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
-    response = client.get(f"/spaces/{space.id}/subjects")
+    response = client.get(f"/space/{space.id}/subject")
     assert response.status_code == 200
     assert response.json() == [study_subject_dict(s)]
 
@@ -35,7 +35,7 @@ def test_subject_show():
         performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
-    response = client.get(f"/spaces/{space.id}/subjects/{s.id}")
+    response = client.get(f"/space/{space.id}/subject/{s.id}")
     assert response.status_code == 200
     assert response.json() == study_subject_dict(s)
 
@@ -43,7 +43,7 @@ def test_subject_show():
 def test_subject_show_404():
     space = StudyProtocolVersionFactory.create_sync()
     id = "12345678-1234-5678-1234-567812345678"
-    response = client.get(f"/spaces/{space.id}/subjects/{id}")
+    response = client.get(f"/space/{space.id}/subject/{id}")
     assert response.status_code == 404
 
 
@@ -55,7 +55,7 @@ def test_subject_create(session: Session):
     id = p.identifier[0]
     en = p.name[0]
     response = client.post(
-        f"/spaces/{space.id}/subjects/",
+        f"/space/{space.id}/subject/",
         json={
             "status": _or(enum_str, s.status),
             "status_date": _or(datetime_str, s.status_date),
@@ -114,7 +114,7 @@ def test_subject_update(session):
         performing_organization=None,
     )
     response = client.patch(
-        f"/spaces/{space.id}/subjects/{s.id}",
+        f"/space/{space.id}/subject/{s.id}",
         json={
             "status": _or(enum_str, patch.status),
             "status_date": _or(datetime_str, patch.status_date),
@@ -155,7 +155,7 @@ def test_subject_lookup(session: Session):
             "identifier": [],
         }
     }
-    response = client.post(f"/spaces/{space.id}/subjects/lookup", json=query)
+    response = client.post(f"/space/{space.id}/subject/lookup", json=query)
     assert response.status_code == 200
     assert response.json() == [
         {"performing_biologic_entity": person_dict(p1)},

@@ -12,7 +12,7 @@ from bridg.api.service.subject import StudySubjectRepository
 
 from . import performed_activity, specimen
 
-router = APIRouter(prefix="/subjects", tags=["subjects"])
+router = APIRouter(prefix="/subject", tags=["subjects"])
 
 
 class NewStudySubject(BaseModel[bridg.alchemy.StudySubject]):

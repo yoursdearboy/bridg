@@ -11,7 +11,7 @@ client = TestClient(app)
 def test_person_name_index():
     name = BiologicEntityNameFactory.batch(2)
     person = PersonFactory.create_sync(name=name)
-    response = client.get(f"/persons/{person.id}/names")
+    response = client.get(f"/person/{person.id}/name")
     assert response.status_code == 200
     assert response.json() == [entity_name_dict(en) for en in name]
 
@@ -28,7 +28,7 @@ def test_person_name_create():
         "prefix": en.prefix,
         "suffix": en.suffix,
     }
-    response = client.post(f"/persons/{person.id}/names", json=data)
+    response = client.post(f"/person/{person.id}/name", json=data)
     assert response.status_code == 200
     assert len(person.name) == 1
     obj = person.name[0]
@@ -48,7 +48,7 @@ def test_person_name_update(session: Session):
         "prefix": en2.prefix,
         "suffix": en2.suffix,
     }
-    response = client.patch(f"/persons/{person.id}/names/{en.id}", json=patch)
+    response = client.patch(f"/person/{person.id}/name/{en.id}", json=patch)
     assert response.status_code == 200
     assert len(person.name) == 1
     obj = person.name[0]
@@ -60,7 +60,7 @@ def test_person_name_update(session: Session):
 def test_person_name_delete(session: Session):
     en = BiologicEntityNameFactory.build()
     person = PersonFactory.create_sync(name=[en])
-    response = client.delete(f"/persons/{person.id}/names/{en.id}")
+    response = client.delete(f"/person/{person.id}/name/{en.id}")
     session.expire_all()
     assert response.status_code == 200
     assert person.name == []

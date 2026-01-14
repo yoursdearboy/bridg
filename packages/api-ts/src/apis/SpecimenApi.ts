@@ -25,7 +25,7 @@ import {
     SpecimenToJSON,
 } from '../models/index';
 
-export interface IndexSpacesSpaceIdSubjectsSubjectIdSpecimenGetRequest {
+export interface IndexSpaceSpaceIdSubjectSubjectIdSpecimenGetRequest {
     spaceId: string;
     subjectId: string;
 }
@@ -38,18 +38,18 @@ export class SpecimenApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexSpacesSpaceIdSubjectsSubjectIdSpecimenGetRaw(requestParameters: IndexSpacesSpaceIdSubjectsSubjectIdSpecimenGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Specimen>>> {
+    async indexSpaceSpaceIdSubjectSubjectIdSpecimenGetRaw(requestParameters: IndexSpaceSpaceIdSubjectSubjectIdSpecimenGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Specimen>>> {
         if (requestParameters['spaceId'] == null) {
             throw new runtime.RequiredError(
                 'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling indexSpacesSpaceIdSubjectsSubjectIdSpecimenGet().'
+                'Required parameter "spaceId" was null or undefined when calling indexSpaceSpaceIdSubjectSubjectIdSpecimenGet().'
             );
         }
 
         if (requestParameters['subjectId'] == null) {
             throw new runtime.RequiredError(
                 'subjectId',
-                'Required parameter "subjectId" was null or undefined when calling indexSpacesSpaceIdSubjectsSubjectIdSpecimenGet().'
+                'Required parameter "subjectId" was null or undefined when calling indexSpaceSpaceIdSubjectSubjectIdSpecimenGet().'
             );
         }
 
@@ -58,7 +58,7 @@ export class SpecimenApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/spaces/{space_id}/subjects/{subject_id}/specimen`;
+        let urlPath = `/space/{space_id}/subject/{subject_id}/specimen`;
         urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
         urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
 
@@ -75,8 +75,8 @@ export class SpecimenApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexSpacesSpaceIdSubjectsSubjectIdSpecimenGet(requestParameters: IndexSpacesSpaceIdSubjectsSubjectIdSpecimenGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Specimen>> {
-        const response = await this.indexSpacesSpaceIdSubjectsSubjectIdSpecimenGetRaw(requestParameters, initOverrides);
+    async indexSpaceSpaceIdSubjectSubjectIdSpecimenGet(requestParameters: IndexSpaceSpaceIdSubjectSubjectIdSpecimenGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Specimen>> {
+        const response = await this.indexSpaceSpaceIdSubjectSubjectIdSpecimenGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

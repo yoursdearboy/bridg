@@ -28,37 +28,37 @@ GET {{base}}/defined_activity/{{cbc_id}}?result=1
 
 ### Index spaces
 
-GET {{base}}/spaces
+GET {{base}}/space
 
 ## Sites
 
 ### Index space sites
 
-GET {{base}}/spaces/{{space_id}}/sites
+GET {{base}}/space/{{space_id}}/sites
 
 ## Activities
 
 ### List space activities
 
-GET {{base}}/spaces/{{space_id}}/activity
+GET {{base}}/space/{{space_id}}/activity
 
 ### Show space activity
 
-GET {{base}}/spaces/{{space_id}}/activity/{{space_cbc_id}}
+GET {{base}}/space/{{space_id}}/activity/{{space_cbc_id}}
 
 ## Subjects
 
 ### Index subjects in the space
 
-GET {{base}}/spaces/{{space_id}}/subjects
+GET {{base}}/space/{{space_id}}/subject
 
 ### Show a subject in the space
 
-GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}
+GET {{base}}/space/{{space_id}}/subject/{{subject_id}}
 
 ### Create a subject in the space
 
-POST {{base}}/spaces/{{space_id}}/subjects
+POST {{base}}/space/{{space_id}}/subject
 Content-Type: application/json
 
 {
@@ -81,7 +81,7 @@ Content-Type: application/json
 
 ### Lookup a subject
 
-POST {{base}}/spaces/{{space_id}}/subjects/lookup
+POST {{base}}/space/{{space_id}}/subject/lookup
 Content-Type: application/json
 
 {
@@ -96,32 +96,32 @@ Content-Type: application/json
 
 #### List subject activities
 
-GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity
+GET {{base}}/space/{{space_id}}/subject/{{subject_id}}/activity
 
 #### Show subject activity (ipt)
 
-GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/{{ss_ipt_id}}
+GET {{base}}/space/{{space_id}}/subject/{{subject_id}}/activity/{{ss_ipt_id}}
 
 #### Show subject activity (observation) with results (cbc)
 
-GET {{base}}/spaces/{{space_id}}/subjects/{{subject_id}}/activity/{{ss_cbc_id}}?result=1
+GET {{base}}/space/{{space_id}}/subject/{{subject_id}}/activity/{{ss_cbc_id}}?result=1
 
 
 ## Persons
 
 ### Show a person
 
-GET {{base}}/persons/{{person_id}}
+GET {{base}}/person/{{person_id}}
 
 ### Names
 
 #### Show a person names
 
-GET {{base}}/persons/{{person_id}}/names
+GET {{base}}/person/{{person_id}}/name
 
 #### Create a person name
 
-POST {{base}}/persons/{{person_id}}/names
+POST {{base}}/person/{{person_id}}/name
 Content-Type: application/json
 
 {
@@ -133,7 +133,7 @@ Content-Type: application/json
 
 #### Update a person name
 
-PATCH {{base}}/persons/{{person_id}}/names/aea59ce0-7630-442d-ba45-8ef490e891c6
+PATCH {{base}}/person/{{person_id}}/name/aea59ce0-7630-442d-ba45-8ef490e891c6
 Content-Type: application/json
 
 {
@@ -145,17 +145,17 @@ Content-Type: application/json
 
 #### Delete a person name
 
-DELETE {{base}}/persons/{{person_id}}/names/b0f79211-0160-42c4-9f75-74b38ba156ca
+DELETE {{base}}/person/{{person_id}}/name/b0f79211-0160-42c4-9f75-74b38ba156ca
 
 ### Postal addresses
 
 #### Show a person postal addresses
 
-GET {{base}}/persons/{{person_id}}/postal_addresses
+GET {{base}}/person/{{person_id}}/postal_address
 
 #### Create a person postal address
 
-POST {{base}}/persons/{{person_id}}/postal_addresses
+POST {{base}}/person/{{person_id}}/postal_address
 Content-Type: application/json
 
 {
@@ -172,11 +172,11 @@ Content-Type: application/json
 
 #### Show a person telecommunication addresses
 
-GET {{base}}/persons/{{person_id}}/telecommunication_addresses
+GET {{base}}/person/{{person_id}}/telecommunication_address
 
 #### Create a person telecommunication address
 
-POST {{base}}/persons/{{person_id}}/telecommunication_addresses
+POST {{base}}/person/{{person_id}}/telecommunication_address
 Content-Type: application/json
 
 {
@@ -187,4 +187,4 @@ Content-Type: application/json
 
 ### Subjects
 
-GET {{base}}/persons/{{person_id}}/subject
+GET {{base}}/person/{{person_id}}/subject

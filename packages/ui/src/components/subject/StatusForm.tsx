@@ -83,7 +83,7 @@ const StatusForm = ({
   });
   const mutation = useMutation({
     mutationFn: (studySubjectData: StudySubjectData) =>
-      api.subjects.updateSpacesSpaceIdSubjectsSubjectIdPatch({
+      api.subjects.updateSpaceSpaceIdSubjectSubjectIdPatch({
         spaceId,
         subjectId,
         studySubjectData,

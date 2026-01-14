@@ -117,7 +117,7 @@ export const ActivityMenu = ({ spaceId, subjectId }: ActivityMenuProps) => {
   const { t } = useTranslation();
   const { data, isSuccess, isError, error } = useQuery({
     queryKey: ["space", spaceId, "activity"],
-    queryFn: () => api.spaceActivity.indexSpacesSpaceIdActivityGet({ spaceId }),
+    queryFn: () => api.spaceActivity.indexSpaceSpaceIdActivityGet({ spaceId }),
   });
   return (
     <Menu shadow="md">

@@ -9,7 +9,7 @@ describe("ActivityCard", () => {
     const subjectId = "1944c046-95b3-4cb4-82e2-c789950e29fc";
     vi.spyOn(
       api.spaceActivity,
-      "indexSpacesSpaceIdActivityGet"
+      "indexSpaceSpaceIdActivityGet"
     ).mockResolvedValue([
       {
         id: "b72ae1a5-784d-4c9b-a4e4-7b09fddeefb7",

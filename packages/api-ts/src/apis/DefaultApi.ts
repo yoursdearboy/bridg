@@ -31,11 +31,11 @@ import {
     StudySiteProtocolVersionRelationshipToJSON,
 } from '../models/index';
 
-export interface IndexEpochSpacesSpaceIdEpochGetRequest {
+export interface IndexEpochSpaceSpaceIdEpochGetRequest {
     spaceId: string;
 }
 
-export interface IndexSiteSpacesSpaceIdSiteGetRequest {
+export interface IndexSiteSpaceSpaceIdSiteGetRequest {
     spaceId: string;
 }
 
@@ -47,11 +47,11 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Index Epoch
      */
-    async indexEpochSpacesSpaceIdEpochGetRaw(requestParameters: IndexEpochSpacesSpaceIdEpochGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Epoch>>> {
+    async indexEpochSpaceSpaceIdEpochGetRaw(requestParameters: IndexEpochSpaceSpaceIdEpochGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Epoch>>> {
         if (requestParameters['spaceId'] == null) {
             throw new runtime.RequiredError(
                 'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling indexEpochSpacesSpaceIdEpochGet().'
+                'Required parameter "spaceId" was null or undefined when calling indexEpochSpaceSpaceIdEpochGet().'
             );
         }
 
@@ -60,7 +60,7 @@ export class DefaultApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/spaces/{space_id}/epoch`;
+        let urlPath = `/space/{space_id}/epoch`;
         urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
 
         const response = await this.request({
@@ -76,8 +76,8 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Index Epoch
      */
-    async indexEpochSpacesSpaceIdEpochGet(requestParameters: IndexEpochSpacesSpaceIdEpochGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Epoch>> {
-        const response = await this.indexEpochSpacesSpaceIdEpochGetRaw(requestParameters, initOverrides);
+    async indexEpochSpaceSpaceIdEpochGet(requestParameters: IndexEpochSpaceSpaceIdEpochGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Epoch>> {
+        const response = await this.indexEpochSpaceSpaceIdEpochGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -117,11 +117,11 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Index Site
      */
-    async indexSiteSpacesSpaceIdSiteGetRaw(requestParameters: IndexSiteSpacesSpaceIdSiteGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<StudySiteProtocolVersionRelationship>>> {
+    async indexSiteSpaceSpaceIdSiteGetRaw(requestParameters: IndexSiteSpaceSpaceIdSiteGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<StudySiteProtocolVersionRelationship>>> {
         if (requestParameters['spaceId'] == null) {
             throw new runtime.RequiredError(
                 'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling indexSiteSpacesSpaceIdSiteGet().'
+                'Required parameter "spaceId" was null or undefined when calling indexSiteSpaceSpaceIdSiteGet().'
             );
         }
 
@@ -130,7 +130,7 @@ export class DefaultApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/spaces/{space_id}/site`;
+        let urlPath = `/space/{space_id}/site`;
         urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
 
         const response = await this.request({
@@ -146,21 +146,21 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Index Site
      */
-    async indexSiteSpacesSpaceIdSiteGet(requestParameters: IndexSiteSpacesSpaceIdSiteGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StudySiteProtocolVersionRelationship>> {
-        const response = await this.indexSiteSpacesSpaceIdSiteGetRaw(requestParameters, initOverrides);
+    async indexSiteSpaceSpaceIdSiteGet(requestParameters: IndexSiteSpaceSpaceIdSiteGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StudySiteProtocolVersionRelationship>> {
+        const response = await this.indexSiteSpaceSpaceIdSiteGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Index
      */
-    async indexSpacesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<StudyProtocolVersion>>> {
+    async indexSpaceGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<StudyProtocolVersion>>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/spaces`;
+        let urlPath = `/space`;
 
         const response = await this.request({
             path: urlPath,
@@ -175,8 +175,8 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexSpacesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StudyProtocolVersion>> {
-        const response = await this.indexSpacesGetRaw(initOverrides);
+    async indexSpaceGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StudyProtocolVersion>> {
+        const response = await this.indexSpaceGetRaw(initOverrides);
         return await response.value();
     }
 

@@ -4,7 +4,7 @@ import { renderRoute } from "@/test-utils";
 import { Route } from "./edit";
 
 it("person edit page renders correctly", async () => {
-  vi.spyOn(api.persons, "showPersonsPersonIdGet").mockResolvedValue({
+  vi.spyOn(api.persons, "showPersonPersonIdGet").mockResolvedValue({
     administrativeGenderCode: "M",
     birthDate: new Date("1991-01-01"),
     deathDate: null,

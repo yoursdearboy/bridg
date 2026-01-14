@@ -13,7 +13,7 @@ export const NewAddressForm = ({ personId, onCancel, onSuccess }: Props) => {
   const mutation = useMutation({
     mutationKey: ["person", personId, "addresses"],
     mutationFn: (data: PersonPostalAddressData) =>
-      api.persons.createPersonsPersonIdPostalAddressesPost({
+      api.persons.createPersonPersonIdPostalAddressPost({
         personId,
         personPostalAddressData: data,
       }),

@@ -8,7 +8,7 @@ from bridg.alchemy import Repository
 from bridg.api.db import get_repository
 from bridg.api.model import PersonTelecommunicationAddress, PersonTelecommunicationAddressData
 
-router = APIRouter(prefix="/telecommunication_addresses")
+router = APIRouter(prefix="/telecommunication_address")
 
 
 class PersonTelecommunicationAddressRepository(Repository[bridg.alchemy.common.person.PersonTelecommunicationAddress]):

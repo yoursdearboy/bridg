@@ -49,74 +49,74 @@ import {
     PersonTelecommunicationAddressDataToJSON,
 } from '../models/index';
 
-export interface CreatePersonsPersonIdNamesPostRequest {
+export interface CreatePersonPersonIdNamePostRequest {
     personId: string;
     biologicEntityNameData: BiologicEntityNameData;
 }
 
-export interface CreatePersonsPersonIdPostalAddressesPostRequest {
+export interface CreatePersonPersonIdPostalAddressPostRequest {
     personId: string;
     personPostalAddressData: PersonPostalAddressData;
 }
 
-export interface CreatePersonsPersonIdTelecommunicationAddressesPostRequest {
+export interface CreatePersonPersonIdTelecommunicationAddressPostRequest {
     personId: string;
     personTelecommunicationAddressData: PersonTelecommunicationAddressData;
 }
 
-export interface DeletePersonsPersonIdNamesNameIdDeleteRequest {
+export interface DeletePersonPersonIdNameNameIdDeleteRequest {
     personId: string;
     nameId: string;
 }
 
-export interface DeletePersonsPersonIdPostalAddressesAddressIdDeleteRequest {
+export interface DeletePersonPersonIdPostalAddressAddressIdDeleteRequest {
     personId: string;
     addressId: string;
 }
 
-export interface DeletePersonsPersonIdTelecommunicationAddressesAddressIdDeleteRequest {
+export interface DeletePersonPersonIdTelecommunicationAddressAddressIdDeleteRequest {
     personId: string;
     addressId: string;
 }
 
-export interface IndexPersonsPersonIdNamesGetRequest {
+export interface IndexPersonPersonIdNameGetRequest {
     personId: string;
 }
 
-export interface IndexPersonsPersonIdPostalAddressesGetRequest {
+export interface IndexPersonPersonIdPostalAddressGetRequest {
     personId: string;
 }
 
-export interface IndexPersonsPersonIdSubjectGetRequest {
+export interface IndexPersonPersonIdSubjectGetRequest {
     personId: string;
 }
 
-export interface IndexPersonsPersonIdTelecommunicationAddressesGetRequest {
+export interface IndexPersonPersonIdTelecommunicationAddressGetRequest {
     personId: string;
 }
 
-export interface ShowPersonsPersonIdGetRequest {
+export interface ShowPersonPersonIdGetRequest {
     personId: string;
 }
 
-export interface UpdatePersonsPersonIdNamesNameIdPatchRequest {
+export interface UpdatePersonPersonIdNameNameIdPatchRequest {
     personId: string;
     nameId: string;
     biologicEntityNameData: BiologicEntityNameData;
 }
 
-export interface UpdatePersonsPersonIdPatchRequest {
+export interface UpdatePersonPersonIdPatchRequest {
     personId: string;
     personPatch: PersonPatch;
 }
 
-export interface UpdatePersonsPersonIdPostalAddressesAddressIdPatchRequest {
+export interface UpdatePersonPersonIdPostalAddressAddressIdPatchRequest {
     personId: string;
     addressId: string;
     personPostalAddressData: PersonPostalAddressData;
 }
 
-export interface UpdatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRequest {
+export interface UpdatePersonPersonIdTelecommunicationAddressAddressIdPatchRequest {
     personId: string;
     addressId: string;
     personTelecommunicationAddressData: PersonTelecommunicationAddressData;
@@ -130,18 +130,18 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Create
      */
-    async createPersonsPersonIdNamesPostRaw(requestParameters: CreatePersonsPersonIdNamesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BiologicEntityName>> {
+    async createPersonPersonIdNamePostRaw(requestParameters: CreatePersonPersonIdNamePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BiologicEntityName>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling createPersonsPersonIdNamesPost().'
+                'Required parameter "personId" was null or undefined when calling createPersonPersonIdNamePost().'
             );
         }
 
         if (requestParameters['biologicEntityNameData'] == null) {
             throw new runtime.RequiredError(
                 'biologicEntityNameData',
-                'Required parameter "biologicEntityNameData" was null or undefined when calling createPersonsPersonIdNamesPost().'
+                'Required parameter "biologicEntityNameData" was null or undefined when calling createPersonPersonIdNamePost().'
             );
         }
 
@@ -152,7 +152,7 @@ export class PersonsApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/persons/{person_id}/names`;
+        let urlPath = `/person/{person_id}/name`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
 
         const response = await this.request({
@@ -169,26 +169,26 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Create
      */
-    async createPersonsPersonIdNamesPost(requestParameters: CreatePersonsPersonIdNamesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BiologicEntityName> {
-        const response = await this.createPersonsPersonIdNamesPostRaw(requestParameters, initOverrides);
+    async createPersonPersonIdNamePost(requestParameters: CreatePersonPersonIdNamePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BiologicEntityName> {
+        const response = await this.createPersonPersonIdNamePostRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Create
      */
-    async createPersonsPersonIdPostalAddressesPostRaw(requestParameters: CreatePersonsPersonIdPostalAddressesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PersonPostalAddress>> {
+    async createPersonPersonIdPostalAddressPostRaw(requestParameters: CreatePersonPersonIdPostalAddressPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PersonPostalAddress>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling createPersonsPersonIdPostalAddressesPost().'
+                'Required parameter "personId" was null or undefined when calling createPersonPersonIdPostalAddressPost().'
             );
         }
 
         if (requestParameters['personPostalAddressData'] == null) {
             throw new runtime.RequiredError(
                 'personPostalAddressData',
-                'Required parameter "personPostalAddressData" was null or undefined when calling createPersonsPersonIdPostalAddressesPost().'
+                'Required parameter "personPostalAddressData" was null or undefined when calling createPersonPersonIdPostalAddressPost().'
             );
         }
 
@@ -199,7 +199,7 @@ export class PersonsApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/persons/{person_id}/postal_addresses`;
+        let urlPath = `/person/{person_id}/postal_address`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
 
         const response = await this.request({
@@ -216,26 +216,26 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Create
      */
-    async createPersonsPersonIdPostalAddressesPost(requestParameters: CreatePersonsPersonIdPostalAddressesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PersonPostalAddress> {
-        const response = await this.createPersonsPersonIdPostalAddressesPostRaw(requestParameters, initOverrides);
+    async createPersonPersonIdPostalAddressPost(requestParameters: CreatePersonPersonIdPostalAddressPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PersonPostalAddress> {
+        const response = await this.createPersonPersonIdPostalAddressPostRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Create
      */
-    async createPersonsPersonIdTelecommunicationAddressesPostRaw(requestParameters: CreatePersonsPersonIdTelecommunicationAddressesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PersonTelecommunicationAddress>> {
+    async createPersonPersonIdTelecommunicationAddressPostRaw(requestParameters: CreatePersonPersonIdTelecommunicationAddressPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PersonTelecommunicationAddress>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling createPersonsPersonIdTelecommunicationAddressesPost().'
+                'Required parameter "personId" was null or undefined when calling createPersonPersonIdTelecommunicationAddressPost().'
             );
         }
 
         if (requestParameters['personTelecommunicationAddressData'] == null) {
             throw new runtime.RequiredError(
                 'personTelecommunicationAddressData',
-                'Required parameter "personTelecommunicationAddressData" was null or undefined when calling createPersonsPersonIdTelecommunicationAddressesPost().'
+                'Required parameter "personTelecommunicationAddressData" was null or undefined when calling createPersonPersonIdTelecommunicationAddressPost().'
             );
         }
 
@@ -246,7 +246,7 @@ export class PersonsApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/persons/{person_id}/telecommunication_addresses`;
+        let urlPath = `/person/{person_id}/telecommunication_address`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
 
         const response = await this.request({
@@ -263,26 +263,26 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Create
      */
-    async createPersonsPersonIdTelecommunicationAddressesPost(requestParameters: CreatePersonsPersonIdTelecommunicationAddressesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PersonTelecommunicationAddress> {
-        const response = await this.createPersonsPersonIdTelecommunicationAddressesPostRaw(requestParameters, initOverrides);
+    async createPersonPersonIdTelecommunicationAddressPost(requestParameters: CreatePersonPersonIdTelecommunicationAddressPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PersonTelecommunicationAddress> {
+        const response = await this.createPersonPersonIdTelecommunicationAddressPostRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Delete
      */
-    async deletePersonsPersonIdNamesNameIdDeleteRaw(requestParameters: DeletePersonsPersonIdNamesNameIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+    async deletePersonPersonIdNameNameIdDeleteRaw(requestParameters: DeletePersonPersonIdNameNameIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling deletePersonsPersonIdNamesNameIdDelete().'
+                'Required parameter "personId" was null or undefined when calling deletePersonPersonIdNameNameIdDelete().'
             );
         }
 
         if (requestParameters['nameId'] == null) {
             throw new runtime.RequiredError(
                 'nameId',
-                'Required parameter "nameId" was null or undefined when calling deletePersonsPersonIdNamesNameIdDelete().'
+                'Required parameter "nameId" was null or undefined when calling deletePersonPersonIdNameNameIdDelete().'
             );
         }
 
@@ -291,7 +291,7 @@ export class PersonsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/persons/{person_id}/names/{name_id}`;
+        let urlPath = `/person/{person_id}/name/{name_id}`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
         urlPath = urlPath.replace(`{${"name_id"}}`, encodeURIComponent(String(requestParameters['nameId'])));
 
@@ -312,26 +312,26 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Delete
      */
-    async deletePersonsPersonIdNamesNameIdDelete(requestParameters: DeletePersonsPersonIdNamesNameIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
-        const response = await this.deletePersonsPersonIdNamesNameIdDeleteRaw(requestParameters, initOverrides);
+    async deletePersonPersonIdNameNameIdDelete(requestParameters: DeletePersonPersonIdNameNameIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+        const response = await this.deletePersonPersonIdNameNameIdDeleteRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Delete
      */
-    async deletePersonsPersonIdPostalAddressesAddressIdDeleteRaw(requestParameters: DeletePersonsPersonIdPostalAddressesAddressIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+    async deletePersonPersonIdPostalAddressAddressIdDeleteRaw(requestParameters: DeletePersonPersonIdPostalAddressAddressIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling deletePersonsPersonIdPostalAddressesAddressIdDelete().'
+                'Required parameter "personId" was null or undefined when calling deletePersonPersonIdPostalAddressAddressIdDelete().'
             );
         }
 
         if (requestParameters['addressId'] == null) {
             throw new runtime.RequiredError(
                 'addressId',
-                'Required parameter "addressId" was null or undefined when calling deletePersonsPersonIdPostalAddressesAddressIdDelete().'
+                'Required parameter "addressId" was null or undefined when calling deletePersonPersonIdPostalAddressAddressIdDelete().'
             );
         }
 
@@ -340,7 +340,7 @@ export class PersonsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/persons/{person_id}/postal_addresses/{address_id}`;
+        let urlPath = `/person/{person_id}/postal_address/{address_id}`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
         urlPath = urlPath.replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId'])));
 
@@ -361,26 +361,26 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Delete
      */
-    async deletePersonsPersonIdPostalAddressesAddressIdDelete(requestParameters: DeletePersonsPersonIdPostalAddressesAddressIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
-        const response = await this.deletePersonsPersonIdPostalAddressesAddressIdDeleteRaw(requestParameters, initOverrides);
+    async deletePersonPersonIdPostalAddressAddressIdDelete(requestParameters: DeletePersonPersonIdPostalAddressAddressIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+        const response = await this.deletePersonPersonIdPostalAddressAddressIdDeleteRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Delete
      */
-    async deletePersonsPersonIdTelecommunicationAddressesAddressIdDeleteRaw(requestParameters: DeletePersonsPersonIdTelecommunicationAddressesAddressIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+    async deletePersonPersonIdTelecommunicationAddressAddressIdDeleteRaw(requestParameters: DeletePersonPersonIdTelecommunicationAddressAddressIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling deletePersonsPersonIdTelecommunicationAddressesAddressIdDelete().'
+                'Required parameter "personId" was null or undefined when calling deletePersonPersonIdTelecommunicationAddressAddressIdDelete().'
             );
         }
 
         if (requestParameters['addressId'] == null) {
             throw new runtime.RequiredError(
                 'addressId',
-                'Required parameter "addressId" was null or undefined when calling deletePersonsPersonIdTelecommunicationAddressesAddressIdDelete().'
+                'Required parameter "addressId" was null or undefined when calling deletePersonPersonIdTelecommunicationAddressAddressIdDelete().'
             );
         }
 
@@ -389,7 +389,7 @@ export class PersonsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/persons/{person_id}/telecommunication_addresses/{address_id}`;
+        let urlPath = `/person/{person_id}/telecommunication_address/{address_id}`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
         urlPath = urlPath.replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId'])));
 
@@ -410,19 +410,19 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Delete
      */
-    async deletePersonsPersonIdTelecommunicationAddressesAddressIdDelete(requestParameters: DeletePersonsPersonIdTelecommunicationAddressesAddressIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
-        const response = await this.deletePersonsPersonIdTelecommunicationAddressesAddressIdDeleteRaw(requestParameters, initOverrides);
+    async deletePersonPersonIdTelecommunicationAddressAddressIdDelete(requestParameters: DeletePersonPersonIdTelecommunicationAddressAddressIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+        const response = await this.deletePersonPersonIdTelecommunicationAddressAddressIdDeleteRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Index
      */
-    async indexPersonsPersonIdNamesGetRaw(requestParameters: IndexPersonsPersonIdNamesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<BiologicEntityName>>> {
+    async indexPersonPersonIdNameGetRaw(requestParameters: IndexPersonPersonIdNameGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<BiologicEntityName>>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling indexPersonsPersonIdNamesGet().'
+                'Required parameter "personId" was null or undefined when calling indexPersonPersonIdNameGet().'
             );
         }
 
@@ -431,7 +431,7 @@ export class PersonsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/persons/{person_id}/names`;
+        let urlPath = `/person/{person_id}/name`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
 
         const response = await this.request({
@@ -447,19 +447,19 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexPersonsPersonIdNamesGet(requestParameters: IndexPersonsPersonIdNamesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<BiologicEntityName>> {
-        const response = await this.indexPersonsPersonIdNamesGetRaw(requestParameters, initOverrides);
+    async indexPersonPersonIdNameGet(requestParameters: IndexPersonPersonIdNameGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<BiologicEntityName>> {
+        const response = await this.indexPersonPersonIdNameGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Index
      */
-    async indexPersonsPersonIdPostalAddressesGetRaw(requestParameters: IndexPersonsPersonIdPostalAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PersonPostalAddress>>> {
+    async indexPersonPersonIdPostalAddressGetRaw(requestParameters: IndexPersonPersonIdPostalAddressGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PersonPostalAddress>>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling indexPersonsPersonIdPostalAddressesGet().'
+                'Required parameter "personId" was null or undefined when calling indexPersonPersonIdPostalAddressGet().'
             );
         }
 
@@ -468,7 +468,7 @@ export class PersonsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/persons/{person_id}/postal_addresses`;
+        let urlPath = `/person/{person_id}/postal_address`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
 
         const response = await this.request({
@@ -484,19 +484,19 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexPersonsPersonIdPostalAddressesGet(requestParameters: IndexPersonsPersonIdPostalAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PersonPostalAddress>> {
-        const response = await this.indexPersonsPersonIdPostalAddressesGetRaw(requestParameters, initOverrides);
+    async indexPersonPersonIdPostalAddressGet(requestParameters: IndexPersonPersonIdPostalAddressGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PersonPostalAddress>> {
+        const response = await this.indexPersonPersonIdPostalAddressGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Index
      */
-    async indexPersonsPersonIdSubjectGetRaw(requestParameters: IndexPersonsPersonIdSubjectGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PersonStudySubject>>> {
+    async indexPersonPersonIdSubjectGetRaw(requestParameters: IndexPersonPersonIdSubjectGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PersonStudySubject>>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling indexPersonsPersonIdSubjectGet().'
+                'Required parameter "personId" was null or undefined when calling indexPersonPersonIdSubjectGet().'
             );
         }
 
@@ -505,7 +505,7 @@ export class PersonsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/persons/{person_id}/subject`;
+        let urlPath = `/person/{person_id}/subject`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
 
         const response = await this.request({
@@ -521,19 +521,19 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexPersonsPersonIdSubjectGet(requestParameters: IndexPersonsPersonIdSubjectGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PersonStudySubject>> {
-        const response = await this.indexPersonsPersonIdSubjectGetRaw(requestParameters, initOverrides);
+    async indexPersonPersonIdSubjectGet(requestParameters: IndexPersonPersonIdSubjectGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PersonStudySubject>> {
+        const response = await this.indexPersonPersonIdSubjectGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Index
      */
-    async indexPersonsPersonIdTelecommunicationAddressesGetRaw(requestParameters: IndexPersonsPersonIdTelecommunicationAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PersonTelecommunicationAddress>>> {
+    async indexPersonPersonIdTelecommunicationAddressGetRaw(requestParameters: IndexPersonPersonIdTelecommunicationAddressGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PersonTelecommunicationAddress>>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling indexPersonsPersonIdTelecommunicationAddressesGet().'
+                'Required parameter "personId" was null or undefined when calling indexPersonPersonIdTelecommunicationAddressGet().'
             );
         }
 
@@ -542,7 +542,7 @@ export class PersonsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/persons/{person_id}/telecommunication_addresses`;
+        let urlPath = `/person/{person_id}/telecommunication_address`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
 
         const response = await this.request({
@@ -558,19 +558,19 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexPersonsPersonIdTelecommunicationAddressesGet(requestParameters: IndexPersonsPersonIdTelecommunicationAddressesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PersonTelecommunicationAddress>> {
-        const response = await this.indexPersonsPersonIdTelecommunicationAddressesGetRaw(requestParameters, initOverrides);
+    async indexPersonPersonIdTelecommunicationAddressGet(requestParameters: IndexPersonPersonIdTelecommunicationAddressGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PersonTelecommunicationAddress>> {
+        const response = await this.indexPersonPersonIdTelecommunicationAddressGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Show
      */
-    async showPersonsPersonIdGetRaw(requestParameters: ShowPersonsPersonIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Person>> {
+    async showPersonPersonIdGetRaw(requestParameters: ShowPersonPersonIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Person>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling showPersonsPersonIdGet().'
+                'Required parameter "personId" was null or undefined when calling showPersonPersonIdGet().'
             );
         }
 
@@ -579,7 +579,7 @@ export class PersonsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/persons/{person_id}`;
+        let urlPath = `/person/{person_id}`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
 
         const response = await this.request({
@@ -595,33 +595,33 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Show
      */
-    async showPersonsPersonIdGet(requestParameters: ShowPersonsPersonIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Person> {
-        const response = await this.showPersonsPersonIdGetRaw(requestParameters, initOverrides);
+    async showPersonPersonIdGet(requestParameters: ShowPersonPersonIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Person> {
+        const response = await this.showPersonPersonIdGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Update
      */
-    async updatePersonsPersonIdNamesNameIdPatchRaw(requestParameters: UpdatePersonsPersonIdNamesNameIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BiologicEntityName>> {
+    async updatePersonPersonIdNameNameIdPatchRaw(requestParameters: UpdatePersonPersonIdNameNameIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BiologicEntityName>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling updatePersonsPersonIdNamesNameIdPatch().'
+                'Required parameter "personId" was null or undefined when calling updatePersonPersonIdNameNameIdPatch().'
             );
         }
 
         if (requestParameters['nameId'] == null) {
             throw new runtime.RequiredError(
                 'nameId',
-                'Required parameter "nameId" was null or undefined when calling updatePersonsPersonIdNamesNameIdPatch().'
+                'Required parameter "nameId" was null or undefined when calling updatePersonPersonIdNameNameIdPatch().'
             );
         }
 
         if (requestParameters['biologicEntityNameData'] == null) {
             throw new runtime.RequiredError(
                 'biologicEntityNameData',
-                'Required parameter "biologicEntityNameData" was null or undefined when calling updatePersonsPersonIdNamesNameIdPatch().'
+                'Required parameter "biologicEntityNameData" was null or undefined when calling updatePersonPersonIdNameNameIdPatch().'
             );
         }
 
@@ -632,7 +632,7 @@ export class PersonsApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/persons/{person_id}/names/{name_id}`;
+        let urlPath = `/person/{person_id}/name/{name_id}`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
         urlPath = urlPath.replace(`{${"name_id"}}`, encodeURIComponent(String(requestParameters['nameId'])));
 
@@ -650,26 +650,26 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Update
      */
-    async updatePersonsPersonIdNamesNameIdPatch(requestParameters: UpdatePersonsPersonIdNamesNameIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BiologicEntityName> {
-        const response = await this.updatePersonsPersonIdNamesNameIdPatchRaw(requestParameters, initOverrides);
+    async updatePersonPersonIdNameNameIdPatch(requestParameters: UpdatePersonPersonIdNameNameIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BiologicEntityName> {
+        const response = await this.updatePersonPersonIdNameNameIdPatchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Update
      */
-    async updatePersonsPersonIdPatchRaw(requestParameters: UpdatePersonsPersonIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Person>> {
+    async updatePersonPersonIdPatchRaw(requestParameters: UpdatePersonPersonIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Person>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling updatePersonsPersonIdPatch().'
+                'Required parameter "personId" was null or undefined when calling updatePersonPersonIdPatch().'
             );
         }
 
         if (requestParameters['personPatch'] == null) {
             throw new runtime.RequiredError(
                 'personPatch',
-                'Required parameter "personPatch" was null or undefined when calling updatePersonsPersonIdPatch().'
+                'Required parameter "personPatch" was null or undefined when calling updatePersonPersonIdPatch().'
             );
         }
 
@@ -680,7 +680,7 @@ export class PersonsApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/persons/{person_id}`;
+        let urlPath = `/person/{person_id}`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
 
         const response = await this.request({
@@ -697,33 +697,33 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Update
      */
-    async updatePersonsPersonIdPatch(requestParameters: UpdatePersonsPersonIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Person> {
-        const response = await this.updatePersonsPersonIdPatchRaw(requestParameters, initOverrides);
+    async updatePersonPersonIdPatch(requestParameters: UpdatePersonPersonIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Person> {
+        const response = await this.updatePersonPersonIdPatchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Update
      */
-    async updatePersonsPersonIdPostalAddressesAddressIdPatchRaw(requestParameters: UpdatePersonsPersonIdPostalAddressesAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PersonPostalAddress>> {
+    async updatePersonPersonIdPostalAddressAddressIdPatchRaw(requestParameters: UpdatePersonPersonIdPostalAddressAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PersonPostalAddress>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling updatePersonsPersonIdPostalAddressesAddressIdPatch().'
+                'Required parameter "personId" was null or undefined when calling updatePersonPersonIdPostalAddressAddressIdPatch().'
             );
         }
 
         if (requestParameters['addressId'] == null) {
             throw new runtime.RequiredError(
                 'addressId',
-                'Required parameter "addressId" was null or undefined when calling updatePersonsPersonIdPostalAddressesAddressIdPatch().'
+                'Required parameter "addressId" was null or undefined when calling updatePersonPersonIdPostalAddressAddressIdPatch().'
             );
         }
 
         if (requestParameters['personPostalAddressData'] == null) {
             throw new runtime.RequiredError(
                 'personPostalAddressData',
-                'Required parameter "personPostalAddressData" was null or undefined when calling updatePersonsPersonIdPostalAddressesAddressIdPatch().'
+                'Required parameter "personPostalAddressData" was null or undefined when calling updatePersonPersonIdPostalAddressAddressIdPatch().'
             );
         }
 
@@ -734,7 +734,7 @@ export class PersonsApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/persons/{person_id}/postal_addresses/{address_id}`;
+        let urlPath = `/person/{person_id}/postal_address/{address_id}`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
         urlPath = urlPath.replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId'])));
 
@@ -752,33 +752,33 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Update
      */
-    async updatePersonsPersonIdPostalAddressesAddressIdPatch(requestParameters: UpdatePersonsPersonIdPostalAddressesAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PersonPostalAddress> {
-        const response = await this.updatePersonsPersonIdPostalAddressesAddressIdPatchRaw(requestParameters, initOverrides);
+    async updatePersonPersonIdPostalAddressAddressIdPatch(requestParameters: UpdatePersonPersonIdPostalAddressAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PersonPostalAddress> {
+        const response = await this.updatePersonPersonIdPostalAddressAddressIdPatchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Update
      */
-    async updatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRaw(requestParameters: UpdatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PersonTelecommunicationAddress>> {
+    async updatePersonPersonIdTelecommunicationAddressAddressIdPatchRaw(requestParameters: UpdatePersonPersonIdTelecommunicationAddressAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PersonTelecommunicationAddress>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch().'
+                'Required parameter "personId" was null or undefined when calling updatePersonPersonIdTelecommunicationAddressAddressIdPatch().'
             );
         }
 
         if (requestParameters['addressId'] == null) {
             throw new runtime.RequiredError(
                 'addressId',
-                'Required parameter "addressId" was null or undefined when calling updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch().'
+                'Required parameter "addressId" was null or undefined when calling updatePersonPersonIdTelecommunicationAddressAddressIdPatch().'
             );
         }
 
         if (requestParameters['personTelecommunicationAddressData'] == null) {
             throw new runtime.RequiredError(
                 'personTelecommunicationAddressData',
-                'Required parameter "personTelecommunicationAddressData" was null or undefined when calling updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch().'
+                'Required parameter "personTelecommunicationAddressData" was null or undefined when calling updatePersonPersonIdTelecommunicationAddressAddressIdPatch().'
             );
         }
 
@@ -789,7 +789,7 @@ export class PersonsApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/persons/{person_id}/telecommunication_addresses/{address_id}`;
+        let urlPath = `/person/{person_id}/telecommunication_address/{address_id}`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
         urlPath = urlPath.replace(`{${"address_id"}}`, encodeURIComponent(String(requestParameters['addressId'])));
 
@@ -807,8 +807,8 @@ export class PersonsApi extends runtime.BaseAPI {
     /**
      * Update
      */
-    async updatePersonsPersonIdTelecommunicationAddressesAddressIdPatch(requestParameters: UpdatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PersonTelecommunicationAddress> {
-        const response = await this.updatePersonsPersonIdTelecommunicationAddressesAddressIdPatchRaw(requestParameters, initOverrides);
+    async updatePersonPersonIdTelecommunicationAddressAddressIdPatch(requestParameters: UpdatePersonPersonIdTelecommunicationAddressAddressIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PersonTelecommunicationAddress> {
+        const response = await this.updatePersonPersonIdTelecommunicationAddressAddressIdPatchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

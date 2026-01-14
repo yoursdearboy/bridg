@@ -17,7 +17,7 @@ export const EpochSelect = ({
   const { t } = useTranslation();
   const { data, isLoading } = useQuery({
     queryFn: () =>
-      api.spaces.indexEpochSpacesSpaceIdEpochGet({
+      api.spaces.indexEpochSpaceSpaceIdEpochGet({
         spaceId,
       }),
     queryKey: ["space", spaceId, "epoch"],

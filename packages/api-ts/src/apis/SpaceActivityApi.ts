@@ -25,11 +25,11 @@ import {
     StudyActivityToJSON,
 } from '../models/index';
 
-export interface IndexSpacesSpaceIdActivityGetRequest {
+export interface IndexSpaceSpaceIdActivityGetRequest {
     spaceId: string;
 }
 
-export interface ShowSpacesSpaceIdActivitySaIdGetRequest {
+export interface ShowSpaceSpaceIdActivitySaIdGetRequest {
     spaceId: string;
     saId: string;
 }
@@ -42,11 +42,11 @@ export class SpaceActivityApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexSpacesSpaceIdActivityGetRaw(requestParameters: IndexSpacesSpaceIdActivityGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<StudyActivity>>> {
+    async indexSpaceSpaceIdActivityGetRaw(requestParameters: IndexSpaceSpaceIdActivityGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<StudyActivity>>> {
         if (requestParameters['spaceId'] == null) {
             throw new runtime.RequiredError(
                 'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling indexSpacesSpaceIdActivityGet().'
+                'Required parameter "spaceId" was null or undefined when calling indexSpaceSpaceIdActivityGet().'
             );
         }
 
@@ -55,7 +55,7 @@ export class SpaceActivityApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/spaces/{space_id}/activity`;
+        let urlPath = `/space/{space_id}/activity`;
         urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
 
         const response = await this.request({
@@ -71,26 +71,26 @@ export class SpaceActivityApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexSpacesSpaceIdActivityGet(requestParameters: IndexSpacesSpaceIdActivityGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StudyActivity>> {
-        const response = await this.indexSpacesSpaceIdActivityGetRaw(requestParameters, initOverrides);
+    async indexSpaceSpaceIdActivityGet(requestParameters: IndexSpaceSpaceIdActivityGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StudyActivity>> {
+        const response = await this.indexSpaceSpaceIdActivityGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Show
      */
-    async showSpacesSpaceIdActivitySaIdGetRaw(requestParameters: ShowSpacesSpaceIdActivitySaIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StudyActivity>> {
+    async showSpaceSpaceIdActivitySaIdGetRaw(requestParameters: ShowSpaceSpaceIdActivitySaIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StudyActivity>> {
         if (requestParameters['spaceId'] == null) {
             throw new runtime.RequiredError(
                 'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling showSpacesSpaceIdActivitySaIdGet().'
+                'Required parameter "spaceId" was null or undefined when calling showSpaceSpaceIdActivitySaIdGet().'
             );
         }
 
         if (requestParameters['saId'] == null) {
             throw new runtime.RequiredError(
                 'saId',
-                'Required parameter "saId" was null or undefined when calling showSpacesSpaceIdActivitySaIdGet().'
+                'Required parameter "saId" was null or undefined when calling showSpaceSpaceIdActivitySaIdGet().'
             );
         }
 
@@ -99,7 +99,7 @@ export class SpaceActivityApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/spaces/{space_id}/activity/{sa_id}`;
+        let urlPath = `/space/{space_id}/activity/{sa_id}`;
         urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
         urlPath = urlPath.replace(`{${"sa_id"}}`, encodeURIComponent(String(requestParameters['saId'])));
 
@@ -116,8 +116,8 @@ export class SpaceActivityApi extends runtime.BaseAPI {
     /**
      * Show
      */
-    async showSpacesSpaceIdActivitySaIdGet(requestParameters: ShowSpacesSpaceIdActivitySaIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StudyActivity> {
-        const response = await this.showSpacesSpaceIdActivitySaIdGetRaw(requestParameters, initOverrides);
+    async showSpaceSpaceIdActivitySaIdGet(requestParameters: ShowSpaceSpaceIdActivitySaIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StudyActivity> {
+        const response = await this.showSpaceSpaceIdActivitySaIdGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

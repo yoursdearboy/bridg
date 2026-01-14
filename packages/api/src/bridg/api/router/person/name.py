@@ -8,7 +8,7 @@ from bridg.alchemy import Repository
 from bridg.api.db import get_repository
 from bridg.api.model import BiologicEntityName, BiologicEntityNameData
 
-router = APIRouter(prefix="/names")
+router = APIRouter(prefix="/name")
 
 
 class BiologicEntityNameRepository(Repository[bridg.alchemy.BiologicEntityName]):

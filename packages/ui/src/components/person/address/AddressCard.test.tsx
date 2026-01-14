@@ -7,7 +7,7 @@ describe("NamesCard", () => {
   it("matches snapshot", () => {
     vi.spyOn(
       api.persons,
-      "indexPersonsPersonIdPostalAddressesGet"
+      "indexPersonPersonIdPostalAddressGet"
     ).mockResolvedValue([
       {
         id: "1",

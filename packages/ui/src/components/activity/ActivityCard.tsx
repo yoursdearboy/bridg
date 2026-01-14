@@ -15,7 +15,7 @@ export const ActivityCard = ({ spaceId, subjectId }: ActivityCardProps) => {
   const query = useQuery({
     queryKey: ["space", spaceId, "subject", subjectId, "activity"],
     queryFn: () =>
-      api.subjects.indexSpacesSpaceIdSubjectsSubjectIdActivityGet({
+      api.subjects.indexSpaceSpaceIdSubjectSubjectIdActivityGet({
         spaceId,
         subjectId,
       }),

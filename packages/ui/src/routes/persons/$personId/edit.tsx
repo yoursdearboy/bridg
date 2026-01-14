@@ -20,7 +20,7 @@ import { Route as indexRoute } from "../$personId";
 
 export const Route = createFileRoute("/persons/$personId/edit")({
   component: PersonEditPage,
-  loader: ({ params }) => api.persons.showPersonsPersonIdGet(params),
+  loader: ({ params }) => api.persons.showPersonPersonIdGet(params),
   beforeLoad: () => ({
     breadcrumb: i18next.t("PersonEditPage.breadcrumb"),
   }),

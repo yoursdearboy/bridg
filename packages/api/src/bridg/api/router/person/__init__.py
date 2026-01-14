@@ -10,7 +10,7 @@ from bridg.api.model import Person, PersonPatch
 
 from . import name, postal_address, subject, telecommunication_address
 
-router = APIRouter(prefix="/persons", tags=["persons"])
+router = APIRouter(prefix="/person", tags=["persons"])
 
 
 class PersonRepository(Repository[bridg.alchemy.Person]):

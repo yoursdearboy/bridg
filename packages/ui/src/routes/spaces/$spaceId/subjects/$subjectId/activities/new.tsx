@@ -71,7 +71,7 @@ function ActivityNewRoute() {
   });
   const mutation = useMutation({
     mutationFn: (data: PerformedActivityUnionData) =>
-      api.subjects.createSpacesSpaceIdSubjectsSubjectIdActivityPost({
+      api.subjects.createSpaceSpaceIdSubjectSubjectIdActivityPost({
         spaceId,
         subjectId,
         performedActivityUnionData: data,

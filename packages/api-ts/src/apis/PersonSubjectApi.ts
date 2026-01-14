@@ -25,7 +25,7 @@ import {
     PersonStudySubjectToJSON,
 } from '../models/index';
 
-export interface IndexPersonsPersonIdSubjectGetRequest {
+export interface IndexPersonPersonIdSubjectGetRequest {
     personId: string;
 }
 
@@ -37,11 +37,11 @@ export class PersonSubjectApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexPersonsPersonIdSubjectGetRaw(requestParameters: IndexPersonsPersonIdSubjectGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PersonStudySubject>>> {
+    async indexPersonPersonIdSubjectGetRaw(requestParameters: IndexPersonPersonIdSubjectGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PersonStudySubject>>> {
         if (requestParameters['personId'] == null) {
             throw new runtime.RequiredError(
                 'personId',
-                'Required parameter "personId" was null or undefined when calling indexPersonsPersonIdSubjectGet().'
+                'Required parameter "personId" was null or undefined when calling indexPersonPersonIdSubjectGet().'
             );
         }
 
@@ -50,7 +50,7 @@ export class PersonSubjectApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/persons/{person_id}/subject`;
+        let urlPath = `/person/{person_id}/subject`;
         urlPath = urlPath.replace(`{${"person_id"}}`, encodeURIComponent(String(requestParameters['personId'])));
 
         const response = await this.request({
@@ -66,8 +66,8 @@ export class PersonSubjectApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async indexPersonsPersonIdSubjectGet(requestParameters: IndexPersonsPersonIdSubjectGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PersonStudySubject>> {
-        const response = await this.indexPersonsPersonIdSubjectGetRaw(requestParameters, initOverrides);
+    async indexPersonPersonIdSubjectGet(requestParameters: IndexPersonPersonIdSubjectGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PersonStudySubject>> {
+        const response = await this.indexPersonPersonIdSubjectGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

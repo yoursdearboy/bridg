@@ -8,7 +8,7 @@ describe("PersonTimelineCard", () => {
     const personId = "1944c046-95b3-4cb4-82e2-c789950e29fc";
     const spaceId = "ce946229-9746-46cd-8dd3-b27a2fbfd48a";
     const personSpy = vi
-      .spyOn(api.persons, "indexPersonsPersonIdSubjectGet")
+      .spyOn(api.persons, "indexPersonPersonIdSubjectGet")
       .mockResolvedValue([
         {
           id: personId,
@@ -30,7 +30,7 @@ describe("PersonTimelineCard", () => {
         },
       ]);
     const subjectsSpy = vi
-      .spyOn(api.subjects, "indexSpacesSpaceIdSubjectsSubjectIdActivityGet")
+      .spyOn(api.subjects, "indexSpaceSpaceIdSubjectSubjectIdActivityGet")
       .mockResolvedValue([
         {
           id: "ce3dd821-3a1b-41dd-a366-292c8c163a58",

@@ -33,7 +33,7 @@ import { Route as SubjectIdRoute } from "./$subjectId";
 
 export const Route = createFileRoute("/spaces/$spaceId/subjects/new")({
   loader: async ({ params }) => ({
-    sites: await api.spaces.indexSiteSpacesSpaceIdSiteGet(params),
+    sites: await api.spaces.indexSiteSpaceSpaceIdSiteGet(params),
   }),
   beforeLoad: () => ({
     breadcrumb: i18next.t("SubjectNewPage.breadcrumb"),
@@ -218,7 +218,7 @@ function RouteComponent() {
   const lookup = useQuery({
     queryKey: [],
     queryFn: () =>
-      api.subjects.lookupSpacesSpaceIdSubjectsLookupPost({
+      api.subjects.lookupSpaceSpaceIdSubjectLookupPost({
         spaceId,
         lookupStudySubject: form.getValues(),
       }),
@@ -271,7 +271,7 @@ function RouteComponent() {
 
   const mutation = useMutation({
     mutationFn: (newStudySubject: NewStudySubject) =>
-      api.subjects.createSpacesSpaceIdSubjectsPost({
+      api.subjects.createSpaceSpaceIdSubjectPost({
         spaceId,
         newStudySubject,
       }),
