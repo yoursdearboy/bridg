@@ -19,7 +19,7 @@ export const EditAddressForm = ({
   const mutation = useMutation({
     mutationKey: ["person", personId, "addresses", address.id],
     mutationFn: (data: PersonPostalAddressData) =>
-      api.persons.updatePersonPersonIdPostalAddressAddressIdPatch({
+      api.updatePersonPersonIdPostalAddressAddressIdPatch({
         personId,
         addressId: address.id,
         personPostalAddressData: data,

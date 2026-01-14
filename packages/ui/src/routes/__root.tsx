@@ -51,7 +51,7 @@ function Nav() {
   const { spaceId }: { spaceId?: string } = Route.useParams();
   const spaces = useQuery({
     queryKey: ["space"],
-    queryFn: () => api.spaces.indexSpaceGet(),
+    queryFn: () => api.indexSpaceGet(),
   });
   const space = spaces.data?.find((s) => s.id == spaceId);
   const { t } = useTranslation();

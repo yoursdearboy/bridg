@@ -19,7 +19,7 @@ const AddressTableRowWrapper = ({
   const mutation = useMutation({
     mutationKey: ["person", personId, "addresses", address.id],
     mutationFn: () =>
-      api.persons.deletePersonPersonIdPostalAddressAddressIdDelete({
+      api.deletePersonPersonIdPostalAddressAddressIdDelete({
         personId,
         addressId: address.id,
       }),

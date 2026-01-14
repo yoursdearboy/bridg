@@ -2,13 +2,6 @@
 .npmignore
 src/apis/CodeSystemApi.ts
 src/apis/DefaultApi.ts
-src/apis/DefinedActivityApi.ts
-src/apis/PerformedActivityApi.ts
-src/apis/PersonSubjectApi.ts
-src/apis/PersonsApi.ts
-src/apis/SpaceActivityApi.ts
-src/apis/SpecimenApi.ts
-src/apis/SubjectsApi.ts
 src/apis/index.ts
 src/index.ts
 src/models/AdministrativeGender.ts

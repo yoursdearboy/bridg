@@ -52,5 +52,3 @@ space_router.include_router(subject.router)
 space_router.include_router(activity.router)
 
 router.include_router(space_router)
-
-openapi_tags = [*subject.openapi_tag, *activity.openapi_tags]

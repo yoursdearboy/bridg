@@ -19,7 +19,7 @@ export const AddressCardWrapper = ({ personId }: { personId: string }) => {
   const query = useQuery({
     queryKey: ["person", personId, "address"],
     queryFn: () =>
-      api.persons.indexPersonPersonIdPostalAddressGet({
+      api.indexPersonPersonIdPostalAddressGet({
         personId,
       }),
   });

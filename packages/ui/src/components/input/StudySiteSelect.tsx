@@ -17,7 +17,7 @@ export const StudySiteSelect = ({
   const { t } = useTranslation();
   const { data, isLoading } = useQuery({
     queryFn: () =>
-      api.spaces.indexSiteSpaceSpaceIdSiteGet({
+      api.indexSiteSpaceSpaceIdSiteGet({
         spaceId,
       }),
     queryKey: ["space", spaceId, "site"],

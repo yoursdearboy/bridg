@@ -21,7 +21,7 @@ import {
   type CharacterString,
   type IntervalPointInTime,
 } from "api-ts";
-import api from "@/api";
+import { codeSystemApi } from "@/api";
 
 export const ConceptDescriptorSelect = ({
   label,
@@ -36,7 +36,7 @@ export const ConceptDescriptorSelect = ({
 }) => {
   const { data, isLoading } = useQuery({
     queryFn: () =>
-      api.codeSystem.expandCodeSystemCodeSystemExpandGet({
+      codeSystemApi.expandCodeSystemCodeSystemExpandGet({
         codeSystem,
       }),
     queryKey: ["codeSystem", codeSystem],

@@ -9,7 +9,7 @@ from bridg.api.db import get_repository
 from bridg.api.model import BaseModel, StudySiteProtocolVersionRelationship
 from bridg.api.service.subject import StudySubjectRepository
 
-router = APIRouter(prefix="/subject", tags=["person_subject"])
+router = APIRouter(prefix="/subject")
 
 
 class PersonStudySubject(BaseModel):

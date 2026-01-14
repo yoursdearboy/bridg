@@ -28,7 +28,7 @@ export const Route = createFileRoute("/persons/$personId")({
     breadcrumb: () => i18next.t("PersonShowPage.breadcrumb"),
     query: queryOptions({
       queryKey: ["person", params.personId],
-      queryFn: () => api.persons.showPersonPersonIdGet(params),
+      queryFn: () => api.showPersonPersonIdGet(params),
     }),
   }),
   loader: ({ context: { query, queryClient } }) =>

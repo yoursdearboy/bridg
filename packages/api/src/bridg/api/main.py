@@ -3,7 +3,7 @@ from fastapi import FastAPI, Response, status
 from bridg.common.env import load_env
 
 from .openapi import get_openapi
-from .router import openapi_tags, routers
+from .router import routers
 
 
 def custom_openapi():
@@ -15,7 +15,7 @@ def custom_openapi():
 
 load_env()
 
-app = FastAPI(openapi_tags=openapi_tags)
+app = FastAPI()
 app.openapi = custom_openapi
 for router in routers:
     app.include_router(router)

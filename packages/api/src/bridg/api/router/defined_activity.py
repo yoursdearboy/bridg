@@ -8,7 +8,7 @@ from bridg.alchemy.repository import Repository
 from bridg.api.db import get_repository
 from bridg.api.model import DefinedActivity, DefinedObservation
 
-router = APIRouter(prefix="/defined_activity", tags=["defined_activity"])
+router = APIRouter(prefix="/defined_activity")
 
 
 class DefinedActivityRepository(Repository[bridg.alchemy.DefinedActivity]):
@@ -49,6 +49,3 @@ def show(
             return DefinedObservation.model_validate(obj)
         return DefinedActivity.model_validate(obj)
     raise HTTPException(status_code=404)
-
-
-openapi_tags = [{"name": "defined_activity"}]

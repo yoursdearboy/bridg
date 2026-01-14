@@ -8,7 +8,7 @@ from bridg.alchemy.repository import Repository
 from bridg.api.db import get_repository
 from bridg.api.model import StudyActivity
 
-router = APIRouter(prefix="/activity", tags=["space_activity"])
+router = APIRouter(prefix="/activity")
 
 
 class StudyActivityRepository(Repository[bridg.alchemy.StudyActivity]):
@@ -29,6 +29,3 @@ def show(space_id: UUID, sa_id: UUID, repo: StudyActivityRepositoryDep) -> Optio
     if obj := repo.one_or_none(sa_id):
         return StudyActivity.model_validate(obj)
     raise HTTPException(status_code=404)
-
-
-openapi_tags = [{"name": "space_activity"}]

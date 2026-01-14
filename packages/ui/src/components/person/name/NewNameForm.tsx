@@ -13,7 +13,7 @@ export const NewNameForm = ({ personId, onCancel, onSuccess }: Props) => {
   const mutation = useMutation({
     mutationKey: ["person", personId, "names"],
     mutationFn: (data: BiologicEntityNameData) =>
-      api.persons.createPersonPersonIdNamePost({
+      api.createPersonPersonIdNamePost({
         personId,
         biologicEntityNameData: data,
       }),

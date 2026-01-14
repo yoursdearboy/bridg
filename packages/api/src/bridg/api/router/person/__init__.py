@@ -10,7 +10,7 @@ from bridg.api.model import Person, PersonPatch
 
 from . import name, postal_address, subject, telecommunication_address
 
-router = APIRouter(prefix="/person", tags=["persons"])
+router = APIRouter(prefix="/person")
 
 
 class PersonRepository(Repository[bridg.alchemy.Person]):
@@ -41,5 +41,3 @@ router.include_router(name.router, prefix="/{person_id:uuid}")
 router.include_router(postal_address.router, prefix="/{person_id:uuid}")
 router.include_router(telecommunication_address.router, prefix="/{person_id:uuid}")
 router.include_router(subject.router, prefix="/{person_id:uuid}")
-
-openapi_tags = [{"name": "persons", "postal_address": "persons", "telecommunication_address": "persons"}]

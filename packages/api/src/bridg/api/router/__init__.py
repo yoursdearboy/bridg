@@ -6,9 +6,3 @@ routers = [
     person.router,
     space.router,
 ]
-
-openapi_tags = [
-    *defined_activity.openapi_tags,
-    *person.openapi_tags,
-    *space.openapi_tags,
-]

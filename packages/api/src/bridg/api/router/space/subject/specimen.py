@@ -7,7 +7,7 @@ import bridg.alchemy
 from bridg.api.db import get_repository
 from bridg.api.model import Specimen
 
-router = APIRouter(prefix="/specimen", tags=["specimen"])
+router = APIRouter(prefix="/specimen")
 
 
 class SpecimenRepository(bridg.alchemy.Repository[bridg.alchemy.Specimen]):
@@ -29,6 +29,3 @@ SpecimenRepositoryDep = Annotated[SpecimenRepository, Depends(get_repository(Spe
 def index(space_id: UUID, subject_id: UUID, repo: SpecimenRepositoryDep) -> List[Specimen]:
     objs = repo.all(bridg.alchemy.PerformedSpecimenCollection.involved_subject_id == subject_id)
     return [Specimen.model_validate(obj) for obj in objs]
-
-
-openapi_tags = [{"name": "specimen"}]

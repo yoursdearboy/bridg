@@ -25,7 +25,7 @@ const TelecommunicationAddressTableRowWrapper = ({
       telecommunication_address.id,
     ],
     mutationFn: () =>
-      api.persons.deletePersonPersonIdTelecommunicationAddressAddressIdDelete({
+      api.deletePersonPersonIdTelecommunicationAddressAddressIdDelete({
         personId,
         addressId: telecommunication_address.id,
       }),

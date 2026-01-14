@@ -12,7 +12,7 @@ from bridg.api.service.subject import StudySubjectRepository
 
 from . import performed_activity, specimen
 
-router = APIRouter(prefix="/subject", tags=["subjects"])
+router = APIRouter(prefix="/subject")
 
 
 class NewStudySubject(BaseModel[bridg.alchemy.StudySubject]):
@@ -107,5 +107,3 @@ def lookup(space_id: UUID, data: LookupStudySubject, repo: StudySubjectRepositor
 
 router.include_router(performed_activity.router, prefix="/{subject_id:uuid}")
 router.include_router(specimen.router, prefix="/{subject_id:uuid}")
-
-openapi_tag = [{"name": "subjects"}, *performed_activity.openapi_tags]

@@ -39,7 +39,7 @@ export const Route = createFileRoute(
     newActivityQuery: queryOptions({
       queryKey: ["space", params.spaceId, "activity", search.aId],
       queryFn: async () =>
-        await api.definedActivity.showDefinedActivityAIdGet({
+        await api.showDefinedActivityAIdGet({
           aId: search.aId,
           result: true,
         }),
@@ -71,7 +71,7 @@ function ActivityNewRoute() {
   });
   const mutation = useMutation({
     mutationFn: (data: PerformedActivityUnionData) =>
-      api.subjects.createSpaceSpaceIdSubjectSubjectIdActivityPost({
+      api.createSpaceSpaceIdSubjectSubjectIdActivityPost({
         spaceId,
         subjectId,
         performedActivityUnionData: data,

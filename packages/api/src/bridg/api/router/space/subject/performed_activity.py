@@ -15,7 +15,7 @@ from bridg.api.model import (
     PerformedSpecimenCollectionData,
 )
 
-router = APIRouter(prefix="/activity", tags=["performed_activity"])
+router = APIRouter(prefix="/activity")
 
 
 class PerformedActivityRepository(bridg.alchemy.Repository[bridg.alchemy.PerformedActivity]):
@@ -133,6 +133,3 @@ def update(
             case PerformedSpecimenCollectionData():
                 return PerformedSpecimenCollection.model_validate(obj)
     raise HTTPException(status_code=404)
-
-
-openapi_tags = [{"name": "performed_activity"}]

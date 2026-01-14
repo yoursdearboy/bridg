@@ -5,10 +5,7 @@ import { AddressCardWrapper } from "./AddressCard";
 
 describe("NamesCard", () => {
   it("matches snapshot", () => {
-    vi.spyOn(
-      api.persons,
-      "indexPersonPersonIdPostalAddressGet"
-    ).mockResolvedValue([
+    vi.spyOn(api, "indexPersonPersonIdPostalAddressGet").mockResolvedValue([
       {
         id: "1",
         label: "Trafalgar Square",

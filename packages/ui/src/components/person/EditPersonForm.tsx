@@ -13,7 +13,7 @@ export const EditPersonForm = ({ person, onCancel, onSuccess }: Props) => {
   const mutation = useMutation({
     mutationKey: ["person", person.id],
     mutationFn: (data: PersonData) =>
-      api.persons.updatePersonPersonIdPatch({
+      api.updatePersonPersonIdPatch({
         personId: person.id,
         personPatch: data,
       }),

@@ -8,7 +8,7 @@ describe("ActivityCard", () => {
     const spaceId = "ce946229-9746-46cd-8dd3-b27a2fbfd48a";
     const subjectId = "1944c046-95b3-4cb4-82e2-c789950e29fc";
     vi.spyOn(
-      api.subjects,
+      api,
       "indexSpaceSpaceIdSubjectSubjectIdActivityGet"
     ).mockResolvedValue([
       {
@@ -165,10 +165,7 @@ describe("ActivityCard", () => {
         },
       },
     ]);
-    vi.spyOn(
-      api.spaceActivity,
-      "indexSpaceSpaceIdActivityGet"
-    ).mockResolvedValue([
+    vi.spyOn(api, "indexSpaceSpaceIdActivityGet").mockResolvedValue([
       {
         id: "b72ae1a5-784d-4c9b-a4e4-7b09fddeefb7",
         usedDefinedActivity: {

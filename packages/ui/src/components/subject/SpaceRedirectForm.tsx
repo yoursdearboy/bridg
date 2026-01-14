@@ -33,7 +33,7 @@ export const SpaceRedirectForm = ({
 
   const mutation = useMutation({
     mutationFn: ({ spaceId, studySiteId }: SpaceRedirectFormData) =>
-      api.subjects.createSpaceSpaceIdSubjectPost({
+      api.createSpaceSpaceIdSubjectPost({
         spaceId,
         newStudySubject: {
           status: Status.PotentialCandidate,
@@ -89,7 +89,7 @@ const SpaceSelect = ({ onChange }: InputProps) => {
   const { t } = useTranslation();
   const { isError, error, data } = useQuery({
     queryKey: ["space"],
-    queryFn: () => api.spaces.indexSpaceGet(),
+    queryFn: () => api.indexSpaceGet(),
   });
 
   if (isError)
@@ -115,7 +115,7 @@ const StudySiteSelect = ({
   const { t } = useTranslation();
   const { isError, error, data } = useQuery({
     queryKey: ["space", spaceId, "site"],
-    queryFn: () => api.spaces.indexSiteSpaceSpaceIdSiteGet({ spaceId }),
+    queryFn: () => api.indexSiteSpaceSpaceIdSiteGet({ spaceId }),
   });
 
   if (isError)
