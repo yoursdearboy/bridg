@@ -4,6 +4,7 @@ from uuid import UUID, uuid4
 from sqlalchemy import CheckConstraint, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from ..datatype import ConceptDescriptor
 from ..db import Base
 from .study_protocol_version import StudyProtocolVersion
 
@@ -23,7 +24,10 @@ class Epoch(Base):
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
     name: Mapped[Optional[str]]
-    type_code: Mapped[Optional[str]]
+
+    type_code_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
+    type_code: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=type_code_id)
+
     sequence_number: Mapped[Optional[int]]
     description: Mapped[Optional[str]]
 

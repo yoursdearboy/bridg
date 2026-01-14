@@ -56,7 +56,12 @@ it("person page renders correctly", async () => {
       containingEpoch: {
         id: "4c0e30ba-8ef8-450f-b3c0-d489fa053c35",
         name: "Screening",
-        typeCode: "screening",
+        typeCode: {
+          dataTypeName: "CD",
+          code: "screening",
+          codeSystem: "epoch.type_code",
+          displayName: null,
+        },
         description: null,
       },
       instantiatedDefinedActivity: {
@@ -102,7 +107,12 @@ it("person page renders correctly", async () => {
       containingEpoch: {
         id: "4c0e30ba-8ef8-450f-b3c0-d489fa053c35",
         name: "Screening",
-        typeCode: "screening",
+        typeCode: {
+          dataTypeName: "CD",
+          code: "screening",
+          codeSystem: "epoch.type_code",
+          displayName: null,
+        },
         description: null,
       },
       instantiatedDefinedActivity: {
@@ -148,7 +158,12 @@ it("person page renders correctly", async () => {
       containingEpoch: {
         id: "07205390-86e4-4955-a17b-0684fb70b1ef",
         name: "Induction",
-        typeCode: "treatment",
+        typeCode: {
+          dataTypeName: "CD",
+          code: "treatment",
+          codeSystem: "epoch.type_code",
+          displayName: null,
+        },
         description: null,
       },
       instantiatedDefinedActivity: {

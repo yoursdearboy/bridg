@@ -13,6 +13,14 @@
  */
 
 import { mapValues } from '../runtime';
+import type { ConceptDescriptor } from './ConceptDescriptor';
+import {
+    ConceptDescriptorFromJSON,
+    ConceptDescriptorFromJSONTyped,
+    ConceptDescriptorToJSON,
+    ConceptDescriptorToJSONTyped,
+} from './ConceptDescriptor';
+
 /**
  * 
  * @export
@@ -33,10 +41,10 @@ export interface Epoch {
     name: string | null;
     /**
      * 
-     * @type {string}
+     * @type {ConceptDescriptor}
      * @memberof Epoch
      */
-    typeCode: string | null;
+    typeCode: ConceptDescriptor | null;
     /**
      * 
      * @type {string}
@@ -79,7 +87,7 @@ export function EpochFromJSONTyped(json: any, ignoreDiscriminator: boolean): Epo
         
         'id': json['id'],
         'name': json['name'],
-        'typeCode': json['type_code'],
+        'typeCode': ConceptDescriptorFromJSON(json['type_code']),
         'description': json['description'],
     };
 }
@@ -97,7 +105,7 @@ export function EpochToJSONTyped(value?: Epoch | null, ignoreDiscriminator: bool
         
         'id': value['id'],
         'name': value['name'],
-        'type_code': value['typeCode'],
+        'type_code': ConceptDescriptorToJSON(value['typeCode']),
         'description': value['description'],
     };
 }

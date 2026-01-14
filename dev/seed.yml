@@ -131,12 +131,12 @@ study:
               quantity_range: 10
           subdividing_epoch:
             - &aml-mrd-2018-screening
-              { id: 4c0e30ba-8ef8-450f-b3c0-d489fa053c35, name: "Screening", type_code: "screening" }
+              { id: 4c0e30ba-8ef8-450f-b3c0-d489fa053c35, name: "Screening", type_code: "epoch.type_code/screening" }
             - &aml-mrd-2018-induction
-              { id: 07205390-86e4-4955-a17b-0684fb70b1ef, name: "Induction", type_code: "treatment" }
-            - { name: "Consolidation I", type_code: "treatment" }
-            - { name: "Consolidation II", type_code: "treatment" }
-            - { name: "Follow-Up", type_code: "follow-up" }
+              { id: 07205390-86e4-4955-a17b-0684fb70b1ef, name: "Induction", type_code: "epoch.type_code/treatment" }
+            - { name: "Consolidation I", type_code: "epoch.type_code/treatment" }
+            - { name: "Consolidation II", type_code: "epoch.type_code/treatment" }
+            - { name: "Follow-Up", type_code: "epoch.type_code/follow-up" }
           used_study_activity:
             - used_defined_activity: *ipt
             - id: 66da8ea1-5e69-40f2-a720-9937430d582d
