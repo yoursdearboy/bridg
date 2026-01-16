@@ -20,14 +20,14 @@ class PersonRepository(Repository[bridg.alchemy.Person]):
 PersonRepositoryDep = Annotated[PersonRepository, Depends(get_repository(PersonRepository))]
 
 
-@router.get("/{person_id:uuid}")
+@router.get("/{person_id:uuid}", operation_id="get_person")
 def show(person_id: UUID, repo: PersonRepositoryDep) -> Optional[Person]:
     if obj := repo.one_or_none(person_id):
         return Person.model_validate(obj)
     raise HTTPException(status_code=404)
 
 
-@router.patch("/{person_id:uuid}")
+@router.patch("/{person_id:uuid}", operation_id="update_person")
 def update(person_id: UUID, data: PersonPatch, repo: PersonRepositoryDep) -> Person:
     if repo.exists(person_id):
         obj = data.model_dump_sa()

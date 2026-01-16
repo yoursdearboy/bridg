@@ -25,7 +25,7 @@ class SpecimenRepository(bridg.alchemy.Repository[bridg.alchemy.Specimen]):
 SpecimenRepositoryDep = Annotated[SpecimenRepository, Depends(get_repository(SpecimenRepository))]
 
 
-@router.get("")
+@router.get("", operation_id="list_space_subject_specimen")
 def index(space_id: UUID, subject_id: UUID, repo: SpecimenRepositoryDep) -> List[Specimen]:
     objs = repo.all(bridg.alchemy.PerformedSpecimenCollection.involved_subject_id == subject_id)
     return [Specimen.model_validate(obj) for obj in objs]

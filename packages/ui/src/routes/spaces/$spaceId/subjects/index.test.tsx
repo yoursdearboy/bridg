@@ -4,7 +4,7 @@ import { renderRoute } from "@/test-utils";
 import { Route } from "./index";
 
 it("index pages renders correctly", async () => {
-  vi.spyOn(api, "indexSpaceSpaceIdSubjectGet").mockResolvedValue([
+  vi.spyOn(api, "listSpaceSubject").mockResolvedValue([
     {
       id: "2703d0bc-7ed4-497c-91c6-30d86a8eb630",
       status: "eligible",

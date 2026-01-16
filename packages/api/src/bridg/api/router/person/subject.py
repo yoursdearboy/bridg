@@ -22,7 +22,7 @@ class PersonStudySubject(BaseModel):
 StudySubjectRepositoryDep = Annotated[StudySubjectRepository, Depends(get_repository(StudySubjectRepository))]
 
 
-@router.get("")
+@router.get("", operation_id="list_person_subject")
 def index(person_id: UUID, repo: StudySubjectRepositoryDep) -> List[PersonStudySubject]:
     objs = repo.find_by(performing_biologic_entity_id=person_id)
     return [PersonStudySubject.model_validate(obj) for obj in objs]

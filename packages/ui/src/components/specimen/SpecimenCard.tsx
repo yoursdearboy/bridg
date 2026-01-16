@@ -14,7 +14,7 @@ export const SpecimenCard = ({ spaceId, subjectId }: SpecimenCardProps) => {
   const query = useQuery({
     queryKey: ["space", spaceId, "subject", subjectId, "specimen"],
     queryFn: () =>
-      api.indexSpaceSpaceIdSubjectSubjectIdSpecimenGet({
+      api.listSpaceSubjectSpecimen({
         spaceId,
         subjectId,
       }),

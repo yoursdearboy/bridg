@@ -64,20 +64,20 @@ class FoundStudySubject(BaseModel[bridg.alchemy.StudySubject]):
 StudySubjectRepositoryDep = Annotated[StudySubjectRepository, Depends(get_repository(StudySubjectRepository))]
 
 
-@router.get("")
+@router.get("", operation_id="list_space_subject")
 def index(space_id: UUID, repo: StudySubjectRepositoryDep) -> List[StudySubject]:
     objs = repo.find_by(space_id=space_id)
     return [StudySubject.model_validate(obj) for obj in objs]
 
 
-@router.get("/{subject_id:uuid}")
+@router.get("/{subject_id:uuid}", operation_id="get_space_subject")
 def show(space_id: UUID, subject_id: UUID, repo: StudySubjectRepositoryDep) -> StudySubject:
     if obj := repo.one_or_none(subject_id):
         return StudySubject.model_validate(obj)
     raise HTTPException(status_code=404)
 
 
-@router.post("")
+@router.post("", operation_id="create_space_subject")
 def create(
     space_id: UUID,
     data: NewStudySubject,
@@ -88,7 +88,7 @@ def create(
     return StudySubject.model_validate(obj)
 
 
-@router.patch("/{subject_id:uuid}")
+@router.patch("/{subject_id:uuid}", operation_id="update_space_subject")
 def update(space_id: UUID, subject_id: UUID, data: StudySubjectData, repo: StudySubjectRepositoryDep) -> StudySubject:
     if repo.exists(subject_id):
         obj = data.model_dump_sa()
@@ -98,7 +98,7 @@ def update(space_id: UUID, subject_id: UUID, data: StudySubjectData, repo: Study
     raise HTTPException(status_code=404)
 
 
-@router.post("/lookup")
+@router.post("/lookup", operation_id="lookup_space_subject")
 def lookup(space_id: UUID, data: LookupStudySubject, repo: StudySubjectRepositoryDep) -> List[FoundStudySubject]:
     q = data.model_dump_sa()
     objs = repo.lookup(q)

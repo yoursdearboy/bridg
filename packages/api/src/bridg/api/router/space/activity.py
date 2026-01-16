@@ -18,13 +18,13 @@ class StudyActivityRepository(Repository[bridg.alchemy.StudyActivity]):
 StudyActivityRepositoryDep = Annotated[StudyActivityRepository, Depends(get_repository(StudyActivityRepository))]
 
 
-@router.get("")
+@router.get("", operation_id="list_space_activity")
 def index(space_id: UUID, repo: StudyActivityRepositoryDep) -> List[StudyActivity]:
     objs = repo.all(bridg.alchemy.StudyActivity.using_study_protocol_version_id == space_id)
     return [StudyActivity.model_validate(obj) for obj in objs]
 
 
-@router.get("/{sa_id:uuid}")
+@router.get("/{sa_id:uuid}", operation_id="get_space_activity")
 def show(space_id: UUID, sa_id: UUID, repo: StudyActivityRepositoryDep) -> Optional[StudyActivity]:
     if obj := repo.one_or_none(sa_id):
         return StudyActivity.model_validate(obj)

@@ -67,13 +67,13 @@ OPENAPI_EXTRA = {
 }
 
 
-@router.get("")
+@router.get("", operation_id="list_space_subject_performed_activity")
 def index(space_id: UUID, subject_id: UUID, repo: PerformedActivityRepositoryDep) -> List[PerformedActivity]:
     objs = repo.all(bridg.alchemy.PerformedActivity.involved_subject_id == subject_id)
     return [PerformedActivity.model_validate(obj) for obj in objs]
 
 
-@router.get("/{a_id:uuid}", responses=RESPONSES)
+@router.get("/{a_id:uuid}", operation_id="get_space_subject_performed_activity", responses=RESPONSES)
 def show(
     space_id: UUID,
     subject_id: UUID,
@@ -92,7 +92,9 @@ def show(
     raise HTTPException(status_code=404)
 
 
-@router.post("", responses=RESPONSES, openapi_extra=OPENAPI_EXTRA)
+@router.post(
+    "", operation_id="create_space_subject_performed_activity", responses=RESPONSES, openapi_extra=OPENAPI_EXTRA
+)
 def create(
     space_id: UUID,
     subject_id: UUID,
@@ -112,7 +114,12 @@ def create(
             return PerformedSpecimenCollection.model_validate(obj)
 
 
-@router.patch("/{a_id:uuid}", responses=RESPONSES, openapi_extra=OPENAPI_EXTRA)
+@router.patch(
+    "/{a_id:uuid}",
+    operation_id="update_space_subject_performed_activity",
+    responses=RESPONSES,
+    openapi_extra=OPENAPI_EXTRA,
+)
 def update(
     space_id: UUID,
     subject_id: UUID,

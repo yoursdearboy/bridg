@@ -20,13 +20,13 @@ BiologicEntityNameRepositoryDep = Annotated[
 ]
 
 
-@router.get("")
+@router.get("", operation_id="list_person_name")
 def index(person_id: UUID, repo: BiologicEntityNameRepositoryDep) -> List[BiologicEntityName]:
     objs = repo.all(bridg.alchemy.BiologicEntityName.biologic_entity_id == person_id)
     return [BiologicEntityName.model_validate(o) for o in objs]
 
 
-@router.post("")
+@router.post("", operation_id="create_person_name")
 def create(person_id: UUID, data: BiologicEntityNameData, repo: BiologicEntityNameRepositoryDep) -> BiologicEntityName:
     obj = data.model_dump_sa()
     obj.biologic_entity_id = person_id
@@ -34,7 +34,7 @@ def create(person_id: UUID, data: BiologicEntityNameData, repo: BiologicEntityNa
     return BiologicEntityName.model_validate(obj)
 
 
-@router.patch("/{name_id:uuid}")
+@router.patch("/{name_id:uuid}", operation_id="update_person_name")
 def update(
     person_id: UUID, name_id: UUID, data: BiologicEntityNameData, repo: BiologicEntityNameRepositoryDep
 ) -> BiologicEntityName:
@@ -46,6 +46,6 @@ def update(
     raise HTTPException(status_code=404)
 
 
-@router.delete("/{name_id:uuid}")
+@router.delete("/{name_id:uuid}", operation_id="delete_person_name")
 def delete(person_id: UUID, name_id: UUID, repo: BiologicEntityNameRepositoryDep):
     repo.delete(name_id)

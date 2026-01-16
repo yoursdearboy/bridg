@@ -25,7 +25,7 @@ import {
     HTTPValidationErrorToJSON,
 } from '../models/index';
 
-export interface ExpandCodeSystemCodeSystemExpandGetRequest {
+export interface ExpandCodeSystemRequest {
     codeSystem: string;
 }
 
@@ -37,11 +37,11 @@ export class CodeSystemApi extends runtime.BaseAPI {
     /**
      * Expand
      */
-    async expandCodeSystemCodeSystemExpandGetRaw(requestParameters: ExpandCodeSystemCodeSystemExpandGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ConceptDescriptor>>> {
+    async expandCodeSystemRaw(requestParameters: ExpandCodeSystemRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ConceptDescriptor>>> {
         if (requestParameters['codeSystem'] == null) {
             throw new runtime.RequiredError(
                 'codeSystem',
-                'Required parameter "codeSystem" was null or undefined when calling expandCodeSystemCodeSystemExpandGet().'
+                'Required parameter "codeSystem" was null or undefined when calling expandCodeSystem().'
             );
         }
 
@@ -66,8 +66,8 @@ export class CodeSystemApi extends runtime.BaseAPI {
     /**
      * Expand
      */
-    async expandCodeSystemCodeSystemExpandGet(requestParameters: ExpandCodeSystemCodeSystemExpandGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ConceptDescriptor>> {
-        const response = await this.expandCodeSystemCodeSystemExpandGetRaw(requestParameters, initOverrides);
+    async expandCodeSystem(requestParameters: ExpandCodeSystemRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ConceptDescriptor>> {
+        const response = await this.expandCodeSystemRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

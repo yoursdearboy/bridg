@@ -23,7 +23,7 @@ export const PersonTimelineCard = ({ personId }: PersonTimelineCardProps) => {
   const query = useQuery({
     queryKey: ["person", personId, "subject"],
     queryFn: () =>
-      api.indexPersonPersonIdSubjectGet({
+      api.listPersonSubject({
         personId,
       }),
   });
@@ -113,7 +113,7 @@ const SubjectTimeline = ({ subject, personId }: SubjectTimelineProps) => {
   const query = useQuery({
     queryKey: ["person", personId, "subject", subject.id],
     queryFn: () =>
-      api.indexSpaceSpaceIdSubjectSubjectIdActivityGet({
+      api.listSpaceSubjectPerformedActivity({
         spaceId: spaceId,
         subjectId: subject.id,
       }),

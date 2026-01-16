@@ -4,7 +4,7 @@ import { renderRoute } from "@/test-utils";
 import { Route } from "./new";
 
 it("new page renders correctly", async () => {
-  vi.spyOn(api, "indexSiteSpaceSpaceIdSiteGet").mockResolvedValue([
+  vi.spyOn(api, "listSpaceSite").mockResolvedValue([
     {
       id: "6a8e6e2b-9537-408f-bd92-a5b83ad2e750",
       executedStudyProtocolVersion: {
@@ -28,25 +28,23 @@ it("new page renders correctly", async () => {
       },
     },
   ]);
-  const lookupSpy = vi
-    .spyOn(api, "lookupSpaceSpaceIdSubjectLookupPost")
-    .mockResolvedValue([
-      {
-        performingBiologicEntity: {
-          id: "8498d20d-6c84-4f09-96c5-5af3a557b1e3",
-          administrativeGenderCode: null,
-          birthDate: null,
-          deathDate: null,
-          deathDateEstimatedIndicator: null,
-          deathIndicator: null,
-          identifier: [],
-          primaryName: {
-            id: "fc4e3c22-a2a8-45f2-b86c-e58bf618505d",
-            label: "Donald Trump Jr",
-          },
+  const lookupSpy = vi.spyOn(api, "lookupSpaceSubject").mockResolvedValue([
+    {
+      performingBiologicEntity: {
+        id: "8498d20d-6c84-4f09-96c5-5af3a557b1e3",
+        administrativeGenderCode: null,
+        birthDate: null,
+        deathDate: null,
+        deathDateEstimatedIndicator: null,
+        deathIndicator: null,
+        identifier: [],
+        primaryName: {
+          id: "fc4e3c22-a2a8-45f2-b86c-e58bf618505d",
+          label: "Donald Trump Jr",
         },
       },
-    ]);
+    },
+  ]);
 
   expect(
     (

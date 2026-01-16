@@ -7,7 +7,7 @@ import { Route } from "./$personId";
 it("person page renders correctly", async () => {
   const personId = "1944c046-95b3-4cb4-82e2-c789950e29fc";
   const spaceId = "ce946229-9746-46cd-8dd3-b27a2fbfd48a";
-  vi.spyOn(api, "indexPersonPersonIdSubjectGet").mockResolvedValue([
+  vi.spyOn(api, "listPersonSubject").mockResolvedValue([
     {
       id: personId,
       status: "eligible",
@@ -27,10 +27,7 @@ it("person page renders correctly", async () => {
       ],
     },
   ]);
-  vi.spyOn(
-    api,
-    "indexSpaceSpaceIdSubjectSubjectIdActivityGet"
-  ).mockResolvedValue([
+  vi.spyOn(api, "listSpaceSubjectPerformedActivity").mockResolvedValue([
     {
       id: "ce3dd821-3a1b-41dd-a366-292c8c163a58",
       comment: null,
@@ -185,7 +182,7 @@ it("person page renders correctly", async () => {
       },
     },
   ]);
-  vi.spyOn(api, "indexPersonPersonIdPostalAddressGet").mockResolvedValue([
+  vi.spyOn(api, "listPersonPostalAddress").mockResolvedValue([
     {
       id: "1",
       label: "Trafalgar Square",
@@ -195,7 +192,7 @@ it("person page renders correctly", async () => {
       label: "Red Square",
     },
   ]);
-  vi.spyOn(api, "indexPersonPersonIdNameGet").mockResolvedValue([
+  vi.spyOn(api, "listPersonName").mockResolvedValue([
     {
       id: "1",
       label: "Charlie May Kai",
@@ -205,10 +202,7 @@ it("person page renders correctly", async () => {
       label: "Nancy Jonson Mia",
     },
   ]);
-  vi.spyOn(
-    api,
-    "indexPersonPersonIdTelecommunicationAddressGet"
-  ).mockResolvedValue([
+  vi.spyOn(api, "listPersonTelecomAddress").mockResolvedValue([
     {
       id: "1",
       label: "ftp Pizza",

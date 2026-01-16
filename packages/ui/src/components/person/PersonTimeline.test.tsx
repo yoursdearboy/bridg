@@ -7,30 +7,28 @@ describe("PersonTimelineCard", () => {
   it("matches snapshot", async () => {
     const personId = "1944c046-95b3-4cb4-82e2-c789950e29fc";
     const spaceId = "ce946229-9746-46cd-8dd3-b27a2fbfd48a";
-    const personSpy = vi
-      .spyOn(api, "indexPersonPersonIdSubjectGet")
-      .mockResolvedValue([
-        {
-          id: personId,
-          status: "eligible",
-          statusDate: new Date("2024-11-06T12:00:00"),
-          assignedStudySiteProtocolVersionRelationship: [
-            {
-              id: "6a8e6e2b-9537-408f-bd92-a5b83ad2e750",
-              executingStudySite: {
-                id: "7cbc3369-7d06-4742-b6f1-b83f62d72f1e",
-                label: "DGOI",
-              },
-              executedStudyProtocolVersion: {
-                id: spaceId,
-                label: "AML-MRD-2018",
-              },
+    const personSpy = vi.spyOn(api, "listPersonSubject").mockResolvedValue([
+      {
+        id: personId,
+        status: "eligible",
+        statusDate: new Date("2024-11-06T12:00:00"),
+        assignedStudySiteProtocolVersionRelationship: [
+          {
+            id: "6a8e6e2b-9537-408f-bd92-a5b83ad2e750",
+            executingStudySite: {
+              id: "7cbc3369-7d06-4742-b6f1-b83f62d72f1e",
+              label: "DGOI",
             },
-          ],
-        },
-      ]);
+            executedStudyProtocolVersion: {
+              id: spaceId,
+              label: "AML-MRD-2018",
+            },
+          },
+        ],
+      },
+    ]);
     const subjectsSpy = vi
-      .spyOn(api, "indexSpaceSpaceIdSubjectSubjectIdActivityGet")
+      .spyOn(api, "listSpaceSubjectPerformedActivity")
       .mockResolvedValue([
         {
           id: "ce3dd821-3a1b-41dd-a366-292c8c163a58",

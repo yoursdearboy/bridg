@@ -20,6 +20,6 @@ ConceptDescriptorRepositoryDep = Annotated[
 
 
 # FIXME: expand should be done through ValueSet, not CodeSystem directly
-@router.get("/{code_system:str}/$expand")
+@router.get("/{code_system:str}/$expand", operation_id="expand_code_system")
 def expand(code_system: str, repo: ConceptDescriptorRepositoryDep) -> List[ConceptDescriptor]:
     return [ConceptDescriptor.model_validate(c) for c in repo.all(code_system=code_system)]

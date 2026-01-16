@@ -19,7 +19,7 @@ export const EditNameForm = ({
   const mutation = useMutation({
     mutationKey: ["person", personId, "names", name.id],
     mutationFn: (data: BiologicEntityNameData) =>
-      api.updatePersonPersonIdNameNameIdPatch({
+      api.updatePersonName({
         personId,
         nameId: name.id,
         biologicEntityNameData: data,

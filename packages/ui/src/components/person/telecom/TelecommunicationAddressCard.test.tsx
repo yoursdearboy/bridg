@@ -5,10 +5,7 @@ import { TelecommunicationAddressCardWrapper } from "./TelecommunicationAddressC
 
 describe("TelecommunicationAddressesCard", () => {
   it("matches snapshot", () => {
-    vi.spyOn(
-      api,
-      "indexPersonPersonIdTelecommunicationAddressGet"
-    ).mockResolvedValue([
+    vi.spyOn(api, "listPersonTelecomAddress").mockResolvedValue([
       {
         id: "1",
         label: "ftp Pizza",

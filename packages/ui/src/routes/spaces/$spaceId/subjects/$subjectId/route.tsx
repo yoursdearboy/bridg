@@ -7,7 +7,7 @@ export const Route = createFileRoute("/spaces/$spaceId/subjects/$subjectId")({
   beforeLoad: ({ params }) => ({
     subjectQuery: queryOptions({
       queryKey: ["subject", params.subjectId],
-      queryFn: () => api.showSpaceSpaceIdSubjectSubjectIdGet(params),
+      queryFn: () => api.getSpaceSubject(params),
     }),
     breadcrumb: () => i18next.t("SubjectShowPage.breadcrumb"),
   }),

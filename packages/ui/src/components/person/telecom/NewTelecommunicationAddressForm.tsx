@@ -19,7 +19,7 @@ export const NewTelecommunicationAddressForm = ({
   const mutation = useMutation({
     mutationKey: ["person", personId, "telecommunication_addresses"],
     mutationFn: (data: PersonTelecommunicationAddressData) =>
-      api.createPersonPersonIdTelecommunicationAddressPost({
+      api.createPersonTelecomAddress({
         personId,
         personTelecommunicationAddressData: data,
       }),

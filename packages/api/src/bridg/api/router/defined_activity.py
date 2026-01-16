@@ -20,6 +20,7 @@ DefinedActivityRepositoryDep = Annotated[DefinedActivityRepository, Depends(get_
 
 @router.get(
     "/{a_id:uuid}",
+    operation_id="get_defined_activity",
     responses={
         "200": {
             "description": "Successful Response",

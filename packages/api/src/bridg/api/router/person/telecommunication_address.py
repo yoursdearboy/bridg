@@ -20,13 +20,13 @@ PersonTelecommunicationAddressRepositoryDep = Annotated[
 ]
 
 
-@router.get("")
+@router.get("", operation_id="list_person_telecom_address")
 def index(person_id: UUID, repo: PersonTelecommunicationAddressRepositoryDep) -> List[PersonTelecommunicationAddress]:
     objs = repo.all(bridg.alchemy.common.person.PersonTelecommunicationAddress.person_id == person_id)
     return [PersonTelecommunicationAddress.model_validate(o) for o in objs]
 
 
-@router.post("")
+@router.post("", operation_id="create_person_telecom_address")
 def create(
     person_id: UUID, data: PersonTelecommunicationAddressData, repo: PersonTelecommunicationAddressRepositoryDep
 ) -> PersonTelecommunicationAddress:
@@ -36,7 +36,7 @@ def create(
     return PersonTelecommunicationAddress.model_validate(obj)
 
 
-@router.patch("/{address_id:uuid}")
+@router.patch("/{address_id:uuid}", operation_id="update_person_telecom_address")
 def update(
     person_id: UUID,
     address_id: UUID,
@@ -51,6 +51,6 @@ def update(
     raise HTTPException(status_code=404)
 
 
-@router.delete("/{address_id:uuid}")
+@router.delete("/{address_id:uuid}", operation_id="delete_person_telecom_address")
 def delete(person_id: UUID, address_id: UUID, repo: PersonTelecommunicationAddressRepositoryDep):
     repo.delete(address_id)

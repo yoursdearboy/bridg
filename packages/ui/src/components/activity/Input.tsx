@@ -36,7 +36,7 @@ export const ConceptDescriptorSelect = ({
 }) => {
   const { data, isLoading } = useQuery({
     queryFn: () =>
-      codeSystemApi.expandCodeSystemCodeSystemExpandGet({
+      codeSystemApi.expandCodeSystem({
         codeSystem,
       }),
     queryKey: ["codeSystem", codeSystem],

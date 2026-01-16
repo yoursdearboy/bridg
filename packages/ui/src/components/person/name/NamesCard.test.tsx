@@ -5,7 +5,7 @@ import { NamesCardWrapper } from "./NamesCard";
 
 describe("NamesCard", () => {
   it("matches snapshot", () => {
-    vi.spyOn(api, "indexPersonPersonIdNameGet").mockResolvedValue([
+    vi.spyOn(api, "listPersonName").mockResolvedValue([
       {
         id: "1",
         label: "Charlie May Kai",

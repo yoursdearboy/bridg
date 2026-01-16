@@ -20,7 +20,7 @@ export const NamesCardWrapper = ({ personId }: { personId: string }) => {
   const query = useQuery({
     queryKey: ["person", personId, "name"],
     queryFn: () =>
-      api.indexPersonPersonIdNameGet({
+      api.listPersonName({
         personId,
       }),
   });

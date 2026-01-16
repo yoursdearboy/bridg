@@ -27,7 +27,7 @@ export const EditTelecommunicationAddressForm = ({
       telecommunication_address.id,
     ],
     mutationFn: (data: PersonTelecommunicationAddressData) =>
-      api.updatePersonPersonIdTelecommunicationAddressAddressIdPatch({
+      api.updatePersonTelecomAddress({
         personId,
         addressId: telecommunication_address.id,
         personTelecommunicationAddressData: data,
