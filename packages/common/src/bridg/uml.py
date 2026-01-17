@@ -1,5 +1,5 @@
 """
-FIXME: Split bridg into persistence and this
+FIXME: Move into a dedicated package?
 """
 
 import logging
