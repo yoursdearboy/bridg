@@ -10,8 +10,6 @@ from bridg.api.db import get_repository
 from bridg.api.model import BaseModel, Person, PersonData, StudySubject, StudySubjectData
 from bridg.api.service.subject import StudySubjectRepository
 
-from . import performed_activity, specimen
-
 router = APIRouter(prefix="/subject")
 
 
@@ -103,7 +101,3 @@ def lookup(space_id: UUID, data: LookupStudySubject, repo: StudySubjectRepositor
     q = data.model_dump_sa()
     objs = repo.lookup(q)
     return [FoundStudySubject.model_validate(obj) for obj in objs]
-
-
-router.include_router(performed_activity.router, prefix="/{subject_id:uuid}")
-router.include_router(specimen.router, prefix="/{subject_id:uuid}")

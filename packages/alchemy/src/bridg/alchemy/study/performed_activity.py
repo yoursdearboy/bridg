@@ -64,6 +64,7 @@ class PerformedActivity(Activity):
     Each DefinedActivity might be instantiated by one or more PerformedActivity.
     """
 
+    # FIXME: replace StudySubject with Subject
     involved_subject_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("study_subject.id"))
     involved_subject: Mapped[Optional[StudySubject]] = relationship(back_populates="involving_performed_activity")
     """

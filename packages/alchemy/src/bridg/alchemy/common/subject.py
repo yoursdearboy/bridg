@@ -26,6 +26,7 @@ class Subject(Base):
     NOTE(S):
     """
 
+    # FIXME: looks like it is not abstract, because not only StudySubject can be instantiated
     __abstract__ = True
 
     performing_biologic_entity_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("biologic_entity.id"))

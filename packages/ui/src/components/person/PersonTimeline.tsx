@@ -107,14 +107,10 @@ interface SubjectTimelineProps {
 
 const SubjectTimeline = ({ subject, personId }: SubjectTimelineProps) => {
   const { t } = useTranslation();
-  const spaceId =
-    subject.assignedStudySiteProtocolVersionRelationship[0]
-      .executedStudyProtocolVersion.id;
   const query = useQuery({
     queryKey: ["person", personId, "subject", subject.id],
     queryFn: () =>
-      api.listSpaceSubjectPerformedActivity({
-        spaceId: spaceId,
+      api.listSubjectPerformedActivity({
         subjectId: subject.id,
       }),
   });

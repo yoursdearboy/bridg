@@ -111,8 +111,7 @@ export interface CreateSpaceSubjectRequest {
     newStudySubject: NewStudySubject;
 }
 
-export interface CreateSpaceSubjectPerformedActivityRequest {
-    spaceId: string;
+export interface CreateSubjectPerformedActivityRequest {
     subjectId: string;
     performedActivityUnionData: PerformedActivityUnionData;
 }
@@ -151,8 +150,7 @@ export interface GetSpaceSubjectRequest {
     subjectId: string;
 }
 
-export interface GetSpaceSubjectPerformedActivityRequest {
-    spaceId: string;
+export interface GetSubjectPerformedActivityRequest {
     subjectId: string;
     aId: string;
     result?: boolean;
@@ -190,13 +188,12 @@ export interface ListSpaceSubjectRequest {
     spaceId: string;
 }
 
-export interface ListSpaceSubjectPerformedActivityRequest {
-    spaceId: string;
+export interface ListSpaceSubjectSpecimenRequest {
     subjectId: string;
+    spaceId: string;
 }
 
-export interface ListSpaceSubjectSpecimenRequest {
-    spaceId: string;
+export interface ListSubjectPerformedActivityRequest {
     subjectId: string;
 }
 
@@ -234,8 +231,7 @@ export interface UpdateSpaceSubjectRequest {
     studySubjectData: StudySubjectData;
 }
 
-export interface UpdateSpaceSubjectPerformedActivityRequest {
-    spaceId: string;
+export interface UpdateSubjectPerformedActivityRequest {
     subjectId: string;
     aId: string;
     performedActivityUnionData: PerformedActivityUnionData;
@@ -437,25 +433,18 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Create
      */
-    async createSpaceSubjectPerformedActivityRaw(requestParameters: CreateSpaceSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PerformedActivityUnion>> {
-        if (requestParameters['spaceId'] == null) {
-            throw new runtime.RequiredError(
-                'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling createSpaceSubjectPerformedActivity().'
-            );
-        }
-
+    async createSubjectPerformedActivityRaw(requestParameters: CreateSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PerformedActivityUnion>> {
         if (requestParameters['subjectId'] == null) {
             throw new runtime.RequiredError(
                 'subjectId',
-                'Required parameter "subjectId" was null or undefined when calling createSpaceSubjectPerformedActivity().'
+                'Required parameter "subjectId" was null or undefined when calling createSubjectPerformedActivity().'
             );
         }
 
         if (requestParameters['performedActivityUnionData'] == null) {
             throw new runtime.RequiredError(
                 'performedActivityUnionData',
-                'Required parameter "performedActivityUnionData" was null or undefined when calling createSpaceSubjectPerformedActivity().'
+                'Required parameter "performedActivityUnionData" was null or undefined when calling createSubjectPerformedActivity().'
             );
         }
 
@@ -466,8 +455,7 @@ export class DefaultApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/space/{space_id}/subject/{subject_id}/activity`;
-        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+        let urlPath = `/subject/{subject_id}/activity`;
         urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
 
         const response = await this.request({
@@ -484,8 +472,8 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Create
      */
-    async createSpaceSubjectPerformedActivity(requestParameters: CreateSpaceSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PerformedActivityUnion> {
-        const response = await this.createSpaceSubjectPerformedActivityRaw(requestParameters, initOverrides);
+    async createSubjectPerformedActivity(requestParameters: CreateSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PerformedActivityUnion> {
+        const response = await this.createSubjectPerformedActivityRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -807,25 +795,18 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Show
      */
-    async getSpaceSubjectPerformedActivityRaw(requestParameters: GetSpaceSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PerformedActivityUnion>> {
-        if (requestParameters['spaceId'] == null) {
-            throw new runtime.RequiredError(
-                'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling getSpaceSubjectPerformedActivity().'
-            );
-        }
-
+    async getSubjectPerformedActivityRaw(requestParameters: GetSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PerformedActivityUnion>> {
         if (requestParameters['subjectId'] == null) {
             throw new runtime.RequiredError(
                 'subjectId',
-                'Required parameter "subjectId" was null or undefined when calling getSpaceSubjectPerformedActivity().'
+                'Required parameter "subjectId" was null or undefined when calling getSubjectPerformedActivity().'
             );
         }
 
         if (requestParameters['aId'] == null) {
             throw new runtime.RequiredError(
                 'aId',
-                'Required parameter "aId" was null or undefined when calling getSpaceSubjectPerformedActivity().'
+                'Required parameter "aId" was null or undefined when calling getSubjectPerformedActivity().'
             );
         }
 
@@ -838,8 +819,7 @@ export class DefaultApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/space/{space_id}/subject/{subject_id}/activity/{a_id}`;
-        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+        let urlPath = `/subject/{subject_id}/activity/{a_id}`;
         urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
         urlPath = urlPath.replace(`{${"a_id"}}`, encodeURIComponent(String(requestParameters['aId'])));
 
@@ -856,8 +836,8 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Show
      */
-    async getSpaceSubjectPerformedActivity(requestParameters: GetSpaceSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PerformedActivityUnion> {
-        const response = await this.getSpaceSubjectPerformedActivityRaw(requestParameters, initOverrides);
+    async getSubjectPerformedActivity(requestParameters: GetSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PerformedActivityUnion> {
+        const response = await this.getSubjectPerformedActivityRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -1222,59 +1202,7 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async listSpaceSubjectPerformedActivityRaw(requestParameters: ListSpaceSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PerformedActivity>>> {
-        if (requestParameters['spaceId'] == null) {
-            throw new runtime.RequiredError(
-                'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling listSpaceSubjectPerformedActivity().'
-            );
-        }
-
-        if (requestParameters['subjectId'] == null) {
-            throw new runtime.RequiredError(
-                'subjectId',
-                'Required parameter "subjectId" was null or undefined when calling listSpaceSubjectPerformedActivity().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-
-        let urlPath = `/space/{space_id}/subject/{subject_id}/activity`;
-        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
-        urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
-
-        const response = await this.request({
-            path: urlPath,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PerformedActivityFromJSON));
-    }
-
-    /**
-     * Index
-     */
-    async listSpaceSubjectPerformedActivity(requestParameters: ListSpaceSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PerformedActivity>> {
-        const response = await this.listSpaceSubjectPerformedActivityRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Index
-     */
     async listSpaceSubjectSpecimenRaw(requestParameters: ListSpaceSubjectSpecimenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Specimen>>> {
-        if (requestParameters['spaceId'] == null) {
-            throw new runtime.RequiredError(
-                'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling listSpaceSubjectSpecimen().'
-            );
-        }
-
         if (requestParameters['subjectId'] == null) {
             throw new runtime.RequiredError(
                 'subjectId',
@@ -1282,13 +1210,23 @@ export class DefaultApi extends runtime.BaseAPI {
             );
         }
 
+        if (requestParameters['spaceId'] == null) {
+            throw new runtime.RequiredError(
+                'spaceId',
+                'Required parameter "spaceId" was null or undefined when calling listSpaceSubjectSpecimen().'
+            );
+        }
+
         const queryParameters: any = {};
+
+        if (requestParameters['spaceId'] != null) {
+            queryParameters['space_id'] = requestParameters['spaceId'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/space/{space_id}/subject/{subject_id}/specimen`;
-        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+        let urlPath = `/subject/{subject_id}/specimen`;
         urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
 
         const response = await this.request({
@@ -1306,6 +1244,43 @@ export class DefaultApi extends runtime.BaseAPI {
      */
     async listSpaceSubjectSpecimen(requestParameters: ListSpaceSubjectSpecimenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Specimen>> {
         const response = await this.listSpaceSubjectSpecimenRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Index
+     */
+    async listSubjectPerformedActivityRaw(requestParameters: ListSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PerformedActivity>>> {
+        if (requestParameters['subjectId'] == null) {
+            throw new runtime.RequiredError(
+                'subjectId',
+                'Required parameter "subjectId" was null or undefined when calling listSubjectPerformedActivity().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/subject/{subject_id}/activity`;
+        urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PerformedActivityFromJSON));
+    }
+
+    /**
+     * Index
+     */
+    async listSubjectPerformedActivity(requestParameters: ListSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PerformedActivity>> {
+        const response = await this.listSubjectPerformedActivityRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -1626,32 +1601,25 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Update
      */
-    async updateSpaceSubjectPerformedActivityRaw(requestParameters: UpdateSpaceSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PerformedActivityUnion>> {
-        if (requestParameters['spaceId'] == null) {
-            throw new runtime.RequiredError(
-                'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling updateSpaceSubjectPerformedActivity().'
-            );
-        }
-
+    async updateSubjectPerformedActivityRaw(requestParameters: UpdateSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PerformedActivityUnion>> {
         if (requestParameters['subjectId'] == null) {
             throw new runtime.RequiredError(
                 'subjectId',
-                'Required parameter "subjectId" was null or undefined when calling updateSpaceSubjectPerformedActivity().'
+                'Required parameter "subjectId" was null or undefined when calling updateSubjectPerformedActivity().'
             );
         }
 
         if (requestParameters['aId'] == null) {
             throw new runtime.RequiredError(
                 'aId',
-                'Required parameter "aId" was null or undefined when calling updateSpaceSubjectPerformedActivity().'
+                'Required parameter "aId" was null or undefined when calling updateSubjectPerformedActivity().'
             );
         }
 
         if (requestParameters['performedActivityUnionData'] == null) {
             throw new runtime.RequiredError(
                 'performedActivityUnionData',
-                'Required parameter "performedActivityUnionData" was null or undefined when calling updateSpaceSubjectPerformedActivity().'
+                'Required parameter "performedActivityUnionData" was null or undefined when calling updateSubjectPerformedActivity().'
             );
         }
 
@@ -1662,8 +1630,7 @@ export class DefaultApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/space/{space_id}/subject/{subject_id}/activity/{a_id}`;
-        urlPath = urlPath.replace(`{${"space_id"}}`, encodeURIComponent(String(requestParameters['spaceId'])));
+        let urlPath = `/subject/{subject_id}/activity/{a_id}`;
         urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
         urlPath = urlPath.replace(`{${"a_id"}}`, encodeURIComponent(String(requestParameters['aId'])));
 
@@ -1681,8 +1648,8 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Update
      */
-    async updateSpaceSubjectPerformedActivity(requestParameters: UpdateSpaceSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PerformedActivityUnion> {
-        const response = await this.updateSpaceSubjectPerformedActivityRaw(requestParameters, initOverrides);
+    async updateSubjectPerformedActivity(requestParameters: UpdateSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PerformedActivityUnion> {
+        const response = await this.updateSubjectPerformedActivityRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

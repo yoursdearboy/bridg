@@ -28,7 +28,7 @@ describe("PersonTimelineCard", () => {
       },
     ]);
     const subjectsSpy = vi
-      .spyOn(api, "listSpaceSubjectPerformedActivity")
+      .spyOn(api, "listSubjectPerformedActivity")
       .mockResolvedValue([
         {
           id: "ce3dd821-3a1b-41dd-a366-292c8c163a58",

@@ -36,8 +36,7 @@ export const Route = createFileRoute(
     editActivityQuery: queryOptions({
       queryKey: ["subject", params.subjectId, "activity", params.aId],
       queryFn: async () => {
-        const performedActivity = await api.getSpaceSubjectPerformedActivity({
-          spaceId: params.spaceId,
+        const performedActivity = await api.getSubjectPerformedActivity({
           subjectId: params.subjectId,
           aId: params.aId,
           result: true,
@@ -88,8 +87,7 @@ function ActivityEditRoute() {
   const mutation = useMutation({
     mutationKey: ["subject", subjectId, "activity", aId],
     mutationFn: (data: PerformedActivityUnionData) =>
-      api.updateSpaceSubjectPerformedActivity({
-        spaceId,
+      api.updateSubjectPerformedActivity({
         subjectId,
         aId,
         performedActivityUnionData: data,
