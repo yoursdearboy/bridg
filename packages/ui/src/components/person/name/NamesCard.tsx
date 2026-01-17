@@ -1,3 +1,4 @@
+import type { BiologicEntityName } from "@bridg/api-ts";
 import {
   Box,
   Button,
@@ -10,7 +11,6 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { IconCaretDownFilled, IconCaretUpFilled } from "@tabler/icons-react";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
-import type { BiologicEntityName } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { NamesTable } from "./NamesTable";

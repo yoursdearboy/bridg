@@ -1,4 +1,4 @@
-import { Configuration, CodeSystemApi, DefaultApi } from "api-ts";
+import { Configuration, CodeSystemApi, DefaultApi } from "@bridg/api-ts";
 
 const config = new Configuration({
   basePath: "/api",

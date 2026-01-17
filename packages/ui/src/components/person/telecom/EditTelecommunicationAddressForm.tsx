@@ -1,8 +1,8 @@
-import { useMutation } from "@tanstack/react-query";
 import type {
   PersonTelecommunicationAddress,
   PersonTelecommunicationAddressData,
-} from "api-ts";
+} from "@bridg/api-ts";
+import { useMutation } from "@tanstack/react-query";
 import api from "@/api";
 import { TelecommunicationAddressForm } from "./TelecommunicationAddressForm";
 

@@ -1,3 +1,4 @@
+import type { PerformedActivityUnionData } from "@bridg/api-ts";
 import {
   Alert,
   Box,
@@ -14,7 +15,6 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import type { PerformedActivityUnionData } from "api-ts";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import api from "@/api";

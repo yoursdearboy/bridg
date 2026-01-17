@@ -1,5 +1,3 @@
-import { Card, Group, Stack, Text, Textarea } from "@mantine/core";
-import { DateInput } from "@mantine/dates";
 import {
   instanceOfPerformedObservationData,
   instanceOfPerformedSpecimenCollectionData,
@@ -13,7 +11,9 @@ import {
   type PerformedSpecimenCollectionData,
   type PerformingMaterialData,
   type ProducedSpecimenData,
-} from "api-ts";
+} from "@bridg/api-ts";
+import { Card, Group, Stack, Text, Textarea } from "@mantine/core";
+import { DateInput } from "@mantine/dates";
 import { useTranslation } from "react-i18next";
 import { EpochSelect } from "@/components/input/EpochSelect";
 import { StudySiteSelect } from "@/components/input/StudySiteSelect";

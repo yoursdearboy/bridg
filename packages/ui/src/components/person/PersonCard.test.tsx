@@ -1,4 +1,4 @@
-import type { Person } from "api-ts";
+import type { Person } from "@bridg/api-ts";
 import { describe, expect, it } from "vitest";
 import { renderComponentInRoute } from "@/test-utils";
 import { PersonCard } from "./PersonCard";

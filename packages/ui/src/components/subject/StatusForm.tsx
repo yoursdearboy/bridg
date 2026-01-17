@@ -1,10 +1,14 @@
+import {
+  Status,
+  type StudySubject,
+  type StudySubjectData,
+} from "@bridg/api-ts";
 import { Alert, Button, Group, Modal, Radio, Stack } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { Status, type StudySubject, type StudySubjectData } from "api-ts";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import api from "@/api";

@@ -1,7 +1,7 @@
 import type {
   DefinedObservationResult,
   PerformedObservationResultData,
-} from "api-ts";
+} from "@bridg/api-ts";
 import { isEqualCD } from "./datatype";
 
 const definedToPerformedObservationResult = (

@@ -1,4 +1,9 @@
 import {
+  AdministrativeGender,
+  type Person,
+  type PersonData,
+} from "@bridg/api-ts";
+import {
   Alert,
   Button,
   Group,
@@ -9,7 +14,6 @@ import {
 import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import type { UseMutationResult } from "@tanstack/react-query";
-import { AdministrativeGender, type Person, type PersonData } from "api-ts";
 import { useTranslation } from "react-i18next";
 
 interface PersonFormProps {

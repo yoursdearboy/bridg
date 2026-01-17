@@ -3,7 +3,7 @@ import {
   instanceOfPerformedObservationData,
   instanceOfPerformedSpecimenCollectionData,
   type PerformedActivityUnionData,
-} from "api-ts";
+} from "@bridg/api-ts";
 
 export const getClassNameOfPerformedActivityUnionData = (
   data: PerformedActivityUnionData

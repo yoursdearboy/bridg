@@ -1,6 +1,6 @@
+import type { ConceptDescriptor, StudyActivity } from "@bridg/api-ts";
 import { Button, Menu, Text } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
-import type { ConceptDescriptor, StudyActivity } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import MenuItemLink from "@/components/MenuItemLink";

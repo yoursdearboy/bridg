@@ -1,5 +1,5 @@
+import { type Person, type PersonData } from "@bridg/api-ts";
 import { useMutation } from "@tanstack/react-query";
-import { type Person, type PersonData } from "api-ts";
 import api from "@/api";
 import { PersonForm } from "./PersonForm";
 

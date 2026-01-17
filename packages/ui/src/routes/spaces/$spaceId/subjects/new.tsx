@@ -1,4 +1,10 @@
 import {
+  type NewStudySubject,
+  type FoundStudySubject,
+  AdministrativeGender,
+  Status,
+} from "@bridg/api-ts";
+import {
   Alert,
   Button,
   Card,
@@ -19,12 +25,6 @@ import { hasLength, useForm, type UseFormReturnType } from "@mantine/form";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import {
-  type NewStudySubject,
-  type FoundStudySubject,
-  AdministrativeGender,
-  Status,
-} from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import i18next from "@/i18n";

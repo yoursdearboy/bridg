@@ -1,5 +1,5 @@
+import type { StudySubject } from "@bridg/api-ts";
 import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
-import type { StudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
 import { InfoRow } from "@/components/InfoRow";
 

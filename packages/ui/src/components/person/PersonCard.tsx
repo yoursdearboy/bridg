@@ -1,3 +1,4 @@
+import type { Person } from "@bridg/api-ts";
 import {
   Badge,
   Box,
@@ -9,7 +10,6 @@ import {
   Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import type { Person } from "api-ts";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import ButtonLink from "@/components/ButtonLink";

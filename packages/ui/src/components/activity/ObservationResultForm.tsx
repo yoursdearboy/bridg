@@ -2,7 +2,7 @@ import {
   type DataValue,
   type DefinedObservationResult,
   type PerformedObservationResultData,
-} from "api-ts";
+} from "@bridg/api-ts";
 import { Input } from "./Input";
 
 interface ObservatonResultFormProps {

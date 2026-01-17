@@ -1,3 +1,4 @@
+import type { BiologicEntityName, BiologicEntityNameData } from "@bridg/api-ts";
 import {
   Alert,
   Button,
@@ -8,7 +9,6 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import type { UseMutationResult } from "@tanstack/react-query";
-import type { BiologicEntityName, BiologicEntityNameData } from "api-ts";
 import { useTranslation } from "react-i18next";
 
 interface NameFormProps {

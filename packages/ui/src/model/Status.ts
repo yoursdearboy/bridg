@@ -1,4 +1,4 @@
-import { Status } from "api-ts";
+import { Status } from "@bridg/api-ts";
 
 export const STATUSES = [
   Status.PotentialCandidate,

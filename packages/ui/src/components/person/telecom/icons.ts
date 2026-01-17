@@ -1,3 +1,4 @@
+import type { URLScheme } from "@bridg/api-ts";
 import {
   IconMail,
   IconPhone,
@@ -5,7 +6,6 @@ import {
   type Icon,
   type IconProps,
 } from "@tabler/icons-react";
-import type { URLScheme } from "api-ts";
 import type { ForwardRefExoticComponent, RefAttributes } from "react";
 
 const icons: Record<

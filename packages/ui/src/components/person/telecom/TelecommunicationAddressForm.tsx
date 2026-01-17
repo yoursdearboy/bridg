@@ -1,4 +1,10 @@
 import {
+  TelecommunicationAddressUse,
+  URLScheme,
+  type PersonTelecommunicationAddress,
+  type PersonTelecommunicationAddressData,
+} from "@bridg/api-ts";
+import {
   Alert,
   Button,
   Group,
@@ -9,12 +15,6 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import type { UseMutationResult } from "@tanstack/react-query";
-import {
-  TelecommunicationAddressUse,
-  URLScheme,
-  type PersonTelecommunicationAddress,
-  type PersonTelecommunicationAddressData,
-} from "api-ts";
 import { useTranslation } from "react-i18next";
 
 interface TelecommunicationAddressFormProps {

@@ -1,5 +1,5 @@
+import { type BiologicEntityNameData } from "@bridg/api-ts";
 import { useMutation } from "@tanstack/react-query";
-import { type BiologicEntityNameData } from "api-ts";
 import api from "@/api";
 import { NameForm } from "./NameForm";
 

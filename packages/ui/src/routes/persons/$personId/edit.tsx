@@ -1,3 +1,4 @@
+import { AdministrativeGender } from "@bridg/api-ts";
 import {
   Badge,
   Button,
@@ -11,7 +12,6 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { createFileRoute } from "@tanstack/react-router";
-import { AdministrativeGender } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import ButtonLink from "@/components/ButtonLink";

@@ -28,7 +28,7 @@ jobs:
     - name: Reset database
       run: uv run ./dev/db-reset.sh
     - name: Run Playwright tests
-      run: npx -w ui playwright test
+      run: npx -w @bridg/ui playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

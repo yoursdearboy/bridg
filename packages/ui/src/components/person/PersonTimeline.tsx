@@ -1,3 +1,4 @@
+import type { PerformedActivity, PersonStudySubject } from "@bridg/api-ts";
 import {
   Box,
   Card,
@@ -7,7 +8,6 @@ import {
   Timeline,
 } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
-import type { PerformedActivity, PersonStudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import AnchorLink from "@/components/AnchorLink";

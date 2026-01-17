@@ -1,5 +1,5 @@
+import { type PersonPostalAddressData } from "@bridg/api-ts";
 import { useMutation } from "@tanstack/react-query";
-import { type PersonPostalAddressData } from "api-ts";
 import api from "@/api";
 import { AddressForm } from "./AddressForm";
 

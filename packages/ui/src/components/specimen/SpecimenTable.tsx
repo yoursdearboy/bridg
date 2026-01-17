@@ -1,9 +1,9 @@
+import type { Specimen } from "@bridg/api-ts";
 import { Group, LoadingOverlay, Table, Text, Tooltip } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import { IconCancel, IconMessage, IconPencil } from "@tabler/icons-react";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import type { Specimen } from "api-ts";
 import { useTranslation } from "react-i18next";
 import { Route as EditActivityRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId/activities/$aId.edit";
 

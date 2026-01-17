@@ -1,3 +1,4 @@
+import { URLScheme, type PersonTelecommunicationAddress } from "@bridg/api-ts";
 import {
   Box,
   Button,
@@ -9,7 +10,6 @@ import {
   Text,
 } from "@mantine/core";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
-import { URLScheme, type PersonTelecommunicationAddress } from "api-ts";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import api from "@/api";

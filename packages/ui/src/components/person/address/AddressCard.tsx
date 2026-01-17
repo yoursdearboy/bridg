@@ -1,3 +1,4 @@
+import type { PersonPostalAddress } from "@bridg/api-ts";
 import {
   Box,
   Button,
@@ -9,7 +10,6 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
-import type { PersonPostalAddress } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { AddressTable } from "./AddressTable";

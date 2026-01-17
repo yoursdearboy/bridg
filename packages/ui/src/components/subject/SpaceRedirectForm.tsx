@@ -1,8 +1,8 @@
+import { Status, type StudySubject } from "@bridg/api-ts";
 import { Alert, Button, Group, Select, Stack, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { Status, type StudySubject } from "api-ts";
 import { useTranslation } from "react-i18next";
 import api from "@/api";
 import { Route as SpacesSpaceidSubjectsSubjectIdRoute } from "@/routes/spaces/$spaceId/subjects/$subjectId";
