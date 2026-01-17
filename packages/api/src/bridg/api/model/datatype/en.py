@@ -1,8 +1,7 @@
 from typing import Optional
 
-from pydantic import computed_field
-
 import bridg.alchemy
+from pydantic import computed_field
 
 from ..base import BaseModel
 
@@ -21,7 +20,8 @@ class EntityName[T: bridg.alchemy.EntityName](EntityNameData[T]):
     @computed_field
     @property
     def label(self) -> Optional[str]:
-        parts = [self.prefix, self.family, self.given, self.middle, self.suffix]
+        # FIXME: delete or make locale aware
+        parts = [self.prefix, self.given, self.middle, self.family, self.suffix]
         parts = [p for p in parts if p]
         s = " ".join(parts).strip()
         if s == "":
