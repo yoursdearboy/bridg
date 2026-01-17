@@ -15,7 +15,7 @@
           "DefinedObservationResult_value": "DataValue"
         },
         "additionalProperties": {
-            "npmName": "api-ts",
+            "npmName": "@bridg/api-ts",
             "npmVersion": "0.0.1"
         }
       }
