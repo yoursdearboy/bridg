@@ -13,11 +13,7 @@ export const SpecimenCard = ({ spaceId, subjectId }: SpecimenCardProps) => {
   const { t } = useTranslation();
   const query = useQuery({
     queryKey: ["space", spaceId, "subject", subjectId, "specimen"],
-    queryFn: () =>
-      api.listSpaceSubjectSpecimen({
-        spaceId,
-        subjectId,
-      }),
+    queryFn: () => api.listSubjectSpecimen({ subjectId }),
   });
 
   return (
