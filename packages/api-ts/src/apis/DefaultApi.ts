@@ -188,12 +188,11 @@ export interface ListSpaceSubjectRequest {
     spaceId: string;
 }
 
-export interface ListSpaceSubjectSpecimenRequest {
+export interface ListSubjectPerformedActivityRequest {
     subjectId: string;
-    spaceId: string;
 }
 
-export interface ListSubjectPerformedActivityRequest {
+export interface ListSubjectSpecimenRequest {
     subjectId: string;
 }
 
@@ -1202,54 +1201,6 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async listSpaceSubjectSpecimenRaw(requestParameters: ListSpaceSubjectSpecimenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Specimen>>> {
-        if (requestParameters['subjectId'] == null) {
-            throw new runtime.RequiredError(
-                'subjectId',
-                'Required parameter "subjectId" was null or undefined when calling listSpaceSubjectSpecimen().'
-            );
-        }
-
-        if (requestParameters['spaceId'] == null) {
-            throw new runtime.RequiredError(
-                'spaceId',
-                'Required parameter "spaceId" was null or undefined when calling listSpaceSubjectSpecimen().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        if (requestParameters['spaceId'] != null) {
-            queryParameters['space_id'] = requestParameters['spaceId'];
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-
-        let urlPath = `/subject/{subject_id}/specimen`;
-        urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
-
-        const response = await this.request({
-            path: urlPath,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SpecimenFromJSON));
-    }
-
-    /**
-     * Index
-     */
-    async listSpaceSubjectSpecimen(requestParameters: ListSpaceSubjectSpecimenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Specimen>> {
-        const response = await this.listSpaceSubjectSpecimenRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Index
-     */
     async listSubjectPerformedActivityRaw(requestParameters: ListSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PerformedActivity>>> {
         if (requestParameters['subjectId'] == null) {
             throw new runtime.RequiredError(
@@ -1281,6 +1232,43 @@ export class DefaultApi extends runtime.BaseAPI {
      */
     async listSubjectPerformedActivity(requestParameters: ListSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PerformedActivity>> {
         const response = await this.listSubjectPerformedActivityRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Index
+     */
+    async listSubjectSpecimenRaw(requestParameters: ListSubjectSpecimenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Specimen>>> {
+        if (requestParameters['subjectId'] == null) {
+            throw new runtime.RequiredError(
+                'subjectId',
+                'Required parameter "subjectId" was null or undefined when calling listSubjectSpecimen().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/subject/{subject_id}/specimen`;
+        urlPath = urlPath.replace(`{${"subject_id"}}`, encodeURIComponent(String(requestParameters['subjectId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SpecimenFromJSON));
+    }
+
+    /**
+     * Index
+     */
+    async listSubjectSpecimen(requestParameters: ListSubjectSpecimenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Specimen>> {
+        const response = await this.listSubjectSpecimenRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
