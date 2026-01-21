@@ -23,7 +23,7 @@ import type {
   HTTPValidationError,
   LookupStudySubject,
   NewStudySubject,
-  PerformedActivity,
+  PerformedActivityInfo,
   PerformedActivityUnion,
   PerformedActivityUnionData,
   Person,
@@ -57,8 +57,8 @@ import {
     LookupStudySubjectToJSON,
     NewStudySubjectFromJSON,
     NewStudySubjectToJSON,
-    PerformedActivityFromJSON,
-    PerformedActivityToJSON,
+    PerformedActivityInfoFromJSON,
+    PerformedActivityInfoToJSON,
     PerformedActivityUnionFromJSON,
     PerformedActivityUnionToJSON,
     PerformedActivityUnionDataFromJSON,
@@ -1201,7 +1201,7 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Index
      */
-    async listSubjectPerformedActivityRaw(requestParameters: ListSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PerformedActivity>>> {
+    async listSubjectPerformedActivityRaw(requestParameters: ListSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PerformedActivityInfo>>> {
         if (requestParameters['subjectId'] == null) {
             throw new runtime.RequiredError(
                 'subjectId',
@@ -1224,13 +1224,13 @@ export class DefaultApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PerformedActivityFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PerformedActivityInfoFromJSON));
     }
 
     /**
      * Index
      */
-    async listSubjectPerformedActivity(requestParameters: ListSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PerformedActivity>> {
+    async listSubjectPerformedActivity(requestParameters: ListSubjectPerformedActivityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PerformedActivityInfo>> {
         const response = await this.listSubjectPerformedActivityRaw(requestParameters, initOverrides);
         return await response.value();
     }

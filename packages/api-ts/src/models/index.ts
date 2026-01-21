@@ -30,6 +30,8 @@ export * from './Organization';
 export * from './OrganizationOrganizationName';
 export * from './PerformedActivity';
 export * from './PerformedActivityData';
+export * from './PerformedActivityInfo';
+export * from './PerformedActivityType';
 export * from './PerformedActivityUnion';
 export * from './PerformedActivityUnionData';
 export * from './PerformedObservation';

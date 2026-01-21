@@ -9,6 +9,7 @@ from bridg.api.db import get_repository
 from bridg.api.model import (
     PerformedActivity,
     PerformedActivityData,
+    PerformedActivityInfo,
     PerformedObservation,
     PerformedObservationData,
     PerformedSpecimenCollection,
@@ -68,9 +69,9 @@ OPENAPI_EXTRA = {
 
 
 @router.get("", operation_id="list_subject_performed_activity")
-def index(subject_id: UUID, repo: PerformedActivityRepositoryDep) -> List[PerformedActivity]:
+def index(subject_id: UUID, repo: PerformedActivityRepositoryDep) -> List[PerformedActivityInfo]:
     objs = repo.all(bridg.alchemy.PerformedActivity.involved_subject_id == subject_id)
-    return [PerformedActivity.model_validate(obj) for obj in objs]
+    return [PerformedActivityInfo.model_validate(obj) for obj in objs]
 
 
 @router.get("/{a_id:uuid}", operation_id="get_subject_performed_activity", responses=RESPONSES)

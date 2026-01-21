@@ -3,6 +3,8 @@ from .performed_activity import (
     PerformedActivityBase,
     PerformedActivityData,
     PerformedActivityDataBase,
+    PerformedActivityInfo,
+    PerformedActivityType,
 )
 from .performed_observation import (
     PerformedObservation,
@@ -34,6 +36,8 @@ __all__ = [
     "PerformedActivityBase",
     "PerformedActivityData",
     "PerformedActivityDataBase",
+    "PerformedActivityInfo",
+    "PerformedActivityType",
     "PerformedObservation",
     "PerformedObservationData",
     "PerformedObservationResult",

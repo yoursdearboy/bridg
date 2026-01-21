@@ -1,4 +1,5 @@
 from datetime import datetime
+from enum import Enum
 from typing import Optional
 from uuid import UUID
 
@@ -8,6 +9,13 @@ from ..base import BaseModel
 from ..datatype import ConceptDescriptor, IntervalPointInTime
 from ..protocol import DefinedActivity, Epoch
 from .study_site import StudySite
+
+
+class PerformedActivityType(Enum):
+    activity = "activity"
+    procedure = "procedure"
+    observation = "observation"
+    specimen_collection = "specimen_collection"
 
 
 class PerformedActivityBase[T: bridg.alchemy.PerformedActivity](BaseModel[T]):
@@ -22,6 +30,10 @@ class PerformedActivityBase[T: bridg.alchemy.PerformedActivity](BaseModel[T]):
     context_for_study_site: Optional[StudySite]
     containing_epoch: Optional[Epoch]
     instantiated_defined_activity: Optional[DefinedActivity]
+
+
+class PerformedActivityInfo(PerformedActivityBase[bridg.alchemy.PerformedActivity]):
+    type: PerformedActivityType
 
 
 class PerformedActivity(PerformedActivityBase[bridg.alchemy.PerformedActivity]):

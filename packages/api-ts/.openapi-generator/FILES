@@ -34,6 +34,8 @@ src/models/Organization.ts
 src/models/OrganizationOrganizationName.ts
 src/models/PerformedActivity.ts
 src/models/PerformedActivityData.ts
+src/models/PerformedActivityInfo.ts
+src/models/PerformedActivityType.ts
 src/models/PerformedActivityUnion.ts
 src/models/PerformedActivityUnionData.ts
 src/models/PerformedObservation.ts
