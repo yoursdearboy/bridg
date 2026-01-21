@@ -1,7 +1,8 @@
 from typing import Optional
 
-import bridg.alchemy
 from pydantic import computed_field
+
+import bridg.alchemy
 
 from ..base import BaseModel
 
