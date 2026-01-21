@@ -1,3 +1,5 @@
+import pathlib
+from argparse import ArgumentParser
 from typing import Any, Dict, List, TypedDict
 
 import yaml
@@ -59,13 +61,18 @@ def structure(data: Dict[str, List[Any]]):
             yield value
 
 
+parser = ArgumentParser()
+parser.add_argument("path", type=pathlib.Path, help="Path to YAML file with seeds")
+
+
 def main():
     load_env()
+    args = parser.parse_args()
     settings = load_settings()
     engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
     session = Session(engine)
     converter.terminology.set(TerminologyService(session))
-    with open("dev/seed.yml") as f:
+    with open(args.path) as f:
         data = yaml.load(f, yaml.FullLoader)
     objects = structure(data)
     session.add_all(objects)

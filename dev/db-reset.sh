@@ -14,4 +14,3 @@ fi
 rm -f tmp/bridg.db
 
 python -m dev.migrate
-python -m dev.seed
