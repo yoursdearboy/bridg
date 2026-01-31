@@ -8,6 +8,7 @@ members = [
     "api",
     "bridg-workspace",
     "common",
+    "graphql",
 ]
 
 [[package]]

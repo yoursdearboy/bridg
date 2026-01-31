@@ -1,0 +1,41 @@
+[project]
+name = "graphql"
+version = "0.1.0"
+description = "GraphQL for BRIDG"
+dependencies = [
+    "alchemy",
+    "common"
+]
+
+[dependency-groups]
+dev = [
+    "mkinit>=1.2.0",
+    "poethepoet>=0.39.0",
+]
+test = [
+]
+
+[build-system]
+requires = ["uv_build>=0.8.12,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.poe.tasks]
+"graphql:mkinit".sequence = [
+    "mkinit --recursive --relative --nomods -i src/bridg/graphql",
+    "ruff check --fix",
+    "ruff format"
+]
+"graphql:mkinit".default_item_type = "cmd"
+
+[tool.ruff]
+extend = "../../pyproject.toml"
+
+[tool.ruff.lint]
+ignore = ["TID252"]
+
+[tool.uv.build-backend]
+module-name = "bridg.graphql"
+
+[tool.uv.sources]
+alchemy = { workspace = true }
+common = { workspace = true }
