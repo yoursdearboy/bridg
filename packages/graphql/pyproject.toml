@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "GraphQL for BRIDG"
 dependencies = [
     "alchemy",
-    "common"
+    "common",
+    "itsdangerous>=2.2.0",
+    "strawberry-graphql[cli]>=0.289.8",
+    "strawchemy>=0.21.0",
 ]
 
 [dependency-groups]
