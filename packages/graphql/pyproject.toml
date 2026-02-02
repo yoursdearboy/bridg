@@ -4,7 +4,8 @@ version = "0.1.0"
 description = "GraphQL for BRIDG"
 dependencies = [
     "alchemy",
-    "common"
+    "common",
+    "strawberry-graphql[cli]>=0.289.8",
 ]
 
 [dependency-groups]
@@ -21,7 +22,7 @@ build-backend = "uv_build"
 
 [tool.poe.tasks]
 "graphql:mkinit".sequence = [
-    "mkinit --recursive --relative --nomods -i src/bridg/graphql",
+    "mkinit --recursive --relative --nomods -i src/bridg/graphql/common",
     "ruff check --fix",
     "ruff format"
 ]
