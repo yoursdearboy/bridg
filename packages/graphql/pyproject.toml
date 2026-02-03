@@ -23,6 +23,7 @@ build-backend = "uv_build"
 [tool.poe.tasks]
 "graphql:mkinit".sequence = [
     "mkinit --recursive --relative --nomods -i src/bridg/graphql/common",
+    "mkinit --recursive --relative --nomods -i src/bridg/graphql/datatype",
     "ruff check --fix",
     "ruff format"
 ]
