@@ -1,6 +1,7 @@
 from .biologic_entity import (
     BiologicEntity,
     BiologicEntityIdentifier,
+    BiologicEntityInput,
     BiologicEntityName,
 )
 from .id import (
@@ -8,6 +9,15 @@ from .id import (
 )
 from .person import (
     Person,
+    PersonInput,
 )
 
-__all__ = ["BiologicEntity", "BiologicEntityIdentifier", "BiologicEntityName", "ID", "Person"]
+__all__ = [
+    "BiologicEntity",
+    "BiologicEntityIdentifier",
+    "BiologicEntityInput",
+    "BiologicEntityName",
+    "ID",
+    "Person",
+    "PersonInput",
+]

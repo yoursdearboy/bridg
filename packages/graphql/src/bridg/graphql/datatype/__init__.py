@@ -3,9 +3,10 @@ from .cd import (
 )
 from .en import (
     EntityName,
+    EntityNameInput,
 )
 from .ii import (
     InstanceIdentifier,
 )
 
-__all__ = ["ConceptDescriptor", "EntityName", "InstanceIdentifier"]
+__all__ = ["ConceptDescriptor", "EntityName", "EntityNameInput", "InstanceIdentifier"]
