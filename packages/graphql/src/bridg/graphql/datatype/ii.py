@@ -1,9 +1,8 @@
+from dataclasses import dataclass
 from typing import Optional
 
-import strawberry
 
-
-@strawberry.type
+@dataclass
 class InstanceIdentifier:
     root: str
     extension: Optional[str]

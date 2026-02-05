@@ -9,7 +9,7 @@ import strawberry
 from bridg.alchemy import AdministrativeGender
 
 from ..datatype import EntityName, EntityNameInput
-from .id import ID
+from .id import ID, IDInput
 
 
 @strawberry.type
@@ -45,7 +45,13 @@ class BiologicEntityInput:
     death_date_estimated_indicator: strawberry.Maybe[Optional[bool]]
     death_indicator: strawberry.Maybe[Optional[bool]]
 
+    identifier: strawberry.Maybe[List[BiologicEntityIdentifierInput]]
     name: strawberry.Maybe[List[BiologicEntityNameInput]]
+
+
+@strawberry.input
+class BiologicEntityIdentifierInput(IDInput):
+    id: strawberry.Maybe[UUID]
 
 
 @strawberry.input

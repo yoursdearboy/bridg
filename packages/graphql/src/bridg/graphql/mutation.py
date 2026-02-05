@@ -11,6 +11,7 @@ class Mutation:
     @strawberry.mutation
     def person(self, input: PersonInput, info: strawberry.Info[Context]) -> Person:
         session = info.context.session
+        terminology = info.context.terminology
         person = alchemy.Person()
         if input.id is not None:
             person.id = input.id.value
@@ -28,6 +29,20 @@ class Mutation:
                 if name.given is not None:
                     en.given = name.given.value
                 person.name.append(en)
+        if input.identifier is not None:
+            for id in input.identifier.value:
+                bid = alchemy.BiologicEntityIdentifier()
+                bid.identifier = alchemy.InstanceIdentifier(
+                    root=alchemy.UniqueIdentifierString(id.identifier.root),
+                    extension=id.identifier.extension,
+                )
+                if id.identifier_type_code:
+                    bid.identifier_type_code = terminology.get_or_create(
+                        id.identifier_type_code.value.code,
+                        id.identifier_type_code.value.code_system,
+                        id.identifier_type_code.value.display_name,
+                    )
+                person.identifier.append(bid)
         person = session.merge(person)
         session.commit()
         return person  # type: ignore
