@@ -3,29 +3,29 @@ from strawberry.types.scalar import ScalarDefinition, scalar
 from .datatype import ConceptDescriptor, InstanceIdentifier
 
 
-def _serialize_concept_descriptor(x: ConceptDescriptor):
-    return {
-        "code": x.code,
-        "code_system": x.code_system,
-        "display_name": x.display_name,
-    }
+def _serialize_dataclass(cl):
+    def serialize(x):
+        return {k: getattr(x, k) for k in cl.__dataclass_fields__.keys()}
+
+    return serialize
 
 
-def _parse_concept_descriptor(x: dict):
-    x["display_name"] = x.get("display_name", None)
-    return ConceptDescriptor(**x)
+def _parse_dataclass(cl):
+    def parse(x):
+        return cl(**{k: x.get(k) for k in cl.__dataclass_fields__.keys()})
+
+    return parse
 
 
-# FIXME: do serialization consistently
 SCALAR_REGISTRY: dict[object, ScalarDefinition] = {
     ConceptDescriptor: scalar(
         name="ConceptDescriptor",
-        serialize=_serialize_concept_descriptor,
-        parse_value=_parse_concept_descriptor,
+        serialize=_serialize_dataclass(ConceptDescriptor),
+        parse_value=_parse_dataclass(ConceptDescriptor),
     ),
     InstanceIdentifier: scalar(
         name="InstanceIdentifier",
-        serialize=lambda x: x.__dict__,
-        parse_value=lambda x: InstanceIdentifier(**x),
+        serialize=_serialize_dataclass(InstanceIdentifier),
+        parse_value=_parse_dataclass(InstanceIdentifier),
     ),
 }
