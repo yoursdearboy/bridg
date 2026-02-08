@@ -9,7 +9,7 @@ const config: CodegenConfig = {
   ignoreNoDocuments: true,
   generates: {
     // Use a path that works the best for the structure of your application
-    "./src/types/__generated__/": {
+    "./src/": {
       preset: "client",
       presetConfig: {
         gqlTagName: "gql",

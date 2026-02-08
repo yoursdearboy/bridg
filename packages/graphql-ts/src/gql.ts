@@ -15,6 +15,8 @@ const documents = {};
  * The query argument is unknown!
  * Please regenerate the types.
  */
+export function gql(source: string): unknown;
+
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
 }
