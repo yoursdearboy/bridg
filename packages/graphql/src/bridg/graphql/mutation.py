@@ -37,54 +37,93 @@ def _annotation_is_maybe(annotation: Any) -> bool:
     return orig is strawberry.Maybe
 
 
-def _convert[T](input, class_: Type[T], terminology: bridg.alchemy.TerminologyService | None = None) -> T:
-    if is_dataclass(class_):
-        return class_(**{k: getattr(input, k) for k in class_.__dataclass_fields__.keys()})
+class Converter:
+    def __init__(self) -> None:
+        self._registry = []
 
-    if get_origin(class_) is list:
-        (arg,) = get_args(class_)
-        return [_convert(x, arg, terminology=terminology) for x in input]  # type: ignore
+    # TODO: extra classmethod?
+    def register(self, from_=None, to=None):
+        def decorator(f):
+            self._registry.append((from_, to, f))
+            return f
 
-    if class_ == bridg.alchemy.ConceptDescriptor:
-        if terminology is None:
-            raise RuntimeError("TerminologyService required")
-        return terminology.get_or_create(input.code, input.code_system, input.display_name)  # type: ignore
+        return decorator
 
-    if issubclass(class_, bridg.alchemy.Base):
-        class_ = get_concrete_class(input, class_)
-        insp = inspect(class_)
-        output = class_()
-        for key, field in input.__dataclass_fields__.items():
-            value = getattr(input, key, None)
-
-            if _annotation_is_maybe(field.type):
-                if value is None:
+    # TODO: Move context to init?
+    # TODO: Pass converter itself as first argument or make registered converters classy?
+    def convert[T](self, input, class_: Type[T], terminology: bridg.alchemy.TerminologyService | None = None) -> T:
+        for from_, to, f in self._registry:
+            if from_ is not None:
+                if not from_(input):
                     continue
-                value = value.value
+            if to is not None:
+                if isinstance(to, type):
+                    if not issubclass(class_, to):
+                        continue
+                elif callable(to):
+                    if not to(class_):
+                        continue
+                else:
+                    raise RuntimeError("Unknown to predicate")
+            return f(input, class_, terminology=terminology)
+        raise RuntimeError(f"Can't comvert to {class_.__name__}")
 
-            if value is not None:
-                attr = insp.attrs.get(key)
 
-                if attr is None:
-                    raise RuntimeError(f"There's no attr {key} in the model {class_.__name__}")
+converter = Converter()
 
-                if isinstance(attr, Relationship):
-                    attr_class_ = attr.entity.class_
-                    if attr.uselist:
-                        attr_class_ = List[attr_class_]
-                    value = _convert(value, attr_class_, terminology=terminology)
 
-                if isinstance(attr, Composite):
-                    attr_class_ = attr.composite_class
-                    assert isinstance(attr_class_, type)
-                    value = _convert(value, attr_class_, terminology=terminology)
+@converter.register(to=is_dataclass)
+def _[T](x, class_: Type[T], *args, **kwargs) -> T:
+    return class_(
+        **{k: getattr(x, k) for k in class_.__dataclass_fields__.keys()},  # type: ignore
+    )
 
-                # otherwise it must be primitive, so just don't convert
 
-            setattr(output, key, value)
-        return output
+@converter.register(to=lambda x: get_origin(x) is list)
+def _[T](x, class_: List[Type[T]], *args, **kwargs) -> List[T]:
+    (arg,) = get_args(class_)
+    return [converter.convert(y, arg, *args, **kwargs) for y in x]
 
-    raise RuntimeError(f"Can't comvert to {class_.__name__}")
+
+@converter.register(to=bridg.alchemy.ConceptDescriptor)
+def _(x, class_, *, terminology: bridg.alchemy.TerminologyService) -> bridg.alchemy.ConceptDescriptor:
+    return terminology.get_or_create(x.code, x.code_system, x.display_name)
+
+
+@converter.register(to=bridg.alchemy.Base)
+def _[T: bridg.alchemy.Base](x, class_: Type[T], *args, **kwargs) -> T:
+    class_ = get_concrete_class(x, class_)
+    insp = inspect(class_)
+    output = class_()
+    for key, field in x.__dataclass_fields__.items():
+        value = getattr(x, key, None)
+
+        if _annotation_is_maybe(field.type):
+            if value is None:
+                continue
+            value = value.value
+
+        if value is not None:
+            attr = insp.attrs.get(key)
+
+            if attr is None:
+                raise RuntimeError(f"There's no attr {key} in the model {class_.__name__}")
+
+            if isinstance(attr, Relationship):
+                attr_class_ = attr.entity.class_
+                if attr.uselist:
+                    attr_class_ = List[attr_class_]
+                value = converter.convert(value, attr_class_, *args, **kwargs)
+
+            if isinstance(attr, Composite):
+                attr_class_ = attr.composite_class
+                assert isinstance(attr_class_, type)
+                value = converter.convert(value, attr_class_, *args, **kwargs)
+
+            # otherwise it must be primitive, so just don't convert
+
+        setattr(output, key, value)
+    return output
 
 
 @strawberry.type
@@ -93,7 +132,7 @@ class Mutation:
     def person(self, input: PersonInput, info: strawberry.Info[Context]) -> Person:
         session = info.context.session
         terminology = info.context.terminology
-        person = _convert(input, bridg.alchemy.Person, terminology=terminology)
+        person = converter.convert(input, bridg.alchemy.Person, terminology=terminology)
         person = session.merge(person)
         session.commit()
         return person  # type: ignore
