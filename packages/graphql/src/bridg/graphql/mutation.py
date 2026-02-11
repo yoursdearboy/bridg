@@ -1,5 +1,6 @@
-import bridg.alchemy
 import strawberry
+
+import bridg.alchemy
 
 from .common import Person, PersonInput
 from .context import Context

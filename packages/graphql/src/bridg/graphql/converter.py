@@ -3,16 +3,17 @@ import typing
 from dataclasses import is_dataclass
 from typing import Annotated, Any, List, Type, get_args, get_origin
 
-import bridg.alchemy
 import strawberry
-from bridg.common.converter import Converter
 from sqlalchemy import inspect
 from sqlalchemy.orm import Composite, Relationship
+
+import bridg.alchemy
+import bridg.common.converter
 
 from .context import Context
 from .datatype import ConceptDescriptor
 
-converter = Converter()
+converter = bridg.common.converter.Converter()
 
 
 @converter.register(to=is_dataclass)
