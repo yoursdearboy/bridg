@@ -1,7 +1,6 @@
 import re
 import typing
-from dataclasses import is_dataclass
-from typing import Annotated, Any, List, Type, get_args, get_origin
+from typing import Annotated, Any, ClassVar, List, Mapping, Protocol, Type, get_args, runtime_checkable
 
 import strawberry
 from sqlalchemy import inspect
@@ -16,22 +15,25 @@ from .datatype import ConceptDescriptor
 converter = bridg.common.converter.Converter()
 
 
-@converter.register(to=is_dataclass)
-def _object_to_dataclass[T](x, class_: Type[T]) -> T:
-    return class_(
-        **{k: getattr(x, k) for k in class_.__dataclass_fields__.keys()},  # type: ignore
-    )
+@runtime_checkable
+class Dataclass(Protocol):
+    __dataclass_fields__: ClassVar[Mapping[str, Any]]
 
 
-@converter.register(to=lambda x: get_origin(x) is list)
-def _list_to_list[T](x, class_: List[Type[T]], *, context: Context) -> List[T]:
+@converter.register(to=Dataclass)
+def _object_to_dataclass[T: Dataclass](x, class_: Type[T]) -> T:
+    return class_(**{k: getattr(x, k) for k in class_.__dataclass_fields__.keys()})
+
+
+@converter.register()
+def _list_to_list[T](x, class_: Type[List[T]], context: Context) -> List[T]:
     (arg,) = get_args(class_)
     return [converter.convert(y, arg, context=context) for y in x]
 
 
 @converter.register()
 def _str_to_cd(
-    x: str, class_: Type[bridg.alchemy.ConceptDescriptor], *, context: Context
+    x: str, class_: Type[bridg.alchemy.ConceptDescriptor], context: Context
 ) -> bridg.alchemy.ConceptDescriptor:
     try:
         code_system, code = x.split("/", 1)
@@ -43,7 +45,7 @@ def _str_to_cd(
 
 @converter.register()
 def _object_to_cd(
-    x: ConceptDescriptor, class_: Type[bridg.alchemy.ConceptDescriptor], *, context: Context
+    x: ConceptDescriptor, class_: Type[bridg.alchemy.ConceptDescriptor], context: Context
 ) -> bridg.alchemy.ConceptDescriptor:
     return context.terminology.get_or_create(x.code, x.code_system, x.display_name)
 
@@ -73,7 +75,7 @@ def _annotation_is_maybe(annotation: Any) -> bool:
 
 
 @converter.register(to=bridg.alchemy.Base)
-def _object_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], *, context: Context) -> T:
+def _object_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], context: Context) -> T:
     class_ = get_concrete_class(x, class_)
     insp = inspect(class_)
     output = class_()

@@ -1,5 +1,5 @@
 import inspect
-from typing import Type, get_type_hints
+from typing import Type, get_origin, get_type_hints
 
 
 class Context:
@@ -10,7 +10,6 @@ class Converter:
     def __init__(self) -> None:
         self._registry = []
 
-    # TODO: extra classmethod?
     def register(self, from_=None, to=None):
         def decorator(f):
             insp = inspect.signature(f)
@@ -28,8 +27,6 @@ class Converter:
 
         return decorator
 
-    # TODO: Move context to init?
-    # TODO: Pass converter itself as first argument or make registered converters classy?
     def convert[T](self, input, class_: Type[T], *, context: Context) -> T:
         for from_, to, f in self._registry:
             if from_ is not None:
@@ -43,7 +40,14 @@ class Converter:
                     raise RuntimeError("Unknown from_ predicate")
             if to is not None:
                 if isinstance(to, type):
-                    if not issubclass(class_, to):
+                    if getattr(to, "_is_protocol", False):
+                        if not isinstance(class_, to):
+                            continue
+                    elif not issubclass(class_, to):
+                        continue
+                elif get_origin(to) is not None:
+                    # FIXME: check args?
+                    if get_origin(to) != get_origin(class_):
                         continue
                 elif callable(to):
                     if not to(class_):
