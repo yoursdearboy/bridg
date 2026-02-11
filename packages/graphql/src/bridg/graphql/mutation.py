@@ -3,14 +3,14 @@ import typing
 from dataclasses import is_dataclass
 from typing import Annotated, Any, List, Type, get_args, get_origin
 
+import bridg.alchemy
 import strawberry
 from sqlalchemy import inspect
 from sqlalchemy.orm import Composite, Relationship
 
-import bridg.alchemy
-
 from .common import Person, PersonInput
 from .context import Context
+from .datatype import ConceptDescriptor
 
 
 def get_concrete_class[T: bridg.alchemy.Base](input, class_: Type[T]) -> Type[T]:
@@ -54,8 +54,14 @@ class Converter:
     def convert[T](self, input, class_: Type[T], terminology: bridg.alchemy.TerminologyService | None = None) -> T:
         for from_, to, f in self._registry:
             if from_ is not None:
-                if not from_(input):
-                    continue
+                if isinstance(from_, type):
+                    if not isinstance(input, from_):
+                        continue
+                elif callable(from_):
+                    if not from_(input):
+                        continue
+                else:
+                    raise RuntimeError("Unknown from_ predicate")
             if to is not None:
                 if isinstance(to, type):
                     if not issubclass(class_, to):
@@ -85,13 +91,25 @@ def _list_to_list[T](x, class_: List[Type[T]], *args, **kwargs) -> List[T]:
     return [converter.convert(y, arg, *args, **kwargs) for y in x]
 
 
-@converter.register(to=bridg.alchemy.ConceptDescriptor)
-def _dict_to_cd(x, class_, *, terminology: bridg.alchemy.TerminologyService) -> bridg.alchemy.ConceptDescriptor:
+@converter.register(is_dataclass, to=bridg.alchemy.ConceptDescriptor)
+def _object_to_cd(
+    x: ConceptDescriptor, class_, *, terminology: bridg.alchemy.TerminologyService
+) -> bridg.alchemy.ConceptDescriptor:
     return terminology.get_or_create(x.code, x.code_system, x.display_name)
 
 
+@converter.register(str, to=bridg.alchemy.ConceptDescriptor)
+def _str_to_cd(x: str, class_, *, terminology: bridg.alchemy.TerminologyService) -> bridg.alchemy.ConceptDescriptor:
+    try:
+        code_system, code = x.split("/", 1)
+    except ValueError:
+        raise Exception("String representation of ConceptDescriptor must be code_system/code")
+    cd = ConceptDescriptor(code_system=code_system, code=code, display_name=None)
+    return converter.convert(cd, class_, terminology=terminology)
+
+
 @converter.register(to=bridg.alchemy.Base)
-def _dict_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], *args, **kwargs) -> T:
+def _object_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], *args, **kwargs) -> T:
     class_ = get_concrete_class(x, class_)
     insp = inspect(class_)
     output = class_()
@@ -123,6 +141,7 @@ def _dict_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], *args, **kwargs)
             # otherwise it must be primitive, so just don't convert
 
         setattr(output, key, value)
+
     return output
 
 
