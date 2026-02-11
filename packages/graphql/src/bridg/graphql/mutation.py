@@ -1,11 +1,12 @@
+import inspect
 import re
 import typing
 from dataclasses import is_dataclass
-from typing import Annotated, Any, List, Type, get_args, get_origin
+from typing import Annotated, Any, List, Type, get_args, get_origin, get_type_hints
 
 import bridg.alchemy
+import sqlalchemy as sa
 import strawberry
-from sqlalchemy import inspect
 from sqlalchemy.orm import Composite, Relationship
 
 from .common import Person, PersonInput
@@ -14,7 +15,7 @@ from .datatype import ConceptDescriptor
 
 
 def get_concrete_class[T: bridg.alchemy.Base](input, class_: Type[T]) -> Type[T]:
-    insp = inspect(class_)
+    insp = sa.inspect(class_)
     if (polymorphic_on := insp.polymorphic_on) is not None:
         if polymorphic_value := getattr(input, polymorphic_on.name, None):
             return insp.polymorphic_map[polymorphic_value].class_
@@ -44,14 +45,24 @@ class Converter:
     # TODO: extra classmethod?
     def register(self, from_=None, to=None):
         def decorator(f):
-            self._registry.append((from_, to, f))
+            insp = inspect.signature(f)
+            args = list(insp.parameters.values())
+            arg1 = from_
+            if arg1 is None:
+                if args[0].annotation != inspect.Signature.empty:
+                    arg1 = args[0].annotation
+            arg2 = to
+            if arg2 is None:
+                if args[1].annotation != inspect.Signature.empty:
+                    arg2 = args[1].annotation.__args__[0]
+            self._registry.append((arg1, arg2, f))
             return f
 
         return decorator
 
     # TODO: Move context to init?
     # TODO: Pass converter itself as first argument or make registered converters classy?
-    def convert[T](self, input, class_: Type[T], terminology: bridg.alchemy.TerminologyService | None = None) -> T:
+    def convert[T](self, input, class_: Type[T], *, context: Context) -> T:
         for from_, to, f in self._registry:
             if from_ is not None:
                 if isinstance(from_, type):
@@ -71,7 +82,12 @@ class Converter:
                         continue
                 else:
                     raise RuntimeError("Unknown to predicate")
-            return f(input, class_, terminology=terminology)
+            kwargs = {}
+            type_hints = get_type_hints(f)
+            for key, hint in type_hints.items():
+                if hint == Context:
+                    kwargs[key] = context
+            return f(input, class_, **kwargs)
         raise RuntimeError(f"Can't comvert to {class_.__name__}")
 
 
@@ -79,39 +95,41 @@ converter = Converter()
 
 
 @converter.register(to=is_dataclass)
-def _to_dataclass[T](x, class_: Type[T], *args, **kwargs) -> T:
+def _object_to_dataclass[T](x, class_: Type[T]) -> T:
     return class_(
         **{k: getattr(x, k) for k in class_.__dataclass_fields__.keys()},  # type: ignore
     )
 
 
 @converter.register(to=lambda x: get_origin(x) is list)
-def _list_to_list[T](x, class_: List[Type[T]], *args, **kwargs) -> List[T]:
+def _list_to_list[T](x, class_: List[Type[T]], *, context: Context) -> List[T]:
     (arg,) = get_args(class_)
-    return [converter.convert(y, arg, *args, **kwargs) for y in x]
+    return [converter.convert(y, arg, context=context) for y in x]
 
 
-@converter.register(is_dataclass, to=bridg.alchemy.ConceptDescriptor)
-def _object_to_cd(
-    x: ConceptDescriptor, class_, *, terminology: bridg.alchemy.TerminologyService
+@converter.register()
+def _str_to_cd(
+    x: str, class_: Type[bridg.alchemy.ConceptDescriptor], *, context: Context
 ) -> bridg.alchemy.ConceptDescriptor:
-    return terminology.get_or_create(x.code, x.code_system, x.display_name)
-
-
-@converter.register(str, to=bridg.alchemy.ConceptDescriptor)
-def _str_to_cd(x: str, class_, *, terminology: bridg.alchemy.TerminologyService) -> bridg.alchemy.ConceptDescriptor:
     try:
         code_system, code = x.split("/", 1)
     except ValueError:
         raise Exception("String representation of ConceptDescriptor must be code_system/code")
     cd = ConceptDescriptor(code_system=code_system, code=code, display_name=None)
-    return converter.convert(cd, class_, terminology=terminology)
+    return converter.convert(cd, class_, context=context)
+
+
+@converter.register()
+def _object_to_cd(
+    x: ConceptDescriptor, class_: Type[bridg.alchemy.ConceptDescriptor], *, context: Context
+) -> bridg.alchemy.ConceptDescriptor:
+    return context.terminology.get_or_create(x.code, x.code_system, x.display_name)
 
 
 @converter.register(to=bridg.alchemy.Base)
-def _object_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], *args, **kwargs) -> T:
+def _object_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], *, context: Context) -> T:
     class_ = get_concrete_class(x, class_)
-    insp = inspect(class_)
+    insp = sa.inspect(class_)
     output = class_()
     for key, field in x.__dataclass_fields__.items():
         value = getattr(x, key, None)
@@ -131,12 +149,12 @@ def _object_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], *args, **kwarg
                 attr_class_ = attr.entity.class_
                 if attr.uselist:
                     attr_class_ = List[attr_class_]
-                value = converter.convert(value, attr_class_, *args, **kwargs)
+                value = converter.convert(value, attr_class_, context=context)
 
             if isinstance(attr, Composite):
                 attr_class_ = attr.composite_class
                 assert isinstance(attr_class_, type)
-                value = converter.convert(value, attr_class_, *args, **kwargs)
+                value = converter.convert(value, attr_class_, context=context)
 
             # otherwise it must be primitive, so just don't convert
 
@@ -150,8 +168,7 @@ class Mutation:
     @strawberry.mutation
     def person(self, input: PersonInput, info: strawberry.Info[Context]) -> Person:
         session = info.context.session
-        terminology = info.context.terminology
-        person = converter.convert(input, bridg.alchemy.Person, terminology=terminology)
+        person = converter.convert(input, bridg.alchemy.Person, context=info.context)
         person = session.merge(person)
         session.commit()
         return person  # type: ignore
