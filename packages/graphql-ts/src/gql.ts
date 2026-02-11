@@ -1,24 +1,18 @@
 /* eslint-disable */
 import * as types from './graphql';
-import { type TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 
-const documents = {};
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- *
- *
- * @example
- * ```ts
- * const query = gql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
- * ```
- *
- * The query argument is unknown!
- * Please regenerate the types.
- */
-export function gql(source: string): unknown;
+type Documents = {
+  '\n query Person { \n person { \n administrativeGenderCode \n name { \n family \n given \n middle \n patronymic \n\n }\n birthDate\n deathDate\n deathDateEstimatedIndicator\n deathIndicator\n id\n type\n identifier {\n id\n identifier\n identifierTypeCode\n }\n }\n }': typeof types.AllPerson;
+};
+
+const documents: Documents = {
+  '\n query Person { \n person { \n administrativeGenderCode \n name { \n family \n given \n middle \n patronymic \n\n }\n birthDate\n deathDate\n deathDateEstimatedIndicator\n deathIndicator\n id\n type\n identifier {\n id\n identifier\n identifierTypeCode\n }\n }\n }': types.AllPerson
+}
+
+export function gql(
+  source:   '\n query Person { \n person { \n administrativeGenderCode \n name { \n family \n given \n middle \n patronymic \n\n }\n birthDate\n deathDate\n deathDateEstimatedIndicator\n deathIndicator\n id\n type\n identifier {\n id\n identifier\n identifierTypeCode\n }\n }\n }'
+): typeof types.AllPerson;
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
 }
-
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;
