@@ -1581,12 +1581,12 @@ wheels = [
 
 [[package]]
 name = "pyzmq"
-version = "26.2.1"
+version = "26.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cffi", marker = "implementation_name == 'pypy'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5a/e3/8d0382cb59feb111c252b54e8728257416a38ffcb2243c4e4775a3c990fe/pyzmq-26.2.1.tar.gz", hash = "sha256:17d72a74e5e9ff3829deb72897a175333d3ef5b5413948cae3cf7ebf0b02ecca", size = 278433, upload-time = "2025-01-30T11:42:00.757Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b1/11/b9213d25230ac18a71b39b3723494e57adebe36e066397b961657b3b41c1/pyzmq-26.4.0.tar.gz", hash = "sha256:4bd13f85f80962f91a651a7356fe0472791a5f7a92f227822b5acf44795c626d", size = 278293, upload-time = "2025-04-04T12:05:44.049Z" }
 
 [[package]]
 name = "requests"
