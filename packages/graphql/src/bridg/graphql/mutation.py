@@ -73,25 +73,25 @@ converter = Converter()
 
 
 @converter.register(to=is_dataclass)
-def _[T](x, class_: Type[T], *args, **kwargs) -> T:
+def _to_dataclass[T](x, class_: Type[T], *args, **kwargs) -> T:
     return class_(
         **{k: getattr(x, k) for k in class_.__dataclass_fields__.keys()},  # type: ignore
     )
 
 
 @converter.register(to=lambda x: get_origin(x) is list)
-def _[T](x, class_: List[Type[T]], *args, **kwargs) -> List[T]:
+def _list_to_list[T](x, class_: List[Type[T]], *args, **kwargs) -> List[T]:
     (arg,) = get_args(class_)
     return [converter.convert(y, arg, *args, **kwargs) for y in x]
 
 
 @converter.register(to=bridg.alchemy.ConceptDescriptor)
-def _(x, class_, *, terminology: bridg.alchemy.TerminologyService) -> bridg.alchemy.ConceptDescriptor:
+def _dict_to_cd(x, class_, *, terminology: bridg.alchemy.TerminologyService) -> bridg.alchemy.ConceptDescriptor:
     return terminology.get_or_create(x.code, x.code_system, x.display_name)
 
 
 @converter.register(to=bridg.alchemy.Base)
-def _[T: bridg.alchemy.Base](x, class_: Type[T], *args, **kwargs) -> T:
+def _dict_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], *args, **kwargs) -> T:
     class_ = get_concrete_class(x, class_)
     insp = inspect(class_)
     output = class_()
