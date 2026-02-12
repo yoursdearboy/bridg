@@ -7,6 +7,7 @@ from bridg.common.env import load_env
 from bridg.common.settings import load_settings
 
 from .context import Context
+from .converter import converter
 from .schema import schema
 
 load_env()
@@ -23,6 +24,7 @@ class App(GraphQL):
             request=request,
             response=response,
             session=session,
+            convert=converter.convert,
             terminology=terminology,
         )
 

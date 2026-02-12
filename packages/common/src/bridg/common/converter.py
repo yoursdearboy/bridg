@@ -1,9 +1,17 @@
+from __future__ import annotations
+
 import inspect
-from typing import Type, get_origin, get_type_hints
+from dataclasses import dataclass
+from typing import Any, Protocol, Type, get_origin, get_type_hints
 
 
+class Convert(Protocol):
+    def __call__[T](self, input: Any, class_: Type[T], *, context: Context) -> T: ...
+
+
+@dataclass
 class Context:
-    pass
+    convert: Convert
 
 
 class Converter:

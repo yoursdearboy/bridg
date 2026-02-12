@@ -28,7 +28,7 @@ def _object_to_dataclass[T: Dataclass](x, class_: Type[T]) -> T:
 @converter.register()
 def _list_to_list[T](x, class_: Type[List[T]], context: Context) -> List[T]:
     (arg,) = get_args(class_)
-    return [converter.convert(y, arg, context=context) for y in x]
+    return [context.convert(y, arg, context=context) for y in x]
 
 
 @converter.register()
@@ -40,7 +40,7 @@ def _str_to_cd(
     except ValueError:
         raise Exception("String representation of ConceptDescriptor must be code_system/code")
     cd = ConceptDescriptor(code_system=code_system, code=code, display_name=None)
-    return converter.convert(cd, class_, context=context)
+    return context.convert(cd, class_, context=context)
 
 
 @converter.register()
@@ -97,12 +97,12 @@ def _object_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], context: Conte
                 attr_class_ = attr.entity.class_
                 if attr.uselist:
                     attr_class_ = List[attr_class_]
-                value = converter.convert(value, attr_class_, context=context)
+                value = context.convert(value, attr_class_, context=context)
 
             if isinstance(attr, Composite):
                 attr_class_ = attr.composite_class
                 assert isinstance(attr_class_, type)
-                value = converter.convert(value, attr_class_, context=context)
+                value = context.convert(value, attr_class_, context=context)
 
             # otherwise it must be primitive, so just don't convert
 
