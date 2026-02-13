@@ -1,0 +1,25 @@
+query person {
+  person {
+    id
+    type
+    birthDate
+    deathDate
+    deathDateEstimatedIndicator
+    deathIndicator
+    identifier {
+      identifier
+      identifierTypeCode
+      id
+    }
+    name {
+      use
+      family
+      given
+      middle
+      patronymic
+      prefix
+      suffix
+      id
+    }
+  }
+}

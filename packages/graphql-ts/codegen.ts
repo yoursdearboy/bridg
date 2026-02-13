@@ -4,7 +4,7 @@ const config: CodegenConfig = {
   overwrite: true,
   schema: "http://127.0.0.1:8001",
   // This assumes that all your source files are in a top-level `src/` directory - you might need to adjust this to your file structure
-  documents: ["src/**/*.{ts,tsx}"],
+  documents: ["queries/**/*.graphql"],
   // Don't exit with non-zero status when there are no documents
   ignoreNoDocuments: true,
   generates: {
@@ -14,22 +14,13 @@ const config: CodegenConfig = {
       presetConfig: {
         gqlTagName: "gql",
       },
-      plugins: ["typescript", "typescript-operations"],
+      plugins: ["typescript-operations", "typed-document-node", "typescript-react-apollo"],
       config: {
-        avoidOptionals: {
-          // Use `null` for nullable fields instead of optionals
-          field: true,
-          // Allow nullable input fields to remain unspecified
-          inputValue: false,
-        },
-        // Use `unknown` instead of `any` for unconfigured scalars
-        defaultScalarType: "unknown",
-        // Apollo Client always includes `__typename` fields
-        nonOptionalTypename: true,
-        // Apollo Client doesn't add the `__typename` field to root types so
-        // don't generate a type for the `__typename` for root operation types.
-        skipTypeNameForRoot: true,
-        documentMode: 'string',
+        addTypename: true,
+        immutableTypes: false,
+        skipTypename: false, // include __typename fields
+        avoidOptionals: false,
+        enumsAsTypes: false,
       },
     },
   },
