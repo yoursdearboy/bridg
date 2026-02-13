@@ -2,12 +2,11 @@ import re
 import typing
 from typing import Annotated, Any, ClassVar, List, Mapping, Protocol, Type, get_args, runtime_checkable
 
+import bridg.alchemy
+import bridg.common.converter
 import strawberry
 from sqlalchemy import inspect
 from sqlalchemy.orm import Composite, Relationship
-
-import bridg.alchemy
-import bridg.common.converter
 
 from .context import Context
 from .datatype import ConceptDescriptor
@@ -21,31 +20,31 @@ class Dataclass(Protocol):
 
 
 @converter.register(to=Dataclass)
-def _object_to_dataclass[T: Dataclass](x, class_: Type[T]) -> T:
+def _object_to_dataclass[T: Dataclass](converter, input, class_: Type[T]) -> T:
     return class_(**{k: getattr(x, k) for k in class_.__dataclass_fields__.keys()})
 
 
 @converter.register()
-def _list_to_list[T](x, class_: Type[List[T]], context: Context) -> List[T]:
+def _list_to_list[T](self, x, class_: Type[List[T]], context: Context) -> List[T]:
     (arg,) = get_args(class_)
-    return [context.convert(y, arg, context=context) for y in x]
+    return [self.convert(y, arg, context=context) for y in x]
 
 
 @converter.register()
 def _str_to_cd(
-    x: str, class_: Type[bridg.alchemy.ConceptDescriptor], context: Context
+    self, x: str, class_: Type[bridg.alchemy.ConceptDescriptor], context: Context
 ) -> bridg.alchemy.ConceptDescriptor:
     try:
         code_system, code = x.split("/", 1)
     except ValueError:
         raise Exception("String representation of ConceptDescriptor must be code_system/code")
     cd = ConceptDescriptor(code_system=code_system, code=code, display_name=None)
-    return context.convert(cd, class_, context=context)
+    return self.convert(cd, class_, context=context)
 
 
 @converter.register()
 def _object_to_cd(
-    x: ConceptDescriptor, class_: Type[bridg.alchemy.ConceptDescriptor], context: Context
+    self, x: ConceptDescriptor, class_: Type[bridg.alchemy.ConceptDescriptor], context: Context
 ) -> bridg.alchemy.ConceptDescriptor:
     return context.terminology.get_or_create(x.code, x.code_system, x.display_name)
 
@@ -75,7 +74,7 @@ def _annotation_is_maybe(annotation: Any) -> bool:
 
 
 @converter.register(to=bridg.alchemy.Base)
-def _object_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], context: Context) -> T:
+def _object_to_alchemy[T: bridg.alchemy.Base](self, x, class_: Type[T], context: Context) -> T:
     class_ = get_concrete_class(x, class_)
     insp = inspect(class_)
     output = class_()
@@ -97,12 +96,12 @@ def _object_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], context: Conte
                 attr_class_ = attr.entity.class_
                 if attr.uselist:
                     attr_class_ = List[attr_class_]
-                value = context.convert(value, attr_class_, context=context)
+                value = self.convert(value, attr_class_, context=context)
 
             if isinstance(attr, Composite):
                 attr_class_ = attr.composite_class
                 assert isinstance(attr_class_, type)
-                value = context.convert(value, attr_class_, context=context)
+                value = self.convert(value, attr_class_, context=context)
 
             # otherwise it must be primitive, so just don't convert
 

@@ -1,25 +1,23 @@
 from __future__ import annotations
 
 import inspect
-from dataclasses import dataclass
-from typing import Any, Protocol, Type, get_origin, get_type_hints
+from typing import Any, List, Protocol, Tuple, Type, get_origin
 
 
 class Convert(Protocol):
-    def __call__[T](self, input: Any, class_: Type[T], *, context: Context) -> T: ...
+    def __call__[T](self, converter: Converter, input: Any, class_: Type[T]) -> T: ...
 
 
-@dataclass
 class Context:
-    convert: Convert
+    pass
 
 
 class Converter:
     def __init__(self) -> None:
-        self._registry = []
+        self._registry: List[Tuple[Any, Any, Convert]] = []
 
     def register(self, from_=None, to=None):
-        def decorator(f):
+        def wrapper(f: Convert):
             insp = inspect.signature(f)
             args = list(insp.parameters.values())
             arg1 = from_
@@ -33,9 +31,9 @@ class Converter:
             self._registry.append((arg1, arg2, f))
             return f
 
-        return decorator
+        return wrapper
 
-    def convert[T](self, input, class_: Type[T], *, context: Context) -> T:
+    def convert[T](self, input, class_: Type[T]) -> T:
         for from_, to, f in self._registry:
             if from_ is not None:
                 if isinstance(from_, type):
@@ -62,13 +60,5 @@ class Converter:
                         continue
                 else:
                     raise RuntimeError("Unknown to predicate")
-            kwargs = {}
-            type_hints = get_type_hints(f)
-            for key, hint in type_hints.items():
-                try:
-                    if issubclass(hint, Context):
-                        kwargs[key] = context
-                except TypeError:
-                    pass
-            return f(input, class_, **kwargs)
+            return f(self, input, class_)
         raise RuntimeError(f"Can't comvert to {class_.__name__}")
