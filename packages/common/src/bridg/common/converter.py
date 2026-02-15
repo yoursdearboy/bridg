@@ -5,31 +5,54 @@ from dataclasses import dataclass
 from typing import Any, List, Protocol, Type, TypeVar, get_origin
 
 
-class Convert[T](Protocol):
-    def __call__(self, converter: Converter, input: Any, class_: Type[T], /) -> T: ...
+class Convert1[T](Protocol):
+    def __call__(self, input: Any, /) -> T: ...
+
+
+class Convert2[T](Protocol):
+    def __call__(self, input: Any, class_: Type[T], /) -> T: ...
+
+
+class Convert3[T](Protocol):
+    def __call__(self, input: Any, class_: Type[T], converter: Converter, /) -> T: ...
+
+
+Convert = Convert1 | Convert2 | Convert3
 
 
 @dataclass
 class Wrap:
+    f: Convert
     from_: Any
     to: Any
-    f: Convert
+    ftype: Type[Convert]
 
 
 def wrap(f: Convert):
     insp = inspect.signature(f)
-    args = list(insp.parameters.values())
-    assert len(args) >= 2
+    args = insp.parameters
 
-    inp = None
-    if args[1].annotation != inspect.Signature.empty:
-        inp = args[1].annotation
+    def get_f_type():
+        if len(args) == 1:
+            return Convert1
+        if len(args) == 2:
+            return Convert2
+        if len(args) == 3:
+            return Convert3
+        raise RuntimeError("Unknown type")
 
-    ret = insp.return_annotation
-    if isinstance(ret, TypeVar):
-        ret = ret.__bound__
+    def get_input_type():
+        arg0 = list(args.values())[0]
+        if arg0.annotation != inspect.Signature.empty:
+            return arg0.annotation
 
-    return Wrap(inp, ret, f)
+    def get_return_type():
+        ret = insp.return_annotation
+        if isinstance(ret, TypeVar):
+            ret = ret.__bound__
+        return ret
+
+    return Wrap(f, get_input_type(), get_return_type(), get_f_type())
 
 
 class Converter:
@@ -38,9 +61,10 @@ class Converter:
 
     def convert[T](self, input, class_: Type[T]) -> T:
         for wrap in self.converters:
+            f = wrap.f
             from_ = wrap.from_
             to = wrap.to
-            f = wrap.f
+            ftype = wrap.ftype
             if from_ is not None:
                 if isinstance(from_, type):
                     if not isinstance(input, from_):
@@ -63,5 +87,10 @@ class Converter:
                         continue
                 else:
                     raise RuntimeError("Unknown to predicate")
-            return f(self, input, class_)
+            if ftype == Convert1:
+                return f(input)
+            if ftype == Convert2:
+                return f(input, class_)
+            if ftype == Convert3:
+                return f(input, class_, self)
         raise RuntimeError(f"Can't comvert to {class_.__name__}")
