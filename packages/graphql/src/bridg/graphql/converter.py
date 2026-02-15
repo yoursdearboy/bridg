@@ -1,6 +1,6 @@
 import re
 import typing
-from typing import Annotated, Any, ClassVar, List, Mapping, Protocol, Type, get_args, runtime_checkable
+from typing import Annotated, Any, List, Type, get_args
 
 import strawberry
 from sqlalchemy import inspect
@@ -9,12 +9,8 @@ from sqlalchemy.orm import Composite, Relationship
 import bridg.alchemy
 import bridg.common.converter
 
+from .dataclass import Dataclass
 from .datatype import ConceptDescriptor
-
-
-@runtime_checkable
-class Dataclass(Protocol):
-    __dataclass_fields__: ClassVar[Mapping[str, Any]]
 
 
 class Converter(bridg.common.converter.Converter):
