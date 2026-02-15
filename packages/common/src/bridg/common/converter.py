@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import inspect
-from dataclasses import dataclass
-from typing import Any, List, Protocol, Type, TypeVar, get_origin
+from dataclasses import astuple, dataclass
+from typing import Any, List, Protocol, Type, TypeVar, cast, get_origin
 
 
 class Convert1[T](Protocol):
@@ -23,9 +23,15 @@ Convert = Convert1 | Convert2 | Convert3
 @dataclass
 class Wrap:
     f: Convert
+    ftype: Type[Convert]
     from_: Any
     to: Any
-    ftype: Type[Convert]
+
+    def __iter__(self):
+        return iter(astuple(self))
+
+    def __getitem__(self, keys):
+        return iter(getattr(self, k) for k in keys)
 
 
 def wrap(f: Convert):
@@ -39,7 +45,7 @@ def wrap(f: Convert):
             return Convert2
         if len(args) == 3:
             return Convert3
-        raise RuntimeError("Unknown type")
+        raise ValueError(f"Invalid number of arguments: {len(args)}")
 
     def get_input_type():
         arg0 = list(args.values())[0]
@@ -52,7 +58,7 @@ def wrap(f: Convert):
             ret = ret.__bound__
         return ret
 
-    return Wrap(f, get_input_type(), get_return_type(), get_f_type())
+    return Wrap(f, get_f_type(), get_input_type(), get_return_type())
 
 
 class Converter:
@@ -61,10 +67,7 @@ class Converter:
 
     def convert[T](self, input, class_: Type[T]) -> T:
         for wrap in self.converters:
-            f = wrap.f
-            from_ = wrap.from_
-            to = wrap.to
-            ftype = wrap.ftype
+            f, ftype, from_, to = wrap
             if from_ is not None:
                 if isinstance(from_, type):
                     if not isinstance(input, from_):
@@ -87,10 +90,10 @@ class Converter:
                         continue
                 else:
                     raise RuntimeError("Unknown to predicate")
-            if ftype == Convert1:
-                return f(input)
-            if ftype == Convert2:
-                return f(input, class_)
-            if ftype == Convert3:
-                return f(input, class_, self)
+                if ftype is Convert1:
+                    return cast(Convert1, f)(input)
+                if ftype is Convert2:
+                    return cast(Convert2, f)(input, class_)
+                if ftype is Convert3:
+                    return cast(Convert3, f)(input, class_, self)
         raise RuntimeError(f"Can't comvert to {class_.__name__}")
