@@ -1,46 +1,52 @@
 from __future__ import annotations
 
 import inspect
-from typing import Any, List, Protocol, Tuple, Type, get_origin
+from dataclasses import dataclass
+from typing import Any, List, Protocol, Type, TypeVar, get_origin
 
 
-class Convert(Protocol):
-    def __call__[T](self, converter: Converter, input: Any, class_: Type[T]) -> T: ...
+class Convert[T](Protocol):
+    def __call__(self, converter: Converter, input: Any, class_: Type[T], /) -> T: ...
 
 
-class Context:
-    pass
+@dataclass
+class Wrap:
+    from_: Any
+    to: Any
+    f: Convert
+
+
+def converter(f: Convert):
+    insp = inspect.signature(f)
+    args = list(insp.parameters.values())
+    assert len(args) >= 2
+
+    inp = None
+    if args[1].annotation != inspect.Signature.empty:
+        inp = args[1].annotation
+
+    ret = insp.return_annotation
+    if isinstance(ret, TypeVar):
+        ret = ret.__bound__
+
+    return Wrap(inp, ret, f)
 
 
 class Converter:
-    def __init__(self) -> None:
-        self._registry: List[Tuple[Any, Any, Convert]] = []
-
-    def register(self, from_=None, to=None):
-        def wrapper(f: Convert):
-            insp = inspect.signature(f)
-            args = list(insp.parameters.values())
-            arg1 = from_
-            if arg1 is None:
-                if args[0].annotation != inspect.Signature.empty:
-                    arg1 = args[0].annotation
-            arg2 = to
-            if arg2 is None:
-                if args[1].annotation != inspect.Signature.empty:
-                    arg2 = args[1].annotation.__args__[0]
-            self._registry.append((arg1, arg2, f))
-            return f
-
-        return wrapper
+    def __init__(self, converters: List[Wrap]) -> None:
+        self.converters = converters
 
     def convert[T](self, input, class_: Type[T]) -> T:
-        for from_, to, f in self._registry:
+        for wrap in self.converters:
+            from_ = wrap.from_
+            to = wrap.to
+            f = wrap.f
             if from_ is not None:
                 if isinstance(from_, type):
                     if not isinstance(input, from_):
                         continue
-                elif callable(from_):
-                    if not from_(input):
+                elif get_origin(from_) is not None:
+                    if not isinstance(input, get_origin(from_)):
                         continue
                 else:
                     raise RuntimeError("Unknown from_ predicate")
@@ -54,9 +60,6 @@ class Converter:
                 elif get_origin(to) is not None:
                     # FIXME: check args?
                     if get_origin(to) != get_origin(class_):
-                        continue
-                elif callable(to):
-                    if not to(class_):
                         continue
                 else:
                     raise RuntimeError("Unknown to predicate")

@@ -6,12 +6,14 @@ from starlette.responses import Response
 from starlette.websockets import WebSocket
 
 from bridg.alchemy import TerminologyService
-from bridg.common.converter import Context as ConverterContext
+
+from .converter import Converter
 
 
 @dataclass
-class Context(ConverterContext):
+class Context:
     request: Request | WebSocket
     response: Response | WebSocket
+    converter: Converter
     session: Session
     terminology: TerminologyService

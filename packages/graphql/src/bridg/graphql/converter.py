@@ -2,16 +2,15 @@ import re
 import typing
 from typing import Annotated, Any, ClassVar, List, Mapping, Protocol, Type, get_args, runtime_checkable
 
-import bridg.alchemy
-import bridg.common.converter
 import strawberry
 from sqlalchemy import inspect
 from sqlalchemy.orm import Composite, Relationship
 
-from .context import Context
-from .datatype import ConceptDescriptor
+import bridg.alchemy
+import bridg.common.converter
+from bridg.common.converter import converter
 
-converter = bridg.common.converter.Converter()
+from .datatype import ConceptDescriptor
 
 
 @runtime_checkable
@@ -19,34 +18,44 @@ class Dataclass(Protocol):
     __dataclass_fields__: ClassVar[Mapping[str, Any]]
 
 
-@converter.register(to=Dataclass)
-def _object_to_dataclass[T: Dataclass](converter, input, class_: Type[T]) -> T:
+class Converter(bridg.common.converter.Converter):
+    def __init__(self, terminology: bridg.alchemy.TerminologyService) -> None:
+        super().__init__(
+            [
+                object_to_dataclass,
+                list_to_list,
+                str_to_cd,
+                object_to_cd,
+                object_to_alchemy,
+            ]
+        )
+        self.terminology = terminology
+
+
+@converter
+def object_to_dataclass(_, x, class_) -> Dataclass:
     return class_(**{k: getattr(x, k) for k in class_.__dataclass_fields__.keys()})
 
 
-@converter.register()
-def _list_to_list[T](self, x, class_: Type[List[T]], context: Context) -> List[T]:
+@converter
+def list_to_list[T](converter, x: List[T], class_) -> List[T]:
     (arg,) = get_args(class_)
-    return [self.convert(y, arg, context=context) for y in x]
+    return [converter.convert(y, arg) for y in x]
 
 
-@converter.register()
-def _str_to_cd(
-    self, x: str, class_: Type[bridg.alchemy.ConceptDescriptor], context: Context
-) -> bridg.alchemy.ConceptDescriptor:
+@converter
+def str_to_cd(converter, x: str, class_) -> bridg.alchemy.ConceptDescriptor:
     try:
         code_system, code = x.split("/", 1)
     except ValueError:
         raise Exception("String representation of ConceptDescriptor must be code_system/code")
     cd = ConceptDescriptor(code_system=code_system, code=code, display_name=None)
-    return self.convert(cd, class_, context=context)
+    return converter.convert(cd, bridg.alchemy.ConceptDescriptor)
 
 
-@converter.register()
-def _object_to_cd(
-    self, x: ConceptDescriptor, class_: Type[bridg.alchemy.ConceptDescriptor], context: Context
-) -> bridg.alchemy.ConceptDescriptor:
-    return context.terminology.get_or_create(x.code, x.code_system, x.display_name)
+@converter
+def object_to_cd(converter, x: ConceptDescriptor, class_) -> bridg.alchemy.ConceptDescriptor:
+    return converter.terminology.get_or_create(x.code, x.code_system, x.display_name)
 
 
 def get_concrete_class[T: bridg.alchemy.Base](input, class_: Type[T]) -> Type[T]:
@@ -73,8 +82,8 @@ def _annotation_is_maybe(annotation: Any) -> bool:
     return orig is strawberry.Maybe
 
 
-@converter.register(to=bridg.alchemy.Base)
-def _object_to_alchemy[T: bridg.alchemy.Base](self, x, class_: Type[T], context: Context) -> T:
+@converter
+def object_to_alchemy[T: bridg.alchemy.Base](converter, x, class_: Type[T]) -> T:
     class_ = get_concrete_class(x, class_)
     insp = inspect(class_)
     output = class_()
@@ -96,12 +105,12 @@ def _object_to_alchemy[T: bridg.alchemy.Base](self, x, class_: Type[T], context:
                 attr_class_ = attr.entity.class_
                 if attr.uselist:
                     attr_class_ = List[attr_class_]
-                value = self.convert(value, attr_class_, context=context)
+                value = converter.convert(value, attr_class_)
 
             if isinstance(attr, Composite):
                 attr_class_ = attr.composite_class
                 assert isinstance(attr_class_, type)
-                value = self.convert(value, attr_class_, context=context)
+                value = converter.convert(value, attr_class_)
 
             # otherwise it must be primitive, so just don't convert
 
