@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import inspect
-from dataclasses import astuple, dataclass
 from typing import Any, List, Protocol, Type, TypeVar, cast, get_origin
 
 
@@ -20,84 +19,75 @@ class Convert3[T](Protocol):
 Convert = Convert1 | Convert2 | Convert3
 
 
-def configure(f: Convert):
-    return f
+class Wrapper:
+    def __init__(self, f: Convert):
+        self._f = f
+        self._inspect = inspect.signature(f)
+        self._args = self._inspect.parameters
+        self._input_type = self._get_input_type()
+        self._return_type = self._get_return_type()
 
-
-@dataclass
-class Wrap:
-    f: Convert
-    ftype: Type[Convert]
-    from_: Any
-    to: Any
-
-    def __iter__(self):
-        return iter(astuple(self))
-
-    def __getitem__(self, keys):
-        return iter(getattr(self, k) for k in keys)
-
-
-def wrap(f: Convert):
-    insp = inspect.signature(f)
-    args = insp.parameters
-
-    def get_f_type():
-        if len(args) == 1:
-            return Convert1
-        if len(args) == 2:
-            return Convert2
-        if len(args) == 3:
-            return Convert3
-        raise ValueError(f"Invalid number of arguments: {len(args)}")
-
-    def get_input_type():
+    def _get_input_type(self):
+        args = self._inspect.parameters
         arg0 = list(args.values())[0]
         if arg0.annotation != inspect.Signature.empty:
             return arg0.annotation
 
-    def get_return_type():
-        ret = insp.return_annotation
+    def check_input_type(self, input: Any):
+        if self._input_type is None:
+            return True
+        if isinstance(self._input_type, type):
+            if isinstance(input, self._input_type):
+                return True
+        if origin := get_origin(self._input_type):
+            if isinstance(input, origin):
+                return True
+        return False
+
+    def _get_return_type(self):
+        ret = self._inspect.return_annotation
         if isinstance(ret, TypeVar):
             ret = ret.__bound__
         return ret
 
-    return Wrap(f, get_f_type(), get_input_type(), get_return_type())
+    def check_return_type(self, class_: Type):
+        if self._return_type is None:
+            return True
+        if isinstance(self._return_type, type):
+            if getattr(self._return_type, "_is_protocol", False):
+                if isinstance(class_, self._return_type):
+                    return True
+            elif issubclass(class_, self._return_type):
+                return True
+        if origin := get_origin(self._return_type):
+            # FIXME: check args?
+            if origin == get_origin(class_):
+                return True
+        return False
+
+    def check_types(self, input: Any, class_: Type):
+        return self.check_input_type(input) and self.check_return_type(class_)
+
+    def __call__[T](self, input: Any, class_: Type[T], converter: Converter) -> T:
+        if len(self._args) == 1:
+            return cast(Convert1, self._f)(input)
+        if len(self._args) == 2:
+            return cast(Convert2, self._f)(input, class_)
+        if len(self._args) == 3:
+            return cast(Convert3, self._f)(input, class_, converter)
+        raise RuntimeError("Convert function must accept one, two or three args.")
+
+
+def configure(f: Convert):
+    return Wrapper(f)
 
 
 class Converter:
-    def __init__(self, converters: List[Convert]) -> None:
-        self.converters = [wrap(f) for f in converters]
+    def __init__(self, converters: List[Wrapper]) -> None:
+        self.converters = converters
 
     def convert[T](self, input, class_: Type[T]) -> T:
-        for wrap in self.converters:
-            f, ftype, from_, to = wrap
-            if from_ is not None:
-                if isinstance(from_, type):
-                    if not isinstance(input, from_):
-                        continue
-                elif get_origin(from_) is not None:
-                    if not isinstance(input, get_origin(from_)):
-                        continue
-                else:
-                    raise RuntimeError("Unknown from_ predicate")
-            if to is not None:
-                if isinstance(to, type):
-                    if getattr(to, "_is_protocol", False):
-                        if not isinstance(class_, to):
-                            continue
-                    elif not issubclass(class_, to):
-                        continue
-                elif get_origin(to) is not None:
-                    # FIXME: check args?
-                    if get_origin(to) != get_origin(class_):
-                        continue
-                else:
-                    raise RuntimeError("Unknown to predicate")
-                if ftype is Convert1:
-                    return cast(Convert1, f)(input)
-                if ftype is Convert2:
-                    return cast(Convert2, f)(input, class_)
-                if ftype is Convert3:
-                    return cast(Convert3, f)(input, class_, self)
-        raise RuntimeError(f"Can't comvert to {class_.__name__}")
+        for co in self.converters:
+            if co.check_types(input, class_):
+                return co(input, class_, self)
+        raise RuntimeError(f"Can't convert to {class_.__name__}")
