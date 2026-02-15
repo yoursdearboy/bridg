@@ -20,6 +20,10 @@ class Convert3[T](Protocol):
 Convert = Convert1 | Convert2 | Convert3
 
 
+def configure(f: Convert):
+    return f
+
+
 @dataclass
 class Wrap:
     f: Convert

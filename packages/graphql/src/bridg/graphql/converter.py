@@ -31,15 +31,18 @@ class Converter(bridg.common.converter.Converter):
         self.terminology = terminology
 
 
+@bridg.common.converter.configure
 def object_to_dataclass(x, class_) -> Dataclass:
     return class_(**{k: getattr(x, k) for k in class_.__dataclass_fields__.keys()})
 
 
+@bridg.common.converter.configure
 def list_to_list[T](x: List[T], class_, converter) -> List[T]:
     (arg,) = get_args(class_)
     return [converter.convert(y, arg) for y in x]
 
 
+@bridg.common.converter.configure
 def str_to_cd(x: str, _, converter) -> bridg.alchemy.ConceptDescriptor:
     try:
         code_system, code = x.split("/", 1)
@@ -49,6 +52,7 @@ def str_to_cd(x: str, _, converter) -> bridg.alchemy.ConceptDescriptor:
     return converter.convert(cd, bridg.alchemy.ConceptDescriptor)
 
 
+@bridg.common.converter.configure
 def object_to_cd(x: ConceptDescriptor, _, converter) -> bridg.alchemy.ConceptDescriptor:
     return converter.terminology.get_or_create(x.code, x.code_system, x.display_name)
 
@@ -77,6 +81,7 @@ def _annotation_is_maybe(annotation: Any) -> bool:
     return orig is strawberry.Maybe
 
 
+@bridg.common.converter.configure
 def object_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], converter) -> T:
     class_ = get_concrete_class(x, class_)
     insp = inspect(class_)
