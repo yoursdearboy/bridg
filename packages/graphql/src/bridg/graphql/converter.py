@@ -8,7 +8,6 @@ from sqlalchemy.orm import Composite, Relationship
 
 import bridg.alchemy
 import bridg.common.converter
-from bridg.common.converter import converter
 
 from .datatype import ConceptDescriptor
 
@@ -32,18 +31,15 @@ class Converter(bridg.common.converter.Converter):
         self.terminology = terminology
 
 
-@converter
 def object_to_dataclass(_, x, class_) -> Dataclass:
     return class_(**{k: getattr(x, k) for k in class_.__dataclass_fields__.keys()})
 
 
-@converter
 def list_to_list[T](converter, x: List[T], class_) -> List[T]:
     (arg,) = get_args(class_)
     return [converter.convert(y, arg) for y in x]
 
 
-@converter
 def str_to_cd(converter, x: str, class_) -> bridg.alchemy.ConceptDescriptor:
     try:
         code_system, code = x.split("/", 1)
@@ -53,7 +49,6 @@ def str_to_cd(converter, x: str, class_) -> bridg.alchemy.ConceptDescriptor:
     return converter.convert(cd, bridg.alchemy.ConceptDescriptor)
 
 
-@converter
 def object_to_cd(converter, x: ConceptDescriptor, class_) -> bridg.alchemy.ConceptDescriptor:
     return converter.terminology.get_or_create(x.code, x.code_system, x.display_name)
 
@@ -82,7 +77,6 @@ def _annotation_is_maybe(annotation: Any) -> bool:
     return orig is strawberry.Maybe
 
 
-@converter
 def object_to_alchemy[T: bridg.alchemy.Base](converter, x, class_: Type[T]) -> T:
     class_ = get_concrete_class(x, class_)
     insp = inspect(class_)

@@ -16,7 +16,7 @@ class Wrap:
     f: Convert
 
 
-def converter(f: Convert):
+def wrap(f: Convert):
     insp = inspect.signature(f)
     args = list(insp.parameters.values())
     assert len(args) >= 2
@@ -33,8 +33,8 @@ def converter(f: Convert):
 
 
 class Converter:
-    def __init__(self, converters: List[Wrap]) -> None:
-        self.converters = converters
+    def __init__(self, converters: List[Convert]) -> None:
+        self.converters = [wrap(f) for f in converters]
 
     def convert[T](self, input, class_: Type[T]) -> T:
         for wrap in self.converters:
