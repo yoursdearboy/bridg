@@ -5,7 +5,7 @@ import strawberry
 
 from bridg import alchemy
 
-from .common import Person
+from .common import Person, Subject
 from .context import Context
 
 
@@ -15,6 +15,14 @@ class Query:
     def person(self, id: Optional[UUID] = None, *, info: strawberry.Info[Context]) -> List[Person]:
         session = info.context.session
         query = session.query(alchemy.Person)
+        if id:
+            query = query.filter_by(id=id)
+        return query.all()  # type: ignore
+
+    @strawberry.field
+    def subject(self, id: Optional[UUID] = None, *, info: strawberry.Info[Context]) -> List[Subject]:
+        session = info.context.session
+        query = session.query(alchemy.StudySubject)
         if id:
             query = query.filter_by(id=id)
         return query.all()  # type: ignore

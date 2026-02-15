@@ -14,6 +14,10 @@ from .person import (
     Person,
     PersonInput,
 )
+from .subject import (
+    Subject,
+    SubjectInput,
+)
 
 __all__ = [
     "BiologicEntity",
@@ -26,4 +30,6 @@ __all__ = [
     "IDInput",
     "Person",
     "PersonInput",
+    "Subject",
+    "SubjectInput",
 ]
