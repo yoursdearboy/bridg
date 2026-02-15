@@ -3,7 +3,7 @@ from uuid import UUID
 
 import strawberry
 
-from bridg import alchemy
+import bridg.alchemy
 
 from .common import Person, Subject
 from .context import Context
@@ -14,7 +14,7 @@ class Query:
     @strawberry.field
     def person(self, id: Optional[UUID] = None, *, info: strawberry.Info[Context]) -> List[Person]:
         session = info.context.session
-        query = session.query(alchemy.Person)
+        query = session.query(bridg.alchemy.Person)
         if id:
             query = query.filter_by(id=id)
         return query.all()  # type: ignore
@@ -22,7 +22,7 @@ class Query:
     @strawberry.field
     def subject(self, id: Optional[UUID] = None, *, info: strawberry.Info[Context]) -> List[Subject]:
         session = info.context.session
-        query = session.query(alchemy.StudySubject)
+        query = session.query(bridg.alchemy.StudySubject)
         if id:
             query = query.filter_by(id=id)
         return query.all()  # type: ignore
