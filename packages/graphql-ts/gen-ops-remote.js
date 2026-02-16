@@ -1,5 +1,5 @@
 // gen-ops-remote.js
-// Usage: node gen-ops-remote.js https://example.com/graphql ./src/graphql/generated-ops.graphql
+// Usage: node gen-ops-remote.js https://example.com/graphql ./src/graphql/ops
 // Install: npm install node-fetch graphql
 const fs = require('fs');
 const fetch = require('node-fetch');
@@ -15,12 +15,12 @@ const {
 } = require('graphql');
 
 if (process.argv.length < 4) {
-  console.error('Usage: node gen-ops-remote.js <GRAPHQL_ENDPOINT> <OUT_FILE>');
+  console.error('Usage: node gen-ops-remote.js <GRAPHQL_ENDPOINT> <OUT_DIR>');
   process.exit(2);
 }
 
 const ENDPOINT = process.argv[2];
-const OUT_FILE = process.argv[3];
+const OUT_DIR = process.argv[3];
 
 async function fetchSchema(endpoint) {
   const res = await fetch(endpoint, {
@@ -94,28 +94,36 @@ function typeToString(type) {
   return named.name;
 }
 
+function sanitizeFileName(name) {
+  return name.replace(/[^a-zA-Z0-9_]/g, '_');
+}
+
 async function main() {
   try {
     const schema = await fetchSchema(ENDPOINT);
     const queryType = schema.getQueryType();
     if (!queryType) throw new Error('Schema has no Query type.');
 
-    const ops = [];
+    fs.mkdirSync(OUT_DIR, { recursive: true });
+
     Object.values(queryType.getFields()).forEach(field => {
-      const opName = field.name.replace(/[^a-zA-Z0-9]/g, '_');
+      const rawName = field.name;
+      const opName = rawName.replace(/[^a-zA-Z0-9]/g, '_');
       const selection = buildSelectionBlock(field);
 
       const args = field.args || [];
       const varDefs = args.map(a => `$${a.name}: ${typeToString(a.type)}`).join(', ');
       const argsUsage = args.length ? '(' + args.map(a => `${a.name}: $${a.name}`).join(', ') + ')' : '';
 
-      const op = `query ${opName}${varDefs ? `(${varDefs})` : ''} {\n  ${field.name}${argsUsage} {\n${selection}\n  }\n}\n`;
-      ops.push(op);
+      const op = `query ${opName}${varDefs ? `(${varDefs})` : ''} {\n  ${rawName}${argsUsage} {\n${selection}\n  }\n}\n`;
+
+      const fileName = sanitizeFileName(opName) + '.graphql';
+      const outPath = path.join(OUT_DIR, fileName);
+      fs.writeFileSync(outPath, op);
+      console.log(`Wrote ${outPath}`);
     });
 
-    fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
-    fs.writeFileSync(OUT_FILE, ops.join('\n'));
-    console.log(`Generated ${ops.length} operations -> ${OUT_FILE}`);
+    console.log('Done.');
   } catch (err) {
     console.error('Error:', err.message || err);
     process.exit(1);

@@ -14,11 +14,14 @@ import type { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-  "query person($id: UUID) {\n  person(id: $id) {\n    id\n    type\n    birthDate\n    deathDate\n    deathDateEstimatedIndicator\n    deathIndicator\n    identifier {\n      identifier\n      identifierTypeCode\n      id\n    }\n    name {\n      use\n      family\n      given\n      middle\n      patronymic\n      prefix\n      suffix\n      id\n    }\n  }\n}\n\nquery subject($id: UUID) {\n  subject(id: $id) {\n    id\n    performingBiologicEntity {\n      id\n      type\n      birthDate\n      deathDate\n      deathDateEstimatedIndicator\n      deathIndicator\n    }\n  }\n}": typeof types.PersonDocument;
+  "query person($id: UUID) {\n  person(id: $id) {\n    id\n    type\n    birthDate\n    deathDate\n    deathDateEstimatedIndicator\n    deathIndicator\n    identifier {\n      identifier\n      identifierTypeCode\n      id\n    }\n    name {\n      use\n      family\n      given\n      middle\n      patronymic\n      prefix\n      suffix\n      id\n    }\n  }\n}": typeof types.PersonDocument;
+  "query subject($id: UUID) {\n  subject(id: $id) {\n    id\n    performingBiologicEntity {\n      id\n      type\n      birthDate\n      deathDate\n      deathDateEstimatedIndicator\n      deathIndicator\n    }\n  }\n}": typeof types.SubjectDocument;
 };
 const documents: Documents = {
-  "query person($id: UUID) {\n  person(id: $id) {\n    id\n    type\n    birthDate\n    deathDate\n    deathDateEstimatedIndicator\n    deathIndicator\n    identifier {\n      identifier\n      identifierTypeCode\n      id\n    }\n    name {\n      use\n      family\n      given\n      middle\n      patronymic\n      prefix\n      suffix\n      id\n    }\n  }\n}\n\nquery subject($id: UUID) {\n  subject(id: $id) {\n    id\n    performingBiologicEntity {\n      id\n      type\n      birthDate\n      deathDate\n      deathDateEstimatedIndicator\n      deathIndicator\n    }\n  }\n}":
+  "query person($id: UUID) {\n  person(id: $id) {\n    id\n    type\n    birthDate\n    deathDate\n    deathDateEstimatedIndicator\n    deathIndicator\n    identifier {\n      identifier\n      identifierTypeCode\n      id\n    }\n    name {\n      use\n      family\n      given\n      middle\n      patronymic\n      prefix\n      suffix\n      id\n    }\n  }\n}":
     types.PersonDocument,
+  "query subject($id: UUID) {\n  subject(id: $id) {\n    id\n    performingBiologicEntity {\n      id\n      type\n      birthDate\n      deathDate\n      deathDateEstimatedIndicator\n      deathIndicator\n    }\n  }\n}":
+    types.SubjectDocument,
 };
 
 /**
@@ -39,8 +42,14 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "query person($id: UUID) {\n  person(id: $id) {\n    id\n    type\n    birthDate\n    deathDate\n    deathDateEstimatedIndicator\n    deathIndicator\n    identifier {\n      identifier\n      identifierTypeCode\n      id\n    }\n    name {\n      use\n      family\n      given\n      middle\n      patronymic\n      prefix\n      suffix\n      id\n    }\n  }\n}\n\nquery subject($id: UUID) {\n  subject(id: $id) {\n    id\n    performingBiologicEntity {\n      id\n      type\n      birthDate\n      deathDate\n      deathDateEstimatedIndicator\n      deathIndicator\n    }\n  }\n}",
-): (typeof documents)["query person($id: UUID) {\n  person(id: $id) {\n    id\n    type\n    birthDate\n    deathDate\n    deathDateEstimatedIndicator\n    deathIndicator\n    identifier {\n      identifier\n      identifierTypeCode\n      id\n    }\n    name {\n      use\n      family\n      given\n      middle\n      patronymic\n      prefix\n      suffix\n      id\n    }\n  }\n}\n\nquery subject($id: UUID) {\n  subject(id: $id) {\n    id\n    performingBiologicEntity {\n      id\n      type\n      birthDate\n      deathDate\n      deathDateEstimatedIndicator\n      deathIndicator\n    }\n  }\n}"];
+  source: "query person($id: UUID) {\n  person(id: $id) {\n    id\n    type\n    birthDate\n    deathDate\n    deathDateEstimatedIndicator\n    deathIndicator\n    identifier {\n      identifier\n      identifierTypeCode\n      id\n    }\n    name {\n      use\n      family\n      given\n      middle\n      patronymic\n      prefix\n      suffix\n      id\n    }\n  }\n}",
+): (typeof documents)["query person($id: UUID) {\n  person(id: $id) {\n    id\n    type\n    birthDate\n    deathDate\n    deathDateEstimatedIndicator\n    deathIndicator\n    identifier {\n      identifier\n      identifierTypeCode\n      id\n    }\n    name {\n      use\n      family\n      given\n      middle\n      patronymic\n      prefix\n      suffix\n      id\n    }\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "query subject($id: UUID) {\n  subject(id: $id) {\n    id\n    performingBiologicEntity {\n      id\n      type\n      birthDate\n      deathDate\n      deathDateEstimatedIndicator\n      deathIndicator\n    }\n  }\n}",
+): (typeof documents)["query subject($id: UUID) {\n  subject(id: $id) {\n    id\n    performingBiologicEntity {\n      id\n      type\n      birthDate\n      deathDate\n      deathDateEstimatedIndicator\n      deathIndicator\n    }\n  }\n}"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

@@ -1,0 +1,13 @@
+query subject($id: UUID) {
+  subject(id: $id) {
+    id
+    performingBiologicEntity {
+      id
+      type
+      birthDate
+      deathDate
+      deathDateEstimatedIndicator
+      deathIndicator
+    }
+  }
+}
