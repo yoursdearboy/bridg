@@ -1,17 +1,17 @@
 // gen-ops-remote.js
 // Usage: node gen-ops-remote.js https://example.com/graphql ./src/graphql/generated-ops.graphql
-// Installs required: npm i node-fetch graphql
-
+// Install: npm install node-fetch graphql
 const fs = require('fs');
 const fetch = require('node-fetch');
+const path = require('path');
 const {
   buildClientSchema,
   getIntrospectionQuery,
   isScalarType,
   isObjectType,
-  print,
-  parse,
-  GraphQLSchema,
+  isNonNullType,
+  isListType,
+  getNamedType,
 } = require('graphql');
 
 if (process.argv.length < 4) {
@@ -35,24 +35,26 @@ async function fetchSchema(endpoint) {
 }
 
 function unwrapType(type) {
-  return type.ofType ? unwrapType(type.ofType) : type;
+  return getNamedType(type);
 }
 
-function collectScalarSelections(type, schema) {
+function isScalarOrID(type) {
+  return isScalarType(type) || (type && type.name === 'ID');
+}
+
+function collectScalarSelections(type) {
   const named = unwrapType(type);
   if (!isObjectType(named)) return [];
   const fields = named.getFields();
-  const scalarNames = [];
-  Object.values(fields).forEach(f => {
-    const fieldType = unwrapType(f.type);
-    if (isScalarType(fieldType) || fieldType.name === 'ID') {
-      scalarNames.push(f.name);
-    }
-  });
-  return scalarNames;
+  return Object.values(fields)
+    .filter(f => {
+      const nt = unwrapType(f.type);
+      return isScalarOrID(nt);
+    })
+    .map(f => f.name);
 }
 
-function collectNestedObjectSelections(type, schema) {
+function collectNestedObjectSelections(type) {
   const named = unwrapType(type);
   if (!isObjectType(named)) return {};
   const fields = named.getFields();
@@ -60,20 +62,8 @@ function collectNestedObjectSelections(type, schema) {
   Object.values(fields).forEach(f => {
     const oneLevel = unwrapType(f.type);
     if (isObjectType(oneLevel)) {
-      // collect scalar children of this nested object
-      const nestedScalars = Object.values(oneLevel.getFields())
-        .map(nf => unwrapType(nf.type))
-        .filter(nt => isScalarType(nt) || nt.name === 'ID')
-        .map((_, idx) => {
-          // we'll get names properly below
-          return null;
-        });
-      // Actually get names:
       const names = Object.values(oneLevel.getFields())
-        .filter(nf => {
-          const nt = unwrapType(nf.type);
-          return isScalarType(nt) || nt.name === 'ID';
-        })
+        .filter(nf => isScalarOrID(unwrapType(nf.type)))
         .map(nf => nf.name);
       if (names.length) nested[f.name] = names;
     }
@@ -81,23 +71,27 @@ function collectNestedObjectSelections(type, schema) {
   return nested;
 }
 
-function buildSelectionBlock(field, schema) {
-  const fieldType = field.type;
-  const scalars = collectScalarSelections(fieldType, schema);
-  const nested = collectNestedObjectSelections(fieldType, schema);
+function buildSelectionBlock(field) {
+  const scalars = collectScalarSelections(field.type);
+  const nested = collectNestedObjectSelections(field.type);
 
   const lines = [];
   if (scalars.length) lines.push(...scalars);
-  // include one-level nested objects (each with their scalar children)
   Object.entries(nested).forEach(([k, v]) => {
     lines.push(`${k} {`);
     v.forEach(n => lines.push(`  ${n}`));
     lines.push(`}`);
   });
 
-  // if nothing selectable, request __typename
   if (lines.length === 0) lines.push('__typename');
   return lines.map(l => `    ${l}`).join('\n');
+}
+
+function typeToString(type) {
+  if (isNonNullType(type)) return `${typeToString(type.ofType)}!`;
+  if (isListType(type)) return `[${typeToString(type.ofType)}]`;
+  const named = getNamedType(type);
+  return named.name;
 }
 
 async function main() {
@@ -108,46 +102,18 @@ async function main() {
 
     const ops = [];
     Object.values(queryType.getFields()).forEach(field => {
-      // Build a name-safe operation name (pascal-case)
       const opName = field.name.replace(/[^a-zA-Z0-9]/g, '_');
-      const selection = buildSelectionBlock(field, schema);
-      // include basic args in operation signature (all args as variables with scalar types)
-      const args = field.args || [];
-      const varDefs = args
-        .map(a => {
-          const t = (() => {
-            let ty = a.type;
-            // print type as string (rough)
-            const getTypeStr = (tt) => {
-              if (tt.kind && tt.name) return tt.name;
-              if (tt.ofType) {
-                const inner = getTypeStr(tt.ofType);
-                return tt.kind === 'NON_NULL' ? `${inner}!` : inner;
-              }
-              return String(tt);
-            };
-            // fallback simple handling using GraphQL type instances:
-            const unwrap = (x) => {
-              if (x.kind) return getTypeStr(x);
-              // for built schema types, walk .toString if available
-              try { return String(a.type); } catch { return 'String'; }
-            };
-            return unwrap();
-          })();
-          // fall back to generic scalar type String if unknown
-          const typeStr = t || 'String';
-          return `$${a.name}: ${typeStr}`;
-        })
-        .filter(Boolean)
-        .join(', ');
+      const selection = buildSelectionBlock(field);
 
+      const args = field.args || [];
+      const varDefs = args.map(a => `$${a.name}: ${typeToString(a.type)}`).join(', ');
       const argsUsage = args.length ? '(' + args.map(a => `${a.name}: $${a.name}`).join(', ') + ')' : '';
 
       const op = `query ${opName}${varDefs ? `(${varDefs})` : ''} {\n  ${field.name}${argsUsage} {\n${selection}\n  }\n}\n`;
       ops.push(op);
     });
 
-    fs.mkdirSync(require('path').dirname(OUT_FILE), { recursive: true });
+    fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
     fs.writeFileSync(OUT_FILE, ops.join('\n'));
     console.log(`Generated ${ops.length} operations -> ${OUT_FILE}`);
   } catch (err) {

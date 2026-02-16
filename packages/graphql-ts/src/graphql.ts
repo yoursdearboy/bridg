@@ -105,24 +105,33 @@ export type Query = {
   person: Array<Person>;
 };
 
-export type PersonQueryVariables = Exact<{ [key: string]: never; }>;
+
+export type QueryPersonArgs = {
+  id?: InputMaybe<Scalars['UUID']['input']>;
+};
+
+export type PersonQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['UUID']['input']>;
+}>;
 
 
 export type PersonQuery = { __typename?: 'Query', person: Array<{ __typename?: 'Person', id: string, type: string, birthDate?: any | null, deathDate?: any | null, deathDateEstimatedIndicator?: boolean | null, deathIndicator?: boolean | null, identifier: Array<{ __typename?: 'BiologicEntityIdentifier', identifier: any, identifierTypeCode?: any | null, id: string }>, name: Array<{ __typename?: 'BiologicEntityName', use?: string | null, family?: string | null, given?: string | null, middle?: string | null, patronymic?: string | null, prefix?: string | null, suffix?: string | null, id: string }> }> };
 
 
-export const PersonDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"person"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"person"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"birthDate"}},{"kind":"Field","name":{"kind":"Name","value":"deathDate"}},{"kind":"Field","name":{"kind":"Name","value":"deathDateEstimatedIndicator"}},{"kind":"Field","name":{"kind":"Name","value":"deathIndicator"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"identifierTypeCode"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"use"}},{"kind":"Field","name":{"kind":"Name","value":"family"}},{"kind":"Field","name":{"kind":"Name","value":"given"}},{"kind":"Field","name":{"kind":"Name","value":"middle"}},{"kind":"Field","name":{"kind":"Name","value":"patronymic"}},{"kind":"Field","name":{"kind":"Name","value":"prefix"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<PersonQuery, PersonQueryVariables>;
-export type PersonQueryVariables = Exact<{ [key: string]: never; }>;
+export const PersonDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"person"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"person"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"birthDate"}},{"kind":"Field","name":{"kind":"Name","value":"deathDate"}},{"kind":"Field","name":{"kind":"Name","value":"deathDateEstimatedIndicator"}},{"kind":"Field","name":{"kind":"Name","value":"deathIndicator"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"identifierTypeCode"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"use"}},{"kind":"Field","name":{"kind":"Name","value":"family"}},{"kind":"Field","name":{"kind":"Name","value":"given"}},{"kind":"Field","name":{"kind":"Name","value":"middle"}},{"kind":"Field","name":{"kind":"Name","value":"patronymic"}},{"kind":"Field","name":{"kind":"Name","value":"prefix"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<PersonQuery, PersonQueryVariables>;
+export type PersonQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['UUID']['input']>;
+}>;
 
 
 export type PersonQuery = { __typename?: 'Query', person: Array<{ __typename?: 'Person', id: string, type: string, birthDate?: any | null, deathDate?: any | null, deathDateEstimatedIndicator?: boolean | null, deathIndicator?: boolean | null, identifier: Array<{ __typename?: 'BiologicEntityIdentifier', identifier: any, identifierTypeCode?: any | null, id: string }>, name: Array<{ __typename?: 'BiologicEntityName', use?: string | null, family?: string | null, given?: string | null, middle?: string | null, patronymic?: string | null, prefix?: string | null, suffix?: string | null, id: string }> }> };
 
 
-export const PersonDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"person"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"person"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"birthDate"}},{"kind":"Field","name":{"kind":"Name","value":"deathDate"}},{"kind":"Field","name":{"kind":"Name","value":"deathDateEstimatedIndicator"}},{"kind":"Field","name":{"kind":"Name","value":"deathIndicator"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"identifierTypeCode"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"use"}},{"kind":"Field","name":{"kind":"Name","value":"family"}},{"kind":"Field","name":{"kind":"Name","value":"given"}},{"kind":"Field","name":{"kind":"Name","value":"middle"}},{"kind":"Field","name":{"kind":"Name","value":"patronymic"}},{"kind":"Field","name":{"kind":"Name","value":"prefix"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<PersonQuery, PersonQueryVariables>;
+export const PersonDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"person"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"person"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"birthDate"}},{"kind":"Field","name":{"kind":"Name","value":"deathDate"}},{"kind":"Field","name":{"kind":"Name","value":"deathDateEstimatedIndicator"}},{"kind":"Field","name":{"kind":"Name","value":"deathIndicator"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"identifierTypeCode"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"use"}},{"kind":"Field","name":{"kind":"Name","value":"family"}},{"kind":"Field","name":{"kind":"Name","value":"given"}},{"kind":"Field","name":{"kind":"Name","value":"middle"}},{"kind":"Field","name":{"kind":"Name","value":"patronymic"}},{"kind":"Field","name":{"kind":"Name","value":"prefix"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<PersonQuery, PersonQueryVariables>;
 
 export const PersonDocument = gql`
-    query person {
-  person {
+    query person($id: UUID) {
+  person(id: $id) {
     id
     type
     birthDate
@@ -160,6 +169,7 @@ export const PersonDocument = gql`
  * @example
  * const { data, loading, error } = usePersonQuery({
  *   variables: {
+ *      id: // value for 'id'
  *   },
  * });
  */

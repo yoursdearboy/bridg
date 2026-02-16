@@ -1,5 +1,5 @@
-query person {
-  person {
+query person($id: UUID) {
+  person(id: $id) {
     id
     type
     birthDate
