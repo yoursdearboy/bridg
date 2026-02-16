@@ -40,6 +40,19 @@ export enum AdministrativeGender {
   Unknown = "unknown",
 }
 
+export type BiologicEntity = {
+  __typename?: "BiologicEntity";
+  administrativeGenderCode?: Maybe<AdministrativeGender>;
+  birthDate?: Maybe<Scalars["Date"]["output"]>;
+  deathDate?: Maybe<Scalars["Date"]["output"]>;
+  deathDateEstimatedIndicator?: Maybe<Scalars["Boolean"]["output"]>;
+  deathIndicator?: Maybe<Scalars["Boolean"]["output"]>;
+  id: Scalars["ID"]["output"];
+  identifier: Array<BiologicEntityIdentifier>;
+  name: Array<BiologicEntityName>;
+  type: Scalars["String"]["output"];
+};
+
 export type BiologicEntityIdentifier = {
   __typename?: "BiologicEntityIdentifier";
   id: Scalars["ID"]["output"];
@@ -51,6 +64,17 @@ export type BiologicEntityIdentifierInput = {
   id?: InputMaybe<Scalars["UUID"]["input"]>;
   identifier: Scalars["InstanceIdentifier"]["input"];
   identifierTypeCode?: InputMaybe<Scalars["ConceptDescriptor"]["input"]>;
+};
+
+export type BiologicEntityInput = {
+  administrativeGenderCode?: InputMaybe<AdministrativeGender>;
+  birthDate?: InputMaybe<Scalars["Date"]["input"]>;
+  deathDate?: InputMaybe<Scalars["Date"]["input"]>;
+  deathDateEstimatedIndicator?: InputMaybe<Scalars["Boolean"]["input"]>;
+  deathIndicator?: InputMaybe<Scalars["Boolean"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  identifier?: InputMaybe<Array<BiologicEntityIdentifierInput>>;
+  name?: InputMaybe<Array<BiologicEntityNameInput>>;
 };
 
 export type BiologicEntityName = {
@@ -79,10 +103,15 @@ export type BiologicEntityNameInput = {
 export type Mutation = {
   __typename?: "Mutation";
   person: Person;
+  subject: Subject;
 };
 
 export type MutationPersonArgs = {
   input: PersonInput;
+};
+
+export type MutationSubjectArgs = {
+  input: SubjectInput;
 };
 
 export type Person = {
@@ -112,10 +141,27 @@ export type PersonInput = {
 export type Query = {
   __typename?: "Query";
   person: Array<Person>;
+  subject: Array<Subject>;
 };
 
 export type QueryPersonArgs = {
   id?: InputMaybe<Scalars["UUID"]["input"]>;
+};
+
+export type QuerySubjectArgs = {
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+};
+
+export type Subject = {
+  __typename?: "Subject";
+  id: Scalars["ID"]["output"];
+  performingBiologicEntity: BiologicEntity;
+};
+
+export type SubjectInput = {
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  performingBiologicEntity?: InputMaybe<BiologicEntityInput>;
+  performingBiologicEntityId?: InputMaybe<Scalars["UUID"]["input"]>;
 };
 
 export type PersonQueryVariables = Exact<{
@@ -149,6 +195,27 @@ export type PersonQuery = {
       suffix?: string | null;
       id: string;
     }>;
+  }>;
+};
+
+export type SubjectQueryVariables = Exact<{
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+}>;
+
+export type SubjectQuery = {
+  __typename?: "Query";
+  subject: Array<{
+    __typename?: "Subject";
+    id: string;
+    performingBiologicEntity: {
+      __typename?: "BiologicEntity";
+      id: string;
+      type: string;
+      birthDate?: any | null;
+      deathDate?: any | null;
+      deathDateEstimatedIndicator?: boolean | null;
+      deathIndicator?: boolean | null;
+    };
   }>;
 };
 
@@ -255,3 +322,75 @@ export const PersonDocument = {
     },
   ],
 } as unknown as DocumentNode<PersonQuery, PersonQueryVariables>;
+export const SubjectDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "subject" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "UUID" } },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "subject" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "id" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "id" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "performingBiologicEntity" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "type" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "birthDate" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "deathDate" },
+                      },
+                      {
+                        kind: "Field",
+                        name: {
+                          kind: "Name",
+                          value: "deathDateEstimatedIndicator",
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "deathIndicator" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SubjectQuery, SubjectQueryVariables>;
