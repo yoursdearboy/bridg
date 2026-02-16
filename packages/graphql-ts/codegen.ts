@@ -14,7 +14,6 @@ const config: CodegenConfig = {
       presetConfig: {
         gqlTagName: "gql",
       },
-      plugins: ["typescript-operations", "typed-document-node", "typescript-react-apollo"],
       config: {
         addTypename: true,
         immutableTypes: false,
@@ -24,6 +23,7 @@ const config: CodegenConfig = {
       },
     },
   },
+  hooks: { afterAllFileWrite: ['prettier --write'] },
 };
 
 export default config;
