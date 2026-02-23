@@ -25,6 +25,11 @@ class BiologicEntity:
     identifier: List[BiologicEntityIdentifier]
     name: List[BiologicEntityName]
 
+    @strawberry.field
+    def primary_name(self) -> Optional[BiologicEntityName]:
+        if len(self.name) > 0:
+            return self.name[0]
+
 
 @strawberry.type
 class BiologicEntityIdentifier(ID):
