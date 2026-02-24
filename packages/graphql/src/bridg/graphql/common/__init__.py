@@ -3,6 +3,7 @@ from .biologic_entity import (
     BiologicEntityIdentifier,
     BiologicEntityIdentifierInput,
     BiologicEntityInput,
+    BiologicEntityLookup,
     BiologicEntityName,
     BiologicEntityNameInput,
 )
@@ -13,6 +14,7 @@ from .id import (
 from .person import (
     Person,
     PersonInput,
+    PersonLookup,
 )
 from .subject import (
     Subject,
@@ -24,12 +26,14 @@ __all__ = [
     "BiologicEntityIdentifier",
     "BiologicEntityIdentifierInput",
     "BiologicEntityInput",
+    "BiologicEntityLookup",
     "BiologicEntityName",
     "BiologicEntityNameInput",
     "ID",
     "IDInput",
     "Person",
     "PersonInput",
+    "PersonLookup",
     "Subject",
     "SubjectInput",
 ]
