@@ -42,6 +42,12 @@ class BiologicEntityName(EntityName):
 
 
 @strawberry.input
+class BiologicEntityLookup:
+    identifier: Optional[IDInput] = None
+    name: Optional[EntityNameInput] = None
+
+
+@strawberry.input
 class BiologicEntityInput:
     id: strawberry.Maybe[UUID]
     administrative_gender_code: strawberry.Maybe[Optional[AdministrativeGender]]
