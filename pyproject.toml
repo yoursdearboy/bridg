@@ -29,7 +29,8 @@ test = [
 [tool.poe.tasks]
 mkinit = [
     { ref = "alchemy:mkinit", cwd = "packages/alchemy" },
-    { ref = "api:mkinit", cwd = "packages/api" }
+    { ref = "api:mkinit", cwd = "packages/api" },
+    { ref = "graphql:mkinit", cwd = "packages/graphql" }
 ]
 
 [[tool.poe.include]]
@@ -39,6 +40,10 @@ cwd  = "packages/alchemy"
 [[tool.poe.include]]
 path = "packages/api/pyproject.toml"
 cwd  = "packages/api"
+
+[[tool.poe.include]]
+path = "packages/graphql/pyproject.toml"
+cwd  = "packages/graphql"
 
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report html"
@@ -53,5 +58,6 @@ extend-select = ["I", "TID"]
 members = [
     "packages/alchemy",
     "packages/api",
-    "packages/common"
+    "packages/common",
+    "packages/graphql",
 ]
