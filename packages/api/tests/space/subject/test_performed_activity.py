@@ -25,7 +25,7 @@ def test_performed_activity_show(snapshot_json):
         executing_study_protocol_version=space,
         involved_subject=ss,
     )
-    response = client.get(f"/space/{space.id}/subject/{ss.id}/activity/{act.id}")
+    response = client.get(f"/subject/{ss.id}/activity/{act.id}")
     assert response.status_code == 200
     assert response.json() == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
 
@@ -39,7 +39,7 @@ def test_performed_activity_create(snapshot_json):
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     act = PerformedActivityDataFactory.build()
-    response = client.post(f"/space/{space.id}/subject/{ss.id}/activity", content=act.model_dump_json())
+    response = client.post(f"/subject/{ss.id}/activity", content=act.model_dump_json())
     assert response.status_code == 200
     assert response.json() == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
 
@@ -57,7 +57,7 @@ def test_performed_activity_update(snapshot_json):
         involved_subject=ss,
     )
     patch = PerformedActivityDataFactory.build()
-    response = client.patch(f"/space/{space.id}/subject/{ss.id}/activity/{act.id}", content=patch.model_dump_json())
+    response = client.patch(f"/subject/{ss.id}/activity/{act.id}", content=patch.model_dump_json())
     assert response.status_code == 200
     assert response.json()["id"] == str(act.id)
     assert response.json() == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))

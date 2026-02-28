@@ -33,7 +33,7 @@ def test_performed_specimen_collection_show(snapshot_json):
         involved_subject=ss,
         produced_specimen=SpecimenFactory.batch(3),
     )
-    response = client.get(f"/space/{space.id}/subject/{ss.id}/activity/{psc.id}?result=1")
+    response = client.get(f"/subject/{ss.id}/activity/{psc.id}?result=1")
     assert response.status_code == 200
     assert response.json() == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
 
@@ -55,10 +55,7 @@ def test_performed_specimen_collection_create(snapshot_json):
             for _ in range(3)
         ],
     )
-    response = client.post(
-        f"/space/{space.id}/subject/{ss.id}/activity",
-        content=psc.model_dump_json(),
-    )
+    response = client.post(f"/subject/{ss.id}/activity", content=psc.model_dump_json())
     assert response.status_code == 200
     assert response.json() == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
 
@@ -110,7 +107,7 @@ def test_performed_specimen_collection_update(random, snapshot_json):
             material_id.append(IsUUID)
         else:
             pass
-    response = client.patch(f"/space/{space.id}/subject/{ss.id}/activity/{psc.id}", content=patch.model_dump_json())
+    response = client.patch(f"/subject/{ss.id}/activity/{psc.id}", content=patch.model_dump_json())
     json = response.json()
     assert response.status_code == 200
     assert json["id"] == str(psc.id)
