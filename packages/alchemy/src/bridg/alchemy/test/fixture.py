@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from bridg.alchemy.db import Base
 from bridg.alchemy.factory.base import BaseFactory as SQLAlchemyBaseFactory
+from bridg.alchemy.terminology import TerminologyService
 from bridg.common.settings import load_settings
 
 
@@ -32,3 +33,8 @@ def random():
     BaseFactory.__faker__.seed_instance(42)
     BaseFactory.__faker__.unique.clear()
     return BaseFactory.__random__
+
+
+@pytest.fixture
+def terminology(session: Session):
+    return TerminologyService(session)
