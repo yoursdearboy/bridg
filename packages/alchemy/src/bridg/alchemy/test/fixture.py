@@ -8,7 +8,7 @@ from bridg.alchemy.factory.base import BaseFactory as SQLAlchemyBaseFactory
 from bridg.common.settings import load_settings
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture
 def session():
     settings = load_settings()
     engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
