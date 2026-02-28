@@ -1,8 +1,5 @@
-import re
-import typing
-from typing import Annotated, Any, List, Type, get_args
+from typing import List, Type, get_args
 
-import strawberry
 from sqlalchemy import inspect
 from sqlalchemy.orm import Composite, Relationship
 
@@ -11,6 +8,7 @@ import bridg.common.converter
 
 from .dataclass import Dataclass
 from .datatype import ConceptDescriptor
+from .maybe import _annotation_is_maybe
 
 
 class Converter(bridg.common.converter.Converter):
@@ -59,22 +57,6 @@ def get_concrete_class[T: bridg.alchemy.Base](input, class_: Type[T]) -> Type[T]
         if polymorphic_value := getattr(input, polymorphic_on.name, None):
             return insp.polymorphic_map[polymorphic_value].class_
     return class_
-
-
-_maybe_re = re.compile(r"^(?:strawberry\.)?Maybe\[(.+)\]$")
-
-
-def _annotation_is_maybe(annotation: Any) -> bool:
-    if isinstance(annotation, str):
-        # Ideally we would try to evaluate the annotation, but the args inside
-        # may still not be available, as the module is still being constructed.
-        # Checking for the pattern should be good enough for now.
-        return _maybe_re.match(annotation) is not None
-
-    orig = typing.get_origin(annotation)
-    if orig is Annotated:
-        return _annotation_is_maybe(typing.get_args(annotation)[0])
-    return orig is strawberry.Maybe
 
 
 @bridg.common.converter.configure
