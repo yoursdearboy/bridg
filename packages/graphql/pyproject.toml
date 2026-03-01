@@ -24,6 +24,7 @@ build-backend = "uv_build"
 "graphql:mkinit".sequence = [
     "mkinit --recursive --relative --nomods -i src/bridg/graphql/common",
     "mkinit --recursive --relative --nomods -i src/bridg/graphql/datatype",
+    "mkinit --recursive --relative --nomods -i tests/factory",
     "ruff check --fix",
     "ruff format"
 ]
