@@ -52,7 +52,7 @@ addopts = "--cov --cov-report html"
 line-length = 120
 
 [tool.ruff.lint]
-extend-select = ["I", "TID"]
+extend-select = ["F", "I", "TID"]
 
 [tool.uv.workspace]
 members = [
