@@ -8,7 +8,9 @@ from bridg.alchemy.factory import (
 )
 from bridg.graphql.context import Context
 from bridg.graphql.schema import schema
-from tests.utils import process_input
+
+from ..factory import BiologicEntityInputFactory, BiologicEntityNameInputFactory
+from ..utils import process_input
 
 
 def test_person_query(context: Context, snapshot_json):
@@ -211,5 +213,28 @@ def test_person_list_filter_by_id_query(context: Context, snapshot_json):
     }
 
     result = schema.execute_sync(query, dict(filter=filter), context_value=context)
+    assert result.errors is None
+    assert result.data == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
+
+
+def test_person_create(context: Context, snapshot_json):
+    query = """
+        mutation test($input: PersonInput!) {
+            PersonCreate(input: $input) {
+                id
+                administrativeGenderCode
+                primaryName {
+                    family
+                    given
+                }
+            }
+        }
+    """
+    input = BiologicEntityInputFactory.build(
+        name=[
+            BiologicEntityNameInputFactory.build(family="Test"),
+        ]
+    )
+    result = schema.execute_sync(query, dict(input=process_input(input)), context_value=context)
     assert result.errors is None
     assert result.data == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
