@@ -1,9 +1,9 @@
 from .biologic_entity import (
     BiologicEntity,
+    BiologicEntityFilter,
     BiologicEntityIdentifier,
     BiologicEntityIdentifierInput,
     BiologicEntityInput,
-    BiologicEntityLookup,
     BiologicEntityName,
     BiologicEntityNameInput,
 )
@@ -13,8 +13,8 @@ from .id import (
 )
 from .person import (
     Person,
+    PersonFilter,
     PersonInput,
-    PersonLookup,
 )
 from .subject import (
     Subject,
@@ -23,17 +23,17 @@ from .subject import (
 
 __all__ = [
     "BiologicEntity",
+    "BiologicEntityFilter",
     "BiologicEntityIdentifier",
     "BiologicEntityIdentifierInput",
     "BiologicEntityInput",
-    "BiologicEntityLookup",
     "BiologicEntityName",
     "BiologicEntityNameInput",
     "ID",
     "IDInput",
     "Person",
+    "PersonFilter",
     "PersonInput",
-    "PersonLookup",
     "Subject",
     "SubjectInput",
 ]

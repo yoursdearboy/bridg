@@ -42,7 +42,7 @@ class BiologicEntityName(EntityName):
 
 
 @strawberry.input
-class BiologicEntityLookup:
+class BiologicEntityFilter:
     identifier: Optional[IDInput] = None
     name: Optional[EntityNameInput] = None
 

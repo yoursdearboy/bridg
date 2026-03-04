@@ -1,0 +1,24 @@
+{
+  "PersonList": [
+    {
+      "id": "str",
+      "identifier": [
+        {
+          "identifier": {
+            "extension": null,
+            "root": "67890"
+          },
+          "identifierTypeCode": {
+            "code": "test",
+            "codeSystem": "identifier",
+            "displayName": null
+          }
+        }
+      ],
+      "primaryName": {
+        "family": "Test",
+        "given": "Second"
+      }
+    }
+  ]
+}

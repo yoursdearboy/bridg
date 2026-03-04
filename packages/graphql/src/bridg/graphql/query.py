@@ -5,7 +5,7 @@ import strawberry
 
 import bridg.alchemy
 
-from .common import Person, PersonLookup, Subject
+from .common import Person, PersonFilter, Subject
 from .context import Context
 
 
@@ -19,25 +19,25 @@ class Query:
         return query.one_or_none()  # type: ignore
 
     @strawberry.field(name="PersonList")
-    def person_list(self, lookup: Optional[PersonLookup] = None, *, info: strawberry.Info[Context]) -> List[Person]:
+    def person_list(self, filter: Optional[PersonFilter] = None, *, info: strawberry.Info[Context]) -> List[Person]:
         session = info.context.session
         query = session.query(bridg.alchemy.Person)
         # FIXME: move to a service
-        if lookup:
-            if lookup.name and lookup.name.family:
+        if filter:
+            if filter.name and filter.name.family:
                 query = query.filter(
                     bridg.alchemy.BiologicEntity.name.any(
-                        bridg.alchemy.BiologicEntityName.family.ilike(f"%{lookup.name.family.value}%")
+                        bridg.alchemy.BiologicEntityName.family.ilike(f"%{filter.name.family.value}%")
                     )
                 )
-            if lookup.identifier:
-                root = lookup.identifier.identifier.root
-                extension = lookup.identifier.identifier.extension
+            # FIXME: check identifier code? or not?
+            if filter.identifier:
+                root = filter.identifier.identifier.root
+                extension = filter.identifier.identifier.extension
                 q = (bridg.alchemy.BiologicEntityIdentifier.identifier_root == root) & (  # pyright: ignore[reportAttributeAccessIssue]
                     bridg.alchemy.BiologicEntityIdentifier.identifier_extension == extension  # pyright: ignore[reportAttributeAccessIssue]
                 )
                 query = query.filter(bridg.alchemy.BiologicEntity.identifier.any(q))
-                lookup.identifier.identifier.root
         return query.all()  # type: ignore
 
     @strawberry.field(name="Subject")

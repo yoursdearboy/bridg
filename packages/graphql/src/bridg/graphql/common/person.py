@@ -1,6 +1,6 @@
 import strawberry
 
-from .biologic_entity import BiologicEntity, BiologicEntityInput, BiologicEntityLookup
+from .biologic_entity import BiologicEntity, BiologicEntityFilter, BiologicEntityInput
 
 
 @strawberry.type
@@ -9,7 +9,7 @@ class Person(BiologicEntity):
 
 
 @strawberry.input
-class PersonLookup(BiologicEntityLookup):
+class PersonFilter(BiologicEntityFilter):
     pass
 
 
