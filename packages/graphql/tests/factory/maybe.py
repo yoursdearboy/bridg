@@ -6,6 +6,8 @@ from polyfactory.field_meta import FieldMeta, Null
 from polyfactory.value_generators.primitives import create_random_boolean
 from strawberry import Maybe, Some
 
+from bridg.graphql.maybe import _annotation_is_maybe
+
 T = TypeVar("T")
 
 
@@ -22,7 +24,7 @@ class MaybeFactory(BaseFactory[Maybe]):
     @classmethod
     @abstractmethod
     def is_supported_type(cls, value: Any) -> TypeGuard[type[Maybe]]:
-        return True
+        return _annotation_is_maybe(value)
 
     @classmethod
     @abstractmethod
