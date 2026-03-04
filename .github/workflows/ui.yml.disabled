@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  ui-tests:
+  ui-test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -34,20 +34,20 @@ jobs:
           path: packages/ui/coverage/
           retention-days: 30
 
-  ui-telegram-notification:
-    needs: ui-tests
+  ui-test-telegram-notification:
+    needs: ui-test
     if: ${{ always() }}
     uses: ./.github/workflows/telegram-notification.yml
     with:
       working_directory: "./ui"
-      status_text: ${{ needs.ui-tests.result == 'success' && 'success' || 'failure' }}
-      status_emoji: ${{ needs.ui-tests.result == 'success' && '✅' || '❌' }}
+      status_text: ${{ needs.ui-test.result == 'success' && 'success' || 'failure' }}
+      status_emoji: ${{ needs.ui-test.result == 'success' && '✅' || '❌' }}
       stage_name: "UI"
     secrets:
       chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
       bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
-  linter-tests:
+  ui-lint:
     runs-on: ubuntu-latest
 
     strategy:
@@ -68,13 +68,13 @@ jobs:
         run:
           npm run lint --workspaces --if-present
   
-  linter-telegram-notification:
-    needs: linter-tests
+  ui-lint-telegram-notification:
+    needs: ui-lint
     uses: ./.github/workflows/telegram-notification.yml
     with:
       working_directory: "./ui"
-      status_text: ${{ needs.linter-tests.result == 'success' && 'success' || 'failure' }}
-      status_emoji: ${{ needs.linter-tests.result == 'success' && '✅' || '❌' }}
+      status_text: ${{ needs.ui-lint.result == 'success' && 'success' || 'failure' }}
+      status_emoji: ${{ needs.ui-lint.result == 'success' && '✅' || '❌' }}
       stage_name: "LINTER"
     secrets:
       chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}

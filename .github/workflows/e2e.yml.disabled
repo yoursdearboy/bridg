@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [ main, master ]
 jobs:
-  test:
+  e2e:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
@@ -36,13 +36,13 @@ jobs:
         path: packages/ui/playwright-report/
         retention-days: 30
   e2e-telegram-notification:
-    needs: test
+    needs: e2e
     if: ${{ always() }}
     uses: ./.github/workflows/telegram-notification.yml
     with:
       working_directory: "./ui"
-      status_text: ${{ needs.test.result == 'success' && 'success' || 'failure' }}
-      status_emoji: ${{ needs.test.result == 'success' && '✅' || '❌' }}
+      status_text: ${{ needs.e2e.result == 'success' && 'success' || 'failure' }}
+      status_emoji: ${{ needs.e2e.result == 'success' && '✅' || '❌' }}
       stage_name: "e2e"
     secrets:
       chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
