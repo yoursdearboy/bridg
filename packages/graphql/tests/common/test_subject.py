@@ -108,7 +108,7 @@ def test_subject_list_query(context: Context, snapshot_json):
 def test_subject_create(context: Context, snapshot_json):
     query = """
         mutation test($input: SubjectInput!) {
-            subject(input: $input) {
+            SubjectCreate(input: $input) {
                 id
                 performingBiologicEntity {
                     id
@@ -143,7 +143,7 @@ def test_subject_create_using_existing_biologic_entity(context: Context, snapsho
     )
     query = """
         mutation test($input: SubjectInput!) {
-            subject(input: $input) {
+            SubjectCreate(input: $input) {
                 id
                 performingBiologicEntity {
                     id
