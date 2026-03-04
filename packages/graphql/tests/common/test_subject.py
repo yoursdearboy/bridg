@@ -20,6 +20,50 @@ from ..utils import process_input
 def test_subject_query(context: Context, snapshot_json):
     space = StudyProtocolVersionFactory.create_sync()
     sspvr = space.executing_study_site_protocol_version_relationship[0]
+    subject = StudySubjectFactory.create_sync(
+        performing_biologic_entity=PersonFactory.build(
+            name=[
+                BiologicEntityNameFactory.build(family="Test"),
+            ],
+            identifier=[
+                BiologicEntityIdentifierFactory.build(
+                    identifier_root="12345",
+                    identifier_extension=None,
+                    identifier_type_code=ConceptDescriptorFactory.build("identifier/test"),
+                )
+            ],
+        ),
+        performing_organization=None,
+        assigned_study_site_protocol_version_relationship=[sspvr],
+    )
+
+    query = """
+        query($id: UUID!) {
+            Subject(id: $id) {
+                id
+                performingBiologicEntity {
+                    id
+                    primaryName {
+                        family
+                        given
+                    }
+                    identifier {
+                        identifier
+                        identifierTypeCode
+                    }
+                }
+            }
+        }
+    """
+
+    result = schema.execute_sync(query, process_input(dict(id=subject.id)), context_value=context)
+    assert result.errors is None
+    assert result.data == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
+
+
+def test_subject_list_query(context: Context, snapshot_json):
+    space = StudyProtocolVersionFactory.create_sync()
+    sspvr = space.executing_study_site_protocol_version_relationship[0]
     StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(
             name=[
@@ -39,7 +83,7 @@ def test_subject_query(context: Context, snapshot_json):
 
     query = """
         query {
-            subject {
+            SubjectList {
                 id
                 performingBiologicEntity {
                     id
@@ -55,6 +99,7 @@ def test_subject_query(context: Context, snapshot_json):
             }
         }
     """
+
     result = schema.execute_sync(query, context_value=context)
     assert result.errors is None
     assert result.data == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))

@@ -10,7 +10,7 @@ from strawberry.utils.str_converters import to_camel_case
 from bridg.graphql.maybe import _annotation_is_maybe
 
 
-def process_input(x: Any):
+def process_input(x: Any) -> Any:
     if is_dataclass(x):
         result = dict()
         for field in fields(x):

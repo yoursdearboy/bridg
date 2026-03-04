@@ -11,18 +11,17 @@ from .context import Context
 
 @strawberry.type
 class Query:
-    @strawberry.field
-    def person(
-        self,
-        id: Optional[UUID] = None,
-        lookup: Optional[PersonLookup] = None,
-        *,
-        info: strawberry.Info[Context],
-    ) -> List[Person]:
+    @strawberry.field(name="Person")
+    def person(self, id: UUID, *, info: strawberry.Info[Context]) -> Optional[Person]:
         session = info.context.session
         query = session.query(bridg.alchemy.Person)
-        if id:
-            query = query.filter_by(id=id)
+        query = query.filter_by(id=id)
+        return query.one_or_none()  # type: ignore
+
+    @strawberry.field(name="PersonList")
+    def person_list(self, lookup: Optional[PersonLookup] = None, *, info: strawberry.Info[Context]) -> List[Person]:
+        session = info.context.session
+        query = session.query(bridg.alchemy.Person)
         # FIXME: move to a service
         if lookup:
             if lookup.name and lookup.name.family:
@@ -41,10 +40,15 @@ class Query:
                 lookup.identifier.identifier.root
         return query.all()  # type: ignore
 
-    @strawberry.field
-    def subject(self, id: Optional[UUID] = None, *, info: strawberry.Info[Context]) -> List[Subject]:
+    @strawberry.field(name="Subject")
+    def subject(self, id: UUID, *, info: strawberry.Info[Context]) -> Optional[Subject]:
         session = info.context.session
         query = session.query(bridg.alchemy.StudySubject)
-        if id:
-            query = query.filter_by(id=id)
+        query = query.filter_by(id=id)
+        return query.one_or_none()  # type: ignore
+
+    @strawberry.field(name="SubjectList")
+    def subject_list(self, *, info: strawberry.Info[Context]) -> List[Subject]:
+        session = info.context.session
+        query = session.query(bridg.alchemy.StudySubject)
         return query.all()  # type: ignore
