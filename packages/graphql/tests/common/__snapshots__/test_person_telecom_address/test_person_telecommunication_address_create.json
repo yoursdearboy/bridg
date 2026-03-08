@@ -1,0 +1,9 @@
+[
+  {
+    "address": "Test address",
+    "id": "UUID",
+    "person_id": "UUID",
+    "scheme": "<URLScheme.tel: 'tel'>",
+    "use": null
+  }
+]

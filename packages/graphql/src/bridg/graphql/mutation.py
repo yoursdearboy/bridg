@@ -2,7 +2,16 @@ import strawberry
 
 import bridg.alchemy
 
-from .common import Person, PersonInput, Subject, SubjectInput
+from .common import (
+    Person,
+    PersonInput,
+    PersonPostalAddress,
+    PersonPostalAddressInput,
+    PersonTelecommunicationAddress,
+    PersonTelecommunicationAddressInput,
+    Subject,
+    SubjectInput,
+)
 from .context import Context
 
 
@@ -16,6 +25,28 @@ class Mutation:
         person = session.merge(person)
         session.commit()
         return person  # type: ignore
+
+    @strawberry.mutation(name="PersonPostalAddressCreate")
+    def person_postal_address_create(
+        self, input: PersonPostalAddressInput, info: strawberry.Info[Context]
+    ) -> PersonPostalAddress:
+        session = info.context.session
+        converter = info.context.converter
+        ad = converter.convert(input, bridg.alchemy.PersonPostalAddress)
+        ad = session.merge(ad)
+        session.commit()
+        return ad  # type: ignore
+
+    @strawberry.mutation(name="PersonTelecommunicationAddressCreate")
+    def person_telecom_address_create(
+        self, input: PersonTelecommunicationAddressInput, info: strawberry.Info[Context]
+    ) -> PersonTelecommunicationAddress:
+        session = info.context.session
+        converter = info.context.converter
+        tel = converter.convert(input, bridg.alchemy.PersonTelecommunicationAddress)
+        tel = session.merge(tel)
+        session.commit()
+        return tel  # type: ignore
 
     @strawberry.mutation(name="SubjectCreate")
     def subject_create(self, input: SubjectInput, info: strawberry.Info[Context]) -> Subject:

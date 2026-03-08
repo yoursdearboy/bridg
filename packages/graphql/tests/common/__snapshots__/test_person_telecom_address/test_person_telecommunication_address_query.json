@@ -1,0 +1,17 @@
+{
+  "Person": {
+    "id": "str",
+    "telecomAddress": [
+      {
+        "address": "Test address",
+        "scheme": "tel",
+        "use": null
+      },
+      {
+        "address": "Test address",
+        "scheme": "tel",
+        "use": null
+      }
+    ]
+  }
+}

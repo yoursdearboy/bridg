@@ -15,6 +15,10 @@ from .person import (
     Person,
     PersonFilter,
     PersonInput,
+    PersonPostalAddress,
+    PersonPostalAddressInput,
+    PersonTelecommunicationAddress,
+    PersonTelecommunicationAddressInput,
 )
 from .subject import (
     Subject,
@@ -34,6 +38,10 @@ __all__ = [
     "Person",
     "PersonFilter",
     "PersonInput",
+    "PersonPostalAddress",
+    "PersonPostalAddressInput",
+    "PersonTelecommunicationAddress",
+    "PersonTelecommunicationAddressInput",
     "Subject",
     "SubjectInput",
 ]

@@ -4,6 +4,13 @@ from .base import (
 from .common import (
     BiologicEntityInputFactory,
     BiologicEntityNameInputFactory,
+    PersonPostalAddressInputFactory,
+    PersonTelecommunicationAddressInputFactory,
+)
+from .datatype import (
+    PostalAddressInputFactory,
+    TelecommunicationAddressInputFactory,
+    URLInputFactoryy,
 )
 from .maybe import (
     MaybeFactory,
@@ -16,6 +23,11 @@ __all__ = [
     "BiologicEntityInputFactory",
     "BiologicEntityNameInputFactory",
     "MaybeFactory",
+    "PersonPostalAddressInputFactory",
+    "PersonTelecommunicationAddressInputFactory",
+    "PostalAddressInputFactory",
     "T",
+    "TelecommunicationAddressInputFactory",
+    "URLInputFactoryy",
     "make_some",
 ]

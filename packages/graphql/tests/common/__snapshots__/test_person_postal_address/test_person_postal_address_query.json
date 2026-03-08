@@ -1,0 +1,25 @@
+{
+  "Person": {
+    "id": "str",
+    "postalAddress": [
+      {
+        "building": "104",
+        "country": "Ecuador",
+        "municipality": null,
+        "state": "Iowa",
+        "street": "Test street",
+        "use": null,
+        "zip": "18790"
+      },
+      {
+        "building": "181",
+        "country": "Nauru",
+        "municipality": null,
+        "state": "Nevada",
+        "street": "Test street",
+        "use": null,
+        "zip": "04666"
+      }
+    ]
+  }
+}

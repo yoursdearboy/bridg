@@ -1,0 +1,13 @@
+[
+  {
+    "building": "0013",
+    "country": "Djibouti",
+    "id": "UUID",
+    "municipality": null,
+    "person_id": "UUID",
+    "state": "North Carolina",
+    "street": "Test street",
+    "use": null,
+    "zip": "79408"
+  }
+]
