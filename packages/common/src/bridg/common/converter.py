@@ -35,6 +35,8 @@ class Wrapper:
 
     def check_input_type(self, input: Any):
         if self._input_type is None:
+            return False
+        if self._input_type is Any:
             return True
         if isinstance(self._input_type, type):
             if isinstance(input, self._input_type):
@@ -52,6 +54,8 @@ class Wrapper:
 
     def check_return_type(self, class_: Type):
         if self._return_type is None:
+            return False
+        if self._return_type is Any:
             return True
         if isinstance(self._return_type, type):
             if getattr(self._return_type, "_is_protocol", False):

@@ -1,4 +1,5 @@
-from typing import List, Type, get_args
+from typing import Any, List, Type, get_args
+from uuid import UUID
 
 from sqlalchemy import inspect
 from sqlalchemy.orm import Composite, Relationship
@@ -17,9 +18,11 @@ class Converter(bridg.common.converter.Converter):
             [
                 object_to_dataclass,
                 list_to_list,
-                str_to_cd,
                 object_to_cd,
+                str_to_cd,
+                str_to_uuid,
                 object_to_alchemy,
+                fallback,
             ]
         )
         self.terminology = terminology
@@ -51,6 +54,16 @@ def object_to_cd(x: ConceptDescriptor, _, converter) -> bridg.alchemy.ConceptDes
     return converter.terminology.get_or_create(x.code, x.code_system, x.display_name)
 
 
+@bridg.common.converter.configure
+def str_to_uuid(x: str) -> UUID:
+    return UUID(x)
+
+
+@bridg.common.converter.configure
+def fallback(x: Any) -> Any:
+    return x
+
+
 def get_concrete_class[T: bridg.alchemy.Base](input, class_: Type[T]) -> Type[T]:
     insp = inspect(class_)
     if (polymorphic_on := insp.polymorphic_on) is not None:
@@ -60,7 +73,7 @@ def get_concrete_class[T: bridg.alchemy.Base](input, class_: Type[T]) -> Type[T]
 
 
 @bridg.common.converter.configure
-def object_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], converter) -> T:
+def object_to_alchemy[T: bridg.alchemy.Base](x: Any, class_: Type[T], converter) -> T:
     class_ = get_concrete_class(x, class_)
     insp = inspect(class_)
     output = class_()
@@ -77,19 +90,18 @@ def object_to_alchemy[T: bridg.alchemy.Base](x, class_: Type[T], converter) -> T
 
             if attr is None:
                 raise RuntimeError(f"There's no attr {key} in the model {class_.__name__}")
-
-            if isinstance(attr, Relationship):
+            elif isinstance(attr, Relationship):
                 attr_class_ = attr.entity.class_
                 if attr.uselist:
                     attr_class_ = List[attr_class_]
                 value = converter.convert(value, attr_class_)
-
-            if isinstance(attr, Composite):
+            elif isinstance(attr, Composite):
                 attr_class_ = attr.composite_class
                 assert isinstance(attr_class_, type)
                 value = converter.convert(value, attr_class_)
-
-            # otherwise it must be primitive, so just don't convert
+            else:
+                type_ = attr.columns[0].type.python_type
+                value = converter.convert(value, type_)
 
         setattr(output, key, value)
 
