@@ -4,6 +4,7 @@ from strawberry import Some
 from bridg.graphql.common import BiologicEntityInput, BiologicEntityNameInput
 
 from ..base import BaseFactory
+from ..datatype import EntityNameInputFactory
 from ..maybe import make_some
 
 
@@ -19,12 +20,6 @@ class BiologicEntityInputFactory(BaseFactory[BiologicEntityInput]):
     name = Ignore()
 
 
-class BiologicEntityNameInputFactory(BaseFactory[BiologicEntityNameInput]):
+class BiologicEntityNameInputFactory(EntityNameInputFactory[BiologicEntityNameInput]):
     id = None
-    use = None
-    family = Use(make_some(BaseFactory.__faker__.last_name))
-    given = Use(make_some(BaseFactory.__faker__.first_name))
-    middle = None
-    patronymic = None
-    prefix = None
-    suffix = None
+    biologic_entity_id = None

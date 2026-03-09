@@ -68,4 +68,4 @@ class BiologicEntityIdentifierInput(IDInput):
 @strawberry.input
 class BiologicEntityNameInput(EntityNameInput):
     id: strawberry.Maybe[UUID]
-    biologic_entity_id: strawberry.ID
+    biologic_entity_id: strawberry.Maybe[strawberry.ID]

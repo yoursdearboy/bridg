@@ -8,6 +8,7 @@ from .common import (
     PersonTelecommunicationAddressInputFactory,
 )
 from .datatype import (
+    EntityNameInputFactory,
     PostalAddressInputFactory,
     TelecommunicationAddressInputFactory,
     URLInputFactoryy,
@@ -22,6 +23,7 @@ __all__ = [
     "BaseFactory",
     "BiologicEntityInputFactory",
     "BiologicEntityNameInputFactory",
+    "EntityNameInputFactory",
     "MaybeFactory",
     "PersonPostalAddressInputFactory",
     "PersonTelecommunicationAddressInputFactory",
