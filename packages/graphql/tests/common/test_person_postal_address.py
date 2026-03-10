@@ -16,7 +16,7 @@ def test_person_postal_address_query(context: Context, snapshot_json):
     )
 
     query = """
-        query($id: UUID!) {
+        query($id: ID!) {
             Person(id: $id) {
                 id
                 postalAddress {

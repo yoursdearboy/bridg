@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from typing import Optional
-from uuid import UUID
 
 import strawberry
 
@@ -16,6 +15,6 @@ class Subject:
 
 @strawberry.input
 class SubjectInput:
-    id: strawberry.Maybe[UUID]
-    performing_biologic_entity_id: strawberry.Maybe[UUID]
+    id: strawberry.Maybe[strawberry.ID]
+    performing_biologic_entity_id: strawberry.Maybe[strawberry.ID]
     performing_biologic_entity: strawberry.Maybe[BiologicEntityInput]

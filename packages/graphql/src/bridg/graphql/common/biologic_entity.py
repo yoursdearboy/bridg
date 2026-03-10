@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from datetime import date
 from typing import List, Optional
-from uuid import UUID
 
 import strawberry
 
@@ -49,7 +48,7 @@ class BiologicEntityFilter:
 
 @strawberry.input
 class BiologicEntityInput:
-    id: strawberry.Maybe[UUID]
+    id: strawberry.Maybe[strawberry.ID]
     administrative_gender_code: strawberry.Maybe[Optional[AdministrativeGender]]
     birth_date: strawberry.Maybe[Optional[date]]
     death_date: strawberry.Maybe[Optional[date]]
@@ -62,10 +61,10 @@ class BiologicEntityInput:
 
 @strawberry.input
 class BiologicEntityIdentifierInput(IDInput):
-    id: strawberry.Maybe[UUID]
+    id: strawberry.Maybe[strawberry.ID]
 
 
 @strawberry.input
 class BiologicEntityNameInput(EntityNameInput):
-    id: strawberry.Maybe[UUID]
+    id: strawberry.Maybe[strawberry.ID]
     biologic_entity_id: strawberry.Maybe[strawberry.ID]

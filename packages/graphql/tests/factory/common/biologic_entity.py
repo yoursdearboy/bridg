@@ -9,7 +9,7 @@ from ..maybe import make_some
 
 
 class BiologicEntityInputFactory(BaseFactory[BiologicEntityInput]):
-    id = Use(make_some(BaseFactory.__faker__.uuid4))
+    id = None
     # administrative_gender_code
     birth_date = Use(make_some(lambda: BaseFactory.__faker__.date_this_century(after_today=True)))
     death_date = None

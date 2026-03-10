@@ -1,3 +1,4 @@
+import strawberry
 from strawberry import Some
 from syrupy.matchers import path_type
 
@@ -38,7 +39,7 @@ def test_subject_query(context: Context, snapshot_json):
     )
 
     query = """
-        query($id: UUID!) {
+        query($id: ID!) {
             Subject(id: $id) {
                 id
                 performingBiologicEntity {
@@ -158,7 +159,7 @@ def test_subject_create_using_existing_biologic_entity(context: Context, snapsho
     input = SubjectInput(
         id=None,
         performing_biologic_entity=None,
-        performing_biologic_entity_id=Some(p.id),
+        performing_biologic_entity_id=Some(strawberry.ID(str(p.id))),
     )
     result = schema.execute_sync(query, dict(input=process_input(input)), context_value=context)
     assert result.errors is None

@@ -12,10 +12,12 @@ from .context import Context
 @strawberry.type
 class Query:
     @strawberry.field(name="Person")
-    def person(self, id: UUID, *, info: strawberry.Info[Context]) -> Optional[Person]:
+    def person(self, id: strawberry.ID, *, info: strawberry.Info[Context]) -> Optional[Person]:
+        converter = info.context.converter
         session = info.context.session
+        uuid = converter.convert(id, UUID)
         query = session.query(bridg.alchemy.Person)
-        query = query.filter_by(id=id)
+        query = query.filter_by(id=uuid)
         return query.one_or_none()  # type: ignore
 
     @strawberry.field(name="PersonList")
@@ -41,10 +43,12 @@ class Query:
         return query.all()  # type: ignore
 
     @strawberry.field(name="Subject")
-    def subject(self, id: UUID, *, info: strawberry.Info[Context]) -> Optional[Subject]:
+    def subject(self, id: strawberry.ID, *, info: strawberry.Info[Context]) -> Optional[Subject]:
+        converter = info.context.converter
         session = info.context.session
+        uuid = converter.convert(id, UUID)
         query = session.query(bridg.alchemy.StudySubject)
-        query = query.filter_by(id=id)
+        query = query.filter_by(id=uuid)
         return query.one_or_none()  # type: ignore
 
     @strawberry.field(name="SubjectList")

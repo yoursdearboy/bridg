@@ -31,7 +31,7 @@ def test_person_query(context: Context, snapshot_json):
     )
 
     query = """
-        query($id: UUID!) {
+        query($id: ID!) {
             Person(id: $id) {
                 id
                 name {
