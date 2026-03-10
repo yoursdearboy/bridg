@@ -10,8 +10,8 @@ from bridg.alchemy.factory import (
     StudyProtocolVersionFactory,
     StudySubjectFactory,
 )
-from bridg.graphql.common import SubjectInput
 from bridg.graphql.context import Context
+from bridg.graphql.model import SubjectInput
 from bridg.graphql.schema import schema
 
 from ..factory import BiologicEntityInputFactory, EntityNameInputFactory

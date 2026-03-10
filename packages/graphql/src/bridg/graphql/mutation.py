@@ -4,18 +4,16 @@ import strawberry
 
 import bridg.alchemy
 
-from .common import (
-    Person,
-    PersonInput,
-    Subject,
-    SubjectInput,
-)
 from .context import Context
-from .datatype import (
+from .model import (
     EntityName,
     EntityNameInput,
+    Person,
+    PersonInput,
     PostalAddress,
     PostalAddressInput,
+    Subject,
+    SubjectInput,
     TelecommunicationAddress,
     TelecommunicationAddressInput,
 )

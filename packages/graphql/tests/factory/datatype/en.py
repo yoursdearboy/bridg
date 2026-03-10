@@ -1,6 +1,6 @@
 from polyfactory import Use
 
-from bridg.graphql.datatype import EntityNameInput
+from bridg.graphql.model import EntityNameInput
 
 from ..base import BaseFactory
 from ..maybe import make_some

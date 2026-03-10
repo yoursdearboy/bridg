@@ -1,7 +1,7 @@
 from strawberry.types.scalar import ScalarDefinition, scalar
 from strawberry.utils.str_converters import to_camel_case
 
-from .datatype import ConceptDescriptor, InstanceIdentifier
+from .model import ConceptDescriptor, InstanceIdentifier
 
 
 def _serialize_dataclass(cl):

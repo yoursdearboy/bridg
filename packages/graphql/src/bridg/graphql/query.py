@@ -5,8 +5,8 @@ import strawberry
 
 import bridg.alchemy
 
-from .common import Person, PersonFilter, Subject
 from .context import Context
+from .model import Person, PersonFilter, Subject
 
 
 @strawberry.type

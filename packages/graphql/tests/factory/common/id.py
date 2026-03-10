@@ -1,4 +1,4 @@
-from bridg.graphql.common import IDInput
+from bridg.graphql.model import IDInput
 
 from ..base import BaseFactory
 from ..datatype import InstanceIdentifierFactory

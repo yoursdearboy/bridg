@@ -1,6 +1,6 @@
 from polyfactory import Use
 
-from bridg.graphql.datatype import InstanceIdentifier
+from bridg.graphql.model import InstanceIdentifier
 
 from ..base import BaseFactory
 
