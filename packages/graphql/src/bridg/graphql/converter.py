@@ -29,7 +29,7 @@ class Converter(bridg.common.converter.Converter):
 
 
 @bridg.common.converter.configure
-def object_to_dataclass(x, class_) -> Dataclass:
+def object_to_dataclass(x: Any, class_) -> Dataclass:
     return class_(**{k: getattr(x, k) for k in class_.__dataclass_fields__.keys()})
 
 
