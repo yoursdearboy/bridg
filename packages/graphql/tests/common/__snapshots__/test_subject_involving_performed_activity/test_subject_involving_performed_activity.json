@@ -1,0 +1,45 @@
+{
+  "Subject": {
+    "id": "str",
+    "involvingPerformedActivity": [
+      {
+        "dateRange": {
+          "high": "2016-05-04T06:37:33.714143+0000",
+          "low": "2072-11-29T08:33:03.899794+0000"
+        },
+        "id": "str",
+        "negationIndicator": false,
+        "negationReason": {
+          "code": "wish",
+          "codeSystem": "push",
+          "displayName": "Detail food shoulder."
+        },
+        "statusCode": {
+          "code": "arrive",
+          "codeSystem": "drop",
+          "displayName": "Support."
+        },
+        "statusDate": "2037-12-11T14:38:24.881114+00:00"
+      },
+      {
+        "dateRange": {
+          "high": "2026-10-10T05:39:06.769083+0000",
+          "low": "2031-07-18T22:08:30.942928+0000"
+        },
+        "id": "str",
+        "negationIndicator": false,
+        "negationReason": {
+          "code": "yes",
+          "codeSystem": "our",
+          "displayName": "Defense material those."
+        },
+        "statusCode": {
+          "code": "question",
+          "codeSystem": "low",
+          "displayName": "Enter east."
+        },
+        "statusDate": "2021-02-05T03:33:38.475986+00:00"
+      }
+    ]
+  }
+}
