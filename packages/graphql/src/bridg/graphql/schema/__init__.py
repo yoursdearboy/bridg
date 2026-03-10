@@ -35,6 +35,10 @@ from .scalar import (
 from .schema import (
     schema,
 )
+from .study import (
+    PerformedActivity,
+    PerformedActivityInterface,
+)
 
 __all__ = [
     "BiologicEntity",
@@ -48,6 +52,8 @@ __all__ = [
     "IDInput",
     "InstanceIdentifier",
     "Mutation",
+    "PerformedActivity",
+    "PerformedActivityInterface",
     "Person",
     "PersonFilter",
     "PersonInput",

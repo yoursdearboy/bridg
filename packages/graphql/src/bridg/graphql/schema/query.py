@@ -7,7 +7,8 @@ import strawberry
 
 import bridg.alchemy
 
-from . import Person, PersonFilter, Subject
+from .common import Person, PersonFilter, Subject
+from .study import PerformedActivity
 
 if TYPE_CHECKING:
     from ..context import Context
@@ -59,4 +60,19 @@ class Query:
     def subject_list(self, *, info: strawberry.Info[Context]) -> List[Subject]:
         session = info.context.session
         query = session.query(bridg.alchemy.StudySubject)
+        return query.all()  # type: ignore
+
+    @strawberry.field(name="PerformedActivity")
+    def performed_activity(self, id: strawberry.ID, *, info: strawberry.Info[Context]) -> Optional[PerformedActivity]:
+        converter = info.context.converter
+        session = info.context.session
+        uuid = converter.convert(id, UUID)
+        query = session.query(bridg.alchemy.PerformedActivity)
+        query = query.filter_by(id=uuid)
+        return query.one_or_none()  # type: ignore
+
+    @strawberry.field(name="PerformedActivityList")
+    def performed_activity_list(self, *, info: strawberry.Info[Context]) -> List[PerformedActivity]:
+        session = info.context.session
+        query = session.query(bridg.alchemy.PerformedActivity)
         return query.all()  # type: ignore
