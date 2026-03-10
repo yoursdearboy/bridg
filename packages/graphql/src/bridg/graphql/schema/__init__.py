@@ -26,6 +26,9 @@ from .datatype import (
 from .mutation import (
     Mutation,
 )
+from .protocol import (
+    Epoch,
+)
 from .query import (
     Query,
 )
@@ -48,6 +51,7 @@ __all__ = [
     "ConceptDescriptor",
     "EntityName",
     "EntityNameInput",
+    "Epoch",
     "ID",
     "IDInput",
     "InstanceIdentifier",

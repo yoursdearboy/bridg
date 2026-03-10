@@ -6,6 +6,7 @@ import strawberry
 import bridg.alchemy
 
 from ..datatype import ConceptDescriptor
+from ..protocol import Epoch
 
 
 @strawberry.interface
@@ -18,7 +19,7 @@ class PerformedActivityInterface:
     negation_reason: Optional[ConceptDescriptor]
     status_code: Optional[ConceptDescriptor]
     status_date: Optional[datetime]
-    # containing_epoch: Optional[Epoch]
+    containing_epoch: Optional[Epoch]
     # executing_study_protocol_version: Optional[StudyProtocolVersion]
     # instantiated_defined_activity: Optional[DefinedActivity]
     # involved_subject: Optional[StudySubject]

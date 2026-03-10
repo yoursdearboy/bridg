@@ -35,6 +35,11 @@ def test_performed_activity_query(context: Context, snapshot_json):
                 negationIndicator
                 statusCode
                 statusDate
+                containingEpoch {
+                   id
+                   name
+                   typeCode
+                }
             }
         }
     """
@@ -68,6 +73,11 @@ def test_performed_activity_list_query(context: Context, snapshot_json):
                 negationIndicator
                 statusCode
                 statusDate
+                containingEpoch {
+                   id
+                   name
+                   typeCode
+                }
             }
         }
     """
