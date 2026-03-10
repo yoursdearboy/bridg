@@ -9,7 +9,7 @@ import bridg.common.converter
 
 from .dataclass import Dataclass
 from .maybe import _annotation_is_maybe
-from .model import ConceptDescriptor
+from .schema import ConceptDescriptor
 
 
 class Converter(bridg.common.converter.Converter):

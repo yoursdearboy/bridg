@@ -1,6 +1,6 @@
 from polyfactory import Use
 
-from bridg.graphql.model import PostalAddressInput
+from bridg.graphql.schema import PostalAddressInput
 
 from ..base import BaseFactory
 from ..maybe import make_some

@@ -1,12 +1,16 @@
-from typing import List, Optional
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, List, Optional
 from uuid import UUID
 
 import strawberry
 
 import bridg.alchemy
 
-from .context import Context
-from .model import Person, PersonFilter, Subject
+from . import Person, PersonFilter, Subject
+
+if TYPE_CHECKING:
+    from ..context import Context
 
 
 @strawberry.type

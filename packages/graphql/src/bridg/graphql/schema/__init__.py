@@ -23,6 +23,18 @@ from .datatype import (
     TelecommunicationAddressInput,
     URLInput,
 )
+from .mutation import (
+    Mutation,
+)
+from .query import (
+    Query,
+)
+from .scalar import (
+    SCALAR_REGISTRY,
+)
+from .schema import (
+    schema,
+)
 
 __all__ = [
     "BiologicEntity",
@@ -35,15 +47,19 @@ __all__ = [
     "ID",
     "IDInput",
     "InstanceIdentifier",
+    "Mutation",
     "Person",
     "PersonFilter",
     "PersonInput",
     "PostalAddress",
     "PostalAddressInput",
+    "Query",
+    "SCALAR_REGISTRY",
     "Subject",
     "SubjectInput",
     "TelecommunicationAddress",
     "TelecommunicationAddressInput",
     "URL",
     "URLInput",
+    "schema",
 ]

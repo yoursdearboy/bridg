@@ -11,8 +11,7 @@ from bridg.alchemy.factory import (
     StudySubjectFactory,
 )
 from bridg.graphql.context import Context
-from bridg.graphql.model import SubjectInput
-from bridg.graphql.schema import schema
+from bridg.graphql.schema import SubjectInput, schema
 
 from ..factory import BiologicEntityInputFactory, EntityNameInputFactory
 from ..utils import process_input

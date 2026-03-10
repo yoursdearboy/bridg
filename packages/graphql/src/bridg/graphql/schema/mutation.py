@@ -1,11 +1,13 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
 from uuid import UUID
 
 import strawberry
 
 import bridg.alchemy
 
-from .context import Context
-from .model import (
+from . import (
     EntityName,
     EntityNameInput,
     Person,
@@ -17,6 +19,9 @@ from .model import (
     TelecommunicationAddress,
     TelecommunicationAddressInput,
 )
+
+if TYPE_CHECKING:
+    from ..context import Context
 
 
 @strawberry.type
