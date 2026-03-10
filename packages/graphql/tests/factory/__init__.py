@@ -12,7 +12,6 @@ from .datatype import (
 )
 from .maybe import (
     MaybeFactory,
-    T,
     make_some,
 )
 
@@ -22,7 +21,6 @@ __all__ = [
     "EntityNameInputFactory",
     "MaybeFactory",
     "PostalAddressInputFactory",
-    "T",
     "TelecommunicationAddressInputFactory",
     "URLInputFactoryy",
     "make_some",

@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Any, Callable, TypeGuard, TypeVar, get_args
+from typing import Any, Callable, TypeGuard, get_args
 
 from polyfactory.factories import BaseFactory
 from polyfactory.field_meta import FieldMeta, Null
@@ -8,10 +8,8 @@ from strawberry import Maybe, Some
 
 from bridg.graphql.maybe import _annotation_is_maybe
 
-T = TypeVar("T")
 
-
-def make_some(fn: Callable[..., T]) -> Callable[..., Some[T]]:
+def make_some[T](fn: Callable[..., T]) -> Callable[..., Some[T]]:
     def f(*args, **kwargs):
         return Some(fn(*args, **kwargs))
 
