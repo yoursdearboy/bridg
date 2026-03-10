@@ -4,6 +4,7 @@ from .biologic_entity import (
     BiologicEntityIdentifier,
     BiologicEntityIdentifierInput,
     BiologicEntityInput,
+    BiologicEntityInterface,
     BiologicEntityName,
     BiologicEntityNameInput,
 )
@@ -15,8 +16,6 @@ from .person import (
     Person,
     PersonFilter,
     PersonInput,
-    PersonPostalAddress,
-    PersonPostalAddressInput,
     PersonTelecommunicationAddress,
     PersonTelecommunicationAddressInput,
 )
@@ -31,6 +30,7 @@ __all__ = [
     "BiologicEntityIdentifier",
     "BiologicEntityIdentifierInput",
     "BiologicEntityInput",
+    "BiologicEntityInterface",
     "BiologicEntityName",
     "BiologicEntityNameInput",
     "ID",
@@ -38,8 +38,6 @@ __all__ = [
     "Person",
     "PersonFilter",
     "PersonInput",
-    "PersonPostalAddress",
-    "PersonPostalAddressInput",
     "PersonTelecommunicationAddress",
     "PersonTelecommunicationAddressInput",
     "Subject",

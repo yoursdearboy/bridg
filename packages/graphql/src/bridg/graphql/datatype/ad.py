@@ -7,6 +7,7 @@ import bridg.alchemy
 
 @strawberry.type
 class PostalAddress:
+    id: strawberry.ID
     use: Optional[bridg.alchemy.PostalAddressUse]
     street: Optional[str]
     building: Optional[str]

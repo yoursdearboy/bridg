@@ -4,7 +4,6 @@ from .base import (
 from .common import (
     BiologicEntityInputFactory,
     BiologicEntityNameInputFactory,
-    PersonPostalAddressInputFactory,
     PersonTelecommunicationAddressInputFactory,
 )
 from .datatype import (
@@ -25,7 +24,6 @@ __all__ = [
     "BiologicEntityNameInputFactory",
     "EntityNameInputFactory",
     "MaybeFactory",
-    "PersonPostalAddressInputFactory",
     "PersonTelecommunicationAddressInputFactory",
     "PostalAddressInputFactory",
     "T",

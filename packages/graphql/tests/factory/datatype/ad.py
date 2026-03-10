@@ -6,9 +6,7 @@ from ..base import BaseFactory
 from ..maybe import make_some
 
 
-class PostalAddressInputFactory[T: PostalAddressInput](BaseFactory[T]):
-    __is_base_factory__ = True
-
+class PostalAddressInputFactory(BaseFactory[PostalAddressInput]):
     # use
     street = Use(make_some(BaseFactory.__faker__.street_name))
     building = Use(make_some(BaseFactory.__faker__.building_number))

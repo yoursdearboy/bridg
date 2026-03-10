@@ -3,13 +3,7 @@ from .biologic_entity import (
     BiologicEntityNameInputFactory,
 )
 from .person import (
-    PersonPostalAddressInputFactory,
     PersonTelecommunicationAddressInputFactory,
 )
 
-__all__ = [
-    "BiologicEntityInputFactory",
-    "BiologicEntityNameInputFactory",
-    "PersonPostalAddressInputFactory",
-    "PersonTelecommunicationAddressInputFactory",
-]
+__all__ = ["BiologicEntityInputFactory", "BiologicEntityNameInputFactory", "PersonTelecommunicationAddressInputFactory"]

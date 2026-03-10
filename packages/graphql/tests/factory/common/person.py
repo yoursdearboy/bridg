@@ -1,11 +1,6 @@
-from bridg.graphql.common import PersonPostalAddressInput, PersonTelecommunicationAddressInput
+from bridg.graphql.common import PersonTelecommunicationAddressInput
 
-from ..datatype import PostalAddressInputFactory, TelecommunicationAddressInputFactory
-
-
-class PersonPostalAddressInputFactory(PostalAddressInputFactory[PersonPostalAddressInput]):
-    id = None
-    person_id = None
+from ..datatype import TelecommunicationAddressInputFactory
 
 
 class PersonTelecommunicationAddressInputFactory(

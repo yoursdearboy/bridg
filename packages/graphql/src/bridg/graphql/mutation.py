@@ -1,3 +1,5 @@
+from uuid import UUID
+
 import strawberry
 
 import bridg.alchemy
@@ -7,14 +9,13 @@ from .common import (
     BiologicEntityNameInput,
     Person,
     PersonInput,
-    PersonPostalAddress,
-    PersonPostalAddressInput,
     PersonTelecommunicationAddress,
     PersonTelecommunicationAddressInput,
     Subject,
     SubjectInput,
 )
 from .context import Context
+from .datatype import PostalAddress, PostalAddressInput
 
 
 @strawberry.type
@@ -42,11 +43,12 @@ class Mutation:
 
     @strawberry.mutation(name="PersonPostalAddressCreate")
     def person_postal_address_create(
-        self, input: PersonPostalAddressInput, info: strawberry.Info[Context]
-    ) -> PersonPostalAddress:
+        self, person_id: strawberry.ID, input: PostalAddressInput, info: strawberry.Info[Context]
+    ) -> PostalAddress:
         session = info.context.session
         converter = info.context.converter
         ad = converter.convert(input, bridg.alchemy.PersonPostalAddress)
+        ad.person_id = converter.convert(person_id, UUID)
         ad = session.merge(ad)
         session.commit()
         return ad  # type: ignore
