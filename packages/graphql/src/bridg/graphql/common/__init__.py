@@ -1,8 +1,6 @@
 from .biologic_entity import (
     BiologicEntity,
     BiologicEntityFilter,
-    BiologicEntityIdentifier,
-    BiologicEntityIdentifierInput,
     BiologicEntityInput,
     BiologicEntityInterface,
 )
@@ -23,8 +21,6 @@ from .subject import (
 __all__ = [
     "BiologicEntity",
     "BiologicEntityFilter",
-    "BiologicEntityIdentifier",
-    "BiologicEntityIdentifierInput",
     "BiologicEntityInput",
     "BiologicEntityInterface",
     "ID",

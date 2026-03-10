@@ -5,13 +5,14 @@ import strawberry
 from ..datatype import ConceptDescriptor, InstanceIdentifier
 
 
-@strawberry.type
+@strawberry.type(name="Identifier")
 class ID:
+    id: strawberry.ID
     identifier: InstanceIdentifier
     identifier_type_code: Optional[ConceptDescriptor]
 
 
-@strawberry.input
+@strawberry.input(name="IdentifierInput")
 class IDInput:
     identifier: InstanceIdentifier
     identifier_type_code: strawberry.Maybe[ConceptDescriptor]

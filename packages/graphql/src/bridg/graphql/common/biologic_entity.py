@@ -21,7 +21,7 @@ class BiologicEntityInterface:
     death_date_estimated_indicator: Optional[bool]
     death_indicator: Optional[bool]
 
-    identifier: List[BiologicEntityIdentifier]
+    identifier: List[ID]
     name: List[EntityName]
 
     @strawberry.field
@@ -35,11 +35,6 @@ class BiologicEntity(BiologicEntityInterface):
     @staticmethod
     def is_type_of(obj, info) -> bool:
         return isinstance(obj, bridg.alchemy.BiologicEntity)
-
-
-@strawberry.type
-class BiologicEntityIdentifier(ID):
-    id: strawberry.ID
 
 
 @strawberry.input
@@ -57,10 +52,5 @@ class BiologicEntityInput:
     death_date_estimated_indicator: strawberry.Maybe[Optional[bool]]
     death_indicator: strawberry.Maybe[Optional[bool]]
 
-    identifier: strawberry.Maybe[List[BiologicEntityIdentifierInput]]
+    identifier: strawberry.Maybe[List[IDInput]]
     name: strawberry.Maybe[List[EntityNameInput]]
-
-
-@strawberry.input
-class BiologicEntityIdentifierInput(IDInput):
-    id: strawberry.Maybe[strawberry.ID]

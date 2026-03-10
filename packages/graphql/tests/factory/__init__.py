@@ -3,9 +3,11 @@ from .base import (
 )
 from .common import (
     BiologicEntityInputFactory,
+    IDInputFactory,
 )
 from .datatype import (
     EntityNameInputFactory,
+    InstanceIdentifierFactory,
     PostalAddressInputFactory,
     TelecommunicationAddressInputFactory,
     URLInputFactoryy,
@@ -19,6 +21,8 @@ __all__ = [
     "BaseFactory",
     "BiologicEntityInputFactory",
     "EntityNameInputFactory",
+    "IDInputFactory",
+    "InstanceIdentifierFactory",
     "MaybeFactory",
     "PostalAddressInputFactory",
     "TelecommunicationAddressInputFactory",
