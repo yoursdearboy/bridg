@@ -5,7 +5,7 @@ import strawberry
 
 import bridg.alchemy
 
-from ..datatype import ConceptDescriptor
+from ..datatype import ConceptDescriptor, IntervalPointInTime
 from ..protocol import Epoch
 
 
@@ -14,7 +14,7 @@ class PerformedActivityInterface:
     id: strawberry.ID
     repetition_number: Optional[int]
     name_code_modified_text: Optional[str]
-    # date_range: Optional[IntervalPointInTime]
+    date_range: Optional[IntervalPointInTime]
     negation_indicator: Optional[bool]
     negation_reason: Optional[ConceptDescriptor]
     status_code: Optional[ConceptDescriptor]
