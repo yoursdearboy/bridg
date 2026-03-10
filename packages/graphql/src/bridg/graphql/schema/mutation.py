@@ -1,24 +1,27 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
 from uuid import UUID
 
 import strawberry
 
 import bridg.alchemy
 
-from .common import (
-    Person,
-    PersonInput,
-    Subject,
-    SubjectInput,
-)
-from .context import Context
-from .datatype import (
+from . import (
     EntityName,
     EntityNameInput,
+    Person,
+    PersonInput,
     PostalAddress,
     PostalAddressInput,
+    Subject,
+    SubjectInput,
     TelecommunicationAddress,
     TelecommunicationAddressInput,
 )
+
+if TYPE_CHECKING:
+    from ..context import Context
 
 
 @strawberry.type

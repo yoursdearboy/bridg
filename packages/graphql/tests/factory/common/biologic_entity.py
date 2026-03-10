@@ -1,7 +1,7 @@
 from polyfactory import Ignore, Use
 from strawberry import Some
 
-from bridg.graphql.common import BiologicEntityInput
+from bridg.graphql.schema import BiologicEntityInput
 
 from ..base import BaseFactory
 from ..maybe import make_some

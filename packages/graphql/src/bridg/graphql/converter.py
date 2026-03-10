@@ -8,8 +8,8 @@ import bridg.alchemy
 import bridg.common.converter
 
 from .dataclass import Dataclass
-from .datatype import ConceptDescriptor
 from .maybe import _annotation_is_maybe
+from .schema import ConceptDescriptor
 
 
 class Converter(bridg.common.converter.Converter):

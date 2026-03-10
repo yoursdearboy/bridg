@@ -1,6 +1,6 @@
 from polyfactory import Use
 
-from bridg.graphql.datatype import URLInput
+from bridg.graphql.schema import URLInput
 
 from ..base import BaseFactory
 from ..maybe import make_some

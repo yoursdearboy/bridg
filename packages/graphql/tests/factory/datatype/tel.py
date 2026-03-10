@@ -1,4 +1,4 @@
-from bridg.graphql.datatype import TelecommunicationAddressInput
+from bridg.graphql.schema import TelecommunicationAddressInput
 
 from .url import URLInputFactoryy
 
