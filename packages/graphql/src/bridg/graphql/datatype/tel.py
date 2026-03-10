@@ -9,6 +9,7 @@ from .url import URL, URLInput
 
 @strawberry.type
 class TelecommunicationAddress(URL):
+    id: strawberry.ID
     use: Optional[bridg.alchemy.TelecommunicationAddressUse]
 
 

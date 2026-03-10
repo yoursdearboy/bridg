@@ -6,7 +6,7 @@ from bridg.alchemy.factory import PersonFactory, PersonTelecommunicationAddressF
 from bridg.graphql.context import Context
 from bridg.graphql.schema import schema
 
-from ..factory import PersonTelecommunicationAddressInputFactory
+from ..factory import TelecommunicationAddressInputFactory
 from ..utils import process_input
 
 
@@ -37,8 +37,8 @@ def test_person_telecommunication_address_create(context: Context, snapshot_json
     person = PersonFactory.create_sync()
 
     query = """
-        mutation($input: PersonTelecommunicationAddressInput!) {
-            PersonTelecommunicationAddressCreate(input: $input) {
+        mutation($personId: ID!, $input: TelecommunicationAddressInput!) {
+            PersonTelecommunicationAddressCreate(personId: $personId, input: $input) {
                 id
                 use
                 scheme
@@ -46,12 +46,9 @@ def test_person_telecommunication_address_create(context: Context, snapshot_json
             }
         }
     """
-    input = PersonTelecommunicationAddressInputFactory.build(
-        address="Test address",
-        person_id=person.id,
-    )
+    input = TelecommunicationAddressInputFactory.build(address="Test address")
 
-    result = schema.execute_sync(query, process_input(dict(input=input)), context_value=context)
+    result = schema.execute_sync(query, process_input(dict(person_id=person.id, input=input)), context_value=context)
     assert result.errors is None
 
     session = context.session

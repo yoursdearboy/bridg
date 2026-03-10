@@ -16,8 +16,6 @@ from .person import (
     Person,
     PersonFilter,
     PersonInput,
-    PersonTelecommunicationAddress,
-    PersonTelecommunicationAddressInput,
 )
 from .subject import (
     Subject,
@@ -38,8 +36,6 @@ __all__ = [
     "Person",
     "PersonFilter",
     "PersonInput",
-    "PersonTelecommunicationAddress",
-    "PersonTelecommunicationAddressInput",
     "Subject",
     "SubjectInput",
 ]

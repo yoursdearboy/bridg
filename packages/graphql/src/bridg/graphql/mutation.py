@@ -9,13 +9,11 @@ from .common import (
     BiologicEntityNameInput,
     Person,
     PersonInput,
-    PersonTelecommunicationAddress,
-    PersonTelecommunicationAddressInput,
     Subject,
     SubjectInput,
 )
 from .context import Context
-from .datatype import PostalAddress, PostalAddressInput
+from .datatype import PostalAddress, PostalAddressInput, TelecommunicationAddress, TelecommunicationAddressInput
 
 
 @strawberry.type
@@ -55,11 +53,12 @@ class Mutation:
 
     @strawberry.mutation(name="PersonTelecommunicationAddressCreate")
     def person_telecom_address_create(
-        self, input: PersonTelecommunicationAddressInput, info: strawberry.Info[Context]
-    ) -> PersonTelecommunicationAddress:
+        self, person_id: strawberry.ID, input: TelecommunicationAddressInput, info: strawberry.Info[Context]
+    ) -> TelecommunicationAddress:
         session = info.context.session
         converter = info.context.converter
         tel = converter.convert(input, bridg.alchemy.PersonTelecommunicationAddress)
+        tel.person_id = converter.convert(person_id, UUID)
         tel = session.merge(tel)
         session.commit()
         return tel  # type: ignore
