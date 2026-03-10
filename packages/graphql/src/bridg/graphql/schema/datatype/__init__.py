@@ -12,6 +12,9 @@ from .en import (
 from .ii import (
     InstanceIdentifier,
 )
+from .ivl_ts import (
+    IntervalPointInTime,
+)
 from .tel import (
     TelecommunicationAddress,
     TelecommunicationAddressInput,
@@ -26,6 +29,7 @@ __all__ = [
     "EntityName",
     "EntityNameInput",
     "InstanceIdentifier",
+    "IntervalPointInTime",
     "PostalAddress",
     "PostalAddressInput",
     "TelecommunicationAddress",

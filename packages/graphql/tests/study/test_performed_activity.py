@@ -31,6 +31,7 @@ def test_performed_activity_query(context: Context, snapshot_json):
                 id
                 repetitionNumber
                 nameCodeModifiedText
+                dateRange
                 negationReason
                 negationIndicator
                 statusCode
@@ -69,6 +70,7 @@ def test_performed_activity_list_query(context: Context, snapshot_json):
                 id
                 repetitionNumber
                 nameCodeModifiedText
+                dateRange
                 negationReason
                 negationIndicator
                 statusCode
