@@ -2,9 +2,18 @@
   "PersonCreate": {
     "administrativeGenderCode": null,
     "id": "str",
+    "identifier": [
+      {
+        "identifier": {
+          "extension": "655-15-0410",
+          "root": "PSN"
+        },
+        "identifierTypeCode": null
+      }
+    ],
     "primaryName": {
       "family": "Test",
-      "given": "Danielle"
+      "given": "Judith"
     }
   }
 }
