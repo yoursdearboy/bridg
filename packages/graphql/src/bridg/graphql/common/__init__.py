@@ -5,8 +5,6 @@ from .biologic_entity import (
     BiologicEntityIdentifierInput,
     BiologicEntityInput,
     BiologicEntityInterface,
-    BiologicEntityName,
-    BiologicEntityNameInput,
 )
 from .id import (
     ID,
@@ -29,8 +27,6 @@ __all__ = [
     "BiologicEntityIdentifierInput",
     "BiologicEntityInput",
     "BiologicEntityInterface",
-    "BiologicEntityName",
-    "BiologicEntityNameInput",
     "ID",
     "IDInput",
     "Person",

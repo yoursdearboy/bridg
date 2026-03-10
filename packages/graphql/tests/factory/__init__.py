@@ -3,7 +3,6 @@ from .base import (
 )
 from .common import (
     BiologicEntityInputFactory,
-    BiologicEntityNameInputFactory,
 )
 from .datatype import (
     EntityNameInputFactory,
@@ -20,7 +19,6 @@ from .maybe import (
 __all__ = [
     "BaseFactory",
     "BiologicEntityInputFactory",
-    "BiologicEntityNameInputFactory",
     "EntityNameInputFactory",
     "MaybeFactory",
     "PostalAddressInputFactory",

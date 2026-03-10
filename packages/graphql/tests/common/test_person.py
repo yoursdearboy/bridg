@@ -9,7 +9,7 @@ from bridg.alchemy.factory import (
 from bridg.graphql.context import Context
 from bridg.graphql.schema import schema
 
-from ..factory import BiologicEntityInputFactory, BiologicEntityNameInputFactory
+from ..factory import BiologicEntityInputFactory, EntityNameInputFactory
 from ..utils import process_input
 
 
@@ -232,7 +232,7 @@ def test_person_create(context: Context, snapshot_json):
     """
     input = BiologicEntityInputFactory.build(
         name=[
-            BiologicEntityNameInputFactory.build(family="Test"),
+            EntityNameInputFactory.build(family="Test"),
         ]
     )
     result = schema.execute_sync(query, dict(input=process_input(input)), context_value=context)

@@ -14,7 +14,7 @@ from bridg.graphql.common import SubjectInput
 from bridg.graphql.context import Context
 from bridg.graphql.schema import schema
 
-from ..factory import BiologicEntityInputFactory, BiologicEntityNameInputFactory
+from ..factory import BiologicEntityInputFactory, EntityNameInputFactory
 from ..utils import process_input
 
 
@@ -127,7 +127,7 @@ def test_subject_create(context: Context, snapshot_json):
         performing_biologic_entity=Some(
             BiologicEntityInputFactory.build(
                 name=[
-                    BiologicEntityNameInputFactory.build(family="Test"),
+                    EntityNameInputFactory.build(family="Test"),
                 ]
             )
         ),

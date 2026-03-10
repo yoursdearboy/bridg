@@ -5,15 +5,20 @@ import strawberry
 import bridg.alchemy
 
 from .common import (
-    BiologicEntityName,
-    BiologicEntityNameInput,
     Person,
     PersonInput,
     Subject,
     SubjectInput,
 )
 from .context import Context
-from .datatype import PostalAddress, PostalAddressInput, TelecommunicationAddress, TelecommunicationAddressInput
+from .datatype import (
+    EntityName,
+    EntityNameInput,
+    PostalAddress,
+    PostalAddressInput,
+    TelecommunicationAddress,
+    TelecommunicationAddressInput,
+)
 
 
 @strawberry.type
@@ -28,13 +33,14 @@ class Mutation:
         return person  # type: ignore
 
     # FIXME: rename
-    @strawberry.mutation(name="PersonEntityNameCreate")
+    @strawberry.mutation(name="BiologicEntityNameCreate")
     def person_entity_name_create(
-        self, input: BiologicEntityNameInput, info: strawberry.Info[Context]
-    ) -> BiologicEntityName:
+        self, biologic_entity_id: strawberry.ID, input: EntityNameInput, info: strawberry.Info[Context]
+    ) -> EntityName:
         session = info.context.session
         converter = info.context.converter
         en = converter.convert(input, bridg.alchemy.BiologicEntityName)
+        en.biologic_entity_id = converter.convert(biologic_entity_id, UUID)
         en = session.merge(en)
         session.commit()
         return en  # type: ignore

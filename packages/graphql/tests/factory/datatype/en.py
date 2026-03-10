@@ -6,9 +6,7 @@ from ..base import BaseFactory
 from ..maybe import make_some
 
 
-class EntityNameInputFactory[T: EntityNameInput](BaseFactory[T]):
-    __is_base_factory__ = True
-
+class EntityNameInputFactory(BaseFactory[EntityNameInput]):
     use = None
     family = Use(make_some(BaseFactory.__faker__.last_name))
     given = Use(make_some(BaseFactory.__faker__.first_name))

@@ -5,6 +5,7 @@ import strawberry
 
 @strawberry.type
 class EntityName:
+    id: strawberry.ID
     use: Optional[str]
     family: Optional[str]
     given: Optional[str]

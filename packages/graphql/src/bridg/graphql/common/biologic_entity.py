@@ -22,10 +22,10 @@ class BiologicEntityInterface:
     death_indicator: Optional[bool]
 
     identifier: List[BiologicEntityIdentifier]
-    name: List[BiologicEntityName]
+    name: List[EntityName]
 
     @strawberry.field
-    def primary_name(self) -> Optional[BiologicEntityName]:
+    def primary_name(self) -> Optional[EntityName]:
         if len(self.name) > 0:
             return self.name[0]
 
@@ -39,11 +39,6 @@ class BiologicEntity(BiologicEntityInterface):
 
 @strawberry.type
 class BiologicEntityIdentifier(ID):
-    id: strawberry.ID
-
-
-@strawberry.type
-class BiologicEntityName(EntityName):
     id: strawberry.ID
 
 
@@ -63,15 +58,9 @@ class BiologicEntityInput:
     death_indicator: strawberry.Maybe[Optional[bool]]
 
     identifier: strawberry.Maybe[List[BiologicEntityIdentifierInput]]
-    name: strawberry.Maybe[List[BiologicEntityNameInput]]
+    name: strawberry.Maybe[List[EntityNameInput]]
 
 
 @strawberry.input
 class BiologicEntityIdentifierInput(IDInput):
     id: strawberry.Maybe[strawberry.ID]
-
-
-@strawberry.input
-class BiologicEntityNameInput(EntityNameInput):
-    id: strawberry.Maybe[strawberry.ID]
-    biologic_entity_id: strawberry.Maybe[strawberry.ID]
