@@ -33,7 +33,7 @@ class BiologicEntityInterface:
 @strawberry.type
 class BiologicEntity(BiologicEntityInterface):
     @staticmethod
-    def is_type_of(obj, info) -> bool:
+    def is_type_of(obj, _) -> bool:
         return isinstance(obj, bridg.alchemy.BiologicEntity)
 
 
