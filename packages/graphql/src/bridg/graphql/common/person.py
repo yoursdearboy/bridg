@@ -4,14 +4,20 @@ from typing import List
 
 import strawberry
 
+import bridg.alchemy
+
 from ..datatype import PostalAddress, PostalAddressInput, TelecommunicationAddress, TelecommunicationAddressInput
-from .biologic_entity import BiologicEntity, BiologicEntityFilter, BiologicEntityInput
+from .biologic_entity import BiologicEntityFilter, BiologicEntityInput, BiologicEntityInterface
 
 
 @strawberry.type
-class Person(BiologicEntity):
+class Person(BiologicEntityInterface):
     postal_address: List[PersonPostalAddress]
     telecom_address: List[PersonTelecommunicationAddress]
+
+    @staticmethod
+    def is_type_of(obj, info) -> bool:
+        return isinstance(obj, bridg.alchemy.Person)
 
 
 @strawberry.type

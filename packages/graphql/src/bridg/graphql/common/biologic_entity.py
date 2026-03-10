@@ -5,17 +5,17 @@ from typing import List, Optional
 
 import strawberry
 
-from bridg.alchemy import AdministrativeGender
+import bridg.alchemy
 
 from ..datatype import EntityName, EntityNameInput
 from .id import ID, IDInput
 
 
-@strawberry.type
-class BiologicEntity:
+@strawberry.interface
+class BiologicEntityInterface:
     id: strawberry.ID
     type: str
-    administrative_gender_code: Optional[AdministrativeGender]
+    administrative_gender_code: Optional[bridg.alchemy.AdministrativeGender]
     birth_date: Optional[date]
     death_date: Optional[date]
     death_date_estimated_indicator: Optional[bool]
@@ -28,6 +28,13 @@ class BiologicEntity:
     def primary_name(self) -> Optional[BiologicEntityName]:
         if len(self.name) > 0:
             return self.name[0]
+
+
+@strawberry.type
+class BiologicEntity(BiologicEntityInterface):
+    @staticmethod
+    def is_type_of(obj, info) -> bool:
+        return isinstance(obj, bridg.alchemy.BiologicEntity)
 
 
 @strawberry.type
@@ -49,7 +56,7 @@ class BiologicEntityFilter:
 @strawberry.input
 class BiologicEntityInput:
     id: strawberry.Maybe[strawberry.ID]
-    administrative_gender_code: strawberry.Maybe[Optional[AdministrativeGender]]
+    administrative_gender_code: strawberry.Maybe[Optional[bridg.alchemy.AdministrativeGender]]
     birth_date: strawberry.Maybe[Optional[date]]
     death_date: strawberry.Maybe[Optional[date]]
     death_date_estimated_indicator: strawberry.Maybe[Optional[bool]]
