@@ -60,11 +60,15 @@ from .study_subject import (
     StudySubject,
 )
 from .subject import (
+    AbstractSubject,
+    ActualSubject,
     Subject,
 )
 
 __all__ = [
+    "AbstractSubject",
     "Activity",
+    "ActualSubject",
     "AdministrativeGender",
     "Biologic",
     "BiologicEntity",

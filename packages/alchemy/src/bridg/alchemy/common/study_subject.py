@@ -3,17 +3,16 @@ from __future__ import annotations
 from datetime import datetime
 from enum import Enum
 from typing import TYPE_CHECKING, List, Optional
-from uuid import UUID, uuid4
+from uuid import UUID
 
+from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from .subject import Subject
+from .subject import ActualSubject
 
 if TYPE_CHECKING:
     from ..study import (
-        PerformedActivity,
-        ScheduledActivity,
         StudySiteProtocolVersionRelationship,
         StudySubjectProtocolVersionRelationship,
     )
@@ -35,7 +34,7 @@ class Status(Enum):
     withdrawn = "withdrawn"
 
 
-class StudySubject(Subject):
+class StudySubject(ActualSubject):
     """
     DEFINITION:
     A physical entity which is the primary unit of operational and/or administrative interest in a study.
@@ -56,9 +55,11 @@ class StudySubject(Subject):
     """
 
     __tablename__ = "study_subject"
-    __mapper_args__ = {"concrete": True}
+    __mapper_args__ = {
+        "polymorphic_identity": "study_subject",
+    }
 
-    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    id: Mapped[UUID] = mapped_column(ForeignKey("actual_subject.id"), primary_key=True)
 
     status: Mapped[Optional[Status]]
     status_date: Mapped[Optional[datetime]]
@@ -84,6 +85,3 @@ class StudySubject(Subject):
             creator=__assigned_study_site_protocol_version_relationship_creator,
         )
     )
-
-    involving_performed_activity: Mapped[List[PerformedActivity]] = relationship(back_populates="involved_subject")
-    involving_scheduled_activity: Mapped[List[ScheduledActivity]] = relationship(back_populates="involved_subject")

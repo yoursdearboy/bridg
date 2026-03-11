@@ -1,14 +1,14 @@
 from typing import Optional
-from uuid import UUID, uuid4
+from uuid import UUID
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..common.subject import Subject
+from ..common.subject import AbstractSubject
 from .study_protocol_version import StudyProtocolVersion
 
 
-class PlannedStudySubject(Subject):
+class PlannedStudySubject(AbstractSubject):
     """
     DEFINITION:
     A kind of physical entity which is intended to be the primary unit of operational and/or administrative interest in a study.
@@ -23,9 +23,11 @@ class PlannedStudySubject(Subject):
     """
 
     __tablename__ = "planned_study_subject"
-    __mapper_args__ = {"concrete": True}
+    __mapper_args__ = {
+        "polymorphic_identity": "planned_study_subject",
+    }
 
-    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    id: Mapped[UUID] = mapped_column(ForeignKey("abstract_subject.id"), primary_key=True)
 
     quantity_range: Mapped[Optional[int]]
 
