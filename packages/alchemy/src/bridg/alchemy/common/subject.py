@@ -4,11 +4,10 @@ from typing import TYPE_CHECKING, List, Optional
 from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, declared_attr, mapped_column, relationship, validates
+from sqlalchemy.orm import Mapped, mapped_column, relationship, validates
 
 from ..db import Base
-from .biologic_entity import BiologicEntity
-from .organization import Organization
+from .biologic_entity import AbstractBiologicEntity, ActualBiologicEntity, BiologicEntity
 
 if TYPE_CHECKING:
     from ..study import PerformedActivity, ScheduledActivity
@@ -33,23 +32,12 @@ class Subject(Base):
 
     __abstract__ = True
 
-    performing_biologic_entity_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("biologic_entity.id"))
-
-    @declared_attr
-    def performing_biologic_entity(cls) -> Mapped[Optional[BiologicEntity]]:
-        return relationship()
-
-    performing_organization_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("organization.id"))
-
-    @declared_attr
-    def performing_organization(cls) -> Mapped[Optional[Organization]]:
-        return relationship()
+    performing_biologic_entity: BiologicEntity
 
     @validates("performing_biologic_entity", "performing_organization")
     def validate_performing_entity(self, key, value):
         performing_entities = dict(
             performing_biologic_entity=self.performing_biologic_entity,
-            performing_organization=self.performing_organization,
         )
         performing_entities[key] = value
         count = sum(pe is not None for pe in performing_entities.values())
@@ -70,6 +58,11 @@ class ActualSubject(Subject):
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     type: Mapped[str]
 
+    performing_biologic_entity_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("actual_biologic_entity.id"))
+    performing_biologic_entity: Mapped[Optional[ActualBiologicEntity]] = relationship(
+        back_populates="performed_subject",
+    )
+
     involving_performed_activity: Mapped[List[PerformedActivity]] = relationship(back_populates="involved_subject")
     involving_scheduled_activity: Mapped[List[ScheduledActivity]] = relationship(back_populates="involved_subject")
 
@@ -83,3 +76,8 @@ class AbstractSubject(Subject):
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     type: Mapped[str]
+
+    performing_biologic_entity_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("abstract_biologic_entity.id"))
+    performing_biologic_entity: Mapped[Optional[AbstractBiologicEntity]] = relationship(
+        back_populates="performed_subject",
+    )

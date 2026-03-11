@@ -1,6 +1,11 @@
 __protected__ = []
 __private__ = ["converter", "factory", "observation_result", "uml"]
-__ignore__ = ["AbstractSubject", "ActualSubject"]
+__ignore__ = [
+    "AbstractBiologicEntity",
+    "AbstractSubject",
+    "ActualBiologicEntity",
+    "ActualSubject",
+]
 
 from .biospecimen import (
     Specimen,

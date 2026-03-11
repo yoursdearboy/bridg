@@ -7,19 +7,19 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .. import datatype
-from .biologic_entity import BiologicEntity
+from .biologic_entity import ActualBiologicEntity
 
 if TYPE_CHECKING:
     from .healthcare_provider import HealthcareProvider
 
 
-class Person(BiologicEntity):
+class Person(ActualBiologicEntity):
     """A human being."""
 
     __tablename__ = "person"
     __mapper_args__ = {"polymorphic_identity": "person"}
 
-    id: Mapped[UUID] = mapped_column(ForeignKey("biologic_entity.id"), primary_key=True, default=uuid4)
+    id: Mapped[UUID] = mapped_column(ForeignKey("actual_biologic_entity.id"), primary_key=True, default=uuid4)
 
     performed_healthcare_provider: Mapped[HealthcareProvider] = relationship()
 

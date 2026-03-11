@@ -68,6 +68,15 @@ def get_property_annotation(class_, key):
 def make_model_hook():
     cache = Cache()
 
+    # Combine all submodules of bridg.alchemy manually, because it doesn't export some private types
+    localns = {
+        **bridg.alchemy.biospecimen.__dict__,
+        **bridg.alchemy.common.__dict__,
+        **bridg.alchemy.datatype.__dict__,
+        **bridg.alchemy.protocol.__dict__,
+        **bridg.alchemy.study.__dict__,
+    }
+
     def f(data: dict, class_: type[T]) -> T:
         if isinstance(data, class_):
             return data
@@ -89,7 +98,7 @@ def make_model_hook():
         if key is not None:
             cache.set(key, obj)
 
-        annotations = get_type_hints(class_, localns=bridg.alchemy.__dict__)
+        annotations = get_type_hints(class_, localns=localns)
 
         for key, value in data.items():
             if value is None:

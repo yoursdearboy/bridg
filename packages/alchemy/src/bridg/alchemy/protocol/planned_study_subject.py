@@ -4,7 +4,7 @@ from uuid import UUID
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..common.subject import AbstractSubject
+from ..common import AbstractSubject
 from .study_protocol_version import StudyProtocolVersion
 
 

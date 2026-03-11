@@ -8,6 +8,8 @@ from .biologic import (
     Biologic,
 )
 from .biologic_entity import (
+    AbstractBiologicEntity,
+    ActualBiologicEntity,
     BiologicEntity,
     BiologicEntityIdentifier,
     BiologicEntityName,
@@ -66,8 +68,10 @@ from .subject import (
 )
 
 __all__ = [
+    "AbstractBiologicEntity",
     "AbstractSubject",
     "Activity",
+    "ActualBiologicEntity",
     "ActualSubject",
     "AdministrativeGender",
     "Biologic",
