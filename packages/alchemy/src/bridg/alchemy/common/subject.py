@@ -1,8 +1,8 @@
 from typing import Optional
-from uuid import UUID
+from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, declared_attr, mapped_column, relationship, validates
+from sqlalchemy.orm import Mapped, mapped_column, relationship, validates
 
 from ..db import Base
 from .biologic_entity import BiologicEntity
@@ -26,20 +26,20 @@ class Subject(Base):
     NOTE(S):
     """
 
-    # FIXME: looks like it is not abstract, because not only StudySubject can be instantiated
-    __abstract__ = True
+    __tablename__ = "subject"
+    __mapper_args__ = {
+        "polymorphic_on": "type",
+        "polymorphic_identity": "subject",
+    }
+
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    type: Mapped[str]
 
     performing_biologic_entity_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("biologic_entity.id"))
-
-    @declared_attr
-    def performing_biologic_entity(cls) -> Mapped[Optional[BiologicEntity]]:
-        return relationship()
+    performing_biologic_entity: Mapped[Optional[BiologicEntity]] = relationship(back_populates="performed_subject")
 
     performing_organization_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("organization.id"))
-
-    @declared_attr
-    def performing_organization(cls) -> Mapped[Optional[Organization]]:
-        return relationship()
+    performing_organization: Mapped[Optional[Organization]] = relationship(back_populates="performed_subject")
 
     @validates("performing_biologic_entity", "performing_organization")
     def validate_performing_entity(self, key, value):

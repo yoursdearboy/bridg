@@ -1,5 +1,5 @@
 from typing import Optional
-from uuid import UUID, uuid4
+from uuid import UUID
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -23,9 +23,11 @@ class PlannedStudySubject(Subject):
     """
 
     __tablename__ = "planned_study_subject"
-    __mapper_args__ = {"concrete": True}
+    __mapper_args__ = {
+        "polymorphic_identity": "planned_study_subject",
+    }
 
-    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    id: Mapped[UUID] = mapped_column(ForeignKey("subject.id"), primary_key=True)
 
     quantity_range: Mapped[Optional[int]]
 
