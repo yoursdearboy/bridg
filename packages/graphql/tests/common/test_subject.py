@@ -6,6 +6,7 @@ from bridg.alchemy.factory import (
     BiologicEntityIdentifierFactory,
     BiologicEntityNameFactory,
     ConceptDescriptorFactory,
+    PerformedActivityFactory,
     PersonFactory,
     StudyProtocolVersionFactory,
     StudySubjectFactory,
@@ -101,6 +102,41 @@ def test_subject_list_query(context: Context, snapshot_json):
     """
 
     result = schema.execute_sync(query, context_value=context)
+    assert result.errors is None
+    assert result.data == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
+
+
+def test_subject_involving_performed_activity_query(context: Context, snapshot_json):
+    space = StudyProtocolVersionFactory.create_sync()
+    sspvr = space.executing_study_site_protocol_version_relationship[0]
+    ss = StudySubjectFactory.create_sync(
+        performing_biologic_entity=PersonFactory.build(),
+        performing_organization=None,
+        assigned_study_site_protocol_version_relationship=[sspvr],
+    )
+    PerformedActivityFactory.create_batch_sync(
+        2,
+        executing_study_protocol_version=space,
+        involved_subject=ss,
+    )
+
+    query = """
+        query($id: ID!) {
+            Subject(id: $id) {
+                id
+                involvingPerformedActivity {
+                    id
+                    dateRange
+                    negationReason
+                    negationIndicator
+                    statusCode
+                    statusDate
+                }
+            }
+        }
+    """
+
+    result = schema.execute_sync(query, process_input(dict(id=ss.id)), context_value=context)
     assert result.errors is None
     assert result.data == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
 

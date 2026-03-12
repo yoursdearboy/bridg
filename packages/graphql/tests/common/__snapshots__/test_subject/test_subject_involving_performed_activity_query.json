@@ -1,0 +1,45 @@
+{
+  "Subject": {
+    "id": "str",
+    "involvingPerformedActivity": [
+      {
+        "dateRange": {
+          "high": "2063-12-31T23:47:22.157152+0000",
+          "low": "2098-12-14T08:10:09.004942+0000"
+        },
+        "id": "str",
+        "negationIndicator": false,
+        "negationReason": {
+          "code": "reveal",
+          "codeSystem": "garden",
+          "displayName": "Director allow."
+        },
+        "statusCode": {
+          "code": "four",
+          "codeSystem": "institution",
+          "displayName": "At tree."
+        },
+        "statusDate": "2055-09-11T14:08:43.414278+00:00"
+      },
+      {
+        "dateRange": {
+          "high": "2071-10-16T19:38:58.964116+0000",
+          "low": "2056-09-19T06:01:59.253798+0000"
+        },
+        "id": "str",
+        "negationIndicator": false,
+        "negationReason": {
+          "code": "money",
+          "codeSystem": "individual",
+          "displayName": "Central cause seat."
+        },
+        "statusCode": {
+          "code": "nothing",
+          "codeSystem": "everyone",
+          "displayName": "Investment on gun young."
+        },
+        "statusDate": "2021-04-06T04:25:42.664295+00:00"
+      }
+    ]
+  }
+}
