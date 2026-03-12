@@ -35,7 +35,6 @@ class Mutation:
         session.commit()
         return person  # type: ignore
 
-    # FIXME: rename
     @strawberry.mutation(name="BiologicEntityNameCreate")
     def person_entity_name_create(
         self, biologic_entity_id: strawberry.ID, input: EntityNameInput, info: strawberry.Info[Context]
