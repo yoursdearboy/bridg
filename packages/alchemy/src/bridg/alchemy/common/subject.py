@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import TYPE_CHECKING, List, Optional
 from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
@@ -7,6 +7,9 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship, validates
 from ..db import Base
 from .biologic_entity import BiologicEntity
 from .organization import Organization
+
+if TYPE_CHECKING:
+    from ..study import PerformedActivity, ScheduledActivity
 
 
 class Subject(Base):
@@ -40,6 +43,9 @@ class Subject(Base):
 
     performing_organization_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("organization.id"))
     performing_organization: Mapped[Optional[Organization]] = relationship(back_populates="performed_subject")
+
+    involving_performed_activity: Mapped[List[PerformedActivity]] = relationship(back_populates="involved_subject")
+    involving_scheduled_activity: Mapped[List[ScheduledActivity]] = relationship(back_populates="involved_subject")
 
     @validates("performing_biologic_entity", "performing_organization")
     def validate_performing_entity(self, key, value):
