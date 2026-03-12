@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2016-05-04T06:37:33.714143Z",
-    "low": "2072-11-29T08:33:03.899794Z"
+    "high": "2063-12-31T23:47:22.157152Z",
+    "low": "2098-12-14T08:10:09.004942Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "wish",
-    "code_system": "push",
+    "code": "reveal",
+    "code_system": "garden",
     "data_type_name": "CD",
-    "display_name": "Detail food shoulder."
+    "display_name": "Director allow."
   },
   "reason_code": null,
   "status_code": {
-    "code": "arrive",
-    "code_system": "drop",
+    "code": "four",
+    "code_system": "institution",
     "data_type_name": "CD",
-    "display_name": "Support."
+    "display_name": "At tree."
   },
-  "status_date": "2037-12-11T14:38:24.881114Z"
+  "status_date": "2055-09-11T14:08:43.414278Z"
 }

@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2016-05-04T06:37:33.714143Z",
-    "low": "2072-11-29T08:33:03.899794Z"
+    "high": "2063-12-31T23:47:22.157152Z",
+    "low": "2098-12-14T08:10:09.004942Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "hundred",
-    "code_system": "expect",
+    "code": "onto",
+    "code_system": "discuss",
     "data_type_name": "CD",
-    "display_name": "Detail food shoulder."
+    "display_name": "Successful simply director."
   },
   "reason_code": null,
   "status_code": {
-    "code": "arrive",
-    "code_system": "drop",
+    "code": "almost",
+    "code_system": "support",
     "data_type_name": "CD",
-    "display_name": "Support."
+    "display_name": "Husband at tree."
   },
-  "status_date": "2031-07-18T22:08:30.942928Z"
+  "status_date": "2056-09-19T06:01:59.253798Z"
 }
