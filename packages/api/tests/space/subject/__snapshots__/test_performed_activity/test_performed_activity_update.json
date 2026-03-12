@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2026-10-10T05:39:06.769083Z",
-    "low": "2031-07-18T22:08:30.942928Z"
+    "high": "2071-10-16T19:38:58.964116Z",
+    "low": "2056-09-19T06:01:59.253798Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "development",
-    "code_system": "white",
+    "code": "difference",
+    "code_system": "reality",
     "data_type_name": "CD",
-    "display_name": "Then fire pretty."
+    "display_name": "How trip learn."
   },
   "reason_code": null,
   "status_code": {
-    "code": "individual",
-    "code_system": "usually",
+    "code": "evidence",
+    "code_system": "chair",
     "data_type_name": "CD",
-    "display_name": "Central cause seat."
+    "display_name": "Seat much."
   },
-  "status_date": "2053-11-24T03:29:31.640449Z"
+  "status_date": "2074-09-13T16:18:26.259729Z"
 }
