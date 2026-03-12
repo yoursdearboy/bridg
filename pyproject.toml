@@ -38,10 +38,6 @@ path = "packages/alchemy/pyproject.toml"
 cwd  = "packages/alchemy"
 
 [[tool.poe.include]]
-path = "packages/api/pyproject.toml"
-cwd  = "packages/api"
-
-[[tool.poe.include]]
 path = "packages/graphql/pyproject.toml"
 cwd  = "packages/graphql"
 
@@ -57,7 +53,6 @@ extend-select = ["F", "I", "TID"]
 [tool.uv.workspace]
 members = [
     "packages/alchemy",
-    "packages/api",
     "packages/common",
     "packages/graphql",
 ]
