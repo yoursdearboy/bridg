@@ -5,7 +5,7 @@ from uuid import UUID, uuid4
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, composite, mapped_column, relationship
 
-from ..common import Activity, StudySubject
+from ..common import Activity, Subject
 from ..datatype import ConceptDescriptor, IntervalPointInTime
 from ..protocol import DefinedActivity, Epoch, StudyProtocolVersion
 from ..tz_date_time import TZDateTime
@@ -64,9 +64,8 @@ class PerformedActivity(Activity):
     Each DefinedActivity might be instantiated by one or more PerformedActivity.
     """
 
-    # FIXME: replace StudySubject with Subject
-    involved_subject_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("study_subject.id"))
-    involved_subject: Mapped[Optional[StudySubject]] = relationship(back_populates="involving_performed_activity")
+    involved_subject_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("subject.id"))
+    involved_subject: Mapped[Optional[Subject]] = relationship(back_populates="involving_performed_activity")
     """
     Each Activity might be participated in by one Subject.
     Each Subject might participate in one or more Activity.

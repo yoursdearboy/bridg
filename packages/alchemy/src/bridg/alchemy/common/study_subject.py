@@ -13,8 +13,6 @@ from .subject import Subject
 
 if TYPE_CHECKING:
     from ..study import (
-        PerformedActivity,
-        ScheduledActivity,
         StudySiteProtocolVersionRelationship,
         StudySubjectProtocolVersionRelationship,
     )
@@ -87,6 +85,3 @@ class StudySubject(Subject):
             creator=__assigned_study_site_protocol_version_relationship_creator,
         )
     )
-
-    involving_performed_activity: Mapped[List[PerformedActivity]] = relationship(back_populates="involved_subject")
-    involving_scheduled_activity: Mapped[List[ScheduledActivity]] = relationship(back_populates="involved_subject")
