@@ -76,7 +76,7 @@ class Mutation:
     def subject_create(self, input: SubjectInput, info: strawberry.Info[Context]) -> Subject:
         session = info.context.session
         converter = info.context.converter
-        subject = converter.convert(input, bridg.alchemy.StudySubject)
+        subject = converter.convert(input, bridg.alchemy.Subject)
         subject = session.merge(subject)
         session.commit()
         return subject  # type: ignore

@@ -52,14 +52,14 @@ class Query:
         converter = info.context.converter
         session = info.context.session
         uuid = converter.convert(id, UUID)
-        query = session.query(bridg.alchemy.StudySubject)
+        query = session.query(bridg.alchemy.Subject)
         query = query.filter_by(id=uuid)
         return query.one_or_none()  # type: ignore
 
     @strawberry.field(name="SubjectList")
     def subject_list(self, *, info: strawberry.Info[Context]) -> List[Subject]:
         session = info.context.session
-        query = session.query(bridg.alchemy.StudySubject)
+        query = session.query(bridg.alchemy.Subject)
         return query.all()  # type: ignore
 
     @strawberry.field(name="PerformedActivity")
