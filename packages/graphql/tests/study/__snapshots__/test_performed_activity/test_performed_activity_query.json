@@ -1,0 +1,34 @@
+{
+  "PerformedActivity": {
+    "containingEpoch": null,
+    "dateRange": {
+      "high": "2037-12-11T14:38:24.881114+0000",
+      "low": "2016-05-04T06:37:33.714143+0000"
+    },
+    "id": "str",
+    "involvedSubject": {
+      "id": "str",
+      "performingBiologicEntity": {
+        "id": "str",
+        "primaryName": {
+          "family": "Test",
+          "given": "First"
+        }
+      }
+    },
+    "nameCodeModifiedText": null,
+    "negationIndicator": false,
+    "negationReason": {
+      "code": "push",
+      "codeSystem": "rise",
+      "displayName": "Detail food shoulder."
+    },
+    "repetitionNumber": 1,
+    "statusCode": {
+      "code": "arrive",
+      "codeSystem": "drop",
+      "displayName": "Support."
+    },
+    "statusDate": "2098-12-14T08:10:09.004942+00:00"
+  }
+}

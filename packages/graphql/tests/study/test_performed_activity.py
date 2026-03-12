@@ -1,6 +1,7 @@
 from syrupy.matchers import path_type
 
 from bridg.alchemy.factory import (
+    BiologicEntityNameFactory,
     PerformedActivityFactory,
     PersonFactory,
     StudyProtocolVersionFactory,
@@ -16,7 +17,9 @@ def test_performed_activity_query(context: Context, snapshot_json):
     space = StudyProtocolVersionFactory.create_sync()
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
-        performing_biologic_entity=PersonFactory.build(),
+        performing_biologic_entity=PersonFactory.build(
+            name=BiologicEntityNameFactory.batch(1, family="Test", given="First")
+        ),
         performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
@@ -41,6 +44,16 @@ def test_performed_activity_query(context: Context, snapshot_json):
                    name
                    typeCode
                 }
+                involvedSubject {
+                    id
+                    performingBiologicEntity {
+                        id
+                        primaryName {
+                            family
+                            given
+                        }
+                    }
+                }
             }
         }
     """
@@ -54,7 +67,9 @@ def test_performed_activity_list_query(context: Context, snapshot_json):
     space = StudyProtocolVersionFactory.create_sync()
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
-        performing_biologic_entity=PersonFactory.build(),
+        performing_biologic_entity=PersonFactory.build(
+            name=BiologicEntityNameFactory.batch(1, family="Test", given="First")
+        ),
         performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
@@ -79,6 +94,16 @@ def test_performed_activity_list_query(context: Context, snapshot_json):
                    id
                    name
                    typeCode
+                }
+                involvedSubject {
+                    id
+                    performingBiologicEntity {
+                        id
+                        primaryName {
+                            family
+                            given
+                        }
+                    }
                 }
             }
         }

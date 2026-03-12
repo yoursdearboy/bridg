@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import date
-from typing import List, Optional
+from typing import TYPE_CHECKING, Annotated, List, Optional
 
 import strawberry
 
@@ -9,6 +9,9 @@ import bridg.alchemy
 
 from ..datatype import EntityName, EntityNameInput
 from .id import ID, IDInput
+
+if TYPE_CHECKING:
+    from .subject import Subject
 
 
 @strawberry.interface
@@ -22,7 +25,10 @@ class BiologicEntityInterface:
     death_indicator: Optional[bool]
 
     identifier: List[ID]
+
     name: List[EntityName]
+
+    performed_subject: List[Annotated[Subject, strawberry.lazy(".subject")]]
 
     @strawberry.field
     def primary_name(self) -> Optional[EntityName]:
