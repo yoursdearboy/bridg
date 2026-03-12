@@ -13,6 +13,7 @@ if TYPE_CHECKING:
     from .healthcare_facility import HealthcareFacility
     from .healthcare_provider import HealthcareProvider
     from .healthcare_provider_group import HealthcareProviderGroup
+    from .subject import Subject
 
 
 class Organization(Base):
@@ -71,6 +72,10 @@ class Organization(Base):
     Each HealthcareProvider might belong to a department at one Organization.
     Each Organization might be the department for one or more HealthcareProvider.
     """
+
+    performed_subject: Mapped[List[Subject]] = relationship(
+        back_populates="performing_organization",
+    )
 
 
 class OrganizationOrganizationName(OrganizationName):

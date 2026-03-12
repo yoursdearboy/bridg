@@ -3,8 +3,9 @@ from __future__ import annotations
 from datetime import datetime
 from enum import Enum
 from typing import TYPE_CHECKING, List, Optional
-from uuid import UUID, uuid4
+from uuid import UUID
 
+from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -56,9 +57,11 @@ class StudySubject(Subject):
     """
 
     __tablename__ = "study_subject"
-    __mapper_args__ = {"concrete": True}
+    __mapper_args__ = {
+        "polymorphic_identity": "study_subject",
+    }
 
-    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    id: Mapped[UUID] = mapped_column(ForeignKey("subject.id"), primary_key=True)
 
     status: Mapped[Optional[Status]]
     status_date: Mapped[Optional[datetime]]

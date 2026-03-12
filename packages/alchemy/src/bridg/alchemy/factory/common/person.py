@@ -35,3 +35,5 @@ class PersonFactory(BaseFactory[Person]):
     performed_healthcare_provider = Ignore()
     postal_address = Use(lambda: [])
     telecom_address = Use(lambda: [])
+
+    performed_subject = Ignore()

@@ -9,6 +9,7 @@ class StudySubjectFactory(BaseFactory[StudySubject]):
     __set_as_default_factory_for_type__ = True
 
     id = Ignore()
+    type = Ignore()
     performing_biologic_entity = Require()
     performing_organization = Require()
     assigned_study_subject_protocol_version_relationship = Ignore()

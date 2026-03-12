@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import date
-from typing import List, Optional
+from typing import TYPE_CHECKING, List, Optional
 from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
@@ -11,6 +11,9 @@ from ..datatype import EntityName
 from ..db import Base
 from .administrative_gender import AdministrativeGender
 from .id import ID
+
+if TYPE_CHECKING:
+    from .subject import Subject
 
 
 class BiologicEntity(Base):
@@ -48,6 +51,10 @@ class BiologicEntity(Base):
 
     name: Mapped[List[BiologicEntityName]] = relationship(
         back_populates="biologic_entity", cascade="all, delete-orphan"
+    )
+
+    performed_subject: Mapped[List[Subject]] = relationship(
+        back_populates="performing_biologic_entity",
     )
 
 
