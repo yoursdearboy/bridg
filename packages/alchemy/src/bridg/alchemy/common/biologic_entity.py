@@ -58,6 +58,7 @@ class BiologicEntity(Base):
     )
 
 
+# FIXME: make private
 class BiologicEntityName(EntityName):
     __tablename__ = "biologic_entity_name"
 
