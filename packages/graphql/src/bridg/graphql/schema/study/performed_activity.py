@@ -5,6 +5,7 @@ import strawberry
 
 import bridg.alchemy
 
+from ..common import Subject
 from ..datatype import ConceptDescriptor, IntervalPointInTime
 from ..protocol import Epoch
 
@@ -20,9 +21,10 @@ class PerformedActivityInterface:
     status_code: Optional[ConceptDescriptor]
     status_date: Optional[datetime]
     containing_epoch: Optional[Epoch]
+    # TODO: add these properties
     # executing_study_protocol_version: Optional[StudyProtocolVersion]
     # instantiated_defined_activity: Optional[DefinedActivity]
-    # involved_subject: Optional[StudySubject]
+    involved_subject: Optional[Subject]
 
 
 @strawberry.type
