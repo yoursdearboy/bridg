@@ -1,0 +1,74 @@
+{
+  "PerformedSpecimenCollection": {
+    "containingEpoch": null,
+    "dateRange": {
+      "high": "2093-08-31T07:24:41.719580+0000",
+      "low": "2026-09-12T08:45:31.709710+0000"
+    },
+    "id": "str",
+    "nameCodeModifiedText": null,
+    "negationIndicator": false,
+    "negationReason": {
+      "code": "politics",
+      "codeSystem": "prove",
+      "displayName": "Move each."
+    },
+    "producedSpecimen": [
+      {
+        "id": "str",
+        "performingMaterial": {
+          "code": {
+            "code": "begin",
+            "codeSystem": "performance",
+            "displayName": "All behavior discussion."
+          },
+          "description": null,
+          "formCode": {
+            "code": "play",
+            "codeSystem": "agreement",
+            "displayName": "Current practice nation."
+          }
+        }
+      },
+      {
+        "id": "str",
+        "performingMaterial": {
+          "code": {
+            "code": "blue",
+            "codeSystem": "best",
+            "displayName": "Benefit suggest page."
+          },
+          "description": null,
+          "formCode": {
+            "code": "surface",
+            "codeSystem": "animal",
+            "displayName": "Movie win her."
+          }
+        }
+      },
+      {
+        "id": "str",
+        "performingMaterial": {
+          "code": {
+            "code": "top",
+            "codeSystem": "early",
+            "displayName": "Herself law."
+          },
+          "description": null,
+          "formCode": {
+            "code": "they",
+            "codeSystem": "his",
+            "displayName": "Have decide."
+          }
+        }
+      }
+    ],
+    "repetitionNumber": 1,
+    "statusCode": {
+      "code": "maintain",
+      "codeSystem": "hundred",
+      "displayName": "Writer policy."
+    },
+    "statusDate": "2064-10-20T11:49:07.345790+00:00"
+  }
+}

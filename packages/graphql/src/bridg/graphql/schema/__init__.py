@@ -1,3 +1,6 @@
+from .biospecimen import (
+    Specimen,
+)
 from .common import (
     ID,
     BiologicEntity,
@@ -5,6 +8,7 @@ from .common import (
     BiologicEntityInput,
     BiologicEntityInterface,
     IDInput,
+    Material,
     Person,
     PersonFilter,
     PersonInput,
@@ -42,6 +46,7 @@ from .schema import (
 from .study import (
     PerformedActivity,
     PerformedActivityInterface,
+    PerformedSpecimenCollection,
 )
 
 __all__ = [
@@ -57,9 +62,11 @@ __all__ = [
     "IDInput",
     "InstanceIdentifier",
     "IntervalPointInTime",
+    "Material",
     "Mutation",
     "PerformedActivity",
     "PerformedActivityInterface",
+    "PerformedSpecimenCollection",
     "Person",
     "PersonFilter",
     "PersonInput",
@@ -67,6 +74,7 @@ __all__ = [
     "PostalAddressInput",
     "Query",
     "SCALAR_REGISTRY",
+    "Specimen",
     "Subject",
     "SubjectInput",
     "TelecommunicationAddress",
