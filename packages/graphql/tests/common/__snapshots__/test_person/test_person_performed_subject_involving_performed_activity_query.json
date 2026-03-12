@@ -1,0 +1,50 @@
+{
+  "Person": {
+    "id": "str",
+    "performedSubject": [
+      {
+        "id": "str",
+        "involvingPerformedActivity": [
+          {
+            "dateRange": {
+              "high": "2004-09-16T22:12:52.910360+0000",
+              "low": "2009-02-02T11:11:26.561572+0000"
+            },
+            "id": "str",
+            "negationIndicator": false,
+            "negationReason": {
+              "code": "product",
+              "codeSystem": "collection",
+              "displayName": "Others his other."
+            },
+            "statusCode": {
+              "code": "management",
+              "codeSystem": "newspaper",
+              "displayName": "Wife team."
+            },
+            "statusDate": "2010-12-18T22:25:39.595396+00:00"
+          },
+          {
+            "dateRange": {
+              "high": "2072-01-27T08:44:48.664128+0000",
+              "low": "2001-02-23T08:15:49.806273+0000"
+            },
+            "id": "str",
+            "negationIndicator": false,
+            "negationReason": {
+              "code": "not",
+              "codeSystem": "social",
+              "displayName": "Shoulder future."
+            },
+            "statusCode": {
+              "code": "finally",
+              "codeSystem": "learn",
+              "displayName": "Law west."
+            },
+            "statusDate": "2068-03-03T11:18:34.159304+00:00"
+          }
+        ]
+      }
+    ]
+  }
+}
