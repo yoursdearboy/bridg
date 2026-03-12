@@ -8,6 +8,9 @@ from .id import (
     ID,
     IDInput,
 )
+from .material import (
+    Material,
+)
 from .person import (
     Person,
     PersonFilter,
@@ -25,6 +28,7 @@ __all__ = [
     "BiologicEntityInterface",
     "ID",
     "IDInput",
+    "Material",
     "Person",
     "PersonFilter",
     "PersonInput",

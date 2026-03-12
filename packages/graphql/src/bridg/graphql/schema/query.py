@@ -7,8 +7,9 @@ import strawberry
 
 import bridg.alchemy
 
+from .biospecimen import Specimen
 from .common import Person, PersonFilter, Subject
-from .study import PerformedActivity
+from .study import PerformedActivity, PerformedSpecimenCollection
 
 if TYPE_CHECKING:
     from ..context import Context
@@ -62,6 +63,15 @@ class Query:
         query = session.query(bridg.alchemy.Subject)
         return query.all()  # type: ignore
 
+    @strawberry.field(name="Specimen")
+    def specimen(self, id: strawberry.ID, *, info: strawberry.Info[Context]) -> Optional[Specimen]:
+        converter = info.context.converter
+        session = info.context.session
+        uuid = converter.convert(id, UUID)
+        query = session.query(bridg.alchemy.Specimen)
+        query = query.filter_by(id=uuid)
+        return query.one_or_none()  # type: ignore
+
     @strawberry.field(name="PerformedActivity")
     def performed_activity(self, id: strawberry.ID, *, info: strawberry.Info[Context]) -> Optional[PerformedActivity]:
         converter = info.context.converter
@@ -76,3 +86,14 @@ class Query:
         session = info.context.session
         query = session.query(bridg.alchemy.PerformedActivity)
         return query.all()  # type: ignore
+
+    @strawberry.field(name="PerformedSpecimenCollection")
+    def performed_specimen_collection(
+        self, id: strawberry.ID, *, info: strawberry.Info[Context]
+    ) -> Optional[PerformedSpecimenCollection]:
+        converter = info.context.converter
+        session = info.context.session
+        uuid = converter.convert(id, UUID)
+        query = session.query(bridg.alchemy.PerformedSpecimenCollection)
+        query = query.filter_by(id=uuid)
+        return query.one_or_none()  # type: ignore
