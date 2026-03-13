@@ -1,4 +1,5 @@
-from typing import Any, List, Type, get_args
+from types import FunctionType
+from typing import Any, List, Optional, Type, get_args
 from uuid import UUID
 
 from sqlalchemy import inspect
@@ -16,6 +17,7 @@ class Converter(bridg.common.converter.Converter):
     def __init__(self, terminology: bridg.alchemy.TerminologyService) -> None:
         super().__init__(
             [
+                any_to_optional,
                 object_to_dataclass,
                 list_to_list,
                 object_to_cd,
@@ -26,6 +28,14 @@ class Converter(bridg.common.converter.Converter):
             ]
         )
         self.terminology = terminology
+
+
+@bridg.common.converter.configure
+def any_to_optional[T](x: Any, class_: Type[Optional[T]], converter) -> Optional[T]:
+    if x is None:
+        return
+    (arg, _) = get_args(class_)
+    return converter.convert(x, arg)
 
 
 @bridg.common.converter.configure
@@ -97,8 +107,12 @@ def object_to_alchemy[T: bridg.alchemy.Base](x: Any, class_: Type[T], converter)
                 value = converter.convert(value, attr_class_)
             elif isinstance(attr, Composite):
                 attr_class_ = attr.composite_class
-                assert isinstance(attr_class_, type)
-                value = converter.convert(value, attr_class_)
+                if isinstance(attr_class_, type):
+                    value = converter.convert(value, attr_class_)
+                elif isinstance(attr_class_, FunctionType):
+                    value = converter.convert(value, attr_class_.__annotations__["return"])
+                else:
+                    RuntimeError("Unknown Composite attr configuration")
             else:
                 type_ = attr.columns[0].type.python_type
                 value = converter.convert(value, type_)
