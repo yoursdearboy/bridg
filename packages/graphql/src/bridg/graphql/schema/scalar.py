@@ -35,7 +35,7 @@ SCALAR_REGISTRY: dict[object, ScalarDefinition] = {
     ),
     IntervalPointInTime: scalar(
         name="IntervalPointInTime",
-        serialize=_serialize_dataclass(IntervalPointInTime),
-        parse_value=_parse_dataclass(IntervalPointInTime),
+        serialize=IntervalPointInTime.serialize,
+        parse_value=IntervalPointInTime.parse_value,
     ),
 }
