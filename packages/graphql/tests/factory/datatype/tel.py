@@ -4,4 +4,5 @@ from .url import URLInputFactoryy
 
 
 class TelecommunicationAddressInputFactory(URLInputFactoryy[TelecommunicationAddressInput]):
+    id = None
     use = None

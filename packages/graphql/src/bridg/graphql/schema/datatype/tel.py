@@ -15,4 +15,5 @@ class TelecommunicationAddress(URL):
 
 @strawberry.input
 class TelecommunicationAddressInput(URLInput):
+    id: strawberry.Maybe[strawberry.ID]
     use: strawberry.Maybe[Optional[bridg.alchemy.TelecommunicationAddressUse]]

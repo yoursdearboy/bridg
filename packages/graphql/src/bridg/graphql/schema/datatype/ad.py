@@ -19,6 +19,7 @@ class PostalAddress:
 
 @strawberry.input
 class PostalAddressInput:
+    id: strawberry.Maybe[strawberry.ID]
     use: strawberry.Maybe[Optional[bridg.alchemy.PostalAddressUse]]
     street: strawberry.Maybe[Optional[str]]
     building: strawberry.Maybe[Optional[str]]

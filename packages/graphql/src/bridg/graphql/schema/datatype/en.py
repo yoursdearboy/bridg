@@ -17,6 +17,7 @@ class EntityName:
 
 @strawberry.input
 class EntityNameInput:
+    id: strawberry.Maybe[strawberry.ID]
     use: strawberry.Maybe[Optional[str]]
     family: strawberry.Maybe[Optional[str]]
     given: strawberry.Maybe[Optional[str]]

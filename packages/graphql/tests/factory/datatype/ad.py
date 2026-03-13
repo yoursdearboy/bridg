@@ -7,6 +7,7 @@ from ..maybe import make_some
 
 
 class PostalAddressInputFactory(BaseFactory[PostalAddressInput]):
+    id = None
     # use
     street = Use(make_some(BaseFactory.__faker__.street_name))
     building = Use(make_some(BaseFactory.__faker__.building_number))
