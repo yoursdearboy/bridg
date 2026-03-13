@@ -7,6 +7,9 @@ from .performed_diagnosis import (
 from .performed_eligibility_criterion import (
     PerformedEligibilityCriterion,
 )
+from .performed_encounter import (
+    PerformedEncounter,
+)
 from .performed_exclusion_criterion import (
     PerformedExclusionCriterion,
 )
@@ -48,6 +51,7 @@ __all__ = [
     "PerformedActivity",
     "PerformedDiagnosis",
     "PerformedEligibilityCriterion",
+    "PerformedEncounter",
     "PerformedExclusionCriterion",
     "PerformedInclusionCriterion",
     "PerformedObservation",
