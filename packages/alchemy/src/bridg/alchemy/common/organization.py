@@ -78,9 +78,15 @@ class Organization(Base):
     )
 
 
-class OrganizationOrganizationName(OrganizationName):
+class OrganizationOrganizationName(OrganizationName, Base):
     __tablename__ = "organization_name"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+
     organization_id: Mapped[UUID] = mapped_column(ForeignKey("organization.id"))
     organization: Mapped[Organization] = relationship(back_populates="name")
+
+    use: Mapped[Optional[str]]
+    value: Mapped[Optional[str]]
+    prefix: Mapped[Optional[str]]
+    suffix: Mapped[Optional[str]]

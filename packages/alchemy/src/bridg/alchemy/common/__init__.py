@@ -40,6 +40,11 @@ from .person import (
     PersonPostalAddress,
     PersonTelecommunicationAddress,
 )
+from .place import (
+    Place,
+    PlaceIdentifier,
+    PlaceName,
+)
 from .product import (
     Product,
 )
@@ -82,6 +87,9 @@ __all__ = [
     "Person",
     "PersonPostalAddress",
     "PersonTelecommunicationAddress",
+    "Place",
+    "PlaceIdentifier",
+    "PlaceName",
     "Product",
     "Project",
     "ProjectConduct",

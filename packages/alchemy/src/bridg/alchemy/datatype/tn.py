@@ -1,5 +1,5 @@
 from .en import EntityName
 
 
-class OrganizationName(EntityName):
+class TrivialName(EntityName):
     pass

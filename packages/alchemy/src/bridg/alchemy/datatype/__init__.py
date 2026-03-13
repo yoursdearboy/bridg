@@ -28,6 +28,9 @@ from .tel import (
     TelecommunicationAddress,
     TelecommunicationAddressUse,
 )
+from .tn import (
+    TrivialName,
+)
 from .uid import (
     UniqueIdentifierString,
 )
@@ -49,6 +52,7 @@ __all__ = [
     "PostalAddressUse",
     "TelecommunicationAddress",
     "TelecommunicationAddressUse",
+    "TrivialName",
     "URL",
     "URLScheme",
     "UniqueIdentifierString",
