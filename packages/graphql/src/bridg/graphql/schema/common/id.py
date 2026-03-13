@@ -7,7 +7,6 @@ from ..datatype import ConceptDescriptor, InstanceIdentifier
 
 @strawberry.type(name="Identifier")
 class ID:
-    id: strawberry.ID
     identifier: InstanceIdentifier
     identifier_type_code: Optional[ConceptDescriptor]
 

@@ -7,6 +7,7 @@ from ..maybe import make_some
 
 
 class EntityNameInputFactory(BaseFactory[EntityNameInput]):
+    id = None
     use = None
     family = Use(make_some(BaseFactory.__faker__.last_name))
     given = Use(make_some(BaseFactory.__faker__.first_name))
