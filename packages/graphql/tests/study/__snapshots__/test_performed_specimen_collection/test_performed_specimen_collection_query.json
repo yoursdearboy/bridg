@@ -2,8 +2,8 @@
   "PerformedSpecimenCollection": {
     "containingEpoch": null,
     "dateRange": {
-      "high": "2093-08-31T07:24:41.719580+0000",
-      "low": "2026-09-12T08:45:31.709710+0000"
+      "high": "2093-08-31T07:24:41.719580+00:00",
+      "low": "2026-09-12T08:45:31.709710+00:00"
     },
     "id": "str",
     "nameCodeModifiedText": null,
