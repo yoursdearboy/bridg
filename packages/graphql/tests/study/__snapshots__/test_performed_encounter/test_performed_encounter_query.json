@@ -1,0 +1,35 @@
+{
+  "PerformedEncounter": {
+    "arrivingFromPlace": {
+      "id": "str",
+      "primaryName": {
+        "value": "surface"
+      }
+    },
+    "dateRange": {
+      "high": "2082-12-10T00:07:43.263031+00:00",
+      "low": "2055-03-16T06:49:02.546799+00:00"
+    },
+    "departingToPlace": {
+      "id": "str",
+      "primaryName": {
+        "value": "play"
+      }
+    },
+    "id": "str",
+    "nameCodeModifiedText": null,
+    "negationIndicator": false,
+    "negationReason": {
+      "code": "trial",
+      "codeSystem": "blood",
+      "displayName": "Everyone player half."
+    },
+    "repetitionNumber": 1,
+    "statusCode": {
+      "code": "hospital",
+      "codeSystem": "hear",
+      "displayName": "Prove reduce."
+    },
+    "statusDate": "2061-11-07T10:24:53.720993+00:00"
+  }
+}

@@ -17,6 +17,10 @@ from .person import (
     PersonFilter,
     PersonInput,
 )
+from .place import (
+    Place,
+    PlaceName,
+)
 from .subject import (
     Subject,
     SubjectInput,
@@ -34,6 +38,8 @@ __all__ = [
     "Person",
     "PersonFilter",
     "PersonInput",
+    "Place",
+    "PlaceName",
     "Subject",
     "SubjectInput",
 ]

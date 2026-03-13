@@ -14,6 +14,11 @@ from .person import (
     PersonPostalAddressFactory,
     PersonTelecommunicationAddressFactory,
 )
+from .place import (
+    PlaceFactory,
+    PlaceIdentifierFactory,
+    PlaceNameFactory,
+)
 from .study import (
     StudyFactory,
 )
@@ -30,6 +35,9 @@ __all__ = [
     "PersonFactory",
     "PersonPostalAddressFactory",
     "PersonTelecommunicationAddressFactory",
+    "PlaceFactory",
+    "PlaceIdentifierFactory",
+    "PlaceNameFactory",
     "StudyFactory",
     "StudySubjectFactory",
 ]

@@ -9,7 +9,7 @@ import bridg.alchemy
 
 from .biospecimen import Specimen
 from .common import Person, PersonFilter, Subject
-from .study import PerformedActivity, PerformedSpecimenCollection
+from .study import PerformedActivity, PerformedEncounter, PerformedSpecimenCollection
 
 if TYPE_CHECKING:
     from ..context import Context
@@ -95,5 +95,14 @@ class Query:
         session = info.context.session
         uuid = converter.convert(id, UUID)
         query = session.query(bridg.alchemy.PerformedSpecimenCollection)
+        query = query.filter_by(id=uuid)
+        return query.one_or_none()  # type: ignore
+
+    @strawberry.field(name="PerformedEncounter")
+    def performed_encounter(self, id: strawberry.ID, *, info: strawberry.Info[Context]) -> Optional[PerformedEncounter]:
+        converter = info.context.converter
+        session = info.context.session
+        uuid = converter.convert(id, UUID)
+        query = session.query(bridg.alchemy.PerformedEncounter)
         query = query.filter_by(id=uuid)
         return query.one_or_none()  # type: ignore
