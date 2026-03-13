@@ -1,4 +1,5 @@
 import datetime
+from typing import Any, Type
 
 from sqlalchemy import DateTime, TypeDecorator
 
@@ -6,6 +7,10 @@ from sqlalchemy import DateTime, TypeDecorator
 class TZDateTime(TypeDecorator):
     impl = DateTime
     cache_ok = True
+
+    @property
+    def python_type(self) -> Type[Any]:
+        return datetime.datetime
 
     def process_bind_param(self, value, dialect):
         if value is not None:
