@@ -61,7 +61,7 @@ class Wrapper:
             if getattr(self._return_type, "_is_protocol", False):
                 if isinstance(class_, self._return_type):
                     return True
-            elif issubclass(class_, self._return_type):
+            elif inspect.isclass(class_) and issubclass(class_, self._return_type):
                 return True
         if origin := get_origin(self._return_type):
             # FIXME: check args?
