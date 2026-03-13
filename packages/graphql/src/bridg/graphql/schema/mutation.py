@@ -20,6 +20,8 @@ from . import (
     TelecommunicationAddressInput,
 )
 from .study import (
+    PerformedEncounter,
+    PerformedEncounterInput,
     PerformedSpecimenCollection,
     PerformedSpecimenCollectionInput,
 )
@@ -91,6 +93,17 @@ class Mutation:
         session = info.context.session
         converter = info.context.converter
         activity = converter.convert(input, bridg.alchemy.PerformedSpecimenCollection)
+        activity = session.merge(activity)
+        session.commit()
+        return activity  # type: ignore
+
+    @strawberry.mutation(name="PerformedEncounterCreate")
+    def performed_encounter_create(
+        self, input: PerformedEncounterInput, info: strawberry.Info[Context]
+    ) -> PerformedEncounter:
+        session = info.context.session
+        converter = info.context.converter
+        activity = converter.convert(input, bridg.alchemy.PerformedEncounter)
         activity = session.merge(activity)
         session.commit()
         return activity  # type: ignore

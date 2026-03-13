@@ -23,6 +23,7 @@ from .maybe import (
 )
 from .study import (
     PerformedActivityInputFactory,
+    PerformedEncounterInputFactory,
     PerformedSpecimenCollectionInputFactory,
 )
 
@@ -36,6 +37,7 @@ __all__ = [
     "MaterialInputFactory",
     "MaybeFactory",
     "PerformedActivityInputFactory",
+    "PerformedEncounterInputFactory",
     "PerformedSpecimenCollectionInputFactory",
     "PostalAddressInputFactory",
     "SpecimenInputFactory",
