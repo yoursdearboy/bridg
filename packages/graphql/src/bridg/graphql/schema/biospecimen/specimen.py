@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Annotated, Optional
 
 import strawberry
 
-from ..common import Material
+from ..common import Material, MaterialInput
 
 if TYPE_CHECKING:
     from ..study import PerformedSpecimenCollection
@@ -17,3 +17,9 @@ class Specimen:
     producing_performed_specimen_collection: Optional[
         Annotated[PerformedSpecimenCollection, strawberry.lazy("..study")]
     ]
+
+
+@strawberry.input
+class SpecimenInput:
+    id: strawberry.Maybe[strawberry.ID]
+    performing_material: MaterialInput

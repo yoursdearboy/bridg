@@ -10,6 +10,7 @@ from .id import (
 )
 from .material import (
     Material,
+    MaterialInput,
 )
 from .person import (
     Person,
@@ -29,6 +30,7 @@ __all__ = [
     "ID",
     "IDInput",
     "Material",
+    "MaterialInput",
     "Person",
     "PersonFilter",
     "PersonInput",

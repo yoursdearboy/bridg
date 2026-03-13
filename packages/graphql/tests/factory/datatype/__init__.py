@@ -7,6 +7,9 @@ from .en import (
 from .ii import (
     InstanceIdentifierFactory,
 )
+from .ivl_ts import (
+    IntervalPointInTimeFactory,
+)
 from .tel import (
     TelecommunicationAddressInputFactory,
 )
@@ -17,6 +20,7 @@ from .url import (
 __all__ = [
     "EntityNameInputFactory",
     "InstanceIdentifierFactory",
+    "IntervalPointInTimeFactory",
     "PostalAddressInputFactory",
     "TelecommunicationAddressInputFactory",
     "URLInputFactoryy",

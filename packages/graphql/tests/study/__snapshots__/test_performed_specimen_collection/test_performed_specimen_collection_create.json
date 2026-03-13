@@ -1,0 +1,46 @@
+{
+  "PerformedSpecimenCollectionCreate": {
+    "containingEpoch": null,
+    "dateRange": {
+      "high": "2084-11-13T14:40:50.835289+00:00",
+      "low": "2092-08-20T13:17:50.297729+00:00"
+    },
+    "id": "str",
+    "nameCodeModifiedText": null,
+    "negationIndicator": false,
+    "negationReason": null,
+    "producedSpecimen": [
+      {
+        "id": "str",
+        "performingMaterial": {
+          "code": null,
+          "description": "Range successful simply director allow. Husband at tree note responsibility defense. How trip learn enter east no enjoy.",
+          "formCode": {
+            "code": "HbolMJUevblAbkHClEQa",
+            "codeSystem": "PKriXrefSFPLBYtCRGSE",
+            "displayName": "KclpemfoHstknWHFiLit"
+          }
+        }
+      },
+      {
+        "id": "str",
+        "performingMaterial": {
+          "code": null,
+          "description": "Born itself law west then enjoy. Seven medical blood personal success medical current.\nMuch single morning a. Major born guy world southern dream. There water beat magazine attorney.",
+          "formCode": null
+        }
+      },
+      {
+        "id": "str",
+        "performingMaterial": {
+          "code": null,
+          "description": "According remain arrive attack all. Audience draw protect Democrat car very. Office drug list imagine behind probably great. Level rock pull worker better I.",
+          "formCode": null
+        }
+      }
+    ],
+    "repetitionNumber": 1,
+    "statusCode": null,
+    "statusDate": "2016-08-18T00:00:00+00:00"
+  }
+}
