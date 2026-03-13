@@ -4,5 +4,8 @@ from .biologic_entity import (
 from .id import (
     IDInputFactory,
 )
+from .material import (
+    MaterialInputFactory,
+)
 
-__all__ = ["BiologicEntityInputFactory", "IDInputFactory"]
+__all__ = ["BiologicEntityInputFactory", "IDInputFactory", "MaterialInputFactory"]

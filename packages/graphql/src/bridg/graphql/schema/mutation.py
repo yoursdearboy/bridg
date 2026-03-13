@@ -19,6 +19,10 @@ from . import (
     TelecommunicationAddress,
     TelecommunicationAddressInput,
 )
+from .study import (
+    PerformedSpecimenCollection,
+    PerformedSpecimenCollectionInput,
+)
 
 if TYPE_CHECKING:
     from ..context import Context
@@ -79,3 +83,14 @@ class Mutation:
         subject = session.merge(subject)
         session.commit()
         return subject  # type: ignore
+
+    @strawberry.mutation(name="PerformedSpecimenCollectionCreate")
+    def performed_specimen_collection_create(
+        self, input: PerformedSpecimenCollectionInput, info: strawberry.Info[Context]
+    ) -> PerformedSpecimenCollection:
+        session = info.context.session
+        converter = info.context.converter
+        activity = converter.convert(input, bridg.alchemy.PerformedSpecimenCollection)
+        activity = session.merge(activity)
+        session.commit()
+        return activity  # type: ignore
