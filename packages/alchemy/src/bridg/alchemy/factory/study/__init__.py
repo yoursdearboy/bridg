@@ -1,4 +1,5 @@
 from .performed_activity import (
+    PerformedActivityBaseFactory,
     PerformedActivityFactory,
 )
 from .performed_encounter import (
@@ -20,6 +21,7 @@ from .study_site import (
 
 __all__ = [
     "NOT_SET",
+    "PerformedActivityBaseFactory",
     "PerformedActivityFactory",
     "PerformedEncounterFactory",
     "PerformedObservationFactory",

@@ -8,8 +8,8 @@ from ..base import BaseFactory
 from ..datatype import ConceptDescriptorFactory
 
 
-class PerformedActivityFactory(BaseFactory[PerformedActivity]):
-    __set_as_default_factory_for_type__ = True
+class PerformedActivityBaseFactory[T: PerformedActivity](BaseFactory[T]):
+    __is_base_factory__ = True
 
     id = Ignore()
     type = Ignore()
@@ -51,3 +51,7 @@ class PerformedActivityFactory(BaseFactory[PerformedActivity]):
 
     context_for_study_site_id = Ignore()
     context_for_study_site = Ignore()
+
+
+class PerformedActivityFactory(PerformedActivityBaseFactory[PerformedActivity]):
+    __set_as_default_factory_for_type__ = True

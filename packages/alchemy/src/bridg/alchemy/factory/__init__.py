@@ -5,6 +5,7 @@ from .biospecimen import (
     SpecimenFactory,
 )
 from .common import (
+    BiologicEntityBaseFactory,
     BiologicEntityFactory,
     BiologicEntityIdentifierFactory,
     BiologicEntityNameFactory,
@@ -33,6 +34,7 @@ from .protocol import (
 )
 from .study import (
     NOT_SET,
+    PerformedActivityBaseFactory,
     PerformedActivityFactory,
     PerformedEncounterFactory,
     PerformedObservationFactory,
@@ -43,6 +45,7 @@ from .study import (
 
 __all__ = [
     "BaseFactory",
+    "BiologicEntityBaseFactory",
     "BiologicEntityFactory",
     "BiologicEntityIdentifierFactory",
     "BiologicEntityNameFactory",
@@ -52,6 +55,7 @@ __all__ = [
     "MaterialFactory",
     "MaterialIdentifierFactory",
     "NOT_SET",
+    "PerformedActivityBaseFactory",
     "PerformedActivityFactory",
     "PerformedEncounterFactory",
     "PerformedObservationFactory",
