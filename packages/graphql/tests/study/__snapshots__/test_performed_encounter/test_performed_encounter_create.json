@@ -7,8 +7,8 @@
       }
     },
     "dateRange": {
-      "high": "2082-12-10T00:07:43.263031+00:00",
-      "low": "2055-03-16T06:49:02.546799+00:00"
+      "high": "2094-04-16T18:39:20.109992+00:00",
+      "low": "2021-02-05T03:33:38.475986+00:00"
     },
     "departingToPlace": {
       "id": "str",
@@ -21,7 +21,11 @@
     "negationIndicator": false,
     "negationReason": null,
     "repetitionNumber": 1,
-    "statusCode": null,
-    "statusDate": "2061-11-07T00:00:00+00:00"
+    "statusCode": {
+      "code": "TqIuVxnmDnEUulZAecfG",
+      "codeSystem": "PvdtZBYSaLJBnHfwxXTn",
+      "displayName": "AjVTpHFhNCOBaqbWTRpd"
+    },
+    "statusDate": "2087-10-20T00:00:00+00:00"
   }
 }

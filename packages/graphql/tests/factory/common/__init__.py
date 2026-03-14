@@ -1,3 +1,6 @@
+from .activity import (
+    ActivityInputFactory,
+)
 from .biologic_entity import (
     BiologicEntityInputFactory,
 )
@@ -8,4 +11,4 @@ from .material import (
     MaterialInputFactory,
 )
 
-__all__ = ["BiologicEntityInputFactory", "IDInputFactory", "MaterialInputFactory"]
+__all__ = ["ActivityInputFactory", "BiologicEntityInputFactory", "IDInputFactory", "MaterialInputFactory"]

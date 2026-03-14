@@ -1,6 +1,8 @@
 {
   "PerformedActivity": {
+    "comment": null,
     "containingEpoch": null,
+    "contextForStudySite": null,
     "dateRange": {
       "high": "2037-12-11T14:38:24.881114+00:00",
       "low": "2016-05-04T06:37:33.714143+00:00"
@@ -23,12 +25,14 @@
       "codeSystem": "rise",
       "displayName": "Detail food shoulder."
     },
+    "reasonCode": null,
     "repetitionNumber": 1,
     "statusCode": {
       "code": "arrive",
       "codeSystem": "drop",
       "displayName": "Support."
     },
-    "statusDate": "2098-12-14T08:10:09.004942+00:00"
+    "statusDate": "2098-12-14T08:10:09.004942+00:00",
+    "usingProject": null
   }
 }

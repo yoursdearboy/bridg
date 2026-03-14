@@ -6,7 +6,6 @@
       "low": "2026-09-12T08:45:31.709710+00:00"
     },
     "id": "str",
-    "nameCodeModifiedText": null,
     "negationIndicator": false,
     "negationReason": {
       "code": "politics",
@@ -63,7 +62,6 @@
         }
       }
     ],
-    "repetitionNumber": 1,
     "statusCode": {
       "code": "maintain",
       "codeSystem": "hundred",

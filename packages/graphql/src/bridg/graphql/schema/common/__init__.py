@@ -1,9 +1,16 @@
+from .activity import (
+    Activity,
+    ActivityInput,
+)
 from .biologic_entity import (
     BiologicEntity,
     BiologicEntityFilter,
     BiologicEntityInput,
     BiologicEntityInterface,
     BiologicEntityMutation,
+)
+from .healthcare_facility import (
+    HealthcareFacility,
 )
 from .id import (
     ID,
@@ -12,6 +19,10 @@ from .id import (
 from .material import (
     Material,
     MaterialInput,
+)
+from .organization import (
+    Organization,
+    OrganizationOrganizationName,
 )
 from .person import (
     Person,
@@ -24,6 +35,9 @@ from .place import (
     Place,
     PlaceName,
 )
+from .project import (
+    Project,
+)
 from .subject import (
     Subject,
     SubjectInput,
@@ -32,15 +46,20 @@ from .subject import (
 )
 
 __all__ = [
+    "Activity",
+    "ActivityInput",
     "BiologicEntity",
     "BiologicEntityFilter",
     "BiologicEntityInput",
     "BiologicEntityInterface",
     "BiologicEntityMutation",
+    "HealthcareFacility",
     "ID",
     "IDInput",
     "Material",
     "MaterialInput",
+    "Organization",
+    "OrganizationOrganizationName",
     "Person",
     "PersonFilter",
     "PersonInput",
@@ -48,6 +67,7 @@ __all__ = [
     "PersonQuery",
     "Place",
     "PlaceName",
+    "Project",
     "Subject",
     "SubjectInput",
     "SubjectMutation",

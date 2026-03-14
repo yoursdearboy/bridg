@@ -8,6 +8,7 @@ import strawberry
 import bridg.alchemy
 
 from .biologic_entity import BiologicEntity, BiologicEntityInput
+from .organization import Organization
 
 if TYPE_CHECKING:
     from ...context import Context
@@ -18,6 +19,7 @@ if TYPE_CHECKING:
 class Subject:
     id: strawberry.ID
     performing_biologic_entity: Optional[BiologicEntity]
+    performing_organization: Optional[Organization]
     involving_performed_activity: List[Annotated[PerformedActivity, strawberry.lazy("..study")]]
 
 

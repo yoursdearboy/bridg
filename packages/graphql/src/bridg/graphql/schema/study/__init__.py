@@ -17,6 +17,9 @@ from .performed_specimen_collection import (
     PerformedSpecimenCollectionMutation,
     PerformedSpecimenCollectionQuery,
 )
+from .study_site import (
+    StudySite,
+)
 
 __all__ = [
     "PerformedActivity",
@@ -32,4 +35,5 @@ __all__ = [
     "PerformedSpecimenCollectionInput",
     "PerformedSpecimenCollectionMutation",
     "PerformedSpecimenCollectionQuery",
+    "StudySite",
 ]

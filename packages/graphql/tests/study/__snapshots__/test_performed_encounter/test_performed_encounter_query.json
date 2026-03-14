@@ -17,14 +17,12 @@
       }
     },
     "id": "str",
-    "nameCodeModifiedText": null,
     "negationIndicator": false,
     "negationReason": {
       "code": "trial",
       "codeSystem": "blood",
       "displayName": "Everyone player half."
     },
-    "repetitionNumber": 1,
     "statusCode": {
       "code": "hospital",
       "codeSystem": "hear",

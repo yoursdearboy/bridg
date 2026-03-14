@@ -2,8 +2,8 @@
   "PerformedSpecimenCollectionCreate": {
     "containingEpoch": null,
     "dateRange": {
-      "high": "2084-11-13T14:40:50.835289+00:00",
-      "low": "2092-08-20T13:17:50.297729+00:00"
+      "high": "2026-01-28T11:12:31.558120+00:00",
+      "low": "2031-08-21T09:48:25.139516+00:00"
     },
     "id": "str",
     "nameCodeModifiedText": null,
@@ -41,6 +41,6 @@
     ],
     "repetitionNumber": 1,
     "statusCode": null,
-    "statusDate": "2016-08-18T00:00:00+00:00"
+    "statusDate": "2066-12-21T00:00:00+00:00"
   }
 }

@@ -3,11 +3,12 @@ from polyfactory import Ignore, Use
 from bridg.graphql.schema import PerformedActivityInput
 
 from ..base import BaseFactory
+from ..common import ActivityInputFactory
 from ..datatype import IntervalPointInTimeFactory
 from ..maybe import make_some
 
 
-class PerformedActivityInputFactory[T: PerformedActivityInput](BaseFactory[T]):
+class PerformedActivityInputFactory[T: PerformedActivityInput](ActivityInputFactory[T]):
     __is_base_factory__ = True
 
     id = None

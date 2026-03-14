@@ -19,8 +19,6 @@ def test_performed_encounter_query(context: Context, snapshot_json):
         query($id: ID!) {
             PerformedEncounter(id: $id) {
                 id
-                repetitionNumber
-                nameCodeModifiedText
                 dateRange
                 negationReason
                 negationIndicator

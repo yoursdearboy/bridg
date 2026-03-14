@@ -8,7 +8,7 @@ import strawberry
 
 import bridg.alchemy
 
-from ..common import Subject
+from ..common import Activity, ActivityInput, Subject
 from ..datatype import ConceptDescriptor, IntervalPointInTime
 from ..protocol import Epoch
 
@@ -17,7 +17,7 @@ if TYPE_CHECKING:
 
 
 @strawberry.interface
-class PerformedActivityInterface:
+class PerformedActivityInterface(Activity):
     id: strawberry.ID
     repetition_number: Optional[int]
     name_code_modified_text: Optional[str]
@@ -41,7 +41,7 @@ class PerformedActivity(PerformedActivityInterface):
 
 
 @strawberry.input
-class PerformedActivityInput:
+class PerformedActivityInput(ActivityInput):
     id: strawberry.Maybe[strawberry.ID]
     repetition_number: strawberry.Maybe[Optional[int]]
     name_code_modified_text: strawberry.Maybe[Optional[str]]

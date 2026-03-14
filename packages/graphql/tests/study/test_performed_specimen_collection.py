@@ -17,8 +17,6 @@ def test_performed_specimen_collection_query(context: Context, snapshot_json):
         query($id: ID!) {
             PerformedSpecimenCollection(id: $id) {
                 id
-                repetitionNumber
-                nameCodeModifiedText
                 dateRange
                 negationReason
                 negationIndicator

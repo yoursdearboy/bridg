@@ -33,6 +33,23 @@ def test_performed_activity_query(context: Context, snapshot_json):
         query($id: ID!) {
             PerformedActivity(id: $id) {
                 id
+                reasonCode
+                comment
+                usingProject {
+                    id
+                    name
+                    type
+                    description
+                }
+                contextForStudySite {
+                    id
+                    performingOrganization {
+                        id
+                        primaryName {
+                            value
+                        }
+                    }
+                }
                 repetitionNumber
                 nameCodeModifiedText
                 dateRange
