@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 from datetime import datetime
-from typing import Optional
+from typing import TYPE_CHECKING, List, Optional
+from uuid import UUID
 
 import strawberry
 
@@ -8,6 +11,9 @@ import bridg.alchemy
 from ..common import Subject
 from ..datatype import ConceptDescriptor, IntervalPointInTime
 from ..protocol import Epoch
+
+if TYPE_CHECKING:
+    from ...context import Context
 
 
 @strawberry.interface
@@ -49,3 +55,21 @@ class PerformedActivityInput:
     # executing_study_protocol_version: Optional[StudyProtocolVersion]
     # instantiated_defined_activity: Optional[DefinedActivity]
     involved_subject_id: strawberry.Maybe[Optional[strawberry.ID]]
+
+
+@strawberry.type
+class PerformedActivityQuery:
+    @strawberry.field(name="PerformedActivity")
+    def performed_activity(self, id: strawberry.ID, *, info: strawberry.Info[Context]) -> Optional[PerformedActivity]:
+        converter = info.context.converter
+        session = info.context.session
+        uuid = converter.convert(id, UUID)
+        query = session.query(bridg.alchemy.PerformedActivity)
+        query = query.filter_by(id=uuid)
+        return query.one_or_none()  # type: ignore
+
+    @strawberry.field(name="PerformedActivityList")
+    def performed_activity_list(self, *, info: strawberry.Info[Context]) -> List[PerformedActivity]:
+        session = info.context.session
+        query = session.query(bridg.alchemy.PerformedActivity)
+        return query.all()  # type: ignore

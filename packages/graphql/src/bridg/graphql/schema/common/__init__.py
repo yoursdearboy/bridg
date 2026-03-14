@@ -3,6 +3,7 @@ from .biologic_entity import (
     BiologicEntityFilter,
     BiologicEntityInput,
     BiologicEntityInterface,
+    BiologicEntityMutation,
 )
 from .id import (
     ID,
@@ -16,6 +17,8 @@ from .person import (
     Person,
     PersonFilter,
     PersonInput,
+    PersonMutation,
+    PersonQuery,
 )
 from .place import (
     Place,
@@ -24,6 +27,8 @@ from .place import (
 from .subject import (
     Subject,
     SubjectInput,
+    SubjectMutation,
+    SubjectQuery,
 )
 
 __all__ = [
@@ -31,6 +36,7 @@ __all__ = [
     "BiologicEntityFilter",
     "BiologicEntityInput",
     "BiologicEntityInterface",
+    "BiologicEntityMutation",
     "ID",
     "IDInput",
     "Material",
@@ -38,8 +44,12 @@ __all__ = [
     "Person",
     "PersonFilter",
     "PersonInput",
+    "PersonMutation",
+    "PersonQuery",
     "Place",
     "PlaceName",
     "Subject",
     "SubjectInput",
+    "SubjectMutation",
+    "SubjectQuery",
 ]

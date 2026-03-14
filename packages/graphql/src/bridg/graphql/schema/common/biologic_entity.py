@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import date
 from typing import TYPE_CHECKING, Annotated, List, Optional
+from uuid import UUID
 
 import strawberry
 
@@ -11,6 +12,7 @@ from ..datatype import EntityName, EntityNameInput
 from .id import ID, IDInput
 
 if TYPE_CHECKING:
+    from ...context import Context
     from .subject import Subject
 
 
@@ -60,3 +62,18 @@ class BiologicEntityInput:
 
     identifier: strawberry.Maybe[List[IDInput]]
     name: strawberry.Maybe[List[EntityNameInput]]
+
+
+@strawberry.type
+class BiologicEntityMutation:
+    @strawberry.mutation(name="BiologicEntityNameCreate")
+    def biologic_entity_name_create(
+        self, biologic_entity_id: strawberry.ID, input: EntityNameInput, info: strawberry.Info[Context]
+    ) -> EntityName:
+        session = info.context.session
+        converter = info.context.converter
+        en = converter.convert(input, bridg.alchemy.BiologicEntityName)
+        en.biologic_entity_id = converter.convert(biologic_entity_id, UUID)
+        en = session.merge(en)
+        session.commit()
+        return en  # type: ignore

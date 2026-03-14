@@ -1,13 +1,17 @@
 from __future__ import annotations
 
-from typing import List
+from typing import TYPE_CHECKING, List, Optional
+from uuid import UUID
 
 import strawberry
 
 import bridg.alchemy
 
-from ..datatype import PostalAddress, TelecommunicationAddress
+from ..datatype import PostalAddress, PostalAddressInput, TelecommunicationAddress, TelecommunicationAddressInput
 from .biologic_entity import BiologicEntityFilter, BiologicEntityInput, BiologicEntityInterface
+
+if TYPE_CHECKING:
+    from ...context import Context
 
 
 @strawberry.type
@@ -16,7 +20,7 @@ class Person(BiologicEntityInterface):
     telecom_address: List[TelecommunicationAddress]
 
     @staticmethod
-    def is_type_of(obj, info) -> bool:
+    def is_type_of(obj, _) -> bool:
         return isinstance(obj, bridg.alchemy.Person)
 
 
@@ -28,3 +32,73 @@ class PersonFilter(BiologicEntityFilter):
 @strawberry.input
 class PersonInput(BiologicEntityInput):
     pass
+
+
+@strawberry.type
+class PersonQuery:
+    @strawberry.field(name="Person")
+    def person(self, id: strawberry.ID, *, info: strawberry.Info[Context]) -> Optional[Person]:
+        converter = info.context.converter
+        session = info.context.session
+        uuid = converter.convert(id, UUID)
+        query = session.query(bridg.alchemy.Person)
+        query = query.filter_by(id=uuid)
+        return query.one_or_none()  # type: ignore
+
+    @strawberry.field(name="PersonList")
+    def person_list(self, filter: Optional[PersonFilter] = None, *, info: strawberry.Info[Context]) -> List[Person]:
+        session = info.context.session
+        query = session.query(bridg.alchemy.Person)
+        # FIXME: move to a service
+        if filter:
+            if filter.name and filter.name.family:
+                query = query.filter(
+                    bridg.alchemy.BiologicEntity.name.any(
+                        bridg.alchemy.BiologicEntityName.family.ilike(f"%{filter.name.family.value}%")
+                    )
+                )
+            # FIXME: check identifier code? or not?
+            if filter.identifier:
+                root = filter.identifier.identifier.root
+                extension = filter.identifier.identifier.extension
+                q = (bridg.alchemy.BiologicEntityIdentifier.identifier_root == root) & (  # pyright: ignore[reportAttributeAccessIssue]
+                    bridg.alchemy.BiologicEntityIdentifier.identifier_extension == extension  # pyright: ignore[reportAttributeAccessIssue]
+                )
+                query = query.filter(bridg.alchemy.BiologicEntity.identifier.any(q))
+        return query.all()  # type: ignore
+
+
+@strawberry.type
+class PersonMutation:
+    @strawberry.mutation(name="PersonCreate")
+    def person_create(self, input: PersonInput, info: strawberry.Info[Context]) -> Person:
+        session = info.context.session
+        converter = info.context.converter
+        person = converter.convert(input, bridg.alchemy.Person)
+        person = session.merge(person)
+        session.commit()
+        return person  # type: ignore
+
+    @strawberry.mutation(name="PersonPostalAddressCreate")
+    def person_postal_address_create(
+        self, person_id: strawberry.ID, input: PostalAddressInput, info: strawberry.Info[Context]
+    ) -> PostalAddress:
+        session = info.context.session
+        converter = info.context.converter
+        ad = converter.convert(input, bridg.alchemy.PersonPostalAddress)
+        ad.person_id = converter.convert(person_id, UUID)
+        ad = session.merge(ad)
+        session.commit()
+        return ad  # type: ignore
+
+    @strawberry.mutation(name="PersonTelecommunicationAddressCreate")
+    def person_telecom_address_create(
+        self, person_id: strawberry.ID, input: TelecommunicationAddressInput, info: strawberry.Info[Context]
+    ) -> TelecommunicationAddress:
+        session = info.context.session
+        converter = info.context.converter
+        tel = converter.convert(input, bridg.alchemy.PersonTelecommunicationAddress)
+        tel.person_id = converter.convert(person_id, UUID)
+        tel = session.merge(tel)
+        session.commit()
+        return tel  # type: ignore
