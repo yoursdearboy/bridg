@@ -91,6 +91,17 @@ class PersonMutation:
         session.commit()
         return ad  # type: ignore
 
+    @strawberry.mutation(name="PersonPostalAddressDelete")
+    def person_postal_address_delete(self, id: strawberry.ID, info: strawberry.Info[Context]) -> bool:
+        converter = info.context.converter
+        session = info.context.session
+        uuid = converter.convert(id, UUID)
+        query = session.query(bridg.alchemy.PersonPostalAddress)
+        query = query.filter_by(id=uuid)
+        result = query.delete() > 0
+        session.commit()
+        return result
+
     @strawberry.mutation(name="PersonTelecommunicationAddressCreate")
     def person_telecom_address_create(
         self, person_id: strawberry.ID, input: TelecommunicationAddressInput, info: strawberry.Info[Context]
@@ -102,3 +113,14 @@ class PersonMutation:
         tel = session.merge(tel)
         session.commit()
         return tel  # type: ignore
+
+    @strawberry.mutation(name="PersonTelecommunicationAddressDelete")
+    def person_telecom_address_delete(self, id: strawberry.ID, info: strawberry.Info[Context]) -> bool:
+        converter = info.context.converter
+        session = info.context.session
+        uuid = converter.convert(id, UUID)
+        query = session.query(bridg.alchemy.PersonTelecommunicationAddress)
+        query = query.filter_by(id=uuid)
+        result = query.delete() > 0
+        session.commit()
+        return result

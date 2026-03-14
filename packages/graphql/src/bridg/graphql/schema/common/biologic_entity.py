@@ -77,3 +77,14 @@ class BiologicEntityMutation:
         en = session.merge(en)
         session.commit()
         return en  # type: ignore
+
+    @strawberry.mutation(name="BiologicEntityNameDelete")
+    def biologic_entity_name_delete(self, id: strawberry.ID, info: strawberry.Info[Context]) -> bool:
+        converter = info.context.converter
+        session = info.context.session
+        uuid = converter.convert(id, UUID)
+        query = session.query(bridg.alchemy.BiologicEntityName)
+        query = query.filter_by(id=uuid)
+        result = query.delete() > 0
+        session.commit()
+        return result

@@ -73,3 +73,17 @@ class PerformedActivityQuery:
         session = info.context.session
         query = session.query(bridg.alchemy.PerformedActivity)
         return query.all()  # type: ignore
+
+
+@strawberry.type
+class PerformedActivityMutation:
+    @strawberry.mutation(name="PerformedActivityDelete")
+    def performed_activity_delete(self, id: strawberry.ID, info: strawberry.Info[Context]) -> bool:
+        converter = info.context.converter
+        session = info.context.session
+        uuid = converter.convert(id, UUID)
+        query = session.query(bridg.alchemy.PerformedActivity)
+        query = query.filter_by(id=uuid)
+        result = query.delete() > 0
+        session.commit()
+        return result

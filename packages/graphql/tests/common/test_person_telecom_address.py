@@ -2,6 +2,7 @@ from uuid import UUID
 
 from syrupy.matchers import path_type
 
+from bridg.alchemy import PersonTelecommunicationAddress
 from bridg.alchemy.factory import PersonFactory, PersonTelecommunicationAddressFactory
 from bridg.graphql.context import Context
 from bridg.graphql.schema import schema
@@ -56,3 +57,21 @@ def test_person_telecommunication_address_create(context: Context, snapshot_json
 
     state = [{k: v for k, v in ad.__dict__.items() if k != "_sa_instance_state"} for ad in person.telecom_address]
     assert state == snapshot_json(matcher=path_type({r".*id$": (UUID,)}, regex=True))
+
+
+def test_person_telecommunication_address_delete(context: Context, snapshot_json):
+    session = context.session
+
+    person = PersonFactory.create_sync(telecom_address=PersonTelecommunicationAddressFactory.batch(1))
+    tel = person.telecom_address[0]
+
+    query = """
+        mutation($id: ID!) {
+            PersonTelecommunicationAddressDelete(id: $id)
+        }
+    """
+
+    result = schema.execute_sync(query, process_input(dict(id=tel.id)), context_value=context)
+    assert result.errors is None
+    assert person.telecom_address == []
+    assert session.get(PersonTelecommunicationAddress, tel.id) is None

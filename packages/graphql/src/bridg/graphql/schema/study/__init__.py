@@ -2,6 +2,7 @@ from .performed_activity import (
     PerformedActivity,
     PerformedActivityInput,
     PerformedActivityInterface,
+    PerformedActivityMutation,
     PerformedActivityQuery,
 )
 from .performed_encounter import (
@@ -21,6 +22,7 @@ __all__ = [
     "PerformedActivity",
     "PerformedActivityInput",
     "PerformedActivityInterface",
+    "PerformedActivityMutation",
     "PerformedActivityQuery",
     "PerformedEncounter",
     "PerformedEncounterInput",

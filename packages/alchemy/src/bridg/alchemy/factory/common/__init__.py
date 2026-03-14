@@ -1,4 +1,5 @@
 from .biologic_entity import (
+    BiologicEntityFactory,
     BiologicEntityIdentifierFactory,
     BiologicEntityNameFactory,
 )
@@ -27,6 +28,7 @@ from .study_subject import (
 )
 
 __all__ = [
+    "BiologicEntityFactory",
     "BiologicEntityIdentifierFactory",
     "BiologicEntityNameFactory",
     "IDFactory",

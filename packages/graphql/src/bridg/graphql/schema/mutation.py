@@ -6,6 +6,7 @@ from .common import (
     SubjectMutation,
 )
 from .study import (
+    PerformedActivityMutation,
     PerformedEncounterMutation,
     PerformedSpecimenCollectionMutation,
 )
@@ -15,6 +16,7 @@ from .study import (
 class Mutation(
     PerformedEncounterMutation,
     PerformedSpecimenCollectionMutation,
+    PerformedActivityMutation,
     SubjectMutation,
     PersonMutation,
     BiologicEntityMutation,

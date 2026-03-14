@@ -1,5 +1,6 @@
 from syrupy.matchers import path_type
 
+from bridg.alchemy import PerformedActivity
 from bridg.alchemy.factory import (
     BiologicEntityNameFactory,
     PerformedActivityFactory,
@@ -112,3 +113,28 @@ def test_performed_activity_list_query(context: Context, snapshot_json):
     result = schema.execute_sync(query, context_value=context)
     assert result.errors is None
     assert result.data == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
+
+
+def test_performed_activity_delete(context: Context, snapshot_json):
+    session = context.session
+
+    ss = StudySubjectFactory.create_sync(
+        performing_biologic_entity=PersonFactory.build(
+            name=BiologicEntityNameFactory.batch(1, family="Test", given="First")
+        ),
+        performing_organization=None,
+    )
+    act = PerformedActivityFactory.create_sync(
+        involved_subject=ss,
+    )
+
+    query = """
+        mutation($id: ID!) {
+            PerformedActivityDelete(id: $id)
+        }
+    """
+
+    result = schema.execute_sync(query, process_input(dict(id=act.id)), context_value=context)
+    assert result.errors is None
+    assert ss.involving_performed_activity == []
+    assert session.get(PerformedActivity, act.id) is None
