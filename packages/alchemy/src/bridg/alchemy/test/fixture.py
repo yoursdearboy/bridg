@@ -13,7 +13,7 @@ from bridg.common.settings import load_settings
 def session():
     settings = load_settings()
     engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
-    session = Session(engine)
+    session = Session(engine, expire_on_commit=False)
 
     SQLAlchemyBaseFactory.__session__ = session
 
