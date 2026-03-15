@@ -55,5 +55,4 @@ class PerformedEncounterMutation:
         converter = info.context.converter
         activity = converter.convert(input, bridg.alchemy.PerformedEncounter)
         activity = session.merge(activity)
-        session.commit()
         return activity  # type: ignore

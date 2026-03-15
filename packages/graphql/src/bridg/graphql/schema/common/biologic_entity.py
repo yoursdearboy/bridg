@@ -75,7 +75,6 @@ class BiologicEntityMutation:
         en = converter.convert(input, bridg.alchemy.BiologicEntityName)
         en.biologic_entity_id = converter.convert(biologic_entity_id, UUID)
         en = session.merge(en)
-        session.commit()
         return en  # type: ignore
 
     @strawberry.mutation(name="BiologicEntityNameDelete")
@@ -86,5 +85,4 @@ class BiologicEntityMutation:
         query = session.query(bridg.alchemy.BiologicEntityName)
         query = query.filter_by(id=uuid)
         result = query.delete() > 0
-        session.commit()
         return result

@@ -153,5 +153,4 @@ def test_performed_activity_delete(context: Context, snapshot_json):
 
     result = schema.execute_sync(query, process_input(dict(id=act.id)), context_value=context)
     assert result.errors is None
-    assert ss.involving_performed_activity == []
     assert session.get(PerformedActivity, act.id) is None

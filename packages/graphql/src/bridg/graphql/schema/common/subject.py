@@ -56,5 +56,4 @@ class SubjectMutation:
         converter = info.context.converter
         subject = converter.convert(input, bridg.alchemy.Subject)
         subject = session.merge(subject)
-        session.commit()
         return subject  # type: ignore

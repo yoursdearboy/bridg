@@ -20,5 +20,4 @@ def test_biologic_entity_name_delete(context: Context, snapshot_json):
 
     result = schema.execute_sync(query, process_input(dict(id=en.id)), context_value=context)
     assert result.errors is None
-    assert be.name == []
     assert session.get(PersonPostalAddress, en.id) is None

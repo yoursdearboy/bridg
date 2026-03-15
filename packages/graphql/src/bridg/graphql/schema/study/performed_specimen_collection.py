@@ -52,5 +52,4 @@ class PerformedSpecimenCollectionMutation:
         converter = info.context.converter
         activity = converter.convert(input, bridg.alchemy.PerformedSpecimenCollection)
         activity = session.merge(activity)
-        session.commit()
         return activity  # type: ignore

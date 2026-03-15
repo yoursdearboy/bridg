@@ -85,5 +85,4 @@ class PerformedActivityMutation:
         query = session.query(bridg.alchemy.PerformedActivity)
         query = query.filter_by(id=uuid)
         result = query.delete() > 0
-        session.commit()
         return result
