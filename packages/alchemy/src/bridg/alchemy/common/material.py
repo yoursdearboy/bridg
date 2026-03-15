@@ -53,10 +53,10 @@ class Material(Base):
     performed_specimen: Mapped[Optional[Specimen]] = relationship(back_populates="performing_material")
 
 
-# FIXME: make private
 class MaterialIdentifier(ID):
     __tablename__ = "material_identifier"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+
     material_id: Mapped[UUID] = mapped_column(ForeignKey("material.id"))
     material: Mapped[Material] = relationship(back_populates="identifier")

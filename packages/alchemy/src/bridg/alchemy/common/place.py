@@ -47,11 +47,11 @@ class Place(Base):
     actual_indicator: Mapped[bool] = mapped_column(default=True)
 
 
-# FIXME: make private
 class PlaceIdentifier(ID):
     __tablename__ = "place_identifier"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+
     place_id: Mapped[UUID] = mapped_column(ForeignKey("place.id"))
     place: Mapped[Place] = relationship(back_populates="identifier")
 

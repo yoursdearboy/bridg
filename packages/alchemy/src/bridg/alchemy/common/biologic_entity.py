@@ -67,10 +67,10 @@ class BiologicEntityName(EntityName, EntityNameParts, Base):
     biologic_entity: Mapped[BiologicEntity] = relationship(back_populates="name")
 
 
-# FIXME: make private
 class BiologicEntityIdentifier(ID):
     __tablename__ = "biologic_entity_identifier"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+
     biologic_entity_id: Mapped[UUID] = mapped_column(ForeignKey("biologic_entity.id"))
     biologic_entity: Mapped[BiologicEntity] = relationship(back_populates="identifier")

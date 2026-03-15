@@ -38,6 +38,7 @@ class PersonPostalAddress(datatype.PostalAddress):
     __tablename__ = "person_postal_address"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+
     person_id: Mapped[UUID] = mapped_column(ForeignKey("person.id"))
     person: Mapped[Person] = relationship(back_populates="postal_address")
 
@@ -46,5 +47,6 @@ class PersonTelecommunicationAddress(datatype.TelecommunicationAddress):
     __tablename__ = "person_telecom_address"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+
     person_id: Mapped[UUID] = mapped_column(ForeignKey("person.id"))
     person: Mapped[Person] = relationship(back_populates="telecom_address")
