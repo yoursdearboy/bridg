@@ -7,6 +7,7 @@ from .biospecimen import (
 from .common import (
     ActivityInputFactory,
     BiologicEntityInputFactory,
+    BiologicEntityNameInputFactory,
     IDInputFactory,
     MaterialInputFactory,
 )
@@ -32,6 +33,7 @@ __all__ = [
     "ActivityInputFactory",
     "BaseFactory",
     "BiologicEntityInputFactory",
+    "BiologicEntityNameInputFactory",
     "EntityNameInputFactory",
     "IDInputFactory",
     "InstanceIdentifierFactory",

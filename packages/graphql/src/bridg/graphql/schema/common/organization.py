@@ -4,6 +4,8 @@ from typing import TYPE_CHECKING, Annotated, List, Optional
 
 import strawberry
 
+from ..datatype import OrganizationName as OrganizationNameDataType
+
 if TYPE_CHECKING:
     from .healthcare_facility import HealthcareFacility
     from .subject import Subject
@@ -13,7 +15,7 @@ if TYPE_CHECKING:
 class Organization:
     id: strawberry.ID
 
-    name: List[OrganizationOrganizationName]
+    name: List[OrganizationName]
     type: Optional[str]
     description: Optional[str]
     actual: bool
@@ -26,15 +28,11 @@ class Organization:
     performed_subject: List[Annotated[Subject, strawberry.lazy(".subject")]]
 
     @strawberry.field
-    def primary_name(self) -> Optional[OrganizationOrganizationName]:
+    def primary_name(self) -> Optional[OrganizationName]:
         if len(self.name) > 0:
             return self.name[0]
 
 
 @strawberry.type
-class OrganizationOrganizationName:
+class OrganizationName(OrganizationNameDataType):
     id: strawberry.ID
-    use: Optional[str]
-    value: Optional[str]
-    prefix: Optional[str]
-    suffix: Optional[str]

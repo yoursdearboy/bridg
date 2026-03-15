@@ -1,5 +1,11 @@
+from typing import Optional
+
+from sqlalchemy.orm import Mapped
+
 from .en import EntityName
 
 
 class TrivialName(EntityName):
-    pass
+    __abstract__ = True
+
+    value: Mapped[Optional[str]]

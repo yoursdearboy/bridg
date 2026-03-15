@@ -7,7 +7,7 @@ from uuid import UUID, uuid4
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..datatype import EntityName
+from ..datatype import EntityName, EntityNameParts
 from ..db import Base
 from .administrative_gender import AdministrativeGender
 from .id import ID
@@ -58,22 +58,13 @@ class BiologicEntity(Base):
     )
 
 
-# FIXME: make private
-class BiologicEntityName(EntityName, Base):
+class BiologicEntityName(EntityName, EntityNameParts, Base):
     __tablename__ = "biologic_entity_name"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
     biologic_entity_id: Mapped[UUID] = mapped_column(ForeignKey("biologic_entity.id"))
     biologic_entity: Mapped[BiologicEntity] = relationship(back_populates="name")
-
-    use: Mapped[Optional[str]]
-    family: Mapped[Optional[str]]
-    given: Mapped[Optional[str]]
-    middle: Mapped[Optional[str]]
-    patronymic: Mapped[Optional[str]]
-    prefix: Mapped[Optional[str]]
-    suffix: Mapped[Optional[str]]
 
 
 # FIXME: make private

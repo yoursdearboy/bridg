@@ -28,12 +28,12 @@ class BiologicEntityInterface:
 
     identifier: List[ID]
 
-    name: List[EntityName]
+    name: List[BiologicEntityName]
 
     performed_subject: List[Annotated[Subject, strawberry.lazy(".subject")]]
 
     @strawberry.field
-    def primary_name(self) -> Optional[EntityName]:
+    def primary_name(self) -> Optional[BiologicEntityName]:
         if len(self.name) > 0:
             return self.name[0]
 
@@ -45,10 +45,15 @@ class BiologicEntity(BiologicEntityInterface):
         return isinstance(obj, bridg.alchemy.BiologicEntity)
 
 
+@strawberry.type
+class BiologicEntityName(EntityName):
+    id: strawberry.ID
+
+
 @strawberry.input
 class BiologicEntityFilter:
     identifier: Optional[IDInput] = None
-    name: Optional[EntityNameInput] = None
+    name: Optional[BiologicEntityNameInput] = None
 
 
 @strawberry.input
@@ -61,15 +66,20 @@ class BiologicEntityInput:
     death_indicator: strawberry.Maybe[Optional[bool]]
 
     identifier: strawberry.Maybe[List[IDInput]]
-    name: strawberry.Maybe[List[EntityNameInput]]
+    name: strawberry.Maybe[List[BiologicEntityNameInput]]
+
+
+@strawberry.input
+class BiologicEntityNameInput(EntityNameInput):
+    id: strawberry.Maybe[strawberry.ID]
 
 
 @strawberry.type
 class BiologicEntityMutation:
     @strawberry.mutation(name="BiologicEntityNameCreate")
     def biologic_entity_name_create(
-        self, biologic_entity_id: strawberry.ID, input: EntityNameInput, info: strawberry.Info[Context]
-    ) -> EntityName:
+        self, biologic_entity_id: strawberry.ID, input: BiologicEntityNameInput, info: strawberry.Info[Context]
+    ) -> BiologicEntityName:
         session = info.context.session
         converter = info.context.converter
         en = converter.convert(input, bridg.alchemy.BiologicEntityName)

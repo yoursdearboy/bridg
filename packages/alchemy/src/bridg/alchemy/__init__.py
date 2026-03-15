@@ -1,11 +1,15 @@
 __protected__ = []
 __private__ = ["converter", "factory", "observation_result", "uml"]
+__ignore__ = ["OrganizationName"]
+__explicit__ = ["OrganizationName"]
 
+from .common import OrganizationName  # noqa: I001
+
+# <AUTOGEN_INIT>
 from .biospecimen import (
     Specimen,
 )
 from .common import (
-    ID,
     Activity,
     AdministrativeGender,
     Biologic,
@@ -16,10 +20,10 @@ from .common import (
     HealthcareProvider,
     HealthcareProviderGroup,
     HealthcareProviderGroupMember,
+    ID,
     Material,
     MaterialIdentifier,
     Organization,
-    OrganizationOrganizationName,
     Person,
     PersonPostalAddress,
     PersonTelecommunicationAddress,
@@ -36,22 +40,23 @@ from .common import (
     Subject,
 )
 from .datatype import (
-    URL,
     ConceptDescriptor,
     DataTypeName,
     DataValue,
     EntityName,
+    EntityNameParts,
     InstanceIdentifier,
     IntervalPointInTime,
-    OrganizationName,
+    OrganizationNameParts,
     PhysicalQuantity,
     PostalAddress,
     PostalAddressUse,
     TelecommunicationAddress,
     TelecommunicationAddressUse,
     TrivialName,
-    UniqueIdentifierString,
+    URL,
     URLScheme,
+    UniqueIdentifierString,
 )
 from .db import (
     Base,
@@ -123,6 +128,7 @@ __all__ = [
     "DefinedProcedure",
     "DefinedSubstanceAdministration",
     "EntityName",
+    "EntityNameParts",
     "Epoch",
     "HealthcareFacility",
     "HealthcareProvider",
@@ -135,7 +141,7 @@ __all__ = [
     "MaterialIdentifier",
     "Organization",
     "OrganizationName",
-    "OrganizationOrganizationName",
+    "OrganizationNameParts",
     "PerformedActivity",
     "PerformedDiagnosis",
     "PerformedEligibilityCriterion",
@@ -184,3 +190,4 @@ __all__ = [
     "URLScheme",
     "UniqueIdentifierString",
 ]
+# </AUTOGEN_INIT>

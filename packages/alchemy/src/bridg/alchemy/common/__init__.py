@@ -33,7 +33,7 @@ from .material import (
 )
 from .organization import (
     Organization,
-    OrganizationOrganizationName,
+    OrganizationName,
 )
 from .person import (
     Person,
@@ -83,7 +83,7 @@ __all__ = [
     "Material",
     "MaterialIdentifier",
     "Organization",
-    "OrganizationOrganizationName",
+    "OrganizationName",
     "Person",
     "PersonPostalAddress",
     "PersonTelecommunicationAddress",

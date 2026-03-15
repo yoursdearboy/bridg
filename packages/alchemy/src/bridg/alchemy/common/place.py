@@ -56,7 +56,6 @@ class PlaceIdentifier(ID):
     place: Mapped[Place] = relationship(back_populates="identifier")
 
 
-# FIXME: make private
 class PlaceName(TrivialName, Base):
     __tablename__ = "place_name"
 
@@ -64,5 +63,3 @@ class PlaceName(TrivialName, Base):
 
     place_id: Mapped[UUID] = mapped_column(ForeignKey("place.id"))
     place: Mapped[Place] = relationship(back_populates="name")
-
-    value: Mapped[Optional[str]]

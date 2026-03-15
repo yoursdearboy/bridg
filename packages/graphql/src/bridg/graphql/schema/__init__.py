@@ -1,10 +1,15 @@
+__ignore__ = ["OrganizationName"]
+__explicit__ = ["OrganizationName"]
+
+from .common import OrganizationName  # noqa: I001
+
+# <AUTOGEN_INIT>
 from .biospecimen import (
     Specimen,
     SpecimenInput,
     SpecimenQuery,
 )
 from .common import (
-    ID,
     Activity,
     ActivityInput,
     BiologicEntity,
@@ -12,12 +17,14 @@ from .common import (
     BiologicEntityInput,
     BiologicEntityInterface,
     BiologicEntityMutation,
+    BiologicEntityName,
+    BiologicEntityNameInput,
     HealthcareFacility,
+    ID,
     IDInput,
     Material,
     MaterialInput,
     Organization,
-    OrganizationOrganizationName,
     Person,
     PersonFilter,
     PersonInput,
@@ -32,7 +39,6 @@ from .common import (
     SubjectQuery,
 )
 from .datatype import (
-    URL,
     ConceptDescriptor,
     EntityName,
     EntityNameInput,
@@ -42,6 +48,7 @@ from .datatype import (
     PostalAddressInput,
     TelecommunicationAddress,
     TelecommunicationAddressInput,
+    URL,
     URLInput,
 )
 from .mutation import (
@@ -84,6 +91,8 @@ __all__ = [
     "BiologicEntityInput",
     "BiologicEntityInterface",
     "BiologicEntityMutation",
+    "BiologicEntityName",
+    "BiologicEntityNameInput",
     "ConceptDescriptor",
     "EntityName",
     "EntityNameInput",
@@ -97,7 +106,7 @@ __all__ = [
     "MaterialInput",
     "Mutation",
     "Organization",
-    "OrganizationOrganizationName",
+    "OrganizationName",
     "PerformedActivity",
     "PerformedActivityInput",
     "PerformedActivityInterface",
@@ -137,3 +146,4 @@ __all__ = [
     "URLInput",
     "schema",
 ]
+# </AUTOGEN_INIT>

@@ -11,6 +11,7 @@ from .cd import (
 )
 from .en import (
     EntityName,
+    EntityNameParts,
 )
 from .ii import (
     InstanceIdentifier,
@@ -20,6 +21,7 @@ from .ivl_ts import (
 )
 from .on import (
     OrganizationName,
+    OrganizationNameParts,
 )
 from .pq import (
     PhysicalQuantity,
@@ -44,9 +46,11 @@ __all__ = [
     "DataTypeName",
     "DataValue",
     "EntityName",
+    "EntityNameParts",
     "InstanceIdentifier",
     "IntervalPointInTime",
     "OrganizationName",
+    "OrganizationNameParts",
     "PhysicalQuantity",
     "PostalAddress",
     "PostalAddressUse",

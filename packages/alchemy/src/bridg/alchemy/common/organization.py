@@ -6,7 +6,8 @@ from uuid import UUID, uuid4
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..datatype import OrganizationName
+from ..datatype import OrganizationName as OrganizationNameDataType
+from ..datatype import OrganizationNameParts
 from ..db import Base
 
 if TYPE_CHECKING:
@@ -42,9 +43,11 @@ class Organization(Base):
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
-    name: Mapped[List[OrganizationOrganizationName]] = relationship(
-        back_populates="organization", cascade="all, delete-orphan"
+    name: Mapped[List[OrganizationName]] = relationship(
+        back_populates="organization",
+        cascade="all, delete-orphan",
     )
+
     type: Mapped[Optional[str]]
     description: Mapped[Optional[str]]
     actual: Mapped[bool] = mapped_column(default=True)
@@ -78,15 +81,10 @@ class Organization(Base):
     )
 
 
-class OrganizationOrganizationName(OrganizationName, Base):
+class OrganizationName(OrganizationNameDataType, OrganizationNameParts, Base):
     __tablename__ = "organization_name"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
     organization_id: Mapped[UUID] = mapped_column(ForeignKey("organization.id"))
     organization: Mapped[Organization] = relationship(back_populates="name")
-
-    use: Mapped[Optional[str]]
-    value: Mapped[Optional[str]]
-    prefix: Mapped[Optional[str]]
-    suffix: Mapped[Optional[str]]

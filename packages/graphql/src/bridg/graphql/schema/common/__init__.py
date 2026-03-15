@@ -8,6 +8,8 @@ from .biologic_entity import (
     BiologicEntityInput,
     BiologicEntityInterface,
     BiologicEntityMutation,
+    BiologicEntityName,
+    BiologicEntityNameInput,
 )
 from .healthcare_facility import (
     HealthcareFacility,
@@ -22,7 +24,7 @@ from .material import (
 )
 from .organization import (
     Organization,
-    OrganizationOrganizationName,
+    OrganizationName,
 )
 from .person import (
     Person,
@@ -53,13 +55,15 @@ __all__ = [
     "BiologicEntityInput",
     "BiologicEntityInterface",
     "BiologicEntityMutation",
+    "BiologicEntityName",
+    "BiologicEntityNameInput",
     "HealthcareFacility",
     "ID",
     "IDInput",
     "Material",
     "MaterialInput",
     "Organization",
-    "OrganizationOrganizationName",
+    "OrganizationName",
     "Person",
     "PersonFilter",
     "PersonInput",

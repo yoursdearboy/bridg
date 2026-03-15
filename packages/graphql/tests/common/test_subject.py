@@ -14,7 +14,7 @@ from bridg.alchemy.factory import (
 from bridg.graphql.context import Context
 from bridg.graphql.schema import SubjectInput, schema
 
-from ..factory import BiologicEntityInputFactory, EntityNameInputFactory
+from ..factory import BiologicEntityInputFactory, BiologicEntityNameInputFactory
 from ..utils import process_input
 
 
@@ -162,7 +162,7 @@ def test_subject_create(context: Context, snapshot_json):
         performing_biologic_entity=Some(
             BiologicEntityInputFactory.build(
                 name=[
-                    EntityNameInputFactory.build(family="Test"),
+                    BiologicEntityNameInputFactory.build(family="Test"),
                 ]
             )
         ),

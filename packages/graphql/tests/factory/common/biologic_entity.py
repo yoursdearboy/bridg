@@ -1,9 +1,10 @@
 from polyfactory import Ignore, Use
 from strawberry import Some
 
-from bridg.graphql.schema import BiologicEntityInput
+from bridg.graphql.schema import BiologicEntityInput, BiologicEntityNameInput
 
 from ..base import BaseFactory
+from ..datatype import EntityNameInputFactory
 from ..maybe import make_some
 
 
@@ -17,3 +18,7 @@ class BiologicEntityInputFactory(BaseFactory[BiologicEntityInput]):
 
     identifier = Ignore()
     name = Ignore()
+
+
+class BiologicEntityNameInputFactory(EntityNameInputFactory[BiologicEntityNameInput]):
+    id = None
