@@ -17,8 +17,8 @@ from .material import (
 )
 from .organization import (
     Organization,
-    OrganizationOrganizationName,
-    OrganizationOrganizationNameData,
+    OrganizationName,
+    OrganizationNameData,
 )
 from .person import (
     Person,
@@ -50,8 +50,8 @@ __all__ = [
     "MaterialData",
     "MaterialIdentifier",
     "Organization",
-    "OrganizationOrganizationName",
-    "OrganizationOrganizationNameData",
+    "OrganizationName",
+    "OrganizationNameData",
     "Person",
     "PersonAttributes",
     "PersonData",

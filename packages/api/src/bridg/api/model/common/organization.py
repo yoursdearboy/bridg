@@ -6,23 +6,23 @@ from pydantic import Field, computed_field
 import bridg.alchemy
 
 from ..base import BaseModel
-from ..datatype import OrganizationName
+from ..datatype import OrganizationName as OrganizationNameDataType
 
 
-class OrganizationOrganizationNameData(OrganizationName[bridg.alchemy.OrganizationOrganizationName]):
-    _sa = bridg.alchemy.OrganizationOrganizationName
+class OrganizationNameData(OrganizationNameDataType[bridg.alchemy.OrganizationName]):
+    _sa = bridg.alchemy.OrganizationName
 
 
-class OrganizationOrganizationName(OrganizationName[bridg.alchemy.OrganizationOrganizationName]):
+class OrganizationName(OrganizationNameDataType[bridg.alchemy.OrganizationName]):
     id: UUID
 
 
 class Organization(BaseModel):
     id: UUID
     description: Optional[str]
-    name: List[OrganizationOrganizationName] = Field(exclude=True)
+    name: List[OrganizationName] = Field(exclude=True)
 
     @computed_field
     @property
-    def primary_name(self) -> Optional[OrganizationOrganizationName]:
+    def primary_name(self) -> Optional[OrganizationName]:
         return next(iter(self.name), None)

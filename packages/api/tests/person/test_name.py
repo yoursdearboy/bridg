@@ -16,7 +16,7 @@ def test_person_name_index():
     assert response.json() == [entity_name_dict(en) for en in name]
 
 
-def test_person_name_create():
+def test_person_name_create(session: Session):
     person = PersonFactory.create_sync(name=[])
     en = BiologicEntityNameFactory.build()
     data = {
@@ -30,6 +30,7 @@ def test_person_name_create():
     }
     response = client.post(f"/person/{person.id}/name", json=data)
     assert response.status_code == 200
+    session.refresh(person)
     assert len(person.name) == 1
     obj = person.name[0]
     assert response.json() == entity_name_dict(obj)

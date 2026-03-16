@@ -1,3 +1,9 @@
+__ignore__ = ["OrganizationName", "OrganizationNameData"]
+__explicit__ = ["OrganizationName", "OrganizationNameData"]
+
+from .common import OrganizationName, OrganizationNameData  # noqa: I001
+
+# <AUTOGEN_INIT>
 from .base import (
     BaseModel,
 )
@@ -6,18 +12,16 @@ from .biospecimen import (
     Specimen,
 )
 from .common import (
-    ID,
     Biologic,
     BiologicData,
     BiologicEntityIdentifier,
     BiologicEntityName,
     BiologicEntityNameData,
+    ID,
     Material,
     MaterialData,
     MaterialIdentifier,
     Organization,
-    OrganizationOrganizationName,
-    OrganizationOrganizationNameData,
     Person,
     PersonAttributes,
     PersonData,
@@ -41,8 +45,6 @@ from .datatype import (
     EntityNameData,
     InstanceIdentifier,
     IntervalPointInTime,
-    OrganizationName,
-    OrganizationNameData,
     PhysicalQuantity,
     PostalAddress,
     PostalAddressData,
@@ -110,8 +112,6 @@ __all__ = [
     "Organization",
     "OrganizationName",
     "OrganizationNameData",
-    "OrganizationOrganizationName",
-    "OrganizationOrganizationNameData",
     "PerformedActivity",
     "PerformedActivityBase",
     "PerformedActivityData",
@@ -153,3 +153,4 @@ __all__ = [
     "TelecommunicationAddressData",
     "model_validate",
 ]
+# </AUTOGEN_INIT>
