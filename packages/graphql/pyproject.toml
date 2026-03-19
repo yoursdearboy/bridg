@@ -41,3 +41,4 @@ module-name = "bridg.graphql"
 [tool.uv.sources]
 alchemy = { workspace = true }
 common = { workspace = true }
+strawberry-graphql = { git = "https://github.com/yoursdearboy/strawberry.git", rev = "0.291.3-support-lazy-in-optional" }

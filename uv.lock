@@ -562,7 +562,7 @@ dev = [
 requires-dist = [
     { name = "alchemy", editable = "packages/alchemy" },
     { name = "common", editable = "packages/common" },
-    { name = "strawberry-graphql", extras = ["cli"], specifier = ">=0.289.8" },
+    { name = "strawberry-graphql", extras = ["cli"], git = "https://github.com/yoursdearboy/strawberry.git?rev=0.291.3-support-lazy-in-optional" },
 ]
 
 [package.metadata.requires-dev]
@@ -1809,18 +1809,14 @@ wheels = [
 
 [[package]]
 name = "strawberry-graphql"
-version = "0.291.0"
-source = { registry = "https://pypi.org/simple" }
+version = "0.291.3"
+source = { git = "https://github.com/yoursdearboy/strawberry.git?rev=0.291.3-support-lazy-in-optional#1d7bce8f5c9e259026b8ce46e7e49415f5055730" }
 dependencies = [
     { name = "cross-web" },
     { name = "graphql-core" },
     { name = "packaging" },
     { name = "python-dateutil" },
     { name = "typing-extensions" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/db/f1/361ca6041b98e574bb26833afc04792fd1c829c326a3b1ee7027db280f88/strawberry_graphql-0.291.0.tar.gz", hash = "sha256:79828fe4c2d6d3ea4eea243f02c114b39f0074f8caea1f1c43557ae9b530ed99", size = 217717, upload-time = "2026-02-01T12:20:22.043Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/65/1c/b3307f421c78ba0578b07abc93dbc07a3bca2da79c79ef6a6e2b027b557d/strawberry_graphql-0.291.0-py3-none-any.whl", hash = "sha256:cc779e41adb0783682109875d8b1232819efa3253e8d925aff983490bb806f77", size = 316384, upload-time = "2026-02-01T12:20:24.081Z" },
 ]
 
 [package.optional-dependencies]
