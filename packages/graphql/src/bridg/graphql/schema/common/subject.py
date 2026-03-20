@@ -12,7 +12,7 @@ from .organization import Organization
 
 if TYPE_CHECKING:
     from ...context import Context
-    from ..study import PerformedActivity
+    from ..study import PerformedActivityInterface
 
 
 @strawberry.type
@@ -20,7 +20,7 @@ class Subject:
     id: strawberry.ID
     performing_biologic_entity: Optional[BiologicEntity]
     performing_organization: Optional[Organization]
-    involving_performed_activity: List[Annotated[PerformedActivity, strawberry.lazy("..study")]]
+    involving_performed_activity: List[Annotated[PerformedActivityInterface, strawberry.lazy("..study")]]
 
 
 @strawberry.input

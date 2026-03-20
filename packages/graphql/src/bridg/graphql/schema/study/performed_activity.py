@@ -60,7 +60,9 @@ class PerformedActivityInput(ActivityInput):
 @strawberry.type
 class PerformedActivityQuery:
     @strawberry.field(name="PerformedActivity")
-    def performed_activity(self, id: strawberry.ID, *, info: strawberry.Info[Context]) -> Optional[PerformedActivity]:
+    def performed_activity(
+        self, id: strawberry.ID, *, info: strawberry.Info[Context]
+    ) -> Optional[PerformedActivityInterface]:
         converter = info.context.converter
         session = info.context.session
         uuid = converter.convert(id, UUID)
@@ -69,7 +71,7 @@ class PerformedActivityQuery:
         return query.one_or_none()  # type: ignore
 
     @strawberry.field(name="PerformedActivityList")
-    def performed_activity_list(self, *, info: strawberry.Info[Context]) -> List[PerformedActivity]:
+    def performed_activity_list(self, *, info: strawberry.Info[Context]) -> List[PerformedActivityInterface]:
         session = info.context.session
         query = session.query(bridg.alchemy.PerformedActivity)
         return query.all()  # type: ignore
