@@ -37,12 +37,16 @@ class SQLAlchemyExtension(SchemaExtension):
 
         try:
             if operation_type == OperationType.MUTATION:
-                with session.begin():
-                    yield
-                    if not self.execution_context.pre_execution_errors:
-                        session.commit()
-                    else:
-                        session.rollback()
+                try:
+                    with session.begin():
+                        yield
+                        if not self.execution_context.pre_execution_errors:
+                            session.commit()
+                        else:
+                            session.rollback()
+                except Exception:
+                    session.rollback()
+                    raise
             else:
                 yield
         finally:
