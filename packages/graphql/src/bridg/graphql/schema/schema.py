@@ -5,12 +5,12 @@ from ..sqlalchemy_extension import SQLAlchemyExtension
 from .mutation import Mutation
 from .query import Query
 from .scalar import SCALAR_REGISTRY
-from .study import PerformedActivity
+from .study import PerformedActivity, PerformedEncounter, PerformedSpecimenCollection
 
 schema = Schema(
     query=Query,
     mutation=Mutation,
     config=StrawberryConfig(scalar_map=SCALAR_REGISTRY),
     extensions=[SQLAlchemyExtension()],
-    types=[PerformedActivity],
+    types=[PerformedEncounter, PerformedSpecimenCollection, PerformedActivity],
 )
