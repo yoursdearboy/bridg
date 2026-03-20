@@ -35,18 +35,15 @@ class SQLAlchemyExtension(SchemaExtension):
         operation_type = self.execution_context.operation_type
         session = context.session
 
-        if operation_type == OperationType.MUTATION:
-            try:
+        try:
+            if operation_type == OperationType.MUTATION:
                 with session.begin():
                     yield
                     if not self.execution_context.pre_execution_errors:
                         session.commit()
                     else:
                         session.rollback()
-            except Exception:
-                session.rollback()
-                raise
-            finally:
-                session.close()
-        else:
-            yield
+            else:
+                yield
+        finally:
+            session.close()
