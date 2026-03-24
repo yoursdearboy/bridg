@@ -3,6 +3,7 @@ from typing import Any, List, Optional, Type, get_args
 from uuid import UUID
 
 from sqlalchemy import inspect
+from sqlalchemy.ext.associationproxy import AssociationProxy, ObjectAssociationProxyInstance
 from sqlalchemy.orm import Composite, Relationship
 
 import bridg.alchemy
@@ -97,10 +98,9 @@ def object_to_alchemy[T: bridg.alchemy.Base](x: Any, class_: Type[T], converter)
 
         if value is not None:
             attr = insp.attrs.get(key)
+            desc = insp.all_orm_descriptors.get(key)
 
-            if attr is None:
-                raise RuntimeError(f"There's no attr {key} in the model {class_.__name__}")
-            elif isinstance(attr, Relationship):
+            if isinstance(attr, Relationship):
                 attr_class_ = attr.entity.class_
                 if attr.uselist:
                     attr_class_ = List[attr_class_]
@@ -113,9 +113,21 @@ def object_to_alchemy[T: bridg.alchemy.Base](x: Any, class_: Type[T], converter)
                     value = converter.convert(value, attr_class_.__annotations__["return"])
                 else:
                     RuntimeError("Unknown Composite attr configuration")
-            else:
+            elif attr:
                 type_ = attr.columns[0].type.python_type
                 value = converter.convert(value, type_)
+            elif isinstance(desc, AssociationProxy):
+                proxy = getattr(class_, key)
+                assert isinstance(proxy, ObjectAssociationProxyInstance)
+                assert issubclass(proxy.target_class, bridg.alchemy.Base)
+
+                insp2 = inspect(proxy.target_class)
+                attr2 = insp2.attrs.get(proxy.value_attr)
+                assert isinstance(attr2, Relationship)
+                attr2_class_ = List[attr2.entity.class_]
+                value = converter.convert(value, attr2_class_)
+            else:
+                raise RuntimeError(f"There's no attr {key} in the model {class_.__name__}")
 
         setattr(output, key, value)
 
