@@ -3,8 +3,8 @@
     {
       "containingEpoch": null,
       "dateRange": {
-        "high": "2037-12-11T14:38:24.881114+00:00",
-        "low": "2016-05-04T06:37:33.714143+00:00"
+        "high": "2017-11-12T06:14:18.501767+00:00",
+        "low": "2050-01-21T21:47:12.119609+00:00"
       },
       "id": "str",
       "involvedSubject": {
@@ -20,23 +20,23 @@
       "nameCodeModifiedText": null,
       "negationIndicator": false,
       "negationReason": {
-        "code": "push",
-        "codeSystem": "rise",
-        "displayName": "Detail food shoulder."
+        "code": "truth",
+        "codeSystem": "process",
+        "displayName": "Success medical."
       },
       "repetitionNumber": 1,
       "statusCode": {
-        "code": "arrive",
-        "codeSystem": "drop",
-        "displayName": "Support."
+        "code": "decide",
+        "codeSystem": "claim",
+        "displayName": "Several much single."
       },
-      "statusDate": "2098-12-14T08:10:09.004942+00:00"
+      "statusDate": "2091-04-06T17:33:50.290811+00:00"
     },
     {
       "containingEpoch": null,
       "dateRange": {
-        "high": "2026-10-10T05:39:06.769083+00:00",
-        "low": "2031-07-18T22:08:30.942928+00:00"
+        "high": "2000-01-21T21:19:26.924719+00:00",
+        "low": "2053-01-13T04:01:44.566653+00:00"
       },
       "id": "str",
       "involvedSubject": {
@@ -52,17 +52,17 @@
       "nameCodeModifiedText": null,
       "negationIndicator": false,
       "negationReason": {
-        "code": "yes",
-        "codeSystem": "our",
-        "displayName": "Defense material those."
+        "code": "after",
+        "codeSystem": "brother",
+        "displayName": "These story film."
       },
       "repetitionNumber": 1,
       "statusCode": {
-        "code": "question",
-        "codeSystem": "low",
-        "displayName": "Enter east."
+        "code": "article",
+        "codeSystem": "effect",
+        "displayName": "Water beat magazine."
       },
-      "statusDate": "2021-02-05T03:33:38.475986+00:00"
+      "statusDate": "2032-05-31T19:11:58.453067+00:00"
     }
   ]
 }
