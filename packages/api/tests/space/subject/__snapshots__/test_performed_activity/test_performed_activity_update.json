@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2071-10-16T19:38:58.964116Z",
-    "low": "2056-09-19T06:01:59.253798Z"
+    "high": "2001-12-12T09:18:44.551514Z",
+    "low": "2032-05-31T19:11:58.453067Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "difference",
-    "code_system": "reality",
+    "code": "woman",
+    "code_system": "him",
     "data_type_name": "CD",
-    "display_name": "How trip learn."
+    "display_name": "Dream drive."
   },
   "reason_code": null,
   "status_code": {
-    "code": "evidence",
-    "code_system": "chair",
+    "code": "our",
+    "code_system": "your",
     "data_type_name": "CD",
-    "display_name": "Seat much."
+    "display_name": "Beat magazine."
   },
-  "status_date": "2074-09-13T16:18:26.259729Z"
+  "status_date": "2006-12-02T23:41:37.281786Z"
 }

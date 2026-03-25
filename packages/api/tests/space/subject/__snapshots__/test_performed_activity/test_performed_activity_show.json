@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2063-12-31T23:47:22.157152Z",
-    "low": "2098-12-14T08:10:09.004942Z"
+    "high": "2087-01-19T16:34:41.948075Z",
+    "low": "2091-04-06T17:33:50.290811Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "reveal",
-    "code_system": "garden",
+    "code": "purpose",
+    "code_system": "movement",
     "data_type_name": "CD",
-    "display_name": "Director allow."
+    "display_name": "Current hear claim well."
   },
   "reason_code": null,
   "status_code": {
-    "code": "four",
-    "code_system": "institution",
+    "code": "win",
+    "code_system": "nice",
     "data_type_name": "CD",
-    "display_name": "At tree."
+    "display_name": "Place."
   },
-  "status_date": "2055-09-11T14:08:43.414278Z"
+  "status_date": "2029-11-04T16:42:15.061938Z"
 }
