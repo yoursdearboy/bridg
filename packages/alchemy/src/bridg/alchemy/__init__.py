@@ -7,6 +7,7 @@ from .common import OrganizationName  # noqa: I001
 
 # <AUTOGEN_INIT>
 from .biospecimen import (
+    PerformedSpecimenMove,
     Specimen,
 )
 from .common import (
@@ -83,6 +84,7 @@ from .repository import (
 )
 from .study import (
     PerformedActivity,
+    PerformedAdministrativeActivity,
     PerformedDiagnosis,
     PerformedEligibilityCriterion,
     PerformedEncounter,
@@ -143,6 +145,7 @@ __all__ = [
     "OrganizationName",
     "OrganizationNameParts",
     "PerformedActivity",
+    "PerformedAdministrativeActivity",
     "PerformedDiagnosis",
     "PerformedEligibilityCriterion",
     "PerformedEncounter",
@@ -152,6 +155,7 @@ __all__ = [
     "PerformedObservationResult",
     "PerformedProcedure",
     "PerformedSpecimenCollection",
+    "PerformedSpecimenMove",
     "PerformedSubstanceAdministration",
     "Person",
     "PersonPostalAddress",

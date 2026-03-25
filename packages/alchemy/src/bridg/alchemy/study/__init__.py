@@ -1,6 +1,9 @@
 from .performed_activity import (
     PerformedActivity,
 )
+from .performed_administrative_activity import (
+    PerformedAdministrativeActivity,
+)
 from .performed_diagnosis import (
     PerformedDiagnosis,
 )
@@ -49,6 +52,7 @@ from .study_subject_protocol_version_relationship import (
 
 __all__ = [
     "PerformedActivity",
+    "PerformedAdministrativeActivity",
     "PerformedDiagnosis",
     "PerformedEligibilityCriterion",
     "PerformedEncounter",
