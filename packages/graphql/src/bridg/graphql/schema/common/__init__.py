@@ -43,6 +43,7 @@ from .project import (
 from .study_subject import (
     StudySubject,
     StudySubjectCreateInput,
+    StudySubjectFilter,
     StudySubjectMutation,
     StudySubjectQuery,
     StudySubjectUpdateInput,
@@ -82,6 +83,7 @@ __all__ = [
     "Project",
     "StudySubject",
     "StudySubjectCreateInput",
+    "StudySubjectFilter",
     "StudySubjectMutation",
     "StudySubjectQuery",
     "StudySubjectUpdateInput",
