@@ -15,12 +15,19 @@ if TYPE_CHECKING:
     from ..study import PerformedActivityInterface
 
 
-@strawberry.type
-class Subject:
+@strawberry.interface
+class SubjectInterface:
     id: strawberry.ID
     performing_biologic_entity: Optional[BiologicEntity]
     performing_organization: Optional[Organization]
     involving_performed_activity: List[Annotated[PerformedActivityInterface, strawberry.lazy("..study")]]
+
+
+@strawberry.type
+class Subject(SubjectInterface):
+    @staticmethod
+    def is_type_of(obj, _) -> bool:
+        return isinstance(obj, bridg.alchemy.Subject)
 
 
 @strawberry.input

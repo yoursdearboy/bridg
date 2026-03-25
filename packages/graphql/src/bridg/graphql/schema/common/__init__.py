@@ -40,9 +40,17 @@ from .place import (
 from .project import (
     Project,
 )
+from .study_subject import (
+    StudySubject,
+    StudySubjectCreateInput,
+    StudySubjectMutation,
+    StudySubjectQuery,
+    StudySubjectUpdateInput,
+)
 from .subject import (
     Subject,
     SubjectInput,
+    SubjectInterface,
     SubjectMutation,
     SubjectQuery,
 )
@@ -72,8 +80,14 @@ __all__ = [
     "Place",
     "PlaceName",
     "Project",
+    "StudySubject",
+    "StudySubjectCreateInput",
+    "StudySubjectMutation",
+    "StudySubjectQuery",
+    "StudySubjectUpdateInput",
     "Subject",
     "SubjectInput",
+    "SubjectInterface",
     "SubjectMutation",
     "SubjectQuery",
 ]

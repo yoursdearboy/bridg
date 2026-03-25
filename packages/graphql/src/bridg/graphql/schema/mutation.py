@@ -3,6 +3,7 @@ import strawberry
 from .common import (
     BiologicEntityMutation,
     PersonMutation,
+    StudySubjectMutation,
     SubjectMutation,
 )
 from .study import (
@@ -17,6 +18,7 @@ class Mutation(
     PerformedEncounterMutation,
     PerformedSpecimenCollectionMutation,
     PerformedActivityMutation,
+    StudySubjectMutation,
     SubjectMutation,
     PersonMutation,
     BiologicEntityMutation,

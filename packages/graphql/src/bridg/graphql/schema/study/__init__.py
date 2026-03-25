@@ -20,6 +20,10 @@ from .performed_specimen_collection import (
 from .study_site import (
     StudySite,
 )
+from .study_site_protocol_version_relationship import (
+    StudySiteProtocolVersionRelationship,
+    StudySiteProtocolVersionRelationshipInput,
+)
 
 __all__ = [
     "PerformedActivity",
@@ -36,4 +40,6 @@ __all__ = [
     "PerformedSpecimenCollectionMutation",
     "PerformedSpecimenCollectionQuery",
     "StudySite",
+    "StudySiteProtocolVersionRelationship",
+    "StudySiteProtocolVersionRelationshipInput",
 ]

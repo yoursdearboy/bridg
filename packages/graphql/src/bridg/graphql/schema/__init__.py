@@ -9,6 +9,9 @@ from .biospecimen import (
     SpecimenInput,
     SpecimenQuery,
 )
+from .code_system import (
+    CodeSystemQuery,
+)
 from .common import (
     Activity,
     ActivityInput,
@@ -33,8 +36,14 @@ from .common import (
     Place,
     PlaceName,
     Project,
+    StudySubject,
+    StudySubjectCreateInput,
+    StudySubjectMutation,
+    StudySubjectQuery,
+    StudySubjectUpdateInput,
     Subject,
     SubjectInput,
+    SubjectInterface,
     SubjectMutation,
     SubjectQuery,
 )
@@ -56,6 +65,7 @@ from .mutation import (
 )
 from .protocol import (
     Epoch,
+    StudyProtocolVersion,
 )
 from .query import (
     Query,
@@ -81,6 +91,8 @@ from .study import (
     PerformedSpecimenCollectionMutation,
     PerformedSpecimenCollectionQuery,
     StudySite,
+    StudySiteProtocolVersionRelationship,
+    StudySiteProtocolVersionRelationshipInput,
 )
 
 __all__ = [
@@ -93,6 +105,7 @@ __all__ = [
     "BiologicEntityMutation",
     "BiologicEntityName",
     "BiologicEntityNameInput",
+    "CodeSystemQuery",
     "ConceptDescriptor",
     "EntityName",
     "EntityNameInput",
@@ -135,9 +148,18 @@ __all__ = [
     "Specimen",
     "SpecimenInput",
     "SpecimenQuery",
+    "StudyProtocolVersion",
     "StudySite",
+    "StudySiteProtocolVersionRelationship",
+    "StudySiteProtocolVersionRelationshipInput",
+    "StudySubject",
+    "StudySubjectCreateInput",
+    "StudySubjectMutation",
+    "StudySubjectQuery",
+    "StudySubjectUpdateInput",
     "Subject",
     "SubjectInput",
+    "SubjectInterface",
     "SubjectMutation",
     "SubjectQuery",
     "TelecommunicationAddress",

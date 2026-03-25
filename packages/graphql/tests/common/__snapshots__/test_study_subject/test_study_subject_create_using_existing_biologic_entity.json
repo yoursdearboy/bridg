@@ -1,0 +1,24 @@
+{
+  "StudySubjectCreate": {
+    "assignedStudySiteProtocolVersionRelationship": [
+      {
+        "executedStudyProtocolVersion": {
+          "acronym": "TEST",
+          "id": "str"
+        },
+        "executingStudySite": {
+          "id": "str",
+          "lead": true
+        }
+      }
+    ],
+    "id": "str",
+    "performingBiologicEntity": {
+      "id": "str",
+      "primaryName": {
+        "family": "Test",
+        "given": "Nancy"
+      }
+    }
+  }
+}

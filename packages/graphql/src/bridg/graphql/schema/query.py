@@ -6,6 +6,7 @@ from .biospecimen import (
 from .code_system import CodeSystemQuery
 from .common import (
     PersonQuery,
+    StudySubjectQuery,
     SubjectQuery,
 )
 from .study import (
@@ -21,6 +22,7 @@ class Query(
     PerformedEncounterQuery,
     PerformedActivityQuery,
     SpecimenQuery,
+    StudySubjectQuery,
     SubjectQuery,
     PersonQuery,
     CodeSystemQuery,
