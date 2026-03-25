@@ -29,6 +29,12 @@ class StudySubject(SubjectInterface):
 
 
 @strawberry.input
+class StudySubjectFilter:
+    # TODO: make deep, not flat?
+    study_protocol_version_id: Optional[strawberry.ID]
+
+
+@strawberry.input
 class StudySubjectCreateInput(SubjectInput):
     status: strawberry.Maybe[Optional[bridg.alchemy.Status]]
     status_date: strawberry.Maybe[Optional[datetime]]
@@ -58,9 +64,23 @@ class StudySubjectQuery:
         return query.one_or_none()  # type: ignore
 
     @strawberry.field(name="StudySubjectList")
-    def study_subject_list(self, *, info: strawberry.Info[Context]) -> List[StudySubject]:
+    def study_subject_list(
+        self, filter: Optional[StudySubjectFilter] = None, *, info: strawberry.Info[Context]
+    ) -> List[StudySubject]:
         session = info.context.session
+        converter = info.context.converter
         query = session.query(bridg.alchemy.StudySubject)
+        if filter and filter.study_protocol_version_id:
+            query = (
+                query.join(bridg.alchemy.StudySubject.assigned_study_subject_protocol_version_relationship)
+                .join(
+                    bridg.alchemy.StudySubjectProtocolVersionRelationship.assigning_study_site_protocol_version_relationship
+                )
+                .filter(
+                    bridg.alchemy.StudySiteProtocolVersionRelationship.executed_study_protocol_version_id
+                    == converter.convert(filter.study_protocol_version_id, UUID)
+                )
+            )
         return query.all()  # type: ignore
 
 

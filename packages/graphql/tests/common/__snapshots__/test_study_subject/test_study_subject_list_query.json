@@ -1,0 +1,54 @@
+{
+  "StudySubjectList": [
+    {
+      "id": "str",
+      "performingBiologicEntity": {
+        "id": "str",
+        "primaryName": {
+          "family": "Test",
+          "given": "Alexander"
+        }
+      }
+    },
+    {
+      "id": "str",
+      "performingBiologicEntity": {
+        "id": "str",
+        "primaryName": {
+          "family": "Test",
+          "given": "Vincent"
+        }
+      }
+    },
+    {
+      "id": "str",
+      "performingBiologicEntity": {
+        "id": "str",
+        "primaryName": {
+          "family": "Test",
+          "given": "Mario"
+        }
+      }
+    },
+    {
+      "id": "str",
+      "performingBiologicEntity": {
+        "id": "str",
+        "primaryName": {
+          "family": "Test",
+          "given": "Robert"
+        }
+      }
+    },
+    {
+      "id": "str",
+      "performingBiologicEntity": {
+        "id": "str",
+        "primaryName": {
+          "family": "Test",
+          "given": "Charles"
+        }
+      }
+    }
+  ]
+}
