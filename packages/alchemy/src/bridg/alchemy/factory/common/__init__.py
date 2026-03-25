@@ -11,6 +11,10 @@ from .material import (
     MaterialFactory,
     MaterialIdentifierFactory,
 )
+from .organization import (
+    OrganizationFactory,
+    OrganizationNameFactory,
+)
 from .person import (
     PersonFactory,
     PersonPostalAddressFactory,
@@ -36,6 +40,8 @@ __all__ = [
     "IDFactory",
     "MaterialFactory",
     "MaterialIdentifierFactory",
+    "OrganizationFactory",
+    "OrganizationNameFactory",
     "PersonFactory",
     "PersonPostalAddressFactory",
     "PersonTelecommunicationAddressFactory",
