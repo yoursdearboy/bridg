@@ -9,6 +9,9 @@ from .common import (
     StudySubjectQuery,
     SubjectQuery,
 )
+from .protocol import (
+    StudyProtocolVersionQuery,
+)
 from .study import (
     PerformedActivityQuery,
     PerformedEncounterQuery,
@@ -22,6 +25,7 @@ class Query(
     PerformedEncounterQuery,
     PerformedActivityQuery,
     SpecimenQuery,
+    StudyProtocolVersionQuery,
     StudySubjectQuery,
     SubjectQuery,
     PersonQuery,

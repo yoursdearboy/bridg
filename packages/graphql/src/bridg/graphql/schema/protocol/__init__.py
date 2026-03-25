@@ -3,6 +3,7 @@ from .epoch import (
 )
 from .study_protocol_version import (
     StudyProtocolVersion,
+    StudyProtocolVersionQuery,
 )
 
-__all__ = ["Epoch", "StudyProtocolVersion"]
+__all__ = ["Epoch", "StudyProtocolVersion", "StudyProtocolVersionQuery"]

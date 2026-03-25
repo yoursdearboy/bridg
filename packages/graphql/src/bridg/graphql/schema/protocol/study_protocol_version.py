@@ -1,9 +1,33 @@
-from typing import Optional
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Annotated, List, Optional
+from uuid import UUID
 
 import strawberry
+
+import bridg.alchemy
+
+if TYPE_CHECKING:
+    from ...context import Context
+    from ..study import StudySite
 
 
 @strawberry.type
 class StudyProtocolVersion:
     id: strawberry.ID
     acronym: Optional[str]
+    executing_study_site: List[Annotated[StudySite, strawberry.lazy("..study")]]
+
+
+@strawberry.type
+class StudyProtocolVersionQuery:
+    @strawberry.field(name="StudyProtocolVersion")
+    def study_protocol_version(
+        self, id: strawberry.ID, *, info: strawberry.Info[Context]
+    ) -> Optional[StudyProtocolVersion]:
+        converter = info.context.converter
+        session = info.context.session
+        uuid = converter.convert(id, UUID)
+        query = session.query(bridg.alchemy.StudyProtocolVersion)
+        query = query.filter_by(id=uuid)
+        return query.one_or_none()  # type: ignore

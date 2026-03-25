@@ -1,0 +1,38 @@
+{
+  "StudyProtocolVersion": {
+    "acronym": "TEST",
+    "executingStudySite": [
+      {
+        "id": "str",
+        "lead": true,
+        "performingOrganization": {
+          "id": "str",
+          "primaryName": {
+            "value": "Lead Org LTD"
+          }
+        }
+      },
+      {
+        "id": "str",
+        "lead": false,
+        "performingOrganization": {
+          "id": "str",
+          "primaryName": {
+            "value": "James LLC"
+          }
+        }
+      },
+      {
+        "id": "str",
+        "lead": false,
+        "performingOrganization": {
+          "id": "str",
+          "primaryName": {
+            "value": "Miles-Sutton"
+          }
+        }
+      }
+    ],
+    "id": "str"
+  }
+}

@@ -66,6 +66,7 @@ from .mutation import (
 from .protocol import (
     Epoch,
     StudyProtocolVersion,
+    StudyProtocolVersionQuery,
 )
 from .query import (
     Query,
@@ -149,6 +150,7 @@ __all__ = [
     "SpecimenInput",
     "SpecimenQuery",
     "StudyProtocolVersion",
+    "StudyProtocolVersionQuery",
     "StudySite",
     "StudySiteProtocolVersionRelationship",
     "StudySiteProtocolVersionRelationshipInput",
