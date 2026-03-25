@@ -5,6 +5,10 @@ from .common import OrganizationName  # noqa: I001
 
 # <AUTOGEN_INIT>
 from .biospecimen import (
+    PerformedSpecimenMove,
+    PerformedSpecimenMoveInput,
+    PerformedSpecimenMoveMutation,
+    PerformedSpecimenMoveQuery,
     Specimen,
     SpecimenInput,
     SpecimenQuery,
@@ -135,6 +139,10 @@ __all__ = [
     "PerformedSpecimenCollectionInput",
     "PerformedSpecimenCollectionMutation",
     "PerformedSpecimenCollectionQuery",
+    "PerformedSpecimenMove",
+    "PerformedSpecimenMoveInput",
+    "PerformedSpecimenMoveMutation",
+    "PerformedSpecimenMoveQuery",
     "Person",
     "PersonFilter",
     "PersonInput",

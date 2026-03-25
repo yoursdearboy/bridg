@@ -2,6 +2,7 @@ from .base import (
     BaseFactory,
 )
 from .biospecimen import (
+    PerformedSpecimenMoveInputFactory,
     SpecimenInputFactory,
 )
 from .common import (
@@ -43,6 +44,7 @@ __all__ = [
     "PerformedActivityInputFactory",
     "PerformedEncounterInputFactory",
     "PerformedSpecimenCollectionInputFactory",
+    "PerformedSpecimenMoveInputFactory",
     "PostalAddressInputFactory",
     "SpecimenInputFactory",
     "TelecommunicationAddressInputFactory",

@@ -1,22 +1,23 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, Annotated, List, Optional
 from uuid import UUID
 
 import strawberry
 
 import bridg.alchemy
 
-from ..biospecimen import Specimen, SpecimenInput
 from .performed_activity import PerformedActivityInput, PerformedActivityInterface
 
 if TYPE_CHECKING:
     from ...context import Context
+    from ..biospecimen import Specimen, SpecimenInput
 
 
 @strawberry.type
 class PerformedSpecimenCollection(PerformedActivityInterface):
-    produced_specimen: List[Specimen]
+    # FIXME: replace with relative module name
+    produced_specimen: List[Annotated[Specimen, strawberry.lazy("bridg.graphql.schema.biospecimen")]]
 
     @staticmethod
     def is_type_of(obj, _) -> bool:
@@ -25,7 +26,10 @@ class PerformedSpecimenCollection(PerformedActivityInterface):
 
 @strawberry.input
 class PerformedSpecimenCollectionInput(PerformedActivityInput):
-    produced_specimen: strawberry.Maybe[List[SpecimenInput]]
+    # FIXME: replace with relative module name
+    produced_specimen: strawberry.Maybe[
+        List[Annotated[SpecimenInput, strawberry.lazy("bridg.graphql.schema.biospecimen")]]
+    ]
 
 
 @strawberry.type

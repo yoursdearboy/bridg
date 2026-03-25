@@ -1,6 +1,7 @@
 import strawberry
 
 from .biospecimen import (
+    PerformedSpecimenMoveQuery,
     SpecimenQuery,
 )
 from .code_system import CodeSystemQuery
@@ -21,6 +22,7 @@ from .study import (
 
 @strawberry.type
 class Query(
+    PerformedSpecimenMoveQuery,
     PerformedSpecimenCollectionQuery,
     PerformedEncounterQuery,
     PerformedActivityQuery,

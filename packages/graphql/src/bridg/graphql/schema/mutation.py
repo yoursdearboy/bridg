@@ -1,5 +1,8 @@
 import strawberry
 
+from .biospecimen import (
+    PerformedSpecimenMoveMutation,
+)
 from .common import (
     BiologicEntityMutation,
     PersonMutation,
@@ -15,8 +18,9 @@ from .study import (
 
 @strawberry.type
 class Mutation(
-    PerformedEncounterMutation,
+    PerformedSpecimenMoveMutation,
     PerformedSpecimenCollectionMutation,
+    PerformedEncounterMutation,
     PerformedActivityMutation,
     StudySubjectMutation,
     SubjectMutation,

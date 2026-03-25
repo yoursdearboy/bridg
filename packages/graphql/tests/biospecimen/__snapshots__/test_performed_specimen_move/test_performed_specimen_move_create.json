@@ -1,0 +1,20 @@
+{
+  "PerformedSpecimenMoveCreate": {
+    "containingEpoch": null,
+    "dateRange": {
+      "high": "2082-12-10T00:07:43.263031+00:00",
+      "low": "2055-03-16T06:49:02.546799+00:00"
+    },
+    "id": "str",
+    "nameCodeModifiedText": null,
+    "negationIndicator": false,
+    "negationReason": null,
+    "repetitionNumber": 1,
+    "statusCode": {
+      "code": "GSEKclpemfoHstknWHFi",
+      "codeSystem": "LitZHCJROlbqnkXTqIuV",
+      "displayName": "xnmDnEUulZAecfGPvdtZ"
+    },
+    "statusDate": "2052-11-28T21:38:05.690053+00:00"
+  }
+}
