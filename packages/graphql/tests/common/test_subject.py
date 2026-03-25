@@ -199,3 +199,36 @@ def test_subject_create_using_existing_biologic_entity(context: Context, snapsho
     result = schema.execute_sync(query, dict(input=process_input(input)), context_value=context)
     assert result.errors is None
     assert result.data == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
+
+
+def test_subject_create_fails_if_biologic_entity_and_id_provided(context: Context, snapshot_json):
+    p = PersonFactory.create_sync(
+        name=[BiologicEntityNameFactory.build(family="Existing")],
+    )
+    query = """
+        mutation test($input: SubjectInput!) {
+            SubjectCreate(input: $input) {
+                id
+                performingBiologicEntity {
+                    id
+                    primaryName {
+                        family
+                        given
+                    }
+                }
+            }
+        }
+    """
+    input = dict(
+        performing_biologic_entity=Some(
+            BiologicEntityInputFactory.build(
+                name=[
+                    BiologicEntityNameInputFactory.build(family="New"),
+                ]
+            )
+        ),
+        performing_biologic_entity_id=Some(strawberry.ID(str(p.id))),
+    )
+    result = schema.execute_sync(query, dict(input=process_input(input)), context_value=context)
+    assert result.errors is not None
+    assert result.errors[0].message == "Use either performing_biologic_entity_id or performing_biologic_entity"

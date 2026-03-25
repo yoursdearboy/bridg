@@ -36,6 +36,10 @@ class SubjectInput:
     performing_biologic_entity_id: strawberry.Maybe[strawberry.ID]
     performing_biologic_entity: strawberry.Maybe[BiologicEntityInput]
 
+    def __post_init__(self):
+        if self.performing_biologic_entity_id is not None and self.performing_biologic_entity is not None:
+            raise ValueError("Use either performing_biologic_entity_id or performing_biologic_entity")
+
 
 @strawberry.type
 class SubjectQuery:
