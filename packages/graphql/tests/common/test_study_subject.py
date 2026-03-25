@@ -7,15 +7,58 @@ from bridg.alchemy.factory import (
     PersonFactory,
     StudyProtocolVersionFactory,
     StudySiteFactory,
+    StudySubjectFactory,
 )
 from bridg.graphql.context import Context
-from bridg.graphql.schema import (
-    StudySiteProtocolVersionRelationshipInput,
-    StudySubjectCreateInput,
-    schema,
-)
+from bridg.graphql.schema import StudySiteProtocolVersionRelationshipInput, StudySubjectCreateInput, schema
 
 from ..utils import process_input
+
+
+def test_study_subject_list_query(context: Context, snapshot_json):
+    spv = StudyProtocolVersionFactory.create_sync()
+    sspvr = spv.executing_study_site_protocol_version_relationship[0]
+    for _ in range(3):
+        StudySubjectFactory.create_sync(
+            performing_biologic_entity=PersonFactory.build(
+                name=[
+                    BiologicEntityNameFactory.build(family="Test"),
+                ]
+            ),
+            performing_organization=None,
+            assigned_study_site_protocol_version_relationship=[sspvr],
+        )
+    spv2 = StudyProtocolVersionFactory.create_sync()
+    sspvr2 = spv2.executing_study_site_protocol_version_relationship[0]
+    for _ in range(2):
+        StudySubjectFactory.create_sync(
+            performing_biologic_entity=PersonFactory.build(
+                name=[
+                    BiologicEntityNameFactory.build(family="Test"),
+                ]
+            ),
+            performing_organization=None,
+            assigned_study_site_protocol_version_relationship=[sspvr2],
+        )
+
+    query = """
+        query {
+            StudySubjectList {
+                id
+                performingBiologicEntity {
+                    id
+                    primaryName {
+                        family
+                        given
+                    }
+                }
+            }
+        }
+    """
+
+    result = schema.execute_sync(query, context_value=context)
+    assert result.errors is None
+    assert result.data == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
 
 
 def test_study_subject_create_using_existing_biologic_entity(context: Context, snapshot_json):
