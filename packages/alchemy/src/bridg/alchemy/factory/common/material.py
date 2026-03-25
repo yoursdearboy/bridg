@@ -3,7 +3,7 @@ from polyfactory import Ignore, Use
 from bridg.alchemy import Material, MaterialIdentifier
 
 from ..base import BaseFactory
-from ..datatype import ConceptDescriptorFactory
+from ..datatype import ConceptDescriptorFactory, PhysicalQuantityFactory
 from .id import IDFactory
 
 
@@ -28,5 +28,7 @@ class MaterialFactory(BaseFactory[Material]):
     form_code = ConceptDescriptorFactory
 
     description = None
+
+    quantity = PhysicalQuantityFactory
 
     performed_specimen = Ignore()

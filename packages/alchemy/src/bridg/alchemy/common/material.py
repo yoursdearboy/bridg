@@ -3,10 +3,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, List, Optional
 from uuid import UUID, uuid4
 
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import ForeignKey, Numeric, String
+from sqlalchemy.orm import Mapped, composite, mapped_column, relationship
 
-from ..datatype import ConceptDescriptor
+from ..datatype import ConceptDescriptor, PhysicalQuantity
 from ..db import Base
 from .id import ID
 
@@ -49,6 +49,12 @@ class Material(Base):
     form_code: Mapped[Optional[ConceptDescriptor]] = relationship(foreign_keys=form_code_id)
 
     description: Mapped[Optional[str]]
+
+    quantity: Mapped[Optional[PhysicalQuantity]] = composite(
+        lambda value, unit: PhysicalQuantity(value, unit) if value is not None else None,
+        mapped_column("quantity_value", Numeric, nullable=True),
+        mapped_column("quantity_unit", String, nullable=True),
+    )
 
     performed_specimen: Mapped[Optional[Specimen]] = relationship(back_populates="performing_material")
 
