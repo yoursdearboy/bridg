@@ -1,6 +1,6 @@
 import logging
 from types import FunctionType
-from typing import Any, List, Optional, Type, get_args
+from typing import Any, List, Optional, Type, get_args, get_type_hints
 from uuid import UUID
 
 from sqlalchemy import inspect
@@ -115,7 +115,8 @@ def object_to_alchemy[T: bridg.alchemy.Base](x: Any, class_: Type[T], converter)
                 if isinstance(attr_class_, type):
                     value = converter.convert(value, attr_class_)
                 elif isinstance(attr_class_, FunctionType):
-                    value = converter.convert(value, attr_class_.__annotations__["return"])
+                    type_ = get_type_hints(attr_class_)["return"]
+                    value = converter.convert(value, type_)
                 else:
                     RuntimeError("Unknown Composite attr configuration")
             elif attr:
