@@ -1,3 +1,4 @@
+import logging
 from types import FunctionType
 from typing import Any, List, Optional, Type, get_args
 from uuid import UUID
@@ -12,6 +13,8 @@ import bridg.common.converter
 from .dataclass import Dataclass
 from .maybe import _annotation_is_maybe
 from .schema import ConceptDescriptor
+
+logger = logging.getLogger(__name__)
 
 
 class Converter(bridg.common.converter.Converter):
@@ -71,7 +74,9 @@ def str_to_uuid(x: str) -> UUID:
 
 
 @bridg.common.converter.configure
-def fallback(x: Any) -> Any:
+def fallback(x: Any, class_) -> Any:
+    # FIXME: replace with identity instead
+    logger.debug(f"Fallback converter used on value of type {type(x)} to convert to {class_}")
     return x
 
 
