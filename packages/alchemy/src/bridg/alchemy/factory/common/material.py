@@ -3,7 +3,7 @@ from polyfactory import Ignore, Use
 from bridg.alchemy import Material, MaterialIdentifier
 
 from ..base import BaseFactory
-from ..datatype import ConceptDescriptorFactory, PhysicalQuantityFactory
+from ..datatype import ConceptDescriptorFactory
 from .id import IDFactory
 
 
@@ -29,6 +29,7 @@ class MaterialFactory(BaseFactory[Material]):
 
     description = None
 
-    quantity = PhysicalQuantityFactory
+    quantity_value = Use(lambda: BaseFactory.__faker__.random_number(2))
+    quantity_unit = Use(lambda: BaseFactory.__random__.choice(["s", "m", "kg", "m2", "m3", "10^9/l"]))
 
     performed_specimen = Ignore()
