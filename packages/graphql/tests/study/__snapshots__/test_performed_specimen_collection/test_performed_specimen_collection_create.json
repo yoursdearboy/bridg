@@ -19,6 +19,10 @@
             "code": "HbolMJUevblAbkHClEQa",
             "codeSystem": "PKriXrefSFPLBYtCRGSE",
             "displayName": "KclpemfoHstknWHFiLit"
+          },
+          "quantity": {
+            "unit": "m",
+            "value": 96
           }
         }
       },
@@ -27,20 +31,32 @@
         "performingMaterial": {
           "code": null,
           "description": "Born itself law west then enjoy. Seven medical blood personal success medical current.\nMuch single morning a. Major born guy world southern dream. There water beat magazine attorney.",
-          "formCode": null
+          "formCode": null,
+          "quantity": {
+            "unit": "10^9/l",
+            "value": 75
+          }
         }
       },
       {
         "id": "str",
         "performingMaterial": {
           "code": null,
-          "description": "According remain arrive attack all. Audience draw protect Democrat car very. Office drug list imagine behind probably great. Level rock pull worker better I.",
-          "formCode": null
+          "description": "Audience piece director. Teacher audience draw.\nMuch rich think office drug. Space couple best issue interest level rock. Art rock song body.",
+          "formCode": null,
+          "quantity": {
+            "unit": "s",
+            "value": 69
+          }
         }
       }
     ],
     "repetitionNumber": 1,
-    "statusCode": null,
-    "statusDate": "2066-12-21T17:47:22.139636+00:00"
+    "statusCode": {
+      "code": "IqngHxWWaGDfBAgsdmow",
+      "codeSystem": "CpZPBICWfTnUMiokrJSA",
+      "displayName": "nVcGRcrgYiwKDfXJhbtC"
+    },
+    "statusDate": "2042-12-23T23:01:57.040624+00:00"
   }
 }

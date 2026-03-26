@@ -1,7 +1,7 @@
 from strawberry.types.scalar import ScalarDefinition, scalar
 from strawberry.utils.str_converters import to_camel_case
 
-from . import ConceptDescriptor, InstanceIdentifier, IntervalPointInTime
+from . import ConceptDescriptor, InstanceIdentifier, IntervalPointInTime, PhysicalQuantity
 
 
 def _serialize_dataclass(cl):
@@ -37,5 +37,10 @@ SCALAR_REGISTRY: dict[object, ScalarDefinition] = {
         name="IntervalPointInTime",
         serialize=IntervalPointInTime.serialize,
         parse_value=IntervalPointInTime.parse_value,
+    ),
+    PhysicalQuantity: scalar(
+        name="PhysicalQuantity",
+        serialize=_serialize_dataclass(PhysicalQuantity),
+        parse_value=_parse_dataclass(PhysicalQuantity),
     ),
 }

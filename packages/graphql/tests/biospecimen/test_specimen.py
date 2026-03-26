@@ -18,6 +18,7 @@ def test_specimen_query(context: Context, snapshot_json):
                     code
                     formCode
                     description
+                    quantity
                 }
                 producingPerformedSpecimenCollection {
                     id

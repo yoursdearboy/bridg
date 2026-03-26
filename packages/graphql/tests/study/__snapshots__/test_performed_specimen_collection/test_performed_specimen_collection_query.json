@@ -2,30 +2,34 @@
   "PerformedSpecimenCollection": {
     "containingEpoch": null,
     "dateRange": {
-      "high": "2085-02-18T06:52:30.895165+00:00",
-      "low": "2050-10-13T10:27:37.671950+00:00"
+      "high": "2016-05-04T06:37:33.714143+00:00",
+      "low": "2072-11-29T08:33:03.899794+00:00"
     },
     "id": "str",
     "negationIndicator": false,
     "negationReason": {
-      "code": "author",
-      "codeSystem": "Republican",
-      "displayName": "Identify walk."
+      "code": "wish",
+      "codeSystem": "push",
+      "displayName": "Detail food shoulder."
     },
     "producedSpecimen": [
       {
         "id": "str",
         "performingMaterial": {
           "code": {
-            "code": "nothing",
-            "codeSystem": "everyone",
-            "displayName": "Investment on gun young."
+            "code": "discover",
+            "codeSystem": "early",
+            "displayName": "Own night respond."
           },
           "description": null,
           "formCode": {
-            "code": "certainly",
-            "codeSystem": "Mr",
-            "displayName": "Before another body."
+            "code": "science",
+            "codeSystem": "offer",
+            "displayName": "Determine operation speak."
+          },
+          "quantity": {
+            "unit": "s",
+            "value": 35
           }
         }
       },
@@ -33,15 +37,19 @@
         "id": "str",
         "performingMaterial": {
           "code": {
-            "code": "my",
-            "codeSystem": "economy",
-            "displayName": "Protect Democrat."
+            "code": "guy",
+            "codeSystem": "PM",
+            "displayName": "Southern role."
           },
           "description": null,
           "formCode": {
-            "code": "cause",
-            "codeSystem": "several",
-            "displayName": "Office drug list."
+            "code": "not",
+            "codeSystem": "capital",
+            "displayName": "Bad fall pick."
+          },
+          "quantity": {
+            "unit": "kg",
+            "value": 89
           }
         }
       },
@@ -49,24 +57,28 @@
         "id": "str",
         "performingMaterial": {
           "code": {
-            "code": "simply",
-            "codeSystem": "occur",
-            "displayName": "Security arm."
+            "code": "long",
+            "codeSystem": "prove",
+            "displayName": "Class great prove."
           },
           "description": null,
           "formCode": {
-            "code": "pattern",
-            "codeSystem": "me",
-            "displayName": "Try most arm."
+            "code": "write",
+            "codeSystem": "result",
+            "displayName": "Participant commercial."
+          },
+          "quantity": {
+            "unit": "10^9/l",
+            "value": 84
           }
         }
       }
     ],
     "statusCode": {
-      "code": "over",
-      "codeSystem": "employee",
-      "displayName": "Organization people information on."
+      "code": "arrive",
+      "codeSystem": "drop",
+      "displayName": "Support."
     },
-    "statusDate": "2006-11-07T17:48:00.893320+00:00"
+    "statusDate": "2037-12-11T14:38:24.881114+00:00"
   }
 }

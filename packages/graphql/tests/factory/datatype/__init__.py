@@ -10,6 +10,9 @@ from .ii import (
 from .ivl_ts import (
     IntervalPointInTimeFactory,
 )
+from .pq import (
+    PhysicalQuantityFactory,
+)
 from .tel import (
     TelecommunicationAddressInputFactory,
 )
@@ -21,6 +24,7 @@ __all__ = [
     "EntityNameInputFactory",
     "InstanceIdentifierFactory",
     "IntervalPointInTimeFactory",
+    "PhysicalQuantityFactory",
     "PostalAddressInputFactory",
     "TelecommunicationAddressInputFactory",
     "URLInputFactoryy",

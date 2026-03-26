@@ -1,3 +1,4 @@
+from strawberry import Some
 from syrupy.matchers import path_type
 
 from bridg.alchemy.factory import PerformedSpecimenCollectionFactory, SpecimenFactory
@@ -33,6 +34,7 @@ def test_performed_specimen_collection_query(context: Context, snapshot_json):
                         code
                         formCode
                         description
+                        quantity
                     }
                 }
             }
@@ -67,13 +69,14 @@ def test_performed_specimen_collection_create(context: Context, snapshot_json):
                         code
                         formCode
                         description
+                        quantity
                     }
                 }
             }
         }
     """
     input = PerformedSpecimenCollectionInputFactory.build(
-        produced_specimen=SpecimenInputFactory.batch(3),
+        produced_specimen=Some(SpecimenInputFactory.batch(3)),
     )
     result = schema.execute_sync(query, dict(input=process_input(input)), context_value=context)
     assert result.errors is None

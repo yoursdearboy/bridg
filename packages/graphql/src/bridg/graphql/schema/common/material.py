@@ -2,7 +2,7 @@ from typing import List, Optional
 
 import strawberry
 
-from ..datatype import ConceptDescriptor
+from ..datatype import ConceptDescriptor, PhysicalQuantity
 from .id import ID, IDInput
 
 
@@ -14,6 +14,7 @@ class Material:
     code: Optional[ConceptDescriptor]
     form_code: Optional[ConceptDescriptor]
     description: Optional[str]
+    quantity: Optional[PhysicalQuantity]
 
 
 @strawberry.input
@@ -24,3 +25,4 @@ class MaterialInput:
     code: strawberry.Maybe[Optional[ConceptDescriptor]]
     form_code: strawberry.Maybe[Optional[ConceptDescriptor]]
     description: strawberry.Maybe[Optional[str]]
+    quantity: strawberry.Maybe[Optional[PhysicalQuantity]]
