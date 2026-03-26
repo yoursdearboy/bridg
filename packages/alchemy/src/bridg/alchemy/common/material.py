@@ -51,7 +51,7 @@ class Material(Base):
     description: Mapped[Optional[str]]
 
     quantity: Mapped[Optional[PhysicalQuantity]] = composite(
-        lambda value, unit: PhysicalQuantity(value, unit) if value is not None else None,
+        PhysicalQuantity._composite_factory,
         mapped_column("quantity_value", Numeric, nullable=True),
         mapped_column("quantity_unit", String, nullable=True),
     )
