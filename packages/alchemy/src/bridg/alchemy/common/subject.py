@@ -11,6 +11,7 @@ from .biologic_entity import BiologicEntity
 from .organization import Organization
 
 if TYPE_CHECKING:
+    from ..biospecimen import Specimen
     from ..study import PerformedActivity, ScheduledActivity
 
 
@@ -45,6 +46,9 @@ class Subject(Base):
 
     performing_organization_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("organization.id"))
     performing_organization: Mapped[Optional[Organization]] = relationship(back_populates="performed_subject")
+
+    performing_specimen_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("specimen.id"))
+    performing_specimen: Mapped[Optional[Specimen]] = relationship(back_populates="performed_subject")
 
     involving_performed_activity: Mapped[List[PerformedActivity]] = relationship(back_populates="involved_subject")
     involving_scheduled_activity: Mapped[List[ScheduledActivity]] = relationship(back_populates="involved_subject")

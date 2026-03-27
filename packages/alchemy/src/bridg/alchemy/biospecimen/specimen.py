@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from typing import Optional
+from typing import List, Optional
 from uuid import UUID, uuid4
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..common import Material
+from ..common import Material, Subject
 from ..db import Base
 from ..study import PerformedSpecimenCollection
 
@@ -42,8 +42,12 @@ class Specimen(Base):
     )
 
     producing_performed_specimen_collection_id: Mapped[Optional[UUID]] = mapped_column(
-        ForeignKey("performed_activity.id")
+        ForeignKey("performed_activity.id", use_alter=True)
     )
     producing_performed_specimen_collection: Mapped[Optional[PerformedSpecimenCollection]] = relationship(
         back_populates="produced_specimen"
+    )
+
+    performed_subject: Mapped[List[Subject]] = relationship(
+        back_populates="performing_specimen",
     )

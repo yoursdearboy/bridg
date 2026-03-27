@@ -1,4 +1,4 @@
-from polyfactory import Ignore, Require
+from polyfactory import Ignore
 
 from bridg.alchemy.common import StudySubject
 
@@ -10,8 +10,10 @@ class StudySubjectFactory(BaseFactory[StudySubject]):
 
     id = Ignore()
     type = Ignore()
-    performing_biologic_entity = Require()
-    performing_organization = Require()
+    performing_biologic_entity = None
+    performing_organization = None
+    performing_specimen = None
+    performing_specimen_id = None
     assigned_study_subject_protocol_version_relationship = Ignore()
     assigned_study_site_protocol_version_relationship = Ignore()
     involving_performed_activity = Ignore()
