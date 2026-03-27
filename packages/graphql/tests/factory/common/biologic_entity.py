@@ -8,7 +8,9 @@ from ..datatype import EntityNameInputFactory
 from ..maybe import make_some
 
 
-class BiologicEntityInputFactory(BaseFactory[BiologicEntityInput]):
+class BiologicEntityInputBaseFactory[T: BiologicEntityInput](BaseFactory[T]):
+    __is_base_factory__ = True
+
     id = None
     # administrative_gender_code
     birth_date = Use(make_some(lambda: BaseFactory.__faker__.date_this_century(after_today=True)))
@@ -18,6 +20,10 @@ class BiologicEntityInputFactory(BaseFactory[BiologicEntityInput]):
 
     identifier = Ignore()
     name = Ignore()
+
+
+class BiologicEntityInputFactory(BiologicEntityInputBaseFactory[BiologicEntityInput]):
+    type = "biologic_entity"
 
 
 class BiologicEntityNameInputFactory(EntityNameInputFactory[BiologicEntityNameInput]):

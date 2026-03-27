@@ -7,10 +7,12 @@ from .biospecimen import (
 )
 from .common import (
     ActivityInputFactory,
+    BiologicEntityInputBaseFactory,
     BiologicEntityInputFactory,
     BiologicEntityNameInputFactory,
     IDInputFactory,
     MaterialInputFactory,
+    PersonInputFactory,
 )
 from .datatype import (
     EntityNameInputFactory,
@@ -34,6 +36,7 @@ from .study import (
 __all__ = [
     "ActivityInputFactory",
     "BaseFactory",
+    "BiologicEntityInputBaseFactory",
     "BiologicEntityInputFactory",
     "BiologicEntityNameInputFactory",
     "EntityNameInputFactory",
@@ -46,6 +49,7 @@ __all__ = [
     "PerformedEncounterInputFactory",
     "PerformedSpecimenCollectionInputFactory",
     "PerformedSpecimenMoveInputFactory",
+    "PersonInputFactory",
     "PhysicalQuantityFactory",
     "PostalAddressInputFactory",
     "SpecimenInputFactory",
