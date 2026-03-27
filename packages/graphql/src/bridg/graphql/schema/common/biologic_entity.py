@@ -59,6 +59,8 @@ class BiologicEntityFilter:
 @strawberry.input
 class BiologicEntityInput:
     id: strawberry.Maybe[strawberry.ID]
+    type: str = "biologic_entity"
+
     administrative_gender_code: strawberry.Maybe[Optional[bridg.alchemy.AdministrativeGender]]
     birth_date: strawberry.Maybe[Optional[date]]
     death_date: strawberry.Maybe[Optional[date]]

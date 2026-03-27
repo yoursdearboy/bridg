@@ -31,7 +31,7 @@ class PersonFilter(BiologicEntityFilter):
 
 @strawberry.input
 class PersonInput(BiologicEntityInput):
-    pass
+    type = "person"
 
 
 @strawberry.type
