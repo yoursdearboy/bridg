@@ -12,6 +12,7 @@ from .organization import Organization
 
 if TYPE_CHECKING:
     from ...context import Context
+    from ..biospecimen import Specimen, SpecimenInput
     from ..study import PerformedActivityInterface
 
 
@@ -20,6 +21,7 @@ class SubjectInterface:
     id: strawberry.ID
     performing_biologic_entity: Optional[BiologicEntity]
     performing_organization: Optional[Organization]
+    performing_specimen: Optional[Annotated[Specimen, strawberry.lazy("..biospecimen")]]
     involving_performed_activity: List[Annotated[PerformedActivityInterface, strawberry.lazy("..study")]]
 
 
@@ -35,10 +37,25 @@ class SubjectInput:
     id: strawberry.Maybe[strawberry.ID]
     performing_biologic_entity_id: strawberry.Maybe[strawberry.ID]
     performing_biologic_entity: strawberry.Maybe[BiologicEntityInput]
+    performing_specimen_id: strawberry.Maybe[strawberry.ID]
+    performing_specimen: strawberry.Maybe[Annotated[SpecimenInput, strawberry.lazy("..biospecimen")]]
 
     def __post_init__(self):
-        if self.performing_biologic_entity_id is not None and self.performing_biologic_entity is not None:
-            raise ValueError("Use either performing_biologic_entity_id or performing_biologic_entity")
+        performing = [
+            self.performing_biologic_entity,
+            self.performing_biologic_entity_id,
+            self.performing_specimen,
+            self.performing_specimen_id,
+        ]
+        count = sum(pe is not None for pe in performing)
+        if count > 1:
+            raise ValueError(
+                "Use one of: "
+                "performing_biologic_entity_id,"
+                "performing_biologic_entity,"
+                "performing_specimen_id,"
+                "performing_specimen"
+            )
 
 
 @strawberry.type

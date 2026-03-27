@@ -167,6 +167,8 @@ def test_subject_create(context: Context, snapshot_json):
             )
         ),
         performing_biologic_entity_id=None,
+        performing_specimen=None,
+        performing_specimen_id=None,
     )
     result = schema.execute_sync(query, dict(input=process_input(input)), context_value=context)
     assert result.errors is None
@@ -195,6 +197,8 @@ def test_subject_create_using_existing_biologic_entity(context: Context, snapsho
         id=None,
         performing_biologic_entity=None,
         performing_biologic_entity_id=Some(strawberry.ID(str(p.id))),
+        performing_specimen=None,
+        performing_specimen_id=None,
     )
     result = schema.execute_sync(query, dict(input=process_input(input)), context_value=context)
     assert result.errors is None
@@ -231,4 +235,7 @@ def test_subject_create_fails_if_biologic_entity_and_id_provided(context: Contex
     )
     result = schema.execute_sync(query, dict(input=process_input(input)), context_value=context)
     assert result.errors is not None
-    assert result.errors[0].message == "Use either performing_biologic_entity_id or performing_biologic_entity"
+    assert (
+        result.errors[0].message
+        == "Use one of: performing_biologic_entity_id,performing_biologic_entity,performing_specimen_id,performing_specimen"
+    )
