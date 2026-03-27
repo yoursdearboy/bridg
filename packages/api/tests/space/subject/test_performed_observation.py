@@ -24,7 +24,6 @@ def test_performed_observation_show(snapshot_json):
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     pobs = PerformedObservationFactory.create_sync(
@@ -42,7 +41,6 @@ def test_performed_observation_create(snapshot_json):
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     pobs = PerformedObservationDataFactory.build(
@@ -58,7 +56,6 @@ def test_performed_observation_update(random, snapshot_json):
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     pobs = PerformedObservationFactory.create_sync(

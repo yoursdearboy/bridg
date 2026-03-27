@@ -11,7 +11,9 @@ class StudySubjectFactory(BaseFactory[StudySubject]):
     id = Ignore()
     type = Ignore()
     performing_biologic_entity = None
+    performing_biologic_entity_id = None
     performing_organization = None
+    performing_organization_id = None
     performing_specimen = None
     performing_specimen_id = None
     assigned_study_subject_protocol_version_relationship = Ignore()

@@ -19,7 +19,6 @@ def test_subject_index():
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     s = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     response = client.get(f"/space/{space.id}/subject")
@@ -32,7 +31,6 @@ def test_subject_show():
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     s = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     response = client.get(f"/space/{space.id}/subject/{s.id}")
@@ -51,7 +49,7 @@ def test_subject_create(session: Session):
     space = StudyProtocolVersionFactory.create_sync()
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     p = PersonFactory.build()
-    s = StudySubjectFactory.build(performing_biologic_entity=p, performing_organization=None)
+    s = StudySubjectFactory.build(performing_biologic_entity=p)
     id = p.identifier[0]
     en = p.name[0]
     response = client.post(
@@ -106,7 +104,6 @@ def test_subject_update(session):
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     s = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     patch = StudySubjectFactory.build(
@@ -141,7 +138,6 @@ def test_subject_lookup(session: Session):
     for p in [p1, p2, p3]:
         StudySubjectFactory.create_sync(
             performing_biologic_entity=p,
-            performing_organization=None,
             assigned_study_site_protocol_version_relationship=[sspvr],
         )
     query = {

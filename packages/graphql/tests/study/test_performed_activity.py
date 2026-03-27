@@ -21,7 +21,6 @@ def test_performed_activity_query(context: Context, snapshot_json):
         performing_biologic_entity=PersonFactory.build(
             name=BiologicEntityNameFactory.batch(1, family="Test", given="First")
         ),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     act = PerformedActivityFactory.create_sync(
@@ -88,7 +87,6 @@ def test_performed_activity_list_query(context: Context, snapshot_json):
         performing_biologic_entity=PersonFactory.build(
             name=BiologicEntityNameFactory.batch(1, family="Test", given="First")
         ),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     PerformedActivityFactory.create_batch_sync(
@@ -139,7 +137,6 @@ def test_performed_activity_delete(context: Context, snapshot_json):
         performing_biologic_entity=PersonFactory.build(
             name=BiologicEntityNameFactory.batch(1, family="Test", given="First")
         ),
-        performing_organization=None,
     )
     act = PerformedActivityFactory.create_sync(
         involved_subject=ss,

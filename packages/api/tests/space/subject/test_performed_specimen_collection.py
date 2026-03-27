@@ -25,7 +25,6 @@ def test_performed_specimen_collection_show(snapshot_json):
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     psc = PerformedSpecimenCollectionFactory.create_sync(
@@ -43,7 +42,6 @@ def test_performed_specimen_collection_create(snapshot_json):
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     psc = PerformedSpecimenCollectionDataFactory.build(
@@ -65,7 +63,6 @@ def test_performed_specimen_collection_update(random, snapshot_json):
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     psc = PerformedSpecimenCollectionFactory.create_sync(

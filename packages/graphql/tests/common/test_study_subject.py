@@ -25,7 +25,6 @@ def test_study_subject_list_query(context: Context, snapshot_json):
                     BiologicEntityNameFactory.build(family="Test"),
                 ]
             ),
-            performing_organization=None,
             assigned_study_site_protocol_version_relationship=[sspvr],
         )
     spv2 = StudyProtocolVersionFactory.create_sync()
@@ -37,7 +36,6 @@ def test_study_subject_list_query(context: Context, snapshot_json):
                     BiologicEntityNameFactory.build(family="Test"),
                 ]
             ),
-            performing_organization=None,
             assigned_study_site_protocol_version_relationship=[sspvr2],
         )
 
@@ -71,7 +69,6 @@ def test_study_subject_list_filter_by_spv_id_query(context: Context, snapshot_js
                     BiologicEntityNameFactory.build(family="Test"),
                 ]
             ),
-            performing_organization=None,
             assigned_study_site_protocol_version_relationship=[sspvr],
         )
     spv2 = StudyProtocolVersionFactory.create_sync()
@@ -83,7 +80,6 @@ def test_study_subject_list_filter_by_spv_id_query(context: Context, snapshot_js
                     BiologicEntityNameFactory.build(family="Test"),
                 ]
             ),
-            performing_organization=None,
             assigned_study_site_protocol_version_relationship=[sspvr2],
         )
 
@@ -149,6 +145,8 @@ def test_study_subject_create_using_existing_biologic_entity(context: Context, s
         id=None,
         performing_biologic_entity=None,
         performing_biologic_entity_id=Some(strawberry.ID(str(p.id))),
+        performing_specimen=None,
+        performing_specimen_id=None,
         status=None,
         status_date=None,
         assigned_study_site_protocol_version_relationship=[

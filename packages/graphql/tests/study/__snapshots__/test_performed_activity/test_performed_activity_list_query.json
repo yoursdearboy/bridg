@@ -3,8 +3,8 @@
     {
       "containingEpoch": null,
       "dateRange": {
-        "high": "2017-11-12T06:14:18.501767+00:00",
-        "low": "2050-01-21T21:47:12.119609+00:00"
+        "high": "2026-05-04T06:50:30.798262+00:00",
+        "low": "2087-08-02T12:41:15.127890+00:00"
       },
       "id": "str",
       "involvedSubject": {
@@ -20,23 +20,23 @@
       "nameCodeModifiedText": null,
       "negationIndicator": false,
       "negationReason": {
-        "code": "truth",
-        "codeSystem": "process",
-        "displayName": "Success medical."
+        "code": "could",
+        "codeSystem": "movement",
+        "displayName": "That fear."
       },
       "repetitionNumber": 1,
       "statusCode": {
-        "code": "decide",
-        "codeSystem": "claim",
-        "displayName": "Several much single."
+        "code": "purpose",
+        "codeSystem": "movement",
+        "displayName": "Current hear claim well."
       },
-      "statusDate": "2091-04-06T17:33:50.290811+00:00"
+      "statusDate": "2050-01-21T21:47:12.119609+00:00"
     },
     {
       "containingEpoch": null,
       "dateRange": {
-        "high": "2000-01-21T21:19:26.924719+00:00",
-        "low": "2053-01-13T04:01:44.566653+00:00"
+        "high": "2091-11-06T23:23:49.874181+00:00",
+        "low": "2092-03-29T21:42:54.251926+00:00"
       },
       "id": "str",
       "involvedSubject": {
@@ -52,17 +52,17 @@
       "nameCodeModifiedText": null,
       "negationIndicator": false,
       "negationReason": {
-        "code": "after",
-        "codeSystem": "brother",
-        "displayName": "These story film."
+        "code": "middle",
+        "codeSystem": "after",
+        "displayName": "Upon these."
       },
       "repetitionNumber": 1,
       "statusCode": {
-        "code": "article",
-        "codeSystem": "effect",
-        "displayName": "Water beat magazine."
+        "code": "theory",
+        "codeSystem": "surface",
+        "displayName": "Dream drive."
       },
-      "statusDate": "2032-05-31T19:11:58.453067+00:00"
+      "statusDate": "2059-11-23T10:49:21.856213+00:00"
     }
   ]
 }

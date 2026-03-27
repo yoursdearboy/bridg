@@ -34,7 +34,6 @@ def test_subject_query(context: Context, snapshot_json):
                 )
             ],
         ),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
 
@@ -78,7 +77,6 @@ def test_subject_list_query(context: Context, snapshot_json):
                 )
             ],
         ),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
 
@@ -111,7 +109,6 @@ def test_subject_involving_performed_activity_query(context: Context, snapshot_j
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     PerformedActivityFactory.create_batch_sync(

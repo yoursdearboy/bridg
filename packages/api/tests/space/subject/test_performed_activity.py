@@ -18,7 +18,6 @@ def test_performed_activity_show(snapshot_json):
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     act = PerformedActivityFactory.create_sync(
@@ -35,7 +34,6 @@ def test_performed_activity_create(snapshot_json):
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     act = PerformedActivityDataFactory.build()
@@ -49,7 +47,6 @@ def test_performed_activity_update(snapshot_json):
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
         performing_biologic_entity=PersonFactory.build(),
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     act = PerformedActivityFactory.create_sync(

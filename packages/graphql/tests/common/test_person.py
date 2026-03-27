@@ -229,7 +229,6 @@ def test_person_performed_subject_involving_performed_activity_query(context: Co
     sspvr = space.executing_study_site_protocol_version_relationship[0]
     ss = StudySubjectFactory.create_sync(
         performing_biologic_entity=person,
-        performing_organization=None,
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
     PerformedActivityFactory.create_batch_sync(
