@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Annotated, Optional
+from typing import TYPE_CHECKING, Annotated, List, Optional
 from uuid import UUID
 
 import strawberry
 
 import bridg.alchemy
 
-from ..common import Material, MaterialInput
+from ..common import Material, MaterialInput, Subject
 
 if TYPE_CHECKING:
     from ...context import Context
@@ -21,6 +21,7 @@ class Specimen:
     producing_performed_specimen_collection: Optional[
         Annotated[PerformedSpecimenCollection, strawberry.lazy("..study")]
     ]
+    performed_subject: List[Subject]
 
 
 @strawberry.input
