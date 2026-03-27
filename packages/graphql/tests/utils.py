@@ -8,6 +8,7 @@ from strawberry import Some
 from strawberry.utils.str_converters import to_camel_case
 
 from bridg.graphql.maybe import _annotation_is_maybe
+from bridg.graphql.private import _annotation_is_private
 
 
 def process_input(x: Any) -> Any:
@@ -19,6 +20,8 @@ def process_input(x: Any) -> Any:
                 if field_value is None:
                     continue
                 field_value = field_value
+            if _annotation_is_private(field.type):
+                continue
             result[field.name] = field_value
         return process_input(result)
     if isinstance(x, Some):

@@ -14,6 +14,7 @@ class PerformedActivityInputFactory[T: PerformedActivityInput](ActivityInputFact
     __is_base_factory__ = True
 
     id = None
+    type = Ignore()
     repetition_number = 1
     name_code_modified_text = None
     date_range = IntervalPointInTimeFactory

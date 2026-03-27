@@ -43,6 +43,7 @@ class PerformedActivity(PerformedActivityInterface):
 @strawberry.input
 class PerformedActivityInput(ActivityInput):
     id: strawberry.Maybe[strawberry.ID]
+    type: strawberry.Private[str] = "activity"
     repetition_number: strawberry.Maybe[Optional[int]]
     name_code_modified_text: strawberry.Maybe[Optional[str]]
     date_range: strawberry.Maybe[Optional[IntervalPointInTime]]

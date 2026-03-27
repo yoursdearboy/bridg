@@ -26,6 +26,7 @@ class PerformedSpecimenCollection(PerformedActivityInterface):
 
 @strawberry.input
 class PerformedSpecimenCollectionInput(PerformedActivityInput):
+    type: strawberry.Private[str] = "specimen_collection"
     # FIXME: replace with relative module name
     produced_specimen: strawberry.Maybe[
         List[Annotated[SpecimenInput, strawberry.lazy("bridg.graphql.schema.biospecimen")]]

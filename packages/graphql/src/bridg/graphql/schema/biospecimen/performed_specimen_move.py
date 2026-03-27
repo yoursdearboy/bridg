@@ -22,7 +22,7 @@ class PerformedSpecimenMove(PerformedActivityInterface):
 
 @strawberry.input
 class PerformedSpecimenMoveInput(PerformedActivityInput):
-    pass
+    type: strawberry.Private[str] = "specimen_move"
 
 
 @strawberry.type
