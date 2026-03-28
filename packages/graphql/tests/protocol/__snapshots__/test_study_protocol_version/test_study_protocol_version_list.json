@@ -1,0 +1,66 @@
+{
+  "StudyProtocolVersionList": [
+    {
+      "acronym": "TEST-1",
+      "executingStudySite": [
+        {
+          "id": "str",
+          "lead": true,
+          "performingOrganization": {
+            "id": "str",
+            "primaryName": {
+              "value": "Lead Org LTD"
+            }
+          }
+        },
+        {
+          "id": "str",
+          "lead": false,
+          "performingOrganization": {
+            "id": "str",
+            "primaryName": {
+              "value": "James LLC"
+            }
+          }
+        },
+        {
+          "id": "str",
+          "lead": false,
+          "performingOrganization": {
+            "id": "str",
+            "primaryName": {
+              "value": "Miles-Sutton"
+            }
+          }
+        }
+      ],
+      "id": "str"
+    },
+    {
+      "acronym": "TEST-2",
+      "executingStudySite": [
+        {
+          "id": "str",
+          "lead": true,
+          "performingOrganization": {
+            "id": "str",
+            "primaryName": {
+              "value": "Lead Org LTD"
+            }
+          }
+        },
+        {
+          "id": "str",
+          "lead": false,
+          "performingOrganization": {
+            "id": "str",
+            "primaryName": {
+              "value": "Baker, Richards and Hurst"
+            }
+          }
+        }
+      ],
+      "id": "str"
+    }
+  ]
+}
