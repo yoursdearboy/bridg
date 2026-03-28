@@ -21,6 +21,12 @@ class StudyProtocolVersion:
 
 @strawberry.type
 class StudyProtocolVersionQuery:
+    @strawberry.field(name="StudyProtocolVersionList")
+    def study_protocol_version_list(self, *, info: strawberry.Info[Context]) -> List[StudyProtocolVersion]:
+        session = info.context.session
+        query = session.query(bridg.alchemy.StudyProtocolVersion)
+        return query.all()  # type: ignore
+
     @strawberry.field(name="StudyProtocolVersion")
     def study_protocol_version(
         self, id: strawberry.ID, *, info: strawberry.Info[Context]
