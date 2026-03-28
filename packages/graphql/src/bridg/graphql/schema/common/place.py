@@ -1,11 +1,16 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import TYPE_CHECKING, List, Optional
 
 import strawberry
 
+import bridg.alchemy
+
 from ..common import ID
 from ..datatype import ConceptDescriptor
+
+if TYPE_CHECKING:
+    from ...context import Context
 
 
 @strawberry.type
@@ -27,3 +32,12 @@ class Place:
 class PlaceName:
     id: strawberry.ID
     value: Optional[str]
+
+
+@strawberry.type
+class PlaceQuery:
+    @strawberry.field(name="PlaceList")
+    def place_list(self, *, info: strawberry.Info[Context]) -> List[Place]:
+        session = info.context.session
+        query = session.query(bridg.alchemy.Place)
+        return query.all()  # type: ignore

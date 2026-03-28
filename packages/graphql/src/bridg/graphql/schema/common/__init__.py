@@ -36,6 +36,7 @@ from .person import (
 from .place import (
     Place,
     PlaceName,
+    PlaceQuery,
 )
 from .project import (
     Project,
@@ -80,6 +81,7 @@ __all__ = [
     "PersonQuery",
     "Place",
     "PlaceName",
+    "PlaceQuery",
     "Project",
     "StudySubject",
     "StudySubjectCreateInput",

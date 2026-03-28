@@ -1,0 +1,37 @@
+{
+  "PlaceList": [
+    {
+      "id": "str",
+      "primaryName": {
+        "value": "play"
+      },
+      "typeCode": {
+        "code": "agreement",
+        "codeSystem": "option",
+        "displayName": "Respond red."
+      }
+    },
+    {
+      "id": "str",
+      "primaryName": {
+        "value": "surface"
+      },
+      "typeCode": {
+        "code": "animal",
+        "codeSystem": "show",
+        "displayName": "Movie win her."
+      }
+    },
+    {
+      "id": "str",
+      "primaryName": {
+        "value": "long"
+      },
+      "typeCode": {
+        "code": "prove",
+        "codeSystem": "they",
+        "displayName": "Class great prove."
+      }
+    }
+  ]
+}
