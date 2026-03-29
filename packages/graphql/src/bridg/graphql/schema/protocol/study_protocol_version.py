@@ -7,6 +7,8 @@ import strawberry
 
 import bridg.alchemy
 
+from .epoch import Epoch
+
 if TYPE_CHECKING:
     from ...context import Context
     from ..study import StudySite
@@ -17,6 +19,7 @@ class StudyProtocolVersion:
     id: strawberry.ID
     acronym: Optional[str]
     executing_study_site: List[Annotated[StudySite, strawberry.lazy("..study")]]
+    subdividing_epoch: List[Epoch]
 
 
 @strawberry.type
