@@ -41,6 +41,11 @@ class PerformedActivity(PerformedActivityInterface):
 
 
 @strawberry.input
+class PerformedActivityFilter:
+    involved_subject_id: strawberry.Maybe[Optional[strawberry.ID]]
+
+
+@strawberry.input
 class PerformedActivityInput(ActivityInput):
     id: strawberry.Maybe[strawberry.ID]
     type: strawberry.Private[str] = "activity"
@@ -72,9 +77,17 @@ class PerformedActivityQuery:
         return query.one_or_none()  # type: ignore
 
     @strawberry.field(name="PerformedActivityList")
-    def performed_activity_list(self, *, info: strawberry.Info[Context]) -> List[PerformedActivityInterface]:
+    def performed_activity_list(
+        self, filter: Optional[PerformedActivityFilter] = None, *, info: strawberry.Info[Context]
+    ) -> List[PerformedActivityInterface]:
+        converter = info.context.converter
         session = info.context.session
         query = session.query(bridg.alchemy.PerformedActivity)
+        if filter and filter.involved_subject_id:
+            query = query.filter(
+                bridg.alchemy.PerformedActivity.involved_subject_id
+                == converter.convert(filter.involved_subject_id.value, UUID)
+            )
         return query.all()  # type: ignore
 
 
