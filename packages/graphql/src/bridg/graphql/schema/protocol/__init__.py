@@ -1,5 +1,6 @@
 from .defined_activity import (
     DefinedActivity,
+    DefinedActivityQuery,
 )
 from .epoch import (
     Epoch,
@@ -9,4 +10,4 @@ from .study_protocol_version import (
     StudyProtocolVersionQuery,
 )
 
-__all__ = ["DefinedActivity", "Epoch", "StudyProtocolVersion", "StudyProtocolVersionQuery"]
+__all__ = ["DefinedActivity", "DefinedActivityQuery", "Epoch", "StudyProtocolVersion", "StudyProtocolVersionQuery"]

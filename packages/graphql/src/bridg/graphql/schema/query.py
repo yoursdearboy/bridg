@@ -12,6 +12,7 @@ from .common import (
     SubjectQuery,
 )
 from .protocol import (
+    DefinedActivityQuery,
     StudyProtocolVersionQuery,
 )
 from .study import (
@@ -33,5 +34,6 @@ class Query(
     SubjectQuery,
     PlaceQuery,
     PersonQuery,
+    DefinedActivityQuery,
     CodeSystemQuery,
 ): ...

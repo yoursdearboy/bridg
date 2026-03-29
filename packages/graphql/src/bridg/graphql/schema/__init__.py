@@ -72,6 +72,7 @@ from .mutation import (
 )
 from .protocol import (
     DefinedActivity,
+    DefinedActivityQuery,
     Epoch,
     StudyProtocolVersion,
     StudyProtocolVersionQuery,
@@ -118,6 +119,7 @@ __all__ = [
     "CodeSystemQuery",
     "ConceptDescriptor",
     "DefinedActivity",
+    "DefinedActivityQuery",
     "EntityName",
     "EntityNameInput",
     "Epoch",
