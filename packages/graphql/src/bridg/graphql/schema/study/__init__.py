@@ -1,5 +1,6 @@
 from .performed_activity import (
     PerformedActivity,
+    PerformedActivityFilter,
     PerformedActivityInput,
     PerformedActivityInterface,
     PerformedActivityMutation,
@@ -27,6 +28,7 @@ from .study_site_protocol_version_relationship import (
 
 __all__ = [
     "PerformedActivity",
+    "PerformedActivityFilter",
     "PerformedActivityInput",
     "PerformedActivityInterface",
     "PerformedActivityMutation",

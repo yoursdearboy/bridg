@@ -71,6 +71,7 @@ from .mutation import (
     Mutation,
 )
 from .protocol import (
+    DefinedActivity,
     Epoch,
     StudyProtocolVersion,
     StudyProtocolVersionQuery,
@@ -86,6 +87,7 @@ from .schema import (
 )
 from .study import (
     PerformedActivity,
+    PerformedActivityFilter,
     PerformedActivityInput,
     PerformedActivityInterface,
     PerformedActivityMutation,
@@ -115,6 +117,7 @@ __all__ = [
     "BiologicEntityNameInput",
     "CodeSystemQuery",
     "ConceptDescriptor",
+    "DefinedActivity",
     "EntityName",
     "EntityNameInput",
     "Epoch",
@@ -129,6 +132,7 @@ __all__ = [
     "Organization",
     "OrganizationName",
     "PerformedActivity",
+    "PerformedActivityFilter",
     "PerformedActivityInput",
     "PerformedActivityInterface",
     "PerformedActivityMutation",

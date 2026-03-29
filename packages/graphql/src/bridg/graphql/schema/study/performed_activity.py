@@ -10,7 +10,7 @@ import bridg.alchemy
 
 from ..common import Activity, ActivityInput, Subject
 from ..datatype import ConceptDescriptor, IntervalPointInTime
-from ..protocol import Epoch
+from ..protocol import DefinedActivity, Epoch
 
 if TYPE_CHECKING:
     from ...context import Context
@@ -29,7 +29,7 @@ class PerformedActivityInterface(Activity):
     containing_epoch: Optional[Epoch]
     # TODO: add these properties
     # executing_study_protocol_version: Optional[StudyProtocolVersion]
-    # instantiated_defined_activity: Optional[DefinedActivity]
+    instantiated_defined_activity: Optional[DefinedActivity]
     involved_subject: Optional[Subject]
 
 
@@ -59,7 +59,7 @@ class PerformedActivityInput(ActivityInput):
     containing_epoch_id: strawberry.Maybe[Optional[strawberry.ID]]
     # TODO: add these properties
     # executing_study_protocol_version: Optional[StudyProtocolVersion]
-    # instantiated_defined_activity: Optional[DefinedActivity]
+    instantiated_defined_activity_id: strawberry.Maybe[Optional[strawberry.ID]]
     involved_subject_id: strawberry.Maybe[Optional[strawberry.ID]]
 
 
