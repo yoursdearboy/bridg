@@ -40,7 +40,7 @@ SCALAR_REGISTRY: dict[object, ScalarDefinition] = {
     ),
     PhysicalQuantity: scalar(
         name="PhysicalQuantity",
-        serialize=_serialize_dataclass(PhysicalQuantity),
-        parse_value=_parse_dataclass(PhysicalQuantity),
+        serialize=PhysicalQuantity.serialize,
+        parse_value=PhysicalQuantity.parse_value,
     ),
 }
