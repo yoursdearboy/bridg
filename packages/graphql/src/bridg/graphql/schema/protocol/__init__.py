@@ -1,6 +1,13 @@
 from .defined_activity import (
     DefinedActivity,
+    DefinedActivityInterface,
     DefinedActivityQuery,
+)
+from .defined_observation import (
+    DefinedObservation,
+)
+from .defined_observation_result import (
+    DefinedObservationResult,
 )
 from .epoch import (
     Epoch,
@@ -10,4 +17,13 @@ from .study_protocol_version import (
     StudyProtocolVersionQuery,
 )
 
-__all__ = ["DefinedActivity", "DefinedActivityQuery", "Epoch", "StudyProtocolVersion", "StudyProtocolVersionQuery"]
+__all__ = [
+    "DefinedActivity",
+    "DefinedActivityInterface",
+    "DefinedActivityQuery",
+    "DefinedObservation",
+    "DefinedObservationResult",
+    "Epoch",
+    "StudyProtocolVersion",
+    "StudyProtocolVersionQuery",
+]

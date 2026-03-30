@@ -12,6 +12,12 @@ from .performed_encounter import (
     PerformedEncounterMutation,
     PerformedEncounterQuery,
 )
+from .performed_observation import (
+    PerformedObservation,
+)
+from .performed_observation_result import (
+    PerformedObservationResult,
+)
 from .performed_specimen_collection import (
     PerformedSpecimenCollection,
     PerformedSpecimenCollectionInput,
@@ -37,6 +43,8 @@ __all__ = [
     "PerformedEncounterInput",
     "PerformedEncounterMutation",
     "PerformedEncounterQuery",
+    "PerformedObservation",
+    "PerformedObservationResult",
     "PerformedSpecimenCollection",
     "PerformedSpecimenCollectionInput",
     "PerformedSpecimenCollectionMutation",
