@@ -25,8 +25,8 @@ def _parse_dataclass(cl):
 SCALAR_REGISTRY: dict[object, ScalarDefinition] = {
     ConceptDescriptor: scalar(
         name="ConceptDescriptor",
-        serialize=_serialize_dataclass(ConceptDescriptor),
-        parse_value=_parse_dataclass(ConceptDescriptor),
+        serialize=ConceptDescriptor.serialize,
+        parse_value=ConceptDescriptor.parse_value,
     ),
     InstanceIdentifier: scalar(
         name="InstanceIdentifier",

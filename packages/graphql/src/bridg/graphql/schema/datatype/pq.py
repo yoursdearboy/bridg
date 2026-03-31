@@ -10,7 +10,10 @@ class PhysicalQuantity:
 
     @classmethod
     def serialize(cls, x: Self) -> dict:
-        return {"value": float(x.value) if x.value else None, "unit": x.unit}
+        return {
+            "value": float(x.value) if x.value else None,
+            "unit": x.unit,
+        }
 
     @classmethod
     def parse_value(cls, x: dict) -> Self:
