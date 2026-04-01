@@ -3,7 +3,7 @@ from typing import Optional
 
 import strawberry
 
-from ..datatype import ConceptDescriptor
+from ..datatype import ConceptDescriptor, DataValue
 
 
 @strawberry.type
@@ -21,4 +21,4 @@ class PerformedObservationResult:
 
     comment: Optional[str]
 
-    value: None
+    value: Optional[DataValue]

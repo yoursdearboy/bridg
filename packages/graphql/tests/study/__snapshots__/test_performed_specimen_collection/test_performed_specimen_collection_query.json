@@ -29,7 +29,7 @@
           },
           "quantity": {
             "unit": "s",
-            "value": 35
+            "value": 35.0
           }
         }
       },
@@ -49,7 +49,7 @@
           },
           "quantity": {
             "unit": "kg",
-            "value": 89
+            "value": 89.0
           }
         }
       },
@@ -69,7 +69,7 @@
           },
           "quantity": {
             "unit": "10^9/l",
-            "value": 84
+            "value": 84.0
           }
         }
       }

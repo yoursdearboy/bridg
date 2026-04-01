@@ -22,7 +22,7 @@
           },
           "quantity": {
             "unit": "m",
-            "value": 96
+            "value": 96.0
           }
         }
       },
@@ -34,7 +34,7 @@
           "formCode": null,
           "quantity": {
             "unit": "10^9/l",
-            "value": 75
+            "value": 75.0
           }
         }
       },
@@ -46,7 +46,7 @@
           "formCode": null,
           "quantity": {
             "unit": "s",
-            "value": 69
+            "value": 69.0
           }
         }
       }

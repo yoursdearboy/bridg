@@ -55,6 +55,7 @@ from .common import (
 )
 from .datatype import (
     ConceptDescriptor,
+    DataValue,
     EntityName,
     EntityNameInput,
     InstanceIdentifier,
@@ -123,6 +124,7 @@ __all__ = [
     "BiologicEntityNameInput",
     "CodeSystemQuery",
     "ConceptDescriptor",
+    "DataValue",
     "DefinedActivity",
     "DefinedActivityInterface",
     "DefinedActivityQuery",

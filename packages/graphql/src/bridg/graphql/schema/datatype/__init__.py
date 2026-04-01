@@ -2,6 +2,9 @@ from .ad import (
     PostalAddress,
     PostalAddressInput,
 )
+from .any import (
+    DataValue,
+)
 from .cd import (
     ConceptDescriptor,
 )
@@ -32,6 +35,7 @@ from .url import (
 
 __all__ = [
     "ConceptDescriptor",
+    "DataValue",
     "EntityName",
     "EntityNameInput",
     "InstanceIdentifier",
