@@ -10,7 +10,7 @@ from ..base import BaseFactory
 from ..datatype import ConceptDescriptorFactory, PhysicalQuantityFactory
 
 
-class NOT_SET:
+class _NOT_SET:
     pass
 
 
@@ -49,10 +49,10 @@ class PerformedObservationResultFactory(BaseFactory[bridg.alchemy.PerformedObser
 
     @classmethod
     def build(
-        cls, *_: Any, data_type: None | Type | NOT_SET = NOT_SET, **kwargs: Any
+        cls, *_: Any, data_type: None | Type | type[_NOT_SET] = _NOT_SET, **kwargs: Any
     ) -> bridg.alchemy.PerformedObservationResult:
         obj = super().build(**kwargs)
-        if data_type == NOT_SET:
+        if data_type == _NOT_SET:
             if cls.__random__.random() > 0.1:
                 data_type = cls.__random__.choice(get_args(bridg.alchemy.DataValue))
             else:

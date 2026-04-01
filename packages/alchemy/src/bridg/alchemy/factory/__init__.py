@@ -40,7 +40,6 @@ from .protocol import (
     StudyProtocolVersionFactory,
 )
 from .study import (
-    NOT_SET,
     PerformedActivityBaseFactory,
     PerformedActivityFactory,
     PerformedEncounterFactory,
@@ -65,7 +64,6 @@ __all__ = [
     "IDFactory",
     "MaterialFactory",
     "MaterialIdentifierFactory",
-    "NOT_SET",
     "OrganizationFactory",
     "OrganizationNameFactory",
     "PerformedActivityBaseFactory",
