@@ -32,6 +32,10 @@ from .datatype import (
     TelecommunicationAddressFactory,
 )
 from .protocol import (
+    DefinedActivityBaseFactory,
+    DefinedActivityFactory,
+    DefinedObservationFactory,
+    DefinedObservationResultFactory,
     StudyProtocolFactory,
     StudyProtocolVersionFactory,
 )
@@ -53,6 +57,10 @@ __all__ = [
     "BiologicEntityIdentifierFactory",
     "BiologicEntityNameFactory",
     "ConceptDescriptorFactory",
+    "DefinedActivityBaseFactory",
+    "DefinedActivityFactory",
+    "DefinedObservationFactory",
+    "DefinedObservationResultFactory",
     "EntityNameFactory",
     "IDFactory",
     "MaterialFactory",
