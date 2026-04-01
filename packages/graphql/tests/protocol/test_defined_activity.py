@@ -10,7 +10,7 @@ from bridg.graphql.schema import schema
 from ..utils import process_input
 
 
-def test_defined_activity_list_observation_fragment(context: Context, snapshot_json):
+def test_defined_activity_list_query_observation_fragment(context: Context, snapshot_json):
     for i in range(3):
         DefinedObservationFactory.create_sync(
             produced_defined_observation_result=DefinedObservationResultFactory.batch(3 + i),
@@ -46,7 +46,7 @@ def test_defined_activity_list_observation_fragment(context: Context, snapshot_j
     assert result.data == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
 
 
-def test_defined_activity_observation_fragment(context: Context, snapshot_json):
+def test_defined_activity_query_observation_fragment(context: Context, snapshot_json):
     activity = DefinedObservationFactory.create_sync(
         produced_defined_observation_result=DefinedObservationResultFactory.batch(10),
     )
