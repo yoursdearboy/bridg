@@ -1,0 +1,161 @@
+{
+  "DefinedActivity": {
+    "categoryCode": {
+      "code": "policy",
+      "codeSystem": "small",
+      "displayName": "Sing clearly."
+    },
+    "comment": null,
+    "description": "Home protect something. Subject try wonder move. Option production base investment term consider.\nForce lawyer front they everything week. Edge bank affect much yourself glass.",
+    "id": "str",
+    "nameCode": {
+      "code": "yourself",
+      "codeSystem": "discover",
+      "displayName": "Record short cold."
+    },
+    "producedDefinedObservationResult": [
+      {
+        "derivationExpression": null,
+        "id": "str",
+        "targetCodingSystem": null,
+        "targetType": "PQ",
+        "targetUnit": "s",
+        "typeCode": {
+          "code": "kind",
+          "codeSystem": "discussion",
+          "displayName": "Operation speak according."
+        },
+        "valueNegationIndicator": false
+      },
+      {
+        "derivationExpression": null,
+        "id": "str",
+        "targetCodingSystem": null,
+        "targetType": "PQ",
+        "targetUnit": "s",
+        "typeCode": {
+          "code": "on",
+          "codeSystem": "traditional",
+          "displayName": "Response."
+        },
+        "valueNegationIndicator": false
+      },
+      {
+        "derivationExpression": null,
+        "id": "str",
+        "targetCodingSystem": null,
+        "targetType": "IVL_TS",
+        "targetUnit": null,
+        "typeCode": {
+          "code": "education",
+          "codeSystem": "article",
+          "displayName": "There water."
+        },
+        "valueNegationIndicator": false
+      },
+      {
+        "derivationExpression": null,
+        "id": "str",
+        "targetCodingSystem": null,
+        "targetType": "PQ",
+        "targetUnit": "s",
+        "typeCode": {
+          "code": "turn",
+          "codeSystem": "policy",
+          "displayName": "Who up sense."
+        },
+        "valueNegationIndicator": false
+      },
+      {
+        "derivationExpression": null,
+        "id": "str",
+        "targetCodingSystem": "reason",
+        "targetType": "CD",
+        "targetUnit": null,
+        "typeCode": {
+          "code": "family",
+          "codeSystem": "relationship",
+          "displayName": "Democrat car very."
+        },
+        "valueNegationIndicator": false
+      },
+      {
+        "derivationExpression": null,
+        "id": "str",
+        "targetCodingSystem": null,
+        "targetType": "TS_DATE",
+        "targetUnit": null,
+        "typeCode": {
+          "code": "weight",
+          "codeSystem": "artist",
+          "displayName": "Her world."
+        },
+        "valueNegationIndicator": false
+      },
+      {
+        "derivationExpression": null,
+        "id": "str",
+        "targetCodingSystem": null,
+        "targetType": "TS_DATETIME",
+        "targetUnit": null,
+        "typeCode": {
+          "code": "international",
+          "codeSystem": "call",
+          "displayName": "East organization people."
+        },
+        "valueNegationIndicator": false
+      },
+      {
+        "derivationExpression": null,
+        "id": "str",
+        "targetCodingSystem": null,
+        "targetType": "PQ",
+        "targetUnit": "s",
+        "typeCode": {
+          "code": "offer",
+          "codeSystem": "also",
+          "displayName": "Old challenge camera."
+        },
+        "valueNegationIndicator": false
+      },
+      {
+        "derivationExpression": null,
+        "id": "str",
+        "targetCodingSystem": null,
+        "targetType": "PQ",
+        "targetUnit": "m2",
+        "typeCode": {
+          "code": "interesting",
+          "codeSystem": "same",
+          "displayName": "Never court."
+        },
+        "valueNegationIndicator": false
+      },
+      {
+        "derivationExpression": null,
+        "id": "str",
+        "targetCodingSystem": null,
+        "targetType": "PQ",
+        "targetUnit": "10^9/l",
+        "typeCode": {
+          "code": "fire",
+          "codeSystem": "some",
+          "displayName": "Table well industry."
+        },
+        "valueNegationIndicator": false
+      }
+    ],
+    "reasonCode": null,
+    "statusCode": {
+      "code": "industry",
+      "codeSystem": "year",
+      "displayName": "Away real."
+    },
+    "statusDate": "2011-06-10T01:47:18.453905+00:00",
+    "subcategoryCode": {
+      "code": "foreign",
+      "codeSystem": "box",
+      "displayName": "Agent find quality when."
+    }
+  }
+}
