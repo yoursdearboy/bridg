@@ -19,4 +19,3 @@ class ConceptDescriptor:
     @classmethod
     def parse_value(cls, x: dict) -> Self:
         return cls(x["code"], x["codeSystem"], x.get("displayName"))
-
