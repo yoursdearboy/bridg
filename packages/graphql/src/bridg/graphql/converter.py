@@ -108,6 +108,7 @@ def object_to_alchemy[T: bridg.alchemy.Base](x: Any, class_: Type[T], converter)
         if value is not None:
             attr = insp.attrs.get(key)
             desc = insp.all_orm_descriptors.get(key)
+            prop = getattr(class_, key)
 
             if isinstance(attr, Relationship):
                 attr_class_ = attr.entity.class_
@@ -136,6 +137,11 @@ def object_to_alchemy[T: bridg.alchemy.Base](x: Any, class_: Type[T], converter)
                 assert isinstance(attr2, Relationship)
                 attr2_class_ = List[attr2.entity.class_]
                 value = converter.convert(value, attr2_class_)
+            elif isinstance(prop, property):
+                type_ = next(iter(get_type_hints(prop.fset).values()), None)
+                if type_ is None:
+                    raise RuntimeError("Unknown setter argument type")
+                value = converter.convert(value, type_)
             else:
                 raise RuntimeError(f"There's no attr {key} in the model {class_.__name__}")
 
