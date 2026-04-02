@@ -1,6 +1,6 @@
 import logging
 from types import FunctionType
-from typing import Any, List, Optional, Type, get_args, get_type_hints
+from typing import Any, List, Optional, Type, Union, get_args, get_type_hints
 from uuid import UUID
 
 from sqlalchemy import inspect
@@ -38,8 +38,12 @@ class Converter(bridg.common.converter.Converter):
 def any_to_optional[T](x: Any, class_: Type[Optional[T]], converter) -> Optional[T]:
     if x is None:
         return
-    (arg, _) = get_args(class_)
-    return converter.convert(x, arg)
+    args = get_args(class_)[:-1]
+    if len(args) == 1:
+        type_ = args[0]
+    else:
+        type_ = Union[tuple(args)]
+    return converter.convert(x, type_)
 
 
 @bridg.common.converter.configure
