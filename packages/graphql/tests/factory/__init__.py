@@ -15,6 +15,7 @@ from .common import (
     PersonInputFactory,
 )
 from .datatype import (
+    ConceptDescriptorFactory,
     EntityNameInputFactory,
     InstanceIdentifierFactory,
     IntervalPointInTimeFactory,
@@ -39,6 +40,7 @@ __all__ = [
     "BiologicEntityInputBaseFactory",
     "BiologicEntityInputFactory",
     "BiologicEntityNameInputFactory",
+    "ConceptDescriptorFactory",
     "EntityNameInputFactory",
     "IDInputFactory",
     "InstanceIdentifierFactory",

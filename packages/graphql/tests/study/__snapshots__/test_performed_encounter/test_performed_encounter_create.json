@@ -7,8 +7,8 @@
       }
     },
     "dateRange": {
-      "high": "2094-04-16T18:39:20.109992+00:00",
-      "low": "2021-02-05T03:33:38.475986+00:00"
+      "high": "2099-09-25T07:46:37.147075+00:00",
+      "low": "2036-03-13T22:04:57.213665+00:00"
     },
     "departingToPlace": {
       "id": "str",
@@ -22,10 +22,10 @@
     "negationReason": null,
     "repetitionNumber": 1,
     "statusCode": {
-      "code": "TqIuVxnmDnEUulZAecfG",
-      "codeSystem": "PvdtZBYSaLJBnHfwxXTn",
-      "displayName": "AjVTpHFhNCOBaqbWTRpd"
+      "code": "certainly",
+      "codeSystem": "Mr",
+      "displayName": "Before another body."
     },
-    "statusDate": "2087-10-20T07:12:52.784143+00:00"
+    "statusDate": "2062-09-29T11:12:00.564943+00:00"
   }
 }

@@ -1,6 +1,9 @@
 from .ad import (
     PostalAddressInputFactory,
 )
+from .cd import (
+    ConceptDescriptorFactory,
+)
 from .en import (
     EntityNameInputFactory,
 )
@@ -21,6 +24,7 @@ from .url import (
 )
 
 __all__ = [
+    "ConceptDescriptorFactory",
     "EntityNameInputFactory",
     "InstanceIdentifierFactory",
     "IntervalPointInTimeFactory",
