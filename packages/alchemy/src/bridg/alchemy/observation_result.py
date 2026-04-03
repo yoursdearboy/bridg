@@ -64,3 +64,5 @@ class ObservationResult:
             self.value_date = x
         elif isinstance(x, str):
             self.value_st = x
+        elif x is not None:
+            raise RuntimeError(f"Unknown data type {type(x)}")
