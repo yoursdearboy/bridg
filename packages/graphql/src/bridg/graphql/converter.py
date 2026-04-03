@@ -108,7 +108,7 @@ def object_to_alchemy[T: bridg.alchemy.Base](x: Any, class_: Type[T], converter)
         if value is not None:
             attr = insp.attrs.get(key)
             desc = insp.all_orm_descriptors.get(key)
-            prop = getattr(class_, key)
+            prop = getattr(class_, key, None)
 
             if isinstance(attr, Relationship):
                 attr_class_ = attr.entity.class_
