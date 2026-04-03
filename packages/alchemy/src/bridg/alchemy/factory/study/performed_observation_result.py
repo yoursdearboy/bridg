@@ -7,7 +7,7 @@ from polyfactory import Ignore, Use
 import bridg.alchemy
 
 from ..base import BaseFactory
-from ..datatype import ConceptDescriptorFactory, PhysicalQuantityFactory
+from ..datatype import ConceptDescriptorFactory, IntervalPointInTimeFactory, PhysicalQuantityFactory
 
 
 class _NOT_SET:
@@ -41,6 +41,8 @@ class PerformedObservationResultFactory(BaseFactory[bridg.alchemy.PerformedObser
 
     value_cd_id = Ignore()
     value_cd = Ignore()
+    value_ivl_ts_low = Ignore()
+    value_ivl_ts_high = Ignore()
     value_pq_value = Ignore()
     value_pq_unit = Ignore()
     value_datetime = Ignore()
@@ -62,6 +64,8 @@ class PerformedObservationResultFactory(BaseFactory[bridg.alchemy.PerformedObser
                 obj.value = None
             case bridg.alchemy.ConceptDescriptor:
                 obj.value = ConceptDescriptorFactory.build()
+            case bridg.alchemy.IntervalPointInTime:
+                obj.value = IntervalPointInTimeFactory.build()
             case bridg.alchemy.PhysicalQuantity:
                 obj.value = PhysicalQuantityFactory.build()
             case datetime.datetime:

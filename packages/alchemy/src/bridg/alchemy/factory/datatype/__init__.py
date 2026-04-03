@@ -7,6 +7,9 @@ from .cd import (
 from .en import (
     EntityNameFactory,
 )
+from .ivl_ts import (
+    IntervalPointInTimeFactory,
+)
 from .pq import (
     PhysicalQuantityFactory,
 )
@@ -17,6 +20,7 @@ from .tel import (
 __all__ = [
     "ConceptDescriptorFactory",
     "EntityNameFactory",
+    "IntervalPointInTimeFactory",
     "PhysicalQuantityFactory",
     "PostalAddressFactory",
     "TelecommunicationAddressFactory",

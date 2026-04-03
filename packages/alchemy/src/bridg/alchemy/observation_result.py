@@ -5,7 +5,8 @@ from uuid import UUID
 from sqlalchemy import ForeignKey, Numeric, String
 from sqlalchemy.orm import Mapped, composite, declared_attr, mapped_column, relationship
 
-from .datatype import ConceptDescriptor, DataValue, PhysicalQuantity
+from .datatype import ConceptDescriptor, DataValue, IntervalPointInTime, PhysicalQuantity
+from .tz_date_time import TZDateTime
 
 
 class ObservationResult:
@@ -16,6 +17,14 @@ class ObservationResult:
     @declared_attr
     def value_cd(cls) -> Mapped[Optional[ConceptDescriptor]]:
         return relationship(foreign_keys=cls.value_cd_id)  # type: ignore
+
+    @declared_attr
+    def value_ivl_ts(cls) -> Mapped[Optional[IntervalPointInTime]]:
+        return composite(
+            lambda low, high: IntervalPointInTime(low, high) if low is not None or high is not None else None,
+            mapped_column("value_ivl_ts_low", TZDateTime, nullable=True),
+            mapped_column("value_ivl_ts_high", TZDateTime, nullable=True),
+        )
 
     # FIXME: convert to optional
     # see https://github.com/abdulrahman305/sqlalchemy/commit/071abbb8636d81ff0c9a4ea8b8a972e63cf5ef54#diff-d54af7d55637bc92aefa7c48b51e08b36fa6cd7ae0adc5461d06638e438d08cbR331-R335
@@ -33,6 +42,7 @@ class ObservationResult:
 
     def _reset(self):
         self.value_cd = None
+        self.value_ivl_ts = None
         self.value_pq = None
         self.value_datetime = None
         self.value_date = None
@@ -44,6 +54,8 @@ class ObservationResult:
             return self.value_cd
         elif self.value_pq:
             return self.value_pq
+        elif self.value_ivl_ts:
+            return self.value_ivl_ts
         elif self.value_datetime:
             return self.value_datetime
         elif self.value_date:
@@ -56,6 +68,8 @@ class ObservationResult:
         self._reset()
         if isinstance(x, ConceptDescriptor):
             self.value_cd = x
+        elif isinstance(x, IntervalPointInTime):
+            self.value_ivl_ts = x
         elif isinstance(x, PhysicalQuantity):
             self.value_pq = x
         elif isinstance(x, datetime):

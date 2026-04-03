@@ -2,9 +2,10 @@ from datetime import date, datetime
 from enum import Enum
 
 from .cd import ConceptDescriptor
+from .ivl_ts import IntervalPointInTime
 from .pq import PhysicalQuantity
 
-DataValue = ConceptDescriptor | PhysicalQuantity | datetime | date | str
+DataValue = ConceptDescriptor | IntervalPointInTime | PhysicalQuantity | datetime | date | str
 
 
 class DataTypeName(Enum):
