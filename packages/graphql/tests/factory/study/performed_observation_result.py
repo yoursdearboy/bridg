@@ -1,12 +1,12 @@
 import datetime
 from datetime import timezone
-from typing import Any
+from typing import Any, cast
 
 from polyfactory import Use
 from strawberry import Some
 
 from bridg.alchemy import DataTypeName
-from bridg.graphql.schema import PerformedObservationResultInput
+from bridg.graphql.schema import DataValue, PerformedObservationResultInput
 
 from ..base import BaseFactory
 from ..datatype import ConceptDescriptorFactory, IntervalPointInTimeFactory, PhysicalQuantityFactory
@@ -15,6 +15,24 @@ from ..maybe import make_some
 
 class _NOT_SET:
     pass
+
+
+def _gen_value(data_type: DataTypeName | None) -> DataValue | None:
+    if data_type is None:
+        return None
+    if data_type == DataTypeName.CD:
+        return ConceptDescriptorFactory.build()
+    if data_type == DataTypeName.IVL_TS:
+        return IntervalPointInTimeFactory.build()
+    if data_type == DataTypeName.PQ:
+        return PhysicalQuantityFactory.build()
+    if data_type == DataTypeName.ST:
+        return BaseFactory.__faker__.sentence(3, variable_nb_words=True)
+    if data_type == DataTypeName.TS_DATE:
+        return BaseFactory.__faker__.date_this_century(after_today=True)
+    if data_type == DataTypeName.TS_DATETIME:
+        return BaseFactory.__faker__.date_time_this_century(after_now=True, tzinfo=datetime.timezone.utc)
+    raise RuntimeError(f"Unknown data type {data_type}")
 
 
 class PerformedObservationResultInputFactory(BaseFactory[PerformedObservationResultInput]):
@@ -38,31 +56,18 @@ class PerformedObservationResultInputFactory(BaseFactory[PerformedObservationRes
     value = None
 
     @classmethod
-    def build(cls, *_: Any, data_type: None | DataTypeName | type[_NOT_SET] = _NOT_SET, **kwargs: Any):
+    def build(cls, *_: Any, data_type: DataTypeName | None | type[_NOT_SET] = _NOT_SET, **kwargs: Any):
         obj = super().build(**kwargs)
 
-        if data_type == _NOT_SET:
-            if cls.__random__.random() > 0.1:
-                if data_type == _NOT_SET:
+        if "value" not in kwargs:
+            if data_type == _NOT_SET:
+                if cls.__random__.random() > 0.1:
                     data_type = cls.__faker__.enum(DataTypeName)
+                else:
+                    data_type = None
             else:
-                data_type = None
+                data_type = cast(DataTypeName | None, data_type)
 
-        if data_type is None:
-            obj.value = Some(None)
-        elif data_type == DataTypeName.CD:
-            obj.value = Some(ConceptDescriptorFactory.build())
-        elif data_type == DataTypeName.IVL_TS:
-            obj.value = Some(IntervalPointInTimeFactory.build())
-        elif data_type == DataTypeName.PQ:
-            obj.value = Some(PhysicalQuantityFactory.build())
-        elif data_type == DataTypeName.ST:
-            obj.value = Some(cls.__faker__.sentence(3, variable_nb_words=True))
-        elif data_type == DataTypeName.TS_DATE:
-            obj.value = Some(cls.__faker__.date_this_century(after_today=True))
-        elif data_type == DataTypeName.TS_DATETIME:
-            obj.value = Some(cls.__faker__.date_time_this_century(after_now=True, tzinfo=datetime.timezone.utc))
-        else:
-            raise RuntimeError(f"Unknown data type {data_type}")
+            obj.value = Some(_gen_value(data_type))
 
         return obj
