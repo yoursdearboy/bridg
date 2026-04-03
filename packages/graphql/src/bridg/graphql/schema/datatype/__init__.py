@@ -4,6 +4,8 @@ from .ad import (
 )
 from .any import (
     DataValue,
+    parse_data_value,
+    serialize_data_value,
 )
 from .cd import (
     ConceptDescriptor,
@@ -48,4 +50,6 @@ __all__ = [
     "TelecommunicationAddressInput",
     "URL",
     "URLInput",
+    "parse_data_value",
+    "serialize_data_value",
 ]

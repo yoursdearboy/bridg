@@ -1,4 +1,5 @@
 import logging
+from datetime import date, datetime
 from types import FunctionType
 from typing import Any, List, Optional, Type, Union, get_args, get_type_hints
 from uuid import UUID
@@ -12,7 +13,7 @@ import bridg.common.converter
 
 from .dataclass import Dataclass
 from .maybe import _annotation_is_maybe
-from .schema import ConceptDescriptor
+from .schema import ConceptDescriptor, IntervalPointInTime, PhysicalQuantity
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,7 @@ class Converter(bridg.common.converter.Converter):
                 object_to_cd,
                 str_to_cd,
                 str_to_uuid,
+                object_to_any,
                 object_to_alchemy,
                 fallback,
             ]
@@ -70,6 +72,23 @@ def str_to_cd(x: str, _, converter) -> bridg.alchemy.ConceptDescriptor:
 @bridg.common.converter.configure
 def object_to_cd(x: ConceptDescriptor, _, converter) -> bridg.alchemy.ConceptDescriptor:
     return converter.terminology.get_or_create(x.code, x.code_system, x.display_name)
+
+
+@bridg.common.converter.configure
+def object_to_any(x: Any, _, converter) -> bridg.alchemy.DataValue:
+    if isinstance(x, ConceptDescriptor):
+        return converter.convert(x, bridg.alchemy.ConceptDescriptor)
+    if isinstance(x, IntervalPointInTime):
+        return converter.convert(x, bridg.alchemy.IntervalPointInTime)
+    if isinstance(x, PhysicalQuantity):
+        return converter.convert(x, bridg.alchemy.PhysicalQuantity)
+    if isinstance(x, str):
+        return x
+    if isinstance(x, date):
+        return x
+    if isinstance(x, datetime):
+        return x
+    raise RuntimeError("Unknown data type")
 
 
 @bridg.common.converter.configure

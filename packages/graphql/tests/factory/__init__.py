@@ -31,6 +31,8 @@ from .maybe import (
 from .study import (
     PerformedActivityInputFactory,
     PerformedEncounterInputFactory,
+    PerformedObservationInputFactory,
+    PerformedObservationResultInputFactory,
     PerformedSpecimenCollectionInputFactory,
 )
 
@@ -49,6 +51,8 @@ __all__ = [
     "MaybeFactory",
     "PerformedActivityInputFactory",
     "PerformedEncounterInputFactory",
+    "PerformedObservationInputFactory",
+    "PerformedObservationResultInputFactory",
     "PerformedSpecimenCollectionInputFactory",
     "PerformedSpecimenMoveInputFactory",
     "PersonInputFactory",

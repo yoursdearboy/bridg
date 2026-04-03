@@ -27,7 +27,7 @@ def process_input(x: Any) -> Any:
     if isinstance(x, Some):
         return process_input(x.value)
     if isinstance(x, date):
-        return str(x)
+        return x.isoformat()
     if isinstance(x, Enum):
         return x.name
     if isinstance(x, UUID):

@@ -67,6 +67,8 @@ from .datatype import (
     TelecommunicationAddressInput,
     URL,
     URLInput,
+    parse_data_value,
+    serialize_data_value,
 )
 from .mutation import (
     Mutation,
@@ -102,7 +104,10 @@ from .study import (
     PerformedEncounterMutation,
     PerformedEncounterQuery,
     PerformedObservation,
+    PerformedObservationInput,
+    PerformedObservationMutation,
     PerformedObservationResult,
+    PerformedObservationResultInput,
     PerformedSpecimenCollection,
     PerformedSpecimenCollectionInput,
     PerformedSpecimenCollectionMutation,
@@ -154,7 +159,10 @@ __all__ = [
     "PerformedEncounterMutation",
     "PerformedEncounterQuery",
     "PerformedObservation",
+    "PerformedObservationInput",
+    "PerformedObservationMutation",
     "PerformedObservationResult",
+    "PerformedObservationResultInput",
     "PerformedSpecimenCollection",
     "PerformedSpecimenCollectionInput",
     "PerformedSpecimenCollectionMutation",
@@ -200,6 +208,8 @@ __all__ = [
     "TelecommunicationAddressInput",
     "URL",
     "URLInput",
+    "parse_data_value",
     "schema",
+    "serialize_data_value",
 ]
 # </AUTOGEN_INIT>

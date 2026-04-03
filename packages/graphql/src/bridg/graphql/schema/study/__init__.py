@@ -14,9 +14,12 @@ from .performed_encounter import (
 )
 from .performed_observation import (
     PerformedObservation,
+    PerformedObservationInput,
+    PerformedObservationMutation,
 )
 from .performed_observation_result import (
     PerformedObservationResult,
+    PerformedObservationResultInput,
 )
 from .performed_specimen_collection import (
     PerformedSpecimenCollection,
@@ -44,7 +47,10 @@ __all__ = [
     "PerformedEncounterMutation",
     "PerformedEncounterQuery",
     "PerformedObservation",
+    "PerformedObservationInput",
+    "PerformedObservationMutation",
     "PerformedObservationResult",
+    "PerformedObservationResultInput",
     "PerformedSpecimenCollection",
     "PerformedSpecimenCollectionInput",
     "PerformedSpecimenCollectionMutation",

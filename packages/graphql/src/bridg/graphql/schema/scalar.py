@@ -1,7 +1,15 @@
 from strawberry.types.scalar import ScalarDefinition, scalar
 from strawberry.utils.str_converters import to_camel_case
 
-from . import ConceptDescriptor, DataValue, InstanceIdentifier, IntervalPointInTime, PhysicalQuantity
+from . import (
+    ConceptDescriptor,
+    DataValue,
+    InstanceIdentifier,
+    IntervalPointInTime,
+    PhysicalQuantity,
+    parse_data_value,
+    serialize_data_value,
+)
 
 
 def _serialize_dataclass(cl):
@@ -45,7 +53,7 @@ SCALAR_REGISTRY: dict[object, ScalarDefinition] = {
     ),
     DataValue: scalar(
         name="DataValue",
-        serialize=DataValue.serialize,
-        parse_value=DataValue.parse_value,
+        serialize=serialize_data_value,
+        parse_value=parse_data_value,
     ),
 }
