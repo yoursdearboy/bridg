@@ -30,6 +30,16 @@ class DefinedObservationResultFactory(BaseFactory[bridg.alchemy.DefinedObservati
     target_unit = Ignore()
     derivation_expression = Ignore()
 
+    value_cd_id = Ignore()
+    value_cd = Ignore()
+    value_ivl_ts_low = Ignore()
+    value_ivl_ts_high = Ignore()
+    value_pq_value = Ignore()
+    value_pq_unit = Ignore()
+    value_datetime = Ignore()
+    value_date = Ignore()
+    value_st = Ignore()
+
     @classmethod
     def build(
         cls, *_: Any, target_type: bridg.alchemy.DataTypeName | type[_NOT_SET] = _NOT_SET, **kwargs: Any
