@@ -35,7 +35,7 @@ class Converter(bridg.common.converter.Converter):
 
 
 @bridg.common.converter.configure
-def any_to_optional[T](x: Any, class_: Type[Optional[T]], converter) -> Optional[T]:
+def any_to_optional[T: Any](x: Any, class_: Type[Optional[T]], converter) -> Optional[T]:
     if x is None:
         return
     args = get_args(class_)[:-1]
@@ -52,7 +52,7 @@ def object_to_dataclass(x: Any, class_) -> Dataclass:
 
 
 @bridg.common.converter.configure
-def list_to_list[T](x: List[T], class_, converter) -> List[T]:
+def list_to_list[T: Any](x: List[T], class_, converter) -> List[T]:
     (arg,) = get_args(class_)
     return [converter.convert(y, arg) for y in x]
 

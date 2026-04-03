@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import inspect
-from typing import Any, List, Protocol, Type, TypeVar, cast, get_origin
+from typing import Any, List, Protocol, Type, TypeVar, Union, cast, get_args, get_origin
 
 
 class Convert1[T](Protocol):
@@ -17,6 +17,61 @@ class Convert3[T](Protocol):
 
 
 Convert = Convert1 | Convert2 | Convert3
+
+
+def _is_optional_type(x: Type):
+    if get_origin(x) != Union:
+        return False
+    args = get_args(x)
+    return len(args) > 1 and any(a is type(None) for a in args)
+
+
+def _get_optional_type_arg(x: Type):
+    if not _is_optional_type(x):
+        raise RuntimeError("Not Optional")
+    args = tuple(a for a in get_args(x) if a is not type(None))
+    if len(args) == 1:
+        return args[0]
+    return Union[args]
+
+
+def _bound_type(x: Any):
+    if isinstance(x, TypeVar):
+        return x.__bound__
+    return x
+
+
+def _compare_type(return_type: Any, class_: Any) -> bool:
+    if return_type is None:
+        return False
+
+    if return_type is Any:
+        return True
+
+    if isinstance(return_type, type):
+        if getattr(return_type, "_is_protocol", False):
+            return isinstance(class_, return_type)
+
+        if inspect.isclass(class_):
+            return issubclass(class_, return_type)
+
+    if get_origin(return_type) is list and get_origin(class_) is list:
+        return _compare_type(
+            _bound_type(get_args(return_type)[0]),
+            _bound_type(get_args(class_)[0]),
+        )
+
+    if _is_optional_type(return_type) and _is_optional_type(class_):
+        return _compare_type(
+            _bound_type(_get_optional_type_arg(return_type)),
+            _bound_type(_get_optional_type_arg(class_)),
+        )
+
+    # FIXME: do we need this? or maybe need even something more complex?
+    if get_origin(return_type) == Union and get_origin(class_) == Union:
+        return set(get_args(return_type)) == set(get_args(class_))
+
+    return False
 
 
 class Wrapper:
@@ -39,35 +94,18 @@ class Wrapper:
         if self._input_type is Any:
             return True
         if isinstance(self._input_type, type):
-            if isinstance(input, self._input_type):
-                return True
-        if origin := get_origin(self._input_type):
-            if isinstance(input, origin):
-                return True
+            return isinstance(input, self._input_type)
+        if get_origin(self._input_type) == Union:
+            return isinstance(input, self._input_type)
+        if get_origin(self._input_type) is list:
+            return isinstance(input, list)
         return False
 
     def _get_return_type(self):
-        ret = self._inspect.return_annotation
-        if isinstance(ret, TypeVar):
-            ret = ret.__bound__
-        return ret
+        return _bound_type(self._inspect.return_annotation)
 
     def check_return_type(self, class_: Type):
-        if self._return_type is None:
-            return False
-        if self._return_type is Any:
-            return True
-        if isinstance(self._return_type, type):
-            if getattr(self._return_type, "_is_protocol", False):
-                if isinstance(class_, self._return_type):
-                    return True
-            elif inspect.isclass(class_) and issubclass(class_, self._return_type):
-                return True
-        if origin := get_origin(self._return_type):
-            # FIXME: check args?
-            if origin == get_origin(class_):
-                return True
-        return False
+        return _compare_type(self._return_type, class_)
 
     def check_types(self, input: Any, class_: Type):
         return self.check_input_type(input) and self.check_return_type(class_)
