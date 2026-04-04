@@ -80,6 +80,7 @@ from .protocol import (
     DefinedObservation,
     DefinedObservationResult,
     Epoch,
+    StudyActivity,
     StudyProtocolVersion,
     StudyProtocolVersionQuery,
 )
@@ -188,6 +189,7 @@ __all__ = [
     "Specimen",
     "SpecimenInput",
     "SpecimenQuery",
+    "StudyActivity",
     "StudyProtocolVersion",
     "StudyProtocolVersionQuery",
     "StudySite",
