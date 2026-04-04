@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 @strawberry.interface
 class DefinedActivityInterface(Activity):
     id: strawberry.ID
-    name_code: Optional[ConceptDescriptor]
+    name_code: ConceptDescriptor
     category_code: Optional[ConceptDescriptor]
     subcategory_code: Optional[ConceptDescriptor]
     description: Optional[str]
