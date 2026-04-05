@@ -31,7 +31,8 @@ class StudySubject(SubjectInterface):
 @strawberry.input
 class StudySubjectFilter:
     # TODO: make deep, not flat?
-    study_protocol_version_id: Optional[strawberry.ID]
+    performing_biologic_entity_id: Optional[strawberry.ID] = None
+    study_protocol_version_id: Optional[strawberry.ID] = None
 
 
 @strawberry.input
@@ -70,6 +71,10 @@ class StudySubjectQuery:
         session = info.context.session
         converter = info.context.converter
         query = session.query(bridg.alchemy.StudySubject)
+        if filter and filter.performing_biologic_entity_id:
+            query = query.filter(
+                bridg.alchemy.StudySubject.performing_biologic_entity_id == filter.performing_biologic_entity_id
+            )
         if filter and filter.study_protocol_version_id:
             query = (
                 query.join(bridg.alchemy.StudySubject.assigned_study_subject_protocol_version_relationship)
