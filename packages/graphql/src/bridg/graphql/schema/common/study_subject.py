@@ -73,7 +73,8 @@ class StudySubjectQuery:
         query = session.query(bridg.alchemy.StudySubject)
         if filter and filter.performing_biologic_entity_id:
             query = query.filter(
-                bridg.alchemy.StudySubject.performing_biologic_entity_id == filter.performing_biologic_entity_id
+                bridg.alchemy.StudySubject.performing_biologic_entity_id
+                == converter.convert(filter.performing_biologic_entity_id, UUID)
             )
         if filter and filter.study_protocol_version_id:
             query = (
