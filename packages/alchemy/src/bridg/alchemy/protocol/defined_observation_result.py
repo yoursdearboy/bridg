@@ -26,7 +26,8 @@ class DefinedObservationResult(ObservationResult, Base):
         Enum(DataTypeName, values_callable=lambda x: [i.value for i in x])
     )
 
-    target_coding_system: Mapped[Optional[str]] = mapped_column(ForeignKey("concept_descriptor.code_system"))
+    # TODO: normalize concept_descriptor by moving `code_system` to a separate table to achieve referential integrity here
+    target_coding_system: Mapped[Optional[str]]  # = mapped_column(ForeignKey("concept_descriptor.code_system"))
 
     target_unit: Mapped[Optional[str]]
 
