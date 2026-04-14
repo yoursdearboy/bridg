@@ -1,6 +1,7 @@
 # ruff: noqa: F403, F405
 
 from bridg.alchemy import *
+from bridg.auth import *
 from bridg.common.env import load_env
 from bridg.common.settings import load_settings
 from sqlalchemy import create_engine

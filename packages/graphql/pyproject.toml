@@ -5,6 +5,7 @@ description = "GraphQL for BRIDG"
 dependencies = [
     "alchemy",
     "common",
+    "starlette>=0.47.2",
     "strawberry-graphql[cli]>=0.312.2",
 ]
 

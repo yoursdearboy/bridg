@@ -6,6 +6,7 @@ from typing import Any
 @dataclass
 class Settings:
     SQLALCHEMY_DATABASE_URI: str
+    LDAP_URI: str | None = None
 
 
 def _pick(data, keys):
