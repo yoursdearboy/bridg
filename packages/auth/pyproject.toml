@@ -3,6 +3,7 @@ name = "auth"
 version = "0.1.0"
 description = "HTTP Auth for BRIDG web APIs"
 dependencies = [
+    "bcrypt>=5.0.0",
     "common",
     "pyjwt>=2.12.1",
     "sqlalchemy<3.0.0,>=2.0.45",
