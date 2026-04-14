@@ -1,0 +1,31 @@
+[project]
+name = "auth"
+version = "0.1.0"
+description = "HTTP Auth for BRIDG web APIs"
+dependencies = [
+    "common",
+    "sqlalchemy<3.0.0,>=2.0.45",
+    "starlette>=0.47.2",
+]
+
+[dependency-groups]
+dev = [
+]
+test = [
+]
+
+[build-system]
+requires = ["uv_build>=0.8.12,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+extend = "../../pyproject.toml"
+
+[tool.ruff.lint]
+ignore = ["TID252"]
+
+[tool.uv.build-backend]
+module-name = "bridg.auth"
+
+[tool.uv.sources]
+common = { workspace = true }

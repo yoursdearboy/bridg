@@ -58,6 +58,7 @@ extend-select = ["F", "I", "TID"]
 members = [
     "packages/alchemy",
     "packages/api",
+    "packages/auth",
     "packages/common",
     "packages/graphql",
 ]
