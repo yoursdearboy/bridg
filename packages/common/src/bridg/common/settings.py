@@ -6,6 +6,7 @@ from typing import Any
 @dataclass
 class Settings:
     SQLALCHEMY_DATABASE_URI: str
+    SECRET_KEY: str
 
 
 def _pick(data, keys):

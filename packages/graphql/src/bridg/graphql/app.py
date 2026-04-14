@@ -3,11 +3,11 @@ from sqlalchemy.orm import sessionmaker
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
 from starlette.middleware.authentication import AuthenticationMiddleware
-from starlette.routing import Route, WebSocketRoute
+from starlette.routing import Mount, Route, WebSocketRoute
 from strawberry.asgi import GraphQL
 
 from bridg.alchemy import TerminologyService
-from bridg.auth import AuthBackend, AuthorizationMiddleware
+from bridg.auth import AuthBackend, AuthorizationMiddleware, login_endpoint
 from bridg.common.env import load_env
 from bridg.common.settings import load_settings
 
@@ -36,12 +36,18 @@ class App(GraphQL):
 
 graphql_app = App(schema)
 app = Starlette(
-    middleware=[
-        Middleware(AuthenticationMiddleware, backend=AuthBackend()),
-        Middleware(AuthorizationMiddleware),
-    ],
     routes=[
-        Route("/", graphql_app),
-        WebSocketRoute("/", graphql_app),
+        Route("/login", login_endpoint(settings.SECRET_KEY), methods=["POST"]),
+        Mount(
+            "/",
+            middleware=[
+                Middleware(AuthenticationMiddleware, backend=AuthBackend(settings.SECRET_KEY)),
+                Middleware(AuthorizationMiddleware),
+            ],
+            routes=[
+                Route("/", graphql_app),
+                WebSocketRoute("/", graphql_app),
+            ],
+        ),
     ],
 )
