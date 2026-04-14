@@ -5,6 +5,7 @@ description = "HTTP Auth for BRIDG web APIs"
 dependencies = [
     "bcrypt>=5.0.0",
     "common",
+    "ldap3>=2.9.1",
     "sqlalchemy<3.0.0,>=2.0.45",
     "starlette>=0.47.2",
 ]

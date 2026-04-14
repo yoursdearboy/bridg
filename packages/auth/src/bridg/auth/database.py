@@ -15,6 +15,7 @@ class User(Base):
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     username: Mapped[str] = mapped_column(unique=True)
     hashed_password: Mapped[Optional[str]]
+    ldap_username: Mapped[Optional[str]]
     is_active: Mapped[bool] = mapped_column(default=True)
     token: Mapped[List["Token"]] = relationship(back_populates="user")
 
@@ -32,28 +33,39 @@ def _hash_password(x: str) -> str:
     return bcrypt.hashpw(x.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
 
-def _check_password(x: str, hash: str) -> bool:
+def check_password(x: str, hash: str) -> bool:
     return bcrypt.checkpw(x.encode("utf-8"), hash.encode("utf-8"))
 
 
-def find_user_by_credentials(session: Session, username: str, password: str) -> Optional[User]:
-    query = session.query(User).filter(
-        User.username == username,
-        User.is_active.is_(True),
+def find_user_by_username(session: Session, username: str) -> Optional[User]:
+    return (
+        session.query(User)
+        .filter(
+            User.is_active.is_(True),
+            User.username == username,
+        )
+        .one_or_none()
     )
-
-    if user := query.one_or_none():
-        if user.hashed_password and _check_password(password, user.hashed_password):
-            return user
 
 
 def find_user_by_token(session: Session, token: str) -> Optional[User]:
-    return session.query(User).filter(User.token.any(Token.token == token)).one_or_none()
+    return (
+        session.query(User)
+        .filter(
+            User.is_active.is_(True),
+            User.token.any(Token.token == token),
+        )
+        .one_or_none()
+    )
 
 
-def create_user(session: Session, username: str, password: str | None):
+def create_user(session: Session, username: str, password: str | None, *, ldap_username: str | None):
     hashed_password = _hash_password(password) if password else None
-    user = User(username=username, hashed_password=hashed_password)
+    user = User(
+        username=username,
+        hashed_password=hashed_password,
+        ldap_username=ldap_username,
+    )
     session.add(user)
     session.commit()
 

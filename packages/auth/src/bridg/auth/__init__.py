@@ -12,7 +12,10 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import PlainTextResponse
 
-from .database import add_token, find_user_by_credentials, find_user_by_token
+from bridg.common.settings import Settings
+
+from .database import add_token, check_password, find_user_by_token, find_user_by_username
+from .ldap import check_ldap
 
 
 class AuthBackend(AuthenticationBackend):
@@ -42,15 +45,36 @@ class AuthorizationMiddleware(BaseHTTPMiddleware):
         return await call_next(request)
 
 
-def login_endpoint(session: sessionmaker[Session]):
+def login_endpoint(settings: Settings, session: sessionmaker[Session]):
     async def endpoint(request: Request):
         data = await request.json()
-        if (user := data.get("user")) and (password := data.get("password")):
-            s = session()
-            if user := find_user_by_credentials(s, user, password):
-                token = secrets.token_urlsafe()
-                add_token(s, token=token, user_id=user.id)
-                return PlainTextResponse(token)
-        return PlainTextResponse("Unauthenticated", status_code=401)
+        username = data.get("user")
+        password = data.get("password")
+        if username is None or password is None:
+            return PlainTextResponse("Unauthenticated", status_code=401)
+
+        sess = session()
+        user = find_user_by_username(sess, username)
+        if user is None:
+            return PlainTextResponse("Unauthenticated", status_code=401)
+
+        # TODO: Refactor this to some abstract strategies
+
+        success = False
+
+        if not success:
+            if user.hashed_password:
+                success = check_password(password, user.hashed_password)
+
+        if not success:
+            if user.ldap_username and settings.LDAP_URI:
+                success = check_ldap(settings.LDAP_URI, user.ldap_username, password)
+
+        if not success:
+            return PlainTextResponse("Unauthenticated", status_code=401)
+
+        token = secrets.token_urlsafe()
+        add_token(sess, token=token, user_id=user.id)
+        return PlainTextResponse(token)
 
     return endpoint

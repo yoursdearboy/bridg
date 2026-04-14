@@ -14,7 +14,15 @@ subparsers = parser.add_subparsers(dest="command", required=True)
 parser_create = subparsers.add_parser("create")
 parser_create.add_argument("username", type=str)
 parser_create.add_argument("-p", "--password", dest="password", type=str)
-parser_create.set_defaults(func=lambda args: create_user(session, args.username, args.password))
+parser_create.add_argument("--ldap-username", dest="ldap_username", type=str)
+parser_create.set_defaults(
+    func=lambda args: create_user(
+        session,
+        args.username,
+        args.password,
+        ldap_username=args.ldap_username,
+    )
+)
 
 load_env()
 settings = load_settings()
