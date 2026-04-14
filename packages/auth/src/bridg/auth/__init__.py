@@ -2,6 +2,7 @@ from dataclasses import asdict, dataclass
 from uuid import uuid4
 
 import jwt
+from sqlalchemy.orm import Session, sessionmaker
 from starlette.authentication import (
     AuthCredentials,
     AuthenticationBackend,
@@ -13,9 +14,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import PlainTextResponse
 
-
-def _find_user(username: str, password: str) -> bool:
-    return username == "demo" and password == "pass"
+from .database import find_user
 
 
 @dataclass
@@ -59,13 +58,13 @@ class AuthorizationMiddleware(BaseHTTPMiddleware):
         return await call_next(request)
 
 
-def login_endpoint(secret: str):
+def login_endpoint(secret: str, session: sessionmaker[Session]):
     async def endpoint(request: Request):
         data = await request.json()
         if (user := data.get("user")) and (password := data.get("password")):
-            if _find_user(user, password):
+            if user := find_user(session(), user, password):
                 payload = Payload(
-                    sub=user,
+                    sub=user.username,
                     jti=str(uuid4()),
                 )
                 token = _encode(payload, secret)

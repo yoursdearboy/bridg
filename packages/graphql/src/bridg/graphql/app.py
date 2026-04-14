@@ -37,7 +37,7 @@ class App(GraphQL):
 graphql_app = App(schema)
 app = Starlette(
     routes=[
-        Route("/login", login_endpoint(settings.SECRET_KEY), methods=["POST"]),
+        Route("/login", login_endpoint(settings.SECRET_KEY, Session), methods=["POST"]),
         Mount(
             "/",
             middleware=[
