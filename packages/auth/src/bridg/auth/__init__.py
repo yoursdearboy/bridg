@@ -28,8 +28,9 @@ class AuthBackend(AuthenticationBackend):
 
         header = conn.headers["Authorization"]
         scheme, token = header.split()
-        if scheme.lower() != "basic":
+        if scheme.lower() != "bearer":
             return
+
         session = self.session()
         user = find_user_by_token(session, token=token)
         if user is None:
