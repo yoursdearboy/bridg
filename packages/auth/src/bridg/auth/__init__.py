@@ -1,7 +1,5 @@
-from dataclasses import asdict, dataclass
-from uuid import uuid4
+import secrets
 
-import jwt
 from sqlalchemy.orm import Session, sessionmaker
 from starlette.authentication import (
     AuthCredentials,
@@ -14,41 +12,27 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import PlainTextResponse
 
-from .database import find_user
-
-
-@dataclass
-class Payload:
-    sub: str
-    jti: str
-
-
-def _encode(x: Payload, secret: str) -> str:
-    return jwt.encode(asdict(x), secret, algorithm="HS256")
-
-
-def _decode(x: str, secret: str) -> Payload:
-    return Payload(**jwt.decode(x, secret, algorithms=["HS256"]))
+from .database import add_token, find_user_by_credentials, find_user_by_token
 
 
 class AuthBackend(AuthenticationBackend):
-    def __init__(self, secret: str):
-        self.secret = secret
+    def __init__(self, session: sessionmaker[Session]):
+        self.session = session
 
     async def authenticate(self, conn):
         if "Authorization" not in conn.headers:
             return
 
-        auth = conn.headers["Authorization"]
-        try:
-            scheme, credentials = auth.split()
-            if scheme.lower() != "basic":
-                return
-            payload = _decode(credentials, self.secret)
-        except jwt.PyJWTError:
+        header = conn.headers["Authorization"]
+        scheme, token = header.split()
+        if scheme.lower() != "basic":
+            return
+        session = self.session()
+        user = find_user_by_token(session, token=token)
+        if user is None:
             raise AuthenticationError("Invalid auth credentials")
 
-        return AuthCredentials(["authenticated"]), SimpleUser(payload.sub)
+        return AuthCredentials(["authenticated"]), SimpleUser(user.username)
 
 
 class AuthorizationMiddleware(BaseHTTPMiddleware):
@@ -58,16 +42,14 @@ class AuthorizationMiddleware(BaseHTTPMiddleware):
         return await call_next(request)
 
 
-def login_endpoint(secret: str, session: sessionmaker[Session]):
+def login_endpoint(session: sessionmaker[Session]):
     async def endpoint(request: Request):
         data = await request.json()
         if (user := data.get("user")) and (password := data.get("password")):
-            if user := find_user(session(), user, password):
-                payload = Payload(
-                    sub=user.username,
-                    jti=str(uuid4()),
-                )
-                token = _encode(payload, secret)
+            s = session()
+            if user := find_user_by_credentials(s, user, password):
+                token = secrets.token_urlsafe()
+                add_token(s, token=token, user_id=user.id)
                 return PlainTextResponse(token)
         return PlainTextResponse("Unauthenticated", status_code=401)
 
