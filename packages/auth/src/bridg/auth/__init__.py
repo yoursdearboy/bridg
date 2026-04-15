@@ -1,5 +1,3 @@
-import secrets
-
 from sqlalchemy.orm import Session, sessionmaker
 from starlette.authentication import (
     AuthCredentials,
@@ -14,7 +12,7 @@ from starlette.responses import PlainTextResponse
 
 from bridg.common.settings import Settings
 
-from .database import add_token, check_password, find_user_by_token, find_user_by_username
+from .database import add_token, check_password, find_user_by_token, find_user_by_username, generate_token
 from .ldap import check_ldap
 
 
@@ -74,7 +72,7 @@ def login_endpoint(settings: Settings, session: sessionmaker[Session]):
         if not success:
             return PlainTextResponse("Unauthenticated", status_code=401)
 
-        token = secrets.token_urlsafe()
+        token = generate_token()
         add_token(sess, token=token, user_id=user.id)
         return PlainTextResponse(token)
 

@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
@@ -6,7 +7,14 @@ from sqlalchemy.orm import Session
 from bridg.common.env import load_env
 from bridg.common.settings import load_settings
 
-from .database import create_user
+from .database import add_token, create_user, find_user_by_username, generate_token
+
+
+def _error(msg: str):
+    sys.stderr.write(msg)
+    sys.stderr.write("\n")
+    sys.exit(1)
+
 
 parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers(dest="command", required=True)
@@ -23,6 +31,21 @@ parser_create.set_defaults(
         ldap_username=args.ldap_username,
     )
 )
+
+
+def _auth(args):
+    user = find_user_by_username(session, args.username)
+    if user is None:
+        return _error("User not found")
+    token = args.token or generate_token()
+    add_token(session, token, user.id)
+    print(token)
+
+
+parser_auth = subparsers.add_parser("auth")
+parser_auth.add_argument("username", type=str)
+parser_auth.add_argument("-t", "--token", dest="token", type=str)
+parser_auth.set_defaults(func=_auth)
 
 load_env()
 settings = load_settings()

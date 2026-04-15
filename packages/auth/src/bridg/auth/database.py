@@ -1,3 +1,4 @@
+import secrets
 from datetime import datetime
 from typing import List, Optional
 from uuid import UUID, uuid4
@@ -68,6 +69,10 @@ def create_user(session: Session, username: str, password: str | None, *, ldap_u
     )
     session.add(user)
     session.commit()
+
+
+def generate_token():
+    return secrets.token_urlsafe()
 
 
 def add_token(session: Session, token: str, user_id: UUID):

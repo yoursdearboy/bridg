@@ -14,3 +14,7 @@ fi
 rm -f tmp/bridg.db
 
 python -m dev.migrate
+python -m bridg.auth create demo -p pass
+BRIDG_TOKEN=$(python -m bridg.auth auth demo --token token)
+
+echo "Created a user demo with password pass and token $BRIDG_TOKEN"
