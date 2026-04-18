@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import strawberry
 from strawberry import Some
 from syrupy.matchers import path_type
@@ -10,7 +12,12 @@ from bridg.alchemy.factory import (
     StudySubjectFactory,
 )
 from bridg.graphql.context import Context
-from bridg.graphql.schema import StudySiteProtocolVersionRelationshipInput, StudySubjectCreateInput, schema
+from bridg.graphql.schema import (
+    ConceptDescriptor,
+    StudySiteProtocolVersionRelationshipInput,
+    StudySubjectCreateInput,
+    schema,
+)
 
 from ..utils import process_input
 
@@ -43,6 +50,8 @@ def test_study_subject_list_query(context: Context, snapshot_json):
         query {
             StudySubjectList {
                 id
+                statusCode
+                statusDate
                 performingBiologicEntity {
                     id
                     primaryName {
@@ -89,6 +98,8 @@ def test_study_subject_list_filter_by_spv_id_query(context: Context, snapshot_js
                 studyProtocolVersionId: $studyProtocolVersionId
             }) {
                 id
+                statusCode
+                statusDate
                 performingBiologicEntity {
                     id
                     primaryName {
@@ -121,6 +132,8 @@ def test_study_subject_create_using_existing_biologic_entity(context: Context, s
         mutation test($input: StudySubjectCreateInput!) {
             StudySubjectCreate(input: $input) {
                 id
+                statusCode
+                statusDate
                 performingBiologicEntity {
                     id
                     primaryName {
@@ -147,8 +160,10 @@ def test_study_subject_create_using_existing_biologic_entity(context: Context, s
         performing_biologic_entity_id=Some(strawberry.ID(str(p.id))),
         performing_specimen=None,
         performing_specimen_id=None,
-        status=None,
-        status_date=None,
+        status_code=Some(
+            ConceptDescriptor(code="candidate", code_system="study_subject.status", display_name="Cndidate")
+        ),
+        status_date=Some(datetime(2000, 1, 1)),
         assigned_study_site_protocol_version_relationship=[
             StudySiteProtocolVersionRelationshipInput(
                 executing_study_site_id=strawberry.ID(str(sspvr.executing_study_site_id)),

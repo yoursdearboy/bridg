@@ -4,9 +4,8 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends
 
-import bridg.alchemy
 from bridg.api.db import get_repository
-from bridg.api.model import BaseModel, StudySiteProtocolVersionRelationship
+from bridg.api.model import BaseModel, ConceptDescriptor, StudySiteProtocolVersionRelationship
 from bridg.api.service.subject import StudySubjectRepository
 
 router = APIRouter(prefix="/subject")
@@ -14,7 +13,7 @@ router = APIRouter(prefix="/subject")
 
 class PersonStudySubject(BaseModel):
     id: UUID
-    status: Optional[bridg.alchemy.Status]
+    status_code: Optional[ConceptDescriptor]
     status_date: Optional[datetime]
     assigned_study_site_protocol_version_relationship: List[StudySiteProtocolVersionRelationship]
 

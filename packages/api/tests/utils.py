@@ -2,7 +2,7 @@ from datetime import date, datetime, timezone
 from enum import Enum
 from typing import Any, Callable, Optional, TypeVar, overload
 
-from bridg.alchemy import ID, EntityName, Person, StudySubject
+from bridg.alchemy import ID, ConceptDescriptor, EntityName, InstanceIdentifier, Person, StudySubject
 
 T = TypeVar("T")
 R = TypeVar("R")
@@ -62,20 +62,26 @@ def entity_name_dict(x: EntityName):
     }
 
 
+def cd_dict(x: ConceptDescriptor):
+    return {
+        "code": x.code,
+        "code_system": x.code_system,
+        "data_type_name": "CD",
+        "display_name": x.display_name,
+    }
+
+
+def ii_dict(x: InstanceIdentifier):
+    return {
+        "root": x.root,
+        "extension": x.extension,
+    }
+
+
 def identifier_dict(x: ID):
     return {
-        "identifier": {
-            "root": x.identifier.root,
-            "extension": x.identifier.extension,
-        },
-        "identifier_type_code": {
-            "code": x.identifier_type_code.code,
-            "code_system": x.identifier_type_code.code_system,
-            "data_type_name": "CD",
-            "display_name": x.identifier_type_code.display_name,
-        }
-        if x.identifier_type_code
-        else None,
+        "identifier": ii_dict(x.identifier),
+        "identifier_type_code": _or(cd_dict, x.identifier_type_code),
     }
 
 
@@ -95,7 +101,7 @@ def person_dict(x: Person):
 def study_subject_dict(x: StudySubject):
     return {
         "id": _or(str, x.id),
-        "status": _or(enum_str, x.status),
+        "status_code": _or(cd_dict, x.status_code),
         "status_date": _or(datetime_str, x.status_date),
         "performing_biologic_entity": _or(person_dict, x.performing_biologic_entity),
         "performing_organization": None,

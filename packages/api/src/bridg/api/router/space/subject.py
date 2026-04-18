@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException
 import bridg.alchemy
 from bridg.api.context import Context, get_context
 from bridg.api.db import get_repository
-from bridg.api.model import BaseModel, Person, PersonData, StudySubject, StudySubjectData
+from bridg.api.model import BaseModel, ConceptDescriptor, Person, PersonData, StudySubject, StudySubjectData
 from bridg.api.service.subject import StudySubjectRepository
 
 router = APIRouter(prefix="/subject")
@@ -16,7 +16,7 @@ router = APIRouter(prefix="/subject")
 class NewStudySubject(BaseModel[bridg.alchemy.StudySubject]):
     _sa = bridg.alchemy.StudySubject
 
-    status: Optional[bridg.alchemy.Status]
+    status_code: Optional[ConceptDescriptor]
     status_date: Optional[datetime]
     performing_biologic_entity: Optional[PersonData]
     performing_biologic_entity_id: Optional[UUID]
@@ -27,7 +27,10 @@ class NewStudySubject(BaseModel[bridg.alchemy.StudySubject]):
         if context is None:
             raise RuntimeError("No context")
 
-        ss = bridg.alchemy.StudySubject(status=self.status, status_date=self.status_date)
+        ss = bridg.alchemy.StudySubject(
+            status_code=self.status_code.model_dump_sa(context=context) if self.status_code else None,
+            status_date=self.status_date,
+        )
 
         if self.performing_biologic_entity_id is not None:
             ss.performing_biologic_entity_id = self.performing_biologic_entity_id
@@ -87,9 +90,15 @@ def create(
 
 
 @router.patch("/{subject_id:uuid}", operation_id="update_space_subject")
-def update(space_id: UUID, subject_id: UUID, data: StudySubjectData, repo: StudySubjectRepositoryDep) -> StudySubject:
+def update(
+    space_id: UUID,
+    subject_id: UUID,
+    data: StudySubjectData,
+    repo: StudySubjectRepositoryDep,
+    context: Annotated[Context, Depends(get_context)],
+) -> StudySubject:
     if repo.exists(subject_id):
-        obj = data.model_dump_sa()
+        obj = data.model_dump_sa(context=context)
         obj.id = subject_id
         obj = repo.update(obj)
         return StudySubject.model_validate(obj)

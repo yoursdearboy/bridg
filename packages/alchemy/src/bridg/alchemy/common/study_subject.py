@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from datetime import datetime
-from enum import Enum
 from typing import TYPE_CHECKING, List, Optional
 from uuid import UUID
 
@@ -9,6 +8,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from ..datatype import ConceptDescriptor
 from .subject import Subject
 
 if TYPE_CHECKING:
@@ -16,22 +16,6 @@ if TYPE_CHECKING:
         StudySiteProtocolVersionRelationship,
         StudySubjectProtocolVersionRelationship,
     )
-
-
-class Status(Enum):
-    candidate = "candidate"
-    eligible = "eligible"
-    follow_up = "follow-up"
-    ineligible = "ineligible"
-    not_registered = "not-registered"
-    off_study = "off-study"
-    on_study = "on-study"
-    on_study_intervention = "on-study-intervention"
-    on_study_observation = "on-study-observation"
-    pending_on_study = "pending-on-study"
-    potential_candidate = "potential-candidate"
-    screening = "screening"
-    withdrawn = "withdrawn"
 
 
 class StudySubject(Subject):
@@ -61,7 +45,9 @@ class StudySubject(Subject):
 
     id: Mapped[UUID] = mapped_column(ForeignKey("subject.id"), primary_key=True)
 
-    status: Mapped[Optional[Status]]
+    status_code_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("concept_descriptor.id"))
+    status_code: Mapped[Optional[ConceptDescriptor]] = relationship()
+
     status_date: Mapped[Optional[datetime]]
 
     assigned_study_subject_protocol_version_relationship: Mapped[List[StudySubjectProtocolVersionRelationship]] = (

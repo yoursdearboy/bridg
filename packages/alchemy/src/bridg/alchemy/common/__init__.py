@@ -61,7 +61,6 @@ from .study import (
     Study,
 )
 from .study_subject import (
-    Status,
     StudySubject,
 )
 from .subject import (
@@ -94,7 +93,6 @@ __all__ = [
     "Project",
     "ProjectConduct",
     "ResearchProject",
-    "Status",
     "Study",
     "StudySubject",
     "Subject",

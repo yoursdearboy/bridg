@@ -9,7 +9,7 @@ from bridg.alchemy.factory import (
     StudySubjectFactory,
 )
 from bridg.api.main import app
-from tests.utils import _or, date_str, datetime_str, enum_str, person_dict, study_subject_dict
+from tests.utils import _or, cd_dict, date_str, datetime_str, enum_str, identifier_dict, person_dict, study_subject_dict
 
 client = TestClient(app)
 
@@ -55,7 +55,7 @@ def test_subject_create(session: Session):
     response = client.post(
         f"/space/{space.id}/subject/",
         json={
-            "status": _or(enum_str, s.status),
+            "status_code": _or(cd_dict, s.status_code),
             "status_date": _or(datetime_str, s.status_date),
             "performing_biologic_entity": {
                 "administrative_gender_code": _or(enum_str, p.administrative_gender_code),
@@ -68,22 +68,7 @@ def test_subject_create(session: Session):
                     "prefix": en.prefix,
                     "suffix": en.suffix,
                 },
-                "identifier": [
-                    {
-                        "identifier": {
-                            "root": id.identifier.root,
-                            "extension": id.identifier.extension,
-                        },
-                        "identifier_type_code": {
-                            "code": id.identifier_type_code.code,
-                            "code_system": id.identifier_type_code.code_system,
-                            "data_type_name": "CD",
-                            "display_name": id.identifier_type_code.display_name,
-                        }
-                        if id.identifier_type_code
-                        else None,
-                    }
-                ],
+                "identifier": [identifier_dict(id)],
                 "death_date": None,
                 "death_date_estimated_indicator": None,
                 "death_indicator": None,
@@ -113,7 +98,7 @@ def test_subject_update(session):
     response = client.patch(
         f"/space/{space.id}/subject/{s.id}",
         json={
-            "status": _or(enum_str, patch.status),
+            "status_code": _or(cd_dict, patch.status_code),
             "status_date": _or(datetime_str, patch.status_date),
         },
     )
@@ -122,7 +107,7 @@ def test_subject_update(session):
     obj = session.get(StudySubject, s.id)
     assert response.json() == {
         **study_subject_dict(obj),
-        "status": _or(enum_str, patch.status),
+        "status_code": _or(cd_dict, patch.status_code),
         "status_date": _or(datetime_str, patch.status_date),
     }
 

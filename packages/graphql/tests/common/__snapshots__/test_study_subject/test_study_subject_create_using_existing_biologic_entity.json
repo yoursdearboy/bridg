@@ -19,6 +19,12 @@
         "family": "Test",
         "given": "Norman"
       }
-    }
+    },
+    "statusCode": {
+      "code": "candidate",
+      "codeSystem": "study_subject.status",
+      "displayName": "Cndidate"
+    },
+    "statusDate": "2000-01-01T00:00:00"
   }
 }

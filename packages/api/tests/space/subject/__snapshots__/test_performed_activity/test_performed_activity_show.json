@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2017-11-12T06:14:18.501767Z",
-    "low": "2050-01-21T21:47:12.119609Z"
+    "high": "2084-03-01T23:21:02.188745Z",
+    "low": "2062-07-13T02:08:58.849158Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "truth",
-    "code_system": "process",
-    "data_type_name": "CD",
-    "display_name": "Success medical."
-  },
-  "reason_code": null,
-  "status_code": {
     "code": "decide",
     "code_system": "claim",
     "data_type_name": "CD",
     "display_name": "Several much single."
   },
-  "status_date": "2091-04-06T17:33:50.290811Z"
+  "reason_code": null,
+  "status_code": {
+    "code": "nice",
+    "code_system": "why",
+    "data_type_name": "CD",
+    "display_name": "Place."
+  },
+  "status_date": "2050-10-07T09:16:56.429739Z"
 }

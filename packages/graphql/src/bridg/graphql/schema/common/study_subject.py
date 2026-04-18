@@ -8,6 +8,7 @@ import strawberry
 
 import bridg.alchemy
 
+from ..datatype import ConceptDescriptor
 from .subject import SubjectInput, SubjectInterface
 
 if TYPE_CHECKING:
@@ -17,7 +18,7 @@ if TYPE_CHECKING:
 
 @strawberry.type
 class StudySubject(SubjectInterface):
-    status: Optional[bridg.alchemy.Status]
+    status_code: Optional[ConceptDescriptor]
     status_date: Optional[datetime]
     assigned_study_site_protocol_version_relationship: List[
         Annotated[StudySiteProtocolVersionRelationship, strawberry.lazy("..study")]
@@ -37,7 +38,7 @@ class StudySubjectFilter:
 
 @strawberry.input
 class StudySubjectCreateInput(SubjectInput):
-    status: strawberry.Maybe[Optional[bridg.alchemy.Status]]
+    status_code: strawberry.Maybe[Optional[ConceptDescriptor]]
     status_date: strawberry.Maybe[Optional[datetime]]
     assigned_study_site_protocol_version_relationship: List[
         Annotated[
@@ -49,7 +50,7 @@ class StudySubjectCreateInput(SubjectInput):
 
 @strawberry.input
 class StudySubjectUpdateInput(SubjectInput):
-    status: strawberry.Maybe[Optional[bridg.alchemy.Status]]
+    status_code: strawberry.Maybe[Optional[ConceptDescriptor]]
     status_date: strawberry.Maybe[Optional[datetime]]
 
 

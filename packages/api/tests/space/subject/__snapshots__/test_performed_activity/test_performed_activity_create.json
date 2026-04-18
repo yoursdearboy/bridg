@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2017-11-12T06:14:18.501767Z",
-    "low": "2050-01-21T21:47:12.119609Z"
+    "high": "2084-03-01T23:21:02.188745Z",
+    "low": "2062-07-13T02:08:58.849158Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "while",
-    "code_system": "born",
+    "code": "movement",
+    "code_system": "politics",
     "data_type_name": "CD",
-    "display_name": "Fear police participant check."
+    "display_name": "Check several."
   },
   "reason_code": null,
   "status_code": {
-    "code": "sound",
-    "code_system": "color",
+    "code": "notice",
+    "code_system": "start",
     "data_type_name": "CD",
-    "display_name": "Well two truth."
+    "display_name": "Truth out major."
   },
-  "status_date": "2059-11-23T10:49:21.856213Z"
+  "status_date": "2011-03-09T23:14:52.858668Z"
 }

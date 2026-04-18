@@ -8,7 +8,13 @@
           "family": "Test",
           "given": "Alexander"
         }
-      }
+      },
+      "statusCode": {
+        "code": "type",
+        "codeSystem": "serve",
+        "displayName": "Will seven."
+      },
+      "statusDate": "2095-05-20T03:02:31.433924+00:00"
     },
     {
       "id": "str",
@@ -16,9 +22,15 @@
         "id": "str",
         "primaryName": {
           "family": "Test",
-          "given": "Nancy"
+          "given": "William"
         }
-      }
+      },
+      "statusCode": {
+        "code": "win",
+        "codeSystem": "nice",
+        "displayName": "Place."
+      },
+      "statusDate": "2095-05-08T13:52:43.655018+00:00"
     },
     {
       "id": "str",
@@ -26,9 +38,15 @@
         "id": "str",
         "primaryName": {
           "family": "Test",
-          "given": "Chelsea"
+          "given": "Mario"
         }
-      }
+      },
+      "statusCode": {
+        "code": "soon",
+        "codeSystem": "no",
+        "displayName": "Campaign little."
+      },
+      "statusDate": "2006-12-02T23:41:37.281786+00:00"
     },
     {
       "id": "str",
@@ -36,9 +54,15 @@
         "id": "str",
         "primaryName": {
           "family": "Test",
-          "given": "Peter"
+          "given": "Rebecca"
         }
-      }
+      },
+      "statusCode": {
+        "code": "case",
+        "codeSystem": "public",
+        "displayName": "Claim kind."
+      },
+      "statusDate": "2033-05-10T03:39:42.268393+00:00"
     },
     {
       "id": "str",
@@ -46,9 +70,15 @@
         "id": "str",
         "primaryName": {
           "family": "Test",
-          "given": "Brian"
+          "given": "Janice"
         }
-      }
+      },
+      "statusCode": {
+        "code": "way",
+        "codeSystem": "worker",
+        "displayName": "Way."
+      },
+      "statusDate": "2030-10-29T03:16:10.375519+00:00"
     }
   ]
 }

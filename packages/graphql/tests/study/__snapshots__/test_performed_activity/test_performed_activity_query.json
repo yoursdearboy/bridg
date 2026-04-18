@@ -4,8 +4,8 @@
     "containingEpoch": null,
     "contextForStudySite": null,
     "dateRange": {
-      "high": "2026-05-04T06:50:30.798262+00:00",
-      "low": "2087-08-02T12:41:15.127890+00:00"
+      "high": "2010-08-22T15:43:38.152085+00:00",
+      "low": "2050-10-08T01:45:21.449346+00:00"
     },
     "id": "str",
     "involvedSubject": {
@@ -21,18 +21,18 @@
     "nameCodeModifiedText": null,
     "negationIndicator": false,
     "negationReason": {
-      "code": "could",
-      "codeSystem": "movement",
-      "displayName": "That fear."
+      "code": "thought",
+      "codeSystem": "purpose",
+      "displayName": "Participant check several."
     },
     "reasonCode": null,
     "repetitionNumber": 1,
     "statusCode": {
-      "code": "purpose",
-      "codeSystem": "movement",
-      "displayName": "Current hear claim well."
+      "code": "notice",
+      "codeSystem": "start",
+      "displayName": "Truth out major."
     },
-    "statusDate": "2050-01-21T21:47:12.119609+00:00",
+    "statusDate": "2062-07-13T02:08:58.849158+00:00",
     "usingProject": null
   }
 }
