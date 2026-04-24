@@ -8,7 +8,7 @@ import strawberry
 
 import bridg.alchemy
 
-from ..common import Activity, ActivityInput, Subject
+from ..common import Activity, ActivityInput, Place, Subject
 from ..datatype import ConceptDescriptor, IntervalPointInTime
 from ..protocol import DefinedActivityInterface, Epoch
 
@@ -27,6 +27,7 @@ class PerformedActivityInterface(Activity):
     status_code: Optional[ConceptDescriptor]
     status_date: Optional[datetime]
     containing_epoch: Optional[Epoch]
+    locating_place: Optional[Place]
     # TODO: add these properties
     # executing_study_protocol_version: Optional[StudyProtocolVersion]
     instantiated_defined_activity: Optional[DefinedActivityInterface]
@@ -57,6 +58,7 @@ class PerformedActivityInput(ActivityInput):
     status_code: strawberry.Maybe[Optional[ConceptDescriptor]]
     status_date: strawberry.Maybe[Optional[datetime]]
     containing_epoch_id: strawberry.Maybe[Optional[strawberry.ID]]
+    locating_place_id: strawberry.Maybe[Optional[strawberry.ID]]
     # TODO: add these properties
     # executing_study_protocol_version: Optional[StudyProtocolVersion]
     instantiated_defined_activity_id: strawberry.Maybe[Optional[strawberry.ID]]
@@ -93,6 +95,16 @@ class PerformedActivityQuery:
 
 @strawberry.type
 class PerformedActivityMutation:
+    @strawberry.mutation(name="PerformedActivityCreate")
+    def performed_activity_create(
+        self, input: PerformedActivityInput, info: strawberry.Info[Context]
+    ) -> PerformedActivity:
+        session = info.context.session
+        converter = info.context.converter
+        activity = converter.convert(input, bridg.alchemy.PerformedActivity)
+        activity = session.merge(activity)
+        return activity  # type: ignore
+
     @strawberry.mutation(name="PerformedActivityDelete")
     def performed_activity_delete(self, id: strawberry.ID, info: strawberry.Info[Context]) -> bool:
         converter = info.context.converter

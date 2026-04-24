@@ -3,8 +3,8 @@
     {
       "containingEpoch": null,
       "dateRange": {
-        "high": "2010-08-22T15:43:38.152085+00:00",
-        "low": "2050-10-08T01:45:21.449346+00:00"
+        "high": "2087-10-20T07:12:52.784143+00:00",
+        "low": "2005-10-16T17:12:03.415697+00:00"
       },
       "id": "str",
       "involvedSubject": {
@@ -17,26 +17,32 @@
           }
         }
       },
+      "locatingPlace": {
+        "id": "str",
+        "primaryName": {
+          "value": "Test Place"
+        }
+      },
       "nameCodeModifiedText": null,
       "negationIndicator": false,
       "negationReason": {
-        "code": "thought",
-        "codeSystem": "purpose",
-        "displayName": "Participant check several."
+        "code": "bed",
+        "codeSystem": "sign",
+        "displayName": "Staff within mouth."
       },
       "repetitionNumber": 1,
       "statusCode": {
-        "code": "notice",
-        "codeSystem": "start",
-        "displayName": "Truth out major."
+        "code": "car",
+        "codeSystem": "career",
+        "displayName": "Water close month."
       },
-      "statusDate": "2062-07-13T02:08:58.849158+00:00"
+      "statusDate": "2094-09-11T07:53:01.493598+00:00"
     },
     {
       "containingEpoch": null,
       "dateRange": {
-        "high": "2036-04-18T20:56:25.838903+00:00",
-        "low": "2011-03-09T23:14:52.858668+00:00"
+        "high": "2096-06-08T08:31:24.262087+00:00",
+        "low": "2060-08-28T20:13:41.034981+00:00"
       },
       "id": "str",
       "involvedSubject": {
@@ -49,20 +55,26 @@
           }
         }
       },
+      "locatingPlace": {
+        "id": "str",
+        "primaryName": {
+          "value": "Test Place"
+        }
+      },
       "nameCodeModifiedText": null,
       "negationIndicator": false,
       "negationReason": {
-        "code": "surface",
-        "codeSystem": "food",
-        "displayName": "Around there."
+        "code": "someone",
+        "codeSystem": "show",
+        "displayName": "Require human."
       },
       "repetitionNumber": 1,
       "statusCode": {
-        "code": "your",
-        "codeSystem": "bar",
-        "displayName": "Rule staff."
+        "code": "remain",
+        "codeSystem": "rate",
+        "displayName": "Just military building."
       },
-      "statusDate": "2098-07-13T20:43:14.815725+00:00"
+      "statusDate": "2092-11-21T13:34:04.676549+00:00"
     }
   ]
 }

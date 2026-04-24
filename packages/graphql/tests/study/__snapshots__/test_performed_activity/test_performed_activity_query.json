@@ -4,8 +4,8 @@
     "containingEpoch": null,
     "contextForStudySite": null,
     "dateRange": {
-      "high": "2010-08-22T15:43:38.152085+00:00",
-      "low": "2050-10-08T01:45:21.449346+00:00"
+      "high": "2087-10-20T07:12:52.784143+00:00",
+      "low": "2005-10-16T17:12:03.415697+00:00"
     },
     "id": "str",
     "involvedSubject": {
@@ -18,21 +18,27 @@
         }
       }
     },
+    "locatingPlace": {
+      "id": "str",
+      "primaryName": {
+        "value": "Test Place"
+      }
+    },
     "nameCodeModifiedText": null,
     "negationIndicator": false,
     "negationReason": {
-      "code": "thought",
-      "codeSystem": "purpose",
-      "displayName": "Participant check several."
+      "code": "bed",
+      "codeSystem": "sign",
+      "displayName": "Staff within mouth."
     },
     "reasonCode": null,
     "repetitionNumber": 1,
     "statusCode": {
-      "code": "notice",
-      "codeSystem": "start",
-      "displayName": "Truth out major."
+      "code": "car",
+      "codeSystem": "career",
+      "displayName": "Water close month."
     },
-    "statusDate": "2062-07-13T02:08:58.849158+00:00",
+    "statusDate": "2094-09-11T07:53:01.493598+00:00",
     "usingProject": null
   }
 }

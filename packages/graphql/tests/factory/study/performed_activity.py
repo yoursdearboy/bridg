@@ -11,7 +11,7 @@ from ..datatype import ConceptDescriptorFactory, IntervalPointInTimeFactory
 from ..maybe import make_some
 
 
-class PerformedActivityInputFactory[T: PerformedActivityInput](ActivityInputFactory[T]):
+class PerformedActivityInputBaseFactory[T: PerformedActivityInput](ActivityInputFactory[T]):
     __is_base_factory__ = True
 
     id = None
@@ -26,7 +26,12 @@ class PerformedActivityInputFactory[T: PerformedActivityInput](ActivityInputFact
         make_some(lambda: BaseFactory.__faker__.date_time_this_century(after_now=True, tzinfo=timezone.utc))
     )
     containing_epoch_id = None
+    locating_place_id = None
     # TODO: add these properties
     # executing_study_protocol_version: Optional[StudyProtocolVersion]
     instantiated_defined_activity_id = Ignore()
     involved_subject_id = Ignore()
+
+
+class PerformedActivityInputFactory(PerformedActivityInputBaseFactory[PerformedActivityInput]):
+    pass

@@ -2,8 +2,8 @@ from polyfactory import Ignore
 
 from bridg.graphql.schema import PerformedSpecimenMoveInput
 
-from ..study import PerformedActivityInputFactory
+from ..study import PerformedActivityInputBaseFactory
 
 
-class PerformedSpecimenMoveInputFactory(PerformedActivityInputFactory[PerformedSpecimenMoveInput]):
+class PerformedSpecimenMoveInputFactory(PerformedActivityInputBaseFactory[PerformedSpecimenMoveInput]):
     type = Ignore()
