@@ -1,16 +1,18 @@
 from syrupy.matchers import path_type
 
-from bridg.alchemy import PerformedActivity
+from bridg.alchemy import PerformedActivity, PlaceName
 from bridg.alchemy.factory import (
     BiologicEntityNameFactory,
     PerformedActivityFactory,
     PersonFactory,
+    PlaceFactory,
     StudyProtocolVersionFactory,
     StudySubjectFactory,
 )
 from bridg.graphql.context import Context
 from bridg.graphql.schema import schema
 
+from ..factory import PerformedActivityInputFactory
 from ..utils import process_input
 
 
@@ -23,8 +25,12 @@ def test_performed_activity_query(context: Context, snapshot_json):
         ),
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
+    place = PlaceFactory.create_sync(
+        name=[PlaceName(value="Test Place")],
+    )
     act = PerformedActivityFactory.create_sync(
         executing_study_protocol_version=space,
+        locating_place=place,
         involved_subject=ss,
     )
 
@@ -61,6 +67,12 @@ def test_performed_activity_query(context: Context, snapshot_json):
                    name
                    typeCode
                 }
+                locatingPlace {
+                    id
+                    primaryName {
+                        value
+                    }
+                }
                 involvedSubject {
                     id
                     performingBiologicEntity {
@@ -89,9 +101,11 @@ def test_performed_activity_list_query(context: Context, snapshot_json):
         ),
         assigned_study_site_protocol_version_relationship=[sspvr],
     )
+    place = PlaceFactory.create_sync(name=[PlaceName(value="Test Place")])
     PerformedActivityFactory.create_batch_sync(
         2,
         executing_study_protocol_version=space,
+        locating_place=place,
         involved_subject=ss,
     )
 
@@ -111,6 +125,12 @@ def test_performed_activity_list_query(context: Context, snapshot_json):
                    name
                    typeCode
                 }
+                locatingPlace {
+                    id
+                    primaryName {
+                        value
+                    }
+                }
                 involvedSubject {
                     id
                     performingBiologicEntity {
@@ -126,6 +146,36 @@ def test_performed_activity_list_query(context: Context, snapshot_json):
     """
 
     result = schema.execute_sync(query, context_value=context)
+    assert result.errors is None
+    assert result.data == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
+
+
+def test_performed_activity_create(context: Context, snapshot_json):
+    query = """
+        mutation test($input: PerformedEncounterInput!) {
+            PerformedActivityCreate(input: $input) {
+                id
+                repetitionNumber
+                nameCodeModifiedText
+                dateRange
+                negationReason
+                negationIndicator
+                statusCode
+                statusDate
+                locatingPlace {
+                    id
+                    primaryName {
+                        value
+                    }
+                }
+            }
+        }
+    """
+    place = PlaceFactory.create_sync(name=[PlaceName(value="Test place")])
+    input = PerformedActivityInputFactory.build(
+        locating_place_id=place.id,
+    )
+    result = schema.execute_sync(query, dict(input=process_input(input)), context_value=context)
     assert result.errors is None
     assert result.data == snapshot_json(matcher=path_type({r".*id$": (str,)}, regex=True))
 

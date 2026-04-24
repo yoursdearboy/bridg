@@ -29,6 +29,7 @@ from .maybe import (
     make_some,
 )
 from .study import (
+    PerformedActivityInputBaseFactory,
     PerformedActivityInputFactory,
     PerformedEncounterInputFactory,
     PerformedObservationInputFactory,
@@ -49,6 +50,7 @@ __all__ = [
     "IntervalPointInTimeFactory",
     "MaterialInputFactory",
     "MaybeFactory",
+    "PerformedActivityInputBaseFactory",
     "PerformedActivityInputFactory",
     "PerformedEncounterInputFactory",
     "PerformedObservationInputFactory",

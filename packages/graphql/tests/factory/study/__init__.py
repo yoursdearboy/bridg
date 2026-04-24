@@ -1,4 +1,5 @@
 from .performed_activity import (
+    PerformedActivityInputBaseFactory,
     PerformedActivityInputFactory,
 )
 from .performed_encounter import (
@@ -15,6 +16,7 @@ from .performed_specimen_collection import (
 )
 
 __all__ = [
+    "PerformedActivityInputBaseFactory",
     "PerformedActivityInputFactory",
     "PerformedEncounterInputFactory",
     "PerformedObservationInputFactory",

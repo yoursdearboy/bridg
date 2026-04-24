@@ -5,7 +5,7 @@ from uuid import UUID, uuid4
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, composite, mapped_column, relationship
 
-from ..common import Activity, Subject
+from ..common import Activity, Place, Subject
 from ..datatype import ConceptDescriptor, IntervalPointInTime
 from ..protocol import DefinedActivity, Epoch, StudyProtocolVersion
 from ..tz_date_time import TZDateTime
@@ -49,6 +49,9 @@ class PerformedActivity(Activity):
     Each PerformedActivity might be contained by one Epoch.
     Each Epoch might contain one or more PerformedActivity.
     """
+
+    locating_place_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("place.id"))
+    locating_place: Mapped[Optional[Place]] = relationship(foreign_keys=locating_place_id)
 
     executing_study_protocol_version_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("study_protocol_version.id"))
     executing_study_protocol_version: Mapped[Optional[StudyProtocolVersion]] = relationship()

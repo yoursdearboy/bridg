@@ -32,6 +32,9 @@ class PerformedActivityBaseFactory[T: PerformedActivity](BaseFactory[T]):
     containing_epoch_id = Ignore()
     containing_epoch = Ignore()
 
+    locating_place_id = Ignore()
+    locating_place = Ignore()
+
     executing_study_protocol_version_id = Ignore()
     executing_study_protocol_version = Ignore()
 
