@@ -95,6 +95,16 @@ class PerformedActivityQuery:
 
 @strawberry.type
 class PerformedActivityMutation:
+    @strawberry.mutation(name="PerformedActivityCreate")
+    def performed_activity_create(
+        self, input: PerformedActivityInput, info: strawberry.Info[Context]
+    ) -> PerformedActivity:
+        session = info.context.session
+        converter = info.context.converter
+        activity = converter.convert(input, bridg.alchemy.PerformedActivity)
+        activity = session.merge(activity)
+        return activity  # type: ignore
+
     @strawberry.mutation(name="PerformedActivityDelete")
     def performed_activity_delete(self, id: strawberry.ID, info: strawberry.Info[Context]) -> bool:
         converter = info.context.converter

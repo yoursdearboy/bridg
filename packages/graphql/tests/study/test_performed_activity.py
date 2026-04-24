@@ -152,7 +152,7 @@ def test_performed_activity_list_query(context: Context, snapshot_json):
 
 def test_performed_activity_create(context: Context, snapshot_json):
     query = """
-        mutation test($input: PerformedEncounterInput!) {
+        mutation test($input: PerformedActivityInput!) {
             PerformedActivityCreate(input: $input) {
                 id
                 repetitionNumber
