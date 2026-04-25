@@ -13,18 +13,28 @@ from bridg.common.settings import load_settings
 def session():
     settings = load_settings()
     engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
-    session = Session(engine, expire_on_commit=False)
+
+    # see https://docs.sqlalchemy.org/en/20/orm/session_transaction.html#joining-a-session-into-an-external-transaction-such-as-for-test-suites
+    connection = engine.connect()
+    trans = connection.begin()
+
+    session = Session(
+        bind=connection,
+        expire_on_commit=False,
+        join_transaction_mode="create_savepoint",
+    )
 
     SQLAlchemyBaseFactory.__session__ = session
 
-    return session
+    yield session
+
+    trans.rollback()
+    connection.close()
 
 
 @pytest.fixture(scope="function", autouse=True)
 def database(session):
     Base.metadata.create_all(session.bind)
-    yield
-    Base.metadata.drop_all(session.bind)
 
 
 @pytest.fixture(scope="function", autouse=True)
