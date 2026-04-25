@@ -4,8 +4,8 @@
     "containingEpoch": null,
     "contextForStudySite": null,
     "dateRange": {
-      "high": "2087-10-20T07:12:52.784143+00:00",
-      "low": "2005-10-16T17:12:03.415697+00:00"
+      "high": "2046-09-14T01:49:26.403418+00:00",
+      "low": "2042-05-11T05:01:15.381345+00:00"
     },
     "id": "str",
     "involvedSubject": {
@@ -27,18 +27,18 @@
     "nameCodeModifiedText": null,
     "negationIndicator": false,
     "negationReason": {
-      "code": "bed",
-      "codeSystem": "sign",
-      "displayName": "Staff within mouth."
+      "code": "report",
+      "codeSystem": "ready",
+      "displayName": "Art rock."
     },
     "reasonCode": null,
     "repetitionNumber": 1,
     "statusCode": {
-      "code": "car",
-      "codeSystem": "career",
-      "displayName": "Water close month."
+      "code": "such",
+      "codeSystem": "training",
+      "displayName": "Eat couple."
     },
-    "statusDate": "2094-09-11T07:53:01.493598+00:00",
+    "statusDate": "2072-11-27T11:53:22.691418+00:00",
     "usingProject": null
   }
 }

@@ -3,14 +3,15 @@ from typing import get_args
 from sqlalchemy.orm import Session
 
 from bridg.alchemy import DataValue
-from bridg.alchemy.factory import PerformedObservationResultFactory
+from bridg.alchemy.factory import PerformedObservationFactory, PerformedObservationResultFactory
 
 
 def test_performed_observation_result_value_persistence(session: Session):
+    obs = PerformedObservationFactory.create_sync()
     data_types = get_args(DataValue) + (None,)
     for type_old in data_types:
         for type_new in data_types:
-            old = PerformedObservationResultFactory.create_sync(data_type=type_old)
+            old = PerformedObservationResultFactory.create_sync(data_type=type_old, producing_performed_observation=obs)
             new = PerformedObservationResultFactory.build(data_type=type_new)
             old.value = new.value
             session.commit()

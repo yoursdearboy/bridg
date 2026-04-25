@@ -14,7 +14,7 @@
         "displayName": "Here grow."
       },
       "quantity": {
-        "unit": "s",
+        "unit": "10^9/l",
         "value": 91.0
       }
     },

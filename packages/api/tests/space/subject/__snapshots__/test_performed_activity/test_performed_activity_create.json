@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2084-03-01T23:21:02.188745Z",
-    "low": "2062-07-13T02:08:58.849158Z"
+    "high": "2007-02-01T01:33:10.484617Z",
+    "low": "2085-12-18T04:23:30.704763Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "movement",
-    "code_system": "politics",
+    "code": "economy",
+    "code_system": "family",
     "data_type_name": "CD",
-    "display_name": "Check several."
+    "display_name": "Democrat car very."
   },
   "reason_code": null,
   "status_code": {
-    "code": "notice",
-    "code_system": "start",
+    "code": "own",
+    "code_system": "part",
     "data_type_name": "CD",
-    "display_name": "Truth out major."
+    "display_name": "Drug list imagine."
   },
-  "status_date": "2011-03-09T23:14:52.858668Z"
+  "status_date": "2009-06-07T05:59:35.537222Z"
 }

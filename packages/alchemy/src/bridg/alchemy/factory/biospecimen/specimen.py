@@ -11,5 +11,6 @@ class SpecimenFactory(BaseFactory[Specimen]):
 
     id = Ignore()
     performing_material = MaterialFactory
+    producing_performed_specimen_collection_id = Ignore()
     producing_performed_specimen_collection = Ignore()
     performed_subject = Ignore()

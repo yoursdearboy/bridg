@@ -37,6 +37,7 @@ class PerformedObservationResultFactory(BaseFactory[bridg.alchemy.PerformedObser
 
     comment = None
 
+    producing_performed_observation_id = Ignore()
     producing_performed_observation = Ignore()
 
     value_cd_id = Ignore()

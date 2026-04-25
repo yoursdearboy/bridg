@@ -18,7 +18,7 @@
         "performingOrganization": {
           "id": "str",
           "primaryName": {
-            "value": "James LLC"
+            "value": "Rodriguez, Figueroa and Sanchez"
           }
         }
       },
@@ -28,7 +28,7 @@
         "performingOrganization": {
           "id": "str",
           "primaryName": {
-            "value": "Miles-Sutton"
+            "value": "Wyatt Inc"
           }
         }
       }

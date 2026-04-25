@@ -4,24 +4,24 @@
   "context_for_study_site": null,
   "date_range": {
     "data_type_name": "IVL[TS]",
-    "high": "2084-03-01T23:21:02.188745Z",
-    "low": "2062-07-13T02:08:58.849158Z"
+    "high": "2007-02-01T01:33:10.484617Z",
+    "low": "2085-12-18T04:23:30.704763Z"
   },
   "id": "str",
   "instantiated_defined_activity": null,
   "negation_indicator": false,
   "negation_reason": {
-    "code": "decide",
-    "code_system": "claim",
+    "code": "relationship",
+    "code_system": "mention",
     "data_type_name": "CD",
-    "display_name": "Several much single."
+    "display_name": "Much rich."
   },
   "reason_code": null,
   "status_code": {
-    "code": "nice",
-    "code_system": "why",
+    "code": "us",
+    "code_system": "own",
     "data_type_name": "CD",
-    "display_name": "Place."
+    "display_name": "Line six space."
   },
-  "status_date": "2050-10-07T09:16:56.429739Z"
+  "status_date": "2023-10-20T02:51:44.956300Z"
 }

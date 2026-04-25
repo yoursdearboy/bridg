@@ -3,8 +3,8 @@
     {
       "containingEpoch": null,
       "dateRange": {
-        "high": "2087-10-20T07:12:52.784143+00:00",
-        "low": "2005-10-16T17:12:03.415697+00:00"
+        "high": "2046-09-14T01:49:26.403418+00:00",
+        "low": "2042-05-11T05:01:15.381345+00:00"
       },
       "id": "str",
       "involvedSubject": {
@@ -26,23 +26,23 @@
       "nameCodeModifiedText": null,
       "negationIndicator": false,
       "negationReason": {
-        "code": "bed",
-        "codeSystem": "sign",
-        "displayName": "Staff within mouth."
+        "code": "report",
+        "codeSystem": "ready",
+        "displayName": "Art rock."
       },
       "repetitionNumber": 1,
       "statusCode": {
-        "code": "car",
-        "codeSystem": "career",
-        "displayName": "Water close month."
+        "code": "such",
+        "codeSystem": "training",
+        "displayName": "Eat couple."
       },
-      "statusDate": "2094-09-11T07:53:01.493598+00:00"
+      "statusDate": "2072-11-27T11:53:22.691418+00:00"
     },
     {
       "containingEpoch": null,
       "dateRange": {
-        "high": "2096-06-08T08:31:24.262087+00:00",
-        "low": "2060-08-28T20:13:41.034981+00:00"
+        "high": "2042-03-10T05:26:43.723819+00:00",
+        "low": "2044-11-10T14:38:09.709885+00:00"
       },
       "id": "str",
       "involvedSubject": {
@@ -64,17 +64,17 @@
       "nameCodeModifiedText": null,
       "negationIndicator": false,
       "negationReason": {
-        "code": "someone",
-        "codeSystem": "show",
-        "displayName": "Require human."
+        "code": "enjoy",
+        "codeSystem": "two",
+        "displayName": "Kitchen technology."
       },
       "repetitionNumber": 1,
       "statusCode": {
-        "code": "remain",
-        "codeSystem": "rate",
-        "displayName": "Just military building."
+        "code": "oil",
+        "codeSystem": "billion",
+        "displayName": "Reach."
       },
-      "statusDate": "2092-11-21T13:34:04.676549+00:00"
+      "statusDate": "2027-11-08T20:40:25.734144+00:00"
     }
   ]
 }

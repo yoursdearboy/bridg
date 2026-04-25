@@ -12,8 +12,11 @@ class StudySiteFactory(BaseFactory[StudySite]):
     id = Ignore()
     lead = False
 
+    performing_healthcare_facility_id = Ignore()
     performing_healthcare_facility = None
+    performing_organization_id = Ignore()
     performing_organization = OrganizationFactory
+    executed_study_conduct_id = Ignore()
     executed_study_conduct = Ignore()
     executed_study_site_protocol_version_relationship = Ignore()
     executing_study_protocol_version = Ignore()
