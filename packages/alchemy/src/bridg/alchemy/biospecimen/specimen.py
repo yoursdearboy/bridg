@@ -42,7 +42,11 @@ class Specimen(Base):
     )
 
     producing_performed_specimen_collection_id: Mapped[Optional[UUID]] = mapped_column(
-        ForeignKey("performed_activity.id", use_alter=True)
+        ForeignKey(
+            "performed_activity.id",
+            name="specimen_producing_performed_specimen_collection_id_fkey",
+            use_alter=True,
+        )
     )
     producing_performed_specimen_collection: Mapped[Optional[PerformedSpecimenCollection]] = relationship(
         back_populates="produced_specimen"
