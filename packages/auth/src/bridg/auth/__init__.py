@@ -17,9 +17,6 @@ from .ldap import check_ldap
 
 
 class AuthBackend(AuthenticationBackend):
-    def __init__(self, session: sessionmaker[Session]):
-        self.session = session
-
     async def authenticate(self, conn):
         if "Authorization" not in conn.headers:
             return
@@ -29,12 +26,17 @@ class AuthBackend(AuthenticationBackend):
         if scheme.lower() != "bearer":
             return
 
-        session = self.session()
-        user = find_user_by_token(session, token=token)
-        if user is None:
-            raise AuthenticationError("Invalid auth credentials")
+        if not hasattr(conn.state, "session"):
+            raise RuntimeError("Add session attribute to request state")
+        session = conn.state.session
 
-        return AuthCredentials(["authenticated"]), SimpleUser(user.username)
+        with session.begin():
+            user = find_user_by_token(session, token=token)
+            if user is None:
+                raise AuthenticationError("Invalid auth credentials")
+            identity = SimpleUser(user.username)
+
+        return AuthCredentials(["authenticated"]), identity
 
 
 class AuthorizationMiddleware(BaseHTTPMiddleware):

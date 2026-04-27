@@ -10,6 +10,7 @@ from bridg.alchemy import TerminologyService
 from bridg.auth import AuthBackend, AuthorizationMiddleware, login_endpoint
 from bridg.common.env import load_env
 from bridg.common.settings import load_settings
+from bridg.common.starlette.middleware.session import SessionMiddleware
 
 from .context import Context
 from .converter import Converter
@@ -23,7 +24,7 @@ Session = sessionmaker(engine)
 
 class App(GraphQL):
     async def get_context(self, request, response=None) -> Context:
-        session = Session()
+        session = request.state.session
         terminology = TerminologyService(session)
         return Context(
             request=request,
@@ -36,7 +37,8 @@ class App(GraphQL):
 
 graphql_app = App(schema)
 middleware = [
-    Middleware(AuthenticationMiddleware, backend=AuthBackend(Session)),
+    Middleware(SessionMiddleware, session=Session),
+    Middleware(AuthenticationMiddleware, backend=AuthBackend()),
     Middleware(AuthorizationMiddleware),
 ]
 app = Starlette(
