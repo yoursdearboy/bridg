@@ -50,6 +50,7 @@ addopts = "--cov --cov-report html"
 
 [tool.ruff]
 line-length = 120
+src = ["packages/*/src"]
 
 [tool.ruff.lint]
 extend-select = ["F", "I", "TID"]
