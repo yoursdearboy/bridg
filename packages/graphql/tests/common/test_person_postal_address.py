@@ -2,7 +2,7 @@ from uuid import UUID
 
 from syrupy.matchers import path_type
 
-from bridg.alchemy import Person, PersonPostalAddress
+from bridg.alchemy import PersonPostalAddress
 from bridg.alchemy.factory import PersonFactory, PersonPostalAddressFactory
 from bridg.graphql.context import Context
 from bridg.graphql.schema import schema
@@ -61,7 +61,7 @@ def test_person_postal_address_create(context: Context, snapshot_json):
     assert result.errors is None
 
     session = context.session
-    person = session.get_one(Person, person.id)
+    session.refresh(person)
 
     state = [{k: v for k, v in ad.__dict__.items() if k != "_sa_instance_state"} for ad in person.postal_address]
     assert state == snapshot_json(matcher=path_type({r".*id$": (UUID,)}, regex=True))
