@@ -3,6 +3,9 @@ from argparse import ArgumentParser
 from typing import Any, Dict, List, TypedDict
 
 import yaml
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+
 from bridg.alchemy import (
     ConceptDescriptor,
     DefinedActivity,
@@ -27,8 +30,6 @@ from bridg.alchemy import (
 )
 from bridg.common.env import load_env
 from bridg.common.settings import load_settings
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
 
 Root = TypedDict(
     "Root",
