@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v7
+      - name: Install python dependencies dependencies
+        run: sudo apt install -y libjpeg-dev zlib1g-dev
       - name: Lint
         run: uv run ruff check
 
