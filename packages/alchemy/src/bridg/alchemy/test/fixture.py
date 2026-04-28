@@ -1,6 +1,6 @@
 import pytest
 from polyfactory.factories.base import BaseFactory
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, make_url
 from sqlalchemy.orm import Session
 
 from bridg.alchemy.db import Base
@@ -9,10 +9,18 @@ from bridg.alchemy.terminology import TerminologyService
 from bridg.common.settings import load_settings
 
 
+def make_engine(x: str):
+    url = make_url(x)
+    connect_args = dict()
+    if url.drivername == "sqlite":
+        connect_args["autocommit"] = False
+    return create_engine(url, connect_args=connect_args)
+
+
 @pytest.fixture
 def session():
     settings = load_settings()
-    engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
+    engine = make_engine(settings.SQLALCHEMY_DATABASE_URI)
 
     # see https://docs.sqlalchemy.org/en/20/orm/session_transaction.html#joining-a-session-into-an-external-transaction-such-as-for-test-suites
     connection = engine.connect()
