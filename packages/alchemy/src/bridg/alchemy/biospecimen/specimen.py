@@ -9,9 +9,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..common import Material, Subject
 from ..db import Base
 from ..study import PerformedSpecimenCollection
+from ..versioned import Versioned
 
 
-class Specimen(Base):
+class Specimen(Versioned, Base):
     """
     DEFINITION:
     A substance or portion of material originally obtained from an entity for use in testing, examination, or study.

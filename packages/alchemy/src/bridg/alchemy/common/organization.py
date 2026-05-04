@@ -9,6 +9,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..datatype import OrganizationName as OrganizationNameDataType
 from ..datatype import OrganizationNameParts
 from ..db import Base
+from ..versioned import Versioned
 
 if TYPE_CHECKING:
     from .healthcare_facility import HealthcareFacility
@@ -17,7 +18,7 @@ if TYPE_CHECKING:
     from .subject import Subject
 
 
-class Organization(Base):
+class Organization(Versioned, Base):
     """
     DEFINITION:
     A formalized group of persons or other organizations collected together for a common purpose (such as administrative, legal, political) and the infrastructure to carry out that purpose.
@@ -81,7 +82,7 @@ class Organization(Base):
     )
 
 
-class OrganizationName(OrganizationNameDataType, OrganizationNameParts, Base):
+class OrganizationName(Versioned, OrganizationNameDataType, OrganizationNameParts, Base):
     __tablename__ = "organization_name"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)

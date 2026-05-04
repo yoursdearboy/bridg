@@ -8,6 +8,7 @@ from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
+from ..versioned import Versioned
 from .study_subject_protocol_version_relationship import (
     StudySubjectProtocolVersionRelationship,
 )
@@ -18,7 +19,7 @@ if TYPE_CHECKING:
     from .study_site import StudySite
 
 
-class StudySiteProtocolVersionRelationship(Base):
+class StudySiteProtocolVersionRelationship(Versioned, Base):
     """
     DEFINITION:
     Specifies the link between a study site and a version of the study protocol used or available for use at that site.

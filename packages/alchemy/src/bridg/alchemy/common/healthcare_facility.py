@@ -7,6 +7,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
+from ..versioned import Versioned
 
 if TYPE_CHECKING:
     from .healthcare_provider import HealthcareProvider
@@ -14,7 +15,7 @@ if TYPE_CHECKING:
     from .organization import Organization
 
 
-class HealthcareFacility(Base):
+class HealthcareFacility(Versioned, Base):
     """
     DEFINITION:
     An organization that devotes some or all of its resources (people, places, things) to the delivery of healthcare services (including the financial and administrative management of those resources).

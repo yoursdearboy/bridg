@@ -8,13 +8,14 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..datatype import ConceptDescriptor, TrivialName
 from ..db import Base
+from ..versioned import Versioned
 from .id import ID
 
 if TYPE_CHECKING:
     pass
 
 
-class Place(Base):
+class Place(Versioned, Base):
     """
     DEFINITION:
     A bounded physical location which may contain structures.
@@ -47,7 +48,7 @@ class Place(Base):
     actual_indicator: Mapped[bool] = mapped_column(default=True)
 
 
-class PlaceIdentifier(ID):
+class PlaceIdentifier(Versioned, ID):
     __tablename__ = "place_identifier"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
@@ -56,7 +57,7 @@ class PlaceIdentifier(ID):
     place: Mapped[Place] = relationship(back_populates="identifier")
 
 
-class PlaceName(TrivialName, Base):
+class PlaceName(Versioned, TrivialName, Base):
     __tablename__ = "place_name"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)

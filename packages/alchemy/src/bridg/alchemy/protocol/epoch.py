@@ -6,10 +6,11 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..datatype import ConceptDescriptor
 from ..db import Base
+from ..versioned import Versioned
 from .study_protocol_version import StudyProtocolVersion
 
 
-class Epoch(Base):
+class Epoch(Versioned, Base):
     """
     DEFINITION:
     A discrete, structured plan (that persists over time) for a study to assess the utility, impact, pharmacological, physiological, and/or psychological effects of a particular treatment, procedure, drug, device, biologic, food product, cosmetic, care plan, or subject characteristic.

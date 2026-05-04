@@ -9,6 +9,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..datatype import EntityName, EntityNameParts
 from ..db import Base
+from ..versioned import Versioned
 from .administrative_gender import AdministrativeGender
 from .id import ID
 
@@ -16,7 +17,7 @@ if TYPE_CHECKING:
     from .subject import Subject
 
 
-class BiologicEntity(Base):
+class BiologicEntity(Versioned, Base):
     """
     Any individual living (or previously living) being.
 
@@ -58,7 +59,7 @@ class BiologicEntity(Base):
     )
 
 
-class BiologicEntityName(EntityName, EntityNameParts, Base):
+class BiologicEntityName(Versioned, EntityName, EntityNameParts, Base):
     __tablename__ = "biologic_entity_name"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
@@ -67,7 +68,7 @@ class BiologicEntityName(EntityName, EntityNameParts, Base):
     biologic_entity: Mapped[BiologicEntity] = relationship(back_populates="name")
 
 
-class BiologicEntityIdentifier(ID):
+class BiologicEntityIdentifier(Versioned, ID):
     __tablename__ = "biologic_entity_identifier"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)

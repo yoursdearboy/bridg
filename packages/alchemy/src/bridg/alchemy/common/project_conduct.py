@@ -7,12 +7,13 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
+from ..versioned import Versioned
 
 if TYPE_CHECKING:
     from .project import Project
 
 
-class ProjectConduct(Base):
+class ProjectConduct(Versioned, Base):
     """
     DEFINITION:
     An ongoing and/or past performance of a project.

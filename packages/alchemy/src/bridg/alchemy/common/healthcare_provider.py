@@ -8,6 +8,7 @@ from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
+from ..versioned import Versioned
 
 if TYPE_CHECKING:
     from .healthcare_facility import HealthcareFacility
@@ -17,7 +18,7 @@ if TYPE_CHECKING:
     from .person import Person
 
 
-class HealthcareProvider(Base):
+class HealthcareProvider(Versioned, Base):
     """
     DEFINITION:
     A person licensed, certified or otherwise authorized or permitted by law to administer healthcare in the ordinary course of business or practice of a profession.

@@ -9,6 +9,7 @@ from ..common import Activity, Place, Subject
 from ..datatype import ConceptDescriptor, IntervalPointInTime
 from ..protocol import DefinedActivity, Epoch, StudyProtocolVersion
 from ..tz_date_time import TZDateTime
+from ..versioned import Versioned
 
 
 def _date_range(low: datetime, high: datetime) -> Optional[IntervalPointInTime]:
@@ -16,7 +17,7 @@ def _date_range(low: datetime, high: datetime) -> Optional[IntervalPointInTime]:
         return IntervalPointInTime(low, high)
 
 
-class PerformedActivity(Activity):
+class PerformedActivity(Versioned, Activity):
     __tablename__ = "performed_activity"
     __mapper_args__ = {"concrete": True, "polymorphic_identity": "activity", "polymorphic_on": "type"}
 

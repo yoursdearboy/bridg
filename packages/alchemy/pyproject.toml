@@ -5,7 +5,8 @@ description = "BRIDG persistence using SQLAlchemy"
 dependencies = [
     "sqlalchemy<3.0.0,>=2.0.45",
     "cattrs<25.0.0,>=24.1.2",
-    "toolz<2.0.0,>=1.0.0"
+    "toolz<2.0.0,>=1.0.0",
+    "sqlalchemy-continuum>=1.6.0",
 ]
 
 [dependency-groups]

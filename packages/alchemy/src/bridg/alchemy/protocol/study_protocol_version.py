@@ -8,6 +8,7 @@ from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
+from ..versioned import Versioned
 
 if TYPE_CHECKING:
     from ..study import StudySite, StudySiteProtocolVersionRelationship
@@ -17,7 +18,7 @@ if TYPE_CHECKING:
     from .study_protocol import StudyProtocol
 
 
-class StudyProtocolVersion(Base):
+class StudyProtocolVersion(Versioned, Base):
     """
     DEFINITION:
     A variant or snapshot of the study protocol at a particular point in time.

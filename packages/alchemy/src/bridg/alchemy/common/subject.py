@@ -7,6 +7,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship, validates
 
 from ..db import Base
+from ..versioned import Versioned
 from .biologic_entity import BiologicEntity
 from .organization import Organization
 
@@ -15,7 +16,7 @@ if TYPE_CHECKING:
     from ..study import PerformedActivity, ScheduledActivity
 
 
-class Subject(Base):
+class Subject(Versioned, Base):
     """
     DEFINITION:
     An entity of interest, either biological or otherwise.

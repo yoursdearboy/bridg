@@ -8,10 +8,11 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..datatype import ConceptDescriptor
 from ..db import Base
 from ..observation_result import ObservationResult
+from ..versioned import Versioned
 from .performed_observation import PerformedObservation
 
 
-class PerformedObservationResult(ObservationResult, Base):
+class PerformedObservationResult(Versioned, ObservationResult, Base):
     __tablename__ = "performed_observation_result"
     __mapper_args__ = {"polymorphic_on": "type", "polymorphic_identity": "observation_result"}
 

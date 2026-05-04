@@ -1,6 +1,7 @@
 # ruff: noqa: F403, F405
 
 from sqlalchemy import create_engine
+from sqlalchemy.orm import configure_mappers
 
 from bridg.alchemy import *
 from bridg.auth import *
@@ -12,6 +13,7 @@ def main():
     load_env()
     settings = load_settings()
     engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
+    configure_mappers()
     Base.metadata.create_all(bind=engine)
 
 

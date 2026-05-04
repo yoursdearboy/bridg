@@ -7,13 +7,14 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
+from ..versioned import Versioned
 
 if TYPE_CHECKING:
     from ..common import StudySubject
     from ..study import StudySiteProtocolVersionRelationship
 
 
-class StudySubjectProtocolVersionRelationship(Base):
+class StudySubjectProtocolVersionRelationship(Versioned, Base):
     """
     DEFINITION:
     Specifies the link between a study subject and a version of the study protocol at a site.

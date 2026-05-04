@@ -7,13 +7,14 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
+from ..versioned import Versioned
 
 if TYPE_CHECKING:
     from ..common import Study
     from .study_protocol_version import StudyProtocolVersion
 
 
-class StudyProtocol(Base):
+class StudyProtocol(Versioned, Base):
     """
     DEFINITION:
     A discrete, structured plan (that persists over time) for a study to assess the utility, impact, pharmacological, physiological, and/or psychological effects of a particular treatment, procedure, drug, device, biologic, food product, cosmetic, care plan, or subject characteristic.
@@ -23,6 +24,9 @@ class StudyProtocol(Base):
     """
 
     __tablename__ = "study_protocol"
+    __versioned__ = {
+        "table_name": "%s_version_",
+    }
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 

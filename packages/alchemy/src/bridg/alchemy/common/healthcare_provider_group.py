@@ -8,6 +8,7 @@ from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
+from ..versioned import Versioned
 
 if TYPE_CHECKING:
     from .healthcare_facility import HealthcareFacility
@@ -16,7 +17,7 @@ if TYPE_CHECKING:
     from .organization import Organization
 
 
-class HealthcareProviderGroup(Base):
+class HealthcareProviderGroup(Versioned, Base):
     """
     DEFINITION:
     A collection of healthcare providers loosely based upon a criterion (i.e., specialty, department, credentials).

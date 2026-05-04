@@ -19,6 +19,7 @@ source = { editable = "packages/alchemy" }
 dependencies = [
     { name = "cattrs" },
     { name = "sqlalchemy" },
+    { name = "sqlalchemy-continuum" },
     { name = "toolz" },
 ]
 
@@ -35,6 +36,7 @@ test = [
 requires-dist = [
     { name = "cattrs", specifier = ">=24.1.2,<25.0.0" },
     { name = "sqlalchemy", specifier = ">=2.0.45,<3.0.0" },
+    { name = "sqlalchemy-continuum", specifier = ">=1.6.0" },
     { name = "toolz", specifier = ">=1.0.0,<2.0.0" },
 ]
 
@@ -1864,6 +1866,18 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/42/39/f05f0ed54d451156bbed0e23eb0516bcad7cbb9f18b3bf219c786371b3f0/sqlalchemy-2.0.45-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:cd337d3526ec5298f67d6a30bbbe4ed7e5e68862f0bf6dd21d289f8d37b7d60b", size = 3522029, upload-time = "2025-12-09T22:13:32.09Z" },
     { url = "https://files.pythonhosted.org/packages/54/0f/d15398b98b65c2bce288d5ee3f7d0a81f77ab89d9456994d5c7cc8b2a9db/sqlalchemy-2.0.45-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:9a62b446b7d86a3909abbcd1cd3cc550a832f99c2bc37c5b22e1925438b9367b", size = 3475142, upload-time = "2025-12-09T22:13:33.739Z" },
     { url = "https://files.pythonhosted.org/packages/bf/e1/3ccb13c643399d22289c6a9786c1a91e3dcbb68bce4beb44926ac2c557bf/sqlalchemy-2.0.45-py3-none-any.whl", hash = "sha256:5225a288e4c8cc2308dbdd874edad6e7d0fd38eac1e9e5f23503425c8eee20d0", size = 1936672, upload-time = "2025-12-09T21:54:52.608Z" },
+]
+
+[[package]]
+name = "sqlalchemy-continuum"
+version = "1.6.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "sqlalchemy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ca/95/0a5c5cb544804e0be6a32a63ba3204b54877f50999cca03179a8eaa82b31/sqlalchemy_continuum-1.6.0.tar.gz", hash = "sha256:4be2b66c5b951fdccf38da5b45c56f64f45b7656fe69f56310bf723548f612fc", size = 94037, upload-time = "2026-01-23T01:12:46.194Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/77/6e/6818134ff199b9b08d92f79ddde6667e19ab835ef2d0732631935d6a7041/sqlalchemy_continuum-1.6.0-py3-none-any.whl", hash = "sha256:8768a402146f5a71b5b86dc4157c72b10ca86e2eecaf5e575c77c3d0811e6768", size = 54557, upload-time = "2026-01-23T01:12:45.066Z" },
 ]
 
 [[package]]

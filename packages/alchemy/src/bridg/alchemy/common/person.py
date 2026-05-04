@@ -7,6 +7,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .. import datatype
+from ..versioned import Versioned
 from .biologic_entity import BiologicEntity
 
 if TYPE_CHECKING:
@@ -34,7 +35,7 @@ class Person(BiologicEntity):
     )
 
 
-class PersonPostalAddress(datatype.PostalAddress):
+class PersonPostalAddress(Versioned, datatype.PostalAddress):
     __tablename__ = "person_postal_address"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
@@ -43,7 +44,7 @@ class PersonPostalAddress(datatype.PostalAddress):
     person: Mapped[Person] = relationship(back_populates="postal_address")
 
 
-class PersonTelecommunicationAddress(datatype.TelecommunicationAddress):
+class PersonTelecommunicationAddress(Versioned, datatype.TelecommunicationAddress):
     __tablename__ = "person_telecom_address"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)

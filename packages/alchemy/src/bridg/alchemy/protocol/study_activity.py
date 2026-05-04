@@ -7,13 +7,14 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
+from ..versioned import Versioned
 from .study_protocol_version import StudyProtocolVersion
 
 if TYPE_CHECKING:
     from .defined_activity import DefinedActivity
 
 
-class StudyActivity(Base):
+class StudyActivity(Versioned, Base):
     __tablename__ = "study_activity"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)

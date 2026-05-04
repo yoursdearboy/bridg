@@ -5,9 +5,10 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..common import Activity, Subject
+from ..versioned import Versioned
 
 
-class ScheduledActivity(Activity):
+class ScheduledActivity(Versioned, Activity):
     __tablename__ = "scheduled_activity"
     __mapper_args__ = {"concrete": True}
 

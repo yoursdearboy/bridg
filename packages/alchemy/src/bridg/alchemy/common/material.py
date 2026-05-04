@@ -8,13 +8,14 @@ from sqlalchemy.orm import Mapped, composite, mapped_column, relationship
 
 from ..datatype import ConceptDescriptor, PhysicalQuantity
 from ..db import Base
+from ..versioned import Versioned
 from .id import ID
 
 if TYPE_CHECKING:
     from ..biospecimen import Specimen
 
 
-class Material(Base):
+class Material(Versioned, Base):
     """
     DEFINITION:
     A physical substance or system.
@@ -59,7 +60,7 @@ class Material(Base):
     performed_specimen: Mapped[Optional[Specimen]] = relationship(back_populates="performing_material")
 
 
-class MaterialIdentifier(ID):
+class MaterialIdentifier(Versioned, ID):
     __tablename__ = "material_identifier"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)

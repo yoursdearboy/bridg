@@ -8,6 +8,7 @@ from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship, validates
 
 from ..db import Base
+from ..versioned import Versioned
 from .study_site_protocol_version_relationship import (
     StudySiteProtocolVersionRelationship,
 )
@@ -18,7 +19,7 @@ if TYPE_CHECKING:
     from .study_conduct import StudyConduct
 
 
-class StudySite(Base):
+class StudySite(Versioned, Base):
     """
     DEFINITION:
     A facility in which study activities are conducted.

@@ -7,13 +7,14 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
+from ..versioned import Versioned
 
 if TYPE_CHECKING:
     from .healthcare_provider import HealthcareProvider
     from .healthcare_provider_group import HealthcareProviderGroup
 
 
-class HealthcareProviderGroupMember(Base):
+class HealthcareProviderGroupMember(Versioned, Base):
     """
     DEFINITION:
     The role of an individual healthcare provider as a constituent part of a group.
