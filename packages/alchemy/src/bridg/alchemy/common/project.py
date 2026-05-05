@@ -6,12 +6,13 @@ from uuid import UUID, uuid4
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..db import Base
+from ..versioned import VersionedMixin
 
 if TYPE_CHECKING:
     from .project_conduct import ProjectConduct
 
 
-class Project(Base):
+class Project(VersionedMixin, Base):
     """
     DEFINITION:
     A set of coordinated activities that is intended to achieve one or more objectives.

@@ -7,10 +7,11 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..datatype import ConceptDescriptor, DataTypeName
 from ..db import Base
 from ..observation_result import ObservationResult
+from ..versioned import VersionedMixin
 from .defined_observation import DefinedObservation
 
 
-class DefinedObservationResult(ObservationResult, Base):
+class DefinedObservationResult(VersionedMixin, ObservationResult, Base):
     __tablename__ = "defined_observation_result"
     __mapper_args__ = {"polymorphic_on": "type", "polymorphic_identity": "observation_result"}
 

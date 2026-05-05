@@ -7,7 +7,7 @@ from starlette.routing import Route, WebSocketRoute
 from strawberry.asgi import GraphQL
 
 from bridg.alchemy import TerminologyService
-from bridg.auth import AuthBackend, AuthorizationMiddleware, login_endpoint
+from bridg.auth import AuthBackend, AuthorizationMiddleware, User, login_endpoint
 from bridg.common.env import load_env
 from bridg.common.settings import load_settings
 from bridg.common.starlette.middleware.session import SessionMiddleware
@@ -20,6 +20,13 @@ load_env()
 settings = load_settings()
 engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
 Session = sessionmaker(engine)
+
+try:
+    from sqlalchemy_continuum import versioning_manager
+
+    versioning_manager.user_cls = User
+except ImportError:
+    pass
 
 
 class App(GraphQL):
