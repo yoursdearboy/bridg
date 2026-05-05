@@ -12,7 +12,14 @@ from starlette.responses import PlainTextResponse
 
 from bridg.common.settings import Settings
 
-from .database import add_token, check_password, find_user_by_token, find_user_by_username, generate_token
+from .database import (
+    User,  # noqa: F401
+    add_token,
+    check_password,
+    find_user_by_token,
+    find_user_by_username,
+    generate_token,
+)
 from .ldap import check_ldap
 
 

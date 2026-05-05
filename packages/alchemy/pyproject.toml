@@ -8,6 +8,11 @@ dependencies = [
     "toolz<2.0.0,>=1.0.0"
 ]
 
+[project.optional-dependencies]
+continuum = [
+    "sqlalchemy-continuum>=1.6.0",
+]
+
 [dependency-groups]
 dev = [
     "mkinit>=1.2.0",
@@ -38,3 +43,6 @@ ignore = ["TID252"]
 
 [tool.uv.build-backend]
 module-name = "bridg.alchemy"
+
+[tool.uv.sources]
+sqlalchemy-continuum = { git = "https://github.com/yoursdearboy/sqlalchemy-continuum.git", rev = "1.6.0-yoursdearboy1" }

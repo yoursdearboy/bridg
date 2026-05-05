@@ -7,10 +7,11 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..common import Activity
 from ..datatype import ConceptDescriptor
+from ..versioned import VersionedMixin
 from .study_activity import StudyActivity
 
 
-class DefinedActivity(Activity):
+class DefinedActivity(VersionedMixin, Activity):
     __tablename__ = "defined_activity"
     __mapper_args__ = {"concrete": True, "polymorphic_abstract": True, "polymorphic_on": "type"}
 

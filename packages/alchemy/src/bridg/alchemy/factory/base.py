@@ -1,6 +1,7 @@
 from datetime import timezone
 from typing import Any, Callable
 
+from polyfactory import Ignore
 from polyfactory.factories.sqlalchemy_factory import SQLAlchemyFactory
 
 from bridg.alchemy import Base, TZDateTime
@@ -19,3 +20,5 @@ class BaseFactory[T: Base](SQLAlchemyFactory[T]):
             **types,
             TZDateTime: lambda: cls.__faker__.date_time_this_century(after_now=True, tzinfo=timezone.utc),
         }
+
+    versions = Ignore()
