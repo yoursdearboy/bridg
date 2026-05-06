@@ -27,6 +27,10 @@ class StudySubjectProtocolVersionRelationship(VersionedMixin, Base):
     """
 
     __tablename__ = "study_subject_protocol_version_relationship"
+    __versioned__ = {
+        "index_name": "ix_%s_pk_trans",
+        "validity_index_name": "ix_%s_pk_valid",
+    }
 
     id: Mapped[UUID] = mapped_column(unique=True, default=uuid4)
 

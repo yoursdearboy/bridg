@@ -45,4 +45,4 @@ ignore = ["TID252"]
 module-name = "bridg.alchemy"
 
 [tool.uv.sources]
-sqlalchemy-continuum = { git = "https://github.com/yoursdearboy/sqlalchemy-continuum.git", rev = "1.6.0-yoursdearboy1" }
+sqlalchemy-continuum = { git = "https://github.com/yoursdearboy/sqlalchemy-continuum.git", rev = "1.6.0-yoursdearboy.2" }

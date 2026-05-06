@@ -33,6 +33,9 @@ class StudySiteProtocolVersionRelationship(VersionedMixin, Base):
     """
 
     __tablename__ = "study_site_protocol_version_relationship"
+    __versioned__ = {
+        "index_name": "ix_%s_pk_transact",
+    }
 
     id: Mapped[UUID] = mapped_column(unique=True, default=uuid4)
 

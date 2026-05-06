@@ -40,7 +40,7 @@ test = [
 requires-dist = [
     { name = "cattrs", specifier = ">=24.1.2,<25.0.0" },
     { name = "sqlalchemy", specifier = ">=2.0.45,<3.0.0" },
-    { name = "sqlalchemy-continuum", marker = "extra == 'continuum'", git = "https://github.com/yoursdearboy/sqlalchemy-continuum.git?rev=1.6.0-yoursdearboy1" },
+    { name = "sqlalchemy-continuum", marker = "extra == 'continuum'", git = "https://github.com/yoursdearboy/sqlalchemy-continuum.git?rev=1.6.0-yoursdearboy.2" },
     { name = "toolz", specifier = ">=1.0.0,<2.0.0" },
 ]
 provides-extras = ["continuum"]
@@ -1876,7 +1876,7 @@ wheels = [
 [[package]]
 name = "sqlalchemy-continuum"
 version = "1.6.0"
-source = { git = "https://github.com/yoursdearboy/sqlalchemy-continuum.git?rev=1.6.0-yoursdearboy1#3a0c1b21c3528ac3c5995b69a7e8f01366c5275e" }
+source = { git = "https://github.com/yoursdearboy/sqlalchemy-continuum.git?rev=1.6.0-yoursdearboy.2#0d6d76e82e3eac89de9af1fa787a2ed2f87b1c9f" }
 dependencies = [
     { name = "sqlalchemy" },
 ]
