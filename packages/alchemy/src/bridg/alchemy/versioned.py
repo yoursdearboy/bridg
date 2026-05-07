@@ -1,14 +1,15 @@
-from typing import Any, List, Self, TypeGuard
+from typing import List, Self
 
-from sqlalchemy_continuum.transaction import TransactionBase
+# Commented till required
+# Because sqlalchemy-continuum is an optional dependency,
+# it must be in a separate optional module
+
+# class HasTransaction:
+#     transaction: TransactionBase
 
 
-class HasTransaction:
-    transaction: TransactionBase
-
-
-def has_transaction(x: Any) -> TypeGuard[HasTransaction]:
-    return hasattr(x, "transaction")
+# def has_transaction(x: Any) -> TypeGuard[HasTransaction]:
+#     return hasattr(x, "transaction")
 
 
 class VersionedMixin:

@@ -3,7 +3,6 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import configure_mappers
-from sqlalchemy_continuum import versioning_manager
 
 from bridg.alchemy import *
 from bridg.auth import *
@@ -15,7 +14,12 @@ def main():
     load_env()
     settings = load_settings()
     engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
-    versioning_manager.user_cls = User
+    try:
+        from sqlalchemy_continuum import versioning_manager
+
+        versioning_manager.user_cls = User
+    except ImportError:
+        pass
     configure_mappers()
     Base.metadata.create_all(bind=engine)
 
