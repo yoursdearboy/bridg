@@ -3,7 +3,7 @@ from starlette.authentication import (
     AuthCredentials,
     AuthenticationBackend,
     AuthenticationError,
-    SimpleUser,
+    BaseUser,
     UnauthenticatedUser,
 )
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -21,6 +21,15 @@ from .database import (
     generate_token,
 )
 from .ldap import check_ldap
+
+
+class AuthenticatedUser(BaseUser):
+    def __init__(self, user: User):
+        self.user = user
+
+    @property
+    def is_authenticated(self) -> bool:
+        return True
 
 
 class AuthBackend(AuthenticationBackend):
@@ -41,7 +50,7 @@ class AuthBackend(AuthenticationBackend):
             user = find_user_by_token(session, token=token)
             if user is None:
                 raise AuthenticationError("Invalid auth credentials")
-            identity = SimpleUser(user.username)
+            identity = AuthenticatedUser(user)
 
         return AuthCredentials(["authenticated"]), identity
 

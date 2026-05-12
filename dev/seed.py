@@ -1,10 +1,12 @@
-import pathlib
+import pathlib  # noqa: I001
 from argparse import ArgumentParser
 from typing import Any, Dict, List, TypedDict
 
 import yaml
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
+
+from . import versioning  # noqa: F401
 
 from bridg.alchemy import (
     ConceptDescriptor,
