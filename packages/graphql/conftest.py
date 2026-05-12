@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from syrupy.assertion import SnapshotAssertion
 from syrupy.extensions.json import JSONSnapshotExtension
 
+import bridg.graphql.versioning  # noqa: F401
 from bridg.alchemy import TerminologyService
 from bridg.alchemy.test.fixture import *  # noqa: F403  # pyright: ignore[reportWildcardImportFromLibrary]
 from bridg.common.env import load_env
