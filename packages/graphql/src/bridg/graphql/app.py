@@ -17,6 +17,7 @@ from bridg.common.starlette.middleware.session import SessionMiddleware
 from .context import Context
 from .converter import Converter
 from .schema import schema
+from .user import UserMiddleware
 
 load_env()
 settings = load_settings()
@@ -42,6 +43,7 @@ middleware = [
     Middleware(SessionMiddleware, session=Session),
     Middleware(AuthenticationMiddleware, backend=AuthBackend()),
     Middleware(AuthorizationMiddleware),
+    Middleware(UserMiddleware),
 ]
 app = Starlette(
     routes=[

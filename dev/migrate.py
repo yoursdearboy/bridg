@@ -1,8 +1,10 @@
 # ruff: noqa: F403, F405
 # pyright: reportWildcardImportFromLibrary=false
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine  # noqa: I001
 from sqlalchemy.orm import configure_mappers
+
+from . import versioning  # noqa: F401
 
 from bridg.alchemy import *
 from bridg.auth import *
@@ -14,13 +16,8 @@ def main():
     load_env()
     settings = load_settings()
     engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
-    try:
-        from sqlalchemy_continuum import versioning_manager
-
-        versioning_manager.user_cls = User
-    except ImportError:
-        pass
     configure_mappers()
+    User.metadata.create_all(bind=engine)
     Base.metadata.create_all(bind=engine)
 
 
