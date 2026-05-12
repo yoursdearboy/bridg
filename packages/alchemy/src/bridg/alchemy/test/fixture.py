@@ -1,3 +1,5 @@
+import warnings
+
 import pytest
 from polyfactory.factories.base import BaseFactory
 from sqlalchemy import create_engine, make_url
@@ -31,6 +33,14 @@ def session():
         expire_on_commit=False,
         join_transaction_mode="create_savepoint",
     )
+
+    # sqlalchemy_continuum creates sessions internally, triggering "create_savepoint",
+    # but doesn't close them, causing a warning.
+    # Either disable versioning:
+    #     from sqlalchemy_continuum import versioning_manager
+    #     versioning_manager.options["versioning"] = False
+    # or suppress warning:
+    warnings.filterwarnings("ignore", message="nested transaction already deassociated from connection")
 
     SQLAlchemyBaseFactory.__session__ = session
 
