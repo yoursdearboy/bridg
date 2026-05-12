@@ -5,9 +5,11 @@ from uuid import UUID, uuid4
 
 import bcrypt
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, Session, mapped_column, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, relationship
 
-from bridg.alchemy import Base
+
+class Base(DeclarativeBase):
+    pass
 
 
 class User(Base):
