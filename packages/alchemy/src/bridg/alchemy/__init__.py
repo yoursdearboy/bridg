@@ -1,5 +1,5 @@
 __protected__ = []
-__private__ = ["converter", "factory", "observation_result", "uml"]
+__private__ = ["converter", "factory", "observation_result", "versioned", "uml"]
 __ignore__ = ["OrganizationName"]
 __explicit__ = ["OrganizationName"]
 

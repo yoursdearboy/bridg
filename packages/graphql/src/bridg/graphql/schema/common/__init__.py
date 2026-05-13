@@ -35,6 +35,7 @@ from .person import (
 )
 from .place import (
     Place,
+    PlaceFilter,
     PlaceName,
     PlaceQuery,
 )
@@ -80,6 +81,7 @@ __all__ = [
     "PersonMutation",
     "PersonQuery",
     "Place",
+    "PlaceFilter",
     "PlaceName",
     "PlaceQuery",
     "Project",
