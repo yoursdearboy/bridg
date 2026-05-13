@@ -5,7 +5,8 @@ from syrupy.extensions.json import JSONSnapshotExtension
 
 import bridg.graphql.versioning  # noqa: F401
 from bridg.alchemy import TerminologyService
-from bridg.alchemy.test.fixture import *  # noqa: F403  # pyright: ignore[reportWildcardImportFromLibrary]
+from bridg.alchemy.test.fixture import *  # noqa: F403 # pyright: ignore[reportWildcardImportFromLibrary]
+from bridg.auth.test.fixture import *  # noqa: F403 # pyright: ignore[reportWildcardImportFromLibrary]
 from bridg.common.env import load_env
 from bridg.graphql.context import Context
 from bridg.graphql.converter import Converter
