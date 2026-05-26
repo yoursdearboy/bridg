@@ -1,7 +1,7 @@
 from sqlalchemy.orm import configure_mappers
 
 try:
-    from sqlalchemy_continuum import make_versioned
+    from sqlalchemy_continuum import make_versioned  # noqa: I001
 
     from bridg.auth import User
 
