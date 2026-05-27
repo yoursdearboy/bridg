@@ -65,5 +65,7 @@ Helpful quick references (from this repo)
 
 If anything here appears out-of-date when you run it, run `git status` and search the repo for updated scripts or `.github/workflows` to mirror CI exactly. When in doubt, prefer reproducing the CI steps in `.github/workflows/test.yml`.
 
+Use python postponed evaluation of annotations, instead of quoting them as strings. I.e. add `from __future__ import annotations` if necessary.
+
 ---
 Agent signature: Copilot cloud agents should follow these instructions and report any deviation or failures back in the PR description with exact failing commands and logs.
