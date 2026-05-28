@@ -14,3 +14,4 @@ class ActivityInputFactory[T: ActivityInput](BaseFactory[T]):
     comment = Use(make_some(BaseFactory.__faker__.text))
     using_project_id = Ignore()
     context_for_study_site_id = Ignore()
+    performing_organization_id = Ignore()

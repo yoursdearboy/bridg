@@ -55,6 +55,9 @@ class PerformedActivityBaseFactory[T: PerformedActivity](BaseFactory[T]):
     context_for_study_site_id = Ignore()
     context_for_study_site = Ignore()
 
+    performing_organization_id = Ignore()
+    performing_organization = Ignore()
+
 
 class PerformedActivityFactory(PerformedActivityBaseFactory[PerformedActivity]):
     __set_as_default_factory_for_type__ = True

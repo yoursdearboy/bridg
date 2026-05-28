@@ -25,6 +25,9 @@ class DefinedActivityBaseFactory[T: DefinedActivity](BaseFactory[T]):
     context_for_study_site_id = Ignore()
     context_for_study_site = Ignore()
 
+    performing_organization_id = Ignore()
+    performing_organization = Ignore()
+
     name_code_id = Ignore()
     name_code = ConceptDescriptorFactory
 

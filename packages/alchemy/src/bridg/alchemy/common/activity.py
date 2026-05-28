@@ -11,6 +11,7 @@ from ..db import Base
 
 if TYPE_CHECKING:
     from ..study import StudySite
+    from .organization import Organization
     from .project import Project
 
 
@@ -44,3 +45,9 @@ class Activity(Base):
         Each StudySite might be the context for one or more Activity.
         """
         return relationship()
+
+    performing_organization_id: Mapped[Optional[UUID]] = mapped_column(ForeignKey("organization.id"))
+
+    @declared_attr
+    def performing_organization(cls) -> Mapped[Optional[Organization]]:
+        return relationship(foreign_keys=cls.performing_organization_id)  # type: ignore

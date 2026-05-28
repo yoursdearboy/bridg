@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, Annotated, Optional
 import strawberry
 
 from ..datatype import ConceptDescriptor
+from .organization import Organization
 from .project import Project
 
 if TYPE_CHECKING:
@@ -17,6 +18,7 @@ class Activity:
     comment: Optional[str]
     using_project: Optional[Project]
     context_for_study_site: Optional[Annotated[StudySite, strawberry.lazy("..study")]]
+    performing_organization: Optional[Organization]
 
 
 @strawberry.input
@@ -25,3 +27,4 @@ class ActivityInput:
     comment: strawberry.Maybe[Optional[str]]
     using_project_id: strawberry.Maybe[Optional[strawberry.ID]]
     context_for_study_site_id: strawberry.Maybe[Optional[strawberry.ID]]
+    performing_organization_id: strawberry.Maybe[Optional[strawberry.ID]]
