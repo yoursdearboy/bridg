@@ -7,8 +7,6 @@ from typing import Optional
 from sqlalchemy import Enum, select
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
-from .datatype import InstanceIdentifier
-from .datatype.uid import UniqueIdentifierString
 from .db import Base
 
 
@@ -22,7 +20,6 @@ class Sequence(Base):
     __tablename__ = "sequence"
 
     name: Mapped[str] = mapped_column(primary_key=True)
-    root: Mapped[Optional[str]]
     type: Mapped[SequenceType] = mapped_column(
         Enum(SequenceType, native_enum=False)
     )
@@ -35,8 +32,8 @@ class SequenceService:
     def __init__(self, session: Session) -> None:
         self.session = session
 
-    def generate(self, name: str) -> InstanceIdentifier:
-        """Atomically increment the named sequence and return an InstanceIdentifier.
+    def generate(self, name: str) -> str:
+        """Atomically increment the named sequence and return an identifier string.
 
         Uses SELECT FOR UPDATE (PostgreSQL) or SQLite's implicit write lock so the
         counter update rolls back with the surrounding transaction on failure.
@@ -61,10 +58,7 @@ class SequenceService:
         else:
             seq.counter += 1
 
-        value = _format(seq)
-        root = UniqueIdentifierString(seq.root) if seq.root is not None else UniqueIdentifierString(value)
-        extension = value if seq.root is not None else None
-        return InstanceIdentifier(root=root, extension=extension)
+        return _format(seq)
 
 
 def _format(seq: Sequence) -> str:

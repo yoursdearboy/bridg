@@ -4,16 +4,13 @@
     "id": "str",
     "identifier": [
       {
-        "identifier": {
-          "extension": "655-15-0410",
-          "root": "PSN"
-        },
+        "identifier": "655-15-0410",
         "identifierTypeCode": null
       }
     ],
     "primaryName": {
       "family": "Test",
-      "given": "Roberto"
+      "given": "Judith"
     }
   }
 }

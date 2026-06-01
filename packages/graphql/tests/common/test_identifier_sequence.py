@@ -30,8 +30,8 @@ def test_identifier_sequence_generation(context: Context):
     result = schema.execute_sync(query_two, variables_two, context_value=context)
     assert result.errors is None
     assert result.data is not None
-    assert result.data["A"]["identifier"][0]["identifier"] == {"root": "1", "extension": None}
-    assert result.data["B"]["identifier"][0]["identifier"] == {"root": "2", "extension": None}
+    assert result.data["A"]["identifier"][0]["identifier"] == "1"
+    assert result.data["B"]["identifier"][0]["identifier"] == "2"
 
     query_one = """
         mutation($i: PersonInput!) {
@@ -45,7 +45,7 @@ def test_identifier_sequence_generation(context: Context):
     result = schema.execute_sync(query_one, variables_one, context_value=context)
     assert result.errors is None
     assert result.data is not None
-    assert result.data["PersonCreate"]["identifier"][0]["identifier"] == {"root": "3", "extension": None}
+    assert result.data["PersonCreate"]["identifier"][0]["identifier"] == "3"
 
     session.refresh(seq)
     assert seq.counter == 3

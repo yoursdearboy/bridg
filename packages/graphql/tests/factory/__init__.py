@@ -17,7 +17,6 @@ from .common import (
 from .datatype import (
     ConceptDescriptorFactory,
     EntityNameInputFactory,
-    InstanceIdentifierFactory,
     IntervalPointInTimeFactory,
     PhysicalQuantityFactory,
     PostalAddressInputFactory,
@@ -46,7 +45,6 @@ __all__ = [
     "ConceptDescriptorFactory",
     "EntityNameInputFactory",
     "IDInputFactory",
-    "InstanceIdentifierFactory",
     "IntervalPointInTimeFactory",
     "MaterialInputFactory",
     "MaybeFactory",

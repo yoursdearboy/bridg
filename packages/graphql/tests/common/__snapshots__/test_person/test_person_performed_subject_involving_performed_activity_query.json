@@ -7,14 +7,14 @@
         "involvingPerformedActivity": [
           {
             "dateRange": {
-              "high": "2086-05-20T15:17:37.034859+00:00",
-              "low": "2041-02-09T12:15:18.666721+00:00"
+              "high": "2041-02-09T12:15:18.666721+00:00",
+              "low": "2035-06-06T17:14:48.740650+00:00"
             },
             "id": "str",
             "negationIndicator": false,
             "negationReason": {
-              "code": "ready",
-              "codeSystem": "race",
+              "code": "arm",
+              "codeSystem": "report",
               "displayName": "Art rock."
             },
             "statusCode": {
@@ -22,7 +22,7 @@
               "codeSystem": "training",
               "displayName": "Eat couple."
             },
-            "statusDate": "2005-06-01T14:27:45.819794+00:00"
+            "statusDate": "2086-05-20T15:17:37.034859+00:00"
           },
           {
             "dateRange": {

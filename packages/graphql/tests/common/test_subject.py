@@ -28,8 +28,7 @@ def test_subject_query(context: Context, snapshot_json):
             ],
             identifier=[
                 BiologicEntityIdentifierFactory.build(
-                    identifier_root="12345",
-                    identifier_extension=None,
+                    identifier="12345",
                     identifier_type_code=ConceptDescriptorFactory.build("identifier/test"),
                 )
             ],
@@ -71,8 +70,7 @@ def test_subject_list_query(context: Context, snapshot_json):
             ],
             identifier=[
                 BiologicEntityIdentifierFactory.build(
-                    identifier_root="12345",
-                    identifier_extension=None,
+                    identifier="12345",
                     identifier_type_code=ConceptDescriptorFactory.build("identifier/test"),
                 )
             ],

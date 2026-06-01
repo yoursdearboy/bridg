@@ -7,9 +7,6 @@ from .cd import (
 from .en import (
     EntityNameInputFactory,
 )
-from .ii import (
-    InstanceIdentifierFactory,
-)
 from .ivl_ts import (
     IntervalPointInTimeFactory,
 )
@@ -26,7 +23,6 @@ from .url import (
 __all__ = [
     "ConceptDescriptorFactory",
     "EntityNameInputFactory",
-    "InstanceIdentifierFactory",
     "IntervalPointInTimeFactory",
     "PhysicalQuantityFactory",
     "PostalAddressInputFactory",

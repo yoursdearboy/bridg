@@ -2,17 +2,17 @@ from typing import Optional
 
 import strawberry
 
-from ..datatype import ConceptDescriptor, InstanceIdentifier
+from ..datatype import ConceptDescriptor
 
 
 @strawberry.type(name="Identifier")
 class ID:
-    identifier: InstanceIdentifier
+    identifier: str
     identifier_type_code: Optional[ConceptDescriptor]
 
 
 @strawberry.input(name="IdentifierInput")
 class IDInput:
-    identifier: strawberry.Maybe[InstanceIdentifier]
+    identifier: strawberry.Maybe[str]
     identifier_type_code: strawberry.Maybe[ConceptDescriptor]
     sequence: strawberry.Maybe[str]

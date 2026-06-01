@@ -7,7 +7,7 @@
     "person_id": "UUID",
     "state": "North Carolina",
     "street": "Test street",
-    "use": null,
+    "use": "<PostalAddressUse.dir: 'DIR'>",
     "zip": "79408"
   }
 ]

@@ -117,7 +117,7 @@ def get_concrete_class[T: bridg.alchemy.Base](input, class_: Type[T]) -> Type[T]
 def id_input_to_identifier(x: IDInput, class_: Type[bridg.alchemy.ID], converter) -> bridg.alchemy.ID:
     obj = class_()
     if x.identifier is not None:
-        obj.identifier = converter.convert(x.identifier.value, bridg.alchemy.InstanceIdentifier)
+        obj.identifier = x.identifier.value
     elif x.sequence is not None:
         obj.identifier = converter.sequences.generate(x.sequence.value)
     else:

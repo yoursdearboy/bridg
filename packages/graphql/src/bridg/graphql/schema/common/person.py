@@ -59,12 +59,12 @@ class PersonQuery:
                 )
             # FIXME: check identifier code? or not?
             if filter.identifier and filter.identifier.identifier is not None:
-                root = filter.identifier.identifier.value.root
-                extension = filter.identifier.identifier.value.extension
-                q = (bridg.alchemy.BiologicEntityIdentifier.identifier_root == root) & (  # pyright: ignore[reportAttributeAccessIssue]
-                    bridg.alchemy.BiologicEntityIdentifier.identifier_extension == extension  # pyright: ignore[reportAttributeAccessIssue]
+                identifier = filter.identifier.identifier.value
+                query = query.filter(
+                    bridg.alchemy.BiologicEntity.identifier.any(
+                        bridg.alchemy.BiologicEntityIdentifier.identifier == identifier  # pyright: ignore[reportAttributeAccessIssue]
+                    )
                 )
-                query = query.filter(bridg.alchemy.BiologicEntity.identifier.any(q))
         return query.all()  # type: ignore
 
 

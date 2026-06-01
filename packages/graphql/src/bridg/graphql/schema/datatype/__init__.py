@@ -14,9 +14,6 @@ from .en import (
     EntityName,
     EntityNameInput,
 )
-from .ii import (
-    InstanceIdentifier,
-)
 from .ivl_ts import (
     IntervalPointInTime,
 )
@@ -40,7 +37,6 @@ __all__ = [
     "DataValue",
     "EntityName",
     "EntityNameInput",
-    "InstanceIdentifier",
     "IntervalPointInTime",
     "OrganizationName",
     "PhysicalQuantity",

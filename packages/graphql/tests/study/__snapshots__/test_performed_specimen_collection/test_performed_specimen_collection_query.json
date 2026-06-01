@@ -68,7 +68,7 @@
             "displayName": "Prove reduce."
           },
           "quantity": {
-            "unit": "m",
+            "unit": "s",
             "value": 24.0
           }
         }

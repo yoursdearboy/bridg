@@ -27,8 +27,7 @@ def test_person_query(context: Context, snapshot_json):
         ],
         identifier=[
             BiologicEntityIdentifierFactory.build(
-                identifier_root="12345",
-                identifier_extension=None,
+                identifier="12345",
                 identifier_type_code=identifier_type_code,
             )
         ],
@@ -69,8 +68,7 @@ def test_person_list_query(context: Context, snapshot_json):
         ],
         identifier=[
             BiologicEntityIdentifierFactory.build(
-                identifier_root="12345",
-                identifier_extension=None,
+                identifier="12345",
                 identifier_type_code=identifier_type_code,
             )
         ],
@@ -80,8 +78,7 @@ def test_person_list_query(context: Context, snapshot_json):
         name=[BiologicEntityNameFactory.build(family="Test", given="Second")],
         identifier=[
             BiologicEntityIdentifierFactory.build(
-                identifier_root="67890",
-                identifier_extension=None,
+                identifier="67890",
                 identifier_type_code=identifier_type_code,
             )
         ],
@@ -121,8 +118,7 @@ def test_person_list_filter_by_name_query(context: Context, snapshot_json):
         ],
         identifier=[
             BiologicEntityIdentifierFactory.build(
-                identifier_root="12345",
-                identifier_extension=None,
+                identifier="12345",
                 identifier_type_code=identifier_type_code,
             )
         ],
@@ -132,8 +128,7 @@ def test_person_list_filter_by_name_query(context: Context, snapshot_json):
         name=[BiologicEntityNameFactory.build(family="Test", given="Second")],
         identifier=[
             BiologicEntityIdentifierFactory.build(
-                identifier_root="67890",
-                identifier_extension=None,
+                identifier="67890",
                 identifier_type_code=identifier_type_code,
             )
         ],
@@ -174,8 +169,7 @@ def test_person_list_filter_by_id_query(context: Context, snapshot_json):
         ],
         identifier=[
             BiologicEntityIdentifierFactory.build(
-                identifier_root="12345",
-                identifier_extension=None,
+                identifier="12345",
                 identifier_type_code=identifier_type_code,
             )
         ],
@@ -185,8 +179,7 @@ def test_person_list_filter_by_id_query(context: Context, snapshot_json):
         name=[BiologicEntityNameFactory.build(family="Test", given="Second")],
         identifier=[
             BiologicEntityIdentifierFactory.build(
-                identifier_root="67890",
-                identifier_extension=None,
+                identifier="67890",
                 identifier_type_code=identifier_type_code,
             )
         ],
@@ -209,10 +202,7 @@ def test_person_list_filter_by_id_query(context: Context, snapshot_json):
     """
     filter = {
         "identifier": {
-            "identifier": {
-                "root": "67890",
-                "extension": None,
-            }
+            "identifier": "67890",
         }
     }
 

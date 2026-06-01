@@ -45,7 +45,6 @@ from .datatype import (
     DataValue,
     EntityName,
     EntityNameParts,
-    InstanceIdentifier,
     IntervalPointInTime,
     OrganizationNameParts,
     PhysicalQuantity,
@@ -56,7 +55,6 @@ from .datatype import (
     TrivialName,
     URL,
     URLScheme,
-    UniqueIdentifierString,
 )
 from .db import (
     Base,
@@ -141,7 +139,6 @@ __all__ = [
     "HealthcareProviderGroup",
     "HealthcareProviderGroupMember",
     "ID",
-    "InstanceIdentifier",
     "IntervalPointInTime",
     "Material",
     "MaterialIdentifier",
@@ -198,6 +195,5 @@ __all__ = [
     "TrivialName",
     "URL",
     "URLScheme",
-    "UniqueIdentifierString",
 ]
 # </AUTOGEN_INIT>

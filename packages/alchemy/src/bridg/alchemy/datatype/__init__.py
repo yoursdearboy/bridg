@@ -13,9 +13,6 @@ from .en import (
     EntityName,
     EntityNameParts,
 )
-from .ii import (
-    InstanceIdentifier,
-)
 from .ivl_ts import (
     IntervalPointInTime,
 )
@@ -33,9 +30,6 @@ from .tel import (
 from .tn import (
     TrivialName,
 )
-from .uid import (
-    UniqueIdentifierString,
-)
 from .url import (
     URL,
     URLScheme,
@@ -47,7 +41,6 @@ __all__ = [
     "DataValue",
     "EntityName",
     "EntityNameParts",
-    "InstanceIdentifier",
     "IntervalPointInTime",
     "OrganizationName",
     "OrganizationNameParts",
@@ -59,5 +52,4 @@ __all__ = [
     "TrivialName",
     "URL",
     "URLScheme",
-    "UniqueIdentifierString",
 ]
