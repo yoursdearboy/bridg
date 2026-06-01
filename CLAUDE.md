@@ -24,6 +24,10 @@ uv run pytest packages/graphql -s -vv
 # Run a single test
 uv run pytest packages/graphql/tests/study/test_performed_observation.py::test_performed_observation_create -s -vv
 
+# Update snapshots
+uv run pytest packages/alchemy -s -vv --snapshot-update
+uv run pytest packages/graphql -s -vv --snapshot-update
+
 # Start GraphQL server (dev)
 ./dev/graphql.sh                  # or: uv run uvicorn bridg.graphql.app:app --port 8001 --reload
 
