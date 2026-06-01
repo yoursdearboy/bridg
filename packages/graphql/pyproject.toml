@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "GraphQL for BRIDG"
 dependencies = [
     "alchemy",
+    "auth",
     "common",
     "starlette>=0.47.2",
     "strawberry-graphql[cli]>=0.312.2",
@@ -15,6 +16,7 @@ dev = [
     "poethepoet>=0.39.0",
 ]
 test = [
+    "syrupy>=5.3.1",
 ]
 
 [build-system]
@@ -41,4 +43,5 @@ module-name = "bridg.graphql"
 
 [tool.uv.sources]
 alchemy = { workspace = true }
+auth = { workspace = true }
 common = { workspace = true }

@@ -99,6 +99,7 @@ dependencies = [
     { name = "bcrypt" },
     { name = "common" },
     { name = "ldap3" },
+    { name = "pyasn1" },
     { name = "sqlalchemy" },
     { name = "starlette" },
 ]
@@ -108,6 +109,7 @@ requires-dist = [
     { name = "bcrypt", specifier = ">=5.0.0" },
     { name = "common", editable = "packages/common" },
     { name = "ldap3", specifier = ">=2.9.1" },
+    { name = "pyasn1", specifier = "<0.6.0" },
     { name = "sqlalchemy", specifier = ">=2.0.45,<3.0.0" },
     { name = "starlette", specifier = ">=0.47.2" },
 ]
@@ -470,6 +472,7 @@ version = "0.1.0"
 source = { editable = "packages/graphql" }
 dependencies = [
     { name = "alchemy" },
+    { name = "auth" },
     { name = "common" },
     { name = "starlette" },
     { name = "strawberry-graphql", extra = ["cli"] },
@@ -480,10 +483,14 @@ dev = [
     { name = "mkinit" },
     { name = "poethepoet" },
 ]
+test = [
+    { name = "syrupy" },
+]
 
 [package.metadata]
 requires-dist = [
     { name = "alchemy", editable = "packages/alchemy" },
+    { name = "auth", editable = "packages/auth" },
     { name = "common", editable = "packages/common" },
     { name = "starlette", specifier = ">=0.47.2" },
     { name = "strawberry-graphql", extras = ["cli"], specifier = ">=0.312.2" },
@@ -494,7 +501,7 @@ dev = [
     { name = "mkinit", specifier = ">=1.2.0" },
     { name = "poethepoet", specifier = ">=0.39.0" },
 ]
-test = []
+test = [{ name = "syrupy", specifier = ">=5.3.1" }]
 
 [[package]]
 name = "graphql-core"
@@ -1229,11 +1236,11 @@ wheels = [
 
 [[package]]
 name = "pyasn1"
-version = "0.6.3"
+version = "0.5.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/5c/5f/6583902b6f79b399c9c40674ac384fd9cd77805f9e6205075f828ef11fb2/pyasn1-0.6.3.tar.gz", hash = "sha256:697a8ecd6d98891189184ca1fa05d1bb00e2f84b5977c481452050549c8a72cf", size = 148685, upload-time = "2026-03-17T01:06:53.382Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ce/dc/996e5446a94627fe8192735c20300ca51535397e31e7097a3cc80ccf78b7/pyasn1-0.5.1.tar.gz", hash = "sha256:6d391a96e59b23130a5cfa74d6fd7f388dbbe26cc8f1edf39fdddf08d9d6676c", size = 147134, upload-time = "2023-11-20T20:53:01.453Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5d/a0/7d793dce3fa811fe047d6ae2431c672364b462850c6235ae306c0efd025f/pyasn1-0.6.3-py3-none-any.whl", hash = "sha256:a80184d120f0864a52a073acc6fc642847d0be408e7c7252f31390c0f4eadcde", size = 83997, upload-time = "2026-03-17T01:06:52.036Z" },
+    { url = "https://files.pythonhosted.org/packages/d1/75/4686d2872bf2fc0b37917cbc8bbf0dd3a5cdb0990799be1b9cbf1e1eb733/pyasn1-0.5.1-py2.py3-none-any.whl", hash = "sha256:4439847c58d40b1d0a573d07e3856e95333f1976294494c325775aeca506eb58", size = 84930, upload-time = "2023-11-20T20:52:56.135Z" },
 ]
 
 [[package]]
@@ -1629,6 +1636,18 @@ cli = [
     { name = "typer" },
     { name = "uvicorn" },
     { name = "websockets" },
+]
+
+[[package]]
+name = "syrupy"
+version = "5.3.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pytest" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/3d/34/bf26c59efb44a722c57377aa903f58ef370d068466ea013977b4f2df9f6f/syrupy-5.3.1.tar.gz", hash = "sha256:449fb2997176e4ccae0e852ce23748239e1a224b4797a63173da02d6df682340", size = 83987, upload-time = "2026-05-31T18:07:44.095Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d4/f4/753003ddb0d43247febecd5146391a59b80f77e462b2623396192180f4ee/syrupy-5.3.1-py3-none-any.whl", hash = "sha256:d755c2bb9b78692de1db5efa7b452ebff727df3a8290f740bda5c55a4ea5d7d5", size = 51985, upload-time = "2026-05-31T18:07:42.711Z" },
 ]
 
 [[package]]
