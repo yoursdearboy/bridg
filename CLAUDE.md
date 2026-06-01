@@ -20,6 +20,7 @@ uv run ruff check
 # Run tests
 uv run pytest packages/alchemy -s -vv
 uv run pytest packages/graphql -s -vv
+# don't run both packages simultaneously, versioning test will fail, run both using two command and & in shell
 
 # Run a single test
 uv run pytest packages/graphql/tests/study/test_performed_observation.py::test_performed_observation_create -s -vv
