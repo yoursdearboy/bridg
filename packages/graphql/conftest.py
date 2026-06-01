@@ -4,7 +4,7 @@ from syrupy.assertion import SnapshotAssertion
 from syrupy.extensions.json import JSONSnapshotExtension
 
 import bridg.graphql.versioning  # noqa: F401
-from bridg.alchemy import TerminologyService
+from bridg.alchemy import SequenceService, TerminologyService
 from bridg.alchemy.test.fixture import *  # noqa: F403 # pyright: ignore[reportWildcardImportFromLibrary]
 from bridg.auth.test.fixture import *  # noqa: F403 # pyright: ignore[reportWildcardImportFromLibrary]
 from bridg.common.env import load_env
@@ -20,7 +20,7 @@ def context(session: Session, terminology: TerminologyService):
         request=None,  # pyright: ignore[reportArgumentType]
         response=None,  # pyright: ignore[reportArgumentType]
         session=session,
-        converter=Converter(terminology=terminology, session=session),
+        converter=Converter(terminology=terminology, sequences=SequenceService(session)),
         terminology=terminology,
     )
 

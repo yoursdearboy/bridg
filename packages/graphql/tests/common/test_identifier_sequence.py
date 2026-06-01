@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from bridg.alchemy import IdentifierSequence, IdentifierSequenceType
+from bridg.alchemy import Sequence, SequenceType
 from bridg.graphql.context import Context
 from bridg.graphql.schema import schema
 
@@ -8,7 +8,7 @@ from bridg.graphql.schema import schema
 def test_identifier_sequence_generation(context: Context):
     session = context.session
 
-    seq = IdentifierSequence(name="test-seq", type=IdentifierSequenceType.PLAIN)
+    seq = Sequence(name="test-seq", type=SequenceType.PLAIN)
     session.add(seq)
     session.commit()
 
@@ -54,7 +54,7 @@ def test_identifier_sequence_generation(context: Context):
 def test_rollback_does_not_increment_sequence(context: Context):
     session = context.session
 
-    seq = IdentifierSequence(name="rollback-seq", type=IdentifierSequenceType.PLAIN)
+    seq = Sequence(name="rollback-seq", type=SequenceType.PLAIN)
     session.add(seq)
     session.commit()
 

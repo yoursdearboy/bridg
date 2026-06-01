@@ -8,7 +8,7 @@ from strawberry.asgi import GraphQL
 
 from . import versioning  # noqa: F401
 
-from bridg.alchemy import TerminologyService
+from bridg.alchemy import SequenceService, TerminologyService
 from bridg.auth import AuthBackend, AuthorizationMiddleware, login_endpoint
 from bridg.common.env import load_env
 from bridg.common.settings import load_settings
@@ -33,7 +33,7 @@ class App(GraphQL):
             request=request,
             response=response,
             session=session,
-            converter=Converter(terminology=terminology, session=session),
+            converter=Converter(terminology=terminology, sequences=SequenceService(session)),
             terminology=terminology,
         )
 

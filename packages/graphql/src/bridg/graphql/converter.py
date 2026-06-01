@@ -6,7 +6,7 @@ from uuid import UUID
 
 from sqlalchemy import inspect
 from sqlalchemy.ext.associationproxy import AssociationProxy, ObjectAssociationProxyInstance
-from sqlalchemy.orm import Composite, Relationship, Session
+from sqlalchemy.orm import Composite, Relationship
 
 import bridg.alchemy
 import bridg.common.converter
@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 class Converter(bridg.common.converter.Converter):
-    def __init__(self, terminology: bridg.alchemy.TerminologyService, session: Session) -> None:
+    def __init__(self, terminology: bridg.alchemy.TerminologyService, sequences: bridg.alchemy.SequenceService) -> None:
         super().__init__(
             [
                 any_to_optional,
@@ -35,7 +35,7 @@ class Converter(bridg.common.converter.Converter):
             ]
         )
         self.terminology = terminology
-        self.session = session
+        self.sequences = sequences
 
 
 @bridg.common.converter.configure
@@ -119,7 +119,7 @@ def id_input_to_identifier(x: IDInput, class_: Type[bridg.alchemy.ID], converter
     if x.identifier is not None:
         obj.identifier = converter.convert(x.identifier.value, bridg.alchemy.InstanceIdentifier)
     elif x.sequence is not None:
-        obj.identifier = bridg.alchemy.generate_identifier(converter.session, x.sequence.value)
+        obj.identifier = converter.sequences.generate(x.sequence.value)
     else:
         raise ValueError("IDInput: provide either 'identifier' or 'sequence'")
     if x.identifier_type_code is not None:

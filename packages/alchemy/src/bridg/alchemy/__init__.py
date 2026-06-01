@@ -61,10 +61,10 @@ from .datatype import (
 from .db import (
     Base,
 )
-from .identifier_sequence import (
-    IdentifierSequence,
-    IdentifierSequenceType,
-    generate_identifier,
+from .sequence import (
+    Sequence,
+    SequenceService,
+    SequenceType,
 )
 from .protocol import (
     DefinedActivity,
@@ -136,14 +136,11 @@ __all__ = [
     "EntityName",
     "EntityNameParts",
     "Epoch",
-    "generate_identifier",
     "HealthcareFacility",
     "HealthcareProvider",
     "HealthcareProviderGroup",
     "HealthcareProviderGroupMember",
     "ID",
-    "IdentifierSequence",
-    "IdentifierSequenceType",
     "InstanceIdentifier",
     "IntervalPointInTime",
     "Material",
@@ -180,6 +177,9 @@ __all__ = [
     "Repository",
     "ResearchProject",
     "ScheduledActivity",
+    "Sequence",
+    "SequenceService",
+    "SequenceType",
     "Specimen",
     "Study",
     "StudyActivity",
