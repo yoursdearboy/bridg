@@ -20,7 +20,7 @@ def context(session: Session, terminology: TerminologyService):
         request=None,  # pyright: ignore[reportArgumentType]
         response=None,  # pyright: ignore[reportArgumentType]
         session=session,
-        converter=Converter(terminology=terminology),
+        converter=Converter(terminology=terminology, session=session),
         terminology=terminology,
     )
 

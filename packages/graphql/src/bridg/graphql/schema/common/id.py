@@ -13,5 +13,6 @@ class ID:
 
 @strawberry.input(name="IdentifierInput")
 class IDInput:
-    identifier: InstanceIdentifier
+    identifier: strawberry.Maybe[InstanceIdentifier]
     identifier_type_code: strawberry.Maybe[ConceptDescriptor]
+    sequence: strawberry.Maybe[str]

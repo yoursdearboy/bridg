@@ -58,9 +58,9 @@ class PersonQuery:
                     )
                 )
             # FIXME: check identifier code? or not?
-            if filter.identifier:
-                root = filter.identifier.identifier.root
-                extension = filter.identifier.identifier.extension
+            if filter.identifier and filter.identifier.identifier is not None:
+                root = filter.identifier.identifier.value.root
+                extension = filter.identifier.identifier.value.extension
                 q = (bridg.alchemy.BiologicEntityIdentifier.identifier_root == root) & (  # pyright: ignore[reportAttributeAccessIssue]
                     bridg.alchemy.BiologicEntityIdentifier.identifier_extension == extension  # pyright: ignore[reportAttributeAccessIssue]
                 )

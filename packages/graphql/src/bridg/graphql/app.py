@@ -33,7 +33,7 @@ class App(GraphQL):
             request=request,
             response=response,
             session=session,
-            converter=Converter(terminology=terminology),
+            converter=Converter(terminology=terminology, session=session),
             terminology=terminology,
         )
 

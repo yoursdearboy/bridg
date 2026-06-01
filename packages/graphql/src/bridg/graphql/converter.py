@@ -6,20 +6,20 @@ from uuid import UUID
 
 from sqlalchemy import inspect
 from sqlalchemy.ext.associationproxy import AssociationProxy, ObjectAssociationProxyInstance
-from sqlalchemy.orm import Composite, Relationship
+from sqlalchemy.orm import Composite, Relationship, Session
 
 import bridg.alchemy
 import bridg.common.converter
 
 from .dataclass import Dataclass
 from .maybe import _annotation_is_maybe
-from .schema import ConceptDescriptor, IntervalPointInTime, PhysicalQuantity
+from .schema import ConceptDescriptor, IDInput, IntervalPointInTime, PhysicalQuantity
 
 logger = logging.getLogger(__name__)
 
 
 class Converter(bridg.common.converter.Converter):
-    def __init__(self, terminology: bridg.alchemy.TerminologyService) -> None:
+    def __init__(self, terminology: bridg.alchemy.TerminologyService, session: Session) -> None:
         super().__init__(
             [
                 any_to_optional,
@@ -29,11 +29,13 @@ class Converter(bridg.common.converter.Converter):
                 str_to_cd,
                 str_to_uuid,
                 object_to_any,
+                id_input_to_identifier,
                 object_to_alchemy,
                 fallback,
             ]
         )
         self.terminology = terminology
+        self.session = session
 
 
 @bridg.common.converter.configure
@@ -109,6 +111,22 @@ def get_concrete_class[T: bridg.alchemy.Base](input, class_: Type[T]) -> Type[T]
         if polymorphic_value := getattr(input, polymorphic_on.name, None):
             return insp.polymorphic_map[polymorphic_value].class_
     return class_
+
+
+@bridg.common.converter.configure
+def id_input_to_identifier(x: IDInput, class_: Type[bridg.alchemy.ID], converter) -> bridg.alchemy.ID:
+    obj = class_()
+    if x.identifier is not None:
+        obj.identifier = converter.convert(x.identifier.value, bridg.alchemy.InstanceIdentifier)
+    elif x.sequence is not None:
+        obj.identifier = bridg.alchemy.generate_identifier(converter.session, x.sequence.value)
+    else:
+        raise ValueError("IDInput: provide either 'identifier' or 'sequence'")
+    if x.identifier_type_code is not None:
+        obj.identifier_type_code = converter.convert(
+            x.identifier_type_code.value, bridg.alchemy.ConceptDescriptor
+        )
+    return obj
 
 
 @bridg.common.converter.configure
