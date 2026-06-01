@@ -29,7 +29,7 @@ class Converter(bridg.common.converter.Converter):
                 str_to_cd,
                 str_to_uuid,
                 object_to_any,
-                id_input_to_identifier,
+                id_input_to_id,
                 object_to_alchemy,
                 fallback,
             ]
@@ -99,6 +99,20 @@ def str_to_uuid(x: str) -> UUID:
 
 
 @bridg.common.converter.configure
+def id_input_to_id(x: IDInput, class_: Type[bridg.alchemy.ID], converter) -> bridg.alchemy.ID:
+    obj = class_()
+    if x.identifier is not None:
+        obj.identifier = x.identifier.value
+    elif x.sequence is not None:
+        obj.identifier = converter.sequences.generate(x.sequence.value)
+    else:
+        raise ValueError("IDInput: provide either 'identifier' or 'sequence'")
+    if x.identifier_type_code is not None:
+        obj.identifier_type_code = converter.convert(x.identifier_type_code.value, bridg.alchemy.ConceptDescriptor)
+    return obj
+
+
+@bridg.common.converter.configure
 def fallback(x: Any, class_) -> Any:
     # FIXME: replace with identity instead
     logger.debug(f"Fallback converter used on value of type {type(x)} to convert to {class_}")
@@ -111,22 +125,6 @@ def get_concrete_class[T: bridg.alchemy.Base](input, class_: Type[T]) -> Type[T]
         if polymorphic_value := getattr(input, polymorphic_on.name, None):
             return insp.polymorphic_map[polymorphic_value].class_
     return class_
-
-
-@bridg.common.converter.configure
-def id_input_to_identifier(x: IDInput, class_: Type[bridg.alchemy.ID], converter) -> bridg.alchemy.ID:
-    obj = class_()
-    if x.identifier is not None:
-        obj.identifier = x.identifier.value
-    elif x.sequence is not None:
-        obj.identifier = converter.sequences.generate(x.sequence.value)
-    else:
-        raise ValueError("IDInput: provide either 'identifier' or 'sequence'")
-    if x.identifier_type_code is not None:
-        obj.identifier_type_code = converter.convert(
-            x.identifier_type_code.value, bridg.alchemy.ConceptDescriptor
-        )
-    return obj
 
 
 @bridg.common.converter.configure
