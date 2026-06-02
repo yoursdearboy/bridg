@@ -186,4 +186,4 @@ dist-ssr
 
 # Environment variables files
 .env
-.env.production
+.env.prod

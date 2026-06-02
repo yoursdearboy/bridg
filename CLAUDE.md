@@ -42,7 +42,7 @@ uv run pytest packages/graphql -s -vv --snapshot-update
 docker compose -f compose.yaml up -d db
 ```
 
-**Environment:** copy `.env.example` to `.env` and set `BRIDG_SQLALCHEMY_DATABASE_URI`. Tests default to SQLite (`BRIDG_ENV=testing` loads `.env.testing`).
+**Environment:** copy `.env.example` to `.env` and set `BRIDG_SQLALCHEMY_DATABASE_URI`. Tests default to SQLite (`BRIDG_ENV=test` loads `.env.test`).
 
 **User management:**
 ```sh

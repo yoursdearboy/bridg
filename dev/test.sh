@@ -1,6 +1,6 @@
 #!/bin/sh
-export BRIDG_ENV=testing
-dropdb -h localhost -U postgres bridg-testing
-createdb -h localhost -U postgres bridg-testing
+export BRIDG_ENV=test
+dropdb -h localhost -U postgres bridg-test
+createdb -h localhost -U postgres bridg-test
 python -m dev.migrate
 pytest ${@}
