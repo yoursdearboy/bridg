@@ -1,0 +1,16 @@
+{
+  "OrganizationList": [
+    {
+      "id": "str",
+      "primaryName": {
+        "value": "Acme Corporation"
+      }
+    },
+    {
+      "id": "str",
+      "primaryName": {
+        "value": "ACME Labs"
+      }
+    }
+  ]
+}

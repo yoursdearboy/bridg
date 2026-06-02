@@ -1,0 +1,28 @@
+{
+  "OrganizationList": [
+    {
+      "actual": true,
+      "id": "str",
+      "primaryName": {
+        "value": "Rodriguez, Figueroa and Sanchez"
+      },
+      "type": null
+    },
+    {
+      "actual": true,
+      "id": "str",
+      "primaryName": {
+        "value": "Wyatt Inc"
+      },
+      "type": null
+    },
+    {
+      "actual": true,
+      "id": "str",
+      "primaryName": {
+        "value": "Hicks Inc"
+      },
+      "type": null
+    }
+  ]
+}

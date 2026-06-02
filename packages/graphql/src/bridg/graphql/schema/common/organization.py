@@ -4,9 +4,12 @@ from typing import TYPE_CHECKING, Annotated, List, Optional
 
 import strawberry
 
+import bridg.alchemy
+
 from ..datatype import OrganizationName as OrganizationNameDataType
 
 if TYPE_CHECKING:
+    from ...context import Context
     from .healthcare_facility import HealthcareFacility
     from .subject import Subject
 
@@ -36,3 +39,25 @@ class Organization:
 @strawberry.type
 class OrganizationName(OrganizationNameDataType):
     id: strawberry.ID
+
+
+@strawberry.input
+class OrganizationFilter:
+    name: Optional[str] = None
+
+
+@strawberry.type
+class OrganizationQuery:
+    @strawberry.field(name="OrganizationList")
+    def organization_list(
+        self, filter: Optional[OrganizationFilter] = None, *, info: strawberry.Info[Context]
+    ) -> List[Organization]:
+        session = info.context.session
+        query = session.query(bridg.alchemy.Organization)
+        if filter and filter.name:
+            query = query.filter(
+                bridg.alchemy.Organization.name.any(
+                    bridg.alchemy.OrganizationName.value.ilike(f"%{filter.name}%")
+                )
+            )
+        return query.all()  # type: ignore

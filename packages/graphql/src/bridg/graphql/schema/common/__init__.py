@@ -24,7 +24,9 @@ from .material import (
 )
 from .organization import (
     Organization,
+    OrganizationFilter,
     OrganizationName,
+    OrganizationQuery,
 )
 from .person import (
     Person,
@@ -74,7 +76,9 @@ __all__ = [
     "Material",
     "MaterialInput",
     "Organization",
+    "OrganizationFilter",
     "OrganizationName",
+    "OrganizationQuery",
     "Person",
     "PersonFilter",
     "PersonInput",
